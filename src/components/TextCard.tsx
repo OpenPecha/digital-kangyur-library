@@ -50,14 +50,11 @@ const TextCard = ({
     >
       <div className={cn(
         "flex",
-        isCompact ? "flex-col h-full" : isFeatured ? "flex-col md:flex-row" : "flex-col"
+        isCompact ? "flex-col h-full" : "flex-col"
       )}>
-        {/* Image */}
-        {imageUrl && (
-          <div className={cn(
-            "overflow-hidden",
-            isCompact ? "h-36" : isFeatured ? "md:w-2/5 h-48 md:h-auto" : "h-48"
-          )}>
+        {/* Image - only shown for compact variant */}
+        {imageUrl && isCompact && (
+          <div className="h-36 overflow-hidden">
             <div className="w-full h-full relative overflow-hidden">
               <img 
                 src={imageUrl} 
@@ -79,8 +76,17 @@ const TextCard = ({
         {/* Content */}
         <div className={cn(
           "flex flex-col",
-          isCompact ? "p-4 flex-grow" : isFeatured ? "p-6 md:w-3/5" : "p-5"
+          isCompact ? "p-4 flex-grow" : isFeatured ? "p-6" : "p-5"
         )}>
+          {/* Category badge - For featured and default without image */}
+          {!isCompact && (
+            <div className="mb-3">
+              <span className="px-2 py-1 bg-kangyur-maroon text-white text-xs font-medium rounded-md">
+                {category}
+              </span>
+            </div>
+          )}
+          
           {/* Titles */}
           <div className="mb-3">
             <h3 className={cn(

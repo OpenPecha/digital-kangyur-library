@@ -54,54 +54,6 @@ const featuredTexts = [
   }
 ];
 
-// Sample recent texts data
-const recentTexts = [
-  {
-    id: 'diamond-sutra',
-    title: {
-      tibetan: 'རྡོ་རྗེ་གཅོད་པའི་མདོ།',
-      english: 'Diamond Sutra'
-    },
-    category: 'Prajñāpāramitā',
-    volume: 'Ka',
-    pages: 24,
-    imageUrl: 'https://images.unsplash.com/photo-1499728603263-13726abce5fd?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=700&q=80'
-  },
-  {
-    id: 'lankavatara',
-    title: {
-      tibetan: 'ལང་ཀར་གཤེགས་པའི་མདོ།',
-      english: 'Lankavatara Sutra'
-    },
-    category: 'Sutras',
-    volume: 'Ca',
-    pages: 152,
-    imageUrl: 'https://images.unsplash.com/photo-1583512603806-077998240c7a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=700&q=80'
-  },
-  {
-    id: 'samadhi-raja',
-    title: {
-      tibetan: 'ཏིང་ངེ་འཛིན་རྒྱལ་པོའི་མདོ།',
-      english: 'King of Samadhi Sutra'
-    },
-    category: 'Sutras',
-    volume: 'Ta',
-    pages: 186,
-    imageUrl: 'https://images.unsplash.com/photo-1579245354201-07bdb48bd59c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=700&q=80'
-  },
-  {
-    id: 'kalachakra',
-    title: {
-      tibetan: 'དུས་ཀྱི་འཁོར་ལོའི་རྒྱུད།',
-      english: 'Kalachakra Tantra'
-    },
-    category: 'Tantra',
-    volume: 'Ka',
-    pages: 230,
-    imageUrl: 'https://images.unsplash.com/photo-1530272940053-5ffbc555fbb3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=700&q=80'
-  }
-];
-
 const Index = () => {
   // Features for home page
   const features = [
@@ -199,24 +151,6 @@ const Index = () => {
             <TextCard 
               key={text.id}
               variant="featured"
-              {...text}
-            />
-          ))}
-        </div>
-      </FeaturedSection>
-      
-      {/* Recent Additions Section */}
-      <FeaturedSection 
-        title="Recently Added"
-        tibetanTitle="ཉེ་ལམ་གསར་སྣོན།"
-        subtitle="The latest texts added to our digital collection"
-        viewAllLink="/texts"
-      >
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          {recentTexts.map((text) => (
-            <TextCard 
-              key={text.id}
-              variant="compact"
               {...text}
             />
           ))}
