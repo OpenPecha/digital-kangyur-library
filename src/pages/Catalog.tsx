@@ -15,57 +15,58 @@ interface CatalogItem {
   description?: string;
   children?: CatalogItem[];
   count?: number;
+  _matches?: boolean; // Used for filtering
 }
 
-// Updated mock data with Sutra and Tantra as main categories
+// Updated catalog data with the new structure: Discipline, Discourses, Tantra, Dharani
 const catalogData: CatalogItem[] = [
   {
-    id: 'sutra',
+    id: 'discipline',
+    title: {
+      tibetan: 'འདུལ་བ།',
+      english: 'Discipline'
+    },
+    description: 'The section on monastic discipline, containing rules and procedures for the Buddhist Sangha.',
+    count: 13,
+    children: [
+      {
+        id: 'vinaya-vastu',
+        title: {
+          tibetan: 'འདུལ་བ་ལུང་གཞི།',
+          english: 'Vinaya Vastu'
+        },
+        description: 'Foundation of the monastic discipline',
+        count: 4
+      },
+      {
+        id: 'vinaya-vibhanga',
+        title: {
+          tibetan: 'འདུལ་བ་རྣམ་འབྱེད།',
+          english: 'Vinaya Vibhanga'
+        },
+        description: 'Analysis of the monastic rules',
+        count: 5
+      },
+      {
+        id: 'vinaya-ksudrakavastu',
+        title: {
+          tibetan: 'འདུལ་བ་ཕྲན་ཚེགས་ཀྱི་གཞི།',
+          english: 'Vinaya Ksudrakavastu'
+        },
+        description: 'Minor rules and procedures',
+        count: 4
+      }
+    ]
+  },
+  {
+    id: 'discourses',
     title: {
       tibetan: 'མདོ།',
-      english: 'Sutra'
+      english: 'Discourses'
     },
     description: 'The section containing Buddha\'s discourses and teachings.',
     count: 362,
     children: [
-      {
-        id: 'vinaya',
-        title: {
-          tibetan: 'འདུལ་བ།',
-          english: 'Vinaya'
-        },
-        description: 'The section on monastic discipline, containing rules and procedures for the Buddhist Sangha.',
-        count: 13,
-        children: [
-          {
-            id: 'vinaya-vastu',
-            title: {
-              tibetan: 'འདུལ་བ་ལུང་གཞི།',
-              english: 'Vinaya Vastu'
-            },
-            description: 'Foundation of the monastic discipline',
-            count: 4
-          },
-          {
-            id: 'vinaya-vibhanga',
-            title: {
-              tibetan: 'འདུལ་བ་རྣམ་འབྱེད།',
-              english: 'Vinaya Vibhanga'
-            },
-            description: 'Analysis of the monastic rules',
-            count: 5
-          },
-          {
-            id: 'vinaya-ksudrakavastu',
-            title: {
-              tibetan: 'འདུལ་བ་ཕྲན་ཚེགས་ཀྱི་གཞི།',
-              english: 'Vinaya Ksudrakavastu'
-            },
-            description: 'Minor rules and procedures',
-            count: 4
-          }
-        ]
-      },
       {
         id: 'prajnaparamita',
         title: {
@@ -158,27 +159,7 @@ const catalogData: CatalogItem[] = [
           english: 'Ratnakūṭa'
         },
         description: 'The Heap of Jewels collection of 49 diverse Mahayana sutras on various topics.',
-        count: 49,
-        children: [
-          {
-            id: 'ratnakuta-kasyapaparivarta',
-            title: {
-              tibetan: 'འོད་སྲུང་གི་ལེའུ།',
-              english: 'Kāśyapaparivarta'
-            },
-            description: 'Teachings given to Mahākāśyapa',
-            count: 1
-          },
-          {
-            id: 'ratnakuta-akshayamati',
-            title: {
-              tibetan: 'བློ་གྲོས་མི་ཟད་པས་བསྟན་པ།',
-              english: 'Akṣayamati-nirdeśa'
-            },
-            description: 'The teaching of Akṣayamati',
-            count: 1
-          }
-        ]
+        count: 49
       },
       {
         id: 'general-sutras',
@@ -187,36 +168,7 @@ const catalogData: CatalogItem[] = [
           english: 'General Sūtras'
         },
         description: 'General collection of Mahayana sutras not included in other sections.',
-        count: 270,
-        children: [
-          {
-            id: 'sutras-samadhi',
-            title: {
-              tibetan: 'ཏིང་ངེ་འཛིན་གྱི་མདོ་སྡེ།',
-              english: 'Samādhi Sūtras'
-            },
-            description: 'Sutras focused on meditation practices',
-            count: 15
-          },
-          {
-            id: 'sutras-lankavatara',
-            title: {
-              tibetan: 'ལང་ཀར་གཤེགས་པ།',
-              english: 'Laṅkāvatāra Sūtra'
-            },
-            description: 'Teachings given on Lanka Island',
-            count: 1
-          },
-          {
-            id: 'sutras-samadhiraja',
-            title: {
-              tibetan: 'ཏིང་ངེ་འཛིན་རྒྱལ་པོ།',
-              english: 'Samādhirāja Sūtra'
-            },
-            description: 'The King of Samadhi Sutra',
-            count: 1
-          }
-        ]
+        count: 270
       }
     ]
   },
@@ -266,12 +218,51 @@ const catalogData: CatalogItem[] = [
         count: 167
       }
     ]
+  },
+  {
+    id: 'dharani',
+    title: {
+      tibetan: 'གཟུངས།',
+      english: 'Dharani'
+    },
+    description: 'Sacred mantras and incantations for protection, healing, and spiritual awakening.',
+    count: 84,
+    children: [
+      {
+        id: 'dharani-protection',
+        title: {
+          tibetan: 'སྲུང་བའི་གཟུངས།',
+          english: 'Protection Dharanis'
+        },
+        description: 'Mantras for protection from obstacles and negative influences',
+        count: 34
+      },
+      {
+        id: 'dharani-healing',
+        title: {
+          tibetan: 'ནད་འཕྲོག་གཟུངས།',
+          english: 'Healing Dharanis'
+        },
+        description: 'Mantras for physical and mental healing',
+        count: 25
+      },
+      {
+        id: 'dharani-wisdom',
+        title: {
+          tibetan: 'ཡེ་ཤེས་ཀྱི་གཟུངས།',
+          english: 'Wisdom Dharanis'
+        },
+        description: 'Mantras for developing wisdom and spiritual insight',
+        count: 25
+      }
+    ]
   }
 ];
 
+// Keep the rest of the component unchanged
 const Catalog = () => {
   const [searchQuery, setSearchQuery] = useState('');
-  const [expandedItems, setExpandedItems] = useState<string[]>(['sutra']); // Start with Sutra expanded
+  const [expandedItems, setExpandedItems] = useState<string[]>(['discipline']); // Start with Discipline expanded
   const [selectedItem, setSelectedItem] = useState<string | null>(null);
   const [showDetails, setShowDetails] = useState(true);
   
