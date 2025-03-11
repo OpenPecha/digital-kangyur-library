@@ -66,7 +66,10 @@ const Index = () => {
         title="Featured Texts"
         tibetanTitle="གཙོ་བོའི་གསུང་རབ།"
         subtitle="Discover important texts from the Kangyur collection"
+        tibetanSubtitle="བཀའ་འགྱུར་ཕྱོགས་སྒྲིག་ནས་གལ་ཆེའི་གཞུང་ཡིག་ཁག་རྙེད།"
         viewAllLink="/texts"
+        viewAllText="View All"
+        tibetanViewAllText="ཚང་མར་ལྟ།"
         background="cream"
       >
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
@@ -90,22 +93,27 @@ const Index = () => {
         
         <div className="container relative mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h2 className="text-3xl sm:text-4xl font-bold mb-6">Begin Your Journey Through Buddhist Wisdom</h2>
+          <p className="tibetan text-xl mb-6 hidden">ནང་པའི་ཤེས་རབ་བརྒྱུད་དེ་ཁྱེད་ཀྱི་འགྲུལ་བཞུད་འགོ་རྩོམ།</p>
+          
           <p className="text-xl text-white/80 max-w-2xl mx-auto mb-8">
             Explore the richness of the Kangyur texts and discover the profound teachings they contain.
           </p>
+          <p className="tibetan text-xl mb-8 text-white/80 max-w-2xl mx-auto hidden">བཀའ་འགྱུར་གཞུང་ཡིག་གི་ཕྱུག་ཆ་ལ་བརྟག་དཔྱད་བྱེད་ནས་དེ་དག་གི་ནང་དུ་ཡོད་པའི་ཟབ་མོའི་བསྟན་པ་ཁག་རྙེད།</p>
           
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link 
               to="/catalog" 
               className="px-6 py-3 bg-white text-kangyur-maroon font-medium rounded-md hover:bg-white/90 transition-colors"
             >
-              Browse the Catalog
+              <span>Browse the Catalog</span>
+              <span className="tibetan hidden">དཔེ་མཛོད་ལ་བལྟ།</span>
             </Link>
             <Link 
               to="/about/project" 
               className="px-6 py-3 border border-white/30 text-white font-medium rounded-md hover:bg-white/10 transition-colors"
             >
-              About This Project
+              <span>About This Project</span>
+              <span className="tibetan hidden">ལས་གཞི་འདིའི་སྐོར།</span>
             </Link>
           </div>
         </div>

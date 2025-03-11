@@ -118,8 +118,8 @@ const Navbar = () => {
             className="flex items-center space-x-2 text-kangyur-maroon transition-transform duration-300 transform hover:scale-105"
           >
             <span className="font-bold text-xl md:text-2xl">
-              {language === 'en' ? 'Kangyur Library' : (
-                <span className="tibetan">བཀའ་འགྱུར་ཆོས་མཛོད།</span>
+              {language === 'en' ? 'KaZhoe' : (
+                <span className="tibetan">བཀའ་མཛོད།</span>
               )}
             </span>
           </Link>

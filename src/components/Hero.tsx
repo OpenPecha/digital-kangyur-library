@@ -51,15 +51,16 @@ const Hero = () => {
               ref={titleRef}
               className="text-4xl md:text-5xl lg:text-6xl font-bold text-kangyur-dark tracking-tight opacity-0"
             >
-              <span className="block tibetan mt-2 text-kangyur-maroon">བཀའ་འགྱུར་ཆོས་མཛོད།</span>
-              <span className="block text-kangyur-orange">Kangyur Collection</span>
+              <span className="block tibetan mt-2 text-kangyur-maroon">བཀའ་མཛོད།</span>
+              <span className="block text-kangyur-orange">KaZhoe</span>
             </h1>
             
             <p 
               ref={subtitleRef}
               className="text-xl text-kangyur-dark/80 max-w-lg mx-auto opacity-0"
             >
-              Unlocking ancient wisdom through digital access to Buddha's teachings — explore, listen, and discover the timeless path to enlightenment.
+              <span className="hidden tibetan">སངས་རྒྱས་ཀྱི་བསྟན་པར་བརྡ་ཐོ་འཕྲུལ་ཆས་བརྒྱུད་དེ་གནའ་བོའི་ཤེས་རབ་སྒོ་འབྱེད་བྱེད་པ—བརྟག་དཔྱད་བྱེད། ཉན། དུས་ལས་འདས་པའི་བྱང་ཆུབ་ཀྱི་ལམ་རྙེད།</span>
+              <span className="block">Unlocking ancient wisdom through digital access to Buddha's teachings — explore, listen, and discover the timeless path to enlightenment.</span>
             </p>
             
             <div 
@@ -70,7 +71,8 @@ const Hero = () => {
                 to="/catalog" 
                 className="inline-flex items-center justify-center px-6 py-3 bg-kangyur-orange text-white font-medium rounded-md hover:bg-kangyur-orange/90 transition-colors group"
               >
-                Explore Catalog
+                <span className="hidden tibetan">དཔེ་མཛོད་ལ་བརྟག་དཔྱད་བྱེད།</span>
+                <span className="block">Explore Catalog</span>
                 <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
               </Link>
               
@@ -78,7 +80,8 @@ const Hero = () => {
                 to="/about/project" 
                 className="inline-flex items-center justify-center px-6 py-3 border border-kangyur-maroon/20 text-kangyur-maroon font-medium rounded-md hover:bg-kangyur-maroon/5 transition-colors"
               >
-                Learn More
+                <span className="hidden tibetan">དེ་ལས་མང་བ་ཤེས།</span>
+                <span className="block">Learn More</span>
               </Link>
             </div>
           </div>

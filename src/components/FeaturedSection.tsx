@@ -9,8 +9,10 @@ interface FeaturedSectionProps {
   title: string;
   subtitle?: string;
   tibetanTitle?: string;
+  tibetanSubtitle?: string;
   viewAllLink?: string;
   viewAllText?: string;
+  tibetanViewAllText?: string;
   className?: string;
   children: React.ReactNode;
   background?: 'light' | 'cream' | 'gradient';
@@ -20,8 +22,10 @@ const FeaturedSection = ({
   title,
   subtitle,
   tibetanTitle,
+  tibetanSubtitle,
   viewAllLink,
   viewAllText = 'View All',
+  tibetanViewAllText,
   className,
   children,
   background = 'light'
@@ -45,6 +49,9 @@ const FeaturedSection = ({
             {subtitle && (
               <p className="mt-3 text-lg text-kangyur-dark/70 max-w-2xl">{subtitle}</p>
             )}
+            {tibetanSubtitle && (
+              <p className="tibetan mt-3 text-lg text-kangyur-dark/70 max-w-2xl hidden">{tibetanSubtitle}</p>
+            )}
           </div>
           
           {viewAllLink && (
@@ -53,7 +60,8 @@ const FeaturedSection = ({
                 to={viewAllLink}
                 className="group inline-flex items-center text-kangyur-orange hover:text-kangyur-orange/80 font-medium transition-colors"
               >
-                {viewAllText}
+                <span>{viewAllText}</span>
+                {tibetanViewAllText && <span className="tibetan hidden">{tibetanViewAllText}</span>}
                 <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
               </Link>
             </div>
