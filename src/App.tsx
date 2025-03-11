@@ -8,6 +8,7 @@ import Index from "./pages/Index";
 import Catalog from "./pages/Catalog";
 import NotFound from "./pages/NotFound";
 import Texts from "./pages/Texts";
+import TextDetail from "./pages/TextDetail";
 
 // History pages
 import HistoryDevelopment from "./pages/HistoryDevelopment";
@@ -35,6 +36,7 @@ const App = () => (
           <Route path="/" element={<Index />} />
           <Route path="/catalog" element={<Catalog />} />
           <Route path="/texts" element={<Texts />} />
+          <Route path="/texts/:id" element={<TextDetail />} />
           
           {/* History routes */}
           <Route path="/history/development" element={<HistoryDevelopment />} />

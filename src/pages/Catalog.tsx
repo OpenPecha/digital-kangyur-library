@@ -115,7 +115,7 @@ const catalogData: CatalogItem[] = [
           {
             id: 'prajnaparamita-heart',
             title: {
-              tibetan: 'ཤེས་རབ་སྙིང་པོ།',
+              tibetan: 'ཤེས་རབ་སྙིང་པ��།',
               english: 'Heart Sutra'
             },
             description: 'Ultra-concise summary of Prajñāpāramitā teachings',
@@ -168,7 +168,18 @@ const catalogData: CatalogItem[] = [
           english: 'General Sūtras'
         },
         description: 'General collection of Mahayana sutras not included in other sections.',
-        count: 270
+        count: 270,
+        children: [
+          {
+            id: 'golden-sutra',
+            title: {
+              tibetan: 'འཕགས་པ་གསེར་གྱི་མདོ་ཞེས་བྱ་བ།',
+              english: 'Noble Golden Sutra'
+            },
+            description: 'A sutra comparing bodhicitta to gold, showing how its nature remains unchanged despite various manifestations.',
+            count: 1
+          }
+        ]
       }
     ]
   },
@@ -259,10 +270,9 @@ const catalogData: CatalogItem[] = [
   }
 ];
 
-// Keep the rest of the component unchanged
 const Catalog = () => {
   const [searchQuery, setSearchQuery] = useState('');
-  const [expandedItems, setExpandedItems] = useState<string[]>(['discipline']); // Start with Discipline expanded
+  const [expandedItems, setExpandedItems] = useState<string[]>(['discipline', 'discourses', 'general-sutras']); // Start with these expanded
   const [selectedItem, setSelectedItem] = useState<string | null>(null);
   const [showDetails, setShowDetails] = useState(true);
   
@@ -416,7 +426,7 @@ const Catalog = () => {
       {/* Catalog Section */}
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="flex flex-col lg:flex-row gap-10">
-          {/* Left side: Catalog tree */}
+          {/* Left side: Catalog tree - ADDED MAX HEIGHT AND OVERFLOW */}
           <div className="lg:w-1/3 xl:w-1/4">
             <div className="bg-white border border-kangyur-orange/10 rounded-xl shadow-sm p-5">
               <div className="flex justify-between items-center mb-4">
@@ -431,7 +441,7 @@ const Catalog = () => {
                 </button>
               </div>
               
-              <div className="space-y-2">
+              <div className="space-y-2 max-h-[70vh] overflow-y-auto pr-1">
                 {renderCatalogItems(filteredCatalog)}
               </div>
             </div>
@@ -475,13 +485,23 @@ const Catalog = () => {
                 
                 {/* Action buttons */}
                 <div className="flex flex-wrap gap-4">
-                  <Link
-                    to={`/texts?category=${selectedItemDetails.id}`}
-                    className="px-5 py-2.5 bg-kangyur-orange text-white font-medium rounded-md hover:bg-kangyur-orange/90 transition-colors inline-flex items-center"
-                  >
-                    Browse Texts
-                    <ChevronRight className="ml-1 w-4 h-4" />
-                  </Link>
+                  {selectedItemDetails.id === 'golden-sutra' ? (
+                    <Link
+                      to={`/texts/${selectedItemDetails.id}`}
+                      className="px-5 py-2.5 bg-kangyur-orange text-white font-medium rounded-md hover:bg-kangyur-orange/90 transition-colors inline-flex items-center"
+                    >
+                      View Text
+                      <ChevronRight className="ml-1 w-4 h-4" />
+                    </Link>
+                  ) : (
+                    <Link
+                      to={`/texts?category=${selectedItemDetails.id}`}
+                      className="px-5 py-2.5 bg-kangyur-orange text-white font-medium rounded-md hover:bg-kangyur-orange/90 transition-colors inline-flex items-center"
+                    >
+                      Browse Texts
+                      <ChevronRight className="ml-1 w-4 h-4" />
+                    </Link>
+                  )}
                   
                   <Link
                     to={`/history?category=${selectedItemDetails.id}`}
@@ -514,3 +534,4 @@ const Catalog = () => {
 };
 
 export default Catalog;
+
