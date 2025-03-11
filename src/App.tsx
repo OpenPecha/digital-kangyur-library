@@ -7,6 +7,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Index from "./pages/Index";
 import Catalog from "./pages/Catalog";
 import NotFound from "./pages/NotFound";
+import Texts from "./pages/Texts";
 
 // History pages
 import HistoryDevelopment from "./pages/HistoryDevelopment";
@@ -33,6 +34,7 @@ const App = () => (
         <Routes>
           <Route path="/" element={<Index />} />
           <Route path="/catalog" element={<Catalog />} />
+          <Route path="/texts" element={<Texts />} />
           
           {/* History routes */}
           <Route path="/history/development" element={<HistoryDevelopment />} />
