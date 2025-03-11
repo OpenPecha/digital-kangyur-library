@@ -2,7 +2,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowRight } from 'lucide-react';
-import TextCard from './TextCard';
 import { cn } from '@/lib/utils';
 
 interface FeaturedSectionProps {
@@ -43,14 +42,14 @@ const FeaturedSection = ({
         <div className="mb-10 sm:mb-16 flex flex-col sm:flex-row sm:justify-between sm:items-end">
           <div>
             {tibetanTitle && (
-              <h3 className="tibetan text-kangyur-maroon text-lg mb-1">{tibetanTitle}</h3>
+              <h3 className="language-tibetan text-kangyur-maroon text-lg mb-1">{tibetanTitle}</h3>
             )}
-            <h2 className="text-3xl sm:text-4xl font-bold text-kangyur-dark">{title}</h2>
+            <h2 className="language-en text-3xl sm:text-4xl font-bold text-kangyur-dark">{title}</h2>
             {subtitle && (
-              <p className="mt-3 text-lg text-kangyur-dark/70 max-w-2xl">{subtitle}</p>
+              <p className="language-en mt-3 text-lg text-kangyur-dark/70 max-w-2xl">{subtitle}</p>
             )}
             {tibetanSubtitle && (
-              <p className="tibetan mt-3 text-lg text-kangyur-dark/70 max-w-2xl hidden">{tibetanSubtitle}</p>
+              <p className="language-tibetan mt-3 text-lg text-kangyur-dark/70 max-w-2xl">{tibetanSubtitle}</p>
             )}
           </div>
           
@@ -60,8 +59,8 @@ const FeaturedSection = ({
                 to={viewAllLink}
                 className="group inline-flex items-center text-kangyur-orange hover:text-kangyur-orange/80 font-medium transition-colors"
               >
-                <span>{viewAllText}</span>
-                {tibetanViewAllText && <span className="tibetan hidden">{tibetanViewAllText}</span>}
+                <span className="language-en">{viewAllText}</span>
+                {tibetanViewAllText && <span className="language-tibetan">{tibetanViewAllText}</span>}
                 <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
               </Link>
             </div>

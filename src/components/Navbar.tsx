@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Menu, X, ChevronDown, Globe } from 'lucide-react';
@@ -100,8 +99,23 @@ const Navbar = () => {
   };
 
   const toggleLanguage = () => {
-    setLanguage(prev => prev === 'en' ? 'tib' : 'en');
+    const newLanguage = language === 'en' ? 'tib' : 'en';
+    setLanguage(newLanguage);
+    
+    // Update the document class to control language visibility
+    if (newLanguage === 'tib') {
+      document.documentElement.classList.add('tibetan-language');
+      document.documentElement.classList.remove('english-language');
+    } else {
+      document.documentElement.classList.add('english-language');
+      document.documentElement.classList.remove('tibetan-language');
+    }
   };
+  
+  // Initialize language class on component mount
+  useEffect(() => {
+    document.documentElement.classList.add('english-language');
+  }, []);
 
   return (
     <header 
@@ -118,9 +132,8 @@ const Navbar = () => {
             className="flex items-center space-x-2 text-kangyur-maroon transition-transform duration-300 transform hover:scale-105"
           >
             <span className="font-bold text-xl md:text-2xl">
-              {language === 'en' ? 'KaZhoe' : (
-                <span className="tibetan">བཀའ་མཛོད།</span>
-              )}
+              <span className="language-en">KaZhoe</span>
+              <span className="language-tibetan tibetan">བཀའ་མཛོད།</span>
             </span>
           </Link>
 
@@ -138,7 +151,8 @@ const Navbar = () => {
                   onMouseLeave={() => item.children && setActiveDropdown(null)}
                   onClick={() => !item.children && setActiveDropdown(null)}
                 >
-                  {language === 'en' ? item.label : <span className="tibetan">{item.tibetan}</span>}
+                  <span className="language-en">{item.label}</span>
+                  <span className="language-tibetan tibetan">{item.tibetan}</span>
                   {item.children && (
                     <ChevronDown className="ml-1 w-4 h-4" />
                   )}
@@ -161,7 +175,8 @@ const Navbar = () => {
                           to={child.href}
                           className="block px-4 py-2 text-sm text-kangyur-dark hover:bg-kangyur-orange/10 hover:text-kangyur-orange transition-colors"
                         >
-                          {language === 'en' ? child.label : <span className="tibetan">{child.tibetan}</span>}
+                          <span className="language-en">{child.label}</span>
+                          <span className="language-tibetan tibetan">{child.tibetan}</span>
                         </Link>
                       ))}
                     </div>
@@ -211,7 +226,8 @@ const Navbar = () => {
                         activeDropdown === item.label ? "text-kangyur-orange bg-kangyur-orange/10" : "text-kangyur-dark"
                       )}
                     >
-                      <span>{language === 'en' ? item.label : <span className="tibetan">{item.tibetan}</span>}</span>
+                      <span className="language-en">{item.label}</span>
+                      <span className="language-tibetan tibetan">{item.tibetan}</span>
                       <ChevronDown className={cn("w-5 h-5 transition-transform", activeDropdown === item.label ? "rotate-180" : "")} />
                     </button>
 
@@ -227,7 +243,8 @@ const Navbar = () => {
                           to={child.href}
                           className="block px-3 py-2 text-base font-medium rounded-md text-kangyur-dark hover:text-kangyur-orange hover:bg-kangyur-orange/10"
                         >
-                          {language === 'en' ? child.label : <span className="tibetan">{child.tibetan}</span>}
+                          <span className="language-en">{child.label}</span>
+                          <span className="language-tibetan tibetan">{child.tibetan}</span>
                         </Link>
                       ))}
                     </div>
@@ -240,7 +257,8 @@ const Navbar = () => {
                       location.pathname === item.href ? "text-kangyur-orange bg-kangyur-orange/10" : "text-kangyur-dark hover:text-kangyur-orange hover:bg-kangyur-orange/10"
                     )}
                   >
-                    {language === 'en' ? item.label : <span className="tibetan">{item.tibetan}</span>}
+                    <span className="language-en">{item.label}</span>
+                    <span className="language-tibetan tibetan">{item.tibetan}</span>
                   </Link>
                 )}
               </div>
