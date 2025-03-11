@@ -47,14 +47,9 @@ const navItems: NavItem[] = [
     href: "/news",
   },
   {
-    label: "About",
+    label: "About Us",
     tibetan: "ང་ཚོའི་སྐོར།",
     href: "/about",
-    children: [
-      { label: "Team", tibetan: "མི་སྣ་ངོ་སྤྲོད།", href: "/about/team" },
-      { label: "Project", tibetan: "ལས་གཞི་ངོ་སྤྲོད།", href: "/about/project" },
-      { label: "Contact", tibetan: "འབྲེལ་གཏུག།", href: "/about/contact" },
-    ],
   },
 ];
 

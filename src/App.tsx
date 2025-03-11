@@ -34,7 +34,7 @@ const App = () => (
           <Route path="/texts/:id" element={<TextDetail />} />
           <Route path="/news" element={<News />} />
           
-          {/* History route - now a single page */}
+          {/* History route */}
           <Route path="/history" element={<History />} />
           
           {/* Media routes */}
@@ -43,9 +43,6 @@ const App = () => (
           
           {/* About route */}
           <Route path="/about" element={<About />} />
-          <Route path="/about/team" element={<About />} />
-          <Route path="/about/project" element={<About />} />
-          <Route path="/about/contact" element={<About />} />
           
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
