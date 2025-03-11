@@ -8,6 +8,20 @@ import Index from "./pages/Index";
 import Catalog from "./pages/Catalog";
 import NotFound from "./pages/NotFound";
 
+// History pages
+import HistoryDevelopment from "./pages/HistoryDevelopment";
+import HistoryTranslation from "./pages/HistoryTranslation";
+import HistoryManuscripts from "./pages/HistoryManuscripts";
+import HistoryPrintedEditions from "./pages/HistoryPrintedEditions";
+import HistoryCommentary from "./pages/HistoryCommentary";
+
+// Media pages
+import Audio from "./pages/Audio";
+import Video from "./pages/Video";
+
+// About page
+import About from "./pages/About";
+
 const queryClient = new QueryClient();
 
 const App = () => (
@@ -19,6 +33,24 @@ const App = () => (
         <Routes>
           <Route path="/" element={<Index />} />
           <Route path="/catalog" element={<Catalog />} />
+          
+          {/* History routes */}
+          <Route path="/history/development" element={<HistoryDevelopment />} />
+          <Route path="/history/translation" element={<HistoryTranslation />} />
+          <Route path="/history/manuscripts" element={<HistoryManuscripts />} />
+          <Route path="/history/printed-editions" element={<HistoryPrintedEditions />} />
+          <Route path="/history/commentary" element={<HistoryCommentary />} />
+          
+          {/* Media routes */}
+          <Route path="/audio" element={<Audio />} />
+          <Route path="/video" element={<Video />} />
+          
+          {/* About route */}
+          <Route path="/about" element={<About />} />
+          <Route path="/about/team" element={<About />} />
+          <Route path="/about/project" element={<About />} />
+          <Route path="/about/contact" element={<About />} />
+          
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
