@@ -5,7 +5,6 @@ import FeaturedSection from '@/components/FeaturedSection';
 import TextCard from '@/components/TextCard';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
-import { ArrowRight, BookOpen, Search, Headphones, Video, Languages, BookMarked } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 // Sample featured texts data
@@ -55,88 +54,12 @@ const featuredTexts = [
 ];
 
 const Index = () => {
-  // Features for home page
-  const features = [
-    {
-      icon: <BookOpen className="w-8 h-8 text-kangyur-orange" />,
-      title: 'Digital Texts',
-      description: 'Access the complete Kangyur collection in digital format with accurate transcriptions.',
-      link: '/texts'
-    },
-    {
-      icon: <Search className="w-8 h-8 text-kangyur-orange" />,
-      title: 'Advanced Search',
-      description: 'Find specific texts, passages, or topics with our comprehensive search system.',
-      link: '/search'
-    },
-    {
-      icon: <Headphones className="w-8 h-8 text-kangyur-orange" />,
-      title: 'Audio Recordings',
-      description: 'Listen to authentic recitations of important texts by Tibetan scholars.',
-      link: '/audio'
-    },
-    {
-      icon: <Video className="w-8 h-8 text-kangyur-orange" />,
-      title: 'Video Archive',
-      description: 'Watch teachings, documentaries, and ceremonial readings of sacred texts.',
-      link: '/video'
-    },
-    {
-      icon: <Languages className="w-8 h-8 text-kangyur-orange" />,
-      title: 'English Translations',
-      description: 'Read available English translations of Kangyur texts with side-by-side comparisons.',
-      link: '/translations'
-    },
-    {
-      icon: <BookMarked className="w-8 h-8 text-kangyur-orange" />,
-      title: 'Catalog Browser',
-      description: 'Navigate through the traditional organization of the Kangyur collection.',
-      link: '/catalog'
-    }
-  ];
-
   return (
     <div className="min-h-screen bg-white">
       <Navbar />
       
       {/* Hero Section */}
       <Hero />
-      
-      {/* Features Section */}
-      <section className="py-20 bg-gradient-to-b from-white to-kangyur-cream/30">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl font-bold text-kangyur-dark mb-4">Explore the Sacred Kangyur Collection</h2>
-            <p className="text-xl text-kangyur-dark/70 max-w-3xl mx-auto">
-              Our digital library provides unprecedented access to the Kangyur texts, supporting scholars, practitioners, and anyone interested in Buddhist wisdom.
-            </p>
-          </div>
-          
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {features.map((feature, index) => (
-              <div 
-                key={index}
-                className="bg-white border border-kangyur-orange/10 rounded-xl p-6 transition-all duration-300 hover:shadow-md hover:border-kangyur-orange/30 group"
-              >
-                <div className="mb-5 p-3 inline-block rounded-md bg-kangyur-orange/10 group-hover:bg-kangyur-orange/20 transition-colors">
-                  {feature.icon}
-                </div>
-                
-                <h3 className="text-xl font-semibold text-kangyur-dark mb-3">{feature.title}</h3>
-                <p className="text-kangyur-dark/70 mb-4">{feature.description}</p>
-                
-                <Link 
-                  to={feature.link} 
-                  className="group inline-flex items-center text-kangyur-orange font-medium text-sm"
-                >
-                  Explore
-                  <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                </Link>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
       
       {/* Featured Texts Section */}
       <FeaturedSection 
