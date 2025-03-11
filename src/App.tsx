@@ -9,6 +9,7 @@ import Catalog from "./pages/Catalog";
 import NotFound from "./pages/NotFound";
 import Texts from "./pages/Texts";
 import TextDetail from "./pages/TextDetail";
+import News from "./pages/News";
 
 // History pages
 import HistoryDevelopment from "./pages/HistoryDevelopment";
@@ -37,6 +38,7 @@ const App = () => (
           <Route path="/catalog" element={<Catalog />} />
           <Route path="/texts" element={<Texts />} />
           <Route path="/texts/:id" element={<TextDetail />} />
+          <Route path="/news" element={<News />} />
           
           {/* History routes */}
           <Route path="/history/development" element={<HistoryDevelopment />} />

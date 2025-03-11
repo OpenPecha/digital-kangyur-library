@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
@@ -397,7 +398,7 @@ const Catalog = () => {
       <Navbar />
       
       {/* Hero Section - simplified with only search */}
-      <div className="bg-gradient-to-r from-kangyur-maroon to-kangyur-orange text-white pt-32 pb-16 relative overflow-hidden">
+      <div className="bg-gradient-to-r from-kangyur-maroon/90 via-kangyur-orange/80 to-kangyur-gold/70 text-white pt-32 pb-16 relative overflow-hidden">
         <div className="absolute inset-0 overflow-hidden">
           <div className="absolute top-0 left-0 w-full h-full bg-[url('/texture.png')] opacity-10"></div>
           <div className="absolute -top-24 -right-24 w-96 h-96 rounded-full bg-white/10 blur-3xl"></div>
@@ -534,4 +535,3 @@ const Catalog = () => {
 };
 
 export default Catalog;
-

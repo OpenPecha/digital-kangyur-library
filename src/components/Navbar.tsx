@@ -49,11 +49,6 @@ const navItems: NavItem[] = [
     href: "/texts",
   },
   {
-    label: "Translations",
-    tibetan: "དབྱིན་བསྒྱུར།",
-    href: "/translations",
-  },
-  {
     label: "News",
     tibetan: "གསར་འགྱུར།",
     href: "/news",
