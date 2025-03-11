@@ -51,7 +51,6 @@ const Hero = () => {
               ref={titleRef}
               className="text-4xl md:text-5xl lg:text-6xl font-bold text-kangyur-dark tracking-tight opacity-0"
             >
-              <span className="block">Digital Library of</span>
               <span className="block tibetan mt-2 text-kangyur-maroon">བཀའ་འགྱུར་ཆོས་མཛོད།</span>
               <span className="block text-kangyur-orange">Kangyur Collection</span>
             </h1>
@@ -60,8 +59,7 @@ const Hero = () => {
               ref={subtitleRef}
               className="text-xl text-kangyur-dark/80 max-w-lg mx-auto opacity-0"
             >
-              Explore the complete collection of Buddha's teachings translated into Tibetan,
-              with advanced search, audio recordings, and English translations.
+              Unlocking ancient wisdom through digital access to Buddha's teachings — explore, listen, and discover the timeless path to enlightenment.
             </p>
             
             <div 
