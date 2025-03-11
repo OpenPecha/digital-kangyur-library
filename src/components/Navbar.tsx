@@ -20,13 +20,6 @@ const navItems: NavItem[] = [
     label: "History",
     tibetan: "ལོ་རྒྱུས།",
     href: "/history",
-    children: [
-      { label: "Kangyur Development", tibetan: "བཀའ་འགྱུར་བྱུང་རིམ།", href: "/history/development" },
-      { label: "Translation History", tibetan: "སྒྲ་བསྒྱུར་ལོ་ཙཱ།", href: "/history/translation" },
-      { label: "Manuscripts", tibetan: "བཀའ་འགྱུར་བྱིས་མའི་སྐོར།", href: "/history/manuscripts" },
-      { label: "Printed Editions", tibetan: "པར་མའི་སྐོར།", href: "/history/printed-editions" },
-      { label: "Commentary Traditions", tibetan: "འགྲེལ་བའི་སྐོར།", href: "/history/commentary" },
-    ],
   },
   {
     label: "Catalog",
@@ -97,7 +90,6 @@ const Navbar = () => {
     const newLanguage = language === 'en' ? 'tib' : 'en';
     setLanguage(newLanguage);
     
-    // Update the document class to control language visibility
     if (newLanguage === 'tib') {
       document.documentElement.classList.add('tibetan-language');
       document.documentElement.classList.remove('english-language');
@@ -107,7 +99,6 @@ const Navbar = () => {
     }
   };
   
-  // Initialize language class on component mount
   useEffect(() => {
     document.documentElement.classList.add('english-language');
   }, []);
@@ -121,7 +112,6 @@ const Navbar = () => {
     >
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16 md:h-20">
-          {/* Logo */}
           <Link 
             to="/" 
             className="flex items-center space-x-2 text-kangyur-maroon transition-transform duration-300 transform hover:scale-105"
@@ -132,7 +122,6 @@ const Navbar = () => {
             </span>
           </Link>
 
-          {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center space-x-1">
             {navItems.map((item) => (
               <div key={item.label} className="relative group">
@@ -153,7 +142,6 @@ const Navbar = () => {
                   )}
                 </Link>
 
-                {/* Dropdown for desktop */}
                 {item.children && (
                   <div
                     className={cn(
@@ -180,7 +168,6 @@ const Navbar = () => {
               </div>
             ))}
 
-            {/* Language toggle */}
             <button
               onClick={toggleLanguage}
               className="ml-2 p-2 rounded-full text-kangyur-dark hover:text-kangyur-orange hover:bg-kangyur-orange/10 transition-colors"
@@ -190,7 +177,6 @@ const Navbar = () => {
             </button>
           </nav>
 
-          {/* Mobile menu button */}
           <button
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
             className="md:hidden p-2 rounded-md text-kangyur-dark hover:text-kangyur-orange hover:bg-kangyur-orange/10 transition-colors"
@@ -201,7 +187,6 @@ const Navbar = () => {
         </div>
       </div>
 
-      {/* Mobile Navigation */}
       <div
         className={cn(
           "md:hidden fixed inset-0 z-40 bg-white transform transition-transform duration-300 ease-in-out",
@@ -259,7 +244,6 @@ const Navbar = () => {
               </div>
             ))}
 
-            {/* Mobile language toggle */}
             <button
               onClick={toggleLanguage}
               className="flex items-center px-3 py-2 text-base font-medium rounded-md text-kangyur-dark hover:text-kangyur-orange hover:bg-kangyur-orange/10"

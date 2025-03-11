@@ -10,13 +10,7 @@ import NotFound from "./pages/NotFound";
 import Texts from "./pages/Texts";
 import TextDetail from "./pages/TextDetail";
 import News from "./pages/News";
-
-// History pages
-import HistoryDevelopment from "./pages/HistoryDevelopment";
-import HistoryTranslation from "./pages/HistoryTranslation";
-import HistoryManuscripts from "./pages/HistoryManuscripts";
-import HistoryPrintedEditions from "./pages/HistoryPrintedEditions";
-import HistoryCommentary from "./pages/HistoryCommentary";
+import History from "./pages/History";
 
 // Media pages
 import Audio from "./pages/Audio";
@@ -40,12 +34,8 @@ const App = () => (
           <Route path="/texts/:id" element={<TextDetail />} />
           <Route path="/news" element={<News />} />
           
-          {/* History routes */}
-          <Route path="/history/development" element={<HistoryDevelopment />} />
-          <Route path="/history/translation" element={<HistoryTranslation />} />
-          <Route path="/history/manuscripts" element={<HistoryManuscripts />} />
-          <Route path="/history/printed-editions" element={<HistoryPrintedEditions />} />
-          <Route path="/history/commentary" element={<HistoryCommentary />} />
+          {/* History route - now a single page */}
+          <Route path="/history" element={<History />} />
           
           {/* Media routes */}
           <Route path="/audio" element={<Audio />} />
