@@ -206,6 +206,74 @@ const About = () => {
               <Card className="border-kangyur-orange/10">
                 <CardContent className="p-6">
                   <div className="flex items-start gap-4">
+                    <Avatar className="h-16 w-16 border-2 border-kangyur-orange">
+                      <AvatarFallback className="bg-kangyur-maroon text-white">TPG</AvatarFallback>
+                    </Avatar>
+                    <div>
+                      <h4 className="font-bold text-kangyur-dark">Tsering Palmo Gellek</h4>
+                      <p className="text-sm italic text-kangyur-maroon mb-2">Project Director</p>
+                      <p className="text-sm text-kangyur-dark/80">
+                        Tsering Palmo Gellek, appointed by her father Tarthang Rinpoche to establish and lead the Sarnath International Nyingma Institute, is dedicated to fostering the potential of small, focused groups to create positive change. Born in 1973 in Berkeley, California, she completed her bachelor's degree in International Relations at Lewis and Clark College and earned a Masters of Law from the Fletcher School of Law and Diplomacy. Since 2001, she has directed major projects including the restoration of Nepal's historic Swayambhu Stupa and the installation of peace bells across sacred sites in India and Nepal.
+                      </p>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+              
+              <Card className="border-kangyur-orange/10">
+                <CardContent className="p-6">
+                  <div className="flex items-start gap-4">
+                    <Avatar className="h-16 w-16 border-2 border-kangyur-orange">
+                      <AvatarFallback className="bg-kangyur-maroon text-white">JT</AvatarFallback>
+                    </Avatar>
+                    <div>
+                      <h4 className="font-bold text-kangyur-dark">Khenpo Ju Tenkyong</h4>
+                      <p className="text-sm italic text-kangyur-maroon mb-2">Chief Editor</p>
+                      <p className="text-sm text-kangyur-dark/80">
+                        With deep expertise in Buddhist canonical texts, Khenpo Ju Tenkyong leads the editorial team, ensuring accuracy and authenticity in the digital representation of the Kangyur collection.
+                      </p>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+              
+              <Card className="border-kangyur-orange/10">
+                <CardContent className="p-6">
+                  <div className="flex items-start gap-4">
+                    <Avatar className="h-16 w-16 border-2 border-kangyur-orange">
+                      <AvatarFallback className="bg-kangyur-maroon text-white">TL</AvatarFallback>
+                    </Avatar>
+                    <div>
+                      <h4 className="font-bold text-kangyur-dark">Khenpo Thupten Lobsang</h4>
+                      <p className="text-sm italic text-kangyur-maroon mb-2">Editor</p>
+                      <p className="text-sm text-kangyur-dark/80">
+                        As a key member of the editorial team, Khenpo Thupten Lobsang contributes his scholarly expertise to the cataloging and annotation of texts within the Kangyur collection.
+                      </p>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+              
+              <Card className="border-kangyur-orange/10">
+                <CardContent className="p-6">
+                  <div className="flex items-start gap-4">
+                    <Avatar className="h-16 w-16 border-2 border-kangyur-orange">
+                      <AvatarFallback className="bg-kangyur-maroon text-white">TG</AvatarFallback>
+                    </Avatar>
+                    <div>
+                      <h4 className="font-bold text-kangyur-dark">Khenpo Thupthen Gyatso</h4>
+                      <p className="text-sm italic text-kangyur-maroon mb-2">Editor</p>
+                      <p className="text-sm text-kangyur-dark/80">
+                        Bringing specialized knowledge of Buddhist philosophy and textual traditions, Khenpo Thupthen Gyatso ensures the scholarly integrity of the Kangyur digital resources.
+                      </p>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+              
+              <Card className="border-kangyur-orange/10">
+                <CardContent className="p-6">
+                  <div className="flex items-start gap-4">
                     <Avatar className="h-16 w-16 border-2 border-kangyur-orange overflow-hidden">
                       <AvatarImage 
                         src="/lovable-uploads/c871aeca-c10f-459d-b977-fc3284443d19.png" 
@@ -216,7 +284,7 @@ const About = () => {
                     </Avatar>
                     <div>
                       <h4 className="font-bold text-kangyur-dark">Khenpo Tsering Nyima</h4>
-                      <p className="text-sm italic text-kangyur-maroon mb-2">Project Director</p>
+                      <p className="text-sm italic text-kangyur-maroon mb-2">Program Manager</p>
                       <p className="text-sm text-kangyur-dark/80">
                       Khenpo Tsering Nyima comes from Tibet, where he studied at Tarthang Monastery for six years. In 2006, he came to Namdroling Monastery in India. He studied there for fourteen years, and in 2017 received the degree of Lopon. 
                       After four years of teaching and fulfilling other Dharma responsibilities, he came to SINI. He has been the general manager of the Nyingma Monlam in Bodhgaya since 2019, works with the Kagyur Project, and is the on-site manager for SINI. In April 2023 he was given the title of Khenpo in a ceremony at Namdroling Monastery
@@ -225,61 +293,10 @@ const About = () => {
                   </div>
                 </CardContent>
               </Card>
-              
-              <Card className="border-kangyur-orange/10">
-                <CardContent className="p-6">
-                  <div className="flex items-start gap-4">
-                    <Avatar className="h-16 w-16 border-2 border-kangyur-orange">
-                      <div className="bg-kangyur-maroon text-white flex items-center justify-center h-full text-xl font-semibold">PW</div>
-                    </Avatar>
-                    <div>
-                      <h4 className="font-bold text-kangyur-dark">Pema Wangmo</h4>
-                      <p className="text-sm italic text-kangyur-maroon mb-2">Head of Translation</p>
-                      <p className="text-sm text-kangyur-dark/80">
-                        With expertise in classical Tibetan and multiple modern languages, Pema leads our translation team, developing accurate and accessible summaries of complex Buddhist texts.
-                      </p>
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
-              
-              <Card className="border-kangyur-orange/10">
-                <CardContent className="p-6">
-                  <div className="flex items-start gap-4">
-                    <Avatar className="h-16 w-16 border-2 border-kangyur-orange">
-                      <div className="bg-kangyur-maroon text-white flex items-center justify-center h-full text-xl font-semibold">ST</div>
-                    </Avatar>
-                    <div>
-                      <h4 className="font-bold text-kangyur-dark">Sonam Tsering</h4>
-                      <p className="text-sm italic text-kangyur-maroon mb-2">Digital Catalog Architect</p>
-                      <p className="text-sm text-kangyur-dark/80">
-                        Combining traditional Buddhist education with advanced digital skills, Sonam has designed our innovative catalog system that makes navigating the Kangyur intuitive and efficient.
-                      </p>
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
-              
-              <Card className="border-kangyur-orange/10">
-                <CardContent className="p-6">
-                  <div className="flex items-start gap-4">
-                    <Avatar className="h-16 w-16 border-2 border-kangyur-orange">
-                      <div className="bg-kangyur-maroon text-white flex items-center justify-center h-full text-xl font-semibold">LG</div>
-                    </Avatar>
-                    <div>
-                      <h4 className="font-bold text-kangyur-dark">Dr. Lobsang Gyatso</h4>
-                      <p className="text-sm italic text-kangyur-maroon mb-2">Research Coordinator</p>
-                      <p className="text-sm text-kangyur-dark/80">
-                        A specialist in Buddhist philosophy and history, Dr. Gyatso coordinates our research efforts, ensuring comprehensive coverage of all aspects of the Kangyur collection.
-                      </p>
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
             </div>
             
             <p className="text-center text-kangyur-dark/80 italic mt-8">
-              Our extended team includes six additional scholars, translators, and digital specialists working together to bring this precious collection to the world.
+              Our extended team includes additional scholars, translators, and digital specialists working together to bring this precious collection to the world.
             </p>
           </div>
           
