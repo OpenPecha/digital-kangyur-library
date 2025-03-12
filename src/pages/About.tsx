@@ -1,4 +1,3 @@
-
 import React, { useEffect, useRef } from 'react';
 import { useLocation } from 'react-router-dom';
 import Navbar from '@/components/Navbar';
@@ -6,28 +5,26 @@ import Footer from '@/components/Footer';
 import { Users, Sparkles, Mail, Heart, BookOpen, Globe } from 'lucide-react';
 import { Card, CardContent } from '@/components/ui/card';
 import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/avatar';
-
 const About = () => {
   const location = useLocation();
   const teamRef = useRef<HTMLDivElement>(null);
   const projectRef = useRef<HTMLDivElement>(null);
   const contactRef = useRef<HTMLDivElement>(null);
   const missionRef = useRef<HTMLDivElement>(null);
-  
   useEffect(() => {
     if (location.hash) {
       const sectionId = location.hash.substring(1);
       const element = document.getElementById(sectionId);
       if (element) {
         setTimeout(() => {
-          element.scrollIntoView({ behavior: 'smooth' });
+          element.scrollIntoView({
+            behavior: 'smooth'
+          });
         }, 100);
       }
     }
   }, [location]);
-  
-  return (
-    <div className="min-h-screen flex flex-col">
+  return <div className="min-h-screen flex flex-col">
       <Navbar />
       <main className="flex-grow pt-24 pb-16">
         <div className="container mx-auto px-4">
@@ -41,28 +38,14 @@ const About = () => {
           {/* Quick navigation */}
           <div className="flex justify-center mb-16">
             <div className="flex flex-wrap justify-center gap-2 md:gap-4 bg-white rounded-lg shadow-sm p-2 border border-kangyur-orange/10">
-              <a 
-                href="#mission" 
-                className="px-4 py-2 rounded-md hover:bg-kangyur-orange/10 text-kangyur-dark transition-colors"
-              >
-                Mission
-              </a>
-              <a 
-                href="#project" 
-                className="px-4 py-2 rounded-md hover:bg-kangyur-orange/10 text-kangyur-dark transition-colors"
-              >
+              <a href="#mission" className="px-4 py-2 rounded-md hover:bg-kangyur-orange/10 text-kangyur-dark transition-colors">Vission</a>
+              <a href="#project" className="px-4 py-2 rounded-md hover:bg-kangyur-orange/10 text-kangyur-dark transition-colors">
                 Project
               </a>
-              <a 
-                href="#team" 
-                className="px-4 py-2 rounded-md hover:bg-kangyur-orange/10 text-kangyur-dark transition-colors"
-              >
+              <a href="#team" className="px-4 py-2 rounded-md hover:bg-kangyur-orange/10 text-kangyur-dark transition-colors">
                 Team
               </a>
-              <a 
-                href="#contact" 
-                className="px-4 py-2 rounded-md hover:bg-kangyur-orange/10 text-kangyur-dark transition-colors"
-              >
+              <a href="#contact" className="px-4 py-2 rounded-md hover:bg-kangyur-orange/10 text-kangyur-dark transition-colors">
                 Contact
               </a>
             </div>
@@ -168,22 +151,7 @@ const About = () => {
                 </Card>
                 
                 <Card className="border-kangyur-orange/10 hover:shadow-md transition-shadow md:col-span-2">
-                  <CardContent className="p-6">
-                    <div className="flex items-start gap-4">
-                      <div className="mt-1 bg-kangyur-cream p-2 rounded-full">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-kangyur-maroon h-5 w-5">
-                          <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z" />
-                          <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z" />
-                        </svg>
-                      </div>
-                      <div>
-                        <h3 className="font-bold text-kangyur-dark">Scholarly Annotations</h3>
-                        <p className="text-sm text-kangyur-dark/80 mt-2">
-                          Our team of experts provides contextual information and scholarly notes to enhance understanding of these ancient texts.
-                        </p>
-                      </div>
-                    </div>
-                  </CardContent>
+                  
                 </Card>
               </div>
               
@@ -275,11 +243,7 @@ const About = () => {
                 <CardContent className="p-6">
                   <div className="flex items-start gap-4">
                     <Avatar className="h-16 w-16 border-2 border-kangyur-orange overflow-hidden">
-                      <AvatarImage 
-                        src="/lovable-uploads/c871aeca-c10f-459d-b977-fc3284443d19.png" 
-                        alt="Khenpo Tsering Nyima" 
-                        className="object-cover" 
-                      />
+                      <AvatarImage src="/lovable-uploads/c871aeca-c10f-459d-b977-fc3284443d19.png" alt="Khenpo Tsering Nyima" className="object-cover" />
                       <AvatarFallback className="bg-kangyur-maroon text-white">TN</AvatarFallback>
                     </Avatar>
                     <div>
@@ -404,8 +368,6 @@ const About = () => {
         </div>
       </main>
       <Footer />
-    </div>
-  );
+    </div>;
 };
-
 export default About;
