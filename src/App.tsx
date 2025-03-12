@@ -11,6 +11,7 @@ import Texts from "./pages/Texts";
 import TextDetail from "./pages/TextDetail";
 import News from "./pages/News";
 import History from "./pages/History";
+import DergeDetail from "./pages/DergeDetail";
 
 // Media pages
 import Audio from "./pages/Audio";
@@ -32,6 +33,7 @@ const App = () => (
           <Route path="/catalog" element={<Catalog />} />
           <Route path="/texts" element={<Texts />} />
           <Route path="/texts/:id" element={<TextDetail />} />
+          <Route path="/texts/derge-detail" element={<DergeDetail />} />
           <Route path="/news" element={<News />} />
           
           {/* History route */}

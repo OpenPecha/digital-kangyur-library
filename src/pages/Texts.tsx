@@ -1,11 +1,11 @@
-
 import React from 'react';
 import { Link } from 'react-router-dom';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import { cn } from '@/lib/utils';
-import { Book, BookOpen, ChevronRight } from 'lucide-react';
+import { Book, BookOpen, ChevronRight, ExternalLink } from 'lucide-react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { Button } from '@/components/ui/button';
 
 const kangyurEditions = [
   {
@@ -18,6 +18,7 @@ const kangyurEditions = [
     volumes: 103,
     year: '1733',
     imageUrl: '/placeholder.svg',
+    hasOnlineViewer: true,
   },
   {
     id: 'narthang',
@@ -107,48 +108,65 @@ const TextsPage = () => {
           <div className="container mx-auto px-4 sm:px-6 lg:px-8">
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {kangyurEditions.map((edition) => (
-                <Link 
-                  to={`/texts/${edition.id}`} 
+                <Card 
                   key={edition.id}
-                  className="group"
+                  className="h-full overflow-hidden transition-all duration-300 border border-kangyur-orange/10 hover:border-kangyur-orange/30 hover:shadow-md"
                 >
-                  <Card className="h-full overflow-hidden transition-all duration-300 border border-kangyur-orange/10 hover:border-kangyur-orange/30 hover:shadow-md">
-                    <CardHeader className="pb-2">
-                      <CardTitle className="text-xl font-bold text-kangyur-maroon flex flex-col">
-                        <span className="language-en">{edition.title}</span>
-                        <span className="language-tibetan tibetan">{edition.tibetanTitle}</span>
-                      </CardTitle>
-                      <CardDescription className="text-sm">
-                        <span className="italic text-kangyur-dark/60">{edition.transliteration}</span>
-                      </CardDescription>
-                    </CardHeader>
-                    <CardContent>
-                      <div className="flex flex-wrap gap-4 mb-3 text-sm text-kangyur-dark/70">
-                        <div className="flex items-center">
-                          <Book className="w-4 h-4 mr-1.5 flex-shrink-0" />
-                          <span className="language-en">{edition.volumes} volumes</span>
-                          <span className="language-tibetan tibetan">པོད་གྲངས་ {edition.volumes}</span>
-                        </div>
-                        <div className="flex items-center">
-                          <BookOpen className="w-4 h-4 mr-1.5 flex-shrink-0" />
-                          <span className="language-en">Year: {edition.year}</span>
-                          <span className="language-tibetan tibetan">ལོ་ {edition.year}</span>
-                        </div>
+                  <CardHeader className="pb-2">
+                    <CardTitle className="text-xl font-bold text-kangyur-maroon flex flex-col">
+                      <span className="language-en">{edition.title}</span>
+                      <span className="language-tibetan tibetan">{edition.tibetanTitle}</span>
+                    </CardTitle>
+                    <CardDescription className="text-sm">
+                      <span className="italic text-kangyur-dark/60">{edition.transliteration}</span>
+                    </CardDescription>
+                  </CardHeader>
+                  <CardContent>
+                    <div className="flex flex-wrap gap-4 mb-3 text-sm text-kangyur-dark/70">
+                      <div className="flex items-center">
+                        <Book className="w-4 h-4 mr-1.5 flex-shrink-0" />
+                        <span className="language-en">{edition.volumes} volumes</span>
+                        <span className="language-tibetan tibetan">པོད་གྲངས་ {edition.volumes}</span>
                       </div>
-                      
-                      <p className="text-kangyur-dark line-clamp-3">
-                        <span className="language-en">{edition.description}</span>
-                        <span className="language-tibetan tibetan">{edition.tibetanDescription}</span>
-                      </p>
-                      
-                      <div className="mt-4 flex items-center text-kangyur-orange text-sm font-medium group-hover:underline">
-                        <span className="language-en">Explore this edition</span>
-                        <span className="language-tibetan tibetan">པར་མ་འདི་ལ་བརྟག་དཔྱད་བྱེད།</span>
-                        <ChevronRight className="ml-1 w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                      <div className="flex items-center">
+                        <BookOpen className="w-4 h-4 mr-1.5 flex-shrink-0" />
+                        <span className="language-en">Year: {edition.year}</span>
+                        <span className="language-tibetan tibetan">ལོ་ {edition.year}</span>
                       </div>
-                    </CardContent>
-                  </Card>
-                </Link>
+                    </div>
+                    
+                    <p className="text-kangyur-dark line-clamp-3 mb-4">
+                      <span className="language-en">{edition.description}</span>
+                      <span className="language-tibetan tibetan">{edition.tibetanDescription}</span>
+                    </p>
+                    
+                    <div className="flex flex-col sm:flex-row gap-2">
+                      <Link 
+                        to={`/texts/${edition.id}`}
+                        className="group"
+                      >
+                        <Button variant="outline" className="w-full sm:w-auto text-kangyur-orange border-kangyur-orange/30 hover:bg-kangyur-orange/10 hover:text-kangyur-orange">
+                          <span className="language-en">View details</span>
+                          <span className="language-tibetan tibetan">རྒྱས་པ་ལ་ལྟ།</span>
+                          <ChevronRight className="ml-1 w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                        </Button>
+                      </Link>
+                      
+                      {edition.id === 'derge' && (
+                        <Link 
+                          to="/texts/derge-detail"
+                          className="group"
+                        >
+                          <Button variant="default" className="w-full sm:w-auto bg-kangyur-maroon hover:bg-kangyur-maroon/90">
+                            <span className="language-en">View online edition</span>
+                            <span className="language-tibetan tibetan">དྲ་ཐོག་པར་མ་ལ་ལྟ།</span>
+                            <ExternalLink className="ml-1 w-4 h-4" />
+                          </Button>
+                        </Link>
+                      )}
+                    </div>
+                  </CardContent>
+                </Card>
               ))}
             </div>
           </div>
