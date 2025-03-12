@@ -8,6 +8,8 @@ import { Book } from 'lucide-react';
 import CatalogTree from '@/components/catalog/CatalogTree';
 import { catalogData } from '@/data/catalogData';
 import { findItemInTree } from '@/utils/catalogUtils';
+import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
+import { Card, CardContent } from "@/components/ui/card";
 
 // Define the metadata structure
 interface TextMetadata {
@@ -52,7 +54,29 @@ const textData = {
     { id: 'transition', title: 'མཚམས་སྦྱར།', content: '"བཅོམ་ལྡན་འདས་རྒྱལ་བུ་རྒྱལ་བྱེད་ཀྱི་ཚལ་མགོན་མེད་ཟས་སྦྱིན་གྱི་ཀུན་དགའ་ར་བ་ན་བཞུགས་ཏེ།" ཞེས་པས་བསྟན་ཏོ།།' },
     { id: 'debate', title: 'བརྒལ་ལན།', content: 'མི་གསལ།' },
     { id: 'translation-colophon', title: 'འགྱུར་བྱང་།', content: 'མི་གསལ།' }
-  ]
+  ],
+  // Add the new collated text and English translation content
+  collatedText: `༄། །བྱང་ཆུབ་སེམས་དཔའི་སྤྱོད་པ་ལ་འཇུག་པ་བཞུགས་སོ། །
+༄༅༅། །རྒྱ་གར་སྐད་དུ། བོ་<«Q»བོད་>དྷི་:སཏྭ་ཙརྱ་<«I»སཏྭ་ཙཪྻ་«N»སཏྭ་ཙརྱྭ་«Q»སཏྭ་ཙམླཻ་>ཨ་བ་ཏཱ་<«C»ཏ་>ར།
+ བོད་སྐད་དུ། བྱང་ཆུབ་སེམས་དཔའི་སྤྱོད་པ་ལ་འཇུག་པ།
+ སངས་རྒྱས་དང་བྱང་ཆུབ་སེམས་དཔའ་ཐམས་ཅད་ལ་ཕྱག་འཚལ་ལོ། །
+བདེ་གཤེགས་ཆོས་ཀྱི་སྐུ་མངའ་སྲས་བཅས་དང་། །ཕྱག་འོས་ཀུན་ལའང་གུས་པར་<«F,G,N,Q»པས་>ཕྱག་འཚལ་ཏེ། །བདེ་གཤེགས་སྲས་ཀྱི་སྡོམ་ལ་འཇུག་པ་ནི། །ལུང་བཞིན་མདོར་བསྡུས་ནས་ནི་བརྗོད་པར་བྱ། །
+སྔོན་ཆད་མ་བྱུང་བ་ཡང་འདིར་བརྗོད་མེད། །སྡེབ་སྦྱོར་མཁས་པའང་བདག་ལ་ཡོད་མིན་ཏེ། །དེ་ཕྱིར་གཞན་དོན་བསམ་པ་<«C,F,G»པའང་>བདག་ལ་མེད། །རང་གི་ཡིད་ལ་བསྒོམ་ཕྱིར་ངས་འདི་བརྩམས། །
+དགེ་བ་བསྒོམ་ཕྱིར་བདག་གི་དད་པའི་ཤུགས། །འདི་དག་གིས་ཀྱང་རེ་ཞིག་འཕེལ་འགྱུར་ལ། །བདག་དང་སྐལ་བ་མཉམ་པ་གཞན་གྱིས་ཀྱང་། །ཅི་སྟེ་འདི་དག་མཐོང་ན་དོན་ཡོད་འགྱུར། །
+དལ་འབྱོར་འདི་ནི་རྙེད་པར་ཤིན་ཏུ་དཀའ། །སྐྱེས་བུའི་དོན་སྒྲུབ་ཐོབ་པར་གྱུར་པ་ལ། །གལ་ཏེ་འདི་ལ་ཕན་པ་མ་བསྒྲུབས་<«F,G»སྒྲུབས་>ན། །ཕྱིས་འདི་ཡང་དག་འབྱོར་པར་<«C»བར་>ག་ལ་འགྱུར། །
+ཇི་ལྟར་མཚན་མོ་མུན་ནག་སྤྲིན་རུམ་ན། །གློག་འགྱུ་སྐད་ཅིག་བར་<«C,F,G,N,Q»རབ་>སྣང་སྟོན་པ་ལྟར། །དེ་<«I»ད་>བཞིན་སངས་རྒྱས་མཐུ་ཡིས་བརྒྱ་ལམ་ན། །འཇིག་རྟེན་བསོད་ནམས་བློ་གྲོས་ཐང་འགའ་འབྱུང་། །
+དེ་ལྟས་དགེ་བ་ཉམ་ཆུང་ཉིད་ལ་རྟག །<«I»རྟག། །«N,Q»བརྟག། །>སྡིག་པ་སྟོབས་ཆེན་ཤིན་ཏུ་མི་བཟད་པ། །དེ་ནི་རྫོགས་པའི་བྱང་ཆུབ་སེམས་མིན་པ། །དགེ་གཞན་གང་གིས་ཟིལ་གྱིས་གནོན་པར་འགྱུར། །`,
+  englishTranslation: `The Heart of the Perfection of Wisdom of the Blessed Lady 
+Bhagavatī Prajñāpāramitā Hṛdaya 
+In the Tibetan language: The Heart of the Perfection of Wisdom of the Blessed Lady 
+First Fascicle 
+I prostrate to the Blessed Mother Prajñāpāramitā. 
+Thus I have heard at one time. 
+The Blessed One was dwelling on Vulture Peak Mountain in Rājagṛha, together with a great assembly of monks and a great assembly of bodhisattvas. 
+At that time, the Blessed One entered into the samādhi of the Dharma discourse called 'Profound Illumination.' 
+At that time, the noble Bodhisattva Mahasattva Avalokiteśvara was thoroughly contemplating the practice of the profound perfection of wisdom that which transcends conceptual understanding and ordinary causality with direct, non-conceptual awareness. 
+One should view those five aggregates as empty of inherent nature. 
+Then, through the power of the Buddha, the venerable Śāriputra spoke these words to the noble great bodhisattva Avalokiteśvara.`
 };
 
 const TextDetail = () => {
@@ -108,49 +132,78 @@ const TextDetail = () => {
               />
             </div>
             
-            {/* Right side: Text content and metadata */}
+            {/* Right side: Text content with tabs */}
             <div className="lg:col-span-3">
-              <div className="flex flex-col lg:flex-row gap-8">
-                {/* Text content */}
-                <div className="lg:w-2/3 order-2 lg:order-1">
-                  <div className="bg-white border border-kangyur-orange/10 rounded-xl shadow-sm p-6 mb-6">
-                    {textData.sections.map((section) => (
-                      <div key={section.id} className="mb-8 last:mb-0">
-                        <h3 className="tibetan text-xl font-bold text-kangyur-maroon mb-3">
-                          {section.title}
-                        </h3>
-                        <div className="tibetan text-lg leading-relaxed whitespace-pre-line">
-                          {section.content}
+              <Card className="border border-kangyur-orange/10 rounded-xl shadow-sm">
+                <CardContent className="p-0">
+                  <Tabs defaultValue="metadata" className="w-full">
+                    <TabsList className="w-full grid grid-cols-3 border-b">
+                      <TabsTrigger value="metadata" className="rounded-none">Metadata</TabsTrigger>
+                      <TabsTrigger value="collated-text" className="rounded-none">Collated Text</TabsTrigger>
+                      <TabsTrigger value="english-translation" className="rounded-none">English Translation</TabsTrigger>
+                    </TabsList>
+                    
+                    {/* Tab 1: Metadata */}
+                    <TabsContent value="metadata" className="p-6">
+                      <div className="flex flex-col lg:flex-row gap-8">
+                        {/* Text content (sections) */}
+                        <div className="lg:w-2/3">
+                          {textData.sections.map((section) => (
+                            <div key={section.id} className="mb-8 last:mb-0">
+                              <h3 className="tibetan text-xl font-bold text-kangyur-maroon mb-3">
+                                {section.title}
+                              </h3>
+                              <div className="tibetan text-lg leading-relaxed whitespace-pre-line">
+                                {section.content}
+                              </div>
+                            </div>
+                          ))}
+                        </div>
+                        
+                        {/* Metadata table */}
+                        <div className="lg:w-1/3">
+                          <div className="bg-white border border-kangyur-orange/10 rounded-lg p-5 sticky top-24">
+                            <h3 className="text-xl font-semibold text-kangyur-dark mb-4">ཡིག་ཆའི་ཁྱད་ཆོས།</h3>
+                            
+                            <div className="overflow-hidden rounded-lg border border-kangyur-orange/10">
+                              <table className="min-w-full divide-y divide-kangyur-orange/10">
+                                <tbody className="divide-y divide-kangyur-orange/10">
+                                  {textData.metadata.map((item) => (
+                                    <tr key={item.key} className="hover:bg-kangyur-cream/20">
+                                      <td className="tibetan px-4 py-3 text-base font-medium text-kangyur-maroon whitespace-nowrap">
+                                        {item.label}
+                                      </td>
+                                      <td className="tibetan px-4 py-3 text-base text-kangyur-dark">
+                                        {item.value}
+                                      </td>
+                                    </tr>
+                                  ))}
+                                </tbody>
+                              </table>
+                            </div>
+                          </div>
                         </div>
                       </div>
-                    ))}
-                  </div>
-                </div>
-                
-                {/* Metadata table */}
-                <div className="lg:w-1/3 order-1 lg:order-2">
-                  <div className="bg-white border border-kangyur-orange/10 rounded-xl shadow-sm p-5 sticky top-24">
-                    <h3 className="text-xl font-semibold text-kangyur-dark mb-4">ཡིག་ཆའི་ཁྱད་ཆོས།</h3>
+                    </TabsContent>
                     
-                    <div className="overflow-hidden rounded-lg border border-kangyur-orange/10">
-                      <table className="min-w-full divide-y divide-kangyur-orange/10">
-                        <tbody className="divide-y divide-kangyur-orange/10">
-                          {textData.metadata.map((item) => (
-                            <tr key={item.key} className="hover:bg-kangyur-cream/20">
-                              <td className="tibetan px-4 py-3 text-base font-medium text-kangyur-maroon whitespace-nowrap">
-                                {item.label}
-                              </td>
-                              <td className="tibetan px-4 py-3 text-base text-kangyur-dark">
-                                {item.value}
-                              </td>
-                            </tr>
-                          ))}
-                        </tbody>
-                      </table>
-                    </div>
-                  </div>
-                </div>
-              </div>
+                    {/* Tab 2: Collated Text */}
+                    <TabsContent value="collated-text" className="p-6">
+                      <h2 className="text-2xl font-bold text-kangyur-maroon mb-4">Collated Edition</h2>
+                      <div className="tibetan text-lg leading-relaxed whitespace-pre-line bg-gray-50 p-6 rounded-lg border border-gray-200">
+                        {textData.collatedText}
+                      </div>
+                    </TabsContent>
+                    
+                    {/* Tab 3: English Translation */}
+                    <TabsContent value="english-translation" className="p-6">
+                      <h2 className="text-2xl font-bold text-kangyur-maroon mb-4">English Translation</h2>
+                      <div className="text-lg leading-relaxed whitespace-pre-line bg-gray-50 p-6 rounded-lg border border-gray-200">
+                        {textData.englishTranslation}
+                      </div>
+                    </TabsContent>
+                  </Tabs>
+                </CardContent>
+              </Card>
             </div>
           </div>
         </div>
