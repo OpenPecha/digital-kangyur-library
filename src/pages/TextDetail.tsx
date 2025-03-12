@@ -2,8 +2,10 @@
 import React from 'react';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
+import Breadcrumb from '@/components/Breadcrumb';
 import { useParams } from 'react-router-dom';
 import { cn } from '@/lib/utils';
+import { Book } from 'lucide-react';
 
 // Define the metadata structure
 interface TextMetadata {
@@ -82,6 +84,18 @@ const textData = {
 const TextDetail = () => {
   const { id } = useParams<{ id: string }>();
   
+  // Generate breadcrumb items based on the text data
+  const breadcrumbItems = [
+    {
+      label: "Texts",
+      href: "/texts",
+      icon: <Book className="w-4 h-4" />
+    },
+    {
+      label: textData.title.english,
+    }
+  ];
+  
   return (
     <div className="min-h-screen flex flex-col">
       <Navbar />
@@ -94,6 +108,9 @@ const TextDetail = () => {
           </div>
           <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative">
             <div className="max-w-5xl mx-auto">
+              {/* Breadcrumbs */}
+              <Breadcrumb items={breadcrumbItems} className="mb-4 pb-2 border-b border-white/20" />
+              
               <h1 className="tibetan text-3xl md:text-4xl font-bold mb-2">{textData.title.tibetan}</h1>
               <h2 className="tibetan text-xl md:text-2xl opacity-80 mb-3">{textData.title.sanskrit}</h2>
               <p className="text-lg md:text-xl opacity-90">{textData.title.english}</p>
