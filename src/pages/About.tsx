@@ -5,7 +5,7 @@ import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import { Users, Sparkles, Mail, Heart, BookOpen, Globe } from 'lucide-react';
 import { Card, CardContent } from '@/components/ui/card';
-import { Avatar } from '@/components/ui/avatar';
+import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/avatar';
 
 const About = () => {
   const location = useLocation();
@@ -206,8 +206,13 @@ const About = () => {
               <Card className="border-kangyur-orange/10">
                 <CardContent className="p-6">
                   <div className="flex items-start gap-4">
-                    <Avatar className="h-16 w-16 border-2 border-kangyur-orange">
-                      <div className="bg-kangyur-maroon text-white flex items-center justify-center h-full text-xl font-semibold">TD</div>
+                    <Avatar className="h-16 w-16 border-2 border-kangyur-orange overflow-hidden">
+                      <AvatarImage 
+                        src="/lovable-uploads/c871aeca-c10f-459d-b977-fc3284443d19.png" 
+                        alt="Khenpo Tsering Nyima" 
+                        className="object-cover" 
+                      />
+                      <AvatarFallback className="bg-kangyur-maroon text-white">TN</AvatarFallback>
                     </Avatar>
                     <div>
                       <h4 className="font-bold text-kangyur-dark">Khenpo Tsering Nyima</h4>
