@@ -44,8 +44,10 @@ const Catalog = () => {
     : null;
   
   return (
-    <div className="min-h-screen bg-white">
-      <Navbar />
+    <div className="min-h-screen bg-white w-full">
+      <div className="w-full">
+        <Navbar />
+      </div>
       
       {/* Hero Section with Search */}
       <CatalogSearch 
