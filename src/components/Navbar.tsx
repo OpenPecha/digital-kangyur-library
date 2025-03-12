@@ -79,7 +79,7 @@ const Navbar = () => {
     document.documentElement.classList.add('english-language');
   }, []);
   return <header className={cn("fixed top-0 left-0 w-full z-50 transition-all duration-300", scrolled ? "bg-white/90 backdrop-blur-md shadow-sm" : "bg-transparent")}>
-      <div className="container mx-auto sm:px-6 lg:px-8 px-0">
+      <div className="container mx-auto">
         <div className="flex items-center justify-between h-16 md:h-20 bg-slate-50 px-[32px]">
           <Link to="/" className="flex items-center space-x-2 text-kangyur-maroon transition-transform duration-300 transform hover:scale-105">
             <span className="font-bold text-xl md:text-2xl">
