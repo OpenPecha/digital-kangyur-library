@@ -81,11 +81,11 @@ const TextsPage = () => {
   const getViewerLink = (editionId: string) => {
     const links: Record<string, string> = {
       'derge': '/texts/derge-detail',
-      'narthang': 'https://library.bdrc.io/show/bdr:W2KG5014#open-viewer',
-      'peking': 'https://library.bdrc.io/show/bdr:W1PD96684#open-viewer',
-      'cone': 'https://library.bdrc.io/show/bdr:W1PD96685#open-viewer',
-      'lhasa': 'https://online.adarshah.org/index.html?kdb=lhasakangyur&sutra=h1&page=1-1b',
-      'urga': 'https://library.bdrc.io/show/bdr:W29468#open-viewer',
+      'narthang': '/texts/narthang-detail',
+      'peking': '/texts/peking-detail',
+      'cone': '/texts/chone-detail',
+      'lhasa': '/texts/lhasa-detail',
+      'urga': '/texts/urga-detail',
     };
     return links[editionId];
   };
@@ -155,8 +155,6 @@ const TextsPage = () => {
                         <Link 
                           to={getViewerLink(edition.id)}
                           className="group"
-                          target={edition.id !== 'derge' ? "_blank" : undefined}
-                          rel={edition.id !== 'derge' ? "noopener noreferrer" : undefined}
                         >
                           <Button variant="default" className="w-full sm:w-auto bg-kangyur-maroon hover:bg-kangyur-maroon/90">
                             <span className="language-en">View online edition</span>
