@@ -149,7 +149,7 @@ Then, through the power of the Buddha, the venerable Śāriputra spoke these wor
   // Add mock edition-specific metadata
   editionMetadata: [{
     id: 'derge',
-    name: 'དེར་གེ།',
+    name: 'སྡེ་དགེ།',
     volume: '༦༩',
     folio: '༣༤ཀ༢',
     page: '༡༤༥'
