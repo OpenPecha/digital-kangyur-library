@@ -1,3 +1,4 @@
+
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -16,6 +17,10 @@ import LhasaDetail from "./pages/LhasaDetail";
 import NarthangDetail from "./pages/NarthangDetail";
 import PekingDetail from "./pages/PekingDetail";
 import UrgaDetail from "./pages/UrgaDetail";
+import About from "./pages/About";
+// Import the Audio and Video components from the pages directory
+import AudioPage from "./pages/Audio";
+import VideoPage from "./pages/Video";
 
 const queryClient = new QueryClient();
 
@@ -40,8 +45,8 @@ const App = () => (
           
           <Route path="/history" element={<History />} />
           
-          <Route path="/audio" element={<Audio />} />
-          <Route path="/video" element={<Video />} />
+          <Route path="/audio" element={<AudioPage />} />
+          <Route path="/video" element={<VideoPage />} />
           
           <Route path="/about" element={<About />} />
           
