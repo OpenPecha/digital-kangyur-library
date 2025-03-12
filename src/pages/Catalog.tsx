@@ -10,7 +10,7 @@ import { filterCatalogItems, findItemInTree } from '@/utils/catalogUtils';
 
 const Catalog = () => {
   const [searchQuery, setSearchQuery] = useState('');
-  const [expandedItems, setExpandedItems] = useState<string[]>(['discipline', 'discourses', 'general-sutras']); // Start with these expanded
+  const [expandedItems, setExpandedItems] = useState<string[]>(['discipline']); // Start with discipline expanded
   const [selectedItem, setSelectedItem] = useState<string | null>(null);
   const [showDetails, setShowDetails] = useState(true);
   
@@ -54,24 +54,28 @@ const Catalog = () => {
       />
       
       {/* Catalog Section */}
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <div className="flex flex-col lg:flex-row gap-10">
+      <div className="container mx-auto px-4 py-8">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
           {/* Left side: Catalog tree */}
-          <CatalogTree 
-            items={filteredCatalog}
-            expandedItems={expandedItems}
-            selectedItem={selectedItem}
-            showDetails={showDetails}
-            onToggleExpand={toggleExpand}
-            onSelectItem={handleSelectItem}
-            onToggleDetails={toggleDetails}
-          />
+          <div className="lg:col-span-1">
+            <CatalogTree 
+              items={filteredCatalog}
+              expandedItems={expandedItems}
+              selectedItem={selectedItem}
+              showDetails={showDetails}
+              onToggleExpand={toggleExpand}
+              onSelectItem={handleSelectItem}
+              onToggleDetails={toggleDetails}
+            />
+          </div>
           
           {/* Right side: Details panel */}
-          <CatalogItemDetails 
-            selectedItem={selectedItemDetails}
-            showDetails={showDetails}
-          />
+          <div className="lg:col-span-2">
+            <CatalogItemDetails 
+              selectedItem={selectedItemDetails}
+              showDetails={showDetails}
+            />
+          </div>
         </div>
       </div>
       
