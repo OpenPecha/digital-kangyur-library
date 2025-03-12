@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
@@ -45,9 +44,7 @@ const Catalog = () => {
   
   return (
     <div className="min-h-screen bg-white w-full">
-      <div className="w-full">
-        <Navbar />
-      </div>
+      <Navbar />
       
       {/* Hero Section with Search */}
       <CatalogSearch 
