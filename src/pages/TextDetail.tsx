@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
@@ -16,6 +17,7 @@ interface TextMetadata {
   key: string;
   label: string;
   value: string;
+  group: 'general' | 'location';
 }
 
 // Define the text content section structure
@@ -23,6 +25,15 @@ interface TextSection {
   id: string;
   title: string;
   content: string;
+}
+
+// Define edition-specific metadata structure
+interface EditionMetadata {
+  id: string;
+  name: string;
+  volume: string;
+  folio: string;
+  page: string;
 }
 
 // Mock data for this specific text
@@ -35,16 +46,16 @@ const textData = {
   },
   category: 'discourses',
   metadata: [
-    { key: 'vehicle', label: 'ཐེག་པ།', value: 'ཐེག་ཆེན།' },
-    { key: 'definitive', label: 'དྲང་ངེས།', value: 'ངེས་དོན།' },
-    { key: 'dharma-wheel', label: 'ཆོས་འཁོར།', value: 'ཐ་མ།' },
-    { key: 'basket', label: 'སྡེ་སྣོད།', value: 'མདོ་སྡེ།' },
-    { key: 'volume', label: 'པོད་རྟགས།', value: '༦༩' },
-    { key: 'fascicle', label: 'བམ་པོ།', value: '༤' },
-    { key: 'chapter', label: 'ལེའུ།', value: '༤' },
-    { key: 'page', label: 'ཤོག་ངོས།', value: '༢' },
-    { key: 'translation', label: 'འགྱུར་སྔ་ཕྱི།', value: 'སྔ་འགྱུར།' },
-    { key: 'commentary', label: 'མདོ་འགྲེལ།', value: '༢' }
+    { key: 'vehicle', label: 'ཐེག་པ།', value: 'ཐེག་ཆེན།', group: 'general' },
+    { key: 'definitive', label: 'དྲང་ངེས།', value: 'ངེས་དོན།', group: 'general' },
+    { key: 'dharma-wheel', label: 'ཆོས་འཁོར།', value: 'ཐ་མ།', group: 'general' },
+    { key: 'basket', label: 'སྡེ་སྣོད།', value: 'མདོ་སྡེ།', group: 'general' },
+    { key: 'volume', label: 'པོད་རྟགས།', value: '༦༩', group: 'location' },
+    { key: 'fascicle', label: 'བམ་པོ།', value: '༤', group: 'location' },
+    { key: 'chapter', label: 'ལེའུ།', value: '༤', group: 'location' },
+    { key: 'page', label: 'ཤོག་ངོས།', value: '༢', group: 'location' },
+    { key: 'translation', label: 'འགྱུར་སྔ་ཕྱི།', value: 'སྔ་འགྱུར།', group: 'general' },
+    { key: 'commentary', label: 'མདོ་འགྲེལ།', value: '༢', group: 'general' }
   ],
   sections: [
     { id: 'homage', title: 'འགྱུར་ཕྱག', content: 'སངས་རྒྱས་དང་བྱང་ཆུབ་སེམས་དཔའ་ཐམས་ཅད་ལ་ཕྱག་འཚལ་ལོ།།' },
@@ -76,7 +87,52 @@ The Blessed One was dwelling on Vulture Peak Mountain in Rājagṛha, together w
 At that time, the Blessed One entered into the samādhi of the Dharma discourse called 'Profound Illumination.' 
 At that time, the noble Bodhisattva Mahasattva Avalokiteśvara was thoroughly contemplating the practice of the profound perfection of wisdom that which transcends conceptual understanding and ordinary causality with direct, non-conceptual awareness. 
 One should view those five aggregates as empty of inherent nature. 
-Then, through the power of the Buddha, the venerable Śāriputra spoke these words to the noble great bodhisattva Avalokiteśvara.`
+Then, through the power of the Buddha, the venerable Śāriputra spoke these words to the noble great bodhisattva Avalokiteśvara.`,
+  // Add mock edition-specific metadata
+  editionMetadata: [
+    {
+      id: 'derge',
+      name: 'དེར་གེ།',
+      volume: '༦༩',
+      folio: '༣༤ཀ༢',
+      page: '༡༤༥'
+    },
+    {
+      id: 'chone',
+      name: 'ཅོ་ནེ།',
+      volume: '༦༨',
+      folio: '༣༦ཁ༧',
+      page: '༡༤༧'
+    },
+    {
+      id: 'narthang',
+      name: 'སྣར་ཐང་།',
+      volume: '༧༠',
+      folio: '༤༠ཀ༢',
+      page: '༡༥༦'
+    },
+    {
+      id: 'peking',
+      name: 'པེ་ཅིན།',
+      volume: '༧༡',
+      folio: '༤༢ཁ༡',
+      page: '༡༦༢'
+    },
+    {
+      id: 'lhasa',
+      name: 'ལྷ་ས།',
+      volume: '༦༩',
+      folio: '༣༧ཀ༥',
+      page: '༡༥༠'
+    },
+    {
+      id: 'urga',
+      name: 'ཨུར་ག',
+      volume: '༧༠',
+      folio: '༣༩ཁ༤',
+      page: '༡༥༤'
+    }
+  ]
 };
 
 const TextDetail = () => {
@@ -84,6 +140,7 @@ const TextDetail = () => {
   const [expandedItems, setExpandedItems] = useState<string[]>(['discourses', 'general-sutras']);
   const [selectedItem, setSelectedItem] = useState<string | null>('golden-sutra');
   const [showCatalog, setShowCatalog] = useState(true);
+  const [editionTab, setEditionTab] = useState<string>('derge');
   
   // Handle expanding/collapsing categories
   const toggleExpand = (id: string) => {
@@ -154,18 +211,19 @@ const TextDetail = () => {
             )}>
               <Card className="border border-kangyur-orange/10 rounded-xl shadow-sm">
                 <CardContent className="p-0">
-                  <Tabs defaultValue="metadata" className="w-full">
-                    <TabsList className="w-full grid grid-cols-3 border-b">
+                  <Tabs defaultValue="summary" className="w-full">
+                    <TabsList className="w-full grid grid-cols-4 border-b">
+                      <TabsTrigger value="summary" className="rounded-none">Summary</TabsTrigger>
                       <TabsTrigger value="metadata" className="rounded-none">Metadata</TabsTrigger>
                       <TabsTrigger value="collated-text" className="rounded-none">Collated Text</TabsTrigger>
                       <TabsTrigger value="english-translation" className="rounded-none">English Translation</TabsTrigger>
                     </TabsList>
                     
-                    {/* Tab 1: Metadata */}
-                    <TabsContent value="metadata" className="p-6">
+                    {/* Tab 1: Summary - Text content sections from the old metadata tab */}
+                    <TabsContent value="summary" className="p-6">
                       <div className="flex flex-col lg:flex-row gap-8">
                         {/* Text content (sections) */}
-                        <div className="lg:w-2/3">
+                        <div className="w-full">
                           {textData.sections.map((section) => (
                             <div key={section.id} className="mb-8 last:mb-0">
                               <h3 className="tibetan text-xl font-bold text-kangyur-maroon mb-3">
@@ -177,16 +235,21 @@ const TextDetail = () => {
                             </div>
                           ))}
                         </div>
-                        
-                        {/* Metadata table */}
-                        <div className="lg:w-1/3">
-                          <div className="bg-white border border-kangyur-orange/10 rounded-lg p-5 sticky top-24">
-                            <h3 className="text-xl font-semibold text-kangyur-dark mb-4">ཡིག་ཆའི་ཁྱད་ཆོས།</h3>
-                            
-                            <div className="overflow-hidden rounded-lg border border-kangyur-orange/10">
-                              <table className="min-w-full divide-y divide-kangyur-orange/10">
-                                <tbody className="divide-y divide-kangyur-orange/10">
-                                  {textData.metadata.map((item) => (
+                      </div>
+                    </TabsContent>
+                    
+                    {/* Tab 2: Metadata - Reorganized metadata with two sections */}
+                    <TabsContent value="metadata" className="p-6">
+                      <div className="flex flex-col gap-8">
+                        {/* General Metadata Section */}
+                        <div>
+                          <h3 className="text-xl font-semibold text-kangyur-maroon mb-4">General Metadata</h3>
+                          <div className="overflow-hidden rounded-lg border border-kangyur-orange/10">
+                            <table className="min-w-full divide-y divide-kangyur-orange/10">
+                              <tbody className="divide-y divide-kangyur-orange/10">
+                                {textData.metadata
+                                  .filter(item => item.group === 'general')
+                                  .map((item) => (
                                     <tr key={item.key} className="hover:bg-kangyur-cream/20">
                                       <td className="tibetan px-4 py-3 text-base font-medium text-kangyur-maroon whitespace-nowrap">
                                         {item.label}
@@ -196,15 +259,68 @@ const TextDetail = () => {
                                       </td>
                                     </tr>
                                   ))}
-                                </tbody>
-                              </table>
-                            </div>
+                              </tbody>
+                            </table>
                           </div>
+                        </div>
+                        
+                        {/* Edition-specific Metadata Section */}
+                        <div>
+                          <h3 className="text-xl font-semibold text-kangyur-maroon mb-4">Editions</h3>
+                          
+                          <Tabs value={editionTab} onValueChange={setEditionTab} className="w-full">
+                            <TabsList className="mb-4">
+                              {textData.editionMetadata.map((edition) => (
+                                <TabsTrigger 
+                                  key={edition.id} 
+                                  value={edition.id}
+                                  className="tibetan"
+                                >
+                                  {edition.name}
+                                </TabsTrigger>
+                              ))}
+                            </TabsList>
+                            
+                            {textData.editionMetadata.map((edition) => (
+                              <TabsContent key={edition.id} value={edition.id}>
+                                <div className="overflow-hidden rounded-lg border border-kangyur-orange/10">
+                                  <table className="min-w-full divide-y divide-kangyur-orange/10">
+                                    <tbody className="divide-y divide-kangyur-orange/10">
+                                      <tr className="hover:bg-kangyur-cream/20">
+                                        <td className="tibetan px-4 py-3 text-base font-medium text-kangyur-maroon whitespace-nowrap">
+                                          པོད་རྟགས།
+                                        </td>
+                                        <td className="tibetan px-4 py-3 text-base text-kangyur-dark">
+                                          {edition.volume}
+                                        </td>
+                                      </tr>
+                                      <tr className="hover:bg-kangyur-cream/20">
+                                        <td className="tibetan px-4 py-3 text-base font-medium text-kangyur-maroon whitespace-nowrap">
+                                          ཤོག་ལྡེབ།
+                                        </td>
+                                        <td className="tibetan px-4 py-3 text-base text-kangyur-dark">
+                                          {edition.folio}
+                                        </td>
+                                      </tr>
+                                      <tr className="hover:bg-kangyur-cream/20">
+                                        <td className="tibetan px-4 py-3 text-base font-medium text-kangyur-maroon whitespace-nowrap">
+                                          ཤོག་ངོས།
+                                        </td>
+                                        <td className="tibetan px-4 py-3 text-base text-kangyur-dark">
+                                          {edition.page}
+                                        </td>
+                                      </tr>
+                                    </tbody>
+                                  </table>
+                                </div>
+                              </TabsContent>
+                            ))}
+                          </Tabs>
                         </div>
                       </div>
                     </TabsContent>
                     
-                    {/* Tab 2: Collated Text */}
+                    {/* Tab 3: Collated Text */}
                     <TabsContent value="collated-text" className="p-6">
                       <h2 className="text-2xl font-bold text-kangyur-maroon mb-4">Collated Edition</h2>
                       <div className="tibetan text-lg leading-relaxed whitespace-pre-line bg-gray-50 p-6 rounded-lg border border-gray-200">
@@ -212,7 +328,7 @@ const TextDetail = () => {
                       </div>
                     </TabsContent>
                     
-                    {/* Tab 3: English Translation */}
+                    {/* Tab 4: English Translation */}
                     <TabsContent value="english-translation" className="p-6">
                       <h2 className="text-2xl font-bold text-kangyur-maroon mb-4">English Translation</h2>
                       <div className="text-lg leading-relaxed whitespace-pre-line bg-gray-50 p-6 rounded-lg border border-gray-200">
