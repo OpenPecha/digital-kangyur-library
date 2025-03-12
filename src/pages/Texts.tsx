@@ -1,9 +1,10 @@
+
 import React from 'react';
 import { Link } from 'react-router-dom';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import { cn } from '@/lib/utils';
-import { Book, BookOpen, ChevronRight, ExternalLink } from 'lucide-react';
+import { Book, BookOpen, ExternalLink } from 'lucide-react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 
@@ -141,17 +142,6 @@ const TextsPage = () => {
                     </p>
                     
                     <div className="flex flex-col sm:flex-row gap-2">
-                      <Link 
-                        to={`/texts/${edition.id}`}
-                        className="group"
-                      >
-                        <Button variant="outline" className="w-full sm:w-auto text-kangyur-orange border-kangyur-orange/30 hover:bg-kangyur-orange/10 hover:text-kangyur-orange">
-                          <span className="language-en">View details</span>
-                          <span className="language-tibetan tibetan">རྒྱས་པ་ལ་ལྟ།</span>
-                          <ChevronRight className="ml-1 w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                        </Button>
-                      </Link>
-                      
                       {edition.id === 'derge' && (
                         <Link 
                           to="/texts/derge-detail"
