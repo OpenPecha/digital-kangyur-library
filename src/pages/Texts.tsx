@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Link } from 'react-router-dom';
 import Navbar from '@/components/Navbar';
@@ -60,7 +59,7 @@ const kangyurEditions = [
     tibetanTitle: 'ལྷ་ས་བཀའ་འགྱུར།',
     transliteration: 'Lha sa bKa\' \'gyur',
     description: 'The Lhasa Kangyur was produced in Tibet\'s capital city and represents a later tradition of the Tibetan Buddhist canon.',
-    tibetanDescription: 'ལྷ་ས་བཀའ་འགྱུར་ནི་བོད་ཀྱི་རྒྱལ་ས་ལྷ་སར་བཞེངས་པ་ཞིག་ཡིན་ཞིང་། བོད་བརྒྱུད་ནང་བསྟན་གྱི་བཀའ་འགྱུར་གྱི་རྒྱུན་ཕྱི་མ་ཞིག་མཚོན།',
+    tibetanDescription: 'ལྷ་ས་བཀའ་འགྱུར་ནི་བོད་ཀྱི་རྒྱལ་ས་ལྷ་སར་བཞེངས་པ་ཞིག��ཡིན་ཞིང་། བོད་བརྒྱུད་ནང་བསྟན་གྱི་བཀའ་འགྱུར་གྱི་རྒྱུན་ཕྱི་མ་ཞིག་མཚོན།',
     volumes: 100,
     year: '1934',
     imageUrl: '/placeholder.svg',
@@ -79,12 +78,23 @@ const kangyurEditions = [
 ];
 
 const TextsPage = () => {
+  const getViewerLink = (editionId: string) => {
+    const links: Record<string, string> = {
+      'derge': '/texts/derge-detail',
+      'narthang': 'https://library.bdrc.io/show/bdr:W2KG5014#open-viewer',
+      'peking': 'https://library.bdrc.io/show/bdr:W1PD96684#open-viewer',
+      'cone': 'https://library.bdrc.io/show/bdr:W1PD96685#open-viewer',
+      'lhasa': 'https://online.adarshah.org/index.html?kdb=lhasakangyur&sutra=h1&page=1-1b',
+      'urga': 'https://library.bdrc.io/show/bdr:W29468#open-viewer',
+    };
+    return links[editionId];
+  };
+
   return (
     <div className="min-h-screen flex flex-col">
       <Navbar />
       
       <main className="flex-1 py-20 mt-16">
-        {/* Hero section */}
         <section className="bg-gradient-to-br from-kangyur-cream to-white py-16 sm:py-20">
           <div className="container mx-auto px-4 sm:px-6 lg:px-8">
             <div className="max-w-3xl mx-auto text-center">
@@ -97,14 +107,13 @@ const TextsPage = () => {
                   Explore the historical Kangyur editions with their unique characteristics, provenance, and historical significance.
                 </span>
                 <span className="language-tibetan tibetan">
-                  བཀའ་འགྱུར་གྱི་པར་མའི་རིགས་སོ་སོའི་ཁྱད་ཆོས་དང་། འབྱུང་ཁུངས། དེ་བཞིན་ལོ་རྒྱུས་ཀྱི་གལ་གནད་ལ་བརྟག་དཔྱད་བྱེད།
+                  བཀའ་འགྱུར་གྱི་པར་མའི་རིགས་སོ་སོའི་ཁྱད་ཆོས་དང་། དེ་བཞིན་ལོ་རྒྱུས་ཀྱི་གལ་གནད་ལ་བརྟག་དཔྱད་བྱེད།
                 </span>
               </p>
             </div>
           </div>
         </section>
 
-        {/* Kangyur editions card section */}
         <section className="py-16 bg-white">
           <div className="container mx-auto px-4 sm:px-6 lg:px-8">
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -142,10 +151,12 @@ const TextsPage = () => {
                     </p>
                     
                     <div className="flex flex-col sm:flex-row gap-2">
-                      {edition.id === 'derge' && (
+                      {getViewerLink(edition.id) && (
                         <Link 
-                          to="/texts/derge-detail"
+                          to={getViewerLink(edition.id)}
                           className="group"
+                          target={edition.id !== 'derge' ? "_blank" : undefined}
+                          rel={edition.id !== 'derge' ? "noopener noreferrer" : undefined}
                         >
                           <Button variant="default" className="w-full sm:w-auto bg-kangyur-maroon hover:bg-kangyur-maroon/90">
                             <span className="language-en">View online edition</span>
