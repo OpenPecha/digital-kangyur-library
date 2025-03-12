@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
@@ -45,27 +44,86 @@ const textData = {
     english: 'The Noble Golden Sutra, a Mahayana Discourse'
   },
   category: 'discourses',
-  metadata: [
-    { key: 'vehicle', label: 'ཐེག་པ།', value: 'ཐེག་ཆེན།', group: 'general' },
-    { key: 'definitive', label: 'དྲང་ངེས།', value: 'ངེས་དོན།', group: 'general' },
-    { key: 'dharma-wheel', label: 'ཆོས་འཁོར།', value: 'ཐ་མ།', group: 'general' },
-    { key: 'basket', label: 'སྡེ་སྣོད།', value: 'མདོ་སྡེ།', group: 'general' },
-    { key: 'volume', label: 'པོད་རྟགས།', value: '༦༩', group: 'location' },
-    { key: 'fascicle', label: 'བམ་པོ།', value: '༤', group: 'location' },
-    { key: 'chapter', label: 'ལེའུ།', value: '༤', group: 'location' },
-    { key: 'page', label: 'ཤོག་ངོས།', value: '༢', group: 'location' },
-    { key: 'translation', label: 'འགྱུར་སྔ་ཕྱི།', value: 'སྔ་འགྱུར།', group: 'general' },
-    { key: 'commentary', label: 'མདོ་འགྲེལ།', value: '༢', group: 'general' }
-  ],
-  sections: [
-    { id: 'homage', title: 'འགྱུར་ཕྱག', content: 'སངས་རྒྱས་དང་བྱང་ཆུབ་སེམས་དཔའ་ཐམས་ཅད་ལ་ཕྱག་འཚལ་ལོ།།' },
-    { id: 'purpose', title: 'དགོས་དོན།', content: 'གདུལ་བྱ་རྣམས་ཀྱིས་བྱང་ཆུབ་སེམས་ཀྱི་རང་བཞིན་ཇི་ལྟར་ཡིན་པ་ཤེས་ནས་དེ་ལ་བརྩོན་པའི་ཆེད་དུ་སྟེ། དེ་ཡང་མདོ་ལས། བཅོམ་ལྡན་འདས་བྱང་ཆུབ་ཀྱི་སེམས་ཇི་ལྟར་བལྟ་བར་བགྱི། ཞེས་པས་བསྟན་ཏོ།།' },
-    { id: 'summary', title: 'བསྡུས་དོན་ནི།', content: 'ཕུན་སུམ་ཚོགས་པ་ལྔའི་སྒོ་ནས་ཤེས་པར་བྱ་སྟེ། \nགནས་ཕུན་སུམ་ཚོགས་པ་ནི། རྒྱལ་བུ་རྒྱལ་བྱེད་ཀྱི་ཚལ་མགོན་མེད་ཟས་སྦྱིན་གྱི་ཀུན་དགའ་ར་བའོ།།\nསྟོན་པ་ཕུན་སུམ་ཚོགས་པ་ནི། བཅོམ་ལྡན་འདས་ཤཱཀྱ་ཐུབ་པའོ།།\nའཁོར་ཕུན་སུམ་ཚོགས་པ་ནི། ཚེ་དང་ལྡན་པ་ཀུན་དགའ་བོ་ལ་སོགས་པའོ།།\nདུས་ཕུན་སུམ་ཚོགས་པ་ནི། འདི་སྐད་བདག་གིས་ཐོས་པ་དུས་གཅིག་ན། ཞེས་སོ།།\nཆོས་ཕུན་སུམ་ཚོགས་པ་ནི། ཚེ་དང་ལྡན་པ་ཀུན་དགའ་བོས་བྱང་ཆུབ་ཀྱི་སེམས་ཇི་ལྟར་བལྟ་བར་བྱ་དགོས་ཞེས་ཞུས་པའི་ལན་དུ།  བཅོམ་ལྡན་འདས་ཀྱིས་བྱང་ཆུབ་ཀྱི་སེམས་ནི་གསེར་གྱི་རང་བཞིན་འདྲ་བར་གནས་པར་བལྟ་དགོས་པ་དང་། གསེར་རང་བཞིན་གྱིས་རྣམ་པར་དག་པ་ལྟར་བྱང་ཆུབ་སེམས་རྣམ་པར་དག་པ་དང་། མགར་བས་གསེར་ལ་བཟོའི་བྱེ་བྲག་ཐ་དད་པར་བྱས་ཀྱང་གསེར་གྱི་རང་བཞིན་མི་འགྱུར་བ་ལྟར་བྱང་ཆུབ་སེམས་ལ་ཡོན་ཏན་གྱི་ཁྱད་པར་སྣ་ཚོགས་པ་སྣང་ཡང་དོན་དམ་པར་བྱང་ཆུབ་ཀྱི་སེམས་ལས་མ་གཡོས་པས་རང་བཞིན་འགྱུར་བ་མེད་པར་བལྟ་དགོས་པར་བསྟན་ཏོ།།' },
-    { id: 'word-meaning', title: 'ཚིག་དོན།', content: 'ཚིག་གི་དོན་རེ་རེ་བཞིན་མདོ་དངོས་ལས་ཤེས་པར་བྱ་དགོས་ལ། འདིར་བྱང་ཆུབ་ཀྱི་སེམས་རིན་པོ་ཆེ་གསེར་གྱི་དཔེ་དང་སྦྱར་ནས་བསྟན་པས་མདོའི་མཚན་ལ"འཕགས་པ་གསེར་གྱི་མདོ་ཞེས་བྱ་བ་ཐེག་པ་ཆེན་པོའི་མདོ།"ཞེས་དཔེའི་སྒོ་ནས་བཏགས་དེ་ལྟར་བཏགས་སོ། །' },
-    { id: 'transition', title: 'མཚམས་སྦྱར།', content: '"བཅོམ་ལྡན་འདས་རྒྱལ་བུ་རྒྱལ་བྱེད་ཀྱི་ཚལ་མགོན་མེད་ཟས་སྦྱིན་གྱི་ཀུན་དགའ་ར་བ་ན་བཞུགས་ཏེ།" ཞེས་པས་བསྟན་ཏོ།།' },
-    { id: 'debate', title: 'བརྒལ་ལན།', content: 'མི་གསལ།' },
-    { id: 'translation-colophon', title: 'འགྱུར་བྱང་།', content: 'མི་གསལ།' }
-  ],
+  metadata: [{
+    key: 'vehicle',
+    label: 'ཐེག་པ།',
+    value: 'ཐེག་ཆེན།',
+    group: 'general'
+  }, {
+    key: 'definitive',
+    label: 'དྲང་ངེས།',
+    value: 'ངེས་དོན།',
+    group: 'general'
+  }, {
+    key: 'dharma-wheel',
+    label: 'ཆོས་འཁོར།',
+    value: 'ཐ་མ།',
+    group: 'general'
+  }, {
+    key: 'basket',
+    label: 'སྡེ་སྣོད།',
+    value: 'མདོ་སྡེ།',
+    group: 'general'
+  }, {
+    key: 'volume',
+    label: 'པོད་རྟགས།',
+    value: '༦༩',
+    group: 'location'
+  }, {
+    key: 'fascicle',
+    label: 'བམ་པོ།',
+    value: '༤',
+    group: 'location'
+  }, {
+    key: 'chapter',
+    label: 'ལེའུ།',
+    value: '༤',
+    group: 'location'
+  }, {
+    key: 'page',
+    label: 'ཤོག་ངོས།',
+    value: '༢',
+    group: 'location'
+  }, {
+    key: 'translation',
+    label: 'འགྱུར་སྔ་ཕྱི།',
+    value: 'སྔ་འགྱུར།',
+    group: 'general'
+  }, {
+    key: 'commentary',
+    label: 'མདོ་འགྲེལ།',
+    value: '༢',
+    group: 'general'
+  }],
+  sections: [{
+    id: 'homage',
+    title: 'འགྱུར་ཕྱག',
+    content: 'སངས་རྒྱས་དང་བྱང་ཆུབ་སེམས་དཔའ་ཐམས་ཅད་ལ་ཕྱག་འཚལ་ལོ།།'
+  }, {
+    id: 'purpose',
+    title: 'དགོས་དོན།',
+    content: 'གདུལ་བྱ་རྣམས་ཀྱིས་བྱང་ཆུབ་སེམས་ཀྱི་རང་བཞིན་ཇི་ལྟར་ཡིན་པ་ཤེས་ནས་དེ་ལ་བརྩོན་པའི་ཆེད་དུ་སྟེ། དེ་ཡང་མདོ་ལས། བཅོམ་ལྡན་འདས་བྱང་ཆུབ་ཀྱི་སེམས་ཇི་ལྟར་བལྟ་བར་བགྱི། ཞེས་པས་བསྟན་ཏོ།།'
+  }, {
+    id: 'summary',
+    title: 'བསྡུས་དོན་ནི།',
+    content: 'ཕུན་སུམ་ཚོགས་པ་ལྔའི་སྒོ་ནས་ཤེས་པར་བྱ་སྟེ། \nགནས་ཕུན་སུམ་ཚོགས་པ་ནི། རྒྱལ་བུ་རྒྱལ་བྱེད་ཀྱི་ཚལ་མགོན་མེད་ཟས་སྦྱིན་གྱི་ཀུན་དགའ་ར་བའོ།།\nསྟོན་པ་ཕུན་སུམ་ཚོགས་པ་ནི། བཅོམ་ལྡན་འདས་ཤཱཀྱ་ཐུབ་པའོ།།\nའཁོར་ཕུན་སུམ་ཚོགས་པ་ནི། ཚེ་དང་ལྡན་པ་ཀུན་དགའ་བོ་ལ་སོགས་པའོ།།\nདུས་ཕུན་སུམ་ཚོགས་པ་ནི། འདི་སྐད་བདག་གིས་ཐོས་པ་དུས་གཅིག་ན། ཞེས་སོ།།\nཆོས་ཕུན་སུམ་ཚོགས་པ་ནི། ཚེ་དང་ལྡན་པ་ཀུན་དགའ་བོས་བྱང་ཆུབ་ཀྱི་སེམས་ཇི་ལྟར་བལྟ་བར་བྱ་དགོས་ཞེས་ཞུས་པའི་ལན་དུ།  བཅོམ་ལྡན་འདས་ཀྱིས་བྱང་ཆུབ་ཀྱི་སེམས་ནི་གསེར་གྱི་རང་བཞིན་འདྲ་བར་གནས་པར་བལྟ་དགོས་པ་དང་། གསེར་རང་བཞིན་གྱིས་རྣམ་པར་དག་པ་ལྟར་བྱང་ཆུབ་སེམས་རྣམ་པར་དག་པ་དང་། མགར་བས་གསེར་ལ་བཟོའི་བྱེ་བྲག་ཐ་དད་པར་བྱས་ཀྱང་གསེར་གྱི་རང་བཞིན་མི་འགྱུར་བ་ལྟར་བྱང་ཆུབ་སེམས་ལ་ཡོན་ཏན་གྱི་ཁྱད་པར་སྣ་ཚོགས་པ་སྣང་ཡང་དོན་དམ་པར་བྱང་ཆུབ་ཀྱི་སེམས་ལས་མ་གཡོས་པས་རང་བཞིན་འགྱུར་བ་མེད་པར་བལྟ་དགོས་པར་བསྟན་ཏོ།།'
+  }, {
+    id: 'word-meaning',
+    title: 'ཚིག་དོན།',
+    content: 'ཚིག་གི་དོན་རེ་རེ་བཞིན་མདོ་དངོས་ལས་ཤེས་པར་བྱ་དགོས་ལ། འདིར་བྱང་ཆུབ་ཀྱི་སེམས་རིན་པོ་ཆེ་གསེར་གྱི་དཔེ་དང་སྦྱར་ནས་བསྟན་པས་མདོའི་མཚན་ལ"འཕགས་པ་གསེར་གྱི་མདོ་ཞེས་བྱ་བ་ཐེག་པ་ཆེན་པོའི་མདོ།"ཞེས་དཔེའི་སྒོ་ནས་བཏགས་དེ་ལྟར་བཏགས་སོ། །'
+  }, {
+    id: 'transition',
+    title: 'མཚམས་སྦྱར།',
+    content: '"བཅོམ་ལྡན་འདས་རྒྱལ་བུ་རྒྱལ་བྱེད་ཀྱི་ཚལ་མགོན་མེད་ཟས་སྦྱིན་གྱི་ཀུན་དགའ་ར་བ་ན་བཞུགས་ཏེ།" ཞེས་པས་བསྟན་ཏོ།།'
+  }, {
+    id: 'debate',
+    title: 'བརྒལ་ལན།',
+    content: 'མི་གསལ།'
+  }, {
+    id: 'translation-colophon',
+    title: 'འགྱུར་བྱང་།',
+    content: 'མི་གསལ།'
+  }],
   // Add the new collated text and English translation content
   collatedText: `༄། །བྱང་ཆུབ་སེམས་དཔའི་སྤྱོད་པ་ལ་འཇུག་པ་བཞུགས་སོ། །
 ༄༅༅། །རྒྱ་གར་སྐད་དུ། བོ་<«Q»བོད་>དྷི་:སཏྭ་ཙརྱ་<«I»སཏྭ་ཙཪྻ་«N»སཏྭ་ཙརྱྭ་«Q»སཏྭ་ཙམླཻ་>ཨ་བ་ཏཱ་<«C»ཏ་>ར།
@@ -89,75 +147,65 @@ At that time, the noble Bodhisattva Mahasattva Avalokiteśvara was thoroughly co
 One should view those five aggregates as empty of inherent nature. 
 Then, through the power of the Buddha, the venerable Śāriputra spoke these words to the noble great bodhisattva Avalokiteśvara.`,
   // Add mock edition-specific metadata
-  editionMetadata: [
-    {
-      id: 'derge',
-      name: 'དེར་གེ།',
-      volume: '༦༩',
-      folio: '༣༤ཀ༢',
-      page: '༡༤༥'
-    },
-    {
-      id: 'chone',
-      name: 'ཅོ་ནེ།',
-      volume: '༦༨',
-      folio: '༣༦ཁ༧',
-      page: '༡༤༧'
-    },
-    {
-      id: 'narthang',
-      name: 'སྣར་ཐང་།',
-      volume: '༧༠',
-      folio: '༤༠ཀ༢',
-      page: '༡༥༦'
-    },
-    {
-      id: 'peking',
-      name: 'པེ་ཅིན།',
-      volume: '༧༡',
-      folio: '༤༢ཁ༡',
-      page: '༡༦༢'
-    },
-    {
-      id: 'lhasa',
-      name: 'ལྷ་ས།',
-      volume: '༦༩',
-      folio: '༣༧ཀ༥',
-      page: '༡༥༠'
-    },
-    {
-      id: 'urga',
-      name: 'ཨུར་ག',
-      volume: '༧༠',
-      folio: '༣༩ཁ༤',
-      page: '༡༥༤'
-    }
-  ]
+  editionMetadata: [{
+    id: 'derge',
+    name: 'དེར་གེ།',
+    volume: '༦༩',
+    folio: '༣༤ཀ༢',
+    page: '༡༤༥'
+  }, {
+    id: 'chone',
+    name: 'ཅོ་ནེ།',
+    volume: '༦༨',
+    folio: '༣༦ཁ༧',
+    page: '༡༤༧'
+  }, {
+    id: 'narthang',
+    name: 'སྣར་ཐང་།',
+    volume: '༧༠',
+    folio: '༤༠ཀ༢',
+    page: '༡༥༦'
+  }, {
+    id: 'peking',
+    name: 'པེ་ཅིན།',
+    volume: '༧༡',
+    folio: '༤༢ཁ༡',
+    page: '༡༦༢'
+  }, {
+    id: 'lhasa',
+    name: 'ལྷ་ས།',
+    volume: '༦༩',
+    folio: '༣༧ཀ༥',
+    page: '༡༥༠'
+  }, {
+    id: 'urga',
+    name: 'ཨུར་ག',
+    volume: '༧༠',
+    folio: '༣༩ཁ༤',
+    page: '༡༥༤'
+  }]
 };
-
 const TextDetail = () => {
-  const { id } = useParams<{ id: string }>();
+  const {
+    id
+  } = useParams<{
+    id: string;
+  }>();
   const [expandedItems, setExpandedItems] = useState<string[]>(['discourses', 'general-sutras']);
   const [selectedItem, setSelectedItem] = useState<string | null>('golden-sutra');
   const [showCatalog, setShowCatalog] = useState(true);
   const [editionTab, setEditionTab] = useState<string>('derge');
-  
+
   // Handle expanding/collapsing categories
   const toggleExpand = (id: string) => {
-    setExpandedItems(prev => 
-      prev.includes(id) 
-        ? prev.filter(item => item !== id) 
-        : [...prev, id]
-    );
+    setExpandedItems(prev => prev.includes(id) ? prev.filter(item => item !== id) : [...prev, id]);
   };
-  
+
   // Handle selecting an item
   const handleSelectItem = (id: string) => {
     setSelectedItem(id);
   };
-  
-  return (
-    <div className="min-h-screen flex flex-col">
+  return <div className="min-h-screen flex flex-col">
       <Navbar />
       
       <main className="flex-1 pt-24 pb-16">
@@ -177,12 +225,7 @@ const TextDetail = () => {
         
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="mb-4">
-            <Button
-              variant="outline"
-              size="sm"
-              onClick={() => setShowCatalog(!showCatalog)}
-              className="text-kangyur-maroon hover:text-kangyur-orange transition-colors"
-            >
+            <Button variant="outline" size="sm" onClick={() => setShowCatalog(!showCatalog)} className="text-kangyur-maroon hover:text-kangyur-orange transition-colors">
               {showCatalog ? <PanelLeftClose className="h-4 w-4 mr-2" /> : <PanelLeft className="h-4 w-4 mr-2" />}
               {showCatalog ? 'Hide Catalog' : 'Show Catalog'}
             </Button>
@@ -190,25 +233,12 @@ const TextDetail = () => {
           
           <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
             {/* Left side: Catalog navigation */}
-            {showCatalog && (
-              <div className="lg:col-span-1">
-                <CatalogTree 
-                  items={catalogData}
-                  expandedItems={expandedItems}
-                  selectedItem={selectedItem}
-                  showDetails={true}
-                  onToggleExpand={toggleExpand}
-                  onSelectItem={handleSelectItem}
-                  onToggleDetails={() => {}}
-                />
-              </div>
-            )}
+            {showCatalog && <div className="lg:col-span-1">
+                <CatalogTree items={catalogData} expandedItems={expandedItems} selectedItem={selectedItem} showDetails={true} onToggleExpand={toggleExpand} onSelectItem={handleSelectItem} onToggleDetails={() => {}} />
+              </div>}
             
             {/* Right side: Text content with tabs */}
-            <div className={cn(
-              "transition-all duration-300",
-              showCatalog ? "lg:col-span-3" : "lg:col-span-4"
-            )}>
+            <div className={cn("transition-all duration-300", showCatalog ? "lg:col-span-3" : "lg:col-span-4")}>
               <Card className="border border-kangyur-orange/10 rounded-xl shadow-sm">
                 <CardContent className="p-0">
                   <Tabs defaultValue="summary" className="w-full">
@@ -224,16 +254,14 @@ const TextDetail = () => {
                       <div className="flex flex-col lg:flex-row gap-8">
                         {/* Text content (sections) */}
                         <div className="w-full">
-                          {textData.sections.map((section) => (
-                            <div key={section.id} className="mb-8 last:mb-0">
+                          {textData.sections.map(section => <div key={section.id} className="mb-8 last:mb-0">
                               <h3 className="tibetan text-xl font-bold text-kangyur-maroon mb-3">
                                 {section.title}
                               </h3>
                               <div className="tibetan text-lg leading-relaxed whitespace-pre-line">
                                 {section.content}
                               </div>
-                            </div>
-                          ))}
+                            </div>)}
                         </div>
                       </div>
                     </TabsContent>
@@ -247,18 +275,14 @@ const TextDetail = () => {
                           <div className="overflow-hidden rounded-lg border border-kangyur-orange/10">
                             <table className="min-w-full divide-y divide-kangyur-orange/10">
                               <tbody className="divide-y divide-kangyur-orange/10">
-                                {textData.metadata
-                                  .filter(item => item.group === 'general')
-                                  .map((item) => (
-                                    <tr key={item.key} className="hover:bg-kangyur-cream/20">
+                                {textData.metadata.filter(item => item.group === 'general').map(item => <tr key={item.key} className="hover:bg-kangyur-cream/20">
                                       <td className="tibetan px-4 py-3 text-base font-medium text-kangyur-maroon whitespace-nowrap">
                                         {item.label}
                                       </td>
                                       <td className="tibetan px-4 py-3 text-base text-kangyur-dark">
                                         {item.value}
                                       </td>
-                                    </tr>
-                                  ))}
+                                    </tr>)}
                               </tbody>
                             </table>
                           </div>
@@ -266,23 +290,16 @@ const TextDetail = () => {
                         
                         {/* Edition-specific Metadata Section */}
                         <div>
-                          <h3 className="text-xl font-semibold text-kangyur-maroon mb-4">Editions</h3>
+                          <h3 className="text-xl font-semibold text-kangyur-maroon mb-4">Text Locations</h3>
                           
                           <Tabs value={editionTab} onValueChange={setEditionTab} className="w-full">
                             <TabsList className="mb-4">
-                              {textData.editionMetadata.map((edition) => (
-                                <TabsTrigger 
-                                  key={edition.id} 
-                                  value={edition.id}
-                                  className="tibetan"
-                                >
+                              {textData.editionMetadata.map(edition => <TabsTrigger key={edition.id} value={edition.id} className="tibetan">
                                   {edition.name}
-                                </TabsTrigger>
-                              ))}
+                                </TabsTrigger>)}
                             </TabsList>
                             
-                            {textData.editionMetadata.map((edition) => (
-                              <TabsContent key={edition.id} value={edition.id}>
+                            {textData.editionMetadata.map(edition => <TabsContent key={edition.id} value={edition.id}>
                                 <div className="overflow-hidden rounded-lg border border-kangyur-orange/10">
                                   <table className="min-w-full divide-y divide-kangyur-orange/10">
                                     <tbody className="divide-y divide-kangyur-orange/10">
@@ -313,8 +330,7 @@ const TextDetail = () => {
                                     </tbody>
                                   </table>
                                 </div>
-                              </TabsContent>
-                            ))}
+                              </TabsContent>)}
                           </Tabs>
                         </div>
                       </div>
@@ -344,8 +360,6 @@ const TextDetail = () => {
       </main>
       
       <Footer />
-    </div>
-  );
+    </div>;
 };
-
 export default TextDetail;
