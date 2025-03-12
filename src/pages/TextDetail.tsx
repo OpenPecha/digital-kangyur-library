@@ -1,15 +1,15 @@
-
 import React, { useState } from 'react';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import { useParams } from 'react-router-dom';
 import { cn } from '@/lib/utils';
-import { Book } from 'lucide-react';
+import { Book, PanelLeftClose, PanelLeft } from 'lucide-react';
 import CatalogTree from '@/components/catalog/CatalogTree';
 import { catalogData } from '@/data/catalogData';
 import { findItemInTree } from '@/utils/catalogUtils';
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import { Card, CardContent } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
 
 // Define the metadata structure
 interface TextMetadata {
@@ -83,6 +83,7 @@ const TextDetail = () => {
   const { id } = useParams<{ id: string }>();
   const [expandedItems, setExpandedItems] = useState<string[]>(['discourses', 'general-sutras']);
   const [selectedItem, setSelectedItem] = useState<string | null>('golden-sutra');
+  const [showCatalog, setShowCatalog] = useState(true);
   
   // Handle expanding/collapsing categories
   const toggleExpand = (id: string) => {
@@ -118,22 +119,39 @@ const TextDetail = () => {
         </div>
         
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="mb-4">
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={() => setShowCatalog(!showCatalog)}
+              className="text-kangyur-maroon hover:text-kangyur-orange transition-colors"
+            >
+              {showCatalog ? <PanelLeftClose className="h-4 w-4 mr-2" /> : <PanelLeft className="h-4 w-4 mr-2" />}
+              {showCatalog ? 'Hide Catalog' : 'Show Catalog'}
+            </Button>
+          </div>
+          
           <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
             {/* Left side: Catalog navigation */}
-            <div className="lg:col-span-1">
-              <CatalogTree 
-                items={catalogData}
-                expandedItems={expandedItems}
-                selectedItem={selectedItem}
-                showDetails={true}
-                onToggleExpand={toggleExpand}
-                onSelectItem={handleSelectItem}
-                onToggleDetails={() => {}}
-              />
-            </div>
+            {showCatalog && (
+              <div className="lg:col-span-1">
+                <CatalogTree 
+                  items={catalogData}
+                  expandedItems={expandedItems}
+                  selectedItem={selectedItem}
+                  showDetails={true}
+                  onToggleExpand={toggleExpand}
+                  onSelectItem={handleSelectItem}
+                  onToggleDetails={() => {}}
+                />
+              </div>
+            )}
             
             {/* Right side: Text content with tabs */}
-            <div className="lg:col-span-3">
+            <div className={cn(
+              "transition-all duration-300",
+              showCatalog ? "lg:col-span-3" : "lg:col-span-4"
+            )}>
               <Card className="border border-kangyur-orange/10 rounded-xl shadow-sm">
                 <CardContent className="p-0">
                   <Tabs defaultValue="metadata" className="w-full">
