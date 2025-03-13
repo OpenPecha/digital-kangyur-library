@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
@@ -118,9 +117,6 @@ const News = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 6;
   
-  // For demonstration, we're using the same 6 items as if they were paginated
-  // In a real app, you would slice the data based on currentPage and itemsPerPage
-  
   const totalPages = Math.ceil(newsItems.length / itemsPerPage);
 
   const handlePageChange = (page: number) => {
@@ -133,22 +129,19 @@ const News = () => {
       <Navbar />
       
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-16">
-        {/* Page Header */}
-        <div className="mb-10 text-center">
+        <div className="mb-10 text-center pt-8">
           <h1 className="text-4xl font-bold text-kangyur-dark mb-3">Kangyur News</h1>
           <p className="text-xl text-kangyur-dark/70 max-w-2xl mx-auto">
             Latest updates, discoveries, and events in Kangyur studies and Buddhist text research
           </p>
         </div>
         
-        {/* News Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-10">
           {newsItems.map((news) => (
             <NewsCard key={news.id} news={news} />
           ))}
         </div>
         
-        {/* Pagination */}
         <Pagination className="mt-8">
           <PaginationContent>
             <PaginationItem>
