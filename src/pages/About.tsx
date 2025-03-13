@@ -29,10 +29,8 @@ const About = () => {
       <main className="flex-grow pt-24 pb-16">
         <div className="container mx-auto px-4">
           <div className="mb-12 text-center">
-            <h1 className="text-4xl font-bold text-kangyur-maroon mb-4">About the Kangyur Digital Project</h1>
-            <p className="text-xl text-kangyur-dark/80 max-w-3xl mx-auto">
-              A groundbreaking initiative to preserve and share the Buddha's teachings with the world.
-            </p>
+            <h1 className="text-4xl font-bold text-kangyur-maroon mb-4">THE KAGYUR KARCHAG ENCYCLOPEDIA PROJECT</h1>
+            <p className="text-xl text-kangyur-dark/80 max-w-3xl mx-auto">A Global Initiative to Support the Study and Preservation of the Words of the Buddha</p>
           </div>
           
           {/* Quick navigation */}
@@ -55,7 +53,7 @@ const About = () => {
           <div id="mission" ref={missionRef} className="py-12 scroll-mt-24">
             <div className="flex items-center mb-8 border-b border-kangyur-orange/10 pb-4">
               <Heart className="text-kangyur-orange mr-3" size={28} />
-              <h2 className="text-3xl font-bold text-kangyur-dark">Our Mission</h2>
+              <h2 className="text-3xl font-bold text-kangyur-dark">Vission</h2>
             </div>
             <div className="prose max-w-none">
               <p className="text-lg text-kangyur-dark/80">
