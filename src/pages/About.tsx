@@ -1,4 +1,3 @@
-
 import React, { useEffect, useRef, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import Navbar from '@/components/Navbar';
@@ -8,9 +7,12 @@ import { Card, CardContent } from '@/components/ui/card';
 import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/avatar';
 import { Button } from '@/components/ui/button';
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@/components/ui/collapsible';
+import LocalizedText from '@/components/LocalizedText';
+import { useLocalization } from '@/hooks/useLocalization';
 
 const About = () => {
   const location = useLocation();
+  const { language } = useLocalization();
   const teamRef = useRef<HTMLDivElement>(null);
   const projectRef = useRef<HTMLDivElement>(null);
   const contactRef = useRef<HTMLDivElement>(null);
@@ -52,22 +54,28 @@ const About = () => {
       <main className="flex-grow pt-24 pb-16">
         <div className="container mx-auto px-4">
           <div className="mb-12 text-center">
-            <h1 className="text-4xl font-bold text-kangyur-maroon mb-4">The Kangyur Karchag Encyclopedia Project</h1>
-            <p className="text-xl text-kangyur-dark/80 max-w-3xl mx-auto">A Global Initiative to Support the Study and Preservation of the Words of the Buddha</p>
+            <h1 className="text-4xl font-bold text-kangyur-maroon mb-4">
+              <LocalizedText textKey="projectTitle" />
+            </h1>
+            <p className="text-xl text-kangyur-dark/80 max-w-3xl mx-auto">
+              <LocalizedText textKey="projectSubtitle" />
+            </p>
           </div>
           
           {/* Quick navigation */}
           <div className="flex justify-center mb-16">
             <div className="flex flex-wrap justify-center gap-2 md:gap-4 bg-white rounded-lg shadow-sm p-2 border border-kangyur-orange/10">
-              <a href="#mission" className="px-4 py-2 rounded-md hover:bg-kangyur-orange/10 text-kangyur-dark transition-colors">Vission</a>
+              <a href="#mission" className="px-4 py-2 rounded-md hover:bg-kangyur-orange/10 text-kangyur-dark transition-colors">
+                <LocalizedText textKey="vision" />
+              </a>
               <a href="#project" className="px-4 py-2 rounded-md hover:bg-kangyur-orange/10 text-kangyur-dark transition-colors">
-                Project
+                <LocalizedText textKey="project" />
               </a>
               <a href="#team" className="px-4 py-2 rounded-md hover:bg-kangyur-orange/10 text-kangyur-dark transition-colors">
-                Team
+                <LocalizedText textKey="team" />
               </a>
               <a href="#contact" className="px-4 py-2 rounded-md hover:bg-kangyur-orange/10 text-kangyur-dark transition-colors">
-                Contact
+                <LocalizedText textKey="contact" />
               </a>
             </div>
           </div>
@@ -76,11 +84,13 @@ const About = () => {
           <div id="mission" ref={missionRef} className="py-12 scroll-mt-24">
             <div className="flex items-center mb-8 border-b border-kangyur-orange/10 pb-4">
               <Heart className="text-kangyur-orange mr-3" size={28} />
-              <h2 className="text-3xl font-bold text-kangyur-dark">Vission</h2>
+              <h2 className="text-3xl font-bold text-kangyur-dark">
+                <LocalizedText textKey="vision" />
+              </h2>
             </div>
             <div className="prose max-w-none">
               <p className="text-lg text-kangyur-dark/80">
-                The Sarnath International Nyingma Institute (SINI) is dedicated to making the Kangyur—the collected words of the Buddha translated into Tibetan—accessible to scholars, practitioners, and enthusiasts worldwide through our comprehensive digital platform.
+                <LocalizedText textKey="missionDescription" />
               </p>
             </div>
           </div>
@@ -89,11 +99,13 @@ const About = () => {
           <div id="project" ref={projectRef} className="py-12 scroll-mt-24">
             <div className="flex items-center mb-8 border-b border-kangyur-orange/10 pb-4">
               <Sparkles className="text-kangyur-orange mr-3" size={28} />
-              <h2 className="text-3xl font-bold text-kangyur-dark">Project</h2>
+              <h2 className="text-3xl font-bold text-kangyur-dark">
+                <LocalizedText textKey="project" />
+              </h2>
             </div>
             <div className="prose max-w-none">
               <p className="text-lg text-kangyur-dark/80 mb-6">
-                Our groundbreaking Kangyur Digital Project represents an unprecedented effort to preserve and share this invaluable collection of Buddhist teachings. What makes our initiative unique:
+                <LocalizedText textKey="projectDescription" />
               </p>
               
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6 my-8">
@@ -104,9 +116,11 @@ const About = () => {
                         <BookOpen className="text-kangyur-maroon h-5 w-5" />
                       </div>
                       <div>
-                        <h3 className="font-bold text-kangyur-dark">Comprehensive Digital Catalog</h3>
+                        <h3 className="font-bold text-kangyur-dark">
+                          <LocalizedText textKey="digitalCatalog" />
+                        </h3>
                         <p className="text-sm text-kangyur-dark/80 mt-2">
-                          We are creating the first-ever complete digital catalog of the Kangyur, organized with meticulous attention to detail and scholarly accuracy.
+                          <LocalizedText textKey="digitalCatalogDesc" />
                         </p>
                       </div>
                     </div>
@@ -123,9 +137,11 @@ const About = () => {
                         </svg>
                       </div>
                       <div>
-                        <h3 className="font-bold text-kangyur-dark">Innovative Search Capabilities</h3>
+                        <h3 className="font-bold text-kangyur-dark">
+                          <LocalizedText textKey="searchCapabilities" />
+                        </h3>
                         <p className="text-sm text-kangyur-dark/80 mt-2">
-                          Our exclusive catalog features detailed summaries and keyword indexing, allowing users to efficiently locate specific teachings and themes across this vast collection.
+                          <LocalizedText textKey="searchCapabilitiesDesc" />
                         </p>
                       </div>
                     </div>
@@ -146,9 +162,11 @@ const About = () => {
                         </svg>
                       </div>
                       <div>
-                        <h3 className="font-bold text-kangyur-dark">Multimedia Integration</h3>
+                        <h3 className="font-bold text-kangyur-dark">
+                          <LocalizedText textKey="multimediaIntegration" />
+                        </h3>
                         <p className="text-sm text-kangyur-dark/80 mt-2">
-                          We are systematically collecting and organizing audio and video resources related to the Kangyur, making these teachings accessible in multiple formats.
+                          <LocalizedText textKey="multimediaIntegrationDesc" />
                         </p>
                       </div>
                     </div>
@@ -162,9 +180,11 @@ const About = () => {
                         <Globe className="text-kangyur-maroon h-5 w-5" />
                       </div>
                       <div>
-                        <h3 className="font-bold text-kangyur-dark">Multilingual Summaries</h3>
+                        <h3 className="font-bold text-kangyur-dark">
+                          <LocalizedText textKey="multilingualSummaries" />
+                        </h3>
                         <p className="text-sm text-kangyur-dark/80 mt-2">
-                          To serve a global audience, we provide translations of text summaries, breaking down language barriers to these profound teachings.
+                          <LocalizedText textKey="multilingualSummariesDesc" />
                         </p>
                       </div>
                     </div>
@@ -177,7 +197,7 @@ const About = () => {
               </div>
               
               <p className="text-lg text-kangyur-dark/80 mt-8">
-                This project represents years of dedicated work by our team of scholars, translators, and digital specialists, all committed to preserving and sharing the wisdom contained in these sacred texts.
+                <LocalizedText textKey="projectYearsWork" />
               </p>
             </div>
           </div>
@@ -186,10 +206,14 @@ const About = () => {
           <div id="team" ref={teamRef} className="py-12 scroll-mt-24">
             <div className="flex items-center mb-8 border-b border-kangyur-orange/10 pb-4">
               <Users className="text-kangyur-orange mr-3" size={28} />
-              <h2 className="text-3xl font-bold text-kangyur-dark">Our Team</h2>
+              <h2 className="text-3xl font-bold text-kangyur-dark">
+                <LocalizedText textKey="team" />
+              </h2>
             </div>
             
-            <h3 className="text-xl font-semibold text-kangyur-dark mb-6">Core Team Members</h3>
+            <h3 className="text-xl font-semibold text-kangyur-dark mb-6">
+              <LocalizedText textKey="coreTeamMembers" />
+            </h3>
             
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
               <Card className="border-kangyur-orange/10">
@@ -217,9 +241,15 @@ const About = () => {
                           <CollapsibleTrigger asChild>
                             <Button variant="ghost" size="sm" className="flex items-center text-kangyur-maroon hover:text-kangyur-orange hover:bg-kangyur-cream/20">
                               {expandedBios.tpg ? (
-                                <>Read less <ChevronUp className="ml-1 h-4 w-4" /></>
+                                <>
+                                  <LocalizedText textKey="readLess" /> 
+                                  <ChevronUp className="ml-1 h-4 w-4" />
+                                </>
                               ) : (
-                                <>Read more <ChevronDown className="ml-1 h-4 w-4" /></>
+                                <>
+                                  <LocalizedText textKey="readMore" /> 
+                                  <ChevronDown className="ml-1 h-4 w-4" />
+                                </>
                               )}
                             </Button>
                           </CollapsibleTrigger>
@@ -255,9 +285,15 @@ const About = () => {
                           <CollapsibleTrigger asChild>
                             <Button variant="ghost" size="sm" className="flex items-center text-kangyur-maroon hover:text-kangyur-orange hover:bg-kangyur-cream/20">
                               {expandedBios.jt ? (
-                                <>Read less <ChevronUp className="ml-1 h-4 w-4" /></>
+                                <>
+                                  <LocalizedText textKey="readLess" /> 
+                                  <ChevronUp className="ml-1 h-4 w-4" />
+                                </>
                               ) : (
-                                <>Read more <ChevronDown className="ml-1 h-4 w-4" /></>
+                                <>
+                                  <LocalizedText textKey="readMore" /> 
+                                  <ChevronDown className="ml-1 h-4 w-4" />
+                                </>
                               )}
                             </Button>
                           </CollapsibleTrigger>
@@ -293,9 +329,15 @@ const About = () => {
                           <CollapsibleTrigger asChild>
                             <Button variant="ghost" size="sm" className="flex items-center text-kangyur-maroon hover:text-kangyur-orange hover:bg-kangyur-cream/20">
                               {expandedBios.tl ? (
-                                <>Read less <ChevronUp className="ml-1 h-4 w-4" /></>
+                                <>
+                                  <LocalizedText textKey="readLess" /> 
+                                  <ChevronUp className="ml-1 h-4 w-4" />
+                                </>
                               ) : (
-                                <>Read more <ChevronDown className="ml-1 h-4 w-4" /></>
+                                <>
+                                  <LocalizedText textKey="readMore" /> 
+                                  <ChevronDown className="ml-1 h-4 w-4" />
+                                </>
                               )}
                             </Button>
                           </CollapsibleTrigger>
@@ -331,9 +373,15 @@ const About = () => {
                           <CollapsibleTrigger asChild>
                             <Button variant="ghost" size="sm" className="flex items-center text-kangyur-maroon hover:text-kangyur-orange hover:bg-kangyur-cream/20">
                               {expandedBios.tg ? (
-                                <>Read less <ChevronUp className="ml-1 h-4 w-4" /></>
+                                <>
+                                  <LocalizedText textKey="readLess" /> 
+                                  <ChevronUp className="ml-1 h-4 w-4" />
+                                </>
                               ) : (
-                                <>Read more <ChevronDown className="ml-1 h-4 w-4" /></>
+                                <>
+                                  <LocalizedText textKey="readMore" /> 
+                                  <ChevronDown className="ml-1 h-4 w-4" />
+                                </>
                               )}
                             </Button>
                           </CollapsibleTrigger>
@@ -370,9 +418,15 @@ const About = () => {
                           <CollapsibleTrigger asChild>
                             <Button variant="ghost" size="sm" className="flex items-center text-kangyur-maroon hover:text-kangyur-orange hover:bg-kangyur-cream/20">
                               {expandedBios.tn ? (
-                                <>Read less <ChevronUp className="ml-1 h-4 w-4" /></>
+                                <>
+                                  <LocalizedText textKey="readLess" /> 
+                                  <ChevronUp className="ml-1 h-4 w-4" />
+                                </>
                               ) : (
-                                <>Read more <ChevronDown className="ml-1 h-4 w-4" /></>
+                                <>
+                                  <LocalizedText textKey="readMore" /> 
+                                  <ChevronDown className="ml-1 h-4 w-4" />
+                                </>
                               )}
                             </Button>
                           </CollapsibleTrigger>
@@ -385,7 +439,7 @@ const About = () => {
             </div>
             
             <p className="text-center text-kangyur-dark/80 italic mt-8">
-              Our extended team includes additional scholars, translators, and digital specialists working together to bring this precious collection to the world.
+              <LocalizedText textKey="extendedTeam" />
             </p>
           </div>
           
@@ -393,15 +447,19 @@ const About = () => {
           <div id="contact" ref={contactRef} className="py-12 scroll-mt-24">
             <div className="flex items-center mb-8 border-b border-kangyur-orange/10 pb-4">
               <Mail className="text-kangyur-orange mr-3" size={28} />
-              <h2 className="text-3xl font-bold text-kangyur-dark">Contact Us</h2>
+              <h2 className="text-3xl font-bold text-kangyur-dark">
+                <LocalizedText textKey="contact" />
+              </h2>
             </div>
             
             <div className="bg-kangyur-light rounded-lg p-8 border border-kangyur-orange/10 shadow-sm">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                 <div>
-                  <h3 className="text-xl font-semibold text-kangyur-dark mb-4">Get in Touch</h3>
+                  <h3 className="text-xl font-semibold text-kangyur-dark mb-4">
+                    <LocalizedText textKey="getInTouch" />
+                  </h3>
                   <p className="mb-6 text-kangyur-dark/80">
-                    For inquiries about the Kangyur Digital Project, collaboration opportunities, or other information:
+                    <LocalizedText textKey="inquiriesText" />
                   </p>
                   
                   <div className="space-y-4">
@@ -411,7 +469,9 @@ const About = () => {
                         <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" />
                       </svg>
                       <div>
-                        <p className="font-medium text-kangyur-dark">Email</p>
+                        <p className="font-medium text-kangyur-dark">
+                          <LocalizedText textKey="email" />
+                        </p>
                         <a href="mailto:info@sinibridge.org" className="text-kangyur-maroon hover:underline">info@sinibridge.org</a>
                       </div>
                     </div>
@@ -421,7 +481,9 @@ const About = () => {
                         <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" />
                       </svg>
                       <div>
-                        <p className="font-medium text-kangyur-dark">Phone</p>
+                        <p className="font-medium text-kangyur-dark">
+                          <LocalizedText textKey="phone" />
+                        </p>
                         <p className="text-kangyur-dark/80">+91 (0542) 258-5011</p>
                       </div>
                     </div>
@@ -432,7 +494,9 @@ const About = () => {
                         <circle cx="12" cy="10" r="3" />
                       </svg>
                       <div>
-                        <p className="font-medium text-kangyur-dark">Address</p>
+                        <p className="font-medium text-kangyur-dark">
+                          <LocalizedText textKey="address" />
+                        </p>
                         <p className="text-kangyur-dark/80">
                           Sarnath International Nyingma Institute<br />
                           Mūlagandhakuṭī Vihāra<br />
@@ -445,20 +509,26 @@ const About = () => {
                 </div>
                 
                 <div>
-                  <h3 className="text-xl font-semibold text-kangyur-dark mb-4">Connect With Us</h3>
+                  <h3 className="text-xl font-semibold text-kangyur-dark mb-4">
+                    <LocalizedText textKey="connectWithUs" />
+                  </h3>
                   <p className="mb-6 text-kangyur-dark/80">
                     Visit our website and follow us on social media for updates on the Kangyur Digital Project.
                   </p>
                   
                   <div className="mb-6">
-                    <p className="font-medium text-kangyur-dark mb-2">Visit Our Main Website</p>
+                    <p className="font-medium text-kangyur-dark mb-2">
+                      <LocalizedText textKey="visitMainWebsite" />
+                    </p>
                     <a href="https://www.sinibridge.org/" target="_blank" rel="noopener noreferrer" className="text-kangyur-maroon hover:underline">
                       www.sinibridge.org
                     </a>
                   </div>
                   
                   <div>
-                    <p className="font-medium text-kangyur-dark mb-2">Follow Us</p>
+                    <p className="font-medium text-kangyur-dark mb-2">
+                      <LocalizedText textKey="followUs" />
+                    </p>
                     <div className="flex space-x-4">
                       <a href="https://www.facebook.com/sinibridge/" target="_blank" rel="noopener noreferrer" className="text-kangyur-maroon hover:text-kangyur-orange transition-colors">
                         <Facebook size={24} />
@@ -473,7 +543,7 @@ const About = () => {
               
               <div className="text-center mt-10 pt-6 border-t border-kangyur-orange/10">
                 <p className="text-kangyur-dark/80 italic">
-                  Join us in this historic effort to preserve and share the wisdom of the Buddha's teachings for generations to come.
+                  <LocalizedText textKey="joinUsText" />
                 </p>
               </div>
             </div>

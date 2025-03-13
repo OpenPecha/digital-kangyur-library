@@ -34,7 +34,45 @@ export type TranslationKeys =
   | 'selectCategory'
   | 'catalogStructure'
   | 'readMore'
-  | 'readLess';
+  | 'readLess'
+  // News page
+  | 'kangyurNews'
+  | 'newsSubtitle'
+  // Pagination
+  | 'previous'
+  | 'next'
+  // About page
+  | 'projectTitle'
+  | 'projectSubtitle'
+  | 'vision'
+  | 'project'
+  | 'team'
+  | 'contact'
+  | 'missionDescription'
+  | 'projectDescription'
+  | 'digitalCatalog'
+  | 'digitalCatalogDesc'
+  | 'searchCapabilities'
+  | 'searchCapabilitiesDesc'
+  | 'multimediaIntegration'
+  | 'multimediaIntegrationDesc'
+  | 'multilingualSummaries'
+  | 'multilingualSummariesDesc'
+  | 'projectYearsWork'
+  | 'coreTeamMembers'
+  | 'extendedTeam'
+  | 'getInTouch'
+  | 'inquiriesText'
+  | 'email'
+  | 'phone'
+  | 'address'
+  | 'connectWithUs'
+  | 'followUs'
+  | 'visitMainWebsite'
+  | 'joinUsText'
+  // Catalog details
+  | 'textsCount'
+  | 'selectCategoryDesc';
 
 export const translations: Record<TranslationKeys, Translation> = {
   // Navigation
@@ -171,5 +209,149 @@ export const translations: Record<TranslationKeys, Translation> = {
   readLess: {
     en: 'Read less',
     tib: 'ཉུང་བ་ཀློག'
+  },
+  
+  // News page
+  kangyurNews: {
+    en: 'Kangyur News',
+    tib: 'བཀའ་འགྱུར་གསར་འགྱུར།'
+  },
+  newsSubtitle: {
+    en: 'Latest updates, discoveries, and events in Kangyur studies and Buddhist text research',
+    tib: 'བཀའ་འགྱུར་ཞིབ་འཇུག་དང་ནང་པའི་ཡིག་ཆ་ཉམས་ཞིབ་ཐད་ཀྱི་གསར་ཤོས་ཀྱི་གནས་ཚུལ་དང་། རྙེད་དོན། བྱེད་སྒོ་བཅས།'
+  },
+  
+  // Pagination
+  previous: {
+    en: 'Previous',
+    tib: 'སྔོན་མ།'
+  },
+  next: {
+    en: 'Next',
+    tib: 'རྗེས་མ།'
+  },
+  
+  // About page
+  projectTitle: {
+    en: 'The Kangyur Karchag Encyclopedia Project',
+    tib: 'བཀའ་འགྱུར་དཀར་ཆག་ཤེས་བྱ་ཀུན་འདུས་ལས་འཆར།'
+  },
+  projectSubtitle: {
+    en: 'A Global Initiative to Support the Study and Preservation of the Words of the Buddha',
+    tib: 'སངས་རྒྱས་ཀྱི་བཀའ་ཉམས་ཞིབ་དང་བདག་ཉར་ལ་རོགས་རམ་བྱ་རྒྱུའི་འཛམ་གླིང་ཡོངས་ཁྱབ་ཀྱི་ལས་འགུལ་ཞིག'
+  },
+  vision: {
+    en: 'Vision',
+    tib: 'དམིགས་ཡུལ།'
+  },
+  project: {
+    en: 'Project',
+    tib: 'ལས་གཞི།'
+  },
+  team: {
+    en: 'Team',
+    tib: 'ལས་བྱེད།'
+  },
+  contact: {
+    en: 'Contact',
+    tib: 'འབྲེལ་གཏུགས།'
+  },
+  missionDescription: {
+    en: 'The Sarnath International Nyingma Institute (SINI) is dedicated to making the Kangyur—the collected words of the Buddha translated into Tibetan—accessible to scholars, practitioners, and enthusiasts worldwide through our comprehensive digital platform.',
+    tib: 'ཝཱ་ར་ཎ་སིའི་རྒྱལ་སྤྱིའི་རྙིང་མའི་སློབ་གླིང་གིས་བཀའ་འགྱུར་ཏེ། སངས་རྒྱས་ཀྱི་བཀའ་བོད་སྐད་དུ་བསྒྱུར་བ་དེ་ཉིད་མཁས་པ་དང་། ཉམས་ལེན་པ། རྒྱབ་སྐྱོར་བ་རྣམས་ལ་ང་ཚོའི་ཡོངས་ཁྱབ་བརྙན་རྫས་སྡིངས་ཆའི་བརྒྱུད་ནས་མཐུན་འགྱུར་བྱ་རྒྱུར་དམིགས་ཡུལ་བཟུང་།'
+  },
+  projectDescription: {
+    en: 'Our groundbreaking Kangyur Digital Project represents an unprecedented effort to preserve and share this invaluable collection of Buddhist teachings. What makes our initiative unique:',
+    tib: 'ང་ཚོའི་གསར་གཏོད་ཅན་གྱི་བཀའ་འགྱུར་བརྙན་རྫས་ལས་གཞི་འདིས་ནང་པའི་བསྟན་པའི་རིན་ཐང་བྲལ་བའི་མཛོད་འདི་ཉར་ཚགས་དང་བགོ་བཤའ་བྱེད་པར་སྔ་ན་མེད་པའི་འབད་བརྩོན་བྱེད་བཞིན་ཡོད། ང་ཚོའི་ལས་འགུལ་འདི་ཐུན་མོང་མ་ཡིན་པ་ཆགས་དོན་ནི།'
+  },
+  digitalCatalog: {
+    en: 'Comprehensive Digital Catalog',
+    tib: 'ཡོངས་ཁྱབ་བརྙན་རྫས་དཀར་ཆག'
+  },
+  digitalCatalogDesc: {
+    en: 'We are creating the first-ever complete digital catalog of the Kangyur, organized with meticulous attention to detail and scholarly accuracy.',
+    tib: 'ང་ཚོས་བཀའ་འགྱུར་གྱི་ཆ་ཚང་བའི་བརྙན་རྫས་དཀར་ཆག་ཐོག་མ་དེ་བཟོ་སྐྲུན་བྱེད་བཞིན་ཡོད། དེ་ནི་ཞིབ་ཕྲའི་ཆ་ཤས་རེ་རེར་དོ་སྣང་ཆེན་པོ་དང་མཁས་པའི་ངེས་གཏན་ལྡན་པའི་སྒོ་ནས་སྒྲིག་སྦྱོར་བྱས་ཡོད།'
+  },
+  searchCapabilities: {
+    en: 'Innovative Search Capabilities',
+    tib: 'གསར་གཏོད་འཚོལ་བཤེར་ནུས་པ།'
+  },
+  searchCapabilitiesDesc: {
+    en: 'Our exclusive catalog features detailed summaries and keyword indexing, allowing users to efficiently locate specific teachings and themes across this vast collection.',
+    tib: 'ང་ཚོའི་དམིགས་བསལ་དཀར་ཆག་ལ་ཞིབ་ཕྲའི་བསྡུས་དོན་དང་གཙོ་གནད་ཚིག་གི་རིམ་སྒྲིག་ཡོད་པས། སྤྱོད་མི་ཚོས་མཛོད་རྒྱ་ཆེན་པོ་འདིའི་ནང་ནས་བྱེ་བྲག་གི་བསྟན་པ་དང་བརྗོད་དོན་བདེ་ལེགས་ངང་འཚོལ་ཐུབ།'
+  },
+  multimediaIntegration: {
+    en: 'Multimedia Integration',
+    tib: 'སྨྱན་མང་སྟོད་སྦྱོར།'
+  },
+  multimediaIntegrationDesc: {
+    en: 'We are systematically collecting and organizing audio and video resources related to the Kangyur, making these teachings accessible in multiple formats.',
+    tib: 'ང་ཚོས་བཀའ་འགྱུར་དང་འབྲེལ་བའི་སྒྲ་དང་བརྙན་གྱི་ཐོན་ཁུངས་རྣམས་ལམ་ལུགས་ལྡན་པའི་སྒོ་ནས་བསྡུ་རུབ་དང་སྒྲིག་སྦྱོར་བྱེད་བཞིན་ཡོད་པས། བསྟན་པ་འདི་དག་རྣམ་པ་མང་པོའི་ཐོག་ནས་བདེ་བླག་ཏུ་མཐུན་འགྱུར་ཡོང་གི་ཡོད།'
+  },
+  multilingualSummaries: {
+    en: 'Multilingual Summaries',
+    tib: 'སྐད་རིགས་མང་པོའི་བསྡུས་དོན།'
+  },
+  multilingualSummariesDesc: {
+    en: 'To serve a global audience, we provide translations of text summaries, breaking down language barriers to these profound teachings.',
+    tib: 'འཛམ་གླིང་ཡོངས་ཀྱི་སྤྱོད་མི་རྣམས་ལ་ཞབས་ཞུ་སྒྲུབ་ཆེད། ང་ཚོས་ཡིག་ཆའི་བསྡུས་དོན་གྱི་སྐད་བསྒྱུར་མཁོ་སྤྲོད་བྱས་ཏེ་ཟབ་མོའི་བསྟན་པ་འདི་དག་ལ་སྐད་ཡིག་གི་བར་ཆད་མེད་པར་བཟོ་གི་ཡོད།'
+  },
+  projectYearsWork: {
+    en: 'This project represents years of dedicated work by our team of scholars, translators, and digital specialists, all committed to preserving and sharing the wisdom contained in these sacred texts.',
+    tib: 'ལས་གཞི་འདིས་ང་ཚོའི་མཁས་པ་དང་། ལོ་ཙཱ་བ། བརྙན་རྫས་ཆེད་ལས་པ་བཅས་ཀྱི་ལོ་མང་གི་ལྷག་བསམ་ཅན་གྱི་ལས་ཀ་མཚོན་ལ། དེ་ཚང་མས་དམ་པའི་གཞུང་འདི་དག་ཏུ་ཡོད་པའི་ཤེས་རབ་ཉར་ཚགས་དང་བགོ་བཤའ་བྱེད་པའི་ཆོད་སེམས་བཅངས་ཡོད།'
+  },
+  coreTeamMembers: {
+    en: 'Core Team Members',
+    tib: 'གཙོ་བོའི་ལས་བྱེད།'
+  },
+  extendedTeam: {
+    en: 'Our extended team includes additional scholars, translators, and digital specialists working together to bring this precious collection to the world.',
+    tib: 'ང་ཚོའི་ལས་བྱེད་ཁོངས་སུ་མཁས་པ་དང་། ལོ་ཙཱ་བ། བརྙན་རྫས་ཆེད་ལས་པ་གཞན་ཡང་ཡོད་ལ། ཁོང་ཚོས་རིན་ཐང་བྲལ་བའི་མཛོད་འདི་འཛམ་གླིང་ལ་སྤྲོད་ཆེད་མཉམ་ལས་བྱེད་ཀྱི་ཡོད།'
+  },
+  getInTouch: {
+    en: 'Get in Touch',
+    tib: 'འབྲེལ་གཏུགས་བྱོས།'
+  },
+  inquiriesText: {
+    en: 'For inquiries about the Kangyur Digital Project, collaboration opportunities, or other information:',
+    tib: 'བཀའ་འགྱུར་བརྙན་རྫས་ལས་གཞིའི་སྐོར་དང་། མཉམ་ལས་ཀྱི་གོ་སྐབས། གནས་ཚུལ་གཞན་བཅས་ཀྱི་འདྲི་རྩད་ཆེད།'
+  },
+  email: {
+    en: 'Email',
+    tib: 'གློག་འཕྲིན།'
+  },
+  phone: {
+    en: 'Phone',
+    tib: 'ཁ་པར།'
+  },
+  address: {
+    en: 'Address',
+    tib: 'ཁ་བྱང་།'
+  },
+  connectWithUs: {
+    en: 'Connect With Us',
+    tib: 'ང་ཚོ་དང་འབྲེལ་མཐུད་བྱོས།'
+  },
+  followUs: {
+    en: 'Follow Us',
+    tib: 'རྗེས་འབྲང་བྱོས།'
+  },
+  visitMainWebsite: {
+    en: 'Visit Our Main Website',
+    tib: 'ང་ཚོའི་གཙོ་བོའི་དྲ་ཚིགས་ལ་གཟིགས།'
+  },
+  joinUsText: {
+    en: 'Join us in this historic effort to preserve and share the wisdom of the Buddha\'s teachings for generations to come.',
+    tib: 'སངས་རྒྱས་ཀྱི་བསྟན་པའི་ཤེས་རབ་མི་རབས་ནས་མི་རབས་བར་ཉར་ཚགས་དང་བགོ་བཤའ་བྱེད་པའི་ལོ་རྒྱུས་ཅན་གྱི་འབད་བརྩོན་འདིར་ང་ཚོ་དང་མཉམ་དུ་ཞུགས་ཤོག'
+  },
+  
+  // Catalog details
+  textsCount: {
+    en: 'texts',
+    tib: 'ཡིག་ཆ།'
+  },
+  selectCategoryDesc: {
+    en: 'Choose a section from the catalog on the left to view detailed information about that part of the Kangyur collection.',
+    tib: 'བཀའ་འགྱུར་མཛོད་ཀྱི་ཆ་ཤས་དེའི་སྐོར་གྱི་ཞིབ་ཕྲའི་གནས་ཚུལ་ལ་ལྟ་བའི་ཆེད་གཡོན་གྱི་དཀར་ཆག་ནས་སྡེ་ཚན་ཞིག་གདམ་རོགས།'
   }
 };

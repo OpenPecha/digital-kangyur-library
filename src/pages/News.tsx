@@ -6,6 +6,8 @@ import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/componen
 import { Pagination, PaginationContent, PaginationEllipsis, PaginationItem, PaginationLink, PaginationNext, PaginationPrevious } from "@/components/ui/pagination";
 import { ArrowRight, Calendar, ChevronLeft, ChevronRight, Newspaper } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import LocalizedText from '@/components/LocalizedText';
+import { useLocalization } from '@/hooks/useLocalization';
 
 interface NewsItem {
   id: string;
@@ -75,6 +77,8 @@ const newsItems: NewsItem[] = [
 ];
 
 const NewsCard = ({ news }: { news: NewsItem }) => {
+  const { language } = useLocalization();
+  
   return (
     <Card className="flex flex-col h-full overflow-hidden hover:shadow-md transition-shadow">
       <div className="overflow-hidden h-48">
@@ -85,10 +89,11 @@ const NewsCard = ({ news }: { news: NewsItem }) => {
         />
       </div>
       <CardHeader className="pb-2">
-        {news.titleTibetan && (
+        {language === 'tib' && news.titleTibetan ? (
           <p className="text-sm font-medium text-kangyur-maroon tibetan mb-1">{news.titleTibetan}</p>
+        ) : (
+          <CardTitle className="text-lg">{news.title}</CardTitle>
         )}
-        <CardTitle className="text-lg">{news.title}</CardTitle>
       </CardHeader>
       <CardContent className="pb-2 flex-grow">
         <p className="text-muted-foreground text-sm mb-3">{news.description}</p>
@@ -106,7 +111,7 @@ const NewsCard = ({ news }: { news: NewsItem }) => {
           to={news.link || '#'} 
           className="group inline-flex items-center text-kangyur-orange text-sm font-medium hover:text-kangyur-orange/80 transition-colors"
         >
-          Read more 
+          <LocalizedText textKey="readMore" />
           <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
         </Link>
       </CardFooter>
@@ -131,9 +136,11 @@ const News = () => {
       
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-16">
         <div className="mb-10 text-center pt-8">
-          <h1 className="text-4xl font-bold text-kangyur-dark mb-3">Kangyur News</h1>
+          <h1 className="text-4xl font-bold text-kangyur-dark mb-3">
+            <LocalizedText textKey="kangyurNews" />
+          </h1>
           <p className="text-xl text-kangyur-dark/70 max-w-2xl mx-auto">
-            Latest updates, discoveries, and events in Kangyur studies and Buddhist text research
+            <LocalizedText textKey="newsSubtitle" />
           </p>
         </div>
         
@@ -149,7 +156,9 @@ const News = () => {
               <PaginationPrevious 
                 onClick={() => currentPage > 1 && handlePageChange(currentPage - 1)}
                 className={currentPage === 1 ? "pointer-events-none opacity-50" : "cursor-pointer"}
-              />
+              >
+                <LocalizedText textKey="previous" />
+              </PaginationPrevious>
             </PaginationItem>
             
             {Array.from({ length: totalPages }).map((_, idx) => (
@@ -168,7 +177,9 @@ const News = () => {
               <PaginationNext 
                 onClick={() => currentPage < totalPages && handlePageChange(currentPage + 1)}
                 className={currentPage === totalPages ? "pointer-events-none opacity-50" : "cursor-pointer"}
-              />
+              >
+                <LocalizedText textKey="next" />
+              </PaginationNext>
             </PaginationItem>
           </PaginationContent>
         </Pagination>
