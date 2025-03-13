@@ -5,14 +5,12 @@ import Footer from '@/components/Footer';
 import { Users, Sparkles, Mail, Heart, BookOpen, Globe, Facebook, Youtube } from 'lucide-react';
 import { Card, CardContent } from '@/components/ui/card';
 import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/avatar';
-
 const About = () => {
   const location = useLocation();
   const teamRef = useRef<HTMLDivElement>(null);
   const projectRef = useRef<HTMLDivElement>(null);
   const contactRef = useRef<HTMLDivElement>(null);
   const missionRef = useRef<HTMLDivElement>(null);
-
   useEffect(() => {
     if (location.hash) {
       const sectionId = location.hash.substring(1);
@@ -26,7 +24,6 @@ const About = () => {
       }
     }
   }, [location]);
-
   return <div className="min-h-screen flex flex-col">
       <Navbar />
       <main className="flex-grow pt-24 pb-16">
@@ -69,7 +66,7 @@ const About = () => {
           <div id="project" ref={projectRef} className="py-12 scroll-mt-24">
             <div className="flex items-center mb-8 border-b border-kangyur-orange/10 pb-4">
               <Sparkles className="text-kangyur-orange mr-3" size={28} />
-              <h2 className="text-3xl font-bold text-kangyur-dark">The Project</h2>
+              <h2 className="text-3xl font-bold text-kangyur-dark">Project</h2>
             </div>
             <div className="prose max-w-none">
               <p className="text-lg text-kangyur-dark/80 mb-6">
@@ -359,5 +356,4 @@ const About = () => {
       <Footer />
     </div>;
 };
-
 export default About;
