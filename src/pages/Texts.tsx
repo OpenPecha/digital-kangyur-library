@@ -55,7 +55,7 @@ const kangyurEditions = [{
   tibetanTitle: 'ལྷ་ས་བཀའ་འགྱུར།',
   transliteration: 'Lha sa bKa\' \'gyur',
   description: 'The Lhasa Kangyur was produced in Tibet\'s capital city and represents a later tradition of the Tibetan Buddhist canon.',
-  tibetanDescription: 'ལྷ་ས་བཀའ་འགྱུར་ནི་བོད་ཀྱི་རྒྱལ་ས་ལྷ་སར་བཞེངས་པ་ཞིག��ཡིན་ཞིང་། བོད་བརྒྱུད་ནང་བསྟན་གྱི་བཀའ་འགྱུར་གྱི་རྒྱུན་ཕྱི་མ་ཞིག་མཚོན།',
+  tibetanDescription: 'ལྷ་ས་བཀའ་འགྱུར་ནི་བོད་ཀྱི་རྒྱལ་ས་ལྷ་སར་བཞེངས་པ་ཞིག་ཡིན་ཞིང་། བོད་བརྒྱུད་ནང་བསྟན་གྱི་བཀའ་འགྱུར་གྱི་རྒྱུན་ཕྱི་མ་ཞིག་མཚོན།',
   volumes: 100,
   year: '1934',
   imageUrl: '/placeholder.svg'
@@ -90,12 +90,12 @@ const TextsPage = () => {
       <main className="flex-1 mt-16 py-[40px]">
         <section className="bg-gradient-to-br from-kangyur-cream to-white py-16 sm:py-0">
           <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="max-w-3xl mx-auto text-center">
-              <h1 className="text-4xl sm:text-5xl font-bold text-kangyur-dark">
+            <div className="max-w-3xl mx-auto text-center pt-8">
+              <h1 className="text-3xl font-bold text-kangyur-maroon mb-4">
                 <span className="language-en">Kangyur Editions</span>
                 <span className="language-tibetan tibetan">བཀའ་འགྱུར་གྱི་པར་མ་ཁག</span>
               </h1>
-              <p className="mt-6 text-xl text-kangyur-dark/80">
+              <p className="mt-2 text-lg text-kangyur-dark/80">
                 <span className="language-en">
                   Explore the historical Kangyur editions with their unique characteristics, provenance, and historical significance.
                 </span>
