@@ -18,42 +18,40 @@ import NarthangDetail from "./pages/NarthangDetail";
 import PekingDetail from "./pages/PekingDetail";
 import UrgaDetail from "./pages/UrgaDetail";
 import About from "./pages/About";
-// Import the Audio and Video components from the pages directory
 import AudioPage from "./pages/Audio";
 import VideoPage from "./pages/Video";
+import { LocalizationProvider } from "./hooks/useLocalization";
 
 const queryClient = new QueryClient();
 
 const App = () => (
   <QueryClientProvider client={queryClient}>
-    <TooltipProvider>
-      <Toaster />
-      <Sonner />
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Index />} />
-          <Route path="/catalog" element={<Catalog />} />
-          <Route path="/texts" element={<Texts />} />
-          <Route path="/texts/:id" element={<TextDetail />} />
-          <Route path="/texts/derge-detail" element={<DergeDetail />} />
-          <Route path="/texts/chone-detail" element={<ChoneDetail />} />
-          <Route path="/texts/lhasa-detail" element={<LhasaDetail />} />
-          <Route path="/texts/narthang-detail" element={<NarthangDetail />} />
-          <Route path="/texts/peking-detail" element={<PekingDetail />} />
-          <Route path="/texts/urga-detail" element={<UrgaDetail />} />
-          <Route path="/news" element={<News />} />
-          
-          <Route path="/history" element={<History />} />
-          
-          <Route path="/audio" element={<AudioPage />} />
-          <Route path="/video" element={<VideoPage />} />
-          
-          <Route path="/about" element={<About />} />
-          
-          <Route path="*" element={<NotFound />} />
-        </Routes>
-      </BrowserRouter>
-    </TooltipProvider>
+    <LocalizationProvider>
+      <TooltipProvider>
+        <Toaster />
+        <Sonner />
+        <BrowserRouter>
+          <Routes>
+            <Route path="/" element={<Index />} />
+            <Route path="/catalog" element={<Catalog />} />
+            <Route path="/texts" element={<Texts />} />
+            <Route path="/texts/:id" element={<TextDetail />} />
+            <Route path="/texts/derge-detail" element={<DergeDetail />} />
+            <Route path="/texts/chone-detail" element={<ChoneDetail />} />
+            <Route path="/texts/lhasa-detail" element={<LhasaDetail />} />
+            <Route path="/texts/narthang-detail" element={<NarthangDetail />} />
+            <Route path="/texts/peking-detail" element={<PekingDetail />} />
+            <Route path="/texts/urga-detail" element={<UrgaDetail />} />
+            <Route path="/news" element={<News />} />
+            <Route path="/history" element={<History />} />
+            <Route path="/audio" element={<AudioPage />} />
+            <Route path="/video" element={<VideoPage />} />
+            <Route path="/about" element={<About />} />
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+        </BrowserRouter>
+      </TooltipProvider>
+    </LocalizationProvider>
   </QueryClientProvider>
 );
 
