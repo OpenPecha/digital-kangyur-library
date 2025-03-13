@@ -2,15 +2,17 @@ import React, { useEffect, useRef } from 'react';
 import { useLocation } from 'react-router-dom';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
-import { Users, Sparkles, Mail, Heart, BookOpen, Globe } from 'lucide-react';
+import { Users, Sparkles, Mail, Heart, BookOpen, Globe, Facebook, Youtube } from 'lucide-react';
 import { Card, CardContent } from '@/components/ui/card';
 import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/avatar';
+
 const About = () => {
   const location = useLocation();
   const teamRef = useRef<HTMLDivElement>(null);
   const projectRef = useRef<HTMLDivElement>(null);
   const contactRef = useRef<HTMLDivElement>(null);
   const missionRef = useRef<HTMLDivElement>(null);
+
   useEffect(() => {
     if (location.hash) {
       const sectionId = location.hash.substring(1);
@@ -24,6 +26,7 @@ const About = () => {
       }
     }
   }, [location]);
+
   return <div className="min-h-screen flex flex-col">
       <Navbar />
       <main className="flex-grow pt-24 pb-16">
@@ -333,23 +336,11 @@ const About = () => {
                   <div>
                     <p className="font-medium text-kangyur-dark mb-2">Follow Us</p>
                     <div className="flex space-x-4">
-                      <a href="https://facebook.com/SINIBridge" target="_blank" rel="noopener noreferrer" className="text-kangyur-maroon hover:text-kangyur-orange transition-colors">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                          <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z" />
-                        </svg>
+                      <a href="https://www.facebook.com/sinibridge/" target="_blank" rel="noopener noreferrer" className="text-kangyur-maroon hover:text-kangyur-orange transition-colors">
+                        <Facebook size={24} />
                       </a>
-                      <a href="https://instagram.com/sini_bridge" target="_blank" rel="noopener noreferrer" className="text-kangyur-maroon hover:text-kangyur-orange transition-colors">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                          <rect width="20" height="20" x="2" y="2" rx="5" ry="5" />
-                          <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
-                          <line x1="17.5" x2="17.51" y1="6.5" y2="6.5" />
-                        </svg>
-                      </a>
-                      <a href="https://youtube.com/channel/SINI" target="_blank" rel="noopener noreferrer" className="text-kangyur-maroon hover:text-kangyur-orange transition-colors">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                          <path d="M2.5 17a24.12 24.12 0 0 1 0-10 2 2 0 0 1 1.4-1.4 49.56 49.56 0 0 1 16.2 0A2 2 0 0 1 21.5 7a24.12 24.12 0 0 1 0 10 2 2 0 0 1-1.4 1.4 49.55 49.55 0 0 1-16.2 0A2 2 0 0 1 2.5 17" />
-                          <path d="m10 15 5-3-5-3z" />
-                        </svg>
+                      <a href="https://www.youtube.com/@sarnathinternationalnyingm7662" target="_blank" rel="noopener noreferrer" className="text-kangyur-maroon hover:text-kangyur-orange transition-colors">
+                        <Youtube size={24} />
                       </a>
                     </div>
                   </div>
@@ -368,4 +359,5 @@ const About = () => {
       <Footer />
     </div>;
 };
+
 export default About;
