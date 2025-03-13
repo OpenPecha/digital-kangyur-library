@@ -77,7 +77,7 @@ const Hero = () => {
               </Link>
               
               <Link 
-                to="/about/project" 
+                to="/about#project" 
                 className="inline-flex items-center justify-center px-6 py-3 border border-kangyur-maroon/20 text-kangyur-maroon font-medium rounded-md hover:bg-kangyur-maroon/5 transition-colors"
               >
                 <span className="language-tibetan">དེ་ལས་མང་བ་ཤེས།</span>

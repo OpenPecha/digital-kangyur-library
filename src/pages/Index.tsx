@@ -115,7 +115,7 @@ const Index = () => {
               <span className="language-tibetan">དཔེ་མཛོད་ལ་བལྟ།</span>
             </Link>
             <Link 
-              to="/about/project" 
+              to="/about#project" 
               className="px-6 py-3 border border-white/30 text-white font-medium rounded-md hover:bg-white/10 transition-colors"
             >
               <span className="language-en">About This Project</span>
