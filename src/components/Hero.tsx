@@ -65,7 +65,7 @@ const Hero = () => {
             
             <div 
               ref={ctaRef}
-              className="flex flex-col sm:flex-row gap-4 justify-center opacity-0"
+              className="flex justify-center opacity-0"
             >
               <Link 
                 to="/catalog" 
@@ -74,14 +74,6 @@ const Hero = () => {
                 <span className="language-tibetan">དཔེ་མཛོད་ལ་བརྟག་དཔྱད་བྱེད།</span>
                 <span className="language-en">Explore Catalog</span>
                 <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
-              </Link>
-              
-              <Link 
-                to="/about#project" 
-                className="inline-flex items-center justify-center px-6 py-3 border border-kangyur-maroon/20 text-kangyur-maroon font-medium rounded-md hover:bg-kangyur-maroon/5 transition-colors"
-              >
-                <span className="language-tibetan">དེ་ལས་མང་བ་ཤེས།</span>
-                <span className="language-en">Learn More</span>
               </Link>
             </div>
           </div>
