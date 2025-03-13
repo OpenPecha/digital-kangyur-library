@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { Link } from 'react-router-dom';
 import Navbar from '@/components/Navbar';
@@ -6,6 +7,7 @@ import { cn } from '@/lib/utils';
 import { Book, BookOpen, ExternalLink } from 'lucide-react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
+
 const kangyurEditions = [{
   id: 'derge',
   title: 'Derge Kangyur',
@@ -68,6 +70,7 @@ const kangyurEditions = [{
   year: '1908-1910',
   imageUrl: '/placeholder.svg'
 }];
+
 const TextsPage = () => {
   const getViewerLink = (editionId: string) => {
     const links: Record<string, string> = {
@@ -80,6 +83,7 @@ const TextsPage = () => {
     };
     return links[editionId];
   };
+  
   return <div className="min-h-screen flex flex-col">
       <Navbar />
       
@@ -154,4 +158,5 @@ const TextsPage = () => {
       <Footer />
     </div>;
 };
+
 export default TextsPage;
