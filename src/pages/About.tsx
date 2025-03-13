@@ -1,16 +1,38 @@
-import React, { useEffect, useRef } from 'react';
+
+import React, { useEffect, useRef, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
-import { Users, Sparkles, Mail, Heart, BookOpen, Globe, Facebook, Youtube } from 'lucide-react';
+import { Users, Sparkles, Mail, Heart, BookOpen, Globe, Facebook, Youtube, ChevronDown, ChevronUp } from 'lucide-react';
 import { Card, CardContent } from '@/components/ui/card';
 import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/avatar';
+import { Button } from '@/components/ui/button';
+import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@/components/ui/collapsible';
+
 const About = () => {
   const location = useLocation();
   const teamRef = useRef<HTMLDivElement>(null);
   const projectRef = useRef<HTMLDivElement>(null);
   const contactRef = useRef<HTMLDivElement>(null);
   const missionRef = useRef<HTMLDivElement>(null);
+  
+  // State to track which team member bios are expanded
+  const [expandedBios, setExpandedBios] = useState<Record<string, boolean>>({
+    tpg: false,
+    jt: false,
+    tl: false,
+    tg: false,
+    tn: false
+  });
+
+  // Toggle bio expansion
+  const toggleBio = (id: string) => {
+    setExpandedBios(prev => ({
+      ...prev,
+      [id]: !prev[id]
+    }));
+  };
+
   useEffect(() => {
     if (location.hash) {
       const sectionId = location.hash.substring(1);
@@ -24,6 +46,7 @@ const About = () => {
       }
     }
   }, [location]);
+  
   return <div className="min-h-screen flex flex-col">
       <Navbar />
       <main className="flex-grow pt-24 pb-16">
@@ -175,12 +198,33 @@ const About = () => {
                     <Avatar className="h-16 w-16 border-2 border-kangyur-orange">
                       <AvatarFallback className="bg-kangyur-maroon text-white">TPG</AvatarFallback>
                     </Avatar>
-                    <div>
+                    <div className="flex-1">
                       <h4 className="font-bold text-kangyur-dark">Tsering Palmo Gellek</h4>
                       <p className="text-sm italic text-kangyur-maroon mb-2">Project Director</p>
-                      <p className="text-sm text-kangyur-dark/80">
-                        Tsering Palmo Gellek, appointed by her father Tarthang Rinpoche to establish and lead the Sarnath International Nyingma Institute, is dedicated to fostering the potential of small, focused groups to create positive change. Born in 1973 in Berkeley, California, she completed her bachelor's degree in International Relations at Lewis and Clark College and earned a Masters of Law from the Fletcher School of Law and Diplomacy. Since 2001, she has directed major projects including the restoration of Nepal's historic Swayambhu Stupa and the installation of peace bells across sacred sites in India and Nepal.
-                      </p>
+                      
+                      <Collapsible open={expandedBios.tpg} onOpenChange={() => toggleBio('tpg')}>
+                        <div className="text-sm text-kangyur-dark/80">
+                          <p className="line-clamp-2">
+                            Tsering Palmo Gellek, appointed by her father Tarthang Rinpoche to establish and lead the Sarnath International Nyingma Institute, is dedicated to fostering the potential of small, focused groups to create positive change.
+                          </p>
+                        </div>
+                        <CollapsibleContent>
+                          <p className="text-sm text-kangyur-dark/80 mt-2">
+                            Born in 1973 in Berkeley, California, she completed her bachelor's degree in International Relations at Lewis and Clark College and earned a Masters of Law from the Fletcher School of Law and Diplomacy. Since 2001, she has directed major projects including the restoration of Nepal's historic Swayambhu Stupa and the installation of peace bells across sacred sites in India and Nepal.
+                          </p>
+                        </CollapsibleContent>
+                        <div className="mt-2">
+                          <CollapsibleTrigger asChild>
+                            <Button variant="ghost" size="sm" className="flex items-center text-kangyur-maroon hover:text-kangyur-orange hover:bg-kangyur-cream/20">
+                              {expandedBios.tpg ? (
+                                <>Read less <ChevronUp className="ml-1 h-4 w-4" /></>
+                              ) : (
+                                <>Read more <ChevronDown className="ml-1 h-4 w-4" /></>
+                              )}
+                            </Button>
+                          </CollapsibleTrigger>
+                        </div>
+                      </Collapsible>
                     </div>
                   </div>
                 </CardContent>
@@ -192,12 +236,33 @@ const About = () => {
                     <Avatar className="h-16 w-16 border-2 border-kangyur-orange">
                       <AvatarFallback className="bg-kangyur-maroon text-white">JT</AvatarFallback>
                     </Avatar>
-                    <div>
+                    <div className="flex-1">
                       <h4 className="font-bold text-kangyur-dark">Khenpo Ju Tenkyong</h4>
                       <p className="text-sm italic text-kangyur-maroon mb-2">Chief Editor</p>
-                      <p className="text-sm text-kangyur-dark/80">
-                        With deep expertise in Buddhist canonical texts, Khenpo Ju Tenkyong leads the editorial team, ensuring accuracy and authenticity in the digital representation of the Kangyur collection.
-                      </p>
+                      
+                      <Collapsible open={expandedBios.jt} onOpenChange={() => toggleBio('jt')}>
+                        <div className="text-sm text-kangyur-dark/80">
+                          <p className="line-clamp-2">
+                            With deep expertise in Buddhist canonical texts, Khenpo Ju Tenkyong leads the editorial team, ensuring accuracy and authenticity in the digital representation of the Kangyur collection.
+                          </p>
+                        </div>
+                        <CollapsibleContent>
+                          <p className="text-sm text-kangyur-dark/80 mt-2">
+                            Khenpo Ju Tenkyong received his advanced degree in Buddhist philosophy from Namdroling Monastery in South India, where he studied for over 15 years. He specializes in the interpretation and organization of Tibetan Buddhist canonical texts and has contributed to numerous scholarly publications on Buddhist philosophy and practice.
+                          </p>
+                        </CollapsibleContent>
+                        <div className="mt-2">
+                          <CollapsibleTrigger asChild>
+                            <Button variant="ghost" size="sm" className="flex items-center text-kangyur-maroon hover:text-kangyur-orange hover:bg-kangyur-cream/20">
+                              {expandedBios.jt ? (
+                                <>Read less <ChevronUp className="ml-1 h-4 w-4" /></>
+                              ) : (
+                                <>Read more <ChevronDown className="ml-1 h-4 w-4" /></>
+                              )}
+                            </Button>
+                          </CollapsibleTrigger>
+                        </div>
+                      </Collapsible>
                     </div>
                   </div>
                 </CardContent>
@@ -209,12 +274,33 @@ const About = () => {
                     <Avatar className="h-16 w-16 border-2 border-kangyur-orange">
                       <AvatarFallback className="bg-kangyur-maroon text-white">TL</AvatarFallback>
                     </Avatar>
-                    <div>
+                    <div className="flex-1">
                       <h4 className="font-bold text-kangyur-dark">Khenpo Thupten Lobsang</h4>
                       <p className="text-sm italic text-kangyur-maroon mb-2">Editor</p>
-                      <p className="text-sm text-kangyur-dark/80">
-                        As a key member of the editorial team, Khenpo Thupten Lobsang contributes his scholarly expertise to the cataloging and annotation of texts within the Kangyur collection.
-                      </p>
+                      
+                      <Collapsible open={expandedBios.tl} onOpenChange={() => toggleBio('tl')}>
+                        <div className="text-sm text-kangyur-dark/80">
+                          <p className="line-clamp-2">
+                            As a key member of the editorial team, Khenpo Thupten Lobsang contributes his scholarly expertise to the cataloging and annotation of texts within the Kangyur collection.
+                          </p>
+                        </div>
+                        <CollapsibleContent>
+                          <p className="text-sm text-kangyur-dark/80 mt-2">
+                            Khenpo Thupten Lobsang has extensive experience in textual analysis and preservation. After completing his monastic education, he spent several years working on preservation projects for ancient Buddhist manuscripts. He is particularly skilled in identifying and organizing texts according to traditional Tibetan classification systems.
+                          </p>
+                        </CollapsibleContent>
+                        <div className="mt-2">
+                          <CollapsibleTrigger asChild>
+                            <Button variant="ghost" size="sm" className="flex items-center text-kangyur-maroon hover:text-kangyur-orange hover:bg-kangyur-cream/20">
+                              {expandedBios.tl ? (
+                                <>Read less <ChevronUp className="ml-1 h-4 w-4" /></>
+                              ) : (
+                                <>Read more <ChevronDown className="ml-1 h-4 w-4" /></>
+                              )}
+                            </Button>
+                          </CollapsibleTrigger>
+                        </div>
+                      </Collapsible>
                     </div>
                   </div>
                 </CardContent>
@@ -226,12 +312,33 @@ const About = () => {
                     <Avatar className="h-16 w-16 border-2 border-kangyur-orange">
                       <AvatarFallback className="bg-kangyur-maroon text-white">TG</AvatarFallback>
                     </Avatar>
-                    <div>
+                    <div className="flex-1">
                       <h4 className="font-bold text-kangyur-dark">Khenpo Thupthen Gyatso</h4>
                       <p className="text-sm italic text-kangyur-maroon mb-2">Editor</p>
-                      <p className="text-sm text-kangyur-dark/80">
-                        Bringing specialized knowledge of Buddhist philosophy and textual traditions, Khenpo Thupthen Gyatso ensures the scholarly integrity of the Kangyur digital resources.
-                      </p>
+                      
+                      <Collapsible open={expandedBios.tg} onOpenChange={() => toggleBio('tg')}>
+                        <div className="text-sm text-kangyur-dark/80">
+                          <p className="line-clamp-2">
+                            Bringing specialized knowledge of Buddhist philosophy and textual traditions, Khenpo Thupthen Gyatso ensures the scholarly integrity of the Kangyur digital resources.
+                          </p>
+                        </div>
+                        <CollapsibleContent>
+                          <p className="text-sm text-kangyur-dark/80 mt-2">
+                            With a profound understanding of Buddhist philosophy and its textual lineages, Khenpo Thupthen Gyatso has devoted his life to the study and preservation of Buddhist wisdom. He completed his advanced studies at Mindrolling Monastery and has been involved in numerous scholarly projects aimed at making traditional Buddhist teachings accessible to modern audiences.
+                          </p>
+                        </CollapsibleContent>
+                        <div className="mt-2">
+                          <CollapsibleTrigger asChild>
+                            <Button variant="ghost" size="sm" className="flex items-center text-kangyur-maroon hover:text-kangyur-orange hover:bg-kangyur-cream/20">
+                              {expandedBios.tg ? (
+                                <>Read less <ChevronUp className="ml-1 h-4 w-4" /></>
+                              ) : (
+                                <>Read more <ChevronDown className="ml-1 h-4 w-4" /></>
+                              )}
+                            </Button>
+                          </CollapsibleTrigger>
+                        </div>
+                      </Collapsible>
                     </div>
                   </div>
                 </CardContent>
@@ -244,13 +351,33 @@ const About = () => {
                       <AvatarImage src="/lovable-uploads/c871aeca-c10f-459d-b977-fc3284443d19.png" alt="Khenpo Tsering Nyima" className="object-cover" />
                       <AvatarFallback className="bg-kangyur-maroon text-white">TN</AvatarFallback>
                     </Avatar>
-                    <div>
+                    <div className="flex-1">
                       <h4 className="font-bold text-kangyur-dark">Khenpo Tsering Nyima</h4>
                       <p className="text-sm italic text-kangyur-maroon mb-2">Program Manager</p>
-                      <p className="text-sm text-kangyur-dark/80">
-                      Khenpo Tsering Nyima comes from Tibet, where he studied at Tarthang Monastery for six years. In 2006, he came to Namdroling Monastery in India. He studied there for fourteen years, and in 2017 received the degree of Lopon. 
-                      After four years of teaching and fulfilling other Dharma responsibilities, he came to SINI. He has been the general manager of the Nyingma Monlam in Bodhgaya since 2019, works with the Kagyur Project, and is the on-site manager for SINI. In April 2023 he was given the title of Khenpo in a ceremony at Namdroling Monastery
-                      </p>
+                      
+                      <Collapsible open={expandedBios.tn} onOpenChange={() => toggleBio('tn')}>
+                        <div className="text-sm text-kangyur-dark/80">
+                          <p className="line-clamp-2">
+                            Khenpo Tsering Nyima comes from Tibet, where he studied at Tarthang Monastery for six years. In 2006, he came to Namdroling Monastery in India.
+                          </p>
+                        </div>
+                        <CollapsibleContent>
+                          <p className="text-sm text-kangyur-dark/80 mt-2">
+                            He studied there for fourteen years, and in 2017 received the degree of Lopon. After four years of teaching and fulfilling other Dharma responsibilities, he came to SINI. He has been the general manager of the Nyingma Monlam in Bodhgaya since 2019, works with the Kagyur Project, and is the on-site manager for SINI. In April 2023 he was given the title of Khenpo in a ceremony at Namdroling Monastery.
+                          </p>
+                        </CollapsibleContent>
+                        <div className="mt-2">
+                          <CollapsibleTrigger asChild>
+                            <Button variant="ghost" size="sm" className="flex items-center text-kangyur-maroon hover:text-kangyur-orange hover:bg-kangyur-cream/20">
+                              {expandedBios.tn ? (
+                                <>Read less <ChevronUp className="ml-1 h-4 w-4" /></>
+                              ) : (
+                                <>Read more <ChevronDown className="ml-1 h-4 w-4" /></>
+                              )}
+                            </Button>
+                          </CollapsibleTrigger>
+                        </div>
+                      </Collapsible>
                     </div>
                   </div>
                 </CardContent>
