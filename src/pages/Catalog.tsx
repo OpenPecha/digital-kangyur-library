@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
@@ -52,10 +53,10 @@ const Catalog = () => {
         setSearchQuery={setSearchQuery}
       />
       
-      {/* Catalog Section */}
+      {/* Karchag Section */}
       <div className="container mx-auto px-4 py-8">
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-          {/* Left side: Catalog tree */}
+          {/* Left side: Karchag tree */}
           <div className="lg:col-span-1">
             <CatalogTree 
               items={filteredCatalog}

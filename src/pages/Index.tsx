@@ -111,7 +111,7 @@ const Index = () => {
               to="/catalog" 
               className="px-6 py-3 bg-white text-kangyur-maroon font-medium rounded-md hover:bg-white/90 transition-colors"
             >
-              <span className="language-en">Browse the Catalog</span>
+              <span className="language-en">Browse the Karchag</span>
               <span className="language-tibetan">དཔེ་མཛོད་ལ་བལྟ།</span>
             </Link>
             <Link 

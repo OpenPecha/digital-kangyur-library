@@ -72,7 +72,7 @@ const Hero = () => {
                 className="inline-flex items-center justify-center px-6 py-3 bg-kangyur-orange text-white font-medium rounded-md hover:bg-kangyur-orange/90 transition-colors group"
               >
                 <span className="language-tibetan">དཔེ་མཛོད་ལ་བརྟག་དཔྱད་བྱེད།</span>
-                <span className="language-en">Explore Catalog</span>
+                <span className="language-en">Explore Karchag</span>
                 <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
               </Link>
             </div>

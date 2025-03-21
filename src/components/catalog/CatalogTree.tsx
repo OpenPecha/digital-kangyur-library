@@ -84,7 +84,7 @@ const CatalogTree = ({
 
   return (
     <div className="bg-white rounded-lg p-5">
-      <h2 className="text-lg font-semibold text-gray-800 mb-4">Catalog Structure</h2>
+      <h2 className="text-lg font-semibold text-gray-800 mb-4">Karchag Structure</h2>
       <div className="space-y-1 max-h-[70vh] overflow-y-auto pr-2">
         {renderCatalogItems(items)}
       </div>

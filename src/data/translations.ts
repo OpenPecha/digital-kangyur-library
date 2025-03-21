@@ -85,7 +85,7 @@ export const translations: Record<TranslationKeys, Translation> = {
     tib: 'ལོ་རྒྱུས།'
   },
   catalog: {
-    en: 'Catalog',
+    en: 'Karchag',
     tib: 'བཀའ་འགྱུར་དཀར་ཆག།'
   },
   audio: {
@@ -137,7 +137,7 @@ export const translations: Record<TranslationKeys, Translation> = {
     tib: 'གཞུང་ལ་ལྟ།'
   },
   catalogStructure: {
-    en: 'Catalog Structure',
+    en: 'Karchag Structure',
     tib: 'དཀར་ཆག་གི་སྒྲོམ་གཞི།'
   },
   selectCategory: {
@@ -179,7 +179,7 @@ export const translations: Record<TranslationKeys, Translation> = {
     tib: 'བཀའ་འགྱུར་གཞུང་ཡིག་གི་ཕྱུག་ཆ་ལ་བརྟག་དཔྱད་བྱེད་ནས་དེ་དག་གི་ནང་དུ་ཡོད་པའི་ཟབ་མོའི་བསྟན་པ་ཁག་རྙེད།'
   },
   browseCatalog: {
-    en: 'Browse the Catalog',
+    en: 'Browse the Karchag',
     tib: 'དཔེ་མཛོད་ལ་བལྟ།'
   },
   aboutThisProject: {
@@ -351,7 +351,7 @@ export const translations: Record<TranslationKeys, Translation> = {
     tib: 'ཡིག་ཆ།'
   },
   selectCategoryDesc: {
-    en: 'Choose a section from the catalog on the left to view detailed information about that part of the Kangyur collection.',
+    en: 'Choose a section from the karchag on the left to view detailed information about that part of the Kangyur collection.',
     tib: 'བཀའ་འགྱུར་མཛོད་ཀྱི་ཆ་ཤས་དེའི་སྐོར་གྱི་ཞིབ་ཕྲའི་གནས་ཚུལ་ལ་ལྟ་བའི་ཆེད་གཡོན་གྱི་དཀར་ཆག་ནས་སྡེ་ཚན་ཞིག་གདམ་རོགས།'
   }
 };
