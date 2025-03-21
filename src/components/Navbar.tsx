@@ -95,14 +95,14 @@ const Navbar = () => {
             <nav className="hidden md:flex items-center space-x-1">
               {navItems.map(item => (
                 <div key={item.labelKey} className="relative group">
-                  <Link to={item.href} className={cn("px-3 py-2 text-sm font-medium rounded-md text-transition flex items-center", location.pathname === item.href ? "text-kangyur-orange" : "text-kangyur-dark hover:text-kangyur-orange")} onMouseEnter={() => item.children && setActiveDropdown(item.labelKey)} onMouseLeave={() => item.children && setActiveDropdown(null)} onClick={() => !item.children && setActiveDropdown(null)}>
+                  <Link to={item.href} className={cn("px-3 py-2 text-base font-medium rounded-md text-transition flex items-center", location.pathname === item.href ? "text-kangyur-orange" : "text-kangyur-dark hover:text-kangyur-orange")} onMouseEnter={() => item.children && setActiveDropdown(item.labelKey)} onMouseLeave={() => item.children && setActiveDropdown(null)} onClick={() => !item.children && setActiveDropdown(null)}>
                     <LocalizedText textKey={item.labelKey} />
                     {item.children && <ChevronDown className="ml-1 w-4 h-4" />}
                   </Link>
 
                   {item.children && <div className={cn("absolute left-0 mt-1 w-56 rounded-md shadow-lg glass overflow-hidden transition-all duration-300 origin-top-left", activeDropdown === item.labelKey ? "opacity-100 scale-100" : "opacity-0 scale-95 pointer-events-none")} onMouseEnter={() => setActiveDropdown(item.labelKey)} onMouseLeave={() => setActiveDropdown(null)}>
                       <div className="py-1">
-                        {item.children.map(child => <Link key={child.labelKey} to={child.href} className="block px-4 py-2 text-sm text-kangyur-dark hover:bg-kangyur-orange/10 hover:text-kangyur-orange transition-colors">
+                        {item.children.map(child => <Link key={child.labelKey} to={child.href} className="block px-4 py-2 text-base text-kangyur-dark hover:bg-kangyur-orange/10 hover:text-kangyur-orange transition-colors">
                             <LocalizedText textKey={child.labelKey} />
                           </Link>)}
                       </div>

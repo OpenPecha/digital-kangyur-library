@@ -82,7 +82,7 @@ export default {
 			fontFamily: {
 				sans: ['Cabin', 'sans-serif'],
 				serif: ['EB Garamond', 'serif'],
-				tibetan: ['Noto Sans Tibetan', 'sans-serif'],
+				tibetan: ['CustomTibetan', 'Noto Sans Tibetan', 'sans-serif'],
 			},
 			keyframes: {
 				'accordion-down': {

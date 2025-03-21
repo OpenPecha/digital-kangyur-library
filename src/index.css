@@ -3,6 +3,19 @@
 @tailwind components;
 @tailwind utilities;
 
+@font-face {
+  font-family: 'CustomTibetan';
+  src: url('/fonts/Qomolangma-UchenSarchen.ttf') format('truetype');
+  /* Add additional formats if you have them:
+  src: url('/fonts/your-tibetan-font.woff2') format('woff2'),
+       url('/fonts/your-tibetan-font.woff') format('woff'),
+       url('/fonts/your-tibetan-font.ttf') format('truetype');
+  */
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
 @layer base {
   :root {
     --background: 40 30% 96%;
@@ -100,7 +113,7 @@
     @apply font-serif;
   }
 
-  .tibetan {
+  .tibetan, .language-tibetan {
     @apply font-tibetan tracking-wide;
   }
 

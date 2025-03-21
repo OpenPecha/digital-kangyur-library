@@ -86,7 +86,7 @@ export const translations: Record<TranslationKeys, Translation> = {
   },
   catalog: {
     en: 'Karchag',
-    tib: 'བཀའ་འགྱུར་དཀར་ཆག།'
+    tib: 'དཀར་ཆག'
   },
   audio: {
     en: 'Audio',
@@ -194,11 +194,11 @@ export const translations: Record<TranslationKeys, Translation> = {
   },
   volumes: {
     en: 'volumes',
-    tib: 'པོད་གྲངས་'
+    tib: 'པོད་གྲངས།'
   },
   year: {
     en: 'Year',
-    tib: 'ལོ་'
+    tib: 'ལོ།'
   },
   
   // UI elements
