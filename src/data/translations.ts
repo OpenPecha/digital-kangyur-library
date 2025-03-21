@@ -97,7 +97,7 @@ export const translations: Record<TranslationKeys, Translation> = {
     tib: 'བརྙན་མཛོད།'
   },
   texts: {
-    en: 'Texts',
+    en: 'Kangyurs',
     tib: 'བཀའ་འགྱུར།'
   },
   news: {
