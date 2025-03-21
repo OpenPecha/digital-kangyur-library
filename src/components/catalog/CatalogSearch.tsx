@@ -12,7 +12,7 @@ const CatalogSearch = ({
   setSearchQuery
 }: CatalogSearchProps) => {
   return (
-    <div className="bg-gradient-to-r from-kangyur-maroon to-kangyur-gold text-white py-9 pt-28 relative overflow-hidden">      
+    <div className="bg-gradient-to-r from-kangyur-orange to-kangyur-gold text-white py-9 pt-28 relative overflow-hidden">      
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="max-w-md mx-auto">
           <h2 className="text-center text-3xl font-serif mb-6 text-white">Search the Karchag</h2>

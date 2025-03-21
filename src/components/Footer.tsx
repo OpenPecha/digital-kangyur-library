@@ -9,7 +9,7 @@ const Footer = () => {
         <div className="flex flex-col items-center text-center">
           {/* Logo & About */}
           <div className="mb-6">
-            <h3 className="text-xl font-bold text-kangyur-maroon">
+            <h3 className="text-xl font-bold text-kangyur-orange">
               <span className="language-en">Kangyur Karchag</span>
               <span className="language-tibetan">བཀའ་འགྱུར་དཀར་ཆག</span>
             </h3>
@@ -32,10 +32,10 @@ const Footer = () => {
             </p>
             <p className="text-sm text-kangyur-dark/70 mt-2 sm:mt-0 flex items-center">
               <span className="language-en flex items-center">
-                Made with <Heart className="mx-1 text-kangyur-maroon w-4 h-4" /> for the preservation of Buddhist wisdom
+                Made with <Heart className="mx-1 text-kangyur-orange w-4 h-4" /> for the preservation of Buddhist wisdom
               </span>
               <span className="language-tibetan flex items-center">
-                ནང་པའི་ཤེས་རབ་སྲུང་སྐྱོབ་ཀྱི་ཆེད་དུ་བྱམས་སེམས་ཀྱིས་བཟོས་པ། <Heart className="mx-1 text-kangyur-maroon w-4 h-4" />
+                ནང་པའི་ཤེས་རབ་སྲུང་སྐྱོབ་ཀྱི་ཆེད་དུ་བྱམས་སེམས་ཀྱིས་བཟོས་པ། <Heart className="mx-1 text-kangyur-orange w-4 h-4" />
               </span>
             </p>
           </div>

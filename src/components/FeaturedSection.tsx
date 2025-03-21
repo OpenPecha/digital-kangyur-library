@@ -42,7 +42,7 @@ const FeaturedSection = ({
         <div className="mb-10 sm:mb-16 flex flex-col sm:flex-row sm:justify-between sm:items-end">
           <div>
             {tibetanTitle && (
-              <h3 className="language-tibetan text-kangyur-maroon text-lg mb-1">{tibetanTitle}</h3>
+              <h3 className="language-tibetan text-kangyur-orange text-lg mb-1">{tibetanTitle}</h3>
             )}
             <h2 className="language-en text-3xl sm:text-4xl font-bold text-kangyur-dark">{title}</h2>
             {subtitle && (
@@ -57,7 +57,7 @@ const FeaturedSection = ({
             <div className="mt-4 sm:mt-0 sm:ml-8">
               <Link 
                 to={viewAllLink}
-                className="group inline-flex items-center text-kangyur-orange hover:text-kangyur-orange/80 font-medium transition-colors"
+                className="group inline-flex items-center text-kangyur-green hover:text-kangyur-green/80 font-medium transition-colors"
               >
                 <span className="language-en">{viewAllText}</span>
                 {tibetanViewAllText && <span className="language-tibetan">{tibetanViewAllText}</span>}

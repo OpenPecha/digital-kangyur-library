@@ -64,10 +64,12 @@ export default {
 					ring: 'hsl(var(--sidebar-ring))'
 				},
 				kangyur: {
-					orange: '#E88C30',
-					maroon: '#8C1515',
-					gold: '#D4AF37',
-					cream: '#F5F1E8',
+					orange: '#D45C26',  // Primary color 1
+					gold: '#F5B611',    // Primary color 2 (corrected from FSB611)
+					brown: '#A06A32',   // Primary color 3 (corrected from AO6A32)
+					green: '#5EA85F',   // Secondary color 1
+					teal: '#9ED7C7',    // Secondary color 2
+					cream: '#F0E1CA',   // Secondary color 3
 					light: '#FCF9F5',
 					dark: '#2D2826',
 				}

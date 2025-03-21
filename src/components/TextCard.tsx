@@ -65,7 +65,7 @@ const TextCard = ({
               
               {/* Category badge */}
               <div className="absolute top-3 left-3">
-                <span className="px-2 py-1 bg-kangyur-maroon text-white text-xs font-medium rounded-md">
+                <span className="px-2 py-1 bg-kangyur-orange text-white text-xs font-medium rounded-md">
                   {category}
                 </span>
               </div>
@@ -81,7 +81,7 @@ const TextCard = ({
           {/* Category badge - For featured and default without image */}
           {!isCompact && (
             <div className="mb-3">
-              <span className="px-2 py-1 bg-kangyur-maroon text-white text-xs font-medium rounded-md">
+              <span className="px-2 py-1 bg-kangyur-orange text-white text-xs font-medium rounded-md">
                 {category}
               </span>
             </div>
@@ -90,14 +90,14 @@ const TextCard = ({
           {/* Titles */}
           <div className="mb-3">
             <h3 className={cn(
-              "tibetan font-medium text-kangyur-maroon",
+              "tibetan font-medium text-kangyur-orange",
               isCompact ? "text-base" : isFeatured ? "text-xl" : "text-lg"
             )}>
               {title.tibetan}
             </h3>
             
             <h2 className={cn(
-              "font-semibold text-kangyur-dark group-hover:text-kangyur-orange transition-colors",
+              "font-semibold text-kangyur-dark group-hover:text-kangyur-green transition-colors",
               isCompact ? "text-base" : isFeatured ? "text-xl" : "text-lg"
             )}>
               {title.english}
@@ -146,7 +146,7 @@ const TextCard = ({
                 {keywords.slice(0, isCompact ? 2 : 4).map((keyword, index) => (
                   <span
                     key={index}
-                    className="inline-block px-2 py-0.5 bg-kangyur-orange/10 text-kangyur-orange text-xs rounded"
+                    className="inline-block px-2 py-0.5 bg-kangyur-teal/20 text-kangyur-green text-xs rounded"
                   >
                     {keyword}
                   </span>

@@ -41,7 +41,7 @@ const Hero = () => {
       {/* Decorative background elements */}
       <div className="absolute inset-0 z-0 overflow-hidden">
         <div className="absolute top-20 left-10 w-64 h-64 rounded-full bg-kangyur-orange/5 blur-3xl"></div>
-        <div className="absolute bottom-20 right-10 w-80 h-80 rounded-full bg-kangyur-maroon/5 blur-3xl"></div>
+        <div className="absolute bottom-20 right-10 w-80 h-80 rounded-full bg-kangyur-green/5 blur-3xl"></div>
       </div>
       
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 z-10">
@@ -51,7 +51,7 @@ const Hero = () => {
               ref={titleRef}
               className="text-4xl md:text-5xl lg:text-6xl font-bold text-kangyur-dark tracking-tight opacity-0"
             >
-              <span className="block tibetan mt-2 text-kangyur-maroon language-tibetan">བཀའ་འགྱུར་དཀར་ཆག</span>
+              <span className="block tibetan mt-2 text-kangyur-brown language-tibetan">བཀའ་འགྱུར་དཀར་ཆག</span>
               <span className="block text-kangyur-orange language-en">Kangyur Karchag</span>
             </h1>
             
