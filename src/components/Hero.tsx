@@ -42,6 +42,10 @@ const Hero = () => {
       <div className="absolute inset-0 z-0 overflow-hidden">
         <div className="absolute top-20 left-10 w-64 h-64 rounded-full bg-kangyur-orange/5 blur-3xl"></div>
         <div className="absolute bottom-20 right-10 w-80 h-80 rounded-full bg-kangyur-green/5 blur-3xl"></div>
+        {/* Background Logo */}
+        <div className="absolute inset-0 flex items-center justify-center opacity-5">
+          <img src="/logo.svg" alt="" className="w-[600px] h-[600px]" />
+        </div>
       </div>
       
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 z-10">

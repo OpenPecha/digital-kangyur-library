@@ -85,7 +85,8 @@ const Navbar = () => {
       <div className="w-full bg-slate-50">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16 md:h-20">
-            <Link to="/" className="flex items-center space-x-2 text-kangyur-maroon transition-transform duration-300 transform hover:scale-105">
+            <Link to="/" className="flex items-center space-x-3 text-kangyur-maroon transition-transform duration-300 transform hover:scale-105">
+              <img src="/logo.svg" alt="Kangyur Karchag Logo" className="w-8 h-8 md:w-10 md:h-10" />
               <span className="font-bold text-xl md:text-2xl">
                 <span className={language === 'en' ? 'block' : 'hidden'}>Kangyur Karchag</span>
                 <span className={language === 'tib' ? 'block tibetan' : 'hidden'}>བཀའ་འགྱུར་དཀར་ཆག</span>
