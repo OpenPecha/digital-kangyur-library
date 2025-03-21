@@ -1,4 +1,3 @@
-
 import type { Config } from "tailwindcss";
 
 export default {
@@ -72,6 +71,7 @@ export default {
 					cream: '#F0E1CA',   // Secondary color 3
 					light: '#FCF9F5',
 					dark: '#2D2826',
+					maroon: '#8B3A2B',  // Added for compatibility with existing code
 				}
 			},
 			borderRadius: {
