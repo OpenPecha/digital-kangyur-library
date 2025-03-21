@@ -78,8 +78,8 @@ export default {
 				sm: 'calc(var(--radius) - 4px)'
 			},
 			fontFamily: {
-				sans: ['Noto Sans', 'sans-serif'],
-				serif: ['Noto Serif', 'serif'],
+				sans: ['Cabin', 'sans-serif'],
+				serif: ['EB Garamond', 'serif'],
 				tibetan: ['Noto Sans Tibetan', 'sans-serif'],
 			},
 			keyframes: {

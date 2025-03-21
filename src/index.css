@@ -1,6 +1,4 @@
 
-@import url('https://fonts.googleapis.com/css2?family=Noto+Sans:wght@300;400;500;600;700&family=Noto+Serif:wght@400;500;600;700&family=Noto+Sans+Tibetan:wght@300;400;500;600;700&display=swap');
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -96,6 +94,10 @@
     @apply bg-background text-foreground font-sans;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+  }
+
+  .language-en h1, .language-en h2, .language-en h3, .language-en h4, .language-en h5, .language-en h6 {
+    @apply font-serif;
   }
 
   .tibetan {
