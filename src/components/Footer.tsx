@@ -10,8 +10,8 @@ const Footer = () => {
           {/* Logo & About */}
           <div className="mb-6">
             <h3 className="text-xl font-bold text-kangyur-maroon">
-              <span className="language-en">KaZhoe</span>
-              <span className="language-tibetan">བཀའ་མཛོད།</span>
+              <span className="language-en">Kangyur Karchag</span>
+              <span className="language-tibetan">བཀའ་འགྱུར་དཀར་ཆག</span>
             </h3>
             <p className="text-sm text-kangyur-dark/80 mt-3 max-w-2xl">
               <span className="language-en">
@@ -28,7 +28,7 @@ const Footer = () => {
         <div className="mt-8 pt-6 border-t border-kangyur-orange/10">
           <div className="flex flex-col sm:flex-row justify-between items-center">
             <p className="text-sm text-kangyur-dark/70">
-              &copy; {new Date().getFullYear()} KaZhoe. All rights reserved.
+              &copy; {new Date().getFullYear()} Kangyur Karchag. All rights reserved.
             </p>
             <p className="text-sm text-kangyur-dark/70 mt-2 sm:mt-0 flex items-center">
               <span className="language-en flex items-center">

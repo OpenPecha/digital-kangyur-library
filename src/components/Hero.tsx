@@ -51,8 +51,8 @@ const Hero = () => {
               ref={titleRef}
               className="text-4xl md:text-5xl lg:text-6xl font-bold text-kangyur-dark tracking-tight opacity-0"
             >
-              <span className="block tibetan mt-2 text-kangyur-maroon language-tibetan">བཀའ་མཛོད།</span>
-              <span className="block text-kangyur-orange language-en">KaZhoe</span>
+              <span className="block tibetan mt-2 text-kangyur-maroon language-tibetan">བཀའ་འགྱུར་དཀར་ཆག</span>
+              <span className="block text-kangyur-orange language-en">Kangyur Karchag</span>
             </h1>
             
             <p 

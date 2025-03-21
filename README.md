@@ -1,4 +1,5 @@
-# Welcome to your Lovable project
+
+# Welcome to your Kangyur Karchag project
 
 ## Project info
 
