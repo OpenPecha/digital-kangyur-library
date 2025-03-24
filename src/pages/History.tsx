@@ -14,6 +14,7 @@ import {
 } from 'recharts';
 import { ChartContainer, ChartTooltip, ChartTooltipContent } from '@/components/ui/chart';
 import { Card, CardContent } from '@/components/ui/card';
+import { ScrollArea } from '@/components/ui/scroll-area';
 
 type TimelineEvent = {
   id: string;
@@ -444,28 +445,30 @@ const History = () => {
           
           <h2 className="text-2xl font-semibold text-primary-2 mt-12 mb-6">Key Historical Periods</h2>
           
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
-            {timelineData.map((period) => (
-              <Card key={period.id} className="hover:shadow-md transition-shadow">
-                <CardContent className="p-4">
-                  <h3 className="text-xl font-bold text-primary-1 mb-2">
-                    <span className="language-en">{period.period}</span>
-                    {period.tibetanPeriod && (
-                      <span className="language-tibetan tibetan ml-2">{period.tibetanPeriod}</span>
-                    )}
-                  </h3>
-                  <p className="text-sm text-gray-600 mb-3">{period.startYear} - {period.endYear}</p>
-                  <ul className="pl-5 list-disc space-y-2">
-                    {period.events.map((event, idx) => (
-                      <li key={idx} className="text-gray-700">
-                        <span className="font-medium text-primary-3">{event.year}</span>: {event.description}
-                      </li>
-                    ))}
-                  </ul>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
+          <ScrollArea className="w-full mb-12">
+            <div className="flex gap-6 pb-4" style={{ minWidth: 'max-content', paddingRight: '1.5rem' }}>
+              {timelineData.map((period) => (
+                <Card key={period.id} className="hover:shadow-md transition-shadow" style={{ minWidth: '350px', maxWidth: '400px' }}>
+                  <CardContent className="p-4">
+                    <h3 className="text-xl font-bold text-primary-1 mb-2">
+                      <span className="language-en">{period.period}</span>
+                      {period.tibetanPeriod && (
+                        <span className="language-tibetan tibetan ml-2">{period.tibetanPeriod}</span>
+                      )}
+                    </h3>
+                    <p className="text-sm text-gray-600 mb-3">{period.startYear} - {period.endYear}</p>
+                    <ul className="pl-5 list-disc space-y-2">
+                      {period.events.map((event, idx) => (
+                        <li key={idx} className="text-gray-700">
+                          <span className="font-medium text-primary-3">{event.year}</span>: {event.description}
+                        </li>
+                      ))}
+                    </ul>
+                  </CardContent>
+                </Card>
+              ))}
+            </div>
+          </ScrollArea>
         </div>
       </main>
       <Footer />
