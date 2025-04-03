@@ -79,52 +79,65 @@ const AudioPage = () => {
   };
 
   return (
-    <div className="min-h-screen flex flex-col">
+    <div className="min-h-screen bg-white w-full">
       <Navbar />
       
-      <main className="flex-grow pt-24 pb-16">
+      {/* Hero Section with Search */}
+      <div className="bg-gradient-to-br from-kangyur-cream to-white pt-24 pb-8">
         <div className="container mx-auto px-4">
-          <div className="flex items-center justify-between mb-8">
+          <div className="flex items-center justify-between mb-4">
             <h1 className="text-3xl font-bold text-kangyur-maroon">Audio Recitations</h1>
-            <Button variant="outline" size="sm" onClick={() => setShowCatalog(!showCatalog)} className="text-kangyur-maroon hover:text-kangyur-orange transition-colors">
+            <Button 
+              variant="outline" 
+              size="sm" 
+              onClick={() => setShowCatalog(!showCatalog)} 
+              className="text-kangyur-maroon hover:text-kangyur-orange transition-colors"
+            >
               {showCatalog ? <PanelLeftClose className="h-4 w-4 mr-2" /> : <PanelLeft className="h-4 w-4 mr-2" />}
               {showCatalog ? 'Hide Catalog' : 'Show Catalog'}
             </Button>
           </div>
+          <p className="text-kangyur-dark/70 max-w-3xl">
+            Listen to traditional recitations of texts from the Kangyur collection. These audio recordings 
+            preserve the oral tradition of Buddhist scripture.
+          </p>
+        </div>
+      </div>
+      
+      {/* Audio Section */}
+      <div className="container mx-auto px-4 py-8">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+          {/* Left side: Audio catalog tree */}
+          {showCatalog && (
+            <div className="lg:col-span-1">
+              <AudioCatalog 
+                audioTexts={audioTexts} 
+                selectedAudioId={selectedAudio?.id || ''} 
+                onSelectAudio={handleSelectAudio}
+              />
+            </div>
+          )}
           
-          <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
-            {/* Left side: Audio Catalog */}
-            {showCatalog && (
-              <div className="lg:col-span-1">
-                <AudioCatalog 
-                  audioTexts={audioTexts} 
-                  selectedAudioId={selectedAudio?.id || ''} 
-                  onSelectAudio={handleSelectAudio}
-                />
+          {/* Right side: Details panel */}
+          <div className={cn("transition-all duration-300", showCatalog ? "lg:col-span-2" : "lg:col-span-3")}>
+            {selectedAudio ? (
+              <AudioPlayer audio={selectedAudio} />
+            ) : (
+              <div className="bg-white rounded-xl shadow-md p-8 text-center">
+                <h2 className="text-2xl font-semibold text-kangyur-maroon mb-4">Welcome to Audio Recitations</h2>
+                <p className="text-lg text-gray-600 mb-6">
+                  Select a text from the catalog to listen to audio recitations of Kangyur texts.
+                </p>
+                <div className="flex justify-center">
+                  <Button onClick={() => handleSelectAudio('heart-sutra')} className="bg-kangyur-orange hover:bg-kangyur-orange/90 text-white">
+                    Try Heart Sutra
+                  </Button>
+                </div>
               </div>
             )}
-            
-            {/* Right side: Audio Player or Welcome Message */}
-            <div className={cn("transition-all duration-300", showCatalog ? "lg:col-span-3" : "lg:col-span-4")}>
-              {selectedAudio ? (
-                <AudioPlayer audio={selectedAudio} />
-              ) : (
-                <div className="bg-white rounded-xl shadow-md p-8 text-center">
-                  <h2 className="text-2xl font-semibold text-kangyur-maroon mb-4">Welcome to Audio Recitations</h2>
-                  <p className="text-lg text-gray-600 mb-6">
-                    Select a text from the catalog to listen to audio recitations of Kangyur texts.
-                  </p>
-                  <div className="flex justify-center">
-                    <Button onClick={() => handleSelectAudio('heart-sutra')} className="bg-kangyur-orange hover:bg-kangyur-orange/90 text-white">
-                      Try Heart Sutra
-                    </Button>
-                  </div>
-                </div>
-              )}
-            </div>
           </div>
         </div>
-      </main>
+      </div>
       
       <Footer />
     </div>
