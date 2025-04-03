@@ -18,7 +18,7 @@ import NarthangDetail from "./pages/NarthangDetail";
 import PekingDetail from "./pages/PekingDetail";
 import UrgaDetail from "./pages/UrgaDetail";
 import About from "./pages/About";
-import AudioPage from "./pages/Audio";
+import Audio from "./pages/Audio";
 import VideoPage from "./pages/Video";
 import { LocalizationProvider } from "./hooks/useLocalization";
 
@@ -44,7 +44,7 @@ const App = () => (
             <Route path="/texts/urga-detail" element={<UrgaDetail />} />
             <Route path="/news" element={<News />} />
             <Route path="/history" element={<History />} />
-            <Route path="/audio" element={<AudioPage />} />
+            <Route path="/audio" element={<Audio />} />
             <Route path="/video" element={<VideoPage />} />
             <Route path="/about" element={<About />} />
             <Route path="*" element={<NotFound />} />
