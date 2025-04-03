@@ -11,6 +11,7 @@ import Texts from "./pages/Texts";
 import TextDetail from "./pages/TextDetail";
 import News from "./pages/News";
 import History from "./pages/History";
+import HistoryDevelopment from "./pages/HistoryDevelopment";
 import DergeDetail from "./pages/DergeDetail";
 import ChoneDetail from "./pages/ChoneDetail";
 import LhasaDetail from "./pages/LhasaDetail";
@@ -44,6 +45,7 @@ const App = () => (
             <Route path="/texts/urga-detail" element={<UrgaDetail />} />
             <Route path="/news" element={<News />} />
             <Route path="/history" element={<History />} />
+            <Route path="/history/development" element={<HistoryDevelopment />} />
             <Route path="/audio" element={<Audio />} />
             <Route path="/video" element={<VideoPage />} />
             <Route path="/about" element={<About />} />
