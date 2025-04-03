@@ -256,12 +256,7 @@ const History = () => {
             minWidth: 'max-content',
             paddingRight: '1.5rem'
           }}>
-              {timelineData.map(period => <Card key={period.id} className={`hover:shadow-md transition-shadow ${selectedPeriod?.id === period.id ? 'ring-2 ring-primary-1/50' : ''}`} style={{
-              minWidth: '350px',
-              maxWidth: '400px'
-            }} onClick={() => setSelectedPeriod(period)}>
-                  
-                </Card>)}
+              {timelineData.map(period => {})}
             </div>
           </ScrollArea>
         </div>
