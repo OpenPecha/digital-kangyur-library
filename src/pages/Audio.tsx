@@ -1,11 +1,9 @@
 
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
-import { PanelLeft, PanelLeftClose, Play, Pause, SkipBack, SkipForward, Volume2 } from 'lucide-react';
+import { PanelLeft, PanelLeftClose } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import { Slider } from '@/components/ui/slider';
 import { cn } from '@/lib/utils';
 import AudioCatalog from '@/components/audio/AudioCatalog';
 import AudioPlayer from '@/components/audio/AudioPlayer';

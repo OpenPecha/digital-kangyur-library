@@ -1,6 +1,6 @@
 
 import React, { useState, useRef, useEffect } from 'react';
-import { Play, Pause, SkipBack, SkipForward, Volume2, VolumeMute } from 'lucide-react';
+import { Play, Pause, SkipBack, SkipForward, Volume2, VolumeX } from 'lucide-react';
 import { Slider } from '@/components/ui/slider';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
@@ -195,7 +195,7 @@ const AudioPlayer: React.FC<AudioPlayerProps> = ({ audio }) => {
               onClick={toggleMute}
               className="text-gray-600 hover:text-kangyur-orange hover:bg-transparent mr-2"
             >
-              {isMuted ? <VolumeMute className="h-4 w-4" /> : <Volume2 className="h-4 w-4" />}
+              {isMuted ? <VolumeX className="h-4 w-4" /> : <Volume2 className="h-4 w-4" />}
             </Button>
             <Slider
               value={[isMuted ? 0 : volume]}
