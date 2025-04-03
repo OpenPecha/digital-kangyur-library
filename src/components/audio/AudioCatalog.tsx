@@ -1,121 +1,97 @@
 
-import React, { useState } from 'react';
-import { ChevronDown, ChevronRight, Headphones } from 'lucide-react';
+import React from 'react';
+import { ChevronRight, ChevronDown, Headphones } from 'lucide-react';
+import { CatalogItem } from '@/types/catalog';
 import { cn } from '@/lib/utils';
 
-type AudioText = {
-  id: string;
-  title: {
-    tibetan: string;
-    english: string;
-  };
-  category: string;
-  description: string;
-  duration: string;
-  audioUrl: string;
-};
-
 interface AudioCatalogProps {
-  audioTexts: AudioText[];
-  selectedAudioId: string;
-  onSelectAudio: (id: string) => void;
+  items: CatalogItem[];
+  expandedItems: string[];
+  selectedItem: string;
+  onToggleExpand: (id: string) => void;
+  onSelectItem: (id: string) => void;
 }
 
-const AudioCatalog: React.FC<AudioCatalogProps> = ({
-  audioTexts,
-  selectedAudioId,
-  onSelectAudio
+const AudioCatalog: React.FC<AudioCatalogProps> = ({ 
+  items, 
+  expandedItems, 
+  selectedItem, 
+  onToggleExpand, 
+  onSelectItem,
 }) => {
-  const [expandedCategories, setExpandedCategories] = useState<string[]>(['sutras', 'stories']);
   
-  // Group audio texts by category
-  const groupedTexts = audioTexts.reduce((acc, audio) => {
-    if (!acc[audio.category]) {
-      acc[audio.category] = [];
-    }
-    acc[audio.category].push(audio);
-    return acc;
-  }, {} as Record<string, AudioText[]>);
-  
-  // Toggle category expansion
-  const toggleCategory = (category: string) => {
-    setExpandedCategories(prev => 
-      prev.includes(category)
-        ? prev.filter(c => c !== category)
-        : [...prev, category]
-    );
-  };
-  
-  // Get category display name
-  const getCategoryName = (category: string) => {
-    const names: Record<string, { en: string, tib: string }> = {
-      'sutras': { en: 'Sutras', tib: 'མདོ་སྡེ།' },
-      'stories': { en: 'Stories', tib: 'སྒྲུང་གཏམ།' },
-      'commentaries': { en: 'Commentaries', tib: 'འགྲེལ་པ།' }
-    };
-    
-    return names[category] || { en: category, tib: '' };
-  };
-  
-  return (
-    <div className="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden">
-      <div className="p-4 border-b border-gray-200">
-        <h2 className="text-lg font-semibold text-kangyur-maroon">Audio Catalog</h2>
-      </div>
-      
-      <div className="p-2 max-h-[70vh] overflow-y-auto">
-        {Object.entries(groupedTexts).map(([category, texts]) => (
-          <div key={category} className="mb-2">
-            {/* Category Header */}
-            <div 
-              className="flex items-center p-2 rounded-md cursor-pointer hover:bg-gray-100"
-              onClick={() => toggleCategory(category)}
+  // Recursive function to render catalog items with proper nesting
+  const renderCatalogItems = (itemsToRender: CatalogItem[], level: number = 0) => {
+    return itemsToRender.map((category) => (
+      <div key={category.id} className="mb-1">
+        <div
+          className={cn(
+            "flex items-center py-2",
+            level > 0 ? 'pl-6' : '',
+            selectedItem === category.id ? "text-kangyur-orange font-medium" : "text-gray-700"
+          )}
+        >
+          {category.children && category.children.length > 0 ? (
+            <button
+              onClick={(e) => {
+                e.stopPropagation();
+                onToggleExpand(category.id);
+              }}
+              className="mr-1 text-kangyur-orange"
             >
-              {expandedCategories.includes(category) ? (
-                <ChevronDown className="h-4 w-4 text-kangyur-orange mr-2" />
+              {expandedItems.includes(category.id) ? (
+                <ChevronDown className="w-4 h-4" />
               ) : (
-                <ChevronRight className="h-4 w-4 text-kangyur-orange mr-2" />
+                <ChevronRight className="w-4 h-4" />
               )}
-              <div>
-                <div className="font-medium text-gray-900">{getCategoryName(category).en}</div>
-                <div className="tibetan text-xs text-gray-500">{getCategoryName(category).tib}</div>
-              </div>
-            </div>
+            </button>
+          ) : (
+            <div className="w-4 mr-1"></div>
+          )}
+          
+          <div 
+            className="flex items-start cursor-pointer flex-1"
+            onClick={() => onSelectItem(category.id)}
+          >
+            <span className="text-kangyur-orange mr-2 mt-0.5">
+              {category.audioUrl ? (
+                <Headphones className="h-4 w-4" />
+              ) : (
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20"></path>
+                </svg>
+              )}
+            </span>
             
-            {/* Audio Items */}
-            {expandedCategories.includes(category) && (
-              <div className="ml-6 space-y-1 mt-1">
-                {texts.map(audio => (
-                  <div 
-                    key={audio.id}
-                    className={cn(
-                      "flex items-start p-2 rounded-md cursor-pointer",
-                      selectedAudioId === audio.id
-                        ? "bg-kangyur-orange/10 text-kangyur-orange"
-                        : "hover:bg-gray-100 text-gray-700"
-                    )}
-                    onClick={() => onSelectAudio(audio.id)}
-                  >
-                    <Headphones className={cn(
-                      "h-4 w-4 mt-1 mr-2",
-                      selectedAudioId === audio.id ? "text-kangyur-orange" : "text-gray-400"
-                    )} />
-                    <div>
-                      <div className={cn(
-                        "font-medium",
-                        selectedAudioId === audio.id ? "text-kangyur-orange" : "text-gray-900"
-                      )}>
-                        {audio.title.english}
-                      </div>
-                      <div className="tibetan text-xs text-gray-500">{audio.title.tibetan}</div>
-                      <div className="text-xs text-gray-500 mt-1">{audio.duration}</div>
-                    </div>
-                  </div>
-                ))}
+            <div>
+              <div className={cn("text-sm", selectedItem === category.id ? "font-medium" : "")}>
+                {category.title.english}
               </div>
-            )}
+              <div className="tibetan text-xs text-gray-500">
+                {category.title.tibetan}
+              </div>
+              {category.duration && (
+                <div className="text-xs text-gray-500 mt-1">{category.duration}</div>
+              )}
+            </div>
           </div>
-        ))}
+        </div>
+        
+        {/* Children */}
+        {category.children && expandedItems.includes(category.id) && (
+          <div>
+            {renderCatalogItems(category.children, level + 1)}
+          </div>
+        )}
+      </div>
+    ));
+  };
+
+  return (
+    <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-5">
+      <h2 className="text-lg font-semibold text-gray-800 mb-4">Audio Catalog</h2>
+      <div className="space-y-1 max-h-[70vh] overflow-y-auto pr-2">
+        {renderCatalogItems(items)}
       </div>
     </div>
   );

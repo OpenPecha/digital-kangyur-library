@@ -4,21 +4,10 @@ import { Play, Pause, SkipBack, SkipForward, Volume2, VolumeX } from 'lucide-rea
 import { Slider } from '@/components/ui/slider';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
-
-type AudioText = {
-  id: string;
-  title: {
-    tibetan: string;
-    english: string;
-  };
-  category: string;
-  description: string;
-  duration: string;
-  audioUrl: string;
-};
+import { CatalogItem } from '@/types/catalog';
 
 interface AudioPlayerProps {
-  audio: AudioText;
+  audio: CatalogItem & { audioUrl: string; duration?: string; };
 }
 
 const AudioPlayer: React.FC<AudioPlayerProps> = ({ audio }) => {
