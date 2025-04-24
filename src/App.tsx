@@ -1,9 +1,10 @@
-
+import { QueryClientProvider, QueryClient } from "@tanstack/react-query";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { LocalizationProvider } from "./hooks/useLocalization";
+import { TooltipProvider } from "@/components/ui/tooltip";
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
-import { TooltipProvider } from "@/components/ui/tooltip";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+
 import Index from "./pages/Index";
 import Catalog from "./pages/Catalog";
 import NotFound from "./pages/NotFound";
@@ -21,7 +22,8 @@ import UrgaDetail from "./pages/UrgaDetail";
 import About from "./pages/About";
 import Audio from "./pages/Audio";
 import VideoPage from "./pages/Video";
-import { LocalizationProvider } from "./hooks/useLocalization";
+import Dashboard from "./pages/admin/Dashboard";
+import KarchagAdmin from "./pages/admin/KarchagAdmin";
 
 const queryClient = new QueryClient();
 
@@ -49,6 +51,8 @@ const App = () => (
             <Route path="/audio" element={<Audio />} />
             <Route path="/video" element={<VideoPage />} />
             <Route path="/about" element={<About />} />
+            <Route path="/admin" element={<Dashboard />} />
+            <Route path="/admin/karchag" element={<KarchagAdmin />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </BrowserRouter>
