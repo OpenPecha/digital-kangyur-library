@@ -25,6 +25,8 @@ import VideoPage from "./pages/Video";
 import Dashboard from "./pages/admin/Dashboard";
 import KarchagAdmin from "./pages/admin/KarchagAdmin";
 import AudioAdmin from "./pages/admin/AudioAdmin";
+import NewsAdmin from "./pages/admin/NewsAdmin";
+import VideoAdmin from "./pages/admin/VideoAdmin";
 
 const queryClient = new QueryClient();
 
@@ -55,6 +57,8 @@ const App = () => (
             <Route path="/admin" element={<Dashboard />} />
             <Route path="/admin/karchag" element={<KarchagAdmin />} />
             <Route path="/admin/audio" element={<AudioAdmin />} />
+            <Route path="/admin/news" element={<NewsAdmin />} />
+            <Route path="/admin/video" element={<VideoAdmin />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </BrowserRouter>
