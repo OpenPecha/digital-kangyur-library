@@ -24,6 +24,7 @@ import Audio from "./pages/Audio";
 import VideoPage from "./pages/Video";
 import Dashboard from "./pages/admin/Dashboard";
 import KarchagAdmin from "./pages/admin/KarchagAdmin";
+import AudioAdmin from "./pages/admin/AudioAdmin";
 
 const queryClient = new QueryClient();
 
@@ -53,6 +54,7 @@ const App = () => (
             <Route path="/about" element={<About />} />
             <Route path="/admin" element={<Dashboard />} />
             <Route path="/admin/karchag" element={<KarchagAdmin />} />
+            <Route path="/admin/audio" element={<AudioAdmin />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </BrowserRouter>
