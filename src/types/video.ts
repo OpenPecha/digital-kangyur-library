@@ -7,4 +7,5 @@ export interface VideoEntry {
   englishDescription: string;
   createdAt: string;
   youtubeUrl: string;
+  thumbnailUrl?: string;
 }

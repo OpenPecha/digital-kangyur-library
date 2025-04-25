@@ -6,4 +6,5 @@ export interface NewsEntry {
   tibetanDescription: string;
   englishDescription: string;
   createdAt: string;
+  thumbnailUrl?: string;
 }

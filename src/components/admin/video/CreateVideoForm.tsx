@@ -10,9 +10,23 @@ import {
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { useState } from "react";
+import { Label } from "@/components/ui/label";
+import { Image } from "lucide-react";
 
 export function CreateVideoForm() {
   const [open, setOpen] = useState(false);
+  const [thumbnailPreview, setThumbnailPreview] = useState<string | null>(null);
+
+  const handleThumbnailChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setThumbnailPreview(reader.result as string);
+      };
+      reader.readAsDataURL(file);
+    }
+  };
 
   return (
     <Dialog open={open} onOpenChange={setOpen}>
@@ -35,6 +49,32 @@ export function CreateVideoForm() {
             </div>
           </div>
           <Input placeholder="YouTube URL" />
+          <div className="space-y-2">
+            <Label htmlFor="thumbnail">Thumbnail Image</Label>
+            <div className="flex items-center gap-4">
+              <Input
+                id="thumbnail"
+                type="file"
+                accept="image/*"
+                onChange={handleThumbnailChange}
+                className="flex-1"
+              />
+              {thumbnailPreview && (
+                <div className="w-24 h-24 relative">
+                  <img
+                    src={thumbnailPreview}
+                    alt="Thumbnail preview"
+                    className="w-full h-full object-cover rounded"
+                  />
+                </div>
+              )}
+              {!thumbnailPreview && (
+                <div className="w-24 h-24 bg-muted rounded flex items-center justify-center">
+                  <Image className="w-8 h-8 text-muted-foreground" />
+                </div>
+              )}
+            </div>
+          </div>
           <Button type="submit" className="w-full">Create Video Entry</Button>
         </form>
       </DialogContent>
