@@ -1,24 +1,30 @@
+
 import React, { useState, useEffect } from 'react';
 import { useSearchParams, Link } from 'react-router-dom';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import CatalogSearch from '@/components/catalog/CatalogSearch';
 import KarchagFrame from '@/components/catalog/KarchagFrame';
+import KarchagTextCardList from '@/components/catalog/KarchagTextCardList';
 import { catalogData } from '@/data/catalogData';
 import { filterCatalogItems, findItemInTree } from '@/utils/catalogUtils';
+import { paginateItems } from '@/utils/paginationUtils';
 
 const Catalog = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedItem, setSelectedItem] = useState<string | null>(null);
   const [searchParams, setSearchParams] = useSearchParams();
+  const [currentPage, setCurrentPage] = useState(1);
   
-  // Get category from URL params
+  // Get URL parameters
   const category = searchParams.get('category');
+  const page = searchParams.get('page');
   
   // Parse URL parameters on component mount
   useEffect(() => {
     const queryParam = searchParams.get('q');
     const itemParam = searchParams.get('item');
+    const pageParam = searchParams.get('page');
     
     if (queryParam) {
       setSearchQuery(queryParam);
@@ -27,9 +33,15 @@ const Catalog = () => {
     if (itemParam) {
       setSelectedItem(itemParam);
     }
+    
+    if (pageParam) {
+      setCurrentPage(parseInt(pageParam, 10));
+    } else {
+      setCurrentPage(1);
+    }
   }, [searchParams]);
   
-  // Update URL when search or selection changes
+  // Update URL when search, selection, or page changes
   useEffect(() => {
     const newParams = new URLSearchParams(searchParams);
     
@@ -45,8 +57,24 @@ const Catalog = () => {
       newParams.delete('item');
     }
     
+    if (currentPage > 1) {
+      newParams.set('page', currentPage.toString());
+    } else {
+      newParams.delete('page');
+    }
+    
     setSearchParams(newParams);
-  }, [searchQuery, selectedItem]);
+  }, [searchQuery, selectedItem, currentPage]);
+  
+  // Handle page change
+  const handlePageChange = (page: number) => {
+    setCurrentPage(page);
+    // Scroll to top of the page
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    });
+  };
   
   // Filter the catalog data based on search and category
   const getFilteredCatalog = () => {
@@ -72,9 +100,39 @@ const Catalog = () => {
     ? findItemInTree(catalogData, selectedItem)
     : null;
   
+  // Generate mock text entries for the selected item
+  const getTextEntriesForSelectedItem = () => {
+    if (!selectedItemDetails) return [];
+    
+    // For demonstration, create mock entries based on the count in the selected item
+    const count = selectedItemDetails.count || 10;
+    const mockTexts = Array.from({ length: count }).map((_, index) => ({
+      id: `${selectedItem}-text-${index + 1}`,
+      title: {
+        tibetan: `${selectedItemDetails.title.tibetan} ${index + 1}`,
+        english: `${selectedItemDetails.title.english} Text ${index + 1}`,
+        sanskrit: index % 2 === 0 ? `Sanskrit Title ${index + 1}` : undefined,
+      },
+      category: selectedItemDetails.title.english,
+      pages: Math.floor(Math.random() * 100) + 10,
+      volume: `${Math.floor(Math.random() * 10) + 1}`,
+      description: `This is a sample text from the ${selectedItemDetails.title.english} category. Text number ${index + 1}.`,
+      keywords: ["buddhism", selectedItemDetails.id, `keyword-${index}`]
+    }));
+    
+    return mockTexts;
+  };
+  
+  // Get paginated text entries for the selected item
+  const getTextCardItems = () => {
+    const allTexts = getTextEntriesForSelectedItem();
+    return paginateItems(allTexts, currentPage, 10);
+  };
+  
   // Handler for selecting an item
   const handleItemSelect = (id: string) => {
     setSelectedItem(id === selectedItem ? null : id);
+    setCurrentPage(1); // Reset to first page when changing selection
   };
   
   // Handler for clearing the category filter
@@ -158,6 +216,11 @@ const Catalog = () => {
     
     return subsections;
   };
+  
+  // Get paginated data for display
+  const { items: paginatedItems, pagination } = selectedItem 
+    ? getTextCardItems() 
+    : { items: [], pagination: { currentPage: 1, totalPages: 1, totalItems: 0, itemsPerPage: 10, hasNextPage: false, hasPrevPage: false } };
   
   return (
     <div className="min-h-screen bg-white w-full">
@@ -343,16 +406,26 @@ const Catalog = () => {
             </div>
           )}
           
-          {/* Render catalog items */}
-          <div className="space-y-2">
-            {filteredCatalog.map(item => renderCatalogItem(item))}
-            
-            {filteredCatalog.length === 0 && (
-              <div className="text-center py-12">
-                <p className="text-gray-500 text-lg">No items found</p>
-              </div>
-            )}
-          </div>
+          {/* Display text cards if a specific item is selected */}
+          {selectedItem && paginatedItems.length > 0 ? (
+            <KarchagTextCardList
+              items={paginatedItems}
+              currentPage={pagination.currentPage}
+              totalPages={pagination.totalPages}
+              onPageChange={handlePageChange}
+            />
+          ) : (
+            /* Otherwise render catalog items */
+            <div className="space-y-2">
+              {filteredCatalog.map(item => renderCatalogItem(item))}
+              
+              {filteredCatalog.length === 0 && (
+                <div className="text-center py-12">
+                  <p className="text-gray-500 text-lg">No items found</p>
+                </div>
+              )}
+            </div>
+          )}
         </div>
       )}
       
