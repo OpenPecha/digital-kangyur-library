@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Search } from 'lucide-react';
 
@@ -15,7 +14,6 @@ const CatalogSearch = ({
     <div className="bg-gradient-to-r from-kangyur-orange to-kangyur-gold text-white py-9 pt-28 relative overflow-hidden">      
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="max-w-md mx-auto">
-          <h2 className="text-center text-3xl font-serif mb-6 text-white">Search the Karchag</h2>
           <div className="relative">
             <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
               <Search className="w-5 h-5 text-white/60" />
