@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Menu, X, ChevronDown, Globe } from 'lucide-react';
@@ -7,7 +6,7 @@ import { useLocalization } from '@/hooks/useLocalization';
 import LocalizedText from './LocalizedText';
 
 type NavItem = {
-  labelKey: 'home' | 'history' | 'catalog' | 'audio' | 'video' | 'texts' | 'news' | 'aboutUs';
+  labelKey: 'home' | 'history' | 'catalog' | 'audio' | 'video' | 'texts' | 'news' | 'aboutUs' | 'discourses' | 'discipline' | 'prajnaparamita' | 'avatamsaka' | 'ratnakuta' | 'sutras' | 'tantra';
   href: string;
   children?: NavItem[];
 };
@@ -50,6 +49,7 @@ const navItems: NavItem[] = [
 const Navbar = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
+  const [activeSubDropdown, setActiveSubDropdown] = useState<string | null>(null);
   const [scrolled, setScrolled] = useState(false);
   const location = useLocation();
   const { language, setLanguage } = useLocalization();
@@ -64,13 +64,26 @@ const Navbar = () => {
 
   useEffect(() => {
     setIsMobileMenuOpen(false);
+    setActiveDropdown(null);
+    setActiveSubDropdown(null);
   }, [location.pathname]);
 
   const toggleDropdown = (label: string) => {
     if (activeDropdown === label) {
       setActiveDropdown(null);
+      setActiveSubDropdown(null);
     } else {
       setActiveDropdown(label);
+      setActiveSubDropdown(null);
+    }
+  };
+
+  const toggleSubDropdown = (e: React.MouseEvent, label: string) => {
+    e.stopPropagation();
+    if (activeSubDropdown === label) {
+      setActiveSubDropdown(null);
+    } else {
+      setActiveSubDropdown(label);
     }
   };
 
@@ -96,18 +109,75 @@ const Navbar = () => {
             <nav className="hidden md:flex items-center space-x-1">
               {navItems.map(item => (
                 <div key={item.labelKey} className="relative group">
-                  <Link to={item.href} className={cn("px-3 py-2 text-base font-medium rounded-md text-transition flex items-center", location.pathname === item.href ? "text-kangyur-orange" : "text-kangyur-dark hover:text-kangyur-orange")} onMouseEnter={() => item.children && setActiveDropdown(item.labelKey)} onMouseLeave={() => item.children && setActiveDropdown(null)} onClick={() => !item.children && setActiveDropdown(null)}>
+                  <Link 
+                    to={item.href} 
+                    className={cn(
+                      "px-3 py-2 text-base font-medium rounded-md text-transition flex items-center", 
+                      location.pathname === item.href ? "text-kangyur-orange" : "text-kangyur-dark hover:text-kangyur-orange"
+                    )}
+                    onMouseEnter={() => item.children && item.labelKey !== "catalog" && setActiveDropdown(item.labelKey)} 
+                    onMouseLeave={() => item.children && item.labelKey !== "catalog" && setActiveDropdown(null)}
+                  >
                     <LocalizedText textKey={item.labelKey} />
-                    {item.children && <ChevronDown className="ml-1 w-4 h-4" />}
+                    {item.children && item.labelKey !== "catalog" && <ChevronDown className="ml-1 w-4 h-4" />}
                   </Link>
 
-                  {item.children && <div className={cn("absolute left-0 mt-1 w-56 rounded-md shadow-lg glass overflow-hidden transition-all duration-300 origin-top-left", activeDropdown === item.labelKey ? "opacity-100 scale-100" : "opacity-0 scale-95 pointer-events-none")} onMouseEnter={() => setActiveDropdown(item.labelKey)} onMouseLeave={() => setActiveDropdown(null)}>
-                      <div className="py-1">
-                        {item.children.map(child => <Link key={child.labelKey} to={child.href} className="block px-4 py-2 text-base text-kangyur-dark hover:bg-kangyur-orange/10 hover:text-kangyur-orange transition-colors">
-                            <LocalizedText textKey={child.labelKey} />
-                          </Link>)}
+                  {item.children && item.labelKey !== "catalog" && (
+                    <div 
+                      className={cn("absolute left-0 mt-1 w-56 rounded-md shadow-lg glass overflow-hidden transition-all duration-300 origin-top-left z-10", 
+                        activeDropdown === item.labelKey ? "opacity-100 scale-100" : "opacity-0 scale-95 pointer-events-none"
+                      )} 
+                      onMouseEnter={() => setActiveDropdown(item.labelKey)} 
+                      onMouseLeave={() => setActiveDropdown(null)}
+                    >
+                      <div className="py-1 bg-white/95 backdrop-blur-sm">
+                        {item.children.map(child => (
+                          <div key={child.labelKey} className="relative group">
+                            {child.children ? (
+                              <>
+                                <div 
+                                  className="flex justify-between items-center px-4 py-2 text-base text-kangyur-dark hover:bg-kangyur-orange/10 hover:text-kangyur-orange transition-colors cursor-pointer"
+                                  onMouseEnter={() => setActiveSubDropdown(child.labelKey)}
+                                  onMouseLeave={() => setActiveSubDropdown(null)}
+                                >
+                                  <LocalizedText textKey={child.labelKey} />
+                                  <ChevronDown className="ml-1 w-4 h-4 rotate-[-90deg]" />
+                                
+                                  {/* Sub-dropdown menu */}
+                                  {child.children && (
+                                    <div 
+                                      className={cn("absolute left-full top-0 w-52 rounded-md shadow-lg glass overflow-hidden transition-all duration-300 origin-top-left bg-white/95 backdrop-blur-sm",
+                                        activeSubDropdown === child.labelKey ? "opacity-100 scale-100" : "opacity-0 scale-95 pointer-events-none"
+                                      )}
+                                    >
+                                      <div className="py-1">
+                                        {child.children.map(subChild => (
+                                          <Link
+                                            key={subChild.labelKey}
+                                            to={subChild.href}
+                                            className="block px-4 py-2 text-base text-kangyur-dark hover:bg-kangyur-orange/10 hover:text-kangyur-orange transition-colors"
+                                          >
+                                            <LocalizedText textKey={subChild.labelKey} />
+                                          </Link>
+                                        ))}
+                                      </div>
+                                    </div>
+                                  )}
+                                </div>
+                              </>
+                            ) : (
+                              <Link 
+                                to={child.href} 
+                                className="block px-4 py-2 text-base text-kangyur-dark hover:bg-kangyur-orange/10 hover:text-kangyur-orange transition-colors"
+                              >
+                                <LocalizedText textKey={child.labelKey} />
+                              </Link>
+                            )}
+                          </div>
+                        ))}
                       </div>
-                    </div>}
+                    </div>
+                  )}
                 </div>
               ))}
 
@@ -129,20 +199,71 @@ const Navbar = () => {
           <nav className="flex flex-col space-y-1">
             {navItems.map(item => (
               <div key={item.labelKey} className="py-1">
-                {item.children ? <>
-                    <button onClick={() => toggleDropdown(item.labelKey)} className={cn("w-full flex justify-between items-center px-3 py-2 text-base font-medium rounded-md", activeDropdown === item.labelKey ? "text-kangyur-orange bg-kangyur-orange/10" : "text-kangyur-dark")}>
+                {item.children && item.labelKey !== "catalog" ? (
+                  <>
+                    <button 
+                      onClick={() => toggleDropdown(item.labelKey)} 
+                      className={cn("w-full flex justify-between items-center px-3 py-2 text-base font-medium rounded-md", 
+                        activeDropdown === item.labelKey ? "text-kangyur-orange bg-kangyur-orange/10" : "text-kangyur-dark"
+                      )}
+                    >
                       <LocalizedText textKey={item.labelKey} />
                       <ChevronDown className={cn("w-5 h-5 transition-transform", activeDropdown === item.labelKey ? "rotate-180" : "")} />
                     </button>
 
-                    <div className={cn("mt-1 ml-4 space-y-1 transition-all duration-200", activeDropdown === item.labelKey ? "max-h-96 opacity-100" : "max-h-0 opacity-0 overflow-hidden")}>
-                      {item.children.map(child => <Link key={child.labelKey} to={child.href} className="block px-3 py-2 text-base font-medium rounded-md text-kangyur-dark hover:text-kangyur-orange hover:bg-kangyur-orange/10">
-                          <LocalizedText textKey={child.labelKey} />
-                        </Link>)}
+                    <div className={cn("mt-1 ml-4 space-y-1 transition-all duration-200", 
+                      activeDropdown === item.labelKey ? "max-h-96 opacity-100" : "max-h-0 opacity-0 overflow-hidden"
+                    )}>
+                      {item.children.map(child => (
+                        <div key={child.labelKey}>
+                          {child.children ? (
+                            <>
+                              <button 
+                                onClick={(e) => toggleSubDropdown(e, child.labelKey)} 
+                                className={cn("w-full flex justify-between items-center px-3 py-2 text-base font-medium rounded-md", 
+                                  activeSubDropdown === child.labelKey ? "text-kangyur-orange bg-kangyur-orange/10" : "text-kangyur-dark"
+                                )}
+                              >
+                                <LocalizedText textKey={child.labelKey} />
+                                <ChevronDown className={cn("w-5 h-5 transition-transform", activeSubDropdown === child.labelKey ? "rotate-180" : "")} />
+                              </button>
+
+                              <div className={cn("mt-1 ml-4 space-y-1 transition-all duration-200", 
+                                activeSubDropdown === child.labelKey ? "max-h-96 opacity-100" : "max-h-0 opacity-0 overflow-hidden"
+                              )}>
+                                {child.children.map(subChild => (
+                                  <Link 
+                                    key={subChild.labelKey} 
+                                    to={subChild.href} 
+                                    className="block px-3 py-2 text-base font-medium rounded-md text-kangyur-dark hover:text-kangyur-orange hover:bg-kangyur-orange/10"
+                                  >
+                                    <LocalizedText textKey={subChild.labelKey} />
+                                  </Link>
+                                ))}
+                              </div>
+                            </>
+                          ) : (
+                            <Link 
+                              to={child.href} 
+                              className="block px-3 py-2 text-base font-medium rounded-md text-kangyur-dark hover:text-kangyur-orange hover:bg-kangyur-orange/10"
+                            >
+                              <LocalizedText textKey={child.labelKey} />
+                            </Link>
+                          )}
+                        </div>
+                      ))}
                     </div>
-                  </> : <Link to={item.href} className={cn("block px-3 py-2 text-base font-medium rounded-md", location.pathname === item.href ? "text-kangyur-orange bg-kangyur-orange/10" : "text-kangyur-dark hover:text-kangyur-orange hover:bg-kangyur-orange/10")}>
+                  </>
+                ) : (
+                  <Link 
+                    to={item.href} 
+                    className={cn("block px-3 py-2 text-base font-medium rounded-md", 
+                      location.pathname === item.href ? "text-kangyur-orange bg-kangyur-orange/10" : "text-kangyur-dark hover:text-kangyur-orange hover:bg-kangyur-orange/10"
+                    )}
+                  >
                     <LocalizedText textKey={item.labelKey} />
-                  </Link>}
+                  </Link>
+                )}
               </div>
             ))}
 

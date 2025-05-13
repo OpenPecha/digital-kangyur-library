@@ -135,8 +135,16 @@ const Catalog = () => {
     
     // For demonstration, create mock entries based on the count of the discipline category
     const count = disciplineItem.count || 30; // Use the actual count or default to 30
+    
+    // Create sample text IDs that will work with the TextDetail page
+    const textIds = [
+      'golden-sutra', // This ID matches the existing textData in TextDetail.tsx
+      'vinaya-sutra',
+      'discipline-rules'
+    ];
+    
     const mockTexts = Array.from({ length: count }).map((_, index) => ({
-      id: `discipline-text-${index + 1}`,
+      id: index < textIds.length ? textIds[index] : `discipline-text-${index + 1}`,
       title: {
         tibetan: `འདུལ་བ་གཞུང་ ${index + 1}`,
         english: `Discipline Text ${index + 1}`,

@@ -1,46 +1,7 @@
-
 import { CatalogItem } from '@/types/catalog';
 
-// Catalog data with structure: Discipline, Discourses, Tantra, Dharani
+// Catalog data with structure: Discourses (with subcategories), Tantra
 export const catalogData: CatalogItem[] = [
-  {
-    id: 'discipline',
-    title: {
-      tibetan: 'འདུལ་བ།',
-      english: 'Discipline'
-    },
-    description: 'The section on monastic discipline, containing rules and procedures for the Buddhist Sangha.',
-    count: 13,
-    children: [
-      {
-        id: 'vinaya-vastu',
-        title: {
-          tibetan: 'འདུལ་བ་ལུང་གཞི།',
-          english: 'Vinaya Vastu'
-        },
-        description: 'Foundation of the monastic discipline',
-        count: 4
-      },
-      {
-        id: 'vinaya-vibhanga',
-        title: {
-          tibetan: 'འདུལ་བ་རྣམ་འབྱེད།',
-          english: 'Vinaya Vibhanga'
-        },
-        description: 'Analysis of the monastic rules',
-        count: 5
-      },
-      {
-        id: 'vinaya-ksudrakavastu',
-        title: {
-          tibetan: 'འདུལ་བ་ཕྲན་ཚེགས་ཀྱི་གཞི།',
-          english: 'Vinaya Ksudrakavastu'
-        },
-        description: 'Minor rules and procedures',
-        count: 4
-      }
-    ]
-  },
   {
     id: 'discourses',
     title: {
@@ -48,8 +9,46 @@ export const catalogData: CatalogItem[] = [
       english: 'Discourses'
     },
     description: 'The section containing Buddha\'s discourses and teachings.',
-    count: 362,
+    count: 375, // Updated to include discipline texts
     children: [
+      {
+        id: 'discipline',
+        title: {
+          tibetan: 'འདུལ་བ།',
+          english: 'Discipline'
+        },
+        description: 'The section on monastic discipline, containing rules and procedures for the Buddhist Sangha.',
+        count: 13,
+        children: [
+          {
+            id: 'vinaya-vastu',
+            title: {
+              tibetan: 'འདུལ་བ་ལུང་གཞི།',
+              english: 'Vinaya Vastu'
+            },
+            description: 'Foundation of the monastic discipline',
+            count: 4
+          },
+          {
+            id: 'vinaya-vibhanga',
+            title: {
+              tibetan: 'འདུལ་བ་རྣམ་འབྱེད།',
+              english: 'Vinaya Vibhanga'
+            },
+            description: 'Analysis of the monastic rules',
+            count: 5
+          },
+          {
+            id: 'vinaya-ksudrakavastu',
+            title: {
+              tibetan: 'འདུལ་བ་ཕྲན་ཚེགས་ཀྱི་གཞི།',
+              english: 'Vinaya Ksudrakavastu'
+            },
+            description: 'Minor rules and procedures',
+            count: 4
+          }
+        ]
+      },
       {
         id: 'prajnaparamita',
         title: {
@@ -148,7 +147,7 @@ export const catalogData: CatalogItem[] = [
         id: 'general-sutras',
         title: {
           tibetan: 'མདོ་སྡེ།',
-          english: 'General Sūtras'
+          english: 'Sūtras'
         },
         description: 'General collection of Mahayana sutras not included in other sections.',
         count: 270,
@@ -199,55 +198,17 @@ export const catalogData: CatalogItem[] = [
           tibetan: 'རྣལ་འབྱོར་རྒྱུད།',
           english: 'Yoga Tantra'
         },
-        description: 'Yoga tantras emphasizing internal practices',
-        count: 64
+        description: 'Tantras emphasizing internal meditation and deity yoga',
+        count: 31
       },
       {
         id: 'tantra-anuttarayoga',
         title: {
-          tibetan: 'བླ་མེད་རྒྱུད།',
+          tibetan: 'རྣལ་འབྱོར་བླ་ན་མེད་པའི་རྒྱུད།',
           english: 'Anuttarayoga Tantra'
         },
-        description: 'Highest yoga tantras with advanced practices',
-        count: 167
-      }
-    ]
-  },
-  {
-    id: 'dharani',
-    title: {
-      tibetan: 'གཟུངས།',
-      english: 'Dharani'
-    },
-    description: 'Sacred mantras and incantations for protection, healing, and spiritual awakening.',
-    count: 84,
-    children: [
-      {
-        id: 'dharani-protection',
-        title: {
-          tibetan: 'སྲུང་བའི་གཟུངས།',
-          english: 'Protection Dharanis'
-        },
-        description: 'Mantras for protection from obstacles and negative influences',
-        count: 34
-      },
-      {
-        id: 'dharani-healing',
-        title: {
-          tibetan: 'ནད་འཕྲོག་གཟུངས།',
-          english: 'Healing Dharanis'
-        },
-        description: 'Mantras for physical and mental healing',
-        count: 25
-      },
-      {
-        id: 'dharani-wisdom',
-        title: {
-          tibetan: 'ཡེ་ཤེས་ཀྱི་གཟུངས།',
-          english: 'Wisdom Dharanis'
-        },
-        description: 'Mantras for developing wisdom and spiritual insight',
-        count: 25
+        description: 'Highest yoga tantras with advanced completion stage practices',
+        count: 200
       }
     ]
   }

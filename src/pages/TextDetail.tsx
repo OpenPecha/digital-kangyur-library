@@ -10,6 +10,7 @@ import { findItemInTree } from '@/utils/catalogUtils';
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 
 // Define the metadata structure
 interface TextMetadata {
@@ -78,7 +79,7 @@ const textData = {
   }],
   // Add the new collated text and English translation content
   collatedText: `༄། །བྱང་ཆུབ་སེམས་དཔའི་སྤྱོད་པ་ལ་འཇུག་པ་བཞུགས་སོ། །
-༄༅༅། །རྒྱ་གར་སྐད་དུ། བོ་<«Q»བོད་>དྷི་:སཏྭ་ཙརྱ་<«I»སཏྭ་ཙཪྻ་«N»སཏྭ་ཙརྱྭ་«Q»སཏྭ་ཙམླཻ་>ཨ་བ་ཏཱ་<«C»ཏ་>ར།
+༄༅༅། །རྒྱ་གར་སྐད་དུ། བོ་<«Q»བོད་>དྷི་:སཏྭ་ཙརྱ་<«I»སཏྭ་ཙཪྻ་«N»སཏྭ་ཙརྨ་«Q»སཏྭ་ཙམླཻ་>ཨ་བ་ཏཱ་<«C»ཏ་>ར།
  བོད་སྐད་དུ། བྱང་ཆུབ་སེམས་དཔའི་སྤྱོད་པ་ལ་འཇུག་པ།
  སངས་རྒྱས་དང་བྱང་ཆུབ་སེམས་དཔའ་ཐམས་ཅད་ལ་ཕྱག་འཚལ་ལོ། །
 བདེ་གཤེགས་ཆོས་ཀྱི་སྐུ་མངའ་སྲས་བཅས་དང་། །ཕྱག་འོས་ཀུན་ལའང་གུས་པར་<«F,G,N,Q»པས་>ཕྱག་འཚལ་ཏེ། །བདེ་གཤེགས་སྲས་ཀྱི་སྡོམ་ལ་འཇུག་པ་ནི། །ལུང་བཞིན་མདོར་བསྡུས་ནས་ནི་བརྗོད་པར་བྱ། །
@@ -143,7 +144,7 @@ const TextDetail = () => {
   } = useParams<{
     id: string;
   }>();
-  const [expandedItems, setExpandedItems] = useState<string[]>(['discourses', 'general-sutras']);
+  const [expandedItems, setExpandedItems] = useState<string[]>(['discourses', 'discipline', 'general-sutras']);
   const [selectedItem, setSelectedItem] = useState<string | null>('golden-sutra');
   const [showCatalog, setShowCatalog] = useState(true);
   const [editionTab, setEditionTab] = useState<string>('derge');
@@ -181,17 +182,35 @@ const TextDetail = () => {
             <div className={cn("transition-all duration-300", showCatalog ? "lg:col-span-3" : "lg:col-span-4")}>
               <Card className="border border-kangyur-orange/10 rounded-xl shadow-sm">
                 <CardContent className="p-0">
-                  <Tabs defaultValue="summary" className="w-full">
-                    <TabsList className="w-full grid grid-cols-4 border-b">
-                      <TabsTrigger value="summary" className="rounded-none">Summary</TabsTrigger>
+                  <Tabs defaultValue="metadata" className="w-full">
+                    <TabsList className="w-full grid grid-cols-2 border-b">
                       <TabsTrigger value="metadata" className="rounded-none">Metadata</TabsTrigger>
-                      <TabsTrigger value="collated-text" className="rounded-none">Collated Text</TabsTrigger>
-                      <TabsTrigger value="english-translation" className="rounded-none">English Translation</TabsTrigger>
+                      <TabsTrigger value="summary" className="rounded-none">Summary</TabsTrigger>
                     </TabsList>
                     
-                    {/* Tab 1: Summary - Text content sections with title added above the first section */}
+                    {/* Tab 1: Metadata */}
+                    <TabsContent value="metadata" className="p-6">
+                      <div className="flex flex-col gap-6">
+                        {/* General metadata section */}
+                        <div className="w-full space-y-5">
+                          <h3 className="text-xl font-semibold text-kangyur-maroon mb-4">General Information</h3>
+                          <table className="w-full border-collapse">
+                            <tbody>
+                              {textData.metadata.filter(item => item.group === 'general').map((item) => (
+                                <tr key={item.key} className="border-b border-gray-200">
+                                  <td className="py-3 pr-4 font-medium text-gray-700 align-top w-1/3">{item.label}:</td>
+                                  <td className="py-3 text-gray-600">{item.value}</td>
+                                </tr>
+                              ))}
+                            </tbody>
+                          </table>
+                        </div>
+                      </div>
+                    </TabsContent>
+                    
+                    {/* Tab 2: Summary - Text content sections with title */}
                     <TabsContent value="summary" className="p-6">
-                      <div className="flex flex-col lg:flex-row gap-8">
+                      <div className="flex flex-col gap-8">
                         {/* Text content (sections) */}
                         <div className="w-full">
                           {/* Add title at the top of the summary content */}
@@ -201,102 +220,20 @@ const TextDetail = () => {
                             <h3 className="text-xl font-medium mt-1 text-kangyur-dark">{textData.title.english}</h3>
                           </div>
                           
-                          {/* Render text sections */}
-                          {textData.sections.map(section => <div key={section.id} className="mb-8 last:mb-0">
-                              <h3 className="tibetan text-xl font-bold text-kangyur-maroon mb-3">
-                                {section.title}
-                              </h3>
-                              <div className="tibetan text-lg leading-relaxed whitespace-pre-line">
-                                {section.content}
-                              </div>
-                            </div>)}
+                          {/* Render text sections as accordion */}
+                          <Accordion type="single" collapsible className="w-full">
+                            {textData.sections.map(section => (
+                              <AccordionItem key={section.id} value={section.id} className="border-b border-kangyur-orange/20">
+                                <AccordionTrigger className="tibetan text-xl font-bold text-kangyur-maroon hover:text-kangyur-orange hover:no-underline">
+                                  {section.title}
+                                </AccordionTrigger>
+                                <AccordionContent className="tibetan text-lg leading-relaxed whitespace-pre-line">
+                                  {section.content}
+                                </AccordionContent>
+                              </AccordionItem>
+                            ))}
+                          </Accordion>
                         </div>
-                      </div>
-                    </TabsContent>
-                    
-                    {/* Tab 2: Metadata - Keep the rest of the tabs the same */}
-                    <TabsContent value="metadata" className="p-6">
-                      <div className="flex flex-col gap-8">
-                        {/* General Metadata Section */}
-                        <div>
-                          <h3 className="text-xl font-semibold text-kangyur-maroon mb-4">General Metadata</h3>
-                          <div className="overflow-hidden rounded-lg border border-kangyur-orange/10">
-                            <table className="min-w-full divide-y divide-kangyur-orange/10">
-                              <tbody className="divide-y divide-kangyur-orange/10">
-                                {textData.metadata.filter(item => item.group === 'general').map(item => <tr key={item.key} className="hover:bg-kangyur-cream/20">
-                                      <td className="tibetan px-4 py-3 text-base font-medium text-kangyur-maroon whitespace-nowrap">
-                                        {item.label}
-                                      </td>
-                                      <td className="tibetan px-4 py-3 text-base text-kangyur-dark">
-                                        {item.value}
-                                      </td>
-                                    </tr>)}
-                              </tbody>
-                            </table>
-                          </div>
-                        </div>
-                        
-                        {/* Edition-specific Metadata Section */}
-                        <div>
-                          <h3 className="text-xl font-semibold text-kangyur-maroon mb-4">Text Locations</h3>
-                          
-                          <Tabs value={editionTab} onValueChange={setEditionTab} className="w-full">
-                            <TabsList className="mb-4">
-                              {textData.editionMetadata.map(edition => <TabsTrigger key={edition.id} value={edition.id} className="tibetan">
-                                  {edition.name}
-                                </TabsTrigger>)}
-                            </TabsList>
-                            
-                            {textData.editionMetadata.map(edition => <TabsContent key={edition.id} value={edition.id}>
-                                <div className="overflow-hidden rounded-lg border border-kangyur-orange/10">
-                                  <table className="min-w-full divide-y divide-kangyur-orange/10">
-                                    <tbody className="divide-y divide-kangyur-orange/10">
-                                      <tr className="hover:bg-kangyur-cream/20">
-                                        <td className="tibetan px-4 py-3 text-base font-medium text-kangyur-maroon whitespace-nowrap">
-                                          པོད་རྟགས།
-                                        </td>
-                                        <td className="tibetan px-4 py-3 text-base text-kangyur-dark">
-                                          {edition.volume}
-                                        </td>
-                                      </tr>
-                                      <tr className="hover:bg-kangyur-cream/20">
-                                        <td className="tibetan px-4 py-3 text-base font-medium text-kangyur-maroon whitespace-nowrap">
-                                          ཤོག་ལྡེབ།
-                                        </td>
-                                        <td className="tibetan px-4 py-3 text-base text-kangyur-dark">
-                                          {edition.folio}
-                                        </td>
-                                      </tr>
-                                      <tr className="hover:bg-kangyur-cream/20">
-                                        <td className="tibetan px-4 py-3 text-base font-medium text-kangyur-maroon whitespace-nowrap">
-                                          ཤོག་ངོས།
-                                        </td>
-                                        <td className="tibetan px-4 py-3 text-base text-kangyur-dark">
-                                          {edition.page}
-                                        </td>
-                                      </tr>
-                                    </tbody>
-                                  </table>
-                                </div>
-                              </TabsContent>)}
-                          </Tabs>
-                        </div>
-                      </div>
-                    </TabsContent>
-                    
-                    {/* Tab 3: Collated Text */}
-                    <TabsContent value="collated-text" className="p-6">
-                      <h2 className="text-2xl font-bold text-kangyur-maroon mb-4">Collated Edition</h2>
-                      <div className="tibetan text-lg leading-relaxed whitespace-pre-line bg-gray-50 p-6 rounded-lg border border-gray-200">
-                        {textData.collatedText}
-                      </div>
-                    </TabsContent>
-                    
-                    {/* Tab 4: English Translation */}
-                    <TabsContent value="english-translation" className="p-6">
-                      <h2 className="text-2xl font-bold text-kangyur-maroon mb-4">English Translation</h2>
-                      <div className="text-lg leading-relaxed whitespace-pre-line bg-gray-50 p-6 rounded-lg border border-gray-200">
-                        {textData.englishTranslation}
                       </div>
                     </TabsContent>
                   </Tabs>

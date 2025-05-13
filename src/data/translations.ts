@@ -1,4 +1,3 @@
-
 export interface Translation {
   en: string;
   tib: string;
@@ -72,7 +71,15 @@ export type TranslationKeys =
   | 'joinUsText'
   // Catalog details
   | 'textsCount'
-  | 'selectCategoryDesc';
+  | 'selectCategoryDesc'
+  // Catalog categories
+  | 'discourses'
+  | 'discipline'
+  | 'prajnaparamita'
+  | 'avatamsaka'
+  | 'ratnakuta'
+  | 'sutras'
+  | 'tantra';
 
 export const translations: Record<TranslationKeys, Translation> = {
   // Navigation
@@ -347,11 +354,40 @@ export const translations: Record<TranslationKeys, Translation> = {
   
   // Catalog details
   textsCount: {
-    en: 'texts',
-    tib: 'ཡིག་ཆ།'
+    en: 'Texts',
+    tib: 'གཞུང་གྲངས།'
   },
   selectCategoryDesc: {
-    en: 'Choose a section from the karchag on the left to view detailed information about that part of the Kangyur collection.',
-    tib: 'བཀའ་འགྱུར་མཛོད་ཀྱི་ཆ་ཤས་དེའི་སྐོར་གྱི་ཞིབ་ཕྲའི་གནས་ཚུལ་ལ་ལྟ་བའི་ཆེད་གཡོན་གྱི་དཀར་ཆག་ནས་སྡེ་ཚན་ཞིག་གདམ་རོགས།'
+    en: 'Select a category to start your exploration',
+    tib: 'ཁྱེད་ཀྱི་བཙལ་འཚོལ་འགོ་འཛུགས་པར་སྡེ་ཚན་ཞིག་གདམ་ཁ་བྱེད།'
+  },
+  // Catalog categories
+  discourses: {
+    en: 'Discourses',
+    tib: 'མདོ།'
+  },
+  discipline: {
+    en: 'Discipline',
+    tib: 'འདུལ་བ།'
+  },
+  prajnaparamita: {
+    en: 'Prajñāpāramitā',
+    tib: 'ཤེར་ཕྱིན།'
+  },
+  avatamsaka: {
+    en: 'Avataṃsaka',
+    tib: 'ཕལ་ཆེན།'
+  },
+  ratnakuta: {
+    en: 'Ratnakūṭa',
+    tib: 'དཀོན་བརྩེགས།'
+  },
+  sutras: {
+    en: 'Sūtras',
+    tib: 'མདོ་སྡེ།'
+  },
+  tantra: {
+    en: 'Tantra',
+    tib: 'རྒྱུད།'
   }
 };
