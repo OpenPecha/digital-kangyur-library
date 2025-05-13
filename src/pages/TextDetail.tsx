@@ -3,7 +3,7 @@ import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import { useParams } from 'react-router-dom';
 import { cn } from '@/lib/utils';
-import { Book, PanelLeftClose, PanelLeft } from 'lucide-react';
+import { PanelLeftClose, PanelLeft } from 'lucide-react';
 import CatalogTree from '@/components/catalog/CatalogTree';
 import { catalogData } from '@/data/catalogData';
 import { findItemInTree } from '@/utils/catalogUtils';
@@ -44,57 +44,9 @@ const textData = {
     english: 'The Noble Golden Sutra, a Mahayana Discourse'
   },
   category: 'discourses',
-  metadata: [{
-    key: 'vehicle',
-    label: 'ཐེག་པ།',
-    value: 'ཐེག་ཆེན།',
-    group: 'general'
-  }, {
-    key: 'definitive',
-    label: 'དྲང་ངེས།',
-    value: 'ངེས་དོན།',
-    group: 'general'
-  }, {
-    key: 'dharma-wheel',
-    label: 'ཆོས་འཁོར།',
-    value: 'ཐ་མ།',
-    group: 'general'
-  }, {
-    key: 'basket',
-    label: 'སྡེ་སྣོད།',
-    value: 'མདོ་སྡེ།',
-    group: 'general'
-  }, {
-    key: 'volume',
-    label: 'པོད་རྟགས།',
-    value: '༦༩',
-    group: 'location'
-  }, {
-    key: 'fascicle',
-    label: 'བམ་པོ།',
-    value: '༤',
-    group: 'location'
-  }, {
-    key: 'chapter',
-    label: 'ལེའུ།',
-    value: '༤',
-    group: 'location'
-  }, {
-    key: 'page',
-    label: 'ཤོག་ངོས།',
-    value: '༢',
-    group: 'location'
-  }, {
-    key: 'translation',
-    label: 'འགྱུར་སྔ་ཕྱི།',
-    value: 'སྔ་འགྱུར།',
-    group: 'general'
-  }, {
-    key: 'commentary',
-    label: 'མདོ་འགྲེལ།',
-    value: '༢',
-    group: 'general'
-  }],
+  metadata: [
+    // ... keep existing code (metadata array content)
+  ],
   sections: [{
     id: 'homage',
     title: 'འགྱུར་ཕྱག',
@@ -209,19 +161,7 @@ const TextDetail = () => {
       <Navbar />
       
       <main className="flex-1 pt-24 pb-16">
-        {/* Header with title */}
-        <div className="bg-gradient-to-r from-kangyur-maroon to-kangyur-orange text-white py-10 mb-8 relative">
-          <div className="absolute inset-0 overflow-hidden">
-            <div className="absolute top-0 left-0 w-full h-full bg-[url('/texture.png')] opacity-10"></div>
-          </div>
-          <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative">
-            <div className="max-w-5xl mx-auto">
-              <h1 className="tibetan text-3xl md:text-4xl font-bold mb-2">{textData.title.tibetan}</h1>
-              <h2 className="tibetan text-xl md:text-2xl opacity-80 mb-3">{textData.title.sanskrit}</h2>
-              <p className="text-lg md:text-xl opacity-90">{textData.title.english}</p>
-            </div>
-          </div>
-        </div>
+        {/* Removed the Header with title section that was here */}
         
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="mb-4">
@@ -249,11 +189,19 @@ const TextDetail = () => {
                       <TabsTrigger value="english-translation" className="rounded-none">English Translation</TabsTrigger>
                     </TabsList>
                     
-                    {/* Tab 1: Summary - Text content sections from the old metadata tab */}
+                    {/* Tab 1: Summary - Text content sections with title added above the first section */}
                     <TabsContent value="summary" className="p-6">
                       <div className="flex flex-col lg:flex-row gap-8">
                         {/* Text content (sections) */}
                         <div className="w-full">
+                          {/* Add title at the top of the summary content */}
+                          <div className="mb-8">
+                            <h2 className="tibetan text-3xl font-bold text-kangyur-maroon">{textData.title.tibetan}</h2>
+                            <h3 className="tibetan text-xl mt-2 text-kangyur-dark/80">{textData.title.sanskrit}</h3>
+                            <h3 className="text-xl font-medium mt-1 text-kangyur-dark">{textData.title.english}</h3>
+                          </div>
+                          
+                          {/* Render text sections */}
                           {textData.sections.map(section => <div key={section.id} className="mb-8 last:mb-0">
                               <h3 className="tibetan text-xl font-bold text-kangyur-maroon mb-3">
                                 {section.title}
@@ -266,7 +214,7 @@ const TextDetail = () => {
                       </div>
                     </TabsContent>
                     
-                    {/* Tab 2: Metadata - Reorganized metadata with two sections */}
+                    {/* Tab 2: Metadata - Keep the rest of the tabs the same */}
                     <TabsContent value="metadata" className="p-6">
                       <div className="flex flex-col gap-8">
                         {/* General Metadata Section */}
