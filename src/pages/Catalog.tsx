@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { useSearchParams, Link } from 'react-router-dom';
 import Navbar from '@/components/Navbar';
@@ -129,6 +128,36 @@ const Catalog = () => {
     return paginateItems(allTexts, currentPage, 10);
   };
   
+  // Generate mock text entries for the discipline category
+  const getDisciplineTextEntries = () => {
+    const disciplineItem = catalogData.find(item => item.id === 'discipline');
+    if (!disciplineItem) return [];
+    
+    // For demonstration, create mock entries based on the count of the discipline category
+    const count = disciplineItem.count || 30; // Use the actual count or default to 30
+    const mockTexts = Array.from({ length: count }).map((_, index) => ({
+      id: `discipline-text-${index + 1}`,
+      title: {
+        tibetan: `འདུལ་བ་གཞུང་ ${index + 1}`,
+        english: `Discipline Text ${index + 1}`,
+        sanskrit: index % 3 === 0 ? `Vinaya Text ${index + 1}` : undefined,
+      },
+      category: "འདུལ་བ།",
+      pages: Math.floor(Math.random() * 100) + 30,
+      volume: `${Math.floor(Math.random() * 5) + 1}`,
+      description: `This is a text from the Discipline (Vinaya) category of the Kangyur. Text number ${index + 1}.`,
+      keywords: ["discipline", "vinaya", "monk", `section-${Math.floor(index/5) + 1}`]
+    }));
+    
+    return mockTexts;
+  };
+  
+  // Get paginated text entries for the discipline category
+  const getDisciplineCardItems = () => {
+    const allTexts = getDisciplineTextEntries();
+    return paginateItems(allTexts, currentPage, 15); // 15 items per page
+  };
+  
   // Handler for selecting an item
   const handleItemSelect = (id: string) => {
     setSelectedItem(id === selectedItem ? null : id);
@@ -220,6 +249,8 @@ const Catalog = () => {
   // Get paginated data for display
   const { items: paginatedItems, pagination } = selectedItem 
     ? getTextCardItems() 
+    : category === 'discipline' && !searchQuery && !selectedItem
+    ? getDisciplineCardItems()
     : { items: [], pagination: { currentPage: 1, totalPages: 1, totalItems: 0, itemsPerPage: 10, hasNextPage: false, hasPrevPage: false } };
   
   return (
@@ -292,14 +323,27 @@ const Catalog = () => {
                 <div className="absolute left-0 top-1/2 transform -translate-y-1/2 breadcrumbs text-sm">
                   <span className="text-gray-500">
                     <Link to="/catalog" className="hover:text-indigo-600 transition">དཀར་ཆག</Link>
-                    <span className="mx-2">/</span>
-                    <span className="text-indigo-600 font-medium">
-                      {category === 'tantra' ? 'རྒྱུད།' : category === 'discipline' ? 'འདུལ་བ།' : ''}
-                    </span>
+                    
+                    {/* For discipline category, show it as a child of discourses */}
+                    {category === 'discipline' ? (
+                      <>
+                        <span className="mx-2">/</span>
+                        <Link to="/catalog?category=discourses" className="hover:text-indigo-600 transition">མདོ།</Link>
+                        <span className="mx-2">/</span>
+                        <span className="text-indigo-600 font-medium">འདུལ་བ།</span>
+                      </>
+                    ) : (
+                      <>
+                        <span className="mx-2">/</span>
+                        <span className="text-indigo-600 font-medium">
+                          {category === 'tantra' ? 'རྒྱུད།' : category === 'discourses' ? 'མདོ།' : ''}
+                        </span>
+                      </>
+                    )}
                   </span>
                 </div>
                 <h2 className="text-3xl font-bold tibetan text-center">
-                  {category === 'tantra' ? 'རྒྱུད།' : category === 'discipline' ? 'འདུལ་བ།' : ''}
+                  {category === 'tantra' ? 'རྒྱུད།' : category === 'discipline' ? 'འདུལ་བ།' : category === 'discourses' ? 'མདོ།' : ''}
                 </h2>
               </div>
             </div>
@@ -406,8 +450,8 @@ const Catalog = () => {
             </div>
           )}
           
-          {/* Display text cards if a specific item is selected */}
-          {selectedItem && paginatedItems.length > 0 ? (
+          {/* Display text cards if a specific item is selected or if in discipline category */}
+          {((selectedItem && paginatedItems.length > 0) || (category === 'discipline' && !searchQuery && !selectedItem && paginatedItems.length > 0)) ? (
             <KarchagTextCardList
               items={paginatedItems}
               currentPage={pagination.currentPage}

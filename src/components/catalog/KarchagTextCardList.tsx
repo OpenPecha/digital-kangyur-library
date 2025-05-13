@@ -1,4 +1,3 @@
-
 import React from 'react';
 import TextCard from '@/components/TextCard';
 import { 
@@ -16,13 +15,15 @@ interface KarchagTextCardListProps {
   currentPage: number;
   totalPages: number;
   onPageChange: (page: number) => void;
+  viewType?: 'grid' | 'list';
 }
 
 const KarchagTextCardList: React.FC<KarchagTextCardListProps> = ({ 
   items, 
   currentPage, 
   totalPages,
-  onPageChange
+  onPageChange,
+  viewType = 'list' // Default to list view
 }) => {
   // Function to generate pagination links
   const renderPaginationLinks = () => {
@@ -93,25 +94,49 @@ const KarchagTextCardList: React.FC<KarchagTextCardListProps> = ({
 
   return (
     <div className="w-full">
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
-        {items.map((item, index) => (
-          <TextCard
-            key={item.id || `text-${index}`}
-            id={item.id || `text-${index}`}
-            title={{
-              tibetan: item.title?.tibetan || "བོད་ཡིག",
-              sanskrit: item.title?.sanskrit,
-              english: item.title?.english || "Text Title"
-            }}
-            category={item.category || "General"}
-            pages={item.pages || 10}
-            volume={item.volume || "1"}
-            summary={item.description || "No summary available for this text."}
-            keywords={item.keywords || ["buddhism", "text"]}
-            variant="default"
-          />
-        ))}
-      </div>
+      {/* Display cards based on view type */}
+      {viewType === 'grid' ? (
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+          {items.map((item, index) => (
+            <TextCard
+              key={item.id || `text-${index}`}
+              id={item.id || `text-${index}`}
+              title={{
+                tibetan: item.title?.tibetan || "བོད་ཡིག",
+                sanskrit: item.title?.sanskrit,
+                english: item.title?.english || "Text Title"
+              }}
+              category={item.category || "General"}
+              pages={item.pages || 10}
+              volume={item.volume || "1"}
+              summary={item.description || "No summary available for this text."}
+              keywords={item.keywords || ["buddhism", "text"]}
+              variant="default"
+            />
+          ))}
+        </div>
+      ) : (
+        <div className="flex flex-col space-y-4 mb-8">
+          {items.map((item, index) => (
+            <TextCard
+              key={item.id || `text-${index}`}
+              id={item.id || `text-${index}`}
+              title={{
+                tibetan: item.title?.tibetan || "བོད་ཡིག",
+                sanskrit: item.title?.sanskrit,
+                english: item.title?.english || "Text Title"
+              }}
+              category={item.category || "General"}
+              pages={item.pages || 10}
+              volume={item.volume || "1"}
+              summary={item.description || "No summary available for this text."}
+              keywords={item.keywords || ["buddhism", "text"]}
+              variant="default"
+              className="w-full"
+            />
+          ))}
+        </div>
+      )}
       
       {totalPages > 1 && (
         <Pagination className="my-8">
