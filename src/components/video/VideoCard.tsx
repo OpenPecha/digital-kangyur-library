@@ -7,7 +7,7 @@ interface VideoCardProps {
     title: string;
     thumbnailUrl: string;
     createdAt: string;
-+   duration?: string;
+    duration?: string;
   };
 }
 
@@ -21,14 +21,14 @@ const VideoCard: React.FC<VideoCardProps> = ({ video }) => {
           className="object-cover w-full h-full group-hover:scale-105 transition-transform duration-300"
           loading="lazy"
         />
-+       {video.duration && (
-+         <span
-+           className="absolute bottom-2 right-2 px-2 py-0.5 bg-black bg-opacity-80 text-white text-xs font-semibold rounded"
-+           style={{letterSpacing: 1}}
-+         >
-+           {video.duration}
-+         </span>
-+       )}
+        {video.duration && (
+          <span
+            className="absolute bottom-2 right-2 px-2 py-0.5 bg-black bg-opacity-80 text-white text-xs font-semibold rounded"
+            style={{ letterSpacing: 1 }}
+          >
+            {video.duration}
+          </span>
+        )}
       </div>
       <div className="p-3 flex flex-col">
         <div className="flex-1">
