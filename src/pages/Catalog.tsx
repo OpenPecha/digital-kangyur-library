@@ -149,6 +149,21 @@ const Catalog = () => {
     setCurrentPage(1);
   };
 
+  // Handler to reset selected item and search query when clicking main "Catalog" breadcrumb
+  const handleBreadcrumbCatalogClick = () => {
+    setSearchQuery('');
+    setSelectedItem(null);
+    setCurrentPage(1);
+  };
+
+  // Handler to reset selected item and search query when clicking "Discourses" breadcrumb
+  const handleBreadcrumbDiscoursesClick = () => {
+    setSearchQuery('');
+    setSelectedItem(null);
+    setCurrentPage(1);
+    // We might want to set the category in the URL to 'discourses' here if not already (optional)
+  };
+
   // Renders a catalog item with its children
   const renderCatalogItem = (item: any) => {
     const isSelected = item.id === selectedItem;
@@ -226,14 +241,24 @@ const Catalog = () => {
         <div className="container mx-auto px-4 py-8">
           {/* Category Header */}
           {category && !searchQuery && !selectedItem && (
-            <CategoryHeader category={category} selectedItem={selectedItem} />
+            <CategoryHeader
+              category={category}
+              selectedItem={selectedItem}
+              // propagate handlers if CatalogBreadcrumb used inside CategoryHeader in future
+              onCatalogClick={handleBreadcrumbCatalogClick}
+              onDiscoursesClick={handleBreadcrumbDiscoursesClick}
+            />
           )}
 
           {/* Selected Item Header with Breadcrumb */}
           {selectedItem && selectedItemDetails && !searchQuery && (
             <div className="mb-8">
               <div className="relative mb-4">
-                <CatalogBreadcrumb selectedItem={selectedItem} />
+                <CatalogBreadcrumb
+                  selectedItem={selectedItem}
+                  onCatalogClick={handleBreadcrumbCatalogClick}
+                  onDiscoursesClick={handleBreadcrumbDiscoursesClick}
+                />
                 <h2 className="text-3xl font-bold tibetan text-center">
                   {selectedItemDetails.title.tibetan}
                 </h2>

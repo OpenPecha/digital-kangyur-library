@@ -7,17 +7,28 @@ import { findItemInTree } from '@/utils/catalogUtils';
 interface CatalogBreadcrumbProps {
   category?: string | null;
   selectedItem?: string | null;
+  onCatalogClick?: () => void;
+  onDiscoursesClick?: () => void;
 }
 
-const CatalogBreadcrumb: React.FC<CatalogBreadcrumbProps> = ({ category, selectedItem }) => {
+const CatalogBreadcrumb: React.FC<CatalogBreadcrumbProps> = ({
+  category,
+  selectedItem,
+  onCatalogClick,
+  onDiscoursesClick,
+}) => {
   const selectedItemDetails = selectedItem ? findItemInTree(catalogData, selectedItem) : null;
 
   const renderBreadcrumb = () => {
     const parts = [];
-    
     // Always start with catalog
     parts.push(
-      <Link key="catalog" to="/catalog" className="hover:text-indigo-600 transition">
+      <Link
+        key="catalog"
+        to="/catalog"
+        className="hover:text-indigo-600 transition"
+        onClick={onCatalogClick}
+      >
         དཀར་ཆག
       </Link>
     );
@@ -27,11 +38,16 @@ const CatalogBreadcrumb: React.FC<CatalogBreadcrumbProps> = ({ category, selecte
       const categoryItem = catalogData.find(item => item.id === category);
       if (categoryItem) {
         parts.push(<span key="sep1" className="mx-2">/</span>);
-        
+
         if (category === 'discipline') {
           // Discipline is a child of discourses
           parts.push(
-            <Link key="discourses" to="/catalog?category=discourses" className="hover:text-indigo-600 transition">
+            <Link
+              key="discourses"
+              to="/catalog?category=discourses"
+              className="hover:text-indigo-600 transition"
+              onClick={onDiscoursesClick}
+            >
               མདོ།
             </Link>
           );
@@ -57,11 +73,11 @@ const CatalogBreadcrumb: React.FC<CatalogBreadcrumbProps> = ({ category, selecte
       const findParentPath = (items: any[], targetId: string, path: any[] = []): any[] | null => {
         for (const item of items) {
           const currentPath = [...path, item];
-          
+
           if (item.id === targetId) {
             return currentPath;
           }
-          
+
           if (item.children) {
             const result = findParentPath(item.children, targetId, currentPath);
             if (result) return result;
@@ -71,21 +87,24 @@ const CatalogBreadcrumb: React.FC<CatalogBreadcrumbProps> = ({ category, selecte
       };
 
       const parentPath = findParentPath(catalogData, selectedItem!);
-      
+
       if (parentPath && parentPath.length > 1) {
         // Remove the selected item itself from the path
         const parents = parentPath.slice(0, -1);
-        
+
         parents.forEach((parent, index) => {
           if (index === 0) {
             // First parent (top-level category) - add link if not already shown
             if (!category || category !== parent.id) {
               parts.push(<span key="sep-parent" className="mx-2">/</span>);
               parts.push(
-                <Link 
-                  key={parent.id} 
-                  to={`/catalog?category=${parent.id}`} 
+                <Link
+                  key={parent.id}
+                  to={`/catalog?category=${parent.id}`}
                   className="hover:text-indigo-600 transition"
+                  onClick={
+                    parent.id === 'discourses' ? onDiscoursesClick : undefined
+                  }
                 >
                   {parent.title.tibetan}
                 </Link>
@@ -95,9 +114,9 @@ const CatalogBreadcrumb: React.FC<CatalogBreadcrumbProps> = ({ category, selecte
             // Nested parent
             parts.push(<span key={`sep-${parent.id}`} className="mx-2">/</span>);
             parts.push(
-              <Link 
-                key={parent.id} 
-                to={`/catalog?item=${parent.id}`} 
+              <Link
+                key={parent.id}
+                to={`/catalog?item=${parent.id}`}
                 className="hover:text-indigo-600 transition"
               >
                 {parent.title.tibetan}
@@ -129,3 +148,4 @@ const CatalogBreadcrumb: React.FC<CatalogBreadcrumbProps> = ({ category, selecte
 };
 
 export default CatalogBreadcrumb;
+
