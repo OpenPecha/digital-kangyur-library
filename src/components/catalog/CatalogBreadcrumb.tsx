@@ -33,37 +33,36 @@ const CatalogBreadcrumb: React.FC<CatalogBreadcrumbProps> = ({
       </Link>
     );
 
-    // Handle category breadcrumb
-    if (category) {
+    // Special case for 'discipline' -- always show Discourses as a parent
+    if (category === 'discipline' && !selectedItem) {
+      parts.push(<span key="sep1" className="mx-2">/</span>);
+      parts.push(
+        <Link
+          key="discourses"
+          to="/catalog?category=discourses"
+          className="hover:text-indigo-600 transition"
+          onClick={onDiscoursesClick}
+        >
+          མདོ།
+        </Link>
+      );
+      parts.push(<span key="sep2" className="mx-2">/</span>);
+      parts.push(
+        <span key="discipline" className="text-indigo-600 font-medium">
+          འདུལ་བ།
+        </span>
+      );
+    }
+    // Normal category rendering (besides discipline special case)
+    else if (category) {
       const categoryItem = catalogData.find(item => item.id === category);
       if (categoryItem) {
         parts.push(<span key="sep1" className="mx-2">/</span>);
-
-        if (category === 'discipline') {
-          // Discipline is a child of discourses
-          parts.push(
-            <Link
-              key="discourses"
-              to="/catalog?category=discourses"
-              className="hover:text-indigo-600 transition"
-              onClick={onDiscoursesClick}
-            >
-              མདོ།
-            </Link>
-          );
-          parts.push(<span key="sep2" className="mx-2">/</span>);
-          parts.push(
-            <span key="discipline" className="text-indigo-600 font-medium">
-              འདུལ་བ།
-            </span>
-          );
-        } else {
-          parts.push(
-            <span key={category} className="text-indigo-600 font-medium">
-              {categoryItem.title.tibetan}
-            </span>
-          );
-        }
+        parts.push(
+          <span key={category} className="text-indigo-600 font-medium">
+            {categoryItem.title.tibetan}
+          </span>
+        );
       }
     }
 
@@ -95,16 +94,26 @@ const CatalogBreadcrumb: React.FC<CatalogBreadcrumbProps> = ({
         parents.forEach((parent, index) => {
           if (index === 0) {
             // First parent (top-level category) - add link if not already shown
-            if (!category || category !== parent.id) {
-              parts.push(<span key="sep-parent" className="mx-2">/</span>);
+            // For 'discipline' children, always ensure Discourses (མདོ།) is present
+            if (parent.id === 'discourses') {
+              parts.push(<span key={`sep-discourses`} className="mx-2">/</span>);
+              parts.push(
+                <Link
+                  key="discourses"
+                  to="/catalog?category=discourses"
+                  className="hover:text-indigo-600 transition"
+                  onClick={onDiscoursesClick}
+                >
+                  མདོ།
+                </Link>
+              );
+            } else if (!category || category !== parent.id) {
+              parts.push(<span key={`sep-${parent.id}`} className="mx-2">/</span>);
               parts.push(
                 <Link
                   key={parent.id}
                   to={`/catalog?category=${parent.id}`}
                   className="hover:text-indigo-600 transition"
-                  onClick={
-                    parent.id === 'discourses' ? onDiscoursesClick : undefined
-                  }
                 >
                   {parent.title.tibetan}
                 </Link>
