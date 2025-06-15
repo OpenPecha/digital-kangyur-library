@@ -15,6 +15,23 @@ import { filterCatalogItems, findItemInTree } from '@/utils/catalogUtils';
 import { paginateItems } from '@/utils/paginationUtils';
 import TantraSubsections from "@/components/catalog/TantraSubsections";
 
+const tantraSubsectionIds = [
+  "tantra-anuttarayoga",
+  "tantra-yoga",
+  "tantra-carya",
+  "tantra-kriya",
+  "nyi-tantra",
+  "kalacakra"
+];
+const tantraSubsectionTitles: Record<string, { tibetan: string; english: string }> = {
+  "tantra-anuttarayoga": { tibetan: "བླ་མེད་རྒྱུད།", english: "Anuttarayoga Tantra" },
+  "tantra-yoga":         { tibetan: "རྣལ་འབྱོར་རྒྱུད།", english: "Yoga Tantra" },
+  "tantra-carya":        { tibetan: "སྤྱོད་རྒྱུད།", english: "Carya Tantra" },
+  "tantra-kriya":        { tibetan: "བྱ་རྒྱུད།", english: "Kriya Tantra" },
+  "nyi-tantra":          { tibetan: "རྙིང་རྒྱུད།", english: "Nying Tantra" },
+  "kalacakra":           { tibetan: "དུས་འཁོར།", english: "Kalachakra" }
+};
+
 const Catalog = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedItem, setSelectedItem] = useState<string | null>(null);
@@ -86,7 +103,18 @@ const Catalog = () => {
   const filteredCatalog = getFilteredCatalog();
 
   // Get selected item details
-  const selectedItemDetails = selectedItem ? findItemInTree(catalogData, selectedItem) : null;
+  let selectedItemDetails: any = null;
+  if (selectedItem) {
+    // Try tantra subsection mapping first, fallback to findItemInTree
+    if (tantraSubsectionIds.includes(selectedItem)) {
+      selectedItemDetails = {
+        id: selectedItem,
+        title: tantraSubsectionTitles[selectedItem] || { tibetan: '', english: '' }
+      };
+    } else {
+      selectedItemDetails = findItemInTree(catalogData, selectedItem);
+    }
+  }
 
   // Generate mock text entries for the selected item
   const getTextEntriesForSelectedItem = () => {
@@ -341,12 +369,16 @@ const Catalog = () => {
             </>
           )}
 
-          {/* Selected Item Header with Breadcrumb */}
+          {/* Selected Item Header with Breadcrumb (show correct name for tantra subsections too) */}
           {selectedItem && selectedItemDetails && !searchQuery && (
             <div className="mb-8">
               <div className="relative mb-4">
                 <CatalogBreadcrumb
-                  category={category}
+                  category={
+                    tantraSubsectionIds.includes(selectedItem)
+                      ? "tantra"
+                      : category
+                  }
                   selectedItem={selectedItem}
                   onCatalogClick={handleBreadcrumbCatalogClick}
                   onDiscoursesClick={handleBreadcrumbDiscoursesClick}
