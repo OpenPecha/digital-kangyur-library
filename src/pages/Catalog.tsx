@@ -13,6 +13,7 @@ import CatalogEmptyState from "@/components/catalog/CatalogEmptyState";
 import { catalogData } from '@/data/catalogData';
 import { filterCatalogItems, findItemInTree } from '@/utils/catalogUtils';
 import { paginateItems } from '@/utils/paginationUtils';
+import TantraSubsections from "@/components/catalog/TantraSubsections";
 
 const Catalog = () => {
   const [searchQuery, setSearchQuery] = useState('');
@@ -305,9 +306,14 @@ const Catalog = () => {
       {category === 'discourses' && !searchQuery && !selectedItem && (
         <DiscourseSubsections />
       )}
+
+      {/* Tantra Subsections - show when tantra category is selected but no specific item is selected */}
+      {category === 'tantra' && !searchQuery && !selectedItem && (
+        <TantraSubsections />
+      )}
       
       {/* Category or Search Results */}
-      {(category && category !== 'discourses') || searchQuery || selectedItem ? (
+      {(category && category !== 'discourses' && category !== 'tantra') || searchQuery || selectedItem ? (
         <div className="container mx-auto px-4 py-8">
           {/* Always render category header for category pages when not searching and nothing selected */}
           {category && !searchQuery && !selectedItem && category !== 'discipline' && (
