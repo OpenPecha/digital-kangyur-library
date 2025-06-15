@@ -1,10 +1,14 @@
+
 import React, { useState, useEffect } from 'react';
-import { useSearchParams, Link } from 'react-router-dom';
+import { useSearchParams } from 'react-router-dom';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import CatalogSearch from '@/components/catalog/CatalogSearch';
-import KarchagFrame from '@/components/catalog/KarchagFrame';
+import MainKarchagFrames from '@/components/catalog/MainKarchagFrames';
+import DiscourseSubsections from '@/components/catalog/DiscourseSubsections';
+import CategoryHeader from '@/components/catalog/CategoryHeader';
 import KarchagTextCardList from '@/components/catalog/KarchagTextCardList';
+import CatalogBreadcrumb from '@/components/catalog/CatalogBreadcrumb';
 import { catalogData } from '@/data/catalogData';
 import { filterCatalogItems, findItemInTree } from '@/utils/catalogUtils';
 import { paginateItems } from '@/utils/paginationUtils';
@@ -68,7 +72,6 @@ const Catalog = () => {
   // Handle page change
   const handlePageChange = (page: number) => {
     setCurrentPage(page);
-    // Scroll to top of the page
     window.scrollTo({
       top: 0,
       behavior: 'smooth'
@@ -79,12 +82,10 @@ const Catalog = () => {
   const getFilteredCatalog = () => {
     let filtered = catalogData;
     
-    // First apply category filter if present
     if (category) {
       filtered = filtered.filter(item => item.id === category);
     }
     
-    // Then apply search filter if present
     if (searchQuery) {
       filtered = filterCatalogItems(filtered, searchQuery);
     }
@@ -103,7 +104,6 @@ const Catalog = () => {
   const getTextEntriesForSelectedItem = () => {
     if (!selectedItemDetails) return [];
     
-    // For demonstration, create mock entries based on the count in the selected item
     const count = selectedItemDetails.count || 10;
     const mockTexts = Array.from({ length: count }).map((_, index) => ({
       id: `${selectedItem}-text-${index + 1}`,
@@ -133,12 +133,10 @@ const Catalog = () => {
     const disciplineItem = catalogData.find(item => item.id === 'discipline');
     if (!disciplineItem) return [];
     
-    // For demonstration, create mock entries based on the count of the discipline category
-    const count = disciplineItem.count || 30; // Use the actual count or default to 30
+    const count = disciplineItem.count || 30;
     
-    // Create sample text IDs that will work with the TextDetail page
     const textIds = [
-      'golden-sutra', // This ID matches the existing textData in TextDetail.tsx
+      'golden-sutra',
       'vinaya-sutra',
       'discipline-rules'
     ];
@@ -163,20 +161,13 @@ const Catalog = () => {
   // Get paginated text entries for the discipline category
   const getDisciplineCardItems = () => {
     const allTexts = getDisciplineTextEntries();
-    return paginateItems(allTexts, currentPage, 15); // 15 items per page
+    return paginateItems(allTexts, currentPage, 15);
   };
   
   // Handler for selecting an item
   const handleItemSelect = (id: string) => {
     setSelectedItem(id === selectedItem ? null : id);
-    setCurrentPage(1); // Reset to first page when changing selection
-  };
-  
-  // Handler for clearing the category filter
-  const handleClearCategory = () => {
-    const newParams = new URLSearchParams(searchParams);
-    newParams.delete('category');
-    setSearchParams(newParams);
+    setCurrentPage(1);
   };
   
   // Renders a catalog item with its children
@@ -207,7 +198,6 @@ const Catalog = () => {
           </div>
         </div>
         
-        {/* Show children if this item is selected */}
         {isSelected && item.children && item.children.length > 0 && (
           <div className="ml-6 mt-2 border-l-2 border-indigo-200 pl-4">
             {item.children.map((child: any) => renderCatalogItem(child))}
@@ -215,43 +205,6 @@ const Catalog = () => {
         )}
       </div>
     );
-  };
-
-  // Get discourse subsection frames data
-  const getDiscourseSubsections = () => {
-    const discourseItem = catalogData.find(item => item.id === 'discourses');
-    if (!discourseItem || !discourseItem.children) return [];
-    
-    // Find the specific subsections mentioned (Prajnaparamita, Avatamsaka, Ratnakuta)
-    const subsections = [
-      {
-        id: 'discipline',
-        tibetan: 'འདུལ་བ།',
-        link: '/catalog?category=discipline',
-      },
-      {
-        id: 'prajnaparamita',
-        tibetan: 'ཤེར་ཕྱིན།',
-        link: '/catalog?item=prajnaparamita',
-      },
-      {
-        id: 'avatamsaka',
-        tibetan: 'ཕལ་ཆེན།',
-        link: '/catalog?item=avatamsaka',
-      },
-      {
-        id: 'ratnakuta',
-        tibetan: 'དཀོན་བརྩེགས།',
-        link: '/catalog?item=ratnakuta',
-      },
-      {
-        id: 'general-sutras',
-        tibetan: 'མདོ་སྡེ།',
-        link: '/catalog?item=general-sutras',
-      }
-    ];
-    
-    return subsections;
   };
   
   // Get paginated data for display
@@ -265,60 +218,19 @@ const Catalog = () => {
     <div className="min-h-screen bg-white w-full">
       <Navbar />
       
-      {/* Hero Section with Search */}
       <CatalogSearch 
         searchQuery={searchQuery}
         setSearchQuery={setSearchQuery}
       />
       
-      {/* Karchag Frames Section - show only when no search, selected item, or category */}
+      {/* Main Karchag Frames - show only when no search, selected item, or category */}
       {!searchQuery && !selectedItem && !category && (
-        <div className="container mx-auto px-4 py-12">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold tibetan mb-4">དཀར་ཆག</h2>
-            <p className="text-gray-600 max-w-2xl mx-auto">
-              Browse the Kangyur collection by selecting one of the categories below
-            </p>
-          </div>
-          <div className="flex flex-col md:flex-row justify-center gap-10 md:gap-24">
-            <KarchagFrame 
-              tibetanText="མདོ།" 
-              fontSize="xxx-large"
-              link="/catalog?category=discourses" 
-            />
-            <KarchagFrame 
-              tibetanText="རྒྱུད།" 
-              fontSize="xxx-large"
-              link="/catalog?category=tantra" 
-            />
-          </div>
-        </div>
+        <MainKarchagFrames />
       )}
 
-      {/* Discourse Subsections Frames - show when discourse category is selected but no specific item is selected */}
+      {/* Discourse Subsections - show when discourse category is selected but no specific item is selected */}
       {category === 'discourses' && !searchQuery && !selectedItem && (
-        <div className="container mx-auto px-4 py-12">
-          <div className="relative mb-12">
-            <div className="absolute left-0 top-1/2 transform -translate-y-1/2 breadcrumbs text-sm">
-              <span className="text-gray-500">
-                <Link to="/catalog" className="hover:text-indigo-600 transition">དཀར་ཆག</Link>
-                <span className="mx-2">/</span>
-                <span className="text-indigo-600 font-medium">མདོ།</span>
-              </span>
-            </div>
-            <h2 className="text-3xl font-bold tibetan text-center">མདོ།</h2>
-          </div>
-          <div className="flex flex-nowrap justify-center overflow-x-auto pb-6 gap-5 md:gap-2">
-            {getDiscourseSubsections().map(subsection => (
-              <KarchagFrame 
-                key={subsection.id}
-                tibetanText={subsection.tibetan} 
-                link={subsection.link}
-                fontSize="xx-large"
-              />
-            ))}
-          </div>
-        </div>
+        <DiscourseSubsections />
       )}
       
       {/* Category or Search Results */}
@@ -326,35 +238,7 @@ const Catalog = () => {
         <div className="container mx-auto px-4 py-8">
           {/* Category Header */}
           {category && !searchQuery && !selectedItem && (
-            <div className="mb-8">
-              <div className="relative mb-4">
-                <div className="absolute left-0 top-1/2 transform -translate-y-1/2 breadcrumbs text-sm">
-                  <span className="text-gray-500">
-                    <Link to="/catalog" className="hover:text-indigo-600 transition">དཀར་ཆག</Link>
-                    
-                    {/* For discipline category, show it as a child of discourses */}
-                    {category === 'discipline' ? (
-                      <>
-                        <span className="mx-2">/</span>
-                        <Link to="/catalog?category=discourses" className="hover:text-indigo-600 transition">མདོ།</Link>
-                        <span className="mx-2">/</span>
-                        <span className="text-indigo-600 font-medium">འདུལ་བ།</span>
-                      </>
-                    ) : (
-                      <>
-                        <span className="mx-2">/</span>
-                        <span className="text-indigo-600 font-medium">
-                          {category === 'tantra' ? 'རྒྱུད།' : category === 'discourses' ? 'མདོ།' : ''}
-                        </span>
-                      </>
-                    )}
-                  </span>
-                </div>
-                <h2 className="text-3xl font-bold tibetan text-center">
-                  {category === 'tantra' ? 'རྒྱུད།' : category === 'discipline' ? 'འདུལ་བ།' : category === 'discourses' ? 'མདོ།' : ''}
-                </h2>
-              </div>
-            </div>
+            <CategoryHeader category={category} selectedItem={selectedItem} />
           )}
           
           {/* Search Results Header */}
@@ -377,62 +261,7 @@ const Catalog = () => {
             <div className="mb-8 p-6 bg-indigo-50 rounded-lg">
               <div className="breadcrumbs text-sm mb-4">
                 <span className="text-gray-500">
-                  <Link to="/catalog" className="hover:text-indigo-600 transition">དཀར་ཆག</Link>
-                  
-                  {/* Find the parent category */}
-                  {(() => {
-                    // Check if this is a top-level item or a child item
-                    const isTopLevel = catalogData.some(item => item.id === selectedItemDetails.id);
-                    if (!isTopLevel) {
-                      // Find the parent category by iterating through the catalog data
-                      for (const category of catalogData) {
-                        if (category.children) {
-                          // Direct child of a top-level category
-                          if (category.children.some(child => child.id === selectedItemDetails.id)) {
-                            return (
-                              <>
-                                <span className="mx-2">/</span>
-                                <Link 
-                                  to={`/catalog?category=${category.id}`} 
-                                  className="hover:text-indigo-600 transition"
-                                >
-                                  {category.title.tibetan}
-                                </Link>
-                              </>
-                            );
-                          }
-                          
-                          // Check for nested children (two levels deep)
-                          for (const child of category.children) {
-                            if (child.children && child.children.some(grandchild => grandchild.id === selectedItemDetails.id)) {
-                              return (
-                                <>
-                                  <span className="mx-2">/</span>
-                                  <Link 
-                                    to={`/catalog?category=${category.id}`} 
-                                    className="hover:text-indigo-600 transition"
-                                  >
-                                    {category.title.tibetan}
-                                  </Link>
-                                  <span className="mx-2">/</span>
-                                  <Link 
-                                    to={`/catalog?item=${child.id}`} 
-                                    className="hover:text-indigo-600 transition"
-                                  >
-                                    {child.title.tibetan}
-                                  </Link>
-                                </>
-                              );
-                            }
-                          }
-                        }
-                      }
-                    }
-                    return null;
-                  })()}
-                  
-                  <span className="mx-2">/</span>
-                  <span className="text-indigo-600 font-medium">{selectedItemDetails.title.tibetan}</span>
+                  <CatalogBreadcrumb selectedItem={selectedItem} />
                 </span>
               </div>
               <div className="flex justify-between items-start">
