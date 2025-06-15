@@ -13,25 +13,30 @@ export interface BreadcrumbItem {
 interface BreadcrumbProps {
   items: BreadcrumbItem[];
   className?: string;
+  showHome?: boolean; // <-- Add this prop
 }
 
-const Breadcrumb = ({ items, className }: BreadcrumbProps) => {
+const Breadcrumb = ({ items, className, showHome = true }: BreadcrumbProps) => {
   return (
     <nav className={cn("flex", className)} aria-label="Breadcrumb">
       <ol className="inline-flex items-center space-x-1 md:space-x-2">
-        <li className="inline-flex items-center">
-          <Link 
-            to="/" 
-            className="inline-flex items-center text-sm text-gray-500 hover:text-kangyur-maroon"
-          >
-            <Home className="w-4 h-4 mr-1.5" />
-            <span className="sr-only sm:not-sr-only">Home</span>
-          </Link>
-        </li>
-        
+        {showHome && (
+          <li className="inline-flex items-center">
+            <Link 
+              to="/" 
+              className="inline-flex items-center text-sm text-gray-500 hover:text-kangyur-maroon"
+            >
+              <Home className="w-4 h-4 mr-1.5" />
+              <span className="sr-only sm:not-sr-only">Home</span>
+            </Link>
+          </li>
+        )}
         {items.map((item, index) => (
           <li key={index} className="flex items-center">
-            <ChevronRight className="w-4 h-4 text-gray-400" />
+            {/* Render separator only if Home is present or not first item */}
+            {(showHome || index > 0) && (
+              <ChevronRight className="w-4 h-4 text-gray-400" />
+            )}
             {item.href ? (
               <Link 
                 to={item.href} 

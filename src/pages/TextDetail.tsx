@@ -70,8 +70,8 @@ const TextDetail = () => {
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           {/* --- Breadcrumb navigation --- */}
           <div className="mb-4">
-            {/* Pass breadcrumbItems only (no Home) */}
-            <Breadcrumb items={breadcrumbItems} />
+            {/* Pass showHome={false} to remove "Home" */}
+            <Breadcrumb items={breadcrumbItems} showHome={false} />
           </div>
           <div>
             <Card className="border border-kangyur-orange/10 rounded-xl shadow-sm">
