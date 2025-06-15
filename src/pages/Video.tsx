@@ -88,6 +88,12 @@ const mockVideos = [
     thumbnailUrl: '/placeholder.svg',
     createdAt: '2024-06-04',
   },
+  {
+    id: '13',
+    title: 'Modern Perspectives on Kangyur Studies',
+    thumbnailUrl: '/placeholder.svg',
+    createdAt: '2024-06-03',
+  },
 ];
 
 const VIDEOS_PER_PAGE = 12;
