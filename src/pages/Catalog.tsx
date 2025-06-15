@@ -7,10 +7,10 @@ import MainKarchagFrames from '@/components/catalog/MainKarchagFrames';
 import DiscourseSubsections from '@/components/catalog/DiscourseSubsections';
 import CategoryHeader from '@/components/catalog/CategoryHeader';
 import KarchagTextCardList from '@/components/catalog/KarchagTextCardList';
-import CatalogBreadcrumb from '@/components/catalog/CatalogBreadcrumb';
 import { catalogData } from '@/data/catalogData';
 import { filterCatalogItems, findItemInTree } from '@/utils/catalogUtils';
 import { paginateItems } from '@/utils/paginationUtils';
+
 const Catalog = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedItem, setSelectedItem] = useState<string | null>(null);
@@ -19,7 +19,6 @@ const Catalog = () => {
 
   // Get URL parameters
   const category = searchParams.get('category');
-  const page = searchParams.get('page');
 
   // Parse URL parameters on component mount
   useEffect(() => {
@@ -152,82 +151,125 @@ const Catalog = () => {
   // Renders a catalog item with its children
   const renderCatalogItem = (item: any) => {
     const isSelected = item.id === selectedItem;
-    return <div key={item.id} className="mb-4">
-        <div className={`p-4 border rounded-lg cursor-pointer transition-colors ${isSelected ? 'bg-indigo-100 border-indigo-300' : 'hover:bg-gray-50'}`} onClick={() => handleItemSelect(item.id)}>
+    return (
+      <div key={item.id} className="mb-4">
+        <div 
+          className={`p-4 border rounded-lg cursor-pointer transition-colors ${
+            isSelected ? 'bg-indigo-100 border-indigo-300' : 'hover:bg-gray-50'
+          }`} 
+          onClick={() => handleItemSelect(item.id)}
+        >
           <div className="flex justify-between items-center">
             <div>
               <h3 className="text-xl tibetan mb-1">{item.title.tibetan}</h3>
               <h4 className="font-medium text-gray-700">{item.title.english}</h4>
-              {item.description && <p className="text-gray-600 text-sm mt-2">{item.description}</p>}
+              {item.description && (
+                <p className="text-gray-600 text-sm mt-2">{item.description}</p>
+              )}
             </div>
-            {item.count !== undefined && <span className="bg-indigo-100 text-indigo-800 px-3 py-1 rounded-full text-sm">
+            {item.count !== undefined && (
+              <span className="bg-indigo-100 text-indigo-800 px-3 py-1 rounded-full text-sm">
                 {item.count} {item.count === 1 ? 'text' : 'texts'}
-              </span>}
+              </span>
+            )}
           </div>
         </div>
         
-        {isSelected && item.children && item.children.length > 0 && <div className="ml-6 mt-2 border-l-2 border-indigo-200 pl-4">
+        {isSelected && item.children && item.children.length > 0 && (
+          <div className="ml-6 mt-2 border-l-2 border-indigo-200 pl-4">
             {item.children.map((child: any) => renderCatalogItem(child))}
-          </div>}
-      </div>;
+          </div>
+        )}
+      </div>
+    );
   };
 
   // Get paginated data for display
   const {
     items: paginatedItems,
     pagination
-  } = selectedItem ? getTextCardItems() : category === 'discipline' && !searchQuery && !selectedItem ? getDisciplineCardItems() : {
-    items: [],
-    pagination: {
-      currentPage: 1,
-      totalPages: 1,
-      totalItems: 0,
-      itemsPerPage: 10,
-      hasNextPage: false,
-      hasPrevPage: false
-    }
-  };
-  return <div className="min-h-screen bg-white w-full">
+  } = selectedItem 
+    ? getTextCardItems() 
+    : category === 'discipline' && !searchQuery && !selectedItem 
+      ? getDisciplineCardItems() 
+      : {
+          items: [],
+          pagination: {
+            currentPage: 1,
+            totalPages: 1,
+            totalItems: 0,
+            itemsPerPage: 10,
+            hasNextPage: false,
+            hasPrevPage: false
+          }
+        };
+
+  return (
+    <div className="min-h-screen bg-white w-full">
       <Navbar />
       
       <CatalogSearch searchQuery={searchQuery} setSearchQuery={setSearchQuery} />
       
       {/* Main Karchag Frames - show only when no search, selected item, or category */}
-      {!searchQuery && !selectedItem && !category && <MainKarchagFrames />}
+      {!searchQuery && !selectedItem && !category && (
+        <MainKarchagFrames />
+      )}
 
       {/* Discourse Subsections - show when discourse category is selected but no specific item is selected */}
-      {category === 'discourses' && !searchQuery && !selectedItem && <DiscourseSubsections />}
+      {category === 'discourses' && !searchQuery && !selectedItem && (
+        <DiscourseSubsections />
+      )}
       
       {/* Category or Search Results */}
-      {(category && category !== 'discourses' || searchQuery || selectedItem) && <div className="container mx-auto px-4 py-8">
+      {(category && category !== 'discourses' || searchQuery || selectedItem) && (
+        <div className="container mx-auto px-4 py-8">
           {/* Category Header */}
-          {category && !searchQuery && !selectedItem && <CategoryHeader category={category} selectedItem={selectedItem} />}
+          {category && !searchQuery && !selectedItem && (
+            <CategoryHeader category={category} selectedItem={selectedItem} />
+          )}
           
           {/* Search Results Header */}
-          {searchQuery && <div className="mb-8 text-center">
+          {searchQuery && (
+            <div className="mb-8 text-center">
               <p className="text-gray-600">
                 Showing search results for: <span className="font-bold">{searchQuery}</span>
               </p>
-              <button onClick={() => setSearchQuery('')} className="mt-4 px-4 py-2 bg-indigo-600 text-white rounded hover:bg-indigo-700 transition">
+              <button 
+                onClick={() => setSearchQuery('')} 
+                className="mt-4 px-4 py-2 bg-indigo-600 text-white rounded hover:bg-indigo-700 transition"
+              >
                 Clear Search
               </button>
-            </div>}
-          
-          {/* Selected Item Details */}
-          {selectedItemDetails}
+            </div>
+          )}
           
           {/* Display text cards if a specific item is selected or if in discipline category */}
-          {selectedItem && paginatedItems.length > 0 || category === 'discipline' && !searchQuery && !selectedItem && paginatedItems.length > 0 ? <KarchagTextCardList items={paginatedItems} currentPage={pagination.currentPage} totalPages={pagination.totalPages} onPageChange={handlePageChange} /> : (/* Otherwise render catalog items */
-      <div className="space-y-2">
+          {((selectedItem && paginatedItems.length > 0) || 
+            (category === 'discipline' && !searchQuery && !selectedItem && paginatedItems.length > 0)) ? (
+            <KarchagTextCardList 
+              items={paginatedItems} 
+              currentPage={pagination.currentPage} 
+              totalPages={pagination.totalPages} 
+              onPageChange={handlePageChange} 
+            />
+          ) : (
+            /* Otherwise render catalog items */
+            <div className="space-y-2">
               {filteredCatalog.map(item => renderCatalogItem(item))}
               
-              {filteredCatalog.length === 0 && <div className="text-center py-12">
+              {filteredCatalog.length === 0 && (
+                <div className="text-center py-12">
                   <p className="text-gray-500 text-lg">No items found</p>
-                </div>}
-            </div>)}
-        </div>}
+                </div>
+              )}
+            </div>
+          )}
+        </div>
+      )}
       
       <Footer />
-    </div>;
+    </div>
+  );
 };
+
 export default Catalog;
