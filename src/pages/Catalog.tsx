@@ -294,7 +294,6 @@ const Catalog = () => {
   return (
     <div className="min-h-screen bg-white w-full">
       <Navbar />
-      
       <CatalogSearch searchQuery={searchQuery} setSearchQuery={setSearchQuery} />
 
       {/* Main Karchag Frames - show only when no search, selected item, or category */}
@@ -308,15 +307,32 @@ const Catalog = () => {
       )}
       
       {/* Category or Search Results */}
-      {(category && category !== 'discourses' || searchQuery || selectedItem) && (
+      {(category && category !== 'discourses') || searchQuery || selectedItem ? (
         <div className="container mx-auto px-4 py-8">
-          {/* ======== (CHANGED HERE) ======== */}
-          {/* Always show the category header for category pages when not searching and nothing selected */}
-          {category && !searchQuery && !selectedItem && (
+          {/* Always render category header for category pages when not searching and nothing selected */}
+          {category && !searchQuery && !selectedItem && category !== 'discipline' && (
             <CategoryHeader
               category={category}
               selectedItem={selectedItem}
             />
+          )}
+
+          {/* --- Discipline Category Special rendering: show header & cards together --- */}
+          {category === 'discipline' && !searchQuery && !selectedItem && (
+            <>
+              {/* Category header with breadcrumb for Discipline */}
+              <CategoryHeader
+                category={category}
+                selectedItem={selectedItem}
+              />
+              {/* Vinaya (discipline) texts list, as standalone cards */}
+              <KarchagTextCardList
+                items={getVinayaTextsForDisciplineCategory()}
+                currentPage={1}
+                totalPages={1}
+                onPageChange={() => {}}
+              />
+            </>
           )}
 
           {/* Selected Item Header with Breadcrumb */}
@@ -350,38 +366,36 @@ const Catalog = () => {
               </button>
             </div>
           )}
-          
-          {/* Display Vinaya text cards if category is 'discipline' and there's no search or item selected */}
-          {category === 'discipline' && !searchQuery && !selectedItem ? (
-            <KarchagTextCardList
-              items={getVinayaTextsForDisciplineCategory()}
-              currentPage={1}
-              totalPages={1}
-              onPageChange={() => {}}
-            />
-          ) : ((selectedItem && paginatedItems.length > 0) ||
-            (category === 'discipline' && !searchQuery && !selectedItem && paginatedItems.length > 0)) ? (
-            <KarchagTextCardList
-              items={paginatedItems}
-              currentPage={pagination.currentPage}
-              totalPages={pagination.totalPages}
-              onPageChange={handlePageChange}
-            />
-          ) : (
-            <>
-              <CatalogTreeList 
-                items={filteredCatalog}
-                selectedItem={selectedItem}
-                onItemSelect={handleItemSelect}
-              />
-              {filteredCatalog.length === 0 && (
-                <CatalogEmptyState />
-              )}
-            </>
-          )}
+
+          {/* (Selected item or paginated item list) */}
+          {(selectedItem && paginatedItems.length > 0) ||
+            (category === 'discipline' && !searchQuery && !selectedItem && paginatedItems.length > 0)
+            ? (
+              // This block only for paginated item rendering OTHER THAN main vinaya list, so discipline base rendering is above
+              (category !== 'discipline' || !!selectedItem) && (
+                <KarchagTextCardList
+                  items={paginatedItems}
+                  currentPage={pagination.currentPage}
+                  totalPages={pagination.totalPages}
+                  onPageChange={handlePageChange}
+                />
+              )
+            )
+            : (category !== 'discipline') && (
+              <>
+                <CatalogTreeList 
+                  items={filteredCatalog}
+                  selectedItem={selectedItem}
+                  onItemSelect={handleItemSelect}
+                />
+                {filteredCatalog.length === 0 && (
+                  <CatalogEmptyState />
+                )}
+              </>
+            )
+          }
         </div>
-      )}
-      
+      ) : null}
       <Footer />
     </div>
   );
