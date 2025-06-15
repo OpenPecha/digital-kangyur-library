@@ -91,6 +91,43 @@ const Catalog = () => {
   // Generate mock text entries for the selected item
   const getTextEntriesForSelectedItem = () => {
     if (!selectedItemDetails) return [];
+
+    // If selected item is 'vinaya', return dummy Vinaya texts
+    if (selectedItemDetails.id === "vinaya") {
+      const vinayaDummyTexts = [
+        {
+          id: "vinaya-1",
+          title: {
+            tibetan: "འདུལ་བ་གཞུང་ 1",
+            english: "Vinaya text 1",
+            sanskrit: "Vinaya Sūtra 1",
+          },
+          category: "འདུལ་བ། (Discipline)",
+          pages: 56,
+          volume: "I",
+          description:
+            "This is some dummy descriptive text for Vinaya text 1. Here you can describe the background, contents, or importance of the first Vinaya text in your collection. འདུལ་བའི་གཞུང་དང་པོའི་དོན་ངོ་སྤྲོད་གནང་བ་ཡིན།",
+          keywords: ["discipline", "vinaya", "monastic"],
+        },
+        {
+          id: "vinaya-2",
+          title: {
+            tibetan: "འདུལ་བ་གཞུང་ 2",
+            english: "Vinaya text 2",
+            sanskrit: "Vinaya Sūtra 2",
+          },
+          category: "འདུལ་བ། (Discipline)",
+          pages: 72,
+          volume: "II",
+          description:
+            "This is some dummy descriptive text for Vinaya text 2. Use this area to provide details, historical context, or notes about the second Vinaya text. འདུལ་བའི་གཞུང་གཉིས་པའི་བརྗོད་དོན་དེ་འདི་ལ་བཀོད།",
+          keywords: ["discipline", "vinaya", "bhikṣu"],
+        },
+      ];
+      return vinayaDummyTexts;
+    }
+
+    // ... existing generic logic for all other selected items ...
     const count = selectedItemDetails.count || 10;
     const mockTexts = Array.from({
       length: count
