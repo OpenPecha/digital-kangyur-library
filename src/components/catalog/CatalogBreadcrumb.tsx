@@ -78,8 +78,8 @@ const CatalogBreadcrumb: React.FC<CatalogBreadcrumbProps> = ({ category, selecte
         
         parents.forEach((parent, index) => {
           if (index === 0) {
-            // First parent (top-level category)
-            if (!category) {
+            // First parent (top-level category) - add link if not already shown
+            if (!category || category !== parent.id) {
               parts.push(<span key="sep-parent" className="mx-2">/</span>);
               parts.push(
                 <Link 
