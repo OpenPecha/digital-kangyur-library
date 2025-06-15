@@ -244,9 +244,6 @@ const Catalog = () => {
             <CategoryHeader
               category={category}
               selectedItem={selectedItem}
-              // propagate handlers if CatalogBreadcrumb used inside CategoryHeader in future
-              onCatalogClick={handleBreadcrumbCatalogClick}
-              onDiscoursesClick={handleBreadcrumbDiscoursesClick}
             />
           )}
 
