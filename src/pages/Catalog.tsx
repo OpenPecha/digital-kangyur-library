@@ -264,6 +264,21 @@ const Catalog = () => {
     // We might want to set the category in the URL to 'discourses' here if not already (optional)
   };
 
+  // Handler to reset to tantra category when clicking Tantra breadcrumb
+  const handleBreadcrumbTantraClick = () => {
+    setSearchQuery('');
+    setSelectedItem(null);
+    setCurrentPage(1);
+
+    // Set URL params to show Tantra category only
+    const newParams = new URLSearchParams(searchParams);
+    newParams.set('category', 'tantra');
+    newParams.delete('item');
+    newParams.delete('q');
+    newParams.delete('page');
+    setSearchParams(newParams);
+  };
+
   // Renders a catalog item with its children
   const renderCatalogItem = (item: any) => {
     const isSelected = item.id === selectedItem;
@@ -382,6 +397,11 @@ const Catalog = () => {
                   selectedItem={selectedItem}
                   onCatalogClick={handleBreadcrumbCatalogClick}
                   onDiscoursesClick={handleBreadcrumbDiscoursesClick}
+                  onTantraClick={
+                    tantraSubsectionIds.includes(selectedItem)
+                      ? handleBreadcrumbTantraClick
+                      : undefined
+                  }
                 />
                 <h2 className="text-3xl font-bold tibetan text-center">
                   {selectedItemDetails.title.tibetan}
