@@ -5,6 +5,15 @@ import Footer from '@/components/Footer';
 import { Search } from 'lucide-react';
 import { Input } from '@/components/ui/input';
 import VideoCard from '@/components/video/VideoCard';
+import { paginateItems } from '@/utils/paginationUtils';
+import {
+  Pagination,
+  PaginationContent,
+  PaginationItem,
+  PaginationLink,
+  PaginationPrevious,
+  PaginationNext,
+} from '@/components/ui/pagination';
 
 const mockVideos = [
   {
@@ -31,14 +40,91 @@ const mockVideos = [
     thumbnailUrl: '/placeholder.svg',
     createdAt: '2024-06-12',
   },
+  {
+    id: '5',
+    title: 'Great Compassion Sutra Overview',
+    thumbnailUrl: '/placeholder.svg',
+    createdAt: '2024-06-11',
+  },
+  {
+    id: '6',
+    title: 'Classic Sutras for Everyday Life',
+    thumbnailUrl: '/placeholder.svg',
+    createdAt: '2024-06-10',
+  },
+  {
+    id: '7',
+    title: 'Wisdom and Meditation Talk',
+    thumbnailUrl: '/placeholder.svg',
+    createdAt: '2024-06-09',
+  },
+  {
+    id: '8',
+    title: 'Tibetan Buddhist Manuscripts',
+    thumbnailUrl: '/placeholder.svg',
+    createdAt: '2024-06-08',
+  },
+  {
+    id: '9',
+    title: 'Exploring the Kangyur Volumes',
+    thumbnailUrl: '/placeholder.svg',
+    createdAt: '2024-06-07',
+  },
+  {
+    id: '10',
+    title: 'The Art of Buddhist Chanting',
+    thumbnailUrl: '/placeholder.svg',
+    createdAt: '2024-06-06',
+  },
+  {
+    id: '11',
+    title: 'What is the Kangyur?',
+    thumbnailUrl: '/placeholder.svg',
+    createdAt: '2024-06-05',
+  },
+  {
+    id: '12',
+    title: 'Introduction to Buddhist Canon',
+    thumbnailUrl: '/placeholder.svg',
+    createdAt: '2024-06-04',
+  },
 ];
+
+const VIDEOS_PER_PAGE = 12;
 
 const Video = () => {
   const [search, setSearch] = useState('');
+  const [page, setPage] = useState(1);
 
+  // filter videos by search
   const filteredVideos = mockVideos.filter(v =>
-    v.title.toLowerCase().includes(search.toLowerCase()),
+    v.title.toLowerCase().includes(search.toLowerCase())
   );
+
+  // paginate
+  const { items: paginatedVideos, pagination } = paginateItems(
+    filteredVideos,
+    page,
+    VIDEOS_PER_PAGE
+  );
+
+  // helper to render page numbers (small amount, so simple logic)
+  const renderPageNumbers = () => {
+    const arr = [];
+    for (let i = 1; i <= pagination.totalPages; i++) {
+      arr.push(
+        <PaginationItem key={i}>
+          <PaginationLink
+            isActive={pagination.currentPage === i}
+            onClick={() => setPage(i)}
+          >
+            {i}
+          </PaginationLink>
+        </PaginationItem>
+      );
+    }
+    return arr;
+  };
 
   return (
     <div className="min-h-screen flex flex-col">
@@ -55,23 +141,49 @@ const Video = () => {
                 type="search"
                 placeholder="Search videos..."
                 value={search}
-                onChange={e => setSearch(e.target.value)}
+                onChange={e => {
+                  setSearch(e.target.value);
+                  setPage(1); // reset to first page on search
+                }}
                 className="pl-10 pr-4 py-3 bg-white border border-kangyur-orange/20 rounded-lg focus:outline-none focus:ring-1 focus:ring-kangyur-orange/40 text-gray-700 placeholder-gray-400"
               />
             </div>
           </div>
 
           <div className="grid grid-cols-1 xs:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-            {filteredVideos.length === 0 ? (
+            {paginatedVideos.length === 0 ? (
               <div className="col-span-full text-center text-gray-500 py-12 text-lg">
                 No videos found.
               </div>
             ) : (
-              filteredVideos.map(video => (
+              paginatedVideos.map(video => (
                 <VideoCard key={video.id} video={video} />
               ))
             )}
           </div>
+          
+          {/* Pagination */}
+          {pagination.totalPages > 1 && (
+            <Pagination className="mt-8">
+              <PaginationContent>
+                <PaginationItem>
+                  <PaginationPrevious
+                    onClick={() => setPage(page - 1)}
+                    aria-disabled={!pagination.hasPrevPage}
+                    className={!pagination.hasPrevPage ? "pointer-events-none opacity-50" : ""}
+                  />
+                </PaginationItem>
+                {renderPageNumbers()}
+                <PaginationItem>
+                  <PaginationNext
+                    onClick={() => setPage(page + 1)}
+                    aria-disabled={!pagination.hasNextPage}
+                    className={!pagination.hasNextPage ? "pointer-events-none opacity-50" : ""}
+                  />
+                </PaginationItem>
+              </PaginationContent>
+            </Pagination>
+          )}
         </div>
       </main>
       <Footer />
