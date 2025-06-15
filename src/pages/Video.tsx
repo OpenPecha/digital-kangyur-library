@@ -140,8 +140,8 @@ const Video = () => {
           <h1 className="text-3xl font-bold text-kangyur-maroon mb-6">Video Library</h1>
           
           {/* Search bar */}
-          <div className="max-w-lg mb-8">
-            <div className="relative">
+          <div className="flex justify-center mb-8">
+            <div className="relative w-full max-w-lg">
               <span className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400"><Search className="w-5 h-5" /></span>
               <Input
                 type="search"
