@@ -7,6 +7,7 @@ import MainKarchagFrames from '@/components/catalog/MainKarchagFrames';
 import DiscourseSubsections from '@/components/catalog/DiscourseSubsections';
 import CategoryHeader from '@/components/catalog/CategoryHeader';
 import KarchagTextCardList from '@/components/catalog/KarchagTextCardList';
+import CatalogBreadcrumb from '@/components/catalog/CatalogBreadcrumb';
 import { catalogData } from '@/data/catalogData';
 import { filterCatalogItems, findItemInTree } from '@/utils/catalogUtils';
 import { paginateItems } from '@/utils/paginationUtils';
@@ -226,6 +227,18 @@ const Catalog = () => {
           {/* Category Header */}
           {category && !searchQuery && !selectedItem && (
             <CategoryHeader category={category} selectedItem={selectedItem} />
+          )}
+
+          {/* Selected Item Header with Breadcrumb */}
+          {selectedItem && selectedItemDetails && !searchQuery && (
+            <div className="mb-8">
+              <div className="relative mb-4">
+                <CatalogBreadcrumb selectedItem={selectedItem} />
+                <h2 className="text-3xl font-bold tibetan text-center">
+                  {selectedItemDetails.title.tibetan}
+                </h2>
+              </div>
+            </div>
           )}
           
           {/* Search Results Header */}
