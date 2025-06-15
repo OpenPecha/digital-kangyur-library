@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
@@ -135,27 +134,30 @@ const Video = () => {
   return (
     <div className="min-h-screen flex flex-col">
       <Navbar />
-      <main className="flex-grow pt-24 pb-16">
-        <div className="container mx-auto px-4">
-          <h1 className="text-3xl font-bold text-kangyur-maroon mb-6">Video Library</h1>
-          
-          {/* Search bar */}
-          <div className="flex justify-center mb-8">
-            <div className="relative w-full max-w-lg">
-              <span className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400"><Search className="w-5 h-5" /></span>
-              <Input
+      {/* Gradient Header with Search Bar */}
+      <div className="bg-gradient-to-r from-kangyur-orange to-kangyur-gold text-white py-12 pt-28 relative overflow-hidden">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="max-w-md mx-auto">
+            <div className="relative">
+              <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+                <Search className="w-5 h-5 text-white/60" />
+              </div>
+              <input
                 type="search"
+                className="block w-full pl-10 pr-4 py-2.5 bg-white/10 border border-white/20 rounded-lg focus:outline-none focus:ring-1 focus:ring-white/30 text-white placeholder-white/60 font-sans"
                 placeholder="Search videos..."
                 value={search}
                 onChange={e => {
                   setSearch(e.target.value);
                   setPage(1); // reset to first page on search
                 }}
-                className="pl-10 pr-4 py-3 bg-white border border-kangyur-orange/20 rounded-lg focus:outline-none focus:ring-1 focus:ring-kangyur-orange/40 text-gray-700 placeholder-gray-400"
               />
             </div>
           </div>
-
+        </div>
+      </div>
+      <main className="flex-grow pt-6 pb-16">
+        <div className="container mx-auto px-4">
           <div className="grid grid-cols-1 xs:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
             {paginatedVideos.length === 0 ? (
               <div className="col-span-full text-center text-gray-500 py-12 text-lg">
