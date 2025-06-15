@@ -8,7 +8,6 @@ import DiscourseSubsections from '@/components/catalog/DiscourseSubsections';
 import CategoryHeader from '@/components/catalog/CategoryHeader';
 import KarchagTextCardList from '@/components/catalog/KarchagTextCardList';
 import CatalogBreadcrumb from '@/components/catalog/CatalogBreadcrumb';
-import DisciplineDummyText from "@/components/catalog/DisciplineDummyText";
 import CatalogTreeList from "@/components/catalog/CatalogTreeList";
 import CatalogEmptyState from "@/components/catalog/CatalogEmptyState";
 import { catalogData } from '@/data/catalogData';
@@ -285,11 +284,6 @@ const Catalog = () => {
               category={category}
               selectedItem={selectedItem}
             />
-          )}
-
-          {/* Dummy text block for Discipline category */}
-          {category === 'discipline' && !searchQuery && !selectedItem && (
-            <DisciplineDummyText />
           )}
 
           {/* Selected Item Header with Breadcrumb */}
