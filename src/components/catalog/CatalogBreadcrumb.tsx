@@ -18,6 +18,7 @@ interface CatalogBreadcrumbProps {
   selectedItem?: string | null;
   onCatalogClick?: () => void;
   onDiscoursesClick?: () => void;
+  onTantraClick?: () => void;
 }
 
 const CatalogBreadcrumb: React.FC<CatalogBreadcrumbProps> = ({
@@ -25,6 +26,7 @@ const CatalogBreadcrumb: React.FC<CatalogBreadcrumbProps> = ({
   selectedItem,
   onCatalogClick,
   onDiscoursesClick,
+  onTantraClick,
 }) => {
   // Check if selectedItem is a tantra subsection
   const isTantraSubsection = selectedItem && tantraSubsectionTitles[selectedItem];
@@ -52,6 +54,7 @@ const CatalogBreadcrumb: React.FC<CatalogBreadcrumbProps> = ({
           key="tantra"
           to="/catalog?category=tantra"
           className="hover:text-indigo-600 transition"
+          onClick={onTantraClick}
         >
           རྒྱུད།
         </Link>,
