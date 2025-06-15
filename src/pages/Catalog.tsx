@@ -339,9 +339,29 @@ const Catalog = () => {
       {category === 'tantra' && !searchQuery && !selectedItem && (
         <TantraSubsections />
       )}
-      
+
+      {/* --- TANTRA SUBSECTION PAGE: MIRROR DISCIPLINE --- */}
+      {selectedItem && tantraSubsectionIds.includes(selectedItem) && !searchQuery && (
+        <div className="container mx-auto px-4 py-8">
+          {/* Category/Tantra header with breadcrumb */}
+          <CategoryHeader
+            category="tantra"
+            selectedItem={selectedItem}
+          />
+          <h2 className="text-3xl font-bold tibetan text-center mb-8">
+            {tantraSubsectionTitles[selectedItem]?.tibetan}
+          </h2>
+          <KarchagTextCardList
+            items={paginatedItems}
+            currentPage={pagination.currentPage}
+            totalPages={pagination.totalPages}
+            onPageChange={handlePageChange}
+          />
+        </div>
+      )}
+
       {/* Category or Search Results */}
-      {(category && category !== 'discourses' && category !== 'tantra') || searchQuery || selectedItem ? (
+      {(category && category !== 'discourses' && category !== 'tantra') || searchQuery || (selectedItem && !tantraSubsectionIds.includes(selectedItem)) ? (
         <div className="container mx-auto px-4 py-8">
           {/* Always render category header for category pages when not searching and nothing selected */}
           {category && !searchQuery && !selectedItem && category !== 'discipline' && (
@@ -370,7 +390,7 @@ const Catalog = () => {
           )}
 
           {/* Selected Item Header with Breadcrumb (show correct name for tantra subsections too) */}
-          {selectedItem && selectedItemDetails && !searchQuery && (
+          {selectedItem && selectedItemDetails && !searchQuery && !tantraSubsectionIds.includes(selectedItem) && (
             <div className="mb-8">
               <div className="relative mb-4">
                 <CatalogBreadcrumb
@@ -406,7 +426,7 @@ const Catalog = () => {
           )}
 
           {/* (Selected item or paginated item list) */}
-          {(selectedItem && paginatedItems.length > 0) ||
+          {(selectedItem && paginatedItems.length > 0 && !tantraSubsectionIds.includes(selectedItem)) ||
             (category === 'discipline' && !searchQuery && !selectedItem && paginatedItems.length > 0)
             ? (
               // This block only for paginated item rendering OTHER THAN main vinaya list, so discipline base rendering is above
