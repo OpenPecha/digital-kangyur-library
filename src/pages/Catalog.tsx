@@ -182,6 +182,38 @@ const Catalog = () => {
     return paginateItems(allTexts, currentPage, 15);
   };
 
+  // Generate dummy Vinaya texts for the discipline category
+  const getVinayaTextsForDisciplineCategory = () => [
+    {
+      id: "vinaya-1",
+      title: {
+        tibetan: "འདུལ་བ་གཞུང་ 1",
+        english: "Vinaya text 1",
+        sanskrit: "Vinaya Sūtra 1",
+      },
+      category: "འདུལ་བ། (Discipline)",
+      pages: 56,
+      volume: "I",
+      description:
+        "This is some dummy descriptive text for Vinaya text 1. Here you can describe the background, contents, or importance of the first Vinaya text in your collection. འདུལ་བའི་གཞུང་དང་པོའི་དོན་ངོ་སྤྲོད་གནང་བ་ཡིན།",
+      keywords: ["discipline", "vinaya", "monastic"],
+    },
+    {
+      id: "vinaya-2",
+      title: {
+        tibetan: "འདུལ་བ་གཞུང་ 2",
+        english: "Vinaya text 2",
+        sanskrit: "Vinaya Sūtra 2",
+      },
+      category: "འདུལ་བ། (Discipline)",
+      pages: 72,
+      volume: "II",
+      description:
+        "This is some dummy descriptive text for Vinaya text 2. Use this area to provide details, historical context, or notes about the second Vinaya text. འདུལ་བའི་གཞུང་གཉིས་པའི་བརྗོད་དོན་དེ་འདི་ལ་བཀོད།",
+      keywords: ["discipline", "vinaya", "bhikṣu"],
+    },
+  ];
+
   // Handler for selecting an item
   const handleItemSelect = (id: string) => {
     setSelectedItem(id === selectedItem ? null : id);
@@ -291,6 +323,7 @@ const Catalog = () => {
             <div className="mb-8">
               <div className="relative mb-4">
                 <CatalogBreadcrumb
+                  category={category}
                   selectedItem={selectedItem}
                   onCatalogClick={handleBreadcrumbCatalogClick}
                   onDiscoursesClick={handleBreadcrumbDiscoursesClick}
@@ -317,14 +350,21 @@ const Catalog = () => {
             </div>
           )}
           
-          {/* Display text cards if a specific item is selected or if in discipline category */}
-          {((selectedItem && paginatedItems.length > 0) || 
+          {/* Display Vinaya text cards if category is 'discipline' and there's no search or item selected */}
+          {category === 'discipline' && !searchQuery && !selectedItem ? (
+            <KarchagTextCardList
+              items={getVinayaTextsForDisciplineCategory()}
+              currentPage={1}
+              totalPages={1}
+              onPageChange={() => {}}
+            />
+          ) : ((selectedItem && paginatedItems.length > 0) ||
             (category === 'discipline' && !searchQuery && !selectedItem && paginatedItems.length > 0)) ? (
-            <KarchagTextCardList 
-              items={paginatedItems} 
-              currentPage={pagination.currentPage} 
-              totalPages={pagination.totalPages} 
-              onPageChange={handlePageChange} 
+            <KarchagTextCardList
+              items={paginatedItems}
+              currentPage={pagination.currentPage}
+              totalPages={pagination.totalPages}
+              onPageChange={handlePageChange}
             />
           ) : (
             /* Otherwise render catalog items */
