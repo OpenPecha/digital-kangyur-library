@@ -296,7 +296,7 @@ const Catalog = () => {
       <Navbar />
       
       <CatalogSearch searchQuery={searchQuery} setSearchQuery={setSearchQuery} />
-      
+
       {/* Main Karchag Frames - show only when no search, selected item, or category */}
       {!searchQuery && !selectedItem && !category && (
         <MainKarchagFrames />
@@ -310,7 +310,8 @@ const Catalog = () => {
       {/* Category or Search Results */}
       {(category && category !== 'discourses' || searchQuery || selectedItem) && (
         <div className="container mx-auto px-4 py-8">
-          {/* Category Header */}
+          {/* ======== (CHANGED HERE) ======== */}
+          {/* Always show the category header for category pages when not searching and nothing selected */}
           {category && !searchQuery && !selectedItem && (
             <CategoryHeader
               category={category}
@@ -367,7 +368,6 @@ const Catalog = () => {
               onPageChange={handlePageChange}
             />
           ) : (
-            /* Otherwise render catalog items */
             <>
               <CatalogTreeList 
                 items={filteredCatalog}
