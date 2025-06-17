@@ -21,6 +21,7 @@ const mockVideos = [
     thumbnailUrl: '/lovable-uploads/a066b3b5-c9a9-4921-8fe7-5f1c57e02393.jpg',
     createdAt: '2024-06-14',
     duration: '10:45',
+    youtubeUrl: 'https://www.youtube.com/watch?v=bs-21BWZDeo'
   },
   {
     id: '2',
@@ -28,6 +29,7 @@ const mockVideos = [
     thumbnailUrl: '/lovable-uploads/a066b3b5-c9a9-4921-8fe7-5f1c57e02393.jpg',
     createdAt: '2024-06-13',
     duration: '12:34',
+    youtubeUrl: 'https://www.youtube.com/watch?v=ej0_39J4yts'
   },
   {
     id: '3',
@@ -35,6 +37,7 @@ const mockVideos = [
     thumbnailUrl: '/lovable-uploads/a066b3b5-c9a9-4921-8fe7-5f1c57e02393.jpg',
     createdAt: '2024-06-12',
     duration: '07:22',
+    youtubeUrl: 'https://www.youtube.com/watch?v=pbngKOUgCDY'
   },
   {
     id: '4',
@@ -42,6 +45,7 @@ const mockVideos = [
     thumbnailUrl: '/lovable-uploads/a066b3b5-c9a9-4921-8fe7-5f1c57e02393.jpg',
     createdAt: '2024-06-12',
     duration: '18:01',
+    youtubeUrl: 'https://www.youtube.com/watch?v=qllOX8pYcNk'
   },
   {
     id: '5',
@@ -49,6 +53,7 @@ const mockVideos = [
     thumbnailUrl: '/lovable-uploads/a066b3b5-c9a9-4921-8fe7-5f1c57e02393.jpg',
     createdAt: '2024-06-11',
     duration: '15:42',
+    youtubeUrl: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ'
   },
   {
     id: '6',
@@ -56,6 +61,7 @@ const mockVideos = [
     thumbnailUrl: '/lovable-uploads/a066b3b5-c9a9-4921-8fe7-5f1c57e02393.jpg',
     createdAt: '2024-06-10',
     duration: '22:17',
+    youtubeUrl: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ'
   },
   {
     id: '7',
@@ -63,6 +69,7 @@ const mockVideos = [
     thumbnailUrl: '/lovable-uploads/a066b3b5-c9a9-4921-8fe7-5f1c57e02393.jpg',
     createdAt: '2024-06-09',
     duration: '09:55',
+    youtubeUrl: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ'
   },
   {
     id: '8',
@@ -70,6 +77,7 @@ const mockVideos = [
     thumbnailUrl: '/lovable-uploads/a066b3b5-c9a9-4921-8fe7-5f1c57e02393.jpg',
     createdAt: '2024-06-08',
     duration: '06:28',
+    youtubeUrl: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ'
   },
   {
     id: '9',
@@ -77,6 +85,7 @@ const mockVideos = [
     thumbnailUrl: '/lovable-uploads/a066b3b5-c9a9-4921-8fe7-5f1c57e02393.jpg',
     createdAt: '2024-06-07',
     duration: '04:20',
+    youtubeUrl: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ'
   },
   {
     id: '10',
@@ -84,6 +93,7 @@ const mockVideos = [
     thumbnailUrl: '/lovable-uploads/a066b3b5-c9a9-4921-8fe7-5f1c57e02393.jpg',
     createdAt: '2024-06-06',
     duration: '11:56',
+    youtubeUrl: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ'
   },
   {
     id: '11',
@@ -91,6 +101,7 @@ const mockVideos = [
     thumbnailUrl: '/lovable-uploads/a066b3b5-c9a9-4921-8fe7-5f1c57e02393.jpg',
     createdAt: '2024-06-05',
     duration: '08:15',
+    youtubeUrl: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ'
   },
   {
     id: '12',
@@ -98,6 +109,7 @@ const mockVideos = [
     thumbnailUrl: '/lovable-uploads/a066b3b5-c9a9-4921-8fe7-5f1c57e02393.jpg',
     createdAt: '2024-06-04',
     duration: '03:54',
+    youtubeUrl: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ'
   },
   {
     id: '13',
@@ -105,6 +117,7 @@ const mockVideos = [
     thumbnailUrl: '/lovable-uploads/a066b3b5-c9a9-4921-8fe7-5f1c57e02393.jpg',
     createdAt: '2024-06-03',
     duration: '05:46',
+    youtubeUrl: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ'
   },
 ];
 
