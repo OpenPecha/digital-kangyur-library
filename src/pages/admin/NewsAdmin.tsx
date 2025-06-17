@@ -1,10 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 import AdminLayout from '@/components/admin/AdminLayout';
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
 import { CreateNewsForm } from '@/components/admin/news/CreateNewsForm';
 import { NewsEntry } from '@/types/news';
-import { Edit, Trash2, Calendar } from 'lucide-react';
+import { Edit, Trash2, Calendar, Search } from 'lucide-react';
 
 // Extended mock data with more entries and image URLs
 const mockEntries: NewsEntry[] = [{
@@ -79,22 +80,52 @@ const NewsCard = ({
     </Card>;
 };
 const NewsAdmin = () => {
-  return <AdminLayout>
+  const [searchQuery, setSearchQuery] = useState('');
+
+  const filteredEntries = mockEntries.filter(news =>
+    news.englishTitle.toLowerCase().includes(searchQuery.toLowerCase()) ||
+    news.englishDescription.toLowerCase().includes(searchQuery.toLowerCase()) ||
+    news.tibetanTitle.toLowerCase().includes(searchQuery.toLowerCase())
+  );
+
+  return (
+    <AdminLayout>
       <div className="space-y-6">
-        {/* Header with Create Button */}
-        <div className="flex items-center justify-between">
-          <div>
+        {/* Header with Search and Create Button */}
+        <div className="flex items-center justify-between gap-4">
+          <div className="flex-1">
             <h1 className="text-3xl font-bold text-gray-800 py-[10px]">Manage News Content</h1>
             <p className="text-gray-600 mt-1">Create, edit, and manage news articles</p>
           </div>
           <CreateNewsForm />
         </div>
 
+        {/* Search Bar */}
+        <div className="relative max-w-md">
+          <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-4 w-4" />
+          <Input
+            placeholder="Search news articles..."
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+            className="pl-10"
+          />
+        </div>
+
         {/* News Cards Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {mockEntries.map(news => <NewsCard key={news.id} news={news} />)}
+          {filteredEntries.map(news => (
+            <NewsCard key={news.id} news={news} />
+          ))}
         </div>
+
+        {filteredEntries.length === 0 && searchQuery && (
+          <div className="text-center py-8">
+            <p className="text-gray-500">No news articles found matching your search.</p>
+          </div>
+        )}
       </div>
-    </AdminLayout>;
+    </AdminLayout>
+  );
 };
+
 export default NewsAdmin;
