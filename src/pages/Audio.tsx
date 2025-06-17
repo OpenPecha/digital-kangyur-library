@@ -133,64 +133,6 @@ const AudioPage = () => {
             )}
           </div>
         </div>
-        
-        {/* Quick Access Section */}
-        {!selectedAudio && (
-          <div className="mt-12">
-            <h3 className="text-xl font-semibold text-kangyur-maroon mb-6">Popular Recitations</h3>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {[
-                {
-                  id: 'heart-sutra',
-                  title: 'Heart Sutra',
-                  duration: '8:21',
-                  category: 'Prajñāpāramitā',
-                  thumbnail: 'https://images.unsplash.com/photo-1649972904349-6e44c42644a7?w=400&h=200&fit=crop'
-                },
-                {
-                  id: 'diamond-sutra',
-                  title: 'Diamond Sutra',
-                  duration: '31:45',
-                  category: 'Prajñāpāramitā',
-                  thumbnail: 'https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?w=400&h=200&fit=crop'
-                },
-                {
-                  id: 'golden-light-sutra',
-                  title: 'Golden Light Sutra',
-                  duration: '42:18',
-                  category: 'Sutras',
-                  thumbnail: 'https://images.unsplash.com/photo-1518770660439-4636190af475?w=400&h=200&fit=crop'
-                }
-              ].map(item => (
-                <div
-                  key={item.id}
-                  onClick={() => handleSelectAudio(item.id)}
-                  className="bg-white rounded-xl shadow-sm border border-kangyur-orange/10 hover:shadow-lg transition-all cursor-pointer group overflow-hidden"
-                >
-                  <div className="aspect-video w-full bg-gray-100 overflow-hidden relative">
-                    <img
-                      src={item.thumbnail}
-                      alt={item.title}
-                      className="object-cover w-full h-full group-hover:scale-105 transition-transform duration-300"
-                      loading="lazy"
-                    />
-                    <div className="absolute bottom-2 right-2 px-2 py-1 bg-black bg-opacity-75 text-white text-xs font-semibold rounded">
-                      {item.duration}
-                    </div>
-                  </div>
-                  <div className="p-4">
-                    <div className="flex items-center justify-between mb-2">
-                      <span className="text-xs text-kangyur-orange font-medium">{item.category}</span>
-                    </div>
-                    <h4 className="font-semibold text-kangyur-maroon group-hover:text-kangyur-orange transition-colors">
-                      {item.title}
-                    </h4>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        )}
       </div>
       
       <Footer />
