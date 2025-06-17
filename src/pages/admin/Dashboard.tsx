@@ -7,7 +7,7 @@ import { BookOpen, Video, NewspaperIcon, FileText } from 'lucide-react';
 const Dashboard = () => {
   const managementCards = [
     {
-      title: "Catalogue",
+      title: "Text",
       icon: FileText,
       path: "/admin/texts",
       description: "Manage Kangyur texts and content"
