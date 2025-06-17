@@ -44,10 +44,7 @@ export const getAllAudioItems = (items: CatalogItem[]): CatalogItem[] => {
   const collectAudioItems = (items: CatalogItem[]) => {
     items.forEach(item => {
       if (item.audioUrl) {
-        audioItems.push({
-          ...item,
-          playCount: item.playCount || Math.floor(Math.random() * 1000000) + 10000 // Add random play count for demo
-        });
+        audioItems.push(item);
       }
       if (item.children) {
         collectAudioItems(item.children);

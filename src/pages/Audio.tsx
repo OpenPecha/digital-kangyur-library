@@ -30,15 +30,6 @@ const AudioPage = () => {
     }
   };
 
-  const formatPlayCount = (count) => {
-    if (count >= 1000000) {
-      return Math.floor(count / 1000000) + 'M';
-    } else if (count >= 1000) {
-      return Math.floor(count / 1000) + 'K';
-    }
-    return count.toString();
-  };
-
   return (
     <div className="min-h-screen bg-gray-50 w-full">
       <Navbar />
@@ -111,18 +102,10 @@ const AudioPage = () => {
                     {item.title.tibetan}
                   </p>
                   <div className="flex items-center space-x-2 mt-1">
-                    {item.playCount && (
-                      <span className="text-xs text-gray-500">
-                        {formatPlayCount(item.playCount)} plays
-                      </span>
-                    )}
                     {item.duration && (
-                      <>
-                        <span className="text-xs text-gray-400">•</span>
-                        <span className="text-xs text-gray-500">
-                          {item.duration}
-                        </span>
-                      </>
+                      <span className="text-xs text-gray-500">
+                        {item.duration}
+                      </span>
                     )}
                   </div>
                 </div>
