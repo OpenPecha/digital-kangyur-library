@@ -37,15 +37,9 @@ const textData = {
     { key: 'translation-type', label: 'Translation Type', value: 'Direct from Sanskrit', group: 'content' },
     { key: 'yana', label: 'Yana', value: 'Mahayana', group: 'content' },
     
-    // General metadata (existing)
+    // General metadata (filtered to only show category and subcategory)
     { key: 'category', label: 'Category', value: 'Discourses (mdo)', group: 'general' },
-    { key: 'subcategory', label: 'Subcategory', value: 'General Sutras', group: 'general' },
-    { key: 'vehicle', label: 'Vehicle', value: 'Mahayana', group: 'general' },
-    { key: 'language', label: 'Language', value: 'Tibetan', group: 'general' },
-    { key: 'script', label: 'Script', value: 'Tibetan (dbu can)', group: 'general' },
-    { key: 'period', label: 'Translation Period', value: 'Early Period (7th-9th century)', group: 'general' },
-    { key: 'translator', label: 'Translator', value: 'Jinamitra, Dānaśīla, Yeshe De', group: 'general' },
-    { key: 'length', label: 'Length', value: 'Medium (50-100 folios)', group: 'general' }
+    { key: 'subcategory', label: 'Subcategory', value: 'General Sutras', group: 'general' }
   ],
   sections: [
     {
