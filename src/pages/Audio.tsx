@@ -7,10 +7,21 @@ import { Button } from '@/components/ui/button';
 import AudioPlayer from '@/components/audio/AudioPlayer';
 import { audioCatalogData } from '@/data/audioCatalogData';
 import { filterCatalogItems, findItemInTree, getAllAudioItems } from '@/utils/catalogUtils';
+import { paginateItems } from '@/utils/paginationUtils';
+import {
+  Pagination,
+  PaginationContent,
+  PaginationItem,
+  PaginationLink,
+  PaginationNext,
+  PaginationPrevious,
+} from '@/components/ui/pagination';
 
 const AudioPage = () => {
   const [selectedAudio, setSelectedAudio] = useState(null);
   const [searchQuery, setSearchQuery] = useState('');
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 10;
 
   // Get all audio items from the catalog data
   const allAudioItems = getAllAudioItems(audioCatalogData);
@@ -23,11 +34,25 @@ const AudioPage = () => {
       )
     : allAudioItems;
 
+  // Apply pagination
+  const paginatedData = paginateItems(filteredAudioItems, currentPage, itemsPerPage);
+  const { items: displayedItems, pagination } = paginatedData;
+
   const handleSelectAudio = (audioId) => {
     const foundItem = findItemInTree(audioCatalogData, audioId);
     if (foundItem && foundItem.audioUrl) {
       setSelectedAudio(foundItem);
     }
+  };
+
+  const handlePageChange = (page) => {
+    setCurrentPage(page);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  const handleSearchChange = (e) => {
+    setSearchQuery(e.target.value);
+    setCurrentPage(1); // Reset to first page when searching
   };
 
   return (
@@ -54,7 +79,7 @@ const AudioPage = () => {
                 className="block w-full pl-10 pr-4 py-3 bg-white/10 border border-white/20 rounded-lg focus:outline-none focus:ring-2 focus:ring-white/30 text-white placeholder-white/60 font-sans"
                 placeholder="Search audio recordings..."
                 value={searchQuery}
-                onChange={e => setSearchQuery(e.target.value)}
+                onChange={handleSearchChange}
               />
             </div>
           </div>
@@ -74,13 +99,15 @@ const AudioPage = () => {
             {searchQuery ? 'Search Results' : 'All Recordings'}
           </h2>
           <p className="text-gray-600">
-            {filteredAudioItems.length} recording{filteredAudioItems.length !== 1 ? 's' : ''} available
+            Showing {pagination.currentPage === pagination.totalPages 
+              ? filteredAudioItems.length 
+              : pagination.currentPage * itemsPerPage} of {filteredAudioItems.length} recording{filteredAudioItems.length !== 1 ? 's' : ''}
           </p>
         </div>
         
         {/* Audio Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          {filteredAudioItems.map((item) => (
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
+          {displayedItems.map((item) => (
             <div
               key={item.id}
               className="bg-white rounded-lg p-4 shadow-sm border border-gray-200 hover:shadow-md transition-shadow cursor-pointer group"
@@ -127,6 +154,48 @@ const AudioPage = () => {
             </div>
           ))}
         </div>
+
+        {/* Pagination */}
+        {pagination.totalPages > 1 && (
+          <div className="flex justify-center">
+            <Pagination>
+              <PaginationContent>
+                <PaginationItem>
+                  <PaginationPrevious 
+                    onClick={() => pagination.hasPrevPage && handlePageChange(currentPage - 1)}
+                    className={!pagination.hasPrevPage ? 'pointer-events-none opacity-50' : 'cursor-pointer'}
+                  >
+                    Previous
+                  </PaginationPrevious>
+                </PaginationItem>
+                
+                {[...Array(pagination.totalPages)].map((_, index) => {
+                  const pageNumber = index + 1;
+                  return (
+                    <PaginationItem key={pageNumber}>
+                      <PaginationLink
+                        onClick={() => handlePageChange(pageNumber)}
+                        isActive={currentPage === pageNumber}
+                        className="cursor-pointer"
+                      >
+                        {pageNumber}
+                      </PaginationLink>
+                    </PaginationItem>
+                  );
+                })}
+                
+                <PaginationItem>
+                  <PaginationNext 
+                    onClick={() => pagination.hasNextPage && handlePageChange(currentPage + 1)}
+                    className={!pagination.hasNextPage ? 'pointer-events-none opacity-50' : 'cursor-pointer'}
+                  >
+                    Next
+                  </PaginationNext>
+                </PaginationItem>
+              </PaginationContent>
+            </Pagination>
+          </div>
+        )}
         
         {filteredAudioItems.length === 0 && (
           <div className="text-center py-12">
