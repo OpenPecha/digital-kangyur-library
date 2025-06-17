@@ -1,11 +1,17 @@
-
 import React, { useState } from 'react';
 import AdminLayout from '@/components/admin/AdminLayout';
-import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
-import { Edit, Trash2, Calendar, Search, Plus, BookOpen } from 'lucide-react';
+import { Edit, Trash2, Search, Plus, BookOpen } from 'lucide-react';
 import { catalogData } from '@/data/catalogData';
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table";
 
 // Function to flatten catalog data into a list of texts
 const flattenCatalogData = (items: any[], parentPath: string = ''): any[] => {
@@ -47,44 +53,6 @@ const flattenCatalogData = (items: any[], parentPath: string = ''): any[] => {
 
 const allTexts = flattenCatalogData(catalogData);
 
-const TextCard = ({ text }: { text: any }) => {
-  return (
-    <Card className="flex flex-col h-full overflow-hidden hover:shadow-md transition-shadow">
-      <div className="bg-gradient-to-r from-kangyur-orange/10 to-kangyur-gold/10 h-48 flex items-center justify-center">
-        <BookOpen className="h-20 w-20 text-kangyur-orange/60" />
-      </div>
-      <CardHeader className="pb-2">
-        <CardTitle className="text-lg">{text.title.english}</CardTitle>
-        {text.title.tibetan && (
-          <p className="text-sm font-medium text-kangyur-maroon tibetan">{text.title.tibetan}</p>
-        )}
-      </CardHeader>
-      <CardContent className="pb-2 flex-grow">
-        <p className="text-muted-foreground text-sm mb-3">{text.description}</p>
-        <div className="flex items-center justify-between text-xs text-kangyur-dark/60 mb-2">
-          <span className="bg-kangyur-orange/10 text-kangyur-orange px-2 py-1 rounded">
-            {text.type === 'category' ? 'Category' : 'Text'}
-          </span>
-          <span>{text.count} {text.count === 1 ? 'text' : 'texts'}</span>
-        </div>
-        <p className="text-xs text-gray-500">{text.category}</p>
-      </CardContent>
-      <CardFooter className="pt-0">
-        <div className="flex items-center gap-2 w-full">
-          <Button variant="outline" size="sm" className="flex-1">
-            <Edit className="h-4 w-4 mr-2" />
-            Edit
-          </Button>
-          <Button variant="outline" size="sm" className="flex-1 text-red-600 hover:text-red-700">
-            <Trash2 className="h-4 w-4 mr-2" />
-            Delete
-          </Button>
-        </div>
-      </CardFooter>
-    </Card>
-  );
-};
-
 const TextsAdmin = () => {
   const [searchQuery, setSearchQuery] = useState('');
 
@@ -121,11 +89,49 @@ const TextsAdmin = () => {
           />
         </div>
 
-        {/* Text Cards Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {filteredTexts.map(text => (
-            <TextCard key={text.id} text={text} />
-          ))}
+        {/* Text List Table */}
+        <div className="rounded-md border">
+          <Table>
+            <TableHeader>
+              <TableRow>
+                <TableHead>English Title</TableHead>
+                <TableHead>Tibetan Title</TableHead>
+                <TableHead>Category</TableHead>
+                <TableHead>Type</TableHead>
+                <TableHead>Count</TableHead>
+                <TableHead>Actions</TableHead>
+              </TableRow>
+            </TableHeader>
+            <TableBody>
+              {filteredTexts.map(text => (
+                <TableRow key={text.id}>
+                  <TableCell className="font-medium">{text.title.english}</TableCell>
+                  <TableCell className="tibetan text-kangyur-maroon">{text.title.tibetan || '—'}</TableCell>
+                  <TableCell className="text-sm text-gray-600">{text.category}</TableCell>
+                  <TableCell>
+                    <span className={`px-2 py-1 text-xs font-medium rounded ${
+                      text.type === 'category' 
+                        ? 'bg-kangyur-orange/10 text-kangyur-orange' 
+                        : 'bg-kangyur-teal/10 text-kangyur-green'
+                    }`}>
+                      {text.type === 'category' ? 'Category' : 'Text'}
+                    </span>
+                  </TableCell>
+                  <TableCell>{text.count} {text.count === 1 ? 'text' : 'texts'}</TableCell>
+                  <TableCell>
+                    <div className="flex items-center gap-2">
+                      <Button variant="outline" size="sm">
+                        <Edit className="h-4 w-4" />
+                      </Button>
+                      <Button variant="outline" size="sm" className="text-red-600 hover:text-red-700">
+                        <Trash2 className="h-4 w-4" />
+                      </Button>
+                    </div>
+                  </TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
         </div>
 
         {filteredTexts.length === 0 && searchQuery && (
