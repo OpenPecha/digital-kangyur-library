@@ -23,7 +23,7 @@ const KarchagFrame: React.FC<KarchagFrameProps> = ({ tibetanText, link, fontSize
     <Link to={link} className="block">
       <div className="relative w-full h-full flex flex-col items-center justify-center transform transition-transform hover:scale-105">
         <div className="relative w-64 h-[360px] flex items-center justify-center">
-          <img src="/frame.svg" alt="Decorative frame" className="w-full h-full" />
+          <img src="/frame.png" alt="Decorative frame" className="w-full h-full" />
           
           {/* Tibetan text inside the frame */}
           <div className="absolute inset-0 flex items-center justify-center">
