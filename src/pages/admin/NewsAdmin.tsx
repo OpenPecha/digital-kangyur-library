@@ -3,9 +3,9 @@ import AdminLayout from '@/components/admin/AdminLayout';
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
-import { CreateNewsForm } from '@/components/admin/news/CreateNewsForm';
+import { NewsForm } from '@/components/admin/news/CreateNewsForm';
 import { NewsEntry } from '@/types/news';
-import { Edit, Trash2, Calendar, Search } from 'lucide-react';
+import { Edit, Trash2, Calendar, Search, Plus } from 'lucide-react';
 
 // Extended mock data with more entries and image URLs
 const mockEntries: NewsEntry[] = [{
@@ -41,10 +41,13 @@ const mockEntries: NewsEntry[] = [{
   createdAt: "2023-09-18",
   thumbnailUrl: "https://images.unsplash.com/photo-1612599316791-451087e8f043?q=80&w=2574&auto=format&fit=crop"
 }];
+
 const NewsCard = ({
-  news
+  news,
+  onEdit
 }: {
   news: NewsEntry;
+  onEdit: (news: NewsEntry) => void;
 }) => {
   return <Card className="flex flex-col h-full overflow-hidden hover:shadow-md transition-shadow">
       <div className="overflow-hidden h-48">
@@ -67,7 +70,7 @@ const NewsCard = ({
       </CardContent>
       <CardFooter className="pt-0">
         <div className="flex items-center gap-2 w-full">
-          <Button variant="outline" size="sm" className="flex-1">
+          <Button variant="outline" size="sm" className="flex-1" onClick={() => onEdit(news)}>
             <Edit className="h-4 w-4 mr-2" />
             Edit
           </Button>
@@ -79,14 +82,34 @@ const NewsCard = ({
       </CardFooter>
     </Card>;
 };
+
 const NewsAdmin = () => {
   const [searchQuery, setSearchQuery] = useState('');
+  const [isFormOpen, setIsFormOpen] = useState(false);
+  const [editingNews, setEditingNews] = useState<NewsEntry | null>(null);
 
   const filteredEntries = mockEntries.filter(news =>
     news.englishTitle.toLowerCase().includes(searchQuery.toLowerCase()) ||
     news.englishDescription.toLowerCase().includes(searchQuery.toLowerCase()) ||
     news.tibetanTitle.toLowerCase().includes(searchQuery.toLowerCase())
   );
+
+  const handleEdit = (news: NewsEntry) => {
+    setEditingNews(news);
+    setIsFormOpen(true);
+  };
+
+  const handleSave = (data: any) => {
+    // Here you would typically make an API call to save the data
+    console.log('Saving news:', data);
+    setIsFormOpen(false);
+    setEditingNews(null);
+  };
+
+  const handleClose = () => {
+    setIsFormOpen(false);
+    setEditingNews(null);
+  };
 
   return (
     <AdminLayout>
@@ -97,7 +120,10 @@ const NewsAdmin = () => {
             <h1 className="text-3xl font-bold text-gray-800 py-[10px]">Manage News Content</h1>
             <p className="text-gray-600 mt-1">Create, edit, and manage news articles</p>
           </div>
-          <CreateNewsForm />
+          <Button onClick={() => setIsFormOpen(true)}>
+            <Plus className="mr-2 h-4 w-4" />
+            Create News
+          </Button>
         </div>
 
         {/* Search Bar */}
@@ -114,7 +140,7 @@ const NewsAdmin = () => {
         {/* News Cards Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {filteredEntries.map(news => (
-            <NewsCard key={news.id} news={news} />
+            <NewsCard key={news.id} news={news} onEdit={handleEdit} />
           ))}
         </div>
 
@@ -123,6 +149,23 @@ const NewsAdmin = () => {
             <p className="text-gray-500">No news articles found matching your search.</p>
           </div>
         )}
+
+        {/* News Form */}
+        <NewsForm
+          isOpen={isFormOpen}
+          onClose={handleClose}
+          mode={editingNews ? 'edit' : 'create'}
+          data={editingNews ? {
+            id: parseInt(editingNews.id),
+            tibetan_title: editingNews.tibetanTitle,
+            english_title: editingNews.englishTitle,
+            tibetan_content: editingNews.tibetanDescription,
+            english_content: editingNews.englishDescription,
+            published_date: editingNews.createdAt,
+            is_active: true
+          } : undefined}
+          onSave={handleSave}
+        />
       </div>
     </AdminLayout>
   );

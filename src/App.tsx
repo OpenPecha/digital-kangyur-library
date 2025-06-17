@@ -25,7 +25,6 @@ import VideoPage from "./pages/Video";
 import Dashboard from "./pages/admin/Dashboard";
 import KarchagAdmin from "./pages/admin/KarchagAdmin";
 import EditionsAdmin from "./pages/admin/EditionsAdmin";
-import AudioAdmin from "./pages/admin/AudioAdmin";
 import NewsAdmin from "./pages/admin/NewsAdmin";
 import VideoAdmin from "./pages/admin/VideoAdmin";
 
@@ -56,7 +55,6 @@ const App = () => (
             <Route path="/video" element={<VideoPage />} />
             <Route path="/about" element={<About />} />
             <Route path="/admin" element={<Dashboard />} />
-            <Route path="/admin/audio" element={<AudioAdmin />} />
             <Route path="/admin/news" element={<NewsAdmin />} />
             <Route path="/admin/video" element={<VideoAdmin />} />
             <Route path="/admin/karchag" element={<KarchagAdmin />} />

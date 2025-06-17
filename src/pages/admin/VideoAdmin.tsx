@@ -3,9 +3,9 @@ import AdminLayout from '@/components/admin/AdminLayout';
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
-import { CreateVideoForm } from '@/components/admin/video/CreateVideoForm';
+import { VideoForm } from '@/components/admin/video/CreateVideoForm';
 import { VideoEntry } from '@/types/video';
-import { Edit, Trash2, Calendar, Play, Search } from 'lucide-react';
+import { Edit, Trash2, Calendar, Play, Search, Plus } from 'lucide-react';
 
 // Extended mock data with more entries and thumbnails
 const mockEntries: VideoEntry[] = [{
@@ -45,10 +45,13 @@ const mockEntries: VideoEntry[] = [{
   youtubeUrl: "https://youtube.com/watch?v=example4",
   thumbnailUrl: "https://images.unsplash.com/photo-1516979187457-637abb4f9353?q=80&w=2574&auto=format&fit=crop"
 }];
+
 const VideoCard = ({
-  video
+  video,
+  onEdit
 }: {
   video: VideoEntry;
+  onEdit: (video: VideoEntry) => void;
 }) => {
   return <Card className="flex flex-col h-full overflow-hidden hover:shadow-md transition-shadow">
       <div className="overflow-hidden h-48 relative">
@@ -74,7 +77,7 @@ const VideoCard = ({
       </CardContent>
       <CardFooter className="pt-0">
         <div className="flex items-center gap-2 w-full">
-          <Button variant="outline" size="sm" className="flex-1">
+          <Button variant="outline" size="sm" className="flex-1" onClick={() => onEdit(video)}>
             <Edit className="h-4 w-4 mr-2" />
             Edit
           </Button>
@@ -86,14 +89,34 @@ const VideoCard = ({
       </CardFooter>
     </Card>;
 };
+
 const VideoAdmin = () => {
   const [searchQuery, setSearchQuery] = useState('');
+  const [isFormOpen, setIsFormOpen] = useState(false);
+  const [editingVideo, setEditingVideo] = useState<VideoEntry | null>(null);
 
   const filteredEntries = mockEntries.filter(video =>
     video.englishTitle.toLowerCase().includes(searchQuery.toLowerCase()) ||
     video.englishDescription.toLowerCase().includes(searchQuery.toLowerCase()) ||
     video.tibetanTitle.toLowerCase().includes(searchQuery.toLowerCase())
   );
+
+  const handleEdit = (video: VideoEntry) => {
+    setEditingVideo(video);
+    setIsFormOpen(true);
+  };
+
+  const handleSave = (data: any) => {
+    // Here you would typically make an API call to save the data
+    console.log('Saving video:', data);
+    setIsFormOpen(false);
+    setEditingVideo(null);
+  };
+
+  const handleClose = () => {
+    setIsFormOpen(false);
+    setEditingVideo(null);
+  };
 
   return (
     <AdminLayout>
@@ -104,7 +127,10 @@ const VideoAdmin = () => {
             <h1 className="text-3xl font-bold text-gray-800 py-[10px]">Manage Video Content</h1>
             <p className="text-gray-600 mt-1">Create, edit, and manage video recordings</p>
           </div>
-          <CreateVideoForm />
+          <Button onClick={() => setIsFormOpen(true)}>
+            <Plus className="mr-2 h-4 w-4" />
+            Create Video
+          </Button>
         </div>
 
         {/* Search Bar */}
@@ -121,7 +147,7 @@ const VideoAdmin = () => {
         {/* Video Cards Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {filteredEntries.map(video => (
-            <VideoCard key={video.id} video={video} />
+            <VideoCard key={video.id} video={video} onEdit={handleEdit} />
           ))}
         </div>
 
@@ -130,6 +156,23 @@ const VideoAdmin = () => {
             <p className="text-gray-500">No video recordings found matching your search.</p>
           </div>
         )}
+
+        {/* Video Form */}
+        <VideoForm
+          isOpen={isFormOpen}
+          onClose={handleClose}
+          mode={editingVideo ? 'edit' : 'create'}
+          data={editingVideo ? {
+            id: parseInt(editingVideo.id),
+            tibetan_title: editingVideo.tibetanTitle,
+            english_title: editingVideo.englishTitle,
+            tibetan_description: editingVideo.tibetanDescription,
+            english_description: editingVideo.englishDescription,
+            youtube_url: editingVideo.youtubeUrl,
+            thumbnail_url: editingVideo.thumbnailUrl
+          } : undefined}
+          onSave={handleSave}
+        />
       </div>
     </AdminLayout>
   );
