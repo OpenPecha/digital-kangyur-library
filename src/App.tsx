@@ -1,4 +1,3 @@
-
 import { QueryClientProvider, QueryClient } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { LocalizationProvider } from "./hooks/useLocalization";
@@ -25,10 +24,10 @@ import Audio from "./pages/Audio";
 import VideoPage from "./pages/Video";
 import Dashboard from "./pages/admin/Dashboard";
 import KarchagAdmin from "./pages/admin/KarchagAdmin";
+import EditionsAdmin from "./pages/admin/EditionsAdmin";
 import AudioAdmin from "./pages/admin/AudioAdmin";
 import NewsAdmin from "./pages/admin/NewsAdmin";
 import VideoAdmin from "./pages/admin/VideoAdmin";
-import TextsAdmin from "./pages/admin/TextsAdmin";
 
 const queryClient = new QueryClient();
 
@@ -57,11 +56,11 @@ const App = () => (
             <Route path="/video" element={<VideoPage />} />
             <Route path="/about" element={<About />} />
             <Route path="/admin" element={<Dashboard />} />
-            <Route path="/admin/karchag" element={<KarchagAdmin />} />
             <Route path="/admin/audio" element={<AudioAdmin />} />
             <Route path="/admin/news" element={<NewsAdmin />} />
             <Route path="/admin/video" element={<VideoAdmin />} />
-            <Route path="/admin/texts" element={<TextsAdmin />} />
+            <Route path="/admin/karchag" element={<KarchagAdmin />} />
+            <Route path="/admin/editions" element={<EditionsAdmin />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </BrowserRouter>

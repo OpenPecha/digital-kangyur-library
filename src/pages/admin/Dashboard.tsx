@@ -7,9 +7,9 @@ import { BookOpen, Video, NewspaperIcon, FileText } from 'lucide-react';
 const Dashboard = () => {
   const managementCards = [
     {
-      title: "Text",
+      title: "Karchag",
       icon: FileText,
-      path: "/admin/texts",
+      path: "/admin/karchag",
       description: "Manage Kangyur texts and content"
     },
     {
@@ -27,7 +27,7 @@ const Dashboard = () => {
     {
       title: "Editions",
       icon: BookOpen,
-      path: "/admin/karchag",
+      path: "/admin/editions",
       description: "Manage Karchag content and editions"
     }
   ];
@@ -36,7 +36,7 @@ const Dashboard = () => {
     <AdminLayout>
       <div className="space-y-8">
         <div className="text-center">
-          <h1 className="text-3xl font-bold text-gray-800 mb-2">Content Management Board</h1>
+          <h1 className="text-3xl font-bold text-gray-800 mb-2 pt-10">Content Management Board</h1>
           <p className="text-gray-600">Manage your content across different categories</p>
         </div>
         
