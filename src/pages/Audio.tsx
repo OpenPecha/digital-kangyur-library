@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
-import { PanelLeft, PanelLeftClose, Search } from 'lucide-react';
+import { PanelLeft, PanelLeftClose, Search, Music } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
 import AudioCatalog from '@/components/audio/AudioCatalog';
@@ -14,7 +14,7 @@ const AudioPage = () => {
   const [showCatalog, setShowCatalog] = useState(true);
   const [selectedAudio, setSelectedAudio] = useState(null);
   const [searchQuery, setSearchQuery] = useState('');
-  const [expandedItems, setExpandedItems] = useState(['sutras']);
+  const [expandedItems, setExpandedItems] = useState(['sutras', 'prajnaparamita']);
 
   // Filter the catalog data based on search
   const filteredCatalog = searchQuery ? filterCatalogItems(audioCatalogData, searchQuery) : audioCatalogData;
@@ -31,16 +31,41 @@ const AudioPage = () => {
     }
   };
 
+  // Get breadcrumb path for selected item
+  const getBreadcrumbPath = (itemId) => {
+    const findPath = (items, id, path = []) => {
+      for (const item of items) {
+        const currentPath = [...path, item];
+        if (item.id === id) {
+          return currentPath;
+        }
+        if (item.children) {
+          const found = findPath(item.children, id, currentPath);
+          if (found) return found;
+        }
+      }
+      return null;
+    };
+    return findPath(audioCatalogData, itemId);
+  };
+
+  const breadcrumbPath = selectedAudio ? getBreadcrumbPath(selectedAudio.id) : [];
+
   return (
     <div className="min-h-screen bg-gray-50 w-full">
       <Navbar />
       
-      {/* Enhanced Header with Search */}
+      {/* Enhanced Header */}
       <div className="bg-gradient-to-r from-kangyur-orange to-kangyur-gold text-white py-12 pt-28 relative overflow-hidden">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-8">
-            
-            
+            <h1 className="text-4xl font-bold mb-4 flex items-center justify-center">
+              <Music className="w-8 h-8 mr-3" />
+              Audio Archive
+            </h1>
+            <p className="text-xl text-white/90 max-w-2xl mx-auto">
+              Sacred recitations and audio recordings from the Kangyur collection
+            </p>
           </div>
           
           <div className="max-w-md mx-auto">
@@ -62,6 +87,23 @@ const AudioPage = () => {
       
       {/* Main Content */}
       <div className="container mx-auto px-4 py-8">
+        {/* Breadcrumb */}
+        {breadcrumbPath.length > 0 && (
+          <div className="mb-6">
+            <nav className="flex text-sm text-gray-600">
+              <span>Audio Archive</span>
+              {breadcrumbPath.map((item, index) => (
+                <React.Fragment key={item.id}>
+                  <span className="mx-2">/</span>
+                  <span className={index === breadcrumbPath.length - 1 ? "text-kangyur-orange font-medium" : ""}>
+                    {item.title.english}
+                  </span>
+                </React.Fragment>
+              ))}
+            </nav>
+          </div>
+        )}
+
         <div className="flex items-center justify-between mb-6">
           <div className="flex items-center space-x-4">
             <h2 className="text-2xl font-semibold text-kangyur-maroon">Browse Recordings</h2>
@@ -104,14 +146,11 @@ const AudioPage = () => {
               <div className="bg-white rounded-xl shadow-md p-12 text-center border border-kangyur-orange/10">
                 <div className="max-w-md mx-auto">
                   <div className="w-20 h-20 mx-auto mb-6 bg-kangyur-orange/10 rounded-full flex items-center justify-center">
-                    <svg className="w-10 h-10 text-kangyur-orange" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zM9 10l12-3" />
-                    </svg>
+                    <Music className="w-10 h-10 text-kangyur-orange" />
                   </div>
-                  <h3 className="text-2xl font-semibold text-kangyur-maroon mb-4">Welcome to Audio Recitations</h3>
+                  <h3 className="text-2xl font-semibold text-kangyur-maroon mb-4">Welcome to Audio Archive</h3>
                   <p className="text-lg text-gray-600 mb-8 leading-relaxed">
-                    Discover the sacred sounds of Kangyur texts through traditional recitations. 
-                    Select a text from the catalog to begin your listening journey.
+                    Discover the sacred sounds of Kangyur texts through traditional recitations organized by category and subcategory.
                   </p>
                   <div className="space-y-3">
                     <Button
