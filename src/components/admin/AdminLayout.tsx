@@ -13,7 +13,17 @@ const AdminLayout = ({ children }: { children: React.ReactNode }) => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-gradient-to-b from-kangyur-cream to-white relative overflow-hidden">
+      {/* Decorative background elements */}
+      <div className="absolute inset-0 z-0 overflow-hidden">
+        <div className="absolute top-20 left-10 w-64 h-64 rounded-full bg-kangyur-orange/5 blur-3xl"></div>
+        <div className="absolute bottom-20 right-10 w-80 h-80 rounded-full bg-kangyur-green/5 blur-3xl"></div>
+        {/* Background Logo */}
+        <div className="absolute inset-0 flex items-center justify-center opacity-5">
+          <img src="/logo.svg" alt="" className="w-[600px] h-[600px]" />
+        </div>
+      </div>
+
       {/* Top Navigation */}
       <header className="fixed top-0 left-0 w-full z-50 bg-white/90 backdrop-blur-md shadow-sm">
         <div className="w-full bg-slate-50">
@@ -40,7 +50,7 @@ const AdminLayout = ({ children }: { children: React.ReactNode }) => {
       </header>
 
       {/* Main Content */}
-      <div className="pt-20 p-8">
+      <div className="pt-20 p-8 relative z-10">
         {children}
       </div>
     </div>
