@@ -1,4 +1,3 @@
-
 import { CatalogItem } from '@/types/catalog';
 
 export const filterCatalogItems = (items: CatalogItem[], query: string): CatalogItem[] => {
@@ -36,22 +35,4 @@ export const findItemInTree = (items: CatalogItem[], id: string): CatalogItem | 
     }
   }
   return null;
-};
-
-export const getAllAudioItems = (items: CatalogItem[]): CatalogItem[] => {
-  const audioItems: CatalogItem[] = [];
-  
-  const collectAudioItems = (items: CatalogItem[]) => {
-    items.forEach(item => {
-      if (item.audioUrl) {
-        audioItems.push(item);
-      }
-      if (item.children) {
-        collectAudioItems(item.children);
-      }
-    });
-  };
-  
-  collectAudioItems(items);
-  return audioItems;
 };

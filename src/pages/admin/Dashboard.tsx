@@ -1,8 +1,7 @@
-
 import React from 'react';
 import AdminLayout from '@/components/admin/AdminLayout';
 import { Link } from 'react-router-dom';
-import { BookOpen, Video, NewspaperIcon, FileText } from 'lucide-react';
+import { BookOpen, NewspaperIcon, FileText } from 'lucide-react';
 
 const Dashboard = () => {
   const managementCards = [
@@ -11,12 +10,6 @@ const Dashboard = () => {
       icon: FileText,
       path: "/admin/karchag",
       description: "Manage Kangyur texts and content"
-    },
-    {
-      title: "Video",
-      icon: Video,
-      path: "/admin/video",
-      description: "Manage video content and recordings"
     },
     {
       title: "News",

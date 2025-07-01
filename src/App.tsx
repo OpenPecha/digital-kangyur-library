@@ -20,13 +20,10 @@ import NarthangDetail from "./pages/NarthangDetail";
 import PekingDetail from "./pages/PekingDetail";
 import UrgaDetail from "./pages/UrgaDetail";
 import About from "./pages/About";
-import Audio from "./pages/Audio";
-import VideoPage from "./pages/Video";
 import Dashboard from "./pages/admin/Dashboard";
 import KarchagAdmin from "./pages/admin/KarchagAdmin";
 import EditionsAdmin from "./pages/admin/EditionsAdmin";
 import NewsAdmin from "./pages/admin/NewsAdmin";
-import VideoAdmin from "./pages/admin/VideoAdmin";
 
 const queryClient = new QueryClient();
 
@@ -51,12 +48,9 @@ const App = () => (
             <Route path="/news" element={<News />} />
             <Route path="/history" element={<History />} />
             <Route path="/history/development" element={<HistoryDevelopment />} />
-            <Route path="/audio" element={<Audio />} />
-            <Route path="/video" element={<VideoPage />} />
             <Route path="/about" element={<About />} />
             <Route path="/admin" element={<Dashboard />} />
             <Route path="/admin/news" element={<NewsAdmin />} />
-            <Route path="/admin/video" element={<VideoAdmin />} />
             <Route path="/admin/karchag" element={<KarchagAdmin />} />
             <Route path="/admin/editions" element={<EditionsAdmin />} />
             <Route path="*" element={<NotFound />} />

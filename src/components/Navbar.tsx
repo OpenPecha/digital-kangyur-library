@@ -6,7 +6,7 @@ import { useLocalization } from '@/hooks/useLocalization';
 import LocalizedText from './LocalizedText';
 
 type NavItem = {
-  labelKey: 'home' | 'history' | 'catalog' | 'audio' | 'video' | 'texts' | 'news' | 'aboutUs' | 'discourses' | 'discipline' | 'prajnaparamita' | 'avatamsaka' | 'ratnakuta' | 'sutras' | 'tantra';
+  labelKey: 'home' | 'history' | 'catalog' | 'texts' | 'news' | 'aboutUs' | 'discourses' | 'discipline' | 'prajnaparamita' | 'avatamsaka' | 'ratnakuta' | 'sutras' | 'tantra';
   href: string;
   children?: NavItem[];
 };
@@ -23,14 +23,6 @@ const navItems: NavItem[] = [
   {
     labelKey: "catalog",
     href: "/catalog"
-  },
-  {
-    labelKey: "audio",
-    href: "/audio"
-  },
-  {
-    labelKey: "video",
-    href: "/video"
   },
   {
     labelKey: "texts",

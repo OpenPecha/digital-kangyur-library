@@ -7,8 +7,6 @@ export type TranslationKeys =
   | 'home'
   | 'history'
   | 'catalog'
-  | 'audio'
-  | 'video'
   | 'texts'
   | 'news'
   | 'aboutUs'
@@ -94,14 +92,6 @@ export const translations: Record<TranslationKeys, Translation> = {
   catalog: {
     en: 'Karchag',
     tib: 'དཀར་ཆག'
-  },
-  audio: {
-    en: 'Audio',
-    tib: 'སྒྲ་མཛོད།'
-  },
-  video: {
-    en: 'Video',
-    tib: 'བརྙན་མཛོད།'
   },
   texts: {
     en: 'Kangyurs',
@@ -292,8 +282,8 @@ export const translations: Record<TranslationKeys, Translation> = {
     tib: 'སྨྱན་མང་སྟོད་སྦྱོར།'
   },
   multimediaIntegrationDesc: {
-    en: 'We are systematically collecting and organizing audio and video resources related to the Kangyur, making these teachings accessible in multiple formats.',
-    tib: 'ང་ཚོས་བཀའ་འགྱུར་དང་འབྲེལ་བའི་སྒྲ་དང་བརྙན་གྱི་ཐོན་ཁུངས་རྣམས་ལམ་ལུགས་ལྡན་པའི་སྒོ་ནས་བསྡུ་རུབ་དང་སྒྲིག་སྦྱོར་བྱེད་བཞིན་ཡོད་པས། བསྟན་པ་འདི་དག་རྣམ་པ་མང་པོའི་ཐོག་ནས་བདེ་བླག་ཏུ་མཐུན་འགྱུར་ཡོང་གི་ཡོད།'
+    en: 'We are systematically collecting and organizing multimedia resources related to the Kangyur, making these teachings accessible in multiple formats.',
+    tib: 'ང་ཚོས་བཀའ་འགྱུར་དང་འབྲེལ་བའི་སྨྱན་མང་ཐོན་ཁུངས་རྣམས་ལམ་ལུགས་ལྡན་པའི་སྒོ་ནས་བསྡུ་རུབ་དང་སྒྲིག་སྦྱོར་བྱེད་བཞིན་ཡོད་པས། བསྟན་པ་འདི་དག་རྣམ་པ་མང་པོའི་ཐོག་ནས་བདེ་བླག་ཏུ་མཐུན་འགྱུར་ཡོང་གི་ཡོད།'
   },
   multilingualSummaries: {
     en: 'Multilingual Summaries',

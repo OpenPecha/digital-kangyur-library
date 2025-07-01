@@ -1,4 +1,3 @@
-
 // Define the catalog data structure
 export interface CatalogItem {
   id: string;
@@ -10,8 +9,4 @@ export interface CatalogItem {
   children?: CatalogItem[];
   count?: number;
   _matches?: boolean; // Used for filtering
-  
-  // Audio-specific properties
-  audioUrl?: string;
-  duration?: string;
 }
