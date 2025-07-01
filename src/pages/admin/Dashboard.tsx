@@ -42,7 +42,7 @@ const Dashboard = () => {
             >
               <div className="bg-white rounded-lg border border-gray-200 p-6 shadow-sm hover:shadow-md transition-all duration-200 group-hover:border-kangyur-orange/30">
                 <div className="text-center space-y-4">
-                  <div className="mx-auto w-16 h-16 bg-gradient-to-br from-kangyur-orange/10 to-kangyur-gold/10 rounded-full flex items-center justify-center group-hover:from-kangyur-orange/20 group-hover:to-kangyur-gold/20 transition-colors">
+                  <div className="mx-auto w-16 h-16 bg-kangyur-orange/10 hover:bg-kangyur-orange/20 rounded-full flex items-center justify-center transition-colors">
                     <card.icon className="w-8 h-8 text-kangyur-orange" />
                   </div>
                   

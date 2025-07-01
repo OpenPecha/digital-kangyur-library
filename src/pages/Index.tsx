@@ -1,4 +1,3 @@
-
 import React from 'react';
 import Hero from '@/components/Hero';
 import FeaturedSection from '@/components/FeaturedSection';
@@ -84,7 +83,7 @@ const Index = () => {
       </FeaturedSection>
       
       {/* Call to Action */}
-      <section className="py-20 bg-gradient-to-r from-kangyur-maroon to-kangyur-orange text-white overflow-hidden relative">
+      <section className="py-20 text-white overflow-hidden relative" style={{ backgroundColor: '#e3821b' }}>
         <div className="absolute inset-0 overflow-hidden">
           <div className="absolute top-0 left-0 w-full h-full bg-[url('/texture.png')] opacity-10"></div>
           <div className="absolute -top-24 -right-24 w-96 h-96 rounded-full bg-white/10 blur-3xl"></div>

@@ -11,7 +11,7 @@ const CatalogSearch = ({
   setSearchQuery
 }: CatalogSearchProps) => {
   return (
-    <div className="bg-gradient-to-r from-kangyur-orange to-kangyur-gold text-white py-9 pt-28 relative overflow-hidden">      
+    <div className="text-white py-9 pt-28 relative overflow-hidden" style={{ backgroundColor: '#e3821b' }}>      
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="max-w-md mx-auto">
           <div className="relative">
