@@ -35,7 +35,7 @@ const textData = {
     
     // Content information
     { key: 'turning', label: 'Turning', value: 'First Turning of the Wheel', group: 'content' },
-    { key: 'translation-type', label: 'Translation Type', value: 'Direct from Sanskrit', group: 'content' },
+    { key: 'translation-period', label: 'Translation Period', value: 'Direct from Sanskrit', group: 'content' },
     { key: 'yana', label: 'Yana', value: 'Mahayana', group: 'content' },
     
     // General metadata (filtered to only show category and subcategory)

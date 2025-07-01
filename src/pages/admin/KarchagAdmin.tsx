@@ -76,7 +76,7 @@ const mockTexts = [
     english_title: "Analysis of the Vinaya",
     turning_id: 1,
     yana_id: 1,
-    translation_type_id: 1,
+    translation_period_id: 1,
     order_index: 1,
     is_active: true,
     created_at: "2024-01-01",
@@ -306,7 +306,7 @@ const TextForm = ({ isOpen, onClose, mode, data, onSave }: TextFormProps) => {
     english_title: '',
     turning_id: '',
     yana_id: '',
-    translation_type_id: '',
+    translation_period_id: '',
     order_index: 0,
     is_active: true,
 
@@ -497,16 +497,16 @@ const TextForm = ({ isOpen, onClose, mode, data, onSave }: TextFormProps) => {
                 </Select>
               </div>
               <div className="space-y-2">
-                <Label htmlFor="translation_type_id">Translation Type</Label>
+                <Label htmlFor="translation_period_id">Translation Period</Label>
                 <Select
-                  value={formData.translation_type_id?.toString() || ''}
-                  onValueChange={(value) => setFormData({ ...formData, translation_type_id: parseInt(value) })}
+                  value={formData.translation_period_id?.toString() || ''}
+                  onValueChange={(value) => setFormData({ ...formData, translation_period_id: parseInt(value) })}
                 >
                   <SelectTrigger>
                     <SelectValue placeholder="Select type" />
                   </SelectTrigger>
                   <SelectContent>
-                    {/* Add translation type options */}
+                    {/* Add translation period options */}
                   </SelectContent>
                 </Select>
               </div>
