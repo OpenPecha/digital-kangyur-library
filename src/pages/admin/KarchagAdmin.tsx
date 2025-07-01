@@ -74,7 +74,7 @@ const mockTexts = [
     chinese_title: "律分别",
     sanskrit_title: "Vinaya-vibhaṅga",
     english_title: "Analysis of the Vinaya",
-    sermon_id: 1,
+    turning_id: 1,
     yana_id: 1,
     translation_type_id: 1,
     order_index: 1,
@@ -304,7 +304,7 @@ const TextForm = ({ isOpen, onClose, mode, data, onSave }: TextFormProps) => {
     chinese_title: '',
     sanskrit_title: '',
     english_title: '',
-    sermon_id: '',
+    turning_id: '',
     yana_id: '',
     translation_type_id: '',
     order_index: 0,
@@ -469,16 +469,16 @@ const TextForm = ({ isOpen, onClose, mode, data, onSave }: TextFormProps) => {
 
             <div className="grid grid-3 gap-4">
               <div className="space-y-2">
-                <Label htmlFor="sermon_id">Sermon</Label>
+                <Label htmlFor="turning_id">Turning</Label>
                 <Select
-                  value={formData.sermon_id?.toString() || ''}
-                  onValueChange={(value) => setFormData({ ...formData, sermon_id: parseInt(value) })}
+                  value={formData.turning_id?.toString() || ''}
+                  onValueChange={(value) => setFormData({ ...formData, turning_id: parseInt(value) })}
                 >
                   <SelectTrigger>
-                    <SelectValue placeholder="Select sermon" />
+                    <SelectValue placeholder="Select turning" />
                   </SelectTrigger>
                   <SelectContent>
-                    {/* Add sermon options */}
+                    {/* Add turning options */}
                   </SelectContent>
                 </Select>
               </div>

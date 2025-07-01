@@ -34,7 +34,7 @@ const textData = {
     { key: 'yeshe-page-span', label: 'Yeshe De Page Span', value: '125b-140a', group: 'catalog' },
     
     // Content information
-    { key: 'sermon', label: 'Sermon', value: 'First Turning of the Wheel', group: 'content' },
+    { key: 'turning', label: 'Turning', value: 'First Turning of the Wheel', group: 'content' },
     { key: 'translation-type', label: 'Translation Type', value: 'Direct from Sanskrit', group: 'content' },
     { key: 'yana', label: 'Yana', value: 'Mahayana', group: 'content' },
     
