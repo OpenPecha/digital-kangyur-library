@@ -7,7 +7,7 @@ export interface KarchagEntry {
   englishTitle: string;
   category: string;
   parentCategoryId: string;
-  yeshiTextId: string;
+  yesheTextId: string;
   sermon: string;
   vehicle: string;
   translationType: string;
@@ -18,5 +18,5 @@ export interface KarchagEntry {
   pedurmaVolNumber: string;
   pedurmaStartPage: string;
   pedurmaEndPage: string;
-  yeshiVolNumber: string;
+  yesheVolNumber: string;
 }

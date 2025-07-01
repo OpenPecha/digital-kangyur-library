@@ -29,9 +29,9 @@ const textData = {
     
     // Catalog information
     { key: 'derge-id', label: 'Derge ID', value: 'D123', group: 'catalog' },
-    { key: 'yeshi-de-id', label: 'Yeshi De ID', value: 'YD456', group: 'catalog' },
-    { key: 'yeshi-vol-number', label: 'Yeshi De Volume Number', value: 'Vol. 12', group: 'catalog' },
-    { key: 'yeshi-page-span', label: 'Yeshi De Page Span', value: '125b-140a', group: 'catalog' },
+    { key: 'yeshe-de-id', label: 'Yeshe De ID', value: 'YD456', group: 'catalog' },
+    { key: 'yeshe-vol-number', label: 'Yeshe De Volume Number', value: 'Vol. 12', group: 'catalog' },
+    { key: 'yeshe-page-span', label: 'Yeshe De Page Span', value: '125b-140a', group: 'catalog' },
     
     // Content information
     { key: 'sermon', label: 'Sermon', value: 'First Turning of the Wheel', group: 'content' },
