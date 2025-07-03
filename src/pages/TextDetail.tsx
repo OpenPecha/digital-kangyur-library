@@ -9,6 +9,7 @@ import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import { Button } from "@/components/ui/button";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import Breadcrumb from '@/components/Breadcrumb';
+import { useLocalization } from '@/hooks/useLocalization';
 
 // Mock data for this specific text
 const textData = {
@@ -126,6 +127,7 @@ const TextDetail = () => {
   const { id } = useParams<{ id: string }>();
   const [editionTab, setEditionTab] = useState<string>('derge');
   const [activeSection, setActiveSection] = useState<string>('translation-homage');
+  const { language, isTibetan } = useLocalization();
 
   // Breadcrumb: Catalog > Discourses > Prajnaparamita > Golden Sutra
   // For demonstration, use static entries for now (in a full version, this would be dynamically resolved)
@@ -167,15 +169,12 @@ const TextDetail = () => {
           
           {/* Text Title */}
           <div className="mb-6">
-            <h1 className="tibetan text-4xl font-bold text-primary mb-3">
-              {textData.title.tibetan}
+            <h1 className={cn(
+              "text-4xl font-bold text-primary",
+              isTibetan ? "tibetan" : ""
+            )}>
+              {isTibetan ? textData.title.tibetan : textData.title.english}
             </h1>
-            <h2 className="tibetan text-xl text-muted-foreground mb-2">
-              {textData.title.sanskrit}
-            </h2>
-            <h2 className="text-xl font-medium text-foreground">
-              {textData.title.english}
-            </h2>
           </div>
           
           <div>
