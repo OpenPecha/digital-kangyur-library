@@ -127,7 +127,18 @@ const TextDetail = () => {
   const { id } = useParams<{ id: string }>();
   const [editionTab, setEditionTab] = useState<string>('derge');
   const [activeSection, setActiveSection] = useState<string>('translation-homage');
-  const { language, isTibetan } = useLocalization();
+  const { language, isTibetan, t } = useLocalization();
+
+  // Mapping section IDs to translation keys
+  const sectionTitleMap = {
+    'translation-homage': 'translationHomage' as const,
+    'purpose': 'purpose' as const,
+    'summary': 'summary' as const,
+    'word-meaning': 'wordMeaning' as const,
+    'connection': 'connection' as const,
+    'questions-answers': 'questionsAnswers' as const,
+    'colophon': 'colophon' as const,
+  };
 
   // Breadcrumb: Catalog > Discourses > Prajnaparamita > Golden Sutra
   // For demonstration, use static entries for now (in a full version, this would be dynamically resolved)
@@ -220,7 +231,7 @@ const TextDetail = () => {
                                     : "hover:bg-muted text-muted-foreground hover:text-foreground"
                                 )}
                               >
-                                {section.title}
+                                {t(sectionTitleMap[section.id as keyof typeof sectionTitleMap])}
                               </button>
                             ))}
                           </nav>

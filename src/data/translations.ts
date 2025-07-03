@@ -77,7 +77,15 @@ export type TranslationKeys =
   | 'avatamsaka'
   | 'ratnakuta'
   | 'sutras'
-  | 'tantra';
+  | 'tantra'
+  // Summary sections
+  | 'translationHomage'
+  | 'purpose'
+  | 'summary'
+  | 'wordMeaning'
+  | 'connection'
+  | 'questionsAnswers'
+  | 'colophon';
 
 export const translations: Record<TranslationKeys, Translation> = {
   // Navigation
@@ -379,5 +387,35 @@ export const translations: Record<TranslationKeys, Translation> = {
   tantra: {
     en: 'Tantra',
     tib: 'རྒྱུད།'
+  },
+  
+  // Summary sections
+  translationHomage: {
+    en: 'Translation Homage',
+    tib: 'འགྱུར་ཕྱག'
+  },
+  purpose: {
+    en: 'Purpose',
+    tib: 'དགོས་དོན།'
+  },
+  summary: {
+    en: 'Summary',
+    tib: 'བསྡུས་དོན།'
+  },
+  wordMeaning: {
+    en: 'Word Meaning',
+    tib: 'ཚིག་དོན།'
+  },
+  connection: {
+    en: 'Connection',
+    tib: 'མཚམས་སྦྱར།'
+  },
+  questionsAnswers: {
+    en: 'Questions & Answers',
+    tib: 'བརྒལ་ལན།'
+  },
+  colophon: {
+    en: 'Colophon',
+    tib: 'འགྱུར་བྱང་།'
   }
 };
