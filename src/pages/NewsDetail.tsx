@@ -94,7 +94,7 @@ const NewsDetail = () => {
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-16">
         <div className="mb-6">
           <Link to="/news">
-            <Button variant="outline" className="mb-4">
+            <Button variant="outline" className="mb-4 mt-[15px]">
               <ArrowLeft className="mr-2 h-4 w-4" />
               Back to News
             </Button>
