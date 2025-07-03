@@ -164,6 +164,20 @@ const TextDetail = () => {
             {/* Pass showHome={false} to remove "Home" */}
             <Breadcrumb items={breadcrumbItems} showHome={false} />
           </div>
+          
+          {/* Text Title */}
+          <div className="mb-6">
+            <h1 className="tibetan text-4xl font-bold text-primary mb-3">
+              {textData.title.tibetan}
+            </h1>
+            <h2 className="tibetan text-xl text-muted-foreground mb-2">
+              {textData.title.sanskrit}
+            </h2>
+            <h2 className="text-xl font-medium text-foreground">
+              {textData.title.english}
+            </h2>
+          </div>
+          
           <div>
             <Card className="border border-kangyur-orange/10 rounded-xl shadow-sm">
               <CardContent className="p-0">
