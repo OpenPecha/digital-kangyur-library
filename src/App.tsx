@@ -24,6 +24,7 @@ import Dashboard from "./pages/admin/Dashboard";
 import KarchagAdmin from "./pages/admin/KarchagAdmin";
 import EditionsAdmin from "./pages/admin/EditionsAdmin";
 import NewsAdmin from "./pages/admin/NewsAdmin";
+import NewsDetail from "./pages/NewsDetail";
 
 const queryClient = new QueryClient();
 
@@ -46,6 +47,7 @@ const App = () => (
             <Route path="/texts/peking-detail" element={<PekingDetail />} />
             <Route path="/texts/urga-detail" element={<UrgaDetail />} />
             <Route path="/news" element={<News />} />
+            <Route path="/news/:id" element={<NewsDetail />} />
             <Route path="/history" element={<History />} />
             <Route path="/history/development" element={<HistoryDevelopment />} />
             <Route path="/about" element={<About />} />
