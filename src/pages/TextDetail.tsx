@@ -225,9 +225,9 @@ const TextDetail = () => {
                                 key={section.id}
                                 onClick={() => setActiveSection(section.id)}
                                 className={cn(
-                                  "w-full text-left p-3 rounded-lg transition-colors text-sm tibetan",
+                                  "w-full text-left p-3 rounded-lg transition-colors text-sm font-semibold",
                                   activeSection === section.id
-                                    ? "bg-primary text-primary-foreground font-medium"
+                                    ? "bg-primary text-primary-foreground"
                                     : "hover:bg-muted text-muted-foreground hover:text-foreground"
                                 )}
                               >
