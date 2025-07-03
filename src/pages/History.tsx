@@ -209,7 +209,7 @@ const History = () => {
                               <h3 className={`text-sm mt-1 font-semibold max-w-[200px] ${selectedPeriod?.id === period.id ? 'text-primary-1' : 'text-gray-700'}`}>
                                 {period.period}
                               </h3>
-                              {period.tibetanPeriod && <p className="text-xs tibetan mt-1">{period.tibetanPeriod}</p>}
+                              {period.tibetanPeriod && <p className="text-xs tibetan mt-1 py-[10px] my-[6px]">{period.tibetanPeriod}</p>}
                             </div>
                           </div>
                         </CarouselItem>)}
