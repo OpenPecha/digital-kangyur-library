@@ -4,7 +4,6 @@ import Footer from '@/components/Footer';
 import { Card, CardContent } from '@/components/ui/card';
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from '@/components/ui/carousel';
 import { ChevronRight } from 'lucide-react';
-
 type TimelineEvent = {
   id: string;
   period: string;
@@ -17,7 +16,6 @@ type TimelineEvent = {
     position?: number;
   }[];
 };
-
 const timelineData: TimelineEvent[] = [{
   id: 'early-translation',
   period: "Early Translation Period",
@@ -156,7 +154,6 @@ const timelineData: TimelineEvent[] = [{
     position: 2012
   }]
 }];
-
 const History = () => {
   const [selectedEvent, setSelectedEvent] = useState<any>(null);
   const [selectedPeriod, setSelectedPeriod] = useState<TimelineEvent | null>(null);
@@ -178,16 +175,13 @@ const History = () => {
       setSelectedPeriod(timelineData[0]);
     }
   }, []);
-
   const handleEventClick = (event: any, periodName: string) => {
     setSelectedEvent({
       ...event,
       period: periodName
     });
   };
-
-  return (
-    <div className="min-h-screen flex flex-col">
+  return <div className="min-h-screen flex flex-col">
       <Navbar />
       <main className="flex-grow pt-24 pb-16">
         <div className="container mx-auto px-4">
@@ -205,41 +199,20 @@ const History = () => {
 
                   <Carousel className="w-full">
                     <CarouselContent>
-                      {timelineData.map((period) => (
-                        <CarouselItem key={period.id} className="md:basis-1/3 lg:basis-1/4">
-                          <div
-                            className={`flex flex-col items-center cursor-pointer transition-all ${
-                              selectedPeriod?.id === period.id ? 'scale-110' : 'opacity-70 hover:opacity-100'
-                            }`}
-                            onClick={() => setSelectedPeriod(period)}
-                          >
-                            <div
-                              className={`h-5 w-5 rounded-full z-10 mb-2 ${
-                                selectedPeriod?.id === period.id ? 'bg-primary-1' : 'bg-gray-400 hover:bg-primary-2'
-                              }`}
-                            ></div>
+                      {timelineData.map(period => <CarouselItem key={period.id} className="md:basis-1/3 lg:basis-1/4">
+                          <div className={`flex flex-col items-center cursor-pointer transition-all ${selectedPeriod?.id === period.id ? 'scale-110' : 'opacity-70 hover:opacity-100'}`} onClick={() => setSelectedPeriod(period)}>
+                            <div className={`h-5 w-5 rounded-full z-10 mb-2 ${selectedPeriod?.id === period.id ? 'bg-primary-1' : 'bg-gray-400 hover:bg-primary-2'}`}></div>
                             <div className="text-center">
-                              <p
-                                className={`font-medium text-sm ${
-                                  selectedPeriod?.id === period.id ? 'text-primary-1' : 'text-gray-600'
-                                }`}
-                              >
+                              <p className={`font-medium text-sm ${selectedPeriod?.id === period.id ? 'text-primary-1' : 'text-gray-600'}`}>
                                 {period.startYear} - {period.endYear}
                               </p>
-                              <h3
-                                className={`text-sm mt-1 font-semibold max-w-[200px] ${
-                                  selectedPeriod?.id === period.id ? 'text-primary-1' : 'text-gray-700'
-                                }`}
-                              >
+                              <h3 className={`text-sm mt-1 font-semibold max-w-[200px] ${selectedPeriod?.id === period.id ? 'text-primary-1' : 'text-gray-700'}`}>
                                 {period.period}
                               </h3>
-                              {period.tibetanPeriod && (
-                                <p className="text-xs tibetan mt-1">{period.tibetanPeriod}</p>
-                              )}
+                              {period.tibetanPeriod && <p className="text-xs tibetan mt-1">{period.tibetanPeriod}</p>}
                             </div>
                           </div>
-                        </CarouselItem>
-                      ))}
+                        </CarouselItem>)}
                     </CarouselContent>
                     <CarouselPrevious className="hidden sm:flex -left-4" />
                     <CarouselNext className="hidden sm:flex -right-4" />
@@ -248,29 +221,17 @@ const History = () => {
               </div>
 
               {/* Selected Period Events */}
-              {selectedPeriod && (
-                <div className="mt-6 animate-fade-in">
+              {selectedPeriod && <div className="mt-6 animate-fade-in">
                   <h3 className="text-xl font-bold text-primary-2 mb-4">
                     {selectedPeriod.period}
-                    {selectedPeriod.tibetanPeriod && (
-                      <span className="tibetan ml-2 text-lg">{selectedPeriod.tibetanPeriod}</span>
-                    )}
+                    {selectedPeriod.tibetanPeriod && <span className="tibetan ml-2 text-lg">{selectedPeriod.tibetanPeriod}</span>}
                     <span className="text-sm font-normal text-gray-500 ml-2">
                       ({selectedPeriod.startYear} - {selectedPeriod.endYear})
                     </span>
                   </h3>
 
                   <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                    {selectedPeriod.events.map((event, idx) => (
-                      <Card
-                        key={idx}
-                        className={`cursor-pointer transition-all hover:shadow-md ${
-                          selectedEvent && selectedEvent.description === event.description
-                            ? 'ring-2 ring-primary-1/50 shadow-md'
-                            : ''
-                        }`}
-                        onClick={() => handleEventClick(event, selectedPeriod.period)}
-                      >
+                    {selectedPeriod.events.map((event, idx) => <Card key={idx} className={`cursor-pointer transition-all hover:shadow-md ${selectedEvent && selectedEvent.description === event.description ? 'ring-2 ring-primary-1/50 shadow-md' : ''}`} onClick={() => handleEventClick(event, selectedPeriod.period)}>
                         <CardContent className="p-4">
                           <div className="flex items-start gap-2">
                             <div className="mt-1 text-primary-1">
@@ -282,33 +243,19 @@ const History = () => {
                             </div>
                           </div>
                         </CardContent>
-                      </Card>
-                    ))}
+                      </Card>)}
                   </div>
-                </div>
-              )}
+                </div>}
             </CardContent>
           </Card>
 
           {/* Selected Event Details */}
-          {selectedEvent && (
-            <Card className="mb-8 animate-fade-in border-secondary-1 shadow-md">
-              <CardContent className="p-5">
-                <div className="flex justify-between items-center mb-3">
-                  <div>
-                    <span className="font-semibold text-primary-1 text-lg">{selectedEvent.period}</span>
-                    <span className="ml-3 text-secondary-2 font-medium">{selectedEvent.year}</span>
-                  </div>
-                </div>
-                <p className="text-gray-700 leading-relaxed">{selectedEvent.description}</p>
-              </CardContent>
-            </Card>
-          )}
+          {selectedEvent && <Card className="mb-8 animate-fade-in border-secondary-1 shadow-md">
+              
+            </Card>}
         </div>
       </main>
       <Footer />
-    </div>
-  );
+    </div>;
 };
-
 export default History;
