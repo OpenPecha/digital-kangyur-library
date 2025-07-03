@@ -71,7 +71,7 @@ const NewsDetail = () => {
       <div className="min-h-screen bg-kangyur-light">
         <Navbar />
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-16">
-          <div className="text-center">
+          <div className="text-center pt-24">
             <h1 className="text-4xl font-bold text-kangyur-dark mb-4">Article Not Found</h1>
             <p className="text-kangyur-dark/70 mb-6">The requested news article could not be found.</p>
             <Link to="/news">
