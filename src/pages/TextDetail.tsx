@@ -226,6 +226,7 @@ const TextDetail = () => {
                                 onClick={() => setActiveSection(section.id)}
                                 className={cn(
                                   "w-full text-left p-3 rounded-lg transition-colors text-sm font-semibold",
+                                  isTibetan && "tibetan",
                                   activeSection === section.id
                                     ? "bg-primary text-primary-foreground"
                                     : "hover:bg-muted text-muted-foreground hover:text-foreground"
@@ -246,7 +247,10 @@ const TextDetail = () => {
                             .filter((section) => section.id === activeSection)
                             .map((section) => (
                               <div key={section.id} className="space-y-4">
-                                <h3 className="text-xl font-semibold text-kangyur-maroon mb-4">
+                                <h3 className={cn(
+                                  "text-xl font-semibold text-kangyur-maroon mb-4",
+                                  isTibetan && "tibetan"
+                                )}>
                                   {t(sectionTitleMap[section.id as keyof typeof sectionTitleMap])}
                                 </h3>
                                 <div className="tibetan text-lg leading-relaxed text-foreground whitespace-pre-line">
