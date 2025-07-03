@@ -192,7 +192,7 @@ const History = () => {
 
           {/* Horizontal Timeline */}
           <Card className="mb-10">
-            <CardContent className="p-6">
+            <CardContent className="p-6 py-[48px]">
               <div ref={timelineRef} className="w-full">
                 <div className="relative mb-8">
                   <div className="absolute left-0 right-0 h-1 bg-gray-200 top-1/2 transform -translate-y-1/2 rounded-full"></div>
