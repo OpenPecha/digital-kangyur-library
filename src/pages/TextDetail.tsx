@@ -246,8 +246,8 @@ const TextDetail = () => {
                             .filter((section) => section.id === activeSection)
                             .map((section) => (
                               <div key={section.id} className="space-y-4">
-                                <h3 className="tibetan text-2xl font-bold text-primary border-b border-border pb-2">
-                                  {section.title}
+                                <h3 className="text-xl font-semibold text-kangyur-maroon mb-4">
+                                  {t(sectionTitleMap[section.id as keyof typeof sectionTitleMap])}
                                 </h3>
                                 <div className="tibetan text-lg leading-relaxed text-foreground whitespace-pre-line">
                                   {section.content}
