@@ -230,19 +230,6 @@ const TextDetail = () => {
 
                       {/* Right Text Reader - 80% width */}
                       <div className="flex-1 flex flex-col">
-                        {/* Title Header */}
-                        <div className="p-6 border-b border-border bg-background">
-                          <h2 className="tibetan text-2xl font-bold text-primary mb-2">
-                            {textData.title.tibetan}
-                          </h2>
-                          <h3 className="tibetan text-lg text-muted-foreground mb-1">
-                            {textData.title.sanskrit}
-                          </h3>
-                          <h3 className="text-lg font-medium text-foreground">
-                            {textData.title.english}
-                          </h3>
-                        </div>
-
                         {/* Scrollable Content Area */}
                         <div className="flex-1 overflow-y-auto p-6">
                           {textData.sections
