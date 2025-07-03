@@ -125,6 +125,7 @@ I prostrate to the Blessed Mother Prajñāpāramitā.`,
 const TextDetail = () => {
   const { id } = useParams<{ id: string }>();
   const [editionTab, setEditionTab] = useState<string>('derge');
+  const [activeSection, setActiveSection] = useState<string>('translation-homage');
 
   // Breadcrumb: Catalog > Discourses > Prajnaparamita > Golden Sutra
   // For demonstration, use static entries for now (in a full version, this would be dynamically resolved)
@@ -187,30 +188,63 @@ const TextDetail = () => {
                       <MetadataSection title="General Information" group="general" />
                     </div>
                   </TabsContent>
-                  {/* Tab 2: Summary - Text content sections with title */}
-                  <TabsContent value="summary" className="p-6">
-                    <div className="flex flex-col gap-8">
-                      {/* Text content (sections) */}
-                      <div className="w-full">
-                        {/* Add title at the top of the summary content */}
-                        <div className="mb-8">
-                          <h2 className="tibetan text-3xl font-bold text-kangyur-maroon">{textData.title.tibetan}</h2>
-                          <h3 className="tibetan text-xl mt-2 text-kangyur-dark/80">{textData.title.sanskrit}</h3>
-                          <h3 className="text-xl font-medium mt-1 text-kangyur-dark">{textData.title.english}</h3>
-                        </div>
-                        {/* Render text sections as accordion */}
-                        <Accordion type="single" collapsible className="w-full">
-                          {textData.sections.map(section => (
-                            <AccordionItem key={section.id} value={section.id} className="border-b border-kangyur-orange/20">
-                              <AccordionTrigger className="tibetan text-xl font-bold text-kangyur-maroon hover:text-kangyur-orange hover:no-underline">
+                  {/* Tab 2: Summary - New layout with vertical nav and text reader */}
+                  <TabsContent value="summary" className="p-0">
+                    <div className="flex h-[600px]">
+                      {/* Left Navigation Bar - 20% width */}
+                      <div className="w-1/5 border-r border-border bg-muted/30">
+                        <div className="p-4">
+                          <h3 className="text-lg font-semibold text-foreground mb-4">Summary Sections</h3>
+                          <nav className="space-y-2">
+                            {textData.sections.map((section) => (
+                              <button
+                                key={section.id}
+                                onClick={() => setActiveSection(section.id)}
+                                className={cn(
+                                  "w-full text-left p-3 rounded-lg transition-colors text-sm tibetan",
+                                  activeSection === section.id
+                                    ? "bg-primary text-primary-foreground font-medium"
+                                    : "hover:bg-muted text-muted-foreground hover:text-foreground"
+                                )}
+                              >
                                 {section.title}
-                              </AccordionTrigger>
-                              <AccordionContent className="tibetan text-lg leading-relaxed whitespace-pre-line">
-                                {section.content}
-                              </AccordionContent>
-                            </AccordionItem>
-                          ))}
-                        </Accordion>
+                              </button>
+                            ))}
+                          </nav>
+                        </div>
+                      </div>
+
+                      {/* Right Text Reader - 80% width */}
+                      <div className="flex-1 flex flex-col">
+                        {/* Title Header */}
+                        <div className="p-6 border-b border-border bg-background">
+                          <h2 className="tibetan text-2xl font-bold text-primary mb-2">
+                            {textData.title.tibetan}
+                          </h2>
+                          <h3 className="tibetan text-lg text-muted-foreground mb-1">
+                            {textData.title.sanskrit}
+                          </h3>
+                          <h3 className="text-lg font-medium text-foreground">
+                            {textData.title.english}
+                          </h3>
+                        </div>
+
+                        {/* Scrollable Content Area */}
+                        <div className="flex-1 overflow-y-auto p-6">
+                          {textData.sections
+                            .filter((section) => section.id === activeSection)
+                            .map((section) => (
+                              <div key={section.id} className="space-y-4">
+                                <h3 className="tibetan text-2xl font-bold text-primary border-b border-border pb-2">
+                                  {section.title}
+                                </h3>
+                                <div className="tibetan text-lg leading-relaxed text-foreground whitespace-pre-line">
+                                  {section.content}
+                                </div>
+                              </div>
+                            ))
+                          }
+                        </div>
                       </div>
                     </div>
                   </TabsContent>
