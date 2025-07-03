@@ -11,7 +11,7 @@ const DergeDetail = () => {
     <div className="min-h-screen flex flex-col">
       <Navbar />
       
-      <main className="flex-1 py-20 mt-16">
+      <main className="flex-1 pt-15 pb-20 mt-16">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="mb-6">
             <Link to="/texts">
