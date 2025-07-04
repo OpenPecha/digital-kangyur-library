@@ -74,6 +74,9 @@ const About = () => {
               <a href="#team" className="px-4 py-2 rounded-md hover:bg-kangyur-orange/10 text-kangyur-dark transition-colors">
                 <LocalizedText textKey="team" />
               </a>
+              <a href="#advisors" className="px-4 py-2 rounded-md hover:bg-kangyur-orange/10 text-kangyur-dark transition-colors">
+                Advisors
+              </a>
               <a href="#contact" className="px-4 py-2 rounded-md hover:bg-kangyur-orange/10 text-kangyur-dark transition-colors">
                 <LocalizedText textKey="contact" />
               </a>
@@ -443,9 +446,10 @@ const About = () => {
             </p>
             
             {/* Advisors Section */}
-            <h3 className="text-xl font-semibold text-kangyur-dark mb-6 mt-12">
-              Advisors
-            </h3>
+            <div id="advisors" className="scroll-mt-24">
+              <h3 className="text-xl font-semibold text-kangyur-dark mb-6 mt-12">
+                Advisors
+              </h3>
             
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
               <Card className="border-kangyur-orange/10">
@@ -532,6 +536,7 @@ const About = () => {
                   </div>
                 </CardContent>
               </Card>
+            </div>
             </div>
           </div>
           
