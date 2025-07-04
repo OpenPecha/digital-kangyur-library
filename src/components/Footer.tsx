@@ -4,7 +4,7 @@ import { Heart } from 'lucide-react';
 
 const Footer = () => {
   return (
-    <footer className="bg-kangyur-cream border-t border-kangyur-orange/20 pt-8 pb-6">
+    <footer className="fixed bottom-0 left-0 right-0 bg-kangyur-cream border-t border-kangyur-orange/20 pt-8 pb-6 z-10">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col items-center text-center">
           {/* Logo & About */}
