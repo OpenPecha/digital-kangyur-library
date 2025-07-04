@@ -441,6 +441,98 @@ const About = () => {
             <p className="text-center text-kangyur-dark/80 italic mt-8">
               <LocalizedText textKey="extendedTeam" />
             </p>
+            
+            {/* Advisors Section */}
+            <h3 className="text-xl font-semibold text-kangyur-dark mb-6 mt-12">
+              Advisors
+            </h3>
+            
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+              <Card className="border-kangyur-orange/10">
+                <CardContent className="p-6">
+                  <div className="flex items-start gap-4">
+                    <Avatar className="h-16 w-16 border-2 border-kangyur-orange">
+                      <AvatarFallback className="bg-kangyur-maroon text-white">DR</AvatarFallback>
+                    </Avatar>
+                    <div className="flex-1">
+                      <h4 className="font-bold text-kangyur-dark">Dr. Robert Chen</h4>
+                      <p className="text-sm italic text-kangyur-maroon mb-2">Digital Humanities Advisor</p>
+                      <p className="text-sm text-kangyur-dark/80">
+                        Specialist in digital preservation and computational approaches to Buddhist texts with over 20 years of experience in academic research.
+                      </p>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+              
+              <Card className="border-kangyur-orange/10">
+                <CardContent className="p-6">
+                  <div className="flex items-start gap-4">
+                    <Avatar className="h-16 w-16 border-2 border-kangyur-orange">
+                      <AvatarFallback className="bg-kangyur-maroon text-white">SP</AvatarFallback>
+                    </Avatar>
+                    <div className="flex-1">
+                      <h4 className="font-bold text-kangyur-dark">Dr. Sarah Peterson</h4>
+                      <p className="text-sm italic text-kangyur-maroon mb-2">Translation Studies Advisor</p>
+                      <p className="text-sm text-kangyur-dark/80">
+                        Leading expert in Tibetan-English translation methodologies and cross-cultural linguistic analysis.
+                      </p>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+              
+              <Card className="border-kangyur-orange/10">
+                <CardContent className="p-6">
+                  <div className="flex items-start gap-4">
+                    <Avatar className="h-16 w-16 border-2 border-kangyur-orange">
+                      <AvatarFallback className="bg-kangyur-maroon text-white">TN</AvatarFallback>
+                    </Avatar>
+                    <div className="flex-1">
+                      <h4 className="font-bold text-kangyur-dark">Tenzin Norbu</h4>
+                      <p className="text-sm italic text-kangyur-maroon mb-2">Cultural Heritage Advisor</p>
+                      <p className="text-sm text-kangyur-dark/80">
+                        Renowned scholar of Tibetan culture and traditions, focusing on the preservation of ancient wisdom traditions.
+                      </p>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+              
+              <Card className="border-kangyur-orange/10">
+                <CardContent className="p-6">
+                  <div className="flex items-start gap-4">
+                    <Avatar className="h-16 w-16 border-2 border-kangyur-orange">
+                      <AvatarFallback className="bg-kangyur-maroon text-white">MJ</AvatarFallback>
+                    </Avatar>
+                    <div className="flex-1">
+                      <h4 className="font-bold text-kangyur-dark">Prof. Michael Johnson</h4>
+                      <p className="text-sm italic text-kangyur-maroon mb-2">Technology Integration Advisor</p>
+                      <p className="text-sm text-kangyur-dark/80">
+                        Expert in educational technology and digital platform development for cultural institutions.
+                      </p>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+              
+              <Card className="border-kangyur-orange/10">
+                <CardContent className="p-6">
+                  <div className="flex items-start gap-4">
+                    <Avatar className="h-16 w-16 border-2 border-kangyur-orange">
+                      <AvatarFallback className="bg-kangyur-maroon text-white">LW</AvatarFallback>
+                    </Avatar>
+                    <div className="flex-1">
+                      <h4 className="font-bold text-kangyur-dark">Dr. Linda Wong</h4>
+                      <p className="text-sm italic text-kangyur-maroon mb-2">Academic Partnerships Advisor</p>
+                      <p className="text-sm text-kangyur-dark/80">
+                        Facilitates collaboration between international universities and Buddhist institutions for research initiatives.
+                      </p>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+            </div>
           </div>
           
           {/* Contact Section */}
