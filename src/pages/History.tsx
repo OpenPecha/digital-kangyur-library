@@ -202,7 +202,7 @@ const History = () => {
                       {timelineData.map(period => <CarouselItem key={period.id} className="md:basis-1/3 lg:basis-1/4">
                           <div className={`flex flex-col items-center cursor-pointer transition-all ${selectedPeriod?.id === period.id ? 'scale-110' : 'opacity-70 hover:opacity-100'}`} onClick={() => setSelectedPeriod(period)}>
                             <div className={`h-5 w-5 rounded-full z-10 mb-2 ${selectedPeriod?.id === period.id ? 'bg-primary-1' : 'bg-gray-400 hover:bg-primary-2'}`}></div>
-                            <div className="text-center">
+                            <div className="text-center mt-4">
                               <p className={`font-medium text-sm ${selectedPeriod?.id === period.id ? 'text-primary-1' : 'text-gray-600'}`}>
                                 {period.startYear} - {period.endYear}
                               </p>
