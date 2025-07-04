@@ -19,7 +19,7 @@ type TimelineEvent = {
 const timelineData: TimelineEvent[] = [{
   id: 'early-translation',
   period: "Early Translation Period",
-  tibetanPeriod: "སྔ་འགྱུར།",
+  
   startYear: 650,
   endYear: 900,
   events: [{
