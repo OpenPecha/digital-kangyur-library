@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
-import { Users, Sparkles, Mail, Heart, BookOpen, Globe, Facebook, Youtube, ChevronDown, ChevronUp } from 'lucide-react';
+import { Users, Sparkles, Mail, Heart, BookOpen, Globe, Facebook, Youtube, ChevronDown, ChevronUp, GraduationCap } from 'lucide-react';
 import { Card, CardContent } from '@/components/ui/card';
 import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/avatar';
 import { Button } from '@/components/ui/button';
@@ -447,9 +447,12 @@ const About = () => {
             
             {/* Advisors Section */}
             <div id="advisors" className="scroll-mt-24">
-              <h3 className="text-xl font-semibold text-kangyur-dark mb-6 mt-12">
-                Advisors
-              </h3>
+              <div className="flex items-center mb-8 border-b border-kangyur-orange/10 pb-4">
+                <GraduationCap className="text-kangyur-orange mr-3" size={28} />
+                <h3 className="text-xl font-semibold text-kangyur-dark">
+                  Advisors
+                </h3>
+              </div>
             
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
               <Card className="border-kangyur-orange/10">
