@@ -9,15 +9,16 @@ import { Button } from '@/components/ui/button';
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@/components/ui/collapsible';
 import LocalizedText from '@/components/LocalizedText';
 import { useLocalization } from '@/hooks/useLocalization';
-
 const About = () => {
   const location = useLocation();
-  const { language } = useLocalization();
+  const {
+    language
+  } = useLocalization();
   const teamRef = useRef<HTMLDivElement>(null);
   const projectRef = useRef<HTMLDivElement>(null);
   const contactRef = useRef<HTMLDivElement>(null);
   const missionRef = useRef<HTMLDivElement>(null);
-  
+
   // State to track which team member bios are expanded
   const [expandedBios, setExpandedBios] = useState<Record<string, boolean>>({
     tpg: false,
@@ -34,7 +35,6 @@ const About = () => {
       [id]: !prev[id]
     }));
   };
-
   useEffect(() => {
     if (location.hash) {
       const sectionId = location.hash.substring(1);
@@ -48,7 +48,6 @@ const About = () => {
       }
     }
   }, [location]);
-  
   return <div className="min-h-screen flex flex-col">
       <Navbar />
       <main className="flex-grow pt-24 pb-16">
@@ -243,17 +242,13 @@ const About = () => {
                         <div className="mt-2">
                           <CollapsibleTrigger asChild>
                             <Button variant="ghost" size="sm" className="flex items-center text-kangyur-maroon hover:text-kangyur-orange hover:bg-kangyur-cream/20">
-                              {expandedBios.tpg ? (
-                                <>
+                              {expandedBios.tpg ? <>
                                   <LocalizedText textKey="readLess" /> 
                                   <ChevronUp className="ml-1 h-4 w-4" />
-                                </>
-                              ) : (
-                                <>
+                                </> : <>
                                   <LocalizedText textKey="readMore" /> 
                                   <ChevronDown className="ml-1 h-4 w-4" />
-                                </>
-                              )}
+                                </>}
                             </Button>
                           </CollapsibleTrigger>
                         </div>
@@ -287,17 +282,13 @@ const About = () => {
                         <div className="mt-2">
                           <CollapsibleTrigger asChild>
                             <Button variant="ghost" size="sm" className="flex items-center text-kangyur-maroon hover:text-kangyur-orange hover:bg-kangyur-cream/20">
-                              {expandedBios.jt ? (
-                                <>
+                              {expandedBios.jt ? <>
                                   <LocalizedText textKey="readLess" /> 
                                   <ChevronUp className="ml-1 h-4 w-4" />
-                                </>
-                              ) : (
-                                <>
+                                </> : <>
                                   <LocalizedText textKey="readMore" /> 
                                   <ChevronDown className="ml-1 h-4 w-4" />
-                                </>
-                              )}
+                                </>}
                             </Button>
                           </CollapsibleTrigger>
                         </div>
@@ -331,17 +322,13 @@ const About = () => {
                         <div className="mt-2">
                           <CollapsibleTrigger asChild>
                             <Button variant="ghost" size="sm" className="flex items-center text-kangyur-maroon hover:text-kangyur-orange hover:bg-kangyur-cream/20">
-                              {expandedBios.tl ? (
-                                <>
+                              {expandedBios.tl ? <>
                                   <LocalizedText textKey="readLess" /> 
                                   <ChevronUp className="ml-1 h-4 w-4" />
-                                </>
-                              ) : (
-                                <>
+                                </> : <>
                                   <LocalizedText textKey="readMore" /> 
                                   <ChevronDown className="ml-1 h-4 w-4" />
-                                </>
-                              )}
+                                </>}
                             </Button>
                           </CollapsibleTrigger>
                         </div>
@@ -375,17 +362,13 @@ const About = () => {
                         <div className="mt-2">
                           <CollapsibleTrigger asChild>
                             <Button variant="ghost" size="sm" className="flex items-center text-kangyur-maroon hover:text-kangyur-orange hover:bg-kangyur-cream/20">
-                              {expandedBios.tg ? (
-                                <>
+                              {expandedBios.tg ? <>
                                   <LocalizedText textKey="readLess" /> 
                                   <ChevronUp className="ml-1 h-4 w-4" />
-                                </>
-                              ) : (
-                                <>
+                                </> : <>
                                   <LocalizedText textKey="readMore" /> 
                                   <ChevronDown className="ml-1 h-4 w-4" />
-                                </>
-                              )}
+                                </>}
                             </Button>
                           </CollapsibleTrigger>
                         </div>
@@ -420,17 +403,13 @@ const About = () => {
                         <div className="mt-2">
                           <CollapsibleTrigger asChild>
                             <Button variant="ghost" size="sm" className="flex items-center text-kangyur-maroon hover:text-kangyur-orange hover:bg-kangyur-cream/20">
-                              {expandedBios.tn ? (
-                                <>
+                              {expandedBios.tn ? <>
                                   <LocalizedText textKey="readLess" /> 
                                   <ChevronUp className="ml-1 h-4 w-4" />
-                                </>
-                              ) : (
-                                <>
+                                </> : <>
                                   <LocalizedText textKey="readMore" /> 
                                   <ChevronDown className="ml-1 h-4 w-4" />
-                                </>
-                              )}
+                                </>}
                             </Button>
                           </CollapsibleTrigger>
                         </div>
@@ -441,9 +420,7 @@ const About = () => {
               </Card>
             </div>
             
-            <p className="text-center text-kangyur-dark/80 italic mt-8">
-              <LocalizedText textKey="extendedTeam" />
-            </p>
+            
             
             {/* Advisors Section */}
             <div id="advisors" className="scroll-mt-24">
