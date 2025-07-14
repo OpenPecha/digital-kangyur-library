@@ -1,0 +1,36 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Kangyur Karchag</title>
+    <meta name="description" content="A comprehensive digital library for the Tibetan Buddhist Kangyur collection, providing access to sacred texts, translations, and educational resources." />
+    <meta name="author" content="Kangyur Karchag Project" />
+    <meta property="og:image" content="/og-image.png" />
+    <link rel="icon" type="image/svg+xml" href="/digital-kangyur-library/favicon.ico" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cabin:wght@400;500;600;700&family=EB+Garamond:wght@400;500;600;700&family=Noto+Sans+Tibetan:wght@300;400;500;600;700&display=swap" />
+    <style>
+      /* Language toggle styles */
+      .english-language .language-tibetan {
+        display: none;
+      }
+      .tibetan-language .language-en {
+        display: none;
+      }
+      
+      /* Default to English if no language class is set */
+      html:not(.english-language):not(.tibetan-language) .language-tibetan {
+        display: none;
+      }
+    </style>
+    <script type="module" crossorigin src="/digital-kangyur-library/assets/index-VFlBum7Y.js"></script>
+    <link rel="stylesheet" crossorigin href="/digital-kangyur-library/assets/index-D6yNP3EE.css">
+  </head>
+
+  <body>
+    <div id="root"></div>
+    <!-- IMPORTANT: DO NOT REMOVE THIS SCRIPT TAG OR THIS VERY COMMENT! -->
+    <script src="https://cdn.gpteng.co/gptengineer.js" type="module"></script>
+  </body>
+</html>
