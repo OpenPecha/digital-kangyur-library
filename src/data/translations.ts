@@ -10,6 +10,7 @@ export type TranslationKeys =
   | 'texts'
   | 'news'
   | 'aboutUs'
+  | 'timeline'
   | 'kangyurEditions'
   | 'backToKangyurEditions'
   | 'browseTexts'
@@ -112,6 +113,10 @@ export const translations: Record<TranslationKeys, Translation> = {
   aboutUs: {
     en: 'About Us',
     tib: 'ང་ཚོའི་སྐོར།'
+  },
+  timeline: {
+    en: 'Timeline',
+    tib: 'དུས་རིམ།'
   },
   
   // Texts Page
