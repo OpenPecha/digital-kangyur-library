@@ -2,15 +2,16 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { catalogData } from '@/data/catalogData';
 import { findItemInTree } from '@/utils/catalogUtils';
+import { useLocalization } from '@/hooks/useLocalization';
 
 // Mapping for tantra subsection ids to their tibetan/english names
 const tantraSubsectionTitles: Record<string, { tibetan: string; english: string }> = {
   "tantra-anuttarayoga": { tibetan: "བླ་མེད་རྒྱུད།", english: "Anuttarayoga Tantra" },
-  "tantra-yoga":         { tibetan: "རྣལ་འབྱོར་རྒྱུད།", english: "Yoga Tantra" },
-  "tantra-carya":        { tibetan: "སྤྱོད་རྒྱུད།", english: "Carya Tantra" },
-  "tantra-kriya":        { tibetan: "བྱ་རྒྱུད།", english: "Kriya Tantra" },
-  "nyi-tantra":          { tibetan: "རྙིང་རྒྱུད།", english: "Nying Tantra" },
-  "kalacakra":           { tibetan: "དུས་འཁོར།", english: "Kalachakra" }
+  "tantra-yoga": { tibetan: "རྣལ་འབྱོར་རྒྱུད།", english: "Yoga Tantra" },
+  "tantra-carya": { tibetan: "སྤྱོད་རྒྱུད།", english: "Carya Tantra" },
+  "tantra-kriya": { tibetan: "བྱ་རྒྱུད།", english: "Kriya Tantra" },
+  "nyi-tantra": { tibetan: "རྙིང་རྒྱུད།", english: "Nying Tantra" },
+  "kalacakra": { tibetan: "དུས་འཁོར།", english: "Kalachakra" }
 };
 
 interface CatalogBreadcrumbProps {
@@ -28,13 +29,14 @@ const CatalogBreadcrumb: React.FC<CatalogBreadcrumbProps> = ({
   onDiscoursesClick,
   onTantraClick,
 }) => {
+  const { isTibetan, t } = useLocalization();
   // Check if selectedItem is a tantra subsection
   const isTantraSubsection = selectedItem && tantraSubsectionTitles[selectedItem];
 
   const selectedItemDetails = selectedItem
     ? (isTantraSubsection
-        ? { id: selectedItem, title: tantraSubsectionTitles[selectedItem] }
-        : findItemInTree(catalogData, selectedItem))
+      ? { id: selectedItem, title: tantraSubsectionTitles[selectedItem] }
+      : findItemInTree(catalogData, selectedItem))
     : null;
 
   const renderBreadcrumb = () => {
@@ -47,7 +49,7 @@ const CatalogBreadcrumb: React.FC<CatalogBreadcrumbProps> = ({
           className="hover:text-indigo-600 transition"
           onClick={onCatalogClick}
         >
-          དཀར་ཆག
+          {t('catalog')}
         </Link>,
         <span key="sep1" className="mx-2">/</span>,
         <Link
@@ -56,11 +58,11 @@ const CatalogBreadcrumb: React.FC<CatalogBreadcrumbProps> = ({
           className="hover:text-indigo-600 transition"
           onClick={onTantraClick}
         >
-          རྒྱུད།
+          {t('tantra')}
         </Link>,
         <span key="sep2" className="mx-2">/</span>,
         <span key={selectedItem} className="text-indigo-600 font-medium">
-          {tantraSubsectionTitles[selectedItem].tibetan}
+          {isTibetan ? tantraSubsectionTitles[selectedItem].tibetan : tantraSubsectionTitles[selectedItem].english}
         </span>
       ];
     }
@@ -73,8 +75,7 @@ const CatalogBreadcrumb: React.FC<CatalogBreadcrumbProps> = ({
         to="/catalog"
         className="hover:text-indigo-600 transition"
         onClick={onCatalogClick}
-      >
-        དཀར་ཆག
+      >{t('catalog')}
       </Link>
     );
 
@@ -88,13 +89,13 @@ const CatalogBreadcrumb: React.FC<CatalogBreadcrumbProps> = ({
           className="hover:text-indigo-600 transition"
           onClick={onDiscoursesClick}
         >
-          མདོ།
+          {t('discourses')}
         </Link>
       );
       parts.push(<span key="sep2" className="mx-2">/</span>);
       parts.push(
         <span key="discipline" className="text-indigo-600 font-medium">
-          འདུལ་བ།
+          {t('discipline')}
         </span>
       );
     }
@@ -105,7 +106,7 @@ const CatalogBreadcrumb: React.FC<CatalogBreadcrumbProps> = ({
         parts.push(<span key="sep1" className="mx-2">/</span>);
         parts.push(
           <span key={category} className="text-indigo-600 font-medium">
-            {categoryItem.title.tibetan}
+            {isTibetan ? categoryItem.title.tibetan : categoryItem.title.english}
           </span>
         );
       }
@@ -148,8 +149,7 @@ const CatalogBreadcrumb: React.FC<CatalogBreadcrumbProps> = ({
                   to="/catalog?category=discourses"
                   className="hover:text-indigo-600 transition"
                   onClick={onDiscoursesClick}
-                >
-                  མདོ།
+                >{t('discourses')}
                 </Link>
               );
             } else if (!category || category !== parent.id) {
@@ -160,7 +160,7 @@ const CatalogBreadcrumb: React.FC<CatalogBreadcrumbProps> = ({
                   to={`/catalog?category=${parent.id}`}
                   className="hover:text-indigo-600 transition"
                 >
-                  {parent.title.tibetan}
+                  {isTibetan ? parent.title.tibetan : parent.title.english}
                 </Link>
               );
             }
@@ -173,7 +173,7 @@ const CatalogBreadcrumb: React.FC<CatalogBreadcrumbProps> = ({
                 to={`/catalog?item=${parent.id}`}
                 className="hover:text-indigo-600 transition"
               >
-                {parent.title.tibetan}
+                {isTibetan ? parent.title.tibetan : parent.title.english}
               </Link>
             );
           }
@@ -184,7 +184,7 @@ const CatalogBreadcrumb: React.FC<CatalogBreadcrumbProps> = ({
       parts.push(<span key="sep-selected" className="mx-2">/</span>);
       parts.push(
         <span key="selected" className="text-indigo-600 font-medium">
-          {selectedItemDetails.title.tibetan}
+          {isTibetan ? selectedItemDetails.title.tibetan : selectedItemDetails.title.english}
         </span>
       );
     }
