@@ -105,7 +105,7 @@ const Navbar = () => {
                   <Link 
                     to={item.href} 
                     className={cn(
-                      "px-3 py-2 text-base font-medium rounded-md text-transition flex items-center", 
+                      "px-3 py-2 text-lg font-medium rounded-md text-transition flex items-center", 
                       location.pathname === item.href ? "text-kangyur-orange" : "text-kangyur-dark hover:text-kangyur-orange"
                     )}
                     onMouseEnter={() => item.children && item.labelKey !== "catalog" && setActiveDropdown(item.labelKey)} 
