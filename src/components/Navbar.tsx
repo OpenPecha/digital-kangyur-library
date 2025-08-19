@@ -4,6 +4,7 @@ import { Menu, X, ChevronDown, Globe } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { useLocalization } from '@/hooks/useLocalization';
 import LocalizedText from './LocalizedText';
+import LanguageToggle from './LanguageToggle';
 
 type NavItem = {
   labelKey: 'home' | 'history' | 'catalog' | 'texts' | 'news' | 'aboutUs' | 'discourses' | 'discipline' | 'prajnaparamita' | 'avatamsaka' | 'ratnakuta' | 'sutras' | 'tantra';
@@ -173,9 +174,7 @@ const Navbar = () => {
                 </div>
               ))}
 
-              <button onClick={toggleLanguage} className="ml-2 p-2 rounded-full text-kangyur-dark hover:text-kangyur-orange hover:bg-kangyur-orange/10 transition-colors" aria-label="Toggle language">
-                <Globe className="w-5 h-5" />
-              </button>
+              <LanguageToggle className="ml-3" />
             </nav>
 
             <button onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)} className="md:hidden p-2 rounded-md text-kangyur-dark hover:text-kangyur-orange hover:bg-kangyur-orange/10 transition-colors" aria-label="Toggle menu">
@@ -259,10 +258,9 @@ const Navbar = () => {
               </div>
             ))}
 
-            <button onClick={toggleLanguage} className="flex items-center px-3 py-2 text-base font-medium rounded-md text-kangyur-dark hover:text-kangyur-orange hover:bg-kangyur-orange/10">
-              <Globe className="w-5 h-5 mr-2" />
-              <span>{language === 'en' ? 'Switch to Tibetan' : 'Switch to English'}</span>
-            </button>
+            <div className="px-3 py-2">
+              <LanguageToggle />
+            </div>
           </nav>
         </div>
       </div>
