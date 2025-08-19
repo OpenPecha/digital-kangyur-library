@@ -7,7 +7,7 @@ import LocalizedText from './LocalizedText';
 import LanguageToggle from './LanguageToggle';
 
 type NavItem = {
-  labelKey: 'home' | 'history' | 'catalog' | 'texts' | 'news' | 'aboutUs' | 'discourses' | 'discipline' | 'prajnaparamita' | 'avatamsaka' | 'ratnakuta' | 'sutras' | 'tantra';
+  labelKey: 'home' | 'history' | 'catalog' | 'texts' | 'news' | 'videos' | 'aboutUs' | 'discourses' | 'discipline' | 'prajnaparamita' | 'avatamsaka' | 'ratnakuta' | 'sutras' | 'tantra';
   href: string;
   children?: NavItem[];
 };
@@ -28,6 +28,10 @@ const navItems: NavItem[] = [
   {
     labelKey: "texts",
     href: "/texts"
+  },
+  {
+    labelKey: "videos",
+    href: "/videos"
   },
   {
     labelKey: "news",

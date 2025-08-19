@@ -9,6 +9,7 @@ export type TranslationKeys =
   | 'catalog'
   | 'texts'
   | 'news'
+  | 'videos'
   | 'aboutUs'
   | 'timeline'
   | 'kangyurEditions'
@@ -36,6 +37,9 @@ export type TranslationKeys =
   // News page
   | 'kangyurNews'
   | 'newsSubtitle'
+  // Videos page
+  | 'kangyurVideos'
+  | 'videosSubtitle'
   // Pagination
   | 'previous'
   | 'next'
@@ -110,6 +114,10 @@ export const translations: Record<TranslationKeys, Translation> = {
     en: 'News',
     tib: 'གསར་འགྱུར།'
   },
+  videos: {
+    en: 'Video',
+    tib: 'བརྙེན།'
+  },
   aboutUs: {
     en: 'About Us',
     tib: 'ང་ཚོའི་སྐོར།'
@@ -177,6 +185,14 @@ export const translations: Record<TranslationKeys, Translation> = {
   watchTeachings: {
     en: 'Watch Teachings',
     tib: 'སློབ་ཁྲིད་ལ་ལྟ།'
+  },
+  kangyurVideos: {
+    en: 'Kangyur Videos',
+    tib: 'བཀའ་འགྱུར་བརྙེན།'
+  },
+  videosSubtitle: {
+    en: 'Talks, teachings, and documentaries related to the Kangyur',
+    tib: 'བཀའ་འགྱུར་དང་འབྲེལ་བའི་གྲོས་མོལ། སློབ་ཁྲིད། བརྗོད་བྱ་སོགས།'
   },
   
   // Call to action
