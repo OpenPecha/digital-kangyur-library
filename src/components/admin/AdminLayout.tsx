@@ -11,6 +11,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Button } from "@/components/ui/button";
+import LanguageToggle from '@/components/LanguageToggle';
 
 const AdminLayout = ({ children }: { children: React.ReactNode }) => {
   const { language, setLanguage } = useLocalization();
@@ -46,13 +47,7 @@ const AdminLayout = ({ children }: { children: React.ReactNode }) => {
               </Link>
 
               <div className="flex items-center space-x-2">
-                <button 
-                  onClick={toggleLanguage} 
-                  className="p-2 rounded-full text-kangyur-dark hover:text-kangyur-orange hover:bg-kangyur-orange/10 transition-colors" 
-                  aria-label="Toggle language"
-                >
-                  <Globe className="w-5 h-5" />
-                </button>
+                <LanguageToggle />
 
                 <DropdownMenu>
                   <DropdownMenuTrigger asChild>
