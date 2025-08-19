@@ -26,6 +26,7 @@ import EditionsAdmin from "./pages/admin/EditionsAdmin";
 import NewsAdmin from "./pages/admin/NewsAdmin";
 import NewsDetail from "./pages/NewsDetail";
 import Videos from "./pages/Videos";
+import TantraText from "./pages/TantraText";
 
 const queryClient = new QueryClient();
 
@@ -50,6 +51,7 @@ const App = () => (
             <Route path="/news" element={<News />} />
             <Route path="/news/:id" element={<NewsDetail />} />
             <Route path="/videos" element={<Videos />} />
+            <Route path="/tantra/:id" element={<TantraText />} />
             <Route path="/history" element={<History />} />
             <Route path="/history/development" element={<HistoryDevelopment />} />
             <Route path="/about" element={<About />} />
