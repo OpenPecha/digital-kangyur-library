@@ -22,26 +22,26 @@ const LanguageToggle: React.FC<LanguageToggleProps> = ({ className }) => {
       aria-label="Toggle language"
       onClick={handleToggle}
       className={cn(
-        'relative inline-flex items-center h-7 w-16 rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500',
-        isTibetan ? 'bg-blue-600' : 'bg-gray-300',
+        'relative inline-flex items-center h-7 w-16 rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-kangyur-orange',
+        isTibetan ? 'bg-kangyur-orange' : 'bg-gray-300',
         className
       )}
     >
       <span
         className={cn(
-          'absolute left-2 text-xs font-semibold select-none pointer-events-none tibetan',
+          'absolute left-2 text-xs font-semibold select-none pointer-events-none',
           isTibetan ? 'text-white opacity-100' : 'opacity-0'
         )}
       >
-        བོད།
+        EN
       </span>
       <span
         className={cn(
-          'absolute right-3 text-[12px] font-semibold select-none pointer-events-none',
-          !isTibetan ? 'text-blue-600 opacity-100' : 'opacity-0'
+          'absolute right-3 text-[12px] font-semibold select-none pointer-events-none tibetan',
+          !isTibetan ? 'text-kangyur-orange opacity-100' : 'opacity-0'
         )}
       >
-        EN
+        བོད།
       </span>
       
       <span
