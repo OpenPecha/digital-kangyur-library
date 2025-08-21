@@ -7,26 +7,31 @@ const subsections = [
   {
     id: 'discipline',
     tibetan: 'འདུལ་བ།',
+    english: 'Discipline',
     link: '/catalog?category=discipline',
   },
   {
     id: 'prajnaparamita',
     tibetan: 'ཤེར་ཕྱིན།',
+    english: 'Prajñāpāramitā',
     link: '/catalog?item=prajnaparamita',
   },
   {
     id: 'avatamsaka',
     tibetan: 'ཕལ་ཆེན།',
+    english: 'Avataṃsaka',
     link: '/catalog?item=avatamsaka',
   },
   {
     id: 'ratnakuta',
     tibetan: 'དཀོན་བརྩེགས།',
+    english: 'Ratnakūṭa',
     link: '/catalog?item=ratnakuta',
   },
   {
     id: 'general-sutras',
     tibetan: 'མདོ་སྡེ།',
+    english: 'General Sūtras',
     link: '/catalog?item=general-sutras',
   }
 ];
@@ -46,7 +51,8 @@ const DiscourseSubsections: React.FC = () => {
           {firstRow.map(subsection => (
             <KarchagFrame 
               key={subsection.id}
-              tibetanText={subsection.tibetan} 
+              labelKey={subsection.id as any}
+              label={{ tibetan: subsection.tibetan, english: subsection.english || '' }} 
               link={subsection.link}
               fontSize="xx-large"
             />
@@ -56,7 +62,8 @@ const DiscourseSubsections: React.FC = () => {
           {secondRow.map(subsection => (
             <KarchagFrame 
               key={subsection.id}
-              tibetanText={subsection.tibetan} 
+              labelKey={subsection.id as any}
+              label={{ tibetan: subsection.tibetan, english: subsection.english || '' }} 
               link={subsection.link}
               fontSize="xx-large"
             />
