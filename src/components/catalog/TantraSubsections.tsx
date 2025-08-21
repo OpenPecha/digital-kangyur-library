@@ -5,33 +5,39 @@ import CatalogBreadcrumb from "./CatalogBreadcrumb";
 
 const tantraSubsections = [
   {
-    id: "anuttarayoga",
+    id: "tantraAnuttarayoga",
     tibetan: "བླ་མེད་རྒྱུད།",
+    english: "Anuttarayoga",
     link: "/tantra/tantra-anuttarayoga",
   },
   {
-    id: "yoga",
+    id: "tantraYoga",
     tibetan: "རྣལ་འབྱོར་རྒྱུད།",
+    english: "Yoga",
     link: "/tantra/tantra-yoga",
   },
   {
-    id: "carya",
+    id: "tantraCarya",
     tibetan: "སྤྱོད་རྒྱུད།",
+    english: "Carya",
     link: "/tantra/tantra-carya",
   },
   {
-    id: "kriya",
+    id: "tantraKriya",
     tibetan: "བྱ་རྒྱུད།",
+    english: "Kriya",
     link: "/tantra/tantra-kriya",
   },
   {
-    id: "nyi",
+    id: "nyiTantra",
     tibetan: "རྙིང་རྒྱུད།",
+    english: "Nying",
     link: "/tantra/nyi-tantra",
   },
   {
     id: "kalacakra",
     tibetan: "དུས་འཁོར།",
+    english: "Kalachakra",
     link: "/tantra/kalacakra",
   },
 ];
@@ -49,7 +55,8 @@ const TantraSubsections: React.FC = () => {
           {tantraSubsections.slice(0, 3).map((s) => (
             <KarchagFrame
               key={s.id}
-              tibetanText={s.tibetan}
+              labelKey={s.id as any}
+              label={{ tibetan: s.tibetan, english: s.english || '' }}
               link={s.link}
               fontSize="xx-large"
             />
@@ -60,7 +67,8 @@ const TantraSubsections: React.FC = () => {
           {tantraSubsections.slice(3, 6).map((s) => (
             <KarchagFrame
               key={s.id}
-              tibetanText={s.tibetan}
+              labelKey={s.id as any}
+              label={{ tibetan: s.tibetan, english: s.english || '' }}
               link={s.link}
               fontSize="xx-large"
             />

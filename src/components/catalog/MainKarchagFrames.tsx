@@ -13,13 +13,13 @@ const MainKarchagFrames: React.FC = () => {
       </div>
       <div className="flex flex-col md:flex-row justify-center gap-10 md:gap-24">
         <KarchagFrame 
-          tibetanText="མདོ།" 
-          fontSize="xxx-large"
+          labelKey="discourses"
+          fontSize="xx-large"
           link="/catalog?category=discourses" 
         />
         <KarchagFrame 
-          tibetanText="རྒྱུད།" 
-          fontSize="xxx-large"
+          labelKey="tantra"
+          fontSize="xx-large"
           link="/catalog?category=tantra" 
         />
       </div>

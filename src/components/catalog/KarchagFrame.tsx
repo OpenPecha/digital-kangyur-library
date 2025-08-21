@@ -1,13 +1,20 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { useLocalization } from '@/hooks/useLocalization';
+import { TranslationKeys } from '@/data/translations';
 
 interface KarchagFrameProps {
-  tibetanText: string;
+  labelKey?: TranslationKeys;
+  label?: {
+    tibetan: string;
+    english: string;
+  };
   link: string;
   fontSize?: string; // Font size can be Tailwind class or direct CSS value
 }
 
-const KarchagFrame: React.FC<KarchagFrameProps> = ({ tibetanText, link, fontSize = '8xl' }) => {
+const KarchagFrame: React.FC<KarchagFrameProps> = ({ labelKey, label, link, fontSize = '8xl' }) => {
+  const { isTibetan, t } = useLocalization();
   // Determine if fontSize is a Tailwind class or direct CSS value
   const isTailwindClass = fontSize.startsWith('xs') || 
                          fontSize.startsWith('sm') || 
@@ -16,8 +23,11 @@ const KarchagFrame: React.FC<KarchagFrameProps> = ({ tibetanText, link, fontSize
                          fontSize.startsWith('xl') ||
                          fontSize === 'none';
   
-  const textClass = isTailwindClass ? `tibetan text-${fontSize}` : 'tibetan';
+  const textClass = isTailwindClass
+    ? `${isTibetan ? 'tibetan' : ''} text-${fontSize}`
+    : isTibetan ? 'tibetan' : '';
   const textStyle = !isTailwindClass ? { fontSize } : {};
+  const labelText = labelKey ? t(labelKey) : (isTibetan ? (label?.tibetan || '') : (label?.english || ''));
   
   return (
     <Link to={link} className="block">
@@ -25,9 +35,9 @@ const KarchagFrame: React.FC<KarchagFrameProps> = ({ tibetanText, link, fontSize
         <div className="relative w-64 h-[360px] flex items-center justify-center hover:bg-orange-200 transition-colors duration-300 rounded-lg">
           <img src="/frame.png" alt="Decorative frame" className="w-full h-full" />
           
-          {/* Tibetan text inside the frame */}
+          {/* Localized text inside the frame */}
           <div className="absolute inset-0 flex items-center justify-center">
-            <span className={textClass} style={textStyle}>{tibetanText}</span>
+            <span className={textClass} style={textStyle}>{labelText}</span>
           </div>
         </div>
       </div>

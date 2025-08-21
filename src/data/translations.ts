@@ -83,6 +83,13 @@ export type TranslationKeys =
   | 'ratnakuta'
   | 'sutras'
   | 'tantra'
+  // Tantra subsections
+  | 'tantraAnuttarayoga'
+  | 'tantraYoga'
+  | 'tantraCarya'
+  | 'tantraKriya'
+  | 'nyiTantra'
+  | 'kalacakra'
   // Summary sections
   | 'translationHomage'
   | 'purpose'
@@ -408,6 +415,31 @@ export const translations: Record<TranslationKeys, Translation> = {
   tantra: {
     en: 'Tantra',
     tib: 'རྒྱུད།'
+  },
+  // Tantra subsections
+  tantraAnuttarayoga: {
+    en: 'Anuttarayoga',
+    tib: 'བླ་མེད་རྒྱུད།'
+  },
+  tantraYoga: {
+    en: 'Yoga',
+    tib: 'རྣལ་འབྱོར་རྒྱུད།'
+  },
+  tantraCarya: {
+    en: 'Carya',
+    tib: 'སྤྱོད་རྒྱུད།'
+  },
+  tantraKriya: {
+    en: 'Kriya',
+    tib: 'བྱ་རྒྱུད།'
+  },
+  nyiTantra: {
+    en: 'Nying',
+    tib: 'རྙིང་རྒྱུད།'
+  },
+  kalacakra: {
+    en: 'Kalachakra',
+    tib: 'དུས་འཁོར།'
   },
   
   // Summary sections

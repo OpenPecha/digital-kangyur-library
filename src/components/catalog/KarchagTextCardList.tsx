@@ -111,6 +111,7 @@ const KarchagTextCardList: React.FC<KarchagTextCardListProps> = ({
               volume={item.volume || "1"}
               summary={item.description || "No summary available for this text."}
               keywords={item.keywords || ["buddhism", "text"]}
+              imageUrl="/text_card_thumbnail.png"
               variant="default"
             />
           ))}
@@ -131,6 +132,7 @@ const KarchagTextCardList: React.FC<KarchagTextCardListProps> = ({
               volume={item.volume || "1"}
               summary={item.description || "No summary available for this text."}
               keywords={item.keywords || ["buddhism", "text"]}
+              imageUrl="/text_card_thumbnail.png"
               variant="default"
               className="w-full"
             />
