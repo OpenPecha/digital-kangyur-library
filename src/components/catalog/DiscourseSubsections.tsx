@@ -29,10 +29,10 @@ const subsections = [
     link: '/catalog?item=ratnakuta',
   },
   {
-    id: 'general-sutras',
+    id: 'generalSutras',
     tibetan: 'མདོ་སྡེ།',
     english: 'General Sūtras',
-    link: '/catalog?item=general-sutras',
+    link: '/catalog?item=generalSutras',
   }
 ];
 

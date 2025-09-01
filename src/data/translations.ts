@@ -81,7 +81,7 @@ export type TranslationKeys =
   | 'prajnaparamita'
   | 'avatamsaka'
   | 'ratnakuta'
-  | 'sutras'
+  | 'generalSutras'
   | 'tantra'
   // Tantra subsections
   | 'tantraAnuttarayoga'
@@ -408,8 +408,8 @@ export const translations: Record<TranslationKeys, Translation> = {
     en: 'Ratnakūṭa',
     tib: 'དཀོན་བརྩེགས།'
   },
-  sutras: {
-    en: 'Sūtras',
+  generalSutras: {
+    en: 'General Sutras',
     tib: 'མདོ་སྡེ།'
   },
   tantra: {

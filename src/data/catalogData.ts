@@ -147,7 +147,7 @@ export const catalogData: CatalogItem[] = [
         id: 'general-sutras',
         title: {
           tibetan: 'མདོ་སྡེ།',
-          english: 'Sūtras'
+          english: 'General Sūtras'
         },
         description: 'General collection of Mahayana sutras not included in other sections.',
         count: 270,
