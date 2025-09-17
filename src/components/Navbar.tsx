@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Menu, X, ChevronDown, Globe } from 'lucide-react';
+import { Menu, X, ChevronDown } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { useLocalization } from '@/hooks/useLocalization';
 import LocalizedText from './LocalizedText';
@@ -26,10 +26,6 @@ const navItems: NavItem[] = [
     href: "/catalog"
   },
   {
-    labelKey: "texts",
-    href: "/texts"
-  },
-  {
     labelKey: "videos",
     href: "/videos"
   },
@@ -49,7 +45,7 @@ const Navbar = () => {
   const [activeSubDropdown, setActiveSubDropdown] = useState<string | null>(null);
   const [scrolled, setScrolled] = useState(false);
   const location = useLocation();
-  const { language, setLanguage } = useLocalization();
+  const { language } = useLocalization();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -84,10 +80,6 @@ const Navbar = () => {
     }
   };
 
-  const toggleLanguage = () => {
-    const newLanguage = language === 'en' ? 'tib' : 'en';
-    setLanguage(newLanguage);
-  };
 
   return (
     <header className={cn("fixed top-0 left-0 w-full z-50 transition-all duration-300", 
@@ -106,8 +98,8 @@ const Navbar = () => {
             <nav className="hidden md:flex items-center space-x-1">
               {navItems.map(item => (
                 <div key={item.labelKey} className="relative group">
-                  <Link 
-                    to={item.href} 
+                  <button 
+                    onClick={() => window.location.href = item.href}
                     className={cn(
                       "px-3 py-2 text-lg font-medium rounded-md text-transition flex items-center", 
                       location.pathname === item.href ? "text-kangyur-orange" : "text-kangyur-dark hover:text-kangyur-orange"
@@ -117,7 +109,7 @@ const Navbar = () => {
                   >
                     <LocalizedText textKey={item.labelKey} />
                     {item.children && item.labelKey !== "catalog" && <ChevronDown className="ml-1 w-4 h-4" />}
-                  </Link>
+                  </button>
 
                   {item.children && item.labelKey !== "catalog" && (
                     <div 
@@ -132,35 +124,35 @@ const Navbar = () => {
                           <div key={child.labelKey} className="relative group">
                             {child.children ? (
                               <>
-                                <div 
-                                  className="flex justify-between items-center px-4 py-2 text-base text-kangyur-dark hover:bg-kangyur-orange/10 hover:text-kangyur-orange transition-colors cursor-pointer"
+                                <button 
+                                  className="flex justify-between items-center px-4 py-2 text-base text-kangyur-dark hover:bg-kangyur-orange/10 hover:text-kangyur-orange transition-colors cursor-pointer w-full"
                                   onMouseEnter={() => setActiveSubDropdown(child.labelKey)}
                                   onMouseLeave={() => setActiveSubDropdown(null)}
                                 >
                                   <LocalizedText textKey={child.labelKey} />
                                   <ChevronDown className="ml-1 w-4 h-4 rotate-[-90deg]" />
+                                </button>
                                 
-                                  {/* Sub-dropdown menu */}
-                                  {child.children && (
-                                    <div 
-                                      className={cn("absolute left-full top-0 w-52 rounded-md shadow-lg glass overflow-hidden transition-all duration-300 origin-top-left bg-white/95 backdrop-blur-sm",
-                                        activeSubDropdown === child.labelKey ? "opacity-100 scale-100" : "opacity-0 scale-95 pointer-events-none"
-                                      )}
-                                    >
-                                      <div className="py-1">
-                                        {child.children.map(subChild => (
-                                          <Link
-                                            key={subChild.labelKey}
-                                            to={subChild.href}
-                                            className="block px-4 py-2 text-base text-kangyur-dark hover:bg-kangyur-orange/10 hover:text-kangyur-orange transition-colors"
-                                          >
-                                            <LocalizedText textKey={subChild.labelKey} />
-                                          </Link>
-                                        ))}
-                                      </div>
+                                {/* Sub-dropdown menu */}
+                                {child.children && (
+                                  <div 
+                                    className={cn("absolute left-full top-0 w-52 rounded-md shadow-lg glass overflow-hidden transition-all duration-300 origin-top-left bg-white/95 backdrop-blur-sm",
+                                      activeSubDropdown === child.labelKey ? "opacity-100 scale-100" : "opacity-0 scale-95 pointer-events-none"
+                                    )}
+                                  >
+                                    <div className="py-1">
+                                      {child.children.map(subChild => (
+                                        <Link
+                                          key={subChild.labelKey}
+                                          to={subChild.href}
+                                          className="block px-4 py-2 text-base text-kangyur-dark hover:bg-kangyur-orange/10 hover:text-kangyur-orange transition-colors"
+                                        >
+                                          <LocalizedText textKey={subChild.labelKey} />
+                                        </Link>
+                                      ))}
                                     </div>
-                                  )}
-                                </div>
+                                  </div>
+                                )}
                               </>
                             ) : (
                               <Link 

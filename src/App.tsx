@@ -8,17 +8,9 @@ import { Toaster as Sonner } from "@/components/ui/sonner";
 import Index from "./pages/Index";
 import Catalog from "./pages/Catalog";
 import NotFound from "./pages/NotFound";
-import Texts from "./pages/Texts";
-import TextDetail from "./pages/TextDetail";
 import News from "./pages/News";
 import History from "./pages/History";
 import HistoryDevelopment from "./pages/HistoryDevelopment";
-import DergeDetail from "./pages/DergeDetail";
-import ChoneDetail from "./pages/ChoneDetail";
-import LhasaDetail from "./pages/LhasaDetail";
-import NarthangDetail from "./pages/NarthangDetail";
-import PekingDetail from "./pages/PekingDetail";
-import UrgaDetail from "./pages/UrgaDetail";
 import About from "./pages/About";
 import Dashboard from "./pages/admin/Dashboard";
 import KarchagAdmin from "./pages/admin/KarchagAdmin";
@@ -40,14 +32,6 @@ const App = () => (
           <Routes>
             <Route path="/" element={<Index />} />
             <Route path="/catalog" element={<Catalog />} />
-            <Route path="/texts" element={<Texts />} />
-            <Route path="/texts/:id" element={<TextDetail />} />
-            <Route path="/texts/derge-detail" element={<DergeDetail />} />
-            <Route path="/texts/chone-detail" element={<ChoneDetail />} />
-            <Route path="/texts/lhasa-detail" element={<LhasaDetail />} />
-            <Route path="/texts/narthang-detail" element={<NarthangDetail />} />
-            <Route path="/texts/peking-detail" element={<PekingDetail />} />
-            <Route path="/texts/urga-detail" element={<UrgaDetail />} />
             <Route path="/news" element={<News />} />
             <Route path="/news/:id" element={<NewsDetail />} />
             <Route path="/videos" element={<Videos />} />

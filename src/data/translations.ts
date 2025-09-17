@@ -7,13 +7,10 @@ export type TranslationKeys =
   | 'home'
   | 'history'
   | 'catalog'
-  | 'texts'
   | 'news'
   | 'videos'
   | 'aboutUs'
   | 'timeline'
-  | 'kangyurEditions'
-  | 'backToKangyurEditions'
   | 'browseTexts'
   | 'historicalContext'
   | 'viewText'
@@ -113,10 +110,6 @@ export const translations: Record<TranslationKeys, Translation> = {
     en: 'Karchag',
     tib: 'དཀར་ཆག'
   },
-  texts: {
-    en: 'Kangyurs',
-    tib: 'བཀའ་འགྱུར།'
-  },
   news: {
     en: 'News',
     tib: 'གསར་འགྱུར།'
@@ -134,15 +127,6 @@ export const translations: Record<TranslationKeys, Translation> = {
     tib: 'དུས་རིམ།'
   },
   
-  // Texts Page
-  kangyurEditions: {
-    en: 'Kangyur Editions',
-    tib: 'བཀའ་འགྱུར་གྱི་པར་མ་ཁག'
-  },
-  backToKangyurEditions: {
-    en: 'Back to Kangyur Editions',
-    tib: 'བཀའ་འགྱུར་པར་མ་ཁག་ལ་ཕྱིར་ལོག'
-  },
   viewOnlineEdition: {
     en: 'View online edition',
     tib: 'དྲ་ཐོག་པར་མ་ལ་ལྟ།'
