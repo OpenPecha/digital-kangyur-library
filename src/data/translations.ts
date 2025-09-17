@@ -21,8 +21,6 @@ export type TranslationKeys =
   | 'exploreRichness'
   | 'browseCatalog'
   | 'aboutThisProject'
-  | 'featuredTexts'
-  | 'discoverImportantTexts'
   | 'viewOnlineEdition'
   | 'source'
   | 'volumes'
@@ -154,15 +152,6 @@ export const translations: Record<TranslationKeys, Translation> = {
     tib: 'སྡེ་ཚན་ཞིག་འདེམས།'
   },
   
-  // Featured section
-  featuredTexts: {
-    en: 'Featured Texts',
-    tib: 'གཙོ་བོའི་གསུང་རབ།'
-  },
-  discoverImportantTexts: {
-    en: 'Discover important texts from the Kangyur collection',
-    tib: 'བཀའ་འགྱུར་ཕྱོགས་སྒྲིག་ནས་གལ་ཆེའི་གཞུང་ཡིག་ཁག་རྙེད།'
-  },
   viewAllTexts: {
     en: 'View All',
     tib: 'ཚང་མར་ལྟ།'
