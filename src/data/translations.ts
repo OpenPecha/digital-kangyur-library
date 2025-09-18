@@ -114,7 +114,7 @@ export const translations: Record<TranslationKeys, Translation> = {
   },
   videos: {
     en: 'Video',
-    tib: 'བརྙེན།'
+    tib: 'བརྙན།'
   },
   aboutUs: {
     en: 'About Us',
