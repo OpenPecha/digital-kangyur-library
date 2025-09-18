@@ -1,4 +1,3 @@
-import React from 'react';
 import Hero from '@/components/Hero';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
@@ -9,20 +8,9 @@ const Index = () => {
   return (
     <div className="min-h-screen bg-white">
       <Navbar />
-      
-      {/* Hero Section */}
       <Hero />
-      
-      
-      {/* Call to Action */}
-      <section className="py-20 text-white overflow-hidden relative" style={{ backgroundColor: '#e3821b' }}>
-        <div className="absolute inset-0 overflow-hidden">
-          <div className="absolute top-0 left-0 w-full h-full bg-[url('/texture.png')] opacity-10"></div>
-          <div className="absolute -top-24 -right-24 w-96 h-96 rounded-full bg-white/10 blur-3xl"></div>
-          <div className="absolute -bottom-24 -left-24 w-96 h-96 rounded-full bg-white/10 blur-3xl"></div>
-        </div>
-        
-        <div className="container relative mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <section className="py-20 text-white bg-[#e3821b]" >        
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h2 className="text-3xl sm:text-4xl font-bold mb-6">
             <span className="language-en">Begin Your Journey Through Buddhist Wisdom</span>
             <span className="language-tibetan">ནང་པའི་ཤེས་རབ་བརྒྱུད་དེ་ཁྱེད་ཀྱི་འགྲུལ་བཞུད་འགོ་རྩོམ།</span>
