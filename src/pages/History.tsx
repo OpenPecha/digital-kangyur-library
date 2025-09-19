@@ -1,7 +1,7 @@
 import React from 'react';
-import Navbar from '@/components/Navbar';
-import Footer from '@/components/Footer';
-import Timeline from '@/components/Timeline';
+import Footer from '@/components/ui/molecules/Footer';
+import Timeline from '@/components/ui/molecules/Timeline';
+import Navbar from '@/components/ui/molecules/Navbar';
 
 type TimelineEvent = {
   id: string;

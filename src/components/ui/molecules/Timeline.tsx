@@ -1,6 +1,6 @@
 import React, { useState, useMemo } from 'react';
-import { Card, CardContent } from '@/components/ui/card';
-import { Badge } from '@/components/ui/badge';
+import { Card, CardContent } from '@/components/ui/atoms/card';
+import { Badge } from '@/components/ui/atoms/badge';
 import { Calendar, MapPin, X } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { useLocalization } from '@/hooks/useLocalization';

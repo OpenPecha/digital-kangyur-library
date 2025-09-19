@@ -1,7 +1,7 @@
 
 import React from 'react';
-import Navbar from '@/components/Navbar';
-import Footer from '@/components/Footer';
+import Navbar from '@/components/ui/molecules/Navbar';
+import Footer from '@/components/ui/molecules/Footer';
 import { 
   BarChart, 
   Bar, 
@@ -12,7 +12,7 @@ import {
   ResponsiveContainer,
   ReferenceLine 
 } from 'recharts';
-import { Card, CardContent } from '@/components/ui/card';
+import { Card, CardContent } from '@/components/ui/atoms/card';
 
 // Define historical era data
 const historicalEras = [

@@ -1,11 +1,11 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
-import Navbar from '@/components/Navbar';
-import Footer from '@/components/Footer';
-import Breadcrumb from '@/components/Breadcrumb';
+import Navbar from '@/components/ui/molecules/Navbar';
+import Footer from '@/components/ui/molecules/Footer';
+import Breadcrumb from '@/components/ui/atoms/Breadcrumb';
 import { useLocalization } from '@/hooks/useLocalization';
-import { Card, CardContent } from "@/components/ui/card";
-import { ScrollArea } from "@/components/ui/scroll-area";
+import { Card, CardContent } from "@/components/ui/atoms/card";
+import { ScrollArea } from "@/components/ui/molecules/scroll-area";
 import { cn } from '@/lib/utils';
 
 // Mock data for tantra texts - in production, this would come from your backend

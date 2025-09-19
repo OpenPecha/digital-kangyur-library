@@ -1,12 +1,12 @@
 import React from 'react';
 import { useParams, Link } from 'react-router-dom';
-import Navbar from '@/components/Navbar';
-import Footer from '@/components/Footer';
-import { Card, CardContent } from "@/components/ui/card";
+import Footer from '@/components/ui/molecules/Footer';
+import { Card, CardContent } from "@/components/ui/atoms/card";
 import { Calendar, ArrowLeft } from 'lucide-react';
-import { Button } from '@/components/ui/button';
+import { Button } from '@/components/ui/atoms/button';
 import LocalizedText from '@/components/LocalizedText';
 import { useLocalization } from '@/hooks/useLocalization';
+import Navbar from '@/components/ui/molecules/Navbar';
 
 // Mock news data - in a real app, this would come from an API
 const newsData: Record<string, any> = {

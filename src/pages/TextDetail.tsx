@@ -1,13 +1,11 @@
 import React, { useState } from 'react';
-import Navbar from '@/components/Navbar';
-import Footer from '@/components/Footer';
+import Navbar from '@/components/ui/molecules/Navbar';
+import Footer from '@/components/ui/molecules/Footer';
 import { useParams, Link } from 'react-router-dom';
 import { cn } from '@/lib/utils';
-import { Card, CardContent } from "@/components/ui/card";
-import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
-import { Button } from "@/components/ui/button";
-import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
-import Breadcrumb from '@/components/Breadcrumb';
+import { Card, CardContent } from "@/components/ui/atoms/card";
+import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/atoms/tabs";
+import Breadcrumb from '@/components/ui/atoms/Breadcrumb';
 import { useLocalization } from '@/hooks/useLocalization';
 
 // Mock data for this specific text

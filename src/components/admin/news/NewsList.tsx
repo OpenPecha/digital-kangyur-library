@@ -6,8 +6,8 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from "@/components/ui/table";
-import { Button } from "@/components/ui/button";
+} from "@/components/ui/atoms/table";
+import { Button } from "@/components/ui/atoms/button";
 import { Edit, Trash2 } from "lucide-react";
 import { NewsEntry } from "@/types/news";
 

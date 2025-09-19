@@ -1,6 +1,6 @@
-import Hero from '@/components/Hero';
-import Navbar from '@/components/Navbar';
-import Footer from '@/components/Footer';
+import Hero from '@/components/ui/molecules/Hero';
+import Footer from '@/components/ui/molecules/Footer';
+import Navbar from '@/components/ui/molecules/Navbar';
 import { Link } from 'react-router-dom';
 
 

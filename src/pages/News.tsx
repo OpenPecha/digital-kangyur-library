@@ -1,13 +1,13 @@
 
 import React, { useState } from 'react';
-import Navbar from '@/components/Navbar';
-import Footer from '@/components/Footer';
-import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
-import { Pagination, PaginationContent, PaginationEllipsis, PaginationItem, PaginationLink, PaginationNext, PaginationPrevious } from "@/components/ui/pagination";
+import Footer from '@/components/ui/molecules/Footer';
+import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/atoms/card";
+import { Pagination, PaginationContent, PaginationEllipsis, PaginationItem, PaginationLink, PaginationNext, PaginationPrevious } from "@/components/ui/atoms/pagination";
 import { ArrowRight, Calendar, ChevronLeft, ChevronRight, Newspaper } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import LocalizedText from '@/components/LocalizedText';
 import { useLocalization } from '@/hooks/useLocalization';
+import Navbar from '@/components/ui/molecules/Navbar';
 
 interface NewsItem {
   id: string;
