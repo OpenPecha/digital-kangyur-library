@@ -2,7 +2,6 @@ import { QueryClientProvider, QueryClient } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { LocalizationProvider } from "./hooks/useLocalization";
 import { TooltipProvider } from "@/components/ui/molecules/tooltip";
-import { Toaster } from "@/components/ui/atoms/toaster";
 import { Toaster as Sonner } from "@/components/ui/atoms/sonner";
 
 import Index from "./pages/Index";
@@ -27,7 +26,6 @@ const App = () => (
   <QueryClientProvider client={queryClient}>
     <LocalizationProvider>
       <TooltipProvider>
-        <Toaster />
         <Sonner />
         <BrowserRouter>
           <Routes>
