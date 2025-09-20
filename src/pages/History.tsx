@@ -1,4 +1,3 @@
-import React from 'react';
 import Footer from '@/components/ui/molecules/Footer';
 import Timeline from '@/components/ui/molecules/Timeline';
 
