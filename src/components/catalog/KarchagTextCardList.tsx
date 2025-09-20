@@ -1,5 +1,5 @@
 import React from 'react';
-import TextCard from '@/components/TextCard';
+import TextCard from '@/components/ui/molecules/TextCard';
 import { 
   Pagination,
   PaginationContent,
@@ -8,7 +8,7 @@ import {
   PaginationLink,
   PaginationNext,
   PaginationPrevious,
-} from "@/components/ui/pagination";
+} from "@/components/ui/atoms/pagination";
 
 interface KarchagTextCardListProps {
   items: any[];

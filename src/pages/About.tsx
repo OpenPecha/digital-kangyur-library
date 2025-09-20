@@ -1,12 +1,11 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { useLocation } from 'react-router-dom';
-import Navbar from '@/components/Navbar';
-import Footer from '@/components/Footer';
+import Footer from '@/components/ui/molecules/Footer';
 import { Users, Sparkles, Mail, Heart, BookOpen, Globe, Facebook, Youtube, ChevronDown, ChevronUp, GraduationCap } from 'lucide-react';
-import { Card, CardContent } from '@/components/ui/card';
-import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/avatar';
-import { Button } from '@/components/ui/button';
-import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@/components/ui/collapsible';
+import { Card, CardContent } from '@/components/ui/atoms/card';
+import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/atoms/avatar';
+import { Button } from '@/components/ui/atoms/button';
+import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@/components/ui/molecules/collapsible';
 import LocalizedText from '@/components/LocalizedText';
 import { useLocalization } from '@/hooks/useLocalization';
 const About = () => {
@@ -49,7 +48,6 @@ const About = () => {
     }
   }, [location]);
   return <div className="min-h-screen flex flex-col">
-      <Navbar />
       <main className="flex-grow pt-24 pb-16">
         <div className="container mx-auto px-4">
           <div className="mb-12 text-center">

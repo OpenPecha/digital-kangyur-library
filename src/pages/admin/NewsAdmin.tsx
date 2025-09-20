@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import AdminLayout from '@/components/admin/AdminLayout';
-import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
+import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/atoms/card';
+import { Button } from '@/components/ui/atoms/button';
+import { Input } from '@/components/ui/atoms/input';
 import { NewsForm } from '@/components/admin/news/CreateNewsForm';
 import { NewsEntry } from '@/types/news';
 import { Edit, Trash2, Calendar, Search, Plus } from 'lucide-react';

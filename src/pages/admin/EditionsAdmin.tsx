@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import AdminLayout from '@/components/admin/AdminLayout';
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
+import { Button } from '@/components/ui/atoms/button';
+import { Input } from '@/components/ui/atoms/input';
+import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/atoms/card';
 import { Edit, Trash2, Search, Plus, BookOpen, Calendar, FileText, FolderTree, ChevronRight, X } from 'lucide-react';
 import {
   Select,
@@ -10,17 +10,17 @@ import {
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@/components/ui/select";
+} from "@/components/ui/atoms/select";
 import {
   Dialog,
   DialogContent,
   DialogHeader,
   DialogTitle,
   DialogFooter,
-} from "@/components/ui/dialog";
-import { Label } from "@/components/ui/label";
-import { Textarea } from "@/components/ui/textarea";
-import { Switch } from "@/components/ui/switch";
+} from "@/components/ui/atoms/dialog";
+import { Label } from "@/components/ui/atoms/label";
+import { Textarea } from "@/components/ui/atoms/textarea";
+import { Switch } from "@/components/ui/atoms/switch";
 
 // Mock data for demonstration
 const mockEditions = [

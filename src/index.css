@@ -6,11 +6,6 @@
 @font-face {
   font-family: 'CustomTibetan';
   src: url('/fonts/Qomolangma-UchenSarchen.ttf') format('truetype');
-  /* Add additional formats if you have them:
-  src: url('/fonts/your-tibetan-font.woff2') format('woff2'),
-       url('/fonts/your-tibetan-font.woff') format('woff'),
-       url('/fonts/your-tibetan-font.ttf') format('truetype');
-  */
   font-weight: normal;
   font-style: normal;
   font-display: swap;
@@ -132,23 +127,6 @@
     @apply transition-all duration-300;
   }
 
-  /* Page transitions */
-  .page-enter {
-    @apply opacity-0;
-  }
-
-  .page-enter-active {
-    @apply opacity-100 transition-opacity duration-300;
-  }
-
-  .page-exit {
-    @apply opacity-100;
-  }
-
-  .page-exit-active {
-    @apply opacity-0 transition-opacity duration-300;
-  }
-  
   /* Custom scrollbar */
   ::-webkit-scrollbar {
     width: 10px;

@@ -1,7 +1,5 @@
-import React from 'react';
-import Navbar from '@/components/Navbar';
-import Footer from '@/components/Footer';
-import Timeline from '@/components/Timeline';
+import Footer from '@/components/ui/molecules/Footer';
+import Timeline from '@/components/ui/molecules/Timeline';
 
 type TimelineEvent = {
   id: string;
@@ -169,7 +167,6 @@ const timelineData: TimelineEvent[] = [{
 const History = () => {
   return (
     <div className="min-h-screen flex flex-col">
-      <Navbar />
       <main className="flex-grow pt-24 pb-16">
         <div className="container mx-auto px-4">
           <div className="mb-8">

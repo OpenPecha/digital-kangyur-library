@@ -3,11 +3,11 @@ import { Link, useLocation } from 'react-router-dom';
 import { Menu, X, ChevronDown } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { useLocalization } from '@/hooks/useLocalization';
-import LocalizedText from './LocalizedText';
-import LanguageToggle from './LanguageToggle';
+import LocalizedText from '@/components/LocalizedText';
+import LanguageToggle from '@/components/LanguageToggle';
 
 type NavItem = {
-  labelKey: 'home' | 'history' | 'catalog' | 'texts' | 'news' | 'videos' | 'aboutUs' | 'discourses' | 'discipline' | 'prajnaparamita' | 'avatamsaka' | 'ratnakuta' | 'sutras' | 'tantra';
+  labelKey:any;
   href: string;
   children?: NavItem[];
 };

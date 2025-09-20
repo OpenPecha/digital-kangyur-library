@@ -1,9 +1,8 @@
 
 import React, { useState } from 'react';
-import Navbar from '@/components/Navbar';
-import Footer from '@/components/Footer';
-import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
-import { Pagination, PaginationContent, PaginationEllipsis, PaginationItem, PaginationLink, PaginationNext, PaginationPrevious } from "@/components/ui/pagination";
+import Footer from '@/components/ui/molecules/Footer';
+import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/atoms/card";
+import { Pagination, PaginationContent, PaginationEllipsis, PaginationItem, PaginationLink, PaginationNext, PaginationPrevious } from "@/components/ui/atoms/pagination";
 import { ArrowRight, Calendar, ChevronLeft, ChevronRight, Newspaper } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import LocalizedText from '@/components/LocalizedText';
@@ -132,7 +131,6 @@ const News = () => {
 
   return (
     <div className="min-h-screen bg-kangyur-light">
-      <Navbar />
       
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-16">
         <div className="mb-10 text-center pt-8">
