@@ -1,6 +1,5 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
-import Navbar from '@/components/ui/molecules/Navbar';
 import Footer from '@/components/ui/molecules/Footer';
 import Breadcrumb from '@/components/ui/atoms/Breadcrumb';
 import { useLocalization } from '@/hooks/useLocalization';
@@ -163,7 +162,6 @@ const TantraText = () => {
 
   return (
     <div className="min-h-screen flex flex-col">
-      <Navbar />
       <main className="flex-1 pt-24 pb-16">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="mb-4">

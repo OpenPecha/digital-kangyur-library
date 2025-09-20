@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import Navbar from '@/components/ui/molecules/Navbar';
 import Footer from '@/components/ui/molecules/Footer';
 import { useParams, Link } from 'react-router-dom';
 import { cn } from '@/lib/utils';
@@ -263,7 +262,6 @@ const TextDetail = () => {
 
   return (
     <div className="min-h-screen flex flex-col">
-      <Navbar />
       <main className="flex-1 pt-24 pb-16">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           {/* --- Breadcrumb navigation --- */}

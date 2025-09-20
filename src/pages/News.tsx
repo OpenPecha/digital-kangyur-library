@@ -7,7 +7,6 @@ import { ArrowRight, Calendar, ChevronLeft, ChevronRight, Newspaper } from 'luci
 import { Link } from 'react-router-dom';
 import LocalizedText from '@/components/LocalizedText';
 import { useLocalization } from '@/hooks/useLocalization';
-import Navbar from '@/components/ui/molecules/Navbar';
 
 interface NewsItem {
   id: string;
@@ -132,7 +131,6 @@ const News = () => {
 
   return (
     <div className="min-h-screen bg-kangyur-light">
-      <Navbar />
       
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-16">
         <div className="mb-10 text-center pt-8">

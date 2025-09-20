@@ -1,13 +1,11 @@
 import Hero from '@/components/ui/molecules/Hero';
 import Footer from '@/components/ui/molecules/Footer';
-import Navbar from '@/components/ui/molecules/Navbar';
 import { Link } from 'react-router-dom';
 
 
 const Index = () => {
   return (
     <div className="min-h-screen bg-white">
-      <Navbar />
       <Hero />
       <section className="py-20 text-white bg-[#e3821b]" >        
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 text-center">

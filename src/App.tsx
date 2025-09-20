@@ -19,6 +19,7 @@ import NewsDetail from "./pages/NewsDetail";
 import Videos from "./pages/Videos";
 import TantraText from "./pages/TantraText";
 import TextDetail from "./pages/TextDetail";
+import Navbar from "./components/ui/molecules/Navbar";
 
 const queryClient = new QueryClient();
 
@@ -28,6 +29,7 @@ const App = () => (
       <TooltipProvider>
         <Sonner />
         <BrowserRouter>
+          <Navbar />
           <Routes>
             <Route path="/" element={<Index />} />
             <Route path="/catalog" element={<Catalog />} />

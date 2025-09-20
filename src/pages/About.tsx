@@ -1,6 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { useLocation } from 'react-router-dom';
-import Navbar from '@/components/ui/molecules/Navbar';
 import Footer from '@/components/ui/molecules/Footer';
 import { Users, Sparkles, Mail, Heart, BookOpen, Globe, Facebook, Youtube, ChevronDown, ChevronUp, GraduationCap } from 'lucide-react';
 import { Card, CardContent } from '@/components/ui/atoms/card';
@@ -49,7 +48,6 @@ const About = () => {
     }
   }, [location]);
   return <div className="min-h-screen flex flex-col">
-      <Navbar />
       <main className="flex-grow pt-24 pb-16">
         <div className="container mx-auto px-4">
           <div className="mb-12 text-center">

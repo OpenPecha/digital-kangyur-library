@@ -1,6 +1,5 @@
 
 import React from 'react';
-import Navbar from '@/components/ui/molecules/Navbar';
 import Footer from '@/components/ui/molecules/Footer';
 import { 
   BarChart, 
@@ -87,7 +86,6 @@ const CustomTooltip = ({ active, payload }: any) => {
 const HistoryDevelopment = () => {
   return (
     <div className="min-h-screen flex flex-col">
-      <Navbar />
       <main className="flex-grow pt-24 pb-16">
         <div className="container mx-auto px-4">
           <h1 className="text-3xl font-bold text-center mb-8">Historical Eras Gantt Chart</h1>
