@@ -1,9 +1,8 @@
 import { QueryClientProvider, QueryClient } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { LocalizationProvider } from "./hooks/useLocalization";
-import { TooltipProvider } from "@/components/ui/tooltip";
-import { Toaster } from "@/components/ui/toaster";
-import { Toaster as Sonner } from "@/components/ui/sonner";
+import { TooltipProvider } from "@/components/ui/molecules/tooltip";
+import { Toaster as Sonner } from "@/components/ui/atoms/sonner";
 
 import Index from "./pages/Index";
 import Catalog from "./pages/Catalog";
@@ -20,6 +19,7 @@ import NewsDetail from "./pages/NewsDetail";
 import Videos from "./pages/Videos";
 import TantraText from "./pages/TantraText";
 import TextDetail from "./pages/TextDetail";
+import Navbar from "./components/ui/molecules/Navbar";
 
 const queryClient = new QueryClient();
 
@@ -27,9 +27,9 @@ const App = () => (
   <QueryClientProvider client={queryClient}>
     <LocalizationProvider>
       <TooltipProvider>
-        <Toaster />
         <Sonner />
         <BrowserRouter>
+          <Navbar />
           <Routes>
             <Route path="/" element={<Index />} />
             <Route path="/catalog" element={<Catalog />} />

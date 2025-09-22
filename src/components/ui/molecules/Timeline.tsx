@@ -1,6 +1,6 @@
 import React, { useState, useMemo } from 'react';
-import { Card, CardContent } from '@/components/ui/card';
-import { Badge } from '@/components/ui/badge';
+import { Card, CardContent } from '@/components/ui/atoms/card';
+import { Badge } from '@/components/ui/atoms/badge';
 import { Calendar, MapPin, X } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { useLocalization } from '@/hooks/useLocalization';
@@ -98,12 +98,11 @@ const Timeline: React.FC<TimelineProps> = ({ data, className }) => {
           {data.map((period, index) => {
             const leftPosition = getPositionPercent(period.startYear);
             const width = getWidthPercent(period.startYear, period.endYear);
-            const minWidth = 12; // Minimum width percentage for readability
+            const minWidth = 12;
             const actualWidth = Math.max(width, minWidth);
             
-            // Stagger boxes vertically to avoid overlap - further reduced spacing
             const row = index % 3;
-            const topOffset = row * 70 + 10; // Reduced from row * 90 + 20 to row * 70 + 10
+            const topOffset = row * 70 + 10;
 
             return (
               <div
@@ -118,9 +117,9 @@ const Timeline: React.FC<TimelineProps> = ({ data, className }) => {
                 onClick={() => setSelectedPeriod(period)}
               >
                 <Card className="hover:shadow-lg transition-all duration-200 hover:scale-105 border-kangyur-orange/30 bg-gradient-to-br from-kangyur-cream to-white">
-                  <CardContent className="p-2.5"> {/* Reduced padding from p-3 to p-2.5 */}
+                  <CardContent className="p-2.5">
                     <div className="text-center">
-                      <Badge variant="outline" className="text-xs mb-1.5 bg-kangyur-orange/10"> {/* Reduced margin */}
+                      <Badge variant="outline" className="text-xs mb-1.5 bg-kangyur-orange/10">
                         {period.startYear} - {period.endYear}
                       </Badge>
                       <h4 className={cn(
@@ -142,9 +141,6 @@ const Timeline: React.FC<TimelineProps> = ({ data, className }) => {
             );
           })}
         </div>
-
-        {/* Spacer for staggered boxes - adjusted height to fit all cards */}
-        <div className="h-56" /> {/* Increased from h-48 to h-56 to accommodate taller container */}
       </div>
 
       {/* Dialog for selected period */}

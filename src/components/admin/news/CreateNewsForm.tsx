@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
-import { Switch } from "@/components/ui/switch";
-import { Label } from "@/components/ui/label";
+import { Button } from "@/components/ui/atoms/button";
+import { Input } from "@/components/ui/atoms/input";
+import { Textarea } from "@/components/ui/atoms/textarea";
+import { Switch } from "@/components/ui/atoms/switch";
+import { Label } from "@/components/ui/atoms/label";
 import { Plus, X } from 'lucide-react';
 import {
   Dialog,
@@ -11,7 +11,7 @@ import {
   DialogHeader,
   DialogTitle,
   DialogFooter,
-} from "@/components/ui/dialog";
+} from "@/components/ui/atoms/dialog";
 import { format } from 'date-fns';
 
 interface NewsFormProps {

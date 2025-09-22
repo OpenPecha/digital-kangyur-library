@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useSearchParams } from 'react-router-dom';
-import Navbar from '@/components/Navbar';
-import Footer from '@/components/Footer';
+import Footer from '@/components/ui/molecules/Footer';
 import CatalogSearch from '@/components/catalog/CatalogSearch';
 import MainKarchagFrames from '@/components/catalog/MainKarchagFrames';
 import DiscourseSubsections from '@/components/catalog/DiscourseSubsections';
@@ -337,7 +336,6 @@ const Catalog = () => {
 
   return (
     <div className="min-h-screen bg-white w-full">
-      <Navbar />
       <CatalogSearch searchQuery={searchQuery} setSearchQuery={setSearchQuery} />
 
       {/* Main Karchag Frames - show only when no search, selected item, or category */}

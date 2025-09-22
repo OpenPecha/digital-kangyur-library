@@ -1,13 +1,12 @@
 import React, { useMemo, useState } from 'react';
-import Navbar from '@/components/Navbar';
-import Footer from '@/components/Footer';
-import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
-import { Pagination, PaginationContent, PaginationItem, PaginationLink, PaginationNext, PaginationPrevious } from "@/components/ui/pagination";
+import Footer from '@/components/ui/molecules/Footer';
+import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/atoms/card";
+import { Pagination, PaginationContent, PaginationItem, PaginationLink, PaginationNext, PaginationPrevious } from "@/components/ui/atoms/pagination";
 import { Clock, Play } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import LocalizedText from '@/components/LocalizedText';
 import { useLocalization } from '@/hooks/useLocalization';
-import { Dialog, DialogContent } from '@/components/ui/dialog';
+import { Dialog, DialogContent } from '@/components/ui/atoms/dialog';
 
 interface VideoItem {
   id: string;
@@ -118,7 +117,6 @@ const Videos = () => {
 
   return (
     <div className="min-h-screen bg-kangyur-light">
-      <Navbar />
 
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-16">
         <div className="mb-6 text-center pt-8">

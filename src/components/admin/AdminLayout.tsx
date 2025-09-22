@@ -9,8 +9,8 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
-import { Button } from "@/components/ui/button";
+} from "@/components/ui/molecules/dropdown-menu";
+import { Button } from "@/components/ui/atoms/button";
 import LanguageToggle from '@/components/LanguageToggle';
 
 const AdminLayout = ({ children }: { children: React.ReactNode }) => {
