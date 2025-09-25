@@ -1,7 +1,10 @@
 
+import useLanguage from '@/hooks/useLanguage';
+import { cn } from '@/lib/utils';
 import { Heart } from 'lucide-react';
 
 const Footer = () => {
+  const {isTibetan,t}=useLanguage()
   return (
     <footer className="bg-kangyur-cream border-t border-kangyur-orange/20 pt-8 pb-6">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
@@ -9,17 +12,10 @@ const Footer = () => {
           {/* Logo & About */}
           <div className="mb-6">
             <h3 className="text-xl font-bold text-kangyur-orange">
-              <span className="language-en">Kangyur Karchag</span>
-              <span className="language-tibetan">བཀའ་འགྱུར་དཀར་ཆག</span>
+              <span className={cn(isTibetan ? 'tibetan' : 'english')}>{t('title')}</span>
             </h3>
             <p className="text-sm text-kangyur-dark/80 mt-3 max-w-2xl">
-              <span className="language-en">
-                A comprehensive digital library for the Tibetan Buddhist Kangyur collection,
-                providing access to sacred texts, translations, and educational resources.
-              </span>
-              <span className="language-tibetan">
-                བོད་བརྒྱུད་ནང་བསྟན་གྱི་བཀའ་འགྱུར་ཕྱོགས་སྒྲིག་གི་ཆེད་དུ་ཆ་ཚང་བའི་བརྡ་ཐོ་དཔེ་མཛོད་ཅིག་སྟེ། དམ་པའི་གཞུང་ཡིག་དང་། ཡིག་སྒྱུར། དེ་བཞིན་སློབ་གསོའི་ཐོན་ཁུངས་ཁག་ལ་བལྟ་ཐུབ་པ་བྱེད་ཀྱི་ཡོད།
-              </span>
+              <span className={cn(isTibetan ? 'tibetan' : 'english')}>{t('footerDescription')}</span>
             </p>
           </div>
         </div>
@@ -30,11 +26,8 @@ const Footer = () => {
               &copy; {new Date().getFullYear()} Kangyur Karchag. All rights reserved.
             </p>
             <p className="text-sm text-kangyur-dark/70 mt-2 sm:mt-0 flex items-center">
-              <span className="language-en flex items-center">
-                Made with <Heart className="mx-1 text-kangyur-orange w-4 h-4" /> for the preservation of Buddhist wisdom
-              </span>
-              <span className="language-tibetan flex items-center">
-                ནང་པའི་ཤེས་རབ་སྲུང་སྐྱོབ་ཀྱི་ཆེད་དུ་བྱམས་སེམས་ཀྱིས་བཟོས་པ། <Heart className="mx-1 text-kangyur-orange w-4 h-4" />
+              <span className={cn(isTibetan ? 'tibetan' : 'english',"flex items-center")}>
+                {t('madeWithLove.pre')} <Heart className="mx-1 text-kangyur-orange w-4 h-4" /> {t('madeWithLove.post')}
               </span>
             </p>
           </div>

@@ -37,7 +37,7 @@ const Navbar = () => {
             <Link to="/" className="flex items-center space-x-3 text-kangyur-maroon transition-transform duration-300 transform hover:scale-105">
               <img src="/logo.svg" alt="Kangyur Karchag Logo" className="w-8 h-8 md:w-10 md:h-10" />
               <span className="font-bold text-xl md:text-2xl">
-                <span>{t('title')}</span>
+                <span className={cn(isTibetan ? 'tibetan' : 'english')}>{t('title')}</span>
               </span>
             </Link>        
             <div className='flex items-center space-x-4'>

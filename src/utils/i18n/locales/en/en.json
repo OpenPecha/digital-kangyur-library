@@ -7,5 +7,14 @@
     "catalog": "Karchag",
     "news": "News",
     "videos": "Videos",
-    "aboutUs": "About Us"
+    "aboutUs": "About Us",
+    "subtitle": "Begin Your Journey Through Buddhist Wisdom",
+    "exploreRichness": "Explore the richness of the Kangyur texts and discover the profound teachings they contain.",
+    "browseCatalog": "Browse the Karchag",
+    "aboutThisProject": "About This Project",
+    "footerDescription": "A comprehensive digital library for the Tibetan Buddhist Kangyur collection, providing access to sacred texts, translations, and educational resources.",
+    "madeWithLove": {
+        "pre": "Made with",
+        "post": "for the preservation of Buddhist wisdom"
+    }
 }
