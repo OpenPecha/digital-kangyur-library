@@ -38,7 +38,7 @@ const KarchagFrame: React.FC<KarchagFrameProps> = ({ labelKey, label, link, font
           
           {/* Localized text inside the frame */}
           <div className="absolute inset-0 flex items-center justify-center">
-            <span className={textClass} style={textStyle}>{labelText}</span>
+            <span className={textClass} style={textStyle as any}>{labelText}</span>
           </div>
         </div>
       </div>

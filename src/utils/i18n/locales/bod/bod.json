@@ -25,5 +25,10 @@
     "classicManuscriptKangyurs": "དཔེ་ཆའི་བཀའ་འགྱུར་ཆེན་མོ།",
     "blockPrintedEditions": "པར་རྐྱང་བཀའ་འགྱུར།",
     "twentiethCenturyEditions": "ཆེ་བར་དུས་རབས་ཀྱི་པར་མ།",
-    "twentyFirstCenturyDigitalEditions": "ཉེར་གཅིག་དུས་རབས་བརྙན་རིག་པར་མ།"
+    "twentyFirstCenturyDigitalEditions": "ཉེར་གཅིག་དུས་རབས་བརྙན་རིག་པར་མ།",
+    "kangyurNews": "བཀའ་འགྱུར་གསར་འགྱུར།",
+    "newsSubtitle": "བཀའ་འགྱུར་ཞིབ་འཇུག་དང་ནང་པའི་ཡིག་ཆ་ཉམས་ཞིབ་ཐད་ཀྱི་གསར་ཤོས་ཀྱི་གནས་ཚུལ་དང་། རྙེད་དོན། བྱེད་སྒོ་བཅས།",
+    "previous": "སྔོན་མ།",
+    "next": "རྗེས་མ།",
+    "readMore": "མང་བ་ཀློག"
 }

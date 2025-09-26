@@ -25,6 +25,11 @@
     "classicManuscriptKangyurs": "Classic Manuscript Kangyurs",
     "blockPrintedEditions": "Block-Printed Editions",
     "twentiethCenturyEditions": "20th Century Editions",
-    "twentyFirstCenturyDigitalEditions": "21st Century Digital Editions"
+    "twentyFirstCenturyDigitalEditions": "21st Century Digital Editions",
+    "kangyurNews": "Kangyur News",
+    "newsSubtitle": "Latest updates, discoveries, and events in Kangyur studies and Buddhist text research",
+    "previous": "Previous",
+    "next": "Next",
+    "readMore": "Read more"
 
 }
