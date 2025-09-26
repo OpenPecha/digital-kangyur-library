@@ -5,7 +5,7 @@ import { cn } from '@/lib/utils';
 import { Card, CardContent } from "@/components/ui/atoms/card";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/atoms/tabs";
 import Breadcrumb from '@/components/ui/atoms/Breadcrumb';
-import { useLocalization } from '@/hooks/useLocalization';
+import useLanguage from '@/hooks/useLanguage';
 
 // Mock data for this specific text
 const textData = {
@@ -220,7 +220,7 @@ const TextDetail = () => {
   const { id } = useParams<{ id: string }>();
   const [editionTab, setEditionTab] = useState<string>('derge');
   const [activeSection, setActiveSection] = useState<string>('translation-homage');
-  const { language, isTibetan, t } = useLocalization();
+  const {isTibetan, t } = useLanguage();
 
   // Mapping section IDs to translation keys
   const sectionTitleMap = {

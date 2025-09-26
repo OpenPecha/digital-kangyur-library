@@ -1,6 +1,5 @@
 import { QueryClientProvider, QueryClient } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { LocalizationProvider } from "./hooks/useLocalization";
 import { TooltipProvider } from "@/components/ui/molecules/tooltip";
 import { Toaster as Sonner } from "@/components/ui/atoms/sonner";
 
@@ -25,7 +24,6 @@ const queryClient = new QueryClient();
 
 const App = () => (
   <QueryClientProvider client={queryClient}>
-    <LocalizationProvider>
       <TooltipProvider>
         <Sonner />
         <BrowserRouter>
@@ -49,7 +47,6 @@ const App = () => (
           </Routes>
         </BrowserRouter>
       </TooltipProvider>
-    </LocalizationProvider>
   </QueryClientProvider>
 );
 

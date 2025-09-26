@@ -4,10 +4,8 @@ import Footer from '@/components/ui/molecules/Footer';
 import { Card, CardContent } from "@/components/ui/atoms/card";
 import { Calendar, ArrowLeft } from 'lucide-react';
 import { Button } from '@/components/ui/atoms/button';
-import LocalizedText from '@/components/LocalizedText';
-import { useLocalization } from '@/hooks/useLocalization';
+import useLanguage from '@/hooks/useLanguage';
 
-// Mock news data - in a real app, this would come from an API
 const newsData: Record<string, any> = {
   'digital-archive': {
     id: "digital-archive",
@@ -61,7 +59,7 @@ The next conference is scheduled for 2025 and will focus specifically on the int
 
 const NewsDetail = () => {
   const { id } = useParams<{ id: string }>();
-  const { language } = useLocalization();
+  const { isTibetan } = useLanguage();
   
   const article = id ? newsData[id] : null;
 
@@ -109,7 +107,7 @@ const NewsDetail = () => {
           
           <CardContent className="p-8">
             <div className="mb-6">
-              {language === 'tib' && article.titleTibetan ? (
+              {isTibetan && article.titleTibetan ? (
                 <>
                   <h1 className="text-3xl md:text-4xl font-bold text-kangyur-dark mb-2 tibetan">
                     {article.titleTibetan}

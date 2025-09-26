@@ -1,21 +1,19 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { useLocalization } from '@/hooks/useLocalization';
-import { TranslationKeys } from '@/data/translations';
+import useLanguage from '@/hooks/useLanguage';
 
 interface KarchagFrameProps {
-  labelKey?: TranslationKeys;
+  labelKey?: string;
   label?: {
     tibetan: string;
     english: string;
   };
   link: string;
-  fontSize?: string; // Font size can be Tailwind class or direct CSS value
+  fontSize?: string; 
 }
 
 const KarchagFrame: React.FC<KarchagFrameProps> = ({ labelKey, label, link, fontSize = '8xl' }) => {
-  const { isTibetan, t } = useLocalization();
-  // Determine if fontSize is a Tailwind class or direct CSS value
+  const { isTibetan, t } = useLanguage();
   const isTailwindClass = fontSize.startsWith('xs') || 
                          fontSize.startsWith('sm') || 
                          fontSize.startsWith('base') || 
@@ -38,7 +36,7 @@ const KarchagFrame: React.FC<KarchagFrameProps> = ({ labelKey, label, link, font
           
           {/* Localized text inside the frame */}
           <div className="absolute inset-0 flex items-center justify-center">
-            <span className={textClass} style={textStyle}>{labelText}</span>
+            <span className={textClass} style={textStyle as any}>{labelText}</span>
           </div>
         </div>
       </div>

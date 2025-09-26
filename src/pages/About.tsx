@@ -6,13 +6,13 @@ import { Card, CardContent } from '@/components/ui/atoms/card';
 import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/atoms/avatar';
 import { Button } from '@/components/ui/atoms/button';
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@/components/ui/molecules/collapsible';
-import LocalizedText from '@/components/LocalizedText';
-import { useLocalization } from '@/hooks/useLocalization';
+import useLanguage from '@/hooks/useLanguage';
+import { cn } from '@/lib/utils';
 const About = () => {
   const location = useLocation();
   const {
-    language
-  } = useLocalization();
+    isTibetan, t
+  } = useLanguage();
   const teamRef = useRef<HTMLDivElement>(null);
   const projectRef = useRef<HTMLDivElement>(null);
   const contactRef = useRef<HTMLDivElement>(null);
@@ -47,15 +47,15 @@ const About = () => {
       }
     }
   }, [location]);
-  return <div className="min-h-screen flex flex-col">
+  return <div className={cn("min-h-screen flex flex-col",isTibetan ? 'tibetan' : 'english')}>
       <main className="flex-grow pt-24 pb-16">
         <div className="container mx-auto px-4">
           <div className="mb-12 text-center">
             <h1 className="text-4xl font-bold text-kangyur-maroon mb-4">
-              <LocalizedText textKey="projectTitle" />
+              {t('projectTitle')}
             </h1>
             <p className="text-xl text-kangyur-dark/80 max-w-3xl mx-auto">
-              <LocalizedText textKey="projectSubtitle" />
+              {t('projectSubtitle')}
             </p>
           </div>
           
@@ -63,19 +63,19 @@ const About = () => {
           <div className="flex justify-center mb-16">
             <div className="flex flex-wrap justify-center gap-2 md:gap-4 bg-white rounded-lg shadow-sm p-2 border border-kangyur-orange/10">
               <a href="#mission" className="px-4 py-2 rounded-md hover:bg-kangyur-orange/10 text-kangyur-dark transition-colors">
-                <LocalizedText textKey="vision" />
+                {t('vision')}
               </a>
               <a href="#project" className="px-4 py-2 rounded-md hover:bg-kangyur-orange/10 text-kangyur-dark transition-colors">
-                <LocalizedText textKey="project" />
+                {t('project')}
               </a>
               <a href="#team" className="px-4 py-2 rounded-md hover:bg-kangyur-orange/10 text-kangyur-dark transition-colors">
-                <LocalizedText textKey="team" />
+                {t('team')}
               </a>
               <a href="#advisors" className="px-4 py-2 rounded-md hover:bg-kangyur-orange/10 text-kangyur-dark transition-colors">
                 Advisors
               </a>
               <a href="#contact" className="px-4 py-2 rounded-md hover:bg-kangyur-orange/10 text-kangyur-dark transition-colors">
-                <LocalizedText textKey="contact" />
+                {t('contact')}
               </a>
             </div>
           </div>
@@ -85,12 +85,12 @@ const About = () => {
             <div className="flex items-center mb-8 border-b border-kangyur-orange/10 pb-4">
               <Heart className="text-kangyur-orange mr-3" size={28} />
               <h2 className="text-3xl font-bold text-kangyur-dark">
-                <LocalizedText textKey="vision" />
+                {t('vision')}
               </h2>
             </div>
             <div className="prose max-w-none">
               <p className="text-lg text-kangyur-dark/80">
-                <LocalizedText textKey="missionDescription" />
+                {t('missionDescription')}
               </p>
             </div>
           </div>
@@ -100,12 +100,12 @@ const About = () => {
             <div className="flex items-center mb-8 border-b border-kangyur-orange/10 pb-4">
               <Sparkles className="text-kangyur-orange mr-3" size={28} />
               <h2 className="text-3xl font-bold text-kangyur-dark">
-                <LocalizedText textKey="project" />
+                {t('project')}
               </h2>
             </div>
             <div className="prose max-w-none">
               <p className="text-lg text-kangyur-dark/80 mb-6">
-                <LocalizedText textKey="projectDescription" />
+                {t('projectDescription')}
               </p>
               
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6 my-8">
@@ -117,10 +117,10 @@ const About = () => {
                       </div>
                       <div>
                         <h3 className="font-bold text-kangyur-dark">
-                          <LocalizedText textKey="digitalCatalog" />
+                          {t('digitalCatalog')}
                         </h3>
                         <p className="text-sm text-kangyur-dark/80 mt-2">
-                          <LocalizedText textKey="digitalCatalogDesc" />
+                          {t('digitalCatalogDesc')}
                         </p>
                       </div>
                     </div>
@@ -138,10 +138,10 @@ const About = () => {
                       </div>
                       <div>
                         <h3 className="font-bold text-kangyur-dark">
-                          <LocalizedText textKey="searchCapabilities" />
+                          {t('searchCapabilities')}
                         </h3>
                         <p className="text-sm text-kangyur-dark/80 mt-2">
-                          <LocalizedText textKey="searchCapabilitiesDesc" />
+                          {t('searchCapabilitiesDesc')}
                         </p>
                       </div>
                     </div>
@@ -163,10 +163,10 @@ const About = () => {
                       </div>
                       <div>
                         <h3 className="font-bold text-kangyur-dark">
-                          <LocalizedText textKey="multimediaIntegration" />
+                          {t('multimediaIntegration')}
                         </h3>
                         <p className="text-sm text-kangyur-dark/80 mt-2">
-                          <LocalizedText textKey="multimediaIntegrationDesc" />
+                          {t('multimediaIntegrationDesc')}
                         </p>
                       </div>
                     </div>
@@ -181,10 +181,10 @@ const About = () => {
                       </div>
                       <div>
                         <h3 className="font-bold text-kangyur-dark">
-                          <LocalizedText textKey="multilingualSummaries" />
+                          {t('multilingualSummaries')}
                         </h3>
                         <p className="text-sm text-kangyur-dark/80 mt-2">
-                          <LocalizedText textKey="multilingualSummariesDesc" />
+                          {t('multilingualSummariesDesc')}
                         </p>
                       </div>
                     </div>
@@ -197,7 +197,7 @@ const About = () => {
               </div>
               
               <p className="text-lg text-kangyur-dark/80 mt-8">
-                <LocalizedText textKey="projectYearsWork" />
+                {t('projectYearsWork')}
               </p>
             </div>
           </div>
@@ -207,12 +207,12 @@ const About = () => {
             <div className="flex items-center mb-8 border-b border-kangyur-orange/10 pb-4">
               <Users className="text-kangyur-orange mr-3" size={28} />
               <h2 className="text-3xl font-bold text-kangyur-dark">
-                <LocalizedText textKey="team" />
+                {t('team')}
               </h2>
             </div>
             
             <h3 className="text-xl font-semibold text-kangyur-dark mb-6">
-              <LocalizedText textKey="coreTeamMembers" />
+              {t('coreTeamMembers')}
             </h3>
             
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
@@ -241,10 +241,10 @@ const About = () => {
                           <CollapsibleTrigger asChild>
                             <Button variant="ghost" size="sm" className="flex items-center text-kangyur-maroon hover:text-kangyur-orange hover:bg-kangyur-cream/20">
                               {expandedBios.tpg ? <>
-                                  <LocalizedText textKey="readLess" /> 
+                                  {t('readLess')} 
                                   <ChevronUp className="ml-1 h-4 w-4" />
                                 </> : <>
-                                  <LocalizedText textKey="readMore" /> 
+                                  {t('readMore')} 
                                   <ChevronDown className="ml-1 h-4 w-4" />
                                 </>}
                             </Button>
@@ -281,10 +281,10 @@ const About = () => {
                           <CollapsibleTrigger asChild>
                             <Button variant="ghost" size="sm" className="flex items-center text-kangyur-maroon hover:text-kangyur-orange hover:bg-kangyur-cream/20">
                               {expandedBios.jt ? <>
-                                  <LocalizedText textKey="readLess" /> 
+                                  {t('readLess')} 
                                   <ChevronUp className="ml-1 h-4 w-4" />
                                 </> : <>
-                                  <LocalizedText textKey="readMore" /> 
+                                  {t('readMore')} 
                                   <ChevronDown className="ml-1 h-4 w-4" />
                                 </>}
                             </Button>
@@ -321,10 +321,10 @@ const About = () => {
                           <CollapsibleTrigger asChild>
                             <Button variant="ghost" size="sm" className="flex items-center text-kangyur-maroon hover:text-kangyur-orange hover:bg-kangyur-cream/20">
                               {expandedBios.tl ? <>
-                                  <LocalizedText textKey="readLess" /> 
+                                  {t('readLess')} 
                                   <ChevronUp className="ml-1 h-4 w-4" />
                                 </> : <>
-                                  <LocalizedText textKey="readMore" /> 
+                                  {t('readMore')} 
                                   <ChevronDown className="ml-1 h-4 w-4" />
                                 </>}
                             </Button>
@@ -361,10 +361,10 @@ const About = () => {
                           <CollapsibleTrigger asChild>
                             <Button variant="ghost" size="sm" className="flex items-center text-kangyur-maroon hover:text-kangyur-orange hover:bg-kangyur-cream/20">
                               {expandedBios.tg ? <>
-                                  <LocalizedText textKey="readLess" /> 
+                                  {t('readLess')} 
                                   <ChevronUp className="ml-1 h-4 w-4" />
                                 </> : <>
-                                  <LocalizedText textKey="readMore" /> 
+                                  {t('readMore')} 
                                   <ChevronDown className="ml-1 h-4 w-4" />
                                 </>}
                             </Button>
@@ -402,10 +402,10 @@ const About = () => {
                           <CollapsibleTrigger asChild>
                             <Button variant="ghost" size="sm" className="flex items-center text-kangyur-maroon hover:text-kangyur-orange hover:bg-kangyur-cream/20">
                               {expandedBios.tn ? <>
-                                  <LocalizedText textKey="readLess" /> 
+                                  {t('readLess')} 
                                   <ChevronUp className="ml-1 h-4 w-4" />
                                 </> : <>
-                                  <LocalizedText textKey="readMore" /> 
+                                  {t('readMore')} 
                                   <ChevronDown className="ml-1 h-4 w-4" />
                                 </>}
                             </Button>
@@ -523,7 +523,7 @@ const About = () => {
             <div className="flex items-center mb-8 border-b border-kangyur-orange/10 pb-4">
               <Mail className="text-kangyur-orange mr-3" size={28} />
               <h2 className="text-3xl font-bold text-kangyur-dark">
-                <LocalizedText textKey="contact" />
+                {t('contact')}
               </h2>
             </div>
             
@@ -531,10 +531,10 @@ const About = () => {
               <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                 <div>
                   <h3 className="text-xl font-semibold text-kangyur-dark mb-4">
-                    <LocalizedText textKey="getInTouch" />
+                    {t('getInTouch')}
                   </h3>
                   <p className="mb-6 text-kangyur-dark/80">
-                    <LocalizedText textKey="inquiriesText" />
+                    {t('inquiriesText')}
                   </p>
                   
                   <div className="space-y-4">
@@ -545,7 +545,7 @@ const About = () => {
                       </svg>
                       <div>
                         <p className="font-medium text-kangyur-dark">
-                          <LocalizedText textKey="email" />
+                          {t('email')}
                         </p>
                         <a href="mailto:info@sinibridge.org" className="text-kangyur-maroon hover:underline">info@sinibridge.org</a>
                       </div>
@@ -557,7 +557,7 @@ const About = () => {
                       </svg>
                       <div>
                         <p className="font-medium text-kangyur-dark">
-                          <LocalizedText textKey="phone" />
+                          {t('phone')}
                         </p>
                         <p className="text-kangyur-dark/80">+91 (0542) 258-5011</p>
                       </div>
@@ -570,7 +570,7 @@ const About = () => {
                       </svg>
                       <div>
                         <p className="font-medium text-kangyur-dark">
-                          <LocalizedText textKey="address" />
+                          {t('address')}
                         </p>
                         <p className="text-kangyur-dark/80">
                           Sarnath International Nyingma Institute<br />
@@ -585,7 +585,7 @@ const About = () => {
                 
                 <div>
                   <h3 className="text-xl font-semibold text-kangyur-dark mb-4">
-                    <LocalizedText textKey="connectWithUs" />
+                    {t('connectWithUs')}
                   </h3>
                   <p className="mb-6 text-kangyur-dark/80">
                     Visit our website and follow us on social media for updates on the Kangyur Digital Project.
@@ -593,7 +593,7 @@ const About = () => {
                   
                   <div className="mb-6">
                     <p className="font-medium text-kangyur-dark mb-2">
-                      <LocalizedText textKey="visitMainWebsite" />
+                      {t('visitMainWebsite')}
                     </p>
                     <a href="https://www.sinibridge.org/" target="_blank" rel="noopener noreferrer" className="text-kangyur-maroon hover:underline">
                       www.sinibridge.org
@@ -602,7 +602,7 @@ const About = () => {
                   
                   <div>
                     <p className="font-medium text-kangyur-dark mb-2">
-                      <LocalizedText textKey="followUs" />
+                      {t('followUs')}
                     </p>
                     <div className="flex space-x-4">
                       <a href="https://www.facebook.com/sinibridge/" target="_blank" rel="noopener noreferrer" className="text-kangyur-maroon hover:text-kangyur-orange transition-colors">
@@ -618,7 +618,7 @@ const About = () => {
               
               <div className="text-center mt-10 pt-6 border-t border-kangyur-orange/10">
                 <p className="text-kangyur-dark/80 italic">
-                  <LocalizedText textKey="joinUsText" />
+                  {t('joinUsText')}
                 </p>
               </div>
             </div>

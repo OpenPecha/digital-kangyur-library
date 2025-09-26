@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { catalogData } from '@/data/catalogData';
 import { findItemInTree } from '@/utils/catalogUtils';
-import { useLocalization } from '@/hooks/useLocalization';
+import useLanguage from '@/hooks/useLanguage';
 
 // Mapping for tantra subsection ids to their tibetan/english names
 const tantraSubsectionTitles: Record<string, { tibetan: string; english: string }> = {
@@ -29,7 +29,7 @@ const CatalogBreadcrumb: React.FC<CatalogBreadcrumbProps> = ({
   onDiscoursesClick,
   onTantraClick,
 }) => {
-  const { isTibetan, t } = useLocalization();
+  const { isTibetan, t } = useLanguage();
   // Check if selectedItem is a tantra subsection
   const isTantraSubsection = selectedItem && tantraSubsectionTitles[selectedItem];
 

@@ -1,53 +1,43 @@
 import React from 'react';
 import { cn } from '@/lib/utils';
-import { useLocalization } from '@/hooks/useLocalization';
+import { useLanguage } from '@/hooks/useLanguage';
 
 interface LanguageToggleProps {
   className?: string;
 }
 
 const LanguageToggle: React.FC<LanguageToggleProps> = ({ className }) => {
-  const { language, setLanguage } = useLocalization();
-  const isTibetan = language === 'tib';
-
-  const handleToggle = () => {
-    setLanguage(isTibetan ? 'en' : 'tib');
-  };
+  const { isTibetan, toggleLanguage } = useLanguage();
 
   return (
     <button
-      type="button"
-      role="switch"
-      aria-checked={isTibetan}
-      aria-label="Toggle language"
-      onClick={handleToggle}
+      onClick={toggleLanguage}
       className={cn(
-        'relative inline-flex items-center h-7 w-16 rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-kangyur-orange',
+        'relative inline-flex items-center justify-between w-14 h-7 bg-gray-200 rounded-full transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-kangyur-orange focus:ring-offset-2',
         isTibetan ? 'bg-kangyur-orange' : 'bg-gray-300',
         className
       )}
     >
       <span
         className={cn(
-          'absolute left-2 text-xs font-semibold select-none pointer-events-none',
-          isTibetan ? 'text-white opacity-100' : 'opacity-0'
+          'absolute left-2 top-1/2 transform -translate-y-1/2 text-xs font-medium transition-opacity duration-200 z-10',
+          isTibetan ? 'opacity-0' : 'opacity-100 text-gray-600'
         )}
       >
         EN
       </span>
       <span
         className={cn(
-          'absolute right-3 text-[12px] font-semibold select-none pointer-events-none tibetan',
-          !isTibetan ? 'text-kangyur-orange opacity-100' : 'opacity-0'
+          'absolute right-2 top-1/2 transform -translate-y-1/2 text-xs font-tibetan font-medium transition-opacity duration-200 z-10',
+          isTibetan ? 'opacity-100 text-white' : 'opacity-0'
         )}
       >
-        བོད།
+        བོད
       </span>
-      
       <span
         className={cn(
-          'inline-block h-5 w-5 bg-white rounded-full shadow transform transition-transform',
-          isTibetan ? 'translate-x-9' : 'translate-x-1'
+          'absolute left-1 top-1/2 transform -translate-y-1/2 w-5 h-5 bg-white rounded-full shadow-md transition-transform duration-200',
+          isTibetan ?  'translate-x-0':'translate-x-6'
         )}
       />
     </button>
