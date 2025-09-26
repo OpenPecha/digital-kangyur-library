@@ -20,15 +20,6 @@ interface NewsItem {
 
 const newsItems: NewsItem[] = [
   {
-    id: "news-1",
-    title: "New Digital Archive of Tibetan Buddhist Texts",
-    titleTibetan: "བོད་ཀྱི་ནང་ཆོས་ཀྱི་ཡིག་ཆ་ཁག་གི་བརྙན་དེབ་གསར་པ།",
-    description: "A comprehensive digital archive of rare Tibetan Buddhist texts has been launched, making thousands of important historical documents accessible to scholars worldwide.",
-    date: "2023-05-15",
-    imageUrl: "https://images.unsplash.com/photo-1598499255807-87188c4eda38?q=80&w=2574&auto=format&fit=crop",
-    link: "/news/digital-archive"
-  },
-  {
     id: "news-2",
     title: "International Conference on Kangyur Studies",
     titleTibetan: "བཀའ་འགྱུར་ཞིབ་འཇུག་སྐོར་གྱི་རྒྱལ་སྤྱིའི་ཚོགས་འདུ།",
@@ -36,43 +27,7 @@ const newsItems: NewsItem[] = [
     date: "2023-06-22",
     imageUrl: "https://images.unsplash.com/photo-1540575467063-178a50c2df87?q=80&w=2670&auto=format&fit=crop",
     link: "/news/conference-2023"
-  },
-  {
-    id: "news-3",
-    title: "Newly Discovered Manuscript Fragments",
-    titleTibetan: "གསར་དུ་རྙེད་པའི་དཔེ་ཆའི་ཆ་ཤས་ཁག",
-    description: "Archaeological excavations in Mustang, Nepal have uncovered fragments of 12th century Buddhist manuscripts that may contain previously unknown Kangyur texts.",
-    date: "2023-08-07",
-    imageUrl: "https://images.unsplash.com/photo-1570344345579-7a01124c6705?q=80&w=2673&auto=format&fit=crop",
-    link: "/news/manuscript-discovery"
-  },
-  {
-    id: "news-4",
-    title: "New Translation Project Announced",
-    titleTibetan: "ལོ་ཙཱ་ལས་འཆར་གསར་པ་བསྒྲགས་པ།",
-    description: "A major international collaboration has been announced to translate the complete Kangyur collection into multiple modern languages over the next decade.",
-    date: "2023-09-18",
-    imageUrl: "https://images.unsplash.com/photo-1612599316791-451087e8f043?q=80&w=2574&auto=format&fit=crop",
-    link: "/news/translation-project"
-  },
-  {
-    id: "news-5",
-    title: "Annual Kangyur Reading Festival",
-    titleTibetan: "ལོ་འཁོར་བཀའ་འགྱུར་ཀློག་པའི་དུས་སྟོན།",
-    description: "Thousands of practitioners gather in Dharamsala for the annual Kangyur reading festival, completing the entire reading in just 10 days.",
-    date: "2023-10-05",
-    imageUrl: "https://images.unsplash.com/photo-1588197832594-58bcc8d2c86b?q=80&w=2574&auto=format&fit=crop",
-    link: "/news/reading-festival"
-  },
-  {
-    id: "news-6",
-    title: "New Digital Tools for Textual Analysis",
-    titleTibetan: "ཡིག་ཆ་དབྱེ་ཞིབ་བྱེད་པའི་བརྙན་རྫས་ལག་ཆ་གསར་པ།",
-    description: "A suite of innovative digital tools has been released to help scholars analyze linguistic patterns and relationships within the Kangyur texts.",
-    date: "2023-11-12",
-    imageUrl: "https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?q=80&w=2670&auto=format&fit=crop",
-    link: "/news/digital-tools"
-  },
+  }
 ];
 
 const NewsCard = ({ news, isTibetan, t }: { news: NewsItem, isTibetan: boolean, t: any }) => {
@@ -121,7 +76,6 @@ const News = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 6;
   const { isTibetan, t } = useLanguage();
-
   const totalPages = Math.ceil(newsItems.length / itemsPerPage);
 
   const handlePageChange = (page: number) => {

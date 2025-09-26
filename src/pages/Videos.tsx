@@ -4,34 +4,26 @@ import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/componen
 import { Pagination, PaginationContent, PaginationItem, PaginationLink, PaginationNext, PaginationPrevious } from "@/components/ui/atoms/pagination";
 import { Clock, Play } from 'lucide-react';
 import { Link } from 'react-router-dom';
-import LocalizedText from '@/components/LocalizedText';
-import { useLocalization } from '@/hooks/useLocalization';
 import { Dialog, DialogContent } from '@/components/ui/atoms/dialog';
+import useLanguage from '@/hooks/useLanguage';
+import { cn } from '@/lib/utils';
 
 interface VideoItem {
   id: string;
   title: string;
   titleTibetan?: string;
-  duration: string; // e.g. "12:34"
+  duration: string;
   thumbnailUrl: string;
   link?: string;
   youtubeId?: string;
 }
 
 const videoItems: VideoItem[] = [
-  { id: 'v1', title: 'Introduction to the Kangyur', titleTibetan: 'བཀའ་འགྱུར་གྱི་ངོ་སྤྲོད།', duration: '12:34', thumbnailUrl: 'https://images.unsplash.com/photo-1523752863405-df2a5d8f8b0b?q=80&w=2574&auto=format&fit=crop', youtubeId: 'q-diZYF-epo' },
-  { id: 'v2', title: 'Preserving Ancient Texts', titleTibetan: 'གཞུང་རྙིང་ཉར་ཚགས་བྱེད་ཚུལ།', duration: '08:12', thumbnailUrl: 'https://images.unsplash.com/photo-1507842217343-583bb7270b66?q=80&w=2574&auto=format&fit=crop', link: '#' },
-  { id: 'v3', title: 'Derge Edition Overview', titleTibetan: 'སྡེ་དགེ་པར་མའི་མཐོང་བའི་ཚུལ།', duration: '15:01', thumbnailUrl: 'https://images.unsplash.com/photo-1469474968028-56623f02e42e?q=80&w=2574&auto=format&fit=crop', link: '#' },
-  { id: 'v4', title: 'Cataloging Methods', titleTibetan: 'དཀར་ཆག་བཟོ་ཚུལ།', duration: '09:45', thumbnailUrl: 'https://images.unsplash.com/photo-1484417894907-623942c8ee29?q=80&w=2574&auto=format&fit=crop', link: '#' },
-  { id: 'v5', title: 'Buddhist Teachings Explained', titleTibetan: 'བཀའ་འགྱུར་གྱི་བསྟན་པ་གསལ་བཤད།', duration: '22:08', thumbnailUrl: 'https://images.unsplash.com/photo-1474366521946-c3d4b507abf2?q=80&w=2574&auto=format&fit=crop', link: '#' },
-  { id: 'v6', title: 'Digitization Workflow', titleTibetan: 'དྲ་ཐོག་བསྐྲུན་གཞི་ལས་ཀ།', duration: '11:27', thumbnailUrl: 'https://images.unsplash.com/photo-1515879218367-8466d910aaa4?q=80&w=2574&auto=format&fit=crop', link: '#' },
-  { id: 'v7', title: 'Karchag: How It Works', titleTibetan: 'དཀར་ཆག་གི་ལས་འགུལ།', duration: '13:59', thumbnailUrl: 'https://images.unsplash.com/photo-1504639725590-34d0984388bd?q=80&w=2574&auto=format&fit=crop', link: '#' },
-  { id: 'v8', title: 'Scholarly Collaboration', titleTibetan: 'མཁས་པའི་མཉམ་ལས།', duration: '06:52', thumbnailUrl: 'https://images.unsplash.com/photo-1542744095-291d1f67b221?q=80&w=2574&auto=format&fit=crop', link: '#' },
+  { id: 'v1', title: 'Introduction to the Kangyur', titleTibetan: 'བཀའ་འགྱུར་གྱི་ངོ་སྤྲོད།', duration: '12:34', thumbnailUrl: 'https://images.unsplash.com/photo-1507842217343-583bb7270b66?q=80&w=2574&auto=format&fit=crop', youtubeId: 'q-diZYF-epo' }
 ];
 
-const VideoCard = ({ video, onPlay }: { video: VideoItem; onPlay: (video: VideoItem) => void }) => {
-  const { language } = useLocalization();
-  const title = language === 'tib' && video.titleTibetan ? (
+const VideoCard = ({ video, onPlay, t, isTibetan }: { video: VideoItem; onPlay: (video: VideoItem) => void; t: any; isTibetan: boolean }) => {
+  const title = isTibetan && video.titleTibetan ? (
     <p className="text-sm font-medium text-kangyur-maroon tibetan mb-1">{video.titleTibetan}</p>
   ) : (
     <CardTitle className="text-lg">{video.title}</CardTitle>
@@ -70,14 +62,14 @@ const VideoCard = ({ video, onPlay }: { video: VideoItem; onPlay: (video: VideoI
             onClick={() => onPlay(video)}
             className="inline-flex items-center text-kangyur-orange text-sm font-medium hover:text-kangyur-orange/80 transition-colors"
           >
-            <LocalizedText textKey="watchTeachings" />
+           {t("watchTeachings")}
           </button>
         ) : (
           <Link 
             to={video.link || '#'}
             className="group inline-flex items-center text-kangyur-orange text-sm font-medium hover:text-kangyur-orange/80 transition-colors"
           >
-            <LocalizedText textKey="watchTeachings" />
+            {t("watchTeachings")}
           </Link>
         )}
       </CardFooter>
@@ -86,7 +78,7 @@ const VideoCard = ({ video, onPlay }: { video: VideoItem; onPlay: (video: VideoI
 };
 
 const Videos = () => {
-  const { language } = useLocalization();
+  const { isTibetan, t } = useLanguage();
   const [query, setQuery] = useState('');
   const [currentPage, setCurrentPage] = useState(1);
   const [activeVideo, setActiveVideo] = useState<VideoItem | null>(null);
@@ -98,9 +90,9 @@ const Videos = () => {
     return videoItems.filter(v => {
       const en = v.title.toLowerCase();
       const tib = (v.titleTibetan || '').toLowerCase();
-      return language === 'tib' ? tib.includes(q) : en.includes(q);
+      return isTibetan ? tib.includes(q) : en.includes(q);
     });
-  }, [query, language]);
+  }, [query, isTibetan]);
 
   const totalPages = Math.ceil(filtered.length / itemsPerPage) || 1;
   const start = (currentPage - 1) * itemsPerPage;
@@ -116,15 +108,15 @@ const Videos = () => {
   };
 
   return (
-    <div className="min-h-screen bg-kangyur-light">
+    <div className={cn("min-h-screen bg-kangyur-light",isTibetan ? 'tibetan' : 'english')}>
 
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-16">
         <div className="mb-6 text-center pt-8">
           <h1 className="text-4xl font-bold text-kangyur-dark mb-3">
-            <LocalizedText textKey="kangyurVideos" />
+            {t("kangyurVideos")}
           </h1>
           <p className="text-xl text-kangyur-dark/70 max-w-2xl mx-auto">
-            <LocalizedText textKey="videosSubtitle" />
+            {t("videosSubtitle")}
           </p>
         </div>
 
@@ -133,14 +125,14 @@ const Videos = () => {
             type="text"
             value={query}
             onChange={(e) => { setQuery(e.target.value); setCurrentPage(1); }}
-            placeholder={language === 'tib' ? 'བརྙེན་འཚོལ།' : 'Search videos'}
+            placeholder={t("searchVideos")}
             className="w-full px-4 py-2 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-kangyur-orange/50"
           />
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-10">
           {pageItems.map((video) => (
-            <VideoCard key={video.id} video={video} onPlay={handlePlay} />
+            <VideoCard key={video.id} video={video} onPlay={handlePlay} t={t} isTibetan={isTibetan} />
           ))}
         </div>
 
@@ -151,7 +143,7 @@ const Videos = () => {
                 onClick={() => currentPage > 1 && handlePageChange(currentPage - 1)}
                 className={currentPage === 1 ? "pointer-events-none opacity-50" : "cursor-pointer"}
               >
-                <LocalizedText textKey="previous" />
+                {t("previous")}
               </PaginationPrevious>
             </PaginationItem>
 
@@ -172,7 +164,7 @@ const Videos = () => {
                 onClick={() => currentPage < totalPages && handlePageChange(currentPage + 1)}
                 className={currentPage === totalPages ? "pointer-events-none opacity-50" : "cursor-pointer"}
               >
-                <LocalizedText textKey="next" />
+                {t("next")}
               </PaginationNext>
             </PaginationItem>
           </PaginationContent>

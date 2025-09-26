@@ -2,7 +2,8 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { Book, FileText } from 'lucide-react';
 import { cn } from '@/lib/utils';
-import { useLocalization } from '@/hooks/useLocalization';
+import useLanguage from '@/hooks/useLanguage';
+
 interface TextCardProps {
   id: string;
   title: {
@@ -34,7 +35,7 @@ const TextCard = ({
   const isCompact = variant === 'compact';
   const isFeatured = variant === 'featured';
   const isRowLayout = !!imageUrl && variant === 'default' && !isCompact && !isFeatured;
-  const { isTibetan } = useLocalization();
+  const { isTibetan } = useLanguage();
   return <Link to={`/texts/${id}`} className={cn("group block overflow-hidden transition-all duration-300", isCompact ? "h-full" : "", isFeatured ? "bg-gradient-to-br from-kangyur-cream to-white border border-kangyur-orange/20 rounded-xl shadow-sm hover:shadow-md" : "bg-white border border-kangyur-orange/10 rounded-xl shadow-sm hover:shadow-md", className)}>
       <div className={cn("flex", isCompact ? "flex-col h-full" : isRowLayout ? "flex-row items-stretch gap-4" : "flex-col")}>
         {/* Image - shown for compact and default variants */}

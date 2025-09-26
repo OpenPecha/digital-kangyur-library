@@ -2,10 +2,10 @@ import React from 'react';
 import { useParams } from 'react-router-dom';
 import Footer from '@/components/ui/molecules/Footer';
 import Breadcrumb from '@/components/ui/atoms/Breadcrumb';
-import { useLocalization } from '@/hooks/useLocalization';
 import { Card, CardContent } from "@/components/ui/atoms/card";
 import { ScrollArea } from "@/components/ui/molecules/scroll-area";
 import { cn } from '@/lib/utils';
+import useLanguage from '@/hooks/useLanguage';
 
 // Mock data for tantra texts - in production, this would come from your backend
 const tantraTexts: Record<string, {
@@ -146,7 +146,7 @@ const tantraTexts: Record<string, {
 
 const TantraText = () => {
   const { id } = useParams<{ id: string }>();
-  const { language, isTibetan, t } = useLocalization();
+  const { isTibetan, t } = useLanguage();
 
   const text = id ? tantraTexts[id] : null;
 
