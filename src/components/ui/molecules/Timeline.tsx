@@ -3,7 +3,7 @@ import { Card, CardContent } from '@/components/ui/atoms/card';
 import { Badge } from '@/components/ui/atoms/badge';
 import { Calendar, MapPin, X } from 'lucide-react';
 import { cn } from '@/lib/utils';
-import { useLocalization } from '@/hooks/useLocalization';
+import useLanguage from '@/hooks/useLanguage';
 
 type TimelineEvent = {
   id: string;
@@ -18,23 +18,159 @@ type TimelineEvent = {
   }[];
 };
 
-interface TimelineProps {
-  data: TimelineEvent[];
-  className?: string;
-}
 
-const Timeline: React.FC<TimelineProps> = ({ data, className }) => {
-  const [selectedPeriod, setSelectedPeriod] = useState<TimelineEvent | null>(null);
-  const { t, language } = useLocalization();
+const timelineData: TimelineEvent[] = [{
+  id: 'early-translation',
+  period:'earlyTranslationPeriod',
+  startYear: 650,
+  endYear: 900,
+  events: [{
+    year: "7th-8th Century",
+    description: "Initial Buddhist texts begin to be translated into Tibetan during King Songtsen Gampo's reign",
+    position: 700
+  }, {
+    year: "783 CE",
+    description: "Establishment of the first official translation committee at Samye Monastery",
+    position: 783
+  }, {
+    year: "800-815 CE",
+    description: "Emperor Tride Songtsen (Sadnaleg) orders cataloging of translations, resulting in the Lhenkar (Denkarma) Catalog",
+    position: 807
+  }]
+}, {
+  id: 'dark-age',
+  period: "darkAgeAndRevival",
+  startYear: 842,
+  endYear: 1040,
+  events: [{
+    year: "842-978 CE",
+    description: "Period of fragmentation with limited translation activity following the collapse of the Tibetan Empire",
+    position: 910
+  }, {
+    year: "978-1040 CE",
+    description: "\"Later Diffusion\" (phyi dar) period begins with renewed translation efforts in Western Tibet",
+    position: 1009
+  }]
+}, {
+  id: 'proto-kangyur',
+  period: "protoKangyurFormation",
+  startYear: 1040,
+  endYear: 1300,
+  events: [{
+    year: "1076 CE",
+    description: "\"New Translation Period\" begins with revised translation terminology and systematic organization",
+    position: 1076
+  }, {
+    year: "Late 12th Century",
+    description: "Early collections of translated texts organized into proto-Kangyur collections at various monasteries",
+    position: 1180
+  }]
+}, {
+  id: 'first-structured',
+  period: "firstStructuredKangyurs",
+  startYear: 1300,
+  endYear: 1400,
+  events: [{
+    year: "1310 CE",
+    description: "Old Narthang Kangyur, one of the earliest systematically organized collections",
+    position: 1310
+  }, {
+    year: "1349 CE",
+    description: "Tshalpa Kangyur commissioned, becoming highly influential for later editions",
+    position: 1349
+  }]
+}, {
+  id: 'classic-manuscript',
+  period: "classicManuscriptKangyurs",
+  startYear: 1380,
+  endYear: 1460,
+  events: [{
+    year: "1380-1410 CE",
+    description: "Yongle Kangyur (Beijing/Peking edition) created under Chinese imperial patronage",
+    position: 1395
+  }, {
+    year: "1410 CE",
+    description: "Tempangma Kangyur, produced at Gyangtse with high calligraphic standards",
+    position: 1410
+  }, {
+    year: "1430-1456 CE",
+    description: "Old Derge Manuscript Kangyur created, setting foundation for later printed edition",
+    position: 1443
+  }]
+}, {
+  id: 'block-printed',
+  period: "blockPrintedEditions",
+  startYear: 1410,
+  endYear: 1880,
+  events: [{
+    year: "1410 CE",
+    description: "First printed Kangyur (Yongle/Beijing edition) - revolutionary printing technology",
+    position: 1410
+  }, {
+    year: "1605-1608 CE",
+    description: "Wanli/Lithang Kangyur, the first woodblock printed edition in Tibet proper",
+    position: 1606
+  }, {
+    year: "1733 CE",
+    description: "Derge Kangyur printed edition completed - highly influential and still used today",
+    position: 1733
+  }, {
+    year: "1741 CE",
+    description: "Narthang printed Kangyur, based on refined manuscript traditions",
+    position: 1741
+  }, {
+    year: "1858-1878 CE",
+    description: "Cone Kangyur printed, based on the Derge edition with local variations",
+    position: 1868
+  }]
+}, {
+  id: 'twentieth-century',
+  period: "twentiethCenturyEditions",
+  startYear: 1900,
+  endYear: 2000,
+  events: [{
+    year: "1909 CE",
+    description: "Lhasa (Zhol) Kangyur edition printed under the Thirteenth Dalai Lama",
+    position: 1909
+  }, {
+    year: "1934 CE",
+    description: "Publication of the influential \"Comparative Edition\" for scholarly study",
+    position: 1934
+  }, {
+    year: "1981 CE",
+    description: "Nyingma Edition by Tarthang Rinpoche, Dharma Publishing - first major Western publication",
+    position: 1981
+  }]
+}, {
+  id: 'twenty-first-century',
+  period: "twentyFirstCenturyDigitalEditions",
+  startYear: 2000,
+  endYear: 2024,
+  events: [{
+    year: "2009 CE",
+    description: "Pedurma Edition by Katen Pedur Khang, Alak Zenkar Rinpoche - digitally enhanced accuracy",
+    position: 2009
+  }, {
+    year: "2012-2013 CE",
+    description: "Yidzhin Norbu Edition by Tarthang Rinpoche, Yeshe De Project - comprehensive digital archive",
+    position: 2012
+  }, {
+    year: "2020 CE",
+    description: "Digital Kangyur Library project begins - modern online accessibility",
+    position: 2020
+  }]
+}];
+const Timeline = () => {
 
-  // Calculate timeline range and scale
+const [selectedPeriod, setSelectedPeriod] = useState(null);
+ const {t,isTibetan}=useLanguage()
+
   const { minYear, maxYear, yearRange, tickMarks } = useMemo(() => {
-    const allYears = data.flatMap(period => [period.startYear, period.endYear]);
+    const allYears = timelineData.flatMap(period => [period.startYear, period.endYear]);
     const min = Math.min(...allYears);
     const max = Math.max(...allYears);
     const range = max - min;
     
-    // Create year tick marks every 25-50 years depending on range
     const tickInterval = range > 500 ? 50 : 25;
     const startTick = Math.floor(min / tickInterval) * tickInterval;
     const endTick = Math.ceil(max / tickInterval) * tickInterval;
@@ -50,20 +186,18 @@ const Timeline: React.FC<TimelineProps> = ({ data, className }) => {
       yearRange: range,
       tickMarks: ticks
     };
-  }, [data]);
+  }, [timelineData]);
 
-  // Calculate position percentage for a given year
   const getPositionPercent = (year: number) => {
     return ((year - minYear) / yearRange) * 100;
   };
 
-  // Calculate width percentage for a period
   const getWidthPercent = (startYear: number, endYear: number) => {
     return ((endYear - startYear) / yearRange) * 100;
   };
 
   return (
-    <div className={cn("w-full", className)}>
+    <div className={cn("w-full")}>
       {/* Timeline Container */}
       <div className="relative bg-white border border-kangyur-orange/20 rounded-lg p-6 overflow-x-auto min-h-[480px]"> {/* Increased from min-h-[320px] to min-h-[480px] */}
         {/* Year markers at top */}
@@ -95,7 +229,7 @@ const Timeline: React.FC<TimelineProps> = ({ data, className }) => {
 
         {/* Period boxes positioned along timeline */}
         <div className="relative">
-          {data.map((period, index) => {
+          {timelineData.map((period, index) => {
             const leftPosition = getPositionPercent(period.startYear);
             const width = getWidthPercent(period.startYear, period.endYear);
             const minWidth = 12;
@@ -124,12 +258,9 @@ const Timeline: React.FC<TimelineProps> = ({ data, className }) => {
                       </Badge>
                       <h4 className={cn(
                         "font-semibold text-xs leading-tight mb-1",
-                        language === 'tib' ? 'tibetan text-kangyur-maroon' : 'text-kangyur-maroon'
+                        isTibetan ? 'tibetan text-kangyur-maroon' : 'text-kangyur-maroon'
                       )}>
-                        {language === 'tib' && period.tibetanPeriod 
-                          ? period.tibetanPeriod 
-                          : period.period
-                        }
+                        {t(period.period)}
                       </h4>
                       <div className="text-xs text-kangyur-dark/50 mt-1">
                         {period.events.length} events
@@ -159,14 +290,9 @@ const Timeline: React.FC<TimelineProps> = ({ data, className }) => {
                       ({selectedPeriod.endYear - selectedPeriod.startYear} years)
                     </span>
                   </div>
-                  <h3 className="text-2xl font-bold text-kangyur-maroon mb-2">
-                    {selectedPeriod.period}
+                  <h3 className={cn("text-2xl font-bold text-kangyur-maroon mb-2",isTibetan ? 'tibetan' : 'english')}>
+                    {t(selectedPeriod.period)}
                   </h3>
-                  {selectedPeriod.tibetanPeriod && (
-                    <p className="text-kangyur-dark/70 tibetan text-lg">
-                      {selectedPeriod.tibetanPeriod}
-                    </p>
-                  )}
                 </div>
                 <button 
                   onClick={() => setSelectedPeriod(null)}
