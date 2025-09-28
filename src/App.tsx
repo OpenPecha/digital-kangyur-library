@@ -19,6 +19,9 @@ import Videos from "./pages/Videos";
 import TantraText from "./pages/TantraText";
 import TextDetail from "./pages/TextDetail";
 import Navbar from "./components/ui/molecules/Navbar";
+import CatalogPage from "./pages/Catalog-page/CatalogPage";
+import CatalogCategory from "./pages/Catalog-page/CatalogCategory";
+import CatalogItem from "./pages/Catalog-page/CatalogItem";
 
 const queryClient = new QueryClient();
 
@@ -30,6 +33,9 @@ const App = () => (
           <Navbar />
           <Routes>
             <Route path="/" element={<Index />} />
+            <Route path="/catalogs" element={<CatalogPage />} />
+            <Route path="/catalog/category/:category" element={<CatalogCategory />} />
+            <Route path="/catalog/item/:item" element={<CatalogItem />} />
             <Route path="/catalog" element={<Catalog />} />
             <Route path="/news" element={<News />} />
             <Route path="/news/:id" element={<NewsDetail />} />

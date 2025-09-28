@@ -15,12 +15,12 @@ const MainKarchagFrames: React.FC = () => {
         <KarchagFrame 
           labelKey="discourses"
           fontSize="xx-large"
-          link="/catalog?category=discourses" 
+          link="/catalog/category/discourses" 
         />
         <KarchagFrame 
           labelKey="tantra"
           fontSize="xx-large"
-          link="/catalog?category=tantra" 
+          link="/catalog/category/tantra" 
         />
       </div>
     </div>

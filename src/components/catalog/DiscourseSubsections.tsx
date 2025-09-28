@@ -8,8 +8,8 @@ const subsections = [
     id: 'discipline',
     tibetan: 'འདུལ་བ།',
     english: 'Discipline',
-    link: '/catalog?category=discipline',
-  },
+    link: '/catalog/category/discipline',
+  },  
   {
     id: 'prajnaparamita',
     tibetan: 'ཤེར་ཕྱིན།',
@@ -20,19 +20,19 @@ const subsections = [
     id: 'avatamsaka',
     tibetan: 'ཕལ་ཆེན།',
     english: 'Avataṃsaka',
-    link: '/catalog?item=avatamsaka',
+    link: '/catalog/item/avatamsaka',
   },
   {
     id: 'ratnakuta',
     tibetan: 'དཀོན་བརྩེགས།',
     english: 'Ratnakūṭa',
-    link: '/catalog?item=ratnakuta',
+    link: '/catalog/item/ratnakuta',
   },
   {
     id: 'generalSutras',
     tibetan: 'མདོ་སྡེ།',
     english: 'General Sūtras',
-    link: '/catalog?item=generalSutras',
+    link: '/catalog/item/generalSutras',
   }
 ];
 
