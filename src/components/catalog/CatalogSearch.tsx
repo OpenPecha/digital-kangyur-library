@@ -1,5 +1,6 @@
 import React from 'react';
 import { Search } from 'lucide-react';
+import useLanguage from '@/hooks/useLanguage';
 
 interface CatalogSearchProps {
   searchQuery: string;
@@ -10,6 +11,8 @@ const CatalogSearch = ({
   searchQuery,
   setSearchQuery
 }: CatalogSearchProps) => {
+  const { t } = useLanguage();
+
   return (
     <div className="text-white py-9 pt-28 relative overflow-hidden" style={{ backgroundColor: '#e3821b' }}>      
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
@@ -21,7 +24,7 @@ const CatalogSearch = ({
             <input 
               type="search" 
               className="block w-full pl-10 pr-4 py-2.5 bg-white/10 border border-white/20 rounded-lg focus:outline-none focus:ring-1 focus:ring-white/30 text-white placeholder-white/60 font-sans" 
-              placeholder="Search the karchag..." 
+              placeholder={t('searchCatalogPlaceholder')} 
               value={searchQuery} 
               onChange={e => setSearchQuery(e.target.value)} 
             />

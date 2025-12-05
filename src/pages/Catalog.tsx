@@ -13,6 +13,7 @@ import { catalogData } from '@/data/catalogData';
 import { filterCatalogItems, findItemInTree } from '@/utils/catalogUtils';
 import { paginateItems } from '@/utils/paginationUtils';
 import TantraSubsections from "@/components/catalog/TantraSubsections";
+import useLanguage from '@/hooks/useLanguage';
 
 const tantraSubsectionIds = [
   "tantra-anuttarayoga",
@@ -36,6 +37,7 @@ const Catalog = () => {
   const [selectedItem, setSelectedItem] = useState<string | null>(null);
   const [searchParams, setSearchParams] = useSearchParams();
   const [currentPage, setCurrentPage] = useState(1);
+  const { t } = useLanguage();
 
   // Get URL parameters
   const category = searchParams.get('category');
@@ -412,13 +414,14 @@ const Catalog = () => {
           {searchQuery && (
             <div className="mb-8 text-center">
               <p className="text-gray-600">
-                Showing search results for: <span className="font-bold">{searchQuery}</span>
+                {t('searchResultsFor')}{' '}
+                <span className="font-bold">{searchQuery}</span>
               </p>
               <button 
                 onClick={() => setSearchQuery('')} 
                 className="mt-4 px-4 py-2 bg-indigo-600 text-white rounded hover:bg-indigo-700 transition"
               >
-                Clear Search
+                {t('clearSearch')}
               </button>
             </div>
           )}

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import Footer from '@/components/ui/molecules/Footer';
-import { useParams, Link } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { cn } from '@/lib/utils';
 import { Card, CardContent } from "@/components/ui/atoms/card";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/atoms/tabs";
@@ -217,8 +217,7 @@ I prostrate to the Blessed Mother Prajñāpāramitā.`,
 };
 
 const TextDetail = () => {
-  const { id } = useParams<{ id: string }>();
-  const [editionTab, setEditionTab] = useState<string>('derge');
+  useParams<{ id: string }>();
   const [activeSection, setActiveSection] = useState<string>('translation-homage');
   const {isTibetan, t } = useLanguage();
 
@@ -284,10 +283,16 @@ const TextDetail = () => {
             <Card className="border border-kangyur-orange/10 rounded-xl shadow-sm">
               <CardContent className="p-0">
                 <Tabs defaultValue="metadata" className="w-full">
-                  <TabsList className="w-full grid grid-cols-3 border-b">
-                    <TabsTrigger value="metadata" className="rounded-none">Metadata</TabsTrigger>
-                    <TabsTrigger value="summary" className="rounded-none">Summary</TabsTrigger>
-                    <TabsTrigger value="pdf" className="rounded-none">PDF</TabsTrigger>
+                  <TabsList className="w-full grid grid-cols-3 border-b text-xs sm:text-sm">
+                    <TabsTrigger value="metadata" className="rounded-none">
+                      Metadata
+                    </TabsTrigger>
+                    <TabsTrigger value="summary" className="rounded-none">
+                      Summary
+                    </TabsTrigger>
+                    <TabsTrigger value="pdf" className="rounded-none">
+                      PDF
+                    </TabsTrigger>
                   </TabsList>
                   {/* Tab 1: Metadata */}
                   <TabsContent value="metadata" className="p-6">
@@ -307,18 +312,20 @@ const TextDetail = () => {
                   </TabsContent>
                   {/* Tab 2: Summary - New layout with vertical nav and text reader */}
                   <TabsContent value="summary" className="p-0">
-                    <div className="flex h-[70vh] overflow-hidden">
-                      {/* Left Navigation Bar - 20% width */}
-                      <div className="w-1/5 border-r border-border bg-muted/30 h-full overflow-y-auto">
-                        <div className="p-4">
-                          <h3 className="text-lg font-semibold text-foreground mb-4">Summary Sections</h3>
+                    <div className="flex flex-col md:flex-row h-auto md:h-[70vh] overflow-hidden">
+                      {/* Left Navigation Bar */}
+                      <div className="md:w-1/4 lg:w-1/5 border-b md:border-b-0 md:border-r border-border bg-muted/30 max-h-56 md:max-h-none md:h-full overflow-y-auto">
+                        <div className="p-3 sm:p-4">
+                          <h3 className="text-sm sm:text-base font-semibold text-foreground mb-3 sm:mb-4">
+                            Summary Sections
+                          </h3>
                           <nav className="space-y-2">
                             {textData.sections.map((section) => (
                               <button
                                 key={section.id}
                                 onClick={() => setActiveSection(section.id)}
                                 className={cn(
-                                  "w-full text-left p-3 rounded-lg transition-colors text-sm font-semibold",
+                                  "w-full text-left px-3 py-2 rounded-lg transition-colors text-xs sm:text-sm font-semibold",
                                   isTibetan && "tibetan",
                                   activeSection === section.id
                                     ? "bg-primary text-primary-foreground"
@@ -332,33 +339,33 @@ const TextDetail = () => {
                         </div>
                       </div>
 
-                      {/* Right Text Reader - 80% width */}
+                      {/* Right Text Reader */}
                       <div className="flex-1 flex flex-col">
-                        {/* Scrollable Content Area */}
-                        <div className="flex-1 overflow-y-auto p-6">
+                        <div className="flex-1 overflow-y-auto p-4 sm:p-6">
                           {textData.sections
                             .filter((section) => section.id === activeSection)
                             .map((section) => (
                               <div key={section.id} className="space-y-4">
-                                <h3 className={cn(
-                                  "text-xl font-semibold text-kangyur-maroon mb-4",
-                                  isTibetan && "tibetan"
-                                )}>
+                                <h3
+                                  className={cn(
+                                    "text-lg sm:text-xl font-semibold text-kangyur-maroon mb-3 sm:mb-4",
+                                    isTibetan && "tibetan"
+                                  )}
+                                >
                                   {t(sectionTitleMap[section.id as keyof typeof sectionTitleMap])}
                                 </h3>
-                                <div className="tibetan text-lg leading-relaxed text-foreground whitespace-pre-line break-words">
+                                <div className="tibetan text-base sm:text-lg leading-relaxed text-foreground whitespace-pre-line break-words">
                                   {section.content}
                                 </div>
                               </div>
-                            ))
-                          }
+                            ))}
                         </div>
                       </div>
                     </div>
                   </TabsContent>
                   {/* Tab 3: PDF - Embedded Google Drive preview */}
                   <TabsContent value="pdf" className="p-0">
-                    <div className="h-[70vh]">
+                    <div className="h-[60vh] sm:h-[70vh]">
                       <iframe
                         title="Text PDF"
                         src="https://drive.google.com/file/d/18lzOQGonCX5OHlZ8wfJwXRrb0yEA_RXh/preview"
