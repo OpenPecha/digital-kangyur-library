@@ -243,6 +243,7 @@ const NewsAdmin = () => {
             tibetan_content: editingNews.tibetanDescription,
             english_content: editingNews.englishDescription,
             published_date: editingNews.createdAt,
+            thumbnail_url: editingNews.thumbnailUrl || '',
             is_active: true
           } : undefined}
           onSave={handleSave}

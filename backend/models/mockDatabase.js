@@ -18,6 +18,7 @@ const db = {
   timelineEventRelations: [],
   timelineEventSources: [],
   audioRecordings: [],
+  videos: [],
   karchagMainCategories: [],
   karchagSubCategories: [],
   karchagTexts: [],
@@ -465,6 +466,61 @@ const initializeDatabase = async () => {
   };
 
   db.news.push(news1, news2, news3, news4);
+
+  // Create mock video entries
+  const video1 = {
+    id: uuidv4(),
+    tibetan_title: 'བཀའ་འགྱུར་གྱི་ངོ་སྤྲོད།',
+    english_title: 'Introduction to the Kangyur',
+    tibetan_description: 'བཀའ་འགྱུར་གྱི་ལོ་རྒྱུས་དང་གལ་ཆེན་པོའི་ནང་དོན་ཁག་གི་ངོ་སྤྲོད།',
+    english_description: 'An introduction to the Kangyur, the Tibetan Buddhist canon containing the words of the Buddha. Learn about its history, structure, and significance.',
+    video_link: 'https://www.youtube.com/watch?v=q-diZYF-epo',
+    thumbnail_url: 'https://images.unsplash.com/photo-1507842217343-583bb7270b66?q=80&w=2574&auto=format&fit=crop',
+    is_active: true,
+    created_at: new Date().toISOString(),
+    updated_at: new Date().toISOString(),
+  };
+
+  const video2 = {
+    id: uuidv4(),
+    tibetan_title: 'དཔེ་ཆ་ཞིབ་འཇུག་གི་ཐབས་ལམ།',
+    english_title: 'Methods of Textual Research',
+    tibetan_description: 'བོད་ཡིག་གི་དཔེ་ཆ་ཞིབ་འཇུག་གི་ཐབས་ལམ་དང་ལག་ལེན་གྱི་གནས་ཚུལ།',
+    english_description: 'Exploring methodologies for researching and studying Tibetan Buddhist texts, including comparative analysis and historical context.',
+    video_link: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
+    thumbnail_url: 'https://images.unsplash.com/photo-1481627834876-b7833e8f5570?q=80&w=2576&auto=format&fit=crop',
+    is_active: true,
+    created_at: new Date().toISOString(),
+    updated_at: new Date().toISOString(),
+  };
+
+  const video3 = {
+    id: uuidv4(),
+    tibetan_title: 'བསྒྱུར་ཡིག་གི་གལ་ཆེན་པོ།',
+    english_title: 'The Importance of Translations',
+    tibetan_description: 'བོད་ཡིག་ནས་སྐད་ཡིག་གཞན་དུ་བསྒྱུར་བའི་གལ་ཆེན་པོ་དང་དཀའ་ངལ་ཁག',
+    english_description: 'Understanding the challenges and importance of translating Tibetan Buddhist texts into other languages, preserving meaning and cultural context.',
+    video_link: 'https://www.youtube.com/watch?v=jNQXAC9IVRw',
+    thumbnail_url: 'https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?q=80&w=2573&auto=format&fit=crop',
+    is_active: true,
+    created_at: new Date().toISOString(),
+    updated_at: new Date().toISOString(),
+  };
+
+  const video4 = {
+    id: uuidv4(),
+    tibetan_title: 'དཔེ་ཆ་དང་ལོ་རྒྱུས།',
+    english_title: 'Manuscripts and History',
+    tibetan_description: 'དཔེ་ཆ་རྙིང་པ་ཁག་གི་ལོ་རྒྱུས་དང་དེ་དག་གི་གལ་ཆེན་པོ།',
+    english_description: 'A journey through the history of Tibetan Buddhist manuscripts, from ancient scrolls to modern digital archives.',
+    video_link: 'https://www.youtube.com/watch?v=9bZkp7q19f0',
+    thumbnail_url: 'https://images.unsplash.com/photo-1570344345579-7a01124c6705?q=80&w=2673&auto=format&fit=crop',
+    is_active: true,
+    created_at: new Date().toISOString(),
+    updated_at: new Date().toISOString(),
+  };
+
+  db.videos.push(video1, video2, video3, video4);
 
   // Create timeline periods and events from frontend data
   const earlyTranslationPeriod = {

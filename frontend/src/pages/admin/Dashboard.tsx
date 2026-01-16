@@ -1,10 +1,46 @@
 import React from 'react';
 import AdminLayout from '@/components/admin/AdminLayout';
 import { Link } from 'react-router-dom';
-import { BookOpen, NewspaperIcon, FileText } from 'lucide-react';
+import { BookOpen, NewspaperIcon, FileText, Video, Clock, Music, FolderTree, Users } from 'lucide-react';
 
 const Dashboard = () => {
   const managementCards = [
+    {
+      title: "News",
+      icon: NewspaperIcon,
+      path: "/admin/news",
+      description: "Manage news articles with thumbnails"
+    },
+    {
+      title: "Videos",
+      icon: Video,
+      path: "/admin/videos",
+      description: "Manage video content with links"
+    },
+    {
+      title: "Texts",
+      icon: FileText,
+      path: "/admin/texts",
+      description: "Manage library texts"
+    },
+    {
+      title: "Timeline",
+      icon: Clock,
+      path: "/admin/timeline",
+      description: "Manage timeline events"
+    },
+    {
+      title: "Audio",
+      icon: Music,
+      path: "/admin/audio",
+      description: "Manage audio recordings"
+    },
+    {
+      title: "Catalog",
+      icon: FolderTree,
+      path: "/admin/catalog",
+      description: "Manage catalog categories"
+    },
     {
       title: "Karchag",
       icon: FileText,
@@ -12,16 +48,16 @@ const Dashboard = () => {
       description: "Manage Kangyur texts and content"
     },
     {
-      title: "News",
-      icon: NewspaperIcon,
-      path: "/admin/news",
-      description: "Manage news articles and updates"
-    },
-    {
       title: "Editions",
       icon: BookOpen,
       path: "/admin/editions",
       description: "Manage Karchag content and editions"
+    },
+    {
+      title: "Users",
+      icon: Users,
+      path: "/admin/users",
+      description: "Manage system users"
     }
   ];
 
@@ -33,7 +69,7 @@ const Dashboard = () => {
           <p className="text-gray-600">Manage your content across different categories</p>
         </div>
         
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {managementCards.map((card) => (
             <Link
               key={card.title}

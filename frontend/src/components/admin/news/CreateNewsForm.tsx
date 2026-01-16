@@ -25,6 +25,7 @@ interface NewsFormProps {
     tibetan_content: string;
     english_content: string;
     published_date: string;
+    thumbnail_url?: string;
     is_active: boolean;
   };
   onSave: (data: any) => void;
@@ -37,6 +38,7 @@ export const NewsForm = ({ isOpen, onClose, mode, data, onSave }: NewsFormProps)
     tibetan_content: '',
     english_content: '',
     published_date: format(new Date(), 'yyyy-MM-dd'),
+    thumbnail_url: '',
     is_active: true
   });
 
@@ -101,6 +103,19 @@ export const NewsForm = ({ isOpen, onClose, mode, data, onSave }: NewsFormProps)
                 placeholder="བོད་ཡིག་གི་ནང་དོན།"
               />
             </div>
+          </div>
+
+          {/* Thumbnail URL */}
+          <div className="space-y-2">
+            <Label htmlFor="thumbnail_url">Thumbnail URL</Label>
+            <Input
+              id="thumbnail_url"
+              value={formData.thumbnail_url || ''}
+              onChange={(e) => setFormData({ ...formData, thumbnail_url: e.target.value })}
+              placeholder="https://example.com/thumbnail.jpg"
+              type="url"
+            />
+            <p className="text-xs text-muted-foreground">Optional: URL for news thumbnail image</p>
           </div>
 
           {/* Published Date and Active Status */}

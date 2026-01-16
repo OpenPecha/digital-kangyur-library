@@ -16,6 +16,12 @@ import Dashboard from "./pages/admin/Dashboard";
 import KarchagAdmin from "./pages/admin/KarchagAdmin";
 import EditionsAdmin from "./pages/admin/EditionsAdmin";
 import NewsAdmin from "./pages/admin/NewsAdmin";
+import VideosAdmin from "./pages/admin/VideosAdmin";
+import TextsAdmin from "./pages/admin/TextsAdmin";
+import TimelineAdmin from "./pages/admin/TimelineAdmin";
+import AudioAdmin from "./pages/admin/AudioAdmin";
+import CatalogAdmin from "./pages/admin/CatalogAdmin";
+import UsersAdmin from "./pages/admin/UsersAdmin";
 import Login from "./pages/admin/Login";
 import NewsDetail from "./pages/NewsDetail";
 import Videos from "./pages/Videos";
@@ -46,6 +52,12 @@ const App = () => (
               <Route path="/admin/login" element={<Login />} />
               <Route path="/admin" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
               <Route path="/admin/news" element={<ProtectedRoute><NewsAdmin /></ProtectedRoute>} />
+              <Route path="/admin/videos" element={<ProtectedRoute><VideosAdmin /></ProtectedRoute>} />
+              <Route path="/admin/texts" element={<ProtectedRoute><TextsAdmin /></ProtectedRoute>} />
+              <Route path="/admin/timeline" element={<ProtectedRoute><TimelineAdmin /></ProtectedRoute>} />
+              <Route path="/admin/audio" element={<ProtectedRoute><AudioAdmin /></ProtectedRoute>} />
+              <Route path="/admin/catalog" element={<ProtectedRoute><CatalogAdmin /></ProtectedRoute>} />
+              <Route path="/admin/users" element={<ProtectedRoute><UsersAdmin /></ProtectedRoute>} />
               <Route path="/admin/karchag" element={<ProtectedRoute><KarchagAdmin /></ProtectedRoute>} />
               <Route path="/admin/editions" element={<ProtectedRoute><EditionsAdmin /></ProtectedRoute>} />
               <Route path="*" element={<NotFound />} />

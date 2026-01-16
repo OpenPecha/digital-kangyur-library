@@ -239,6 +239,208 @@ export const api = {
       method: 'DELETE',
     });
   },
+
+  // Videos
+  getVideos: (params?: { page?: number; limit?: number; lang?: string; search?: string; is_active?: string }) => {
+    const queryParams = new URLSearchParams();
+    if (params?.page) queryParams.append('page', params.page.toString());
+    if (params?.limit) queryParams.append('limit', params.limit.toString());
+    if (params?.lang) queryParams.append('lang', params.lang);
+    if (params?.search) queryParams.append('search', params.search);
+    if (params?.is_active) queryParams.append('is_active', params.is_active);
+    const query = queryParams.toString();
+    return fetchApi<{ videos: any[]; pagination: any }>(`/videos${query ? `?${query}` : ''}`);
+  },
+
+  getVideoById: (id: string, params?: { lang?: string }) => {
+    const queryParams = new URLSearchParams();
+    if (params?.lang) queryParams.append('lang', params.lang);
+    const query = queryParams.toString();
+    return fetchApi<any>(`/videos/${id}${query ? `?${query}` : ''}`);
+  },
+
+  createVideo: (data: any) => {
+    return fetchApi<any>('/videos', {
+      method: 'POST',
+      body: JSON.stringify(data),
+    });
+  },
+
+  updateVideo: (id: string, data: any) => {
+    return fetchApi<any>(`/videos/${id}`, {
+      method: 'PUT',
+      body: JSON.stringify(data),
+    });
+  },
+
+  deleteVideo: (id: string) => {
+    return fetchApi<void>(`/videos/${id}`, {
+      method: 'DELETE',
+    });
+  },
+
+  // Texts
+  getTexts: (params?: { page?: number; limit?: number; category_id?: string; search?: string; lang?: string }) => {
+    const queryParams = new URLSearchParams();
+    if (params?.page) queryParams.append('page', params.page.toString());
+    if (params?.limit) queryParams.append('limit', params.limit.toString());
+    if (params?.category_id) queryParams.append('category_id', params.category_id);
+    if (params?.search) queryParams.append('search', params.search);
+    if (params?.lang) queryParams.append('lang', params.lang);
+    const query = queryParams.toString();
+    return fetchApi<{ texts: any[]; pagination: any }>(`/texts${query ? `?${query}` : ''}`);
+  },
+
+  getTextById: (id: string, params?: { lang?: string }) => {
+    const queryParams = new URLSearchParams();
+    if (params?.lang) queryParams.append('lang', params.lang);
+    const query = queryParams.toString();
+    return fetchApi<any>(`/texts/${id}${query ? `?${query}` : ''}`);
+  },
+
+  createText: (data: any) => {
+    return fetchApi<any>('/texts', {
+      method: 'POST',
+      body: JSON.stringify(data),
+    });
+  },
+
+  updateText: (id: string, data: any) => {
+    return fetchApi<any>(`/texts/${id}`, {
+      method: 'PUT',
+      body: JSON.stringify(data),
+    });
+  },
+
+  deleteText: (id: string) => {
+    return fetchApi<void>(`/texts/${id}`, {
+      method: 'DELETE',
+    });
+  },
+
+  // Timeline Events
+  getTimelineEventById: (id: string, params?: { lang?: string }) => {
+    const queryParams = new URLSearchParams();
+    if (params?.lang) queryParams.append('lang', params.lang);
+    const query = queryParams.toString();
+    return fetchApi<any>(`/timeline/events/${id}${query ? `?${query}` : ''}`);
+  },
+
+  createTimelineEvent: (data: any) => {
+    return fetchApi<any>('/timeline/events', {
+      method: 'POST',
+      body: JSON.stringify(data),
+    });
+  },
+
+  updateTimelineEvent: (id: string, data: any) => {
+    return fetchApi<any>(`/timeline/events/${id}`, {
+      method: 'PUT',
+      body: JSON.stringify(data),
+    });
+  },
+
+  deleteTimelineEvent: (id: string) => {
+    return fetchApi<void>(`/timeline/events/${id}`, {
+      method: 'DELETE',
+    });
+  },
+
+  // Audio
+  getAudio: (params?: { page?: number; limit?: number; text_id?: string; search?: string; lang?: string }) => {
+    const queryParams = new URLSearchParams();
+    if (params?.page) queryParams.append('page', params.page.toString());
+    if (params?.limit) queryParams.append('limit', params.limit.toString());
+    if (params?.text_id) queryParams.append('text_id', params.text_id);
+    if (params?.search) queryParams.append('search', params.search);
+    if (params?.lang) queryParams.append('lang', params.lang);
+    const query = queryParams.toString();
+    return fetchApi<{ recordings: any[]; pagination: any }>(`/audio${query ? `?${query}` : ''}`);
+  },
+
+  getAudioById: (id: string, params?: { lang?: string }) => {
+    const queryParams = new URLSearchParams();
+    if (params?.lang) queryParams.append('lang', params.lang);
+    const query = queryParams.toString();
+    return fetchApi<any>(`/audio/${id}${query ? `?${query}` : ''}`);
+  },
+
+  createAudio: (data: any) => {
+    return fetchApi<any>('/audio', {
+      method: 'POST',
+      body: JSON.stringify(data),
+    });
+  },
+
+  updateAudio: (id: string, data: any) => {
+    return fetchApi<any>(`/audio/${id}`, {
+      method: 'PUT',
+      body: JSON.stringify(data),
+    });
+  },
+
+  deleteAudio: (id: string) => {
+    return fetchApi<void>(`/audio/${id}`, {
+      method: 'DELETE',
+    });
+  },
+
+  // Catalog Categories
+  createCategory: (data: any) => {
+    return fetchApi<any>('/catalog/categories', {
+      method: 'POST',
+      body: JSON.stringify(data),
+    });
+  },
+
+  updateCategory: (id: string, data: any) => {
+    return fetchApi<any>(`/catalog/categories/${id}`, {
+      method: 'PUT',
+      body: JSON.stringify(data),
+    });
+  },
+
+  deleteCategory: (id: string) => {
+    return fetchApi<void>(`/catalog/categories/${id}`, {
+      method: 'DELETE',
+    });
+  },
+
+  // Admin - Users
+  getUsers: (params?: { page?: number; limit?: number; role?: string; is_active?: string }) => {
+    const queryParams = new URLSearchParams();
+    if (params?.page) queryParams.append('page', params.page.toString());
+    if (params?.limit) queryParams.append('limit', params.limit.toString());
+    if (params?.role) queryParams.append('role', params.role);
+    if (params?.is_active) queryParams.append('is_active', params.is_active);
+    const query = queryParams.toString();
+    return fetchApi<{ users: any[]; pagination: any }>(`/admin/users${query ? `?${query}` : ''}`);
+  },
+
+  createUser: (data: any) => {
+    return fetchApi<any>('/admin/users', {
+      method: 'POST',
+      body: JSON.stringify(data),
+    });
+  },
+
+  updateUser: (id: string, data: any) => {
+    return fetchApi<any>(`/admin/users/${id}`, {
+      method: 'PUT',
+      body: JSON.stringify(data),
+    });
+  },
+
+  deleteUser: (id: string) => {
+    return fetchApi<void>(`/admin/users/${id}`, {
+      method: 'DELETE',
+    });
+  },
+
+  // Admin - Dashboard
+  getDashboard: () => {
+    return fetchApi<any>('/admin/dashboard');
+  },
 };
 
 export { ApiError };
