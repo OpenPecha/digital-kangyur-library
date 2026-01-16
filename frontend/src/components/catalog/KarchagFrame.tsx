@@ -25,7 +25,7 @@ const KarchagFrame: React.FC<KarchagFrameProps> = ({ labelKey, label, link, font
     ? `${isTibetan ? 'tibetan' : ''} text-${fontSize}`
     : isTibetan ? 'tibetan' : '';
   const textStyle = !isTailwindClass ? { fontSize, maxWidth: isTibetan&& '140px', textAlign: 'center', wordWrap:isTibetan&& 'break-word'} : {};
- 
+  console.log(labelKey, t(labelKey));
   const labelText = labelKey ? t(labelKey) : (isTibetan ? (label?.tibetan || '') : (label?.english || ''));
   
   return (
