@@ -1,44 +1,73 @@
 
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import KarchagFrame from './KarchagFrame';
 import CatalogBreadcrumb from './CatalogBreadcrumb';
 import useLanguage from '@/hooks/useLanguage';
+import api from '@/utils/api';
 
-const subsections = [
-  {
-    id: 'discipline',
-    tibetan: 'འདུལ་བ།',
-    english: 'Discipline',
-    link: '/catalog?category=discipline',
-  },
-  {
-    id: 'prajnaparamita',
-    tibetan: 'ཤེར་ཕྱིན།',
-    english: 'Prajñāpāramitā',
-    link: '/catalog?item=prajnaparamita',
-  },
-  {
-    id: 'avatamsaka',
-    tibetan: 'ཕལ་ཆེན།',
-    english: 'Avataṃsaka',
-    link: '/catalog?item=avatamsaka',
-  },
-  {
-    id: 'ratnakuta',
-    tibetan: 'དཀོན་བརྩེགས།',
-    english: 'Ratnakūṭa',
-    link: '/catalog?item=ratnakuta',
-  },
-  {
-    id: 'generalSutras',
-    tibetan: 'མདོ་སྡེ།',
-    english: 'General Sūtras',
-    link: '/catalog?item=generalSutras',
-  }
-];
+interface Subsection {
+  id: string;
+  tibetan: string;
+  english: string;
+  link: string;
+}
 
 const DiscourseSubsections: React.FC = () => {
   const { isTibetan, t } = useLanguage();
+  const [subsections, setSubsections] = useState<Subsection[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchSubsections = async () => {
+      try {
+        setLoading(true);
+        // Fetch the discourses category with its children
+        const response = await api.getCategoryBySlug('discourses', {
+          include_children: 'true',
+          lang: isTibetan ? 'bod' : 'en'
+        });
+        
+        // Map children to subsection format
+        const mappedSubsections: Subsection[] = (response.children || [])
+          .sort((a: any, b: any) => {
+            // Sort by order_index if available, otherwise maintain order
+            return (a.order_index || 0) - (b.order_index || 0);
+          })
+          .map((child: any) => ({
+            id: child.id_slug,
+            tibetan: child.title.tibetan || '',
+            english: child.title.english || '',
+            link: `/catalog?item=${child.id_slug}`,
+          }));
+        
+        setSubsections(mappedSubsections);
+      } catch (error) {
+        console.error('Failed to fetch discourse subsections:', error);
+        // Fallback to empty array or default data if needed
+        setSubsections([]);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchSubsections();
+  }, [isTibetan]);
+
+  if (loading) {
+    return (
+      <div className="container mx-auto px-4 py-12">
+        <div className="relative mb-12">
+          <CatalogBreadcrumb category="discourses" />
+          <h2 className={`text-3xl font-bold text-center ${isTibetan ? 'tibetan' : 'english'}`}>
+            {t('discourses')}
+          </h2>
+        </div>
+        <div className="flex justify-center items-center py-12">
+          <div className="text-lg">Loading...</div>
+        </div>
+      </div>
+    );
+  }
 
   const firstRow = subsections.slice(0, 3);
   const secondRow = subsections.slice(3, 5);

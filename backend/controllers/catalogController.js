@@ -4,6 +4,7 @@ const { AppError } = require('../utils/errors');
 const buildCategoryTree = (categories, parentId = null) => {
   return categories
     .filter(cat => cat.parent_id === parentId)
+    .sort((a, b) => (a.order_index || 0) - (b.order_index || 0))
     .map(cat => ({
       id: cat.id,
       id_slug: cat.id_slug,
@@ -13,6 +14,7 @@ const buildCategoryTree = (categories, parentId = null) => {
       },
       description: cat.description,
       count: cat.count,
+      order_index: cat.order_index,
       children: buildCategoryTree(categories, cat.id),
     }));
 };
@@ -57,6 +59,7 @@ const getCategoryBySlug = (req, res, next) => {
       },
       description: category.description,
       count: category.count,
+      order_index: category.order_index,
       children: [],
       texts: [],
     };

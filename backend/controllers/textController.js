@@ -1,4 +1,4 @@
-const { db, findById, create, update, remove, filter } = require('../models/mockDatabase');
+const { db, findById, findBySlug, create, update, remove, filter } = require('../models/mockDatabase');
 const { AppError } = require('../utils/errors');
 const { paginate, parsePaginationParams } = require('../utils/pagination');
 
@@ -101,7 +101,11 @@ const getTextById = (req, res, next) => {
       include_editions = 'true',
     } = req.query;
 
-    const text = findById(db.texts, id);
+    // Try to find by ID first, then by slug
+    let text = findById(db.texts, id);
+    if (!text) {
+      text = findBySlug(db.texts, id);
+    }
     if (!text) {
       throw new AppError('RESOURCE_NOT_FOUND', 'Text not found', 404);
     }

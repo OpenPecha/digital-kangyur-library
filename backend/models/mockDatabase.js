@@ -954,6 +954,481 @@ const initializeDatabase = async () => {
   };
 
   db.karchagTexts.push(vinayaVibhangaText);
+
+  // Add Tantra texts from frontend data
+  const tantraAnuttarayogaText = {
+    id: uuidv4(),
+    id_slug: 'tantra-anuttarayoga',
+    category_id: tantraAnuttarayogaCategory.id,
+    tibetan_title: 'བླ་མེད་རྒྱུད་ཀྱི་གཞུང་།',
+    english_title: 'Anuttarayoga Tantra Text',
+    sanskrit_title: null,
+    chinese_title: null,
+    derge_text_id: null,
+    yeshe_text_id: null,
+    turning: null,
+    vehicle: 'tantra',
+    summary: null,
+    keywords: ['tantra', 'anuttarayoga'],
+    is_active: true,
+    order_index: 0,
+    created_at: new Date().toISOString(),
+    updated_at: new Date().toISOString(),
+  };
+
+  const tantraYogaText = {
+    id: uuidv4(),
+    id_slug: 'tantra-yoga',
+    category_id: tantraYogaCategory.id,
+    tibetan_title: 'རྣལ་འབྱོར་རྒྱུད་ཀྱི་གཞུང་།',
+    english_title: 'Yoga Tantra Text',
+    sanskrit_title: null,
+    chinese_title: null,
+    derge_text_id: null,
+    yeshe_text_id: null,
+    turning: null,
+    vehicle: 'tantra',
+    summary: null,
+    keywords: ['tantra', 'yoga'],
+    is_active: true,
+    order_index: 0,
+    created_at: new Date().toISOString(),
+    updated_at: new Date().toISOString(),
+  };
+
+  const tantraCaryaText = {
+    id: uuidv4(),
+    id_slug: 'tantra-carya',
+    category_id: tantraCaryaCategory.id,
+    tibetan_title: 'སྤྱོད་རྒྱུད་ཀྱི་གཞུང་།',
+    english_title: 'Carya Tantra Text',
+    sanskrit_title: null,
+    chinese_title: null,
+    derge_text_id: null,
+    yeshe_text_id: null,
+    turning: null,
+    vehicle: 'tantra',
+    summary: null,
+    keywords: ['tantra', 'carya'],
+    is_active: true,
+    order_index: 0,
+    created_at: new Date().toISOString(),
+    updated_at: new Date().toISOString(),
+  };
+
+  const tantraKriyaText = {
+    id: uuidv4(),
+    id_slug: 'tantra-kriya',
+    category_id: tantraKriyaCategory.id,
+    tibetan_title: 'བྱ་རྒྱུད་ཀྱི་གཞུང་།',
+    english_title: 'Kriya Tantra Text',
+    sanskrit_title: null,
+    chinese_title: null,
+    derge_text_id: null,
+    yeshe_text_id: null,
+    turning: null,
+    vehicle: 'tantra',
+    summary: null,
+    keywords: ['tantra', 'kriya'],
+    is_active: true,
+    order_index: 0,
+    created_at: new Date().toISOString(),
+    updated_at: new Date().toISOString(),
+  };
+
+  const nyiTantraText = {
+    id: uuidv4(),
+    id_slug: 'nyi-tantra',
+    category_id: tantraCategory.id,
+    tibetan_title: 'རྙིང་རྒྱུད་ཀྱི་གཞུང་།',
+    english_title: 'Nying Tantra Text',
+    sanskrit_title: null,
+    chinese_title: null,
+    derge_text_id: null,
+    yeshe_text_id: null,
+    turning: null,
+    vehicle: 'tantra',
+    summary: null,
+    keywords: ['tantra', 'nying'],
+    is_active: true,
+    order_index: 0,
+    created_at: new Date().toISOString(),
+    updated_at: new Date().toISOString(),
+  };
+
+  const kalacakraText = {
+    id: uuidv4(),
+    id_slug: 'kalacakra',
+    category_id: tantraCategory.id,
+    tibetan_title: 'དུས་ཀྱི་འཁོར་ལོའི་རྒྱུད་ཀྱི་གཞུང་།',
+    english_title: 'Kalacakra Tantra Text',
+    sanskrit_title: null,
+    chinese_title: null,
+    derge_text_id: null,
+    yeshe_text_id: null,
+    turning: null,
+    vehicle: 'tantra',
+    summary: null,
+    keywords: ['tantra', 'kalacakra'],
+    is_active: true,
+    order_index: 0,
+    created_at: new Date().toISOString(),
+    updated_at: new Date().toISOString(),
+  };
+
+  db.texts.push(
+    tantraAnuttarayogaText,
+    tantraYogaText,
+    tantraCaryaText,
+    tantraKriyaText,
+    nyiTantraText,
+    kalacakraText
+  );
+
+  // Add text sections with content for each tantra text
+  const createTextSection = (textId, contentTibetan, contentEnglish) => ({
+    id: uuidv4(),
+    text_id: textId,
+    section_type: 'main',
+    title_tibetan: '',
+    title_english: '',
+    content_tibetan: contentTibetan,
+    content_english: contentEnglish,
+    order_index: 0,
+    created_at: new Date().toISOString(),
+    updated_at: new Date().toISOString(),
+  });
+
+  db.textSections.push(
+    createTextSection(
+      tantraAnuttarayogaText.id,
+      `༄༅། །རྒྱུད་ཀྱི་རྒྱལ་པོ་དཔལ་གསང་བ་འདུས་པའི་བཤད་པའི་རྒྱུད་རྡོ་རྗེ་ཕྲེང་བ་ཞེས་བྱ་བ་བཞུགས་སོ། །
+
+རྒྱ་གར་སྐད་དུ། ཤྲཱི་གུ་ཧྱ་ས་མཱ་ཛ་བྱཱ་ཁྱ་ཏནྟྲ་བཛྲ་མཱ་ལཱ་ནཱ་མ།
+བོད་སྐད་དུ། དཔལ་གསང་བ་འདུས་པའི་བཤད་པའི་རྒྱུད་རྡོ་རྗེ་ཕྲེང་བ་ཞེས་བྱ་བ།
+
+དཔལ་རྡོ་རྗེ་སེམས་དཔའ་ལ་ཕྱག་འཚལ་ལོ། །
+
+འདི་སྐད་བདག་གིས་ཐོས་པ་དུས་གཅིག་ན། བཅོམ་ལྡན་འདས་དེ་བཞིན་གཤེགས་པ་ཐམས་ཅད་ཀྱི་སྐུ་དང༌། གསུང་དང༌། ཐུགས་རྡོ་རྗེ་བཅོམ་ལྡན་འདས་དཔལ་རྡོ་རྗེ་སེམས་དཔའ་བདེ་བ་ཆེན་པོའི་གནས་ན་བཞུགས་ཏེ།
+༄༅༅། །རྒྱ་གར་སྐད་དུ། བི་ན་ཡ་བསྟུ། བོད་སྐད་དུ། འདུལ་བ་གཞི། བམ་པོ་དང་པོ། དཀོན་མཆོག་གསུམ་ལ་ཕྱག་འཚལ་ལོ། །གང་གིས་འཆིང་
+རྣམས་ཡང་དག་རབ་བཅད་ཅིང་། །མུ་སྟེགས་ཚོགས་རྣམས་ཐམས་ཅད་རབ་བཅོམ་སྟེ། །སྡེ་དང་བཅས་པའི་བདུད་རྣམས་ངེས་བཅོམ་ནས། །བྱང་ཆུབ་འདི་བརྙེས་དེ་ལ་
+ཕྱག་འཚལ་ལོ། །ཁྱིམ་དོན་ཆེ་ཆུང་སྤངས་ཏེ་དང་པོར་རབ་འབྱུང་དཀའ། །རབ་བྱུང་ཐོབ་ནས་ཡུལ་སྤྱད་དག་གིས་དགའ་ཐོབ་དཀའ། །མངོན་དགའ་ཇི་བཞིན་དོན་བསྐྱེད་ཡང་
+དག་བྱེད་པ་དཀའ། །ངུར་སྨྲིག་གོས་འཆང་མཁས་པ་ཚུལ་ལས་ཉམས་པ་དཀའ། །གཞི་རྣམས་ཀྱི་སྤྱི་སྡོམ་ལ། རབ་འབྱུང་གསོ་སྦྱོང་གཞི་དང་ནི། །དགག་དབྱེ་དབྱར་དང་ཀོ་
+ལྤགས་གཞི། །སྨན་དང་གོས་དང་སྲ་བརྐྱང་དང་། །ཀཽ་ཤཱམ་བཱི་དང་ལས་ཀྱི་གཞི། །དམར་སེར་ཅན་དང་གང་ཟག་དང་། །སྤོ་དང་གསོ་སྦྱོང་བཞག་པ་དང་། །གནས་མལ་དང་ནི་
+
+རྩོད་པ་དང་། །དགེ་འདུན་དབྱེན་རྣམས་བསྡུས་པ་ཡིན། །རབ་ཏུ་འབྱུང་བའི་གཞིའི་སྤྱི་སྡོམ་ལ། ཤཱ་རིའི་བུ་དང་མུ་སྟེགས་ཅན། །དགེ་ཚུལ་གཉིས་དང་བྱ་རོག་སྐྲོད། །དགྲ་བཅོམ་བསད་དང་ལག་རྡུམ་གྱི། །སྡེ་ཚན་
+ཡང་དག་བསྡུས་པ་ཡིན། །སྡོམ་ལ། ཤཱ་རིའི་བུ་དང་རབ་འབྱུང་དང་། །བསྙེན་པར་རྫོགས་པར་གནང་བ་དང་། །ཉེ་སྡེས་ཚོགས་ནི་བསྡུས་པ་དང་། །ལྔ་པའི་སྡེ་ཚན་བསྡུས་པ་ཡིན། །བྱང་ཆུབ་སེམས་དཔའ་དགའ་ལྡན་གྱི་གནས་ན་བཞུགས་པ་ན།
+ཡུལ་ཨང་ག་དག་ན་ཨང་གའི་རྒྱལ་པོ་ཞེས་བྱ་བས་རྒྱལ་སྲིད་འབྱོར་པ། རྒྱས་པ་བདེ་བ་ལོ་ལེགས་པ་སྐྱེ་བོ་དང་མི་མང་པོས་གང་བ་བྱེད་དུ་བཅུག་གོ། །ཡུལ་མ་ག་དྷཱ་དག་ན་ཡང་རྒྱལ་པོ་པད་མ་ཆེན་པོ་ཞེས་བྱ་བས། རྒྱལ་སྲིད་འབྱོར་པ་རྒྱས་པ་བདེ་བ་ལོ་
+ལེགས་པ་སྐྱེ་བོ་དང་མི་མང་པོས་གང་བ་བྱེད་དུ་བཅུག་གོ། །རེས་འགའ་ནི་ཨང་གའི་རྒྱལ་པོ་དཔུང་དང་མཐུ་ཆེ་བ་ཡིན་ལ། རེས་འགའ་ནི་རྒྱལ་པོ་པད་མ་ཆེན་པོ་དཔུང་དང་མཐུ་ཆེ་བ་ཡིན་ནོ། །གང་གི་ཚེ་ཨང་གའི་རྒྱལ་པོ་དཔུང་དང་མཐུ་ཆེ་བ་དེའི་ཚེ་
+ན། དེས་དཔུང་གི་ཚོགས་ཡན་ལག་བཞི་པ། གླང་པོ་ཆེ་པའི་ཚོགས་དང་། རྟ་པའི་ཚོགས་དང་། ཤིང་རྟ་པའི་ཚོགས་དང་། དཔུང་བུ་ཆུང་གི་ཚོགས་གོ་བསྐོན་ཏེ། ཡུལ་མ་ག་དྷཱ་རྒྱལ་པོའི་ཁབ་མ་གཏོགས་པ་བཅོམ་ནས་ཕྱིར་ལྡོག་པར་
+བྱེད་དོ། །གང་གི་ཚེ་རྒྱལ་པོ་པད་མ་ཆེན་པོ་དཔུང་དང་མཐུ་ཆེ་བ་དེའི་ཚེ་ན། དེས་ཀྱང་དཔུང་གི་ཚོགས་ཡན་ལག་བཞི་པ། གླང་པོ་ཆེ་པའི་ཚོགས་དང་། རྟ་པའི་ཚོགས་དང་། ཤིང་རྟ་པའི་ཚོགས་དང་། དཔུང་བུ་ཆུང་གི་ཚོགས་གོ་བསྐོན་ཏེ།
+
+ཡུལ་ཨང་ག་ཙམ་པ་མ་གཏོགས་པ་བཅོམ་ནས་ཕྱིར་ལྡོག་པར་བྱེད་དོ། །དེ་ནས་དུས་གཞན་ཞིག་ན་ཨང་གའི་རྒྱལ་པོ་དཔུང་དང་མཐུ་ཆེ་བར་གྱུར་ནས། དེས་དཔུང་གི་ཚོགས་ཡན་ལག་བཞི་པ་གླང་པོ་ཆེ་པའི་ཚོགས་དང་། རྟ་པའི་ཚོགས་དང་། ཤིང་རྟ་པའི་ཚོགས་དང་། དཔུང་
+བུ་ཆུང་གི་ཚོགས་གོ་བསྐོན་ཏེ། ཡུལ་མ་ག་དྷཱ་གཞོམ་པར་བརྩམས་པ་དང་། མ་ག་དྷཱ་ན་གནས་པའི་སྐྱེ་བོའི་ཚོགས་ཀྱིས་རྒྱལ་པོ་པད་མ་ཆེན་པོ་ལ་ལྷ་ཨང་གའི་རྒྱལ་པོས་དཔུང་གི་ཚོགས་ཡན་ལག་བཞི་པ་གླང་པོ་ཆེ་པའི་ཚོགས་དང་། རྟ་པའི་ཚོགས་དང་། ཤིང་རྟ་པའི་
+
+ཚོགས་དང་། དཔུང་བུ་ཆུང་གི་ཚོགས་གོ་བསྐོན་ཏེ། ཡུལ་མ་ག་དྷཱ་འཇོམས་པར་བགྱིད་དོ་ཞེས་སྦྲོན་པ་དག་བཏང་ངོ་། །རྒྱལ་པོ་པད་མ་ཆེན་པོས་ཀྱང་ཐོས་ནས་དཔུང་གི་ཚོགས་ཡན་ལག་བཞི་པ་གླང་པོ་ཆེ་པའི་ཚོགས་དང་། རྟ་པའི་ཚོགས་དང་། ཤིང་རྟ་པའི་ཚོགས་དང་།
+དཔུང་བུ་ཆུང་གི་ཚོགས་གོ་བསྐོན་ཏེ། ཨང་གའི་རྒྱལ་པོ་དང་གཡུལ་སྤྲད་པའི་ཕྱིར་འཕགས་སོ། །དེ་ནས་ཨང་གའི་རྒྱལ་པོས་རྒྱལ་པོ་པད་མ་ཆེན་པོའི་གླང་པོ་ཆེ་པའི་ཚོགས་ཐམས་ཅད་ཕྲོགས་ཤིང་། རྟ་པའི་ཚོགས་དང་། ཤིང་རྟ་པའི་ཚོགས་དང་། དཔུང་བུ་ཆུང་གི་
+
+ཚོགས་ཐམས་ཅད་ཀྱང་ཕྲོགས་སོ། །རྒྱལ་པོ་པད་མ་ཆེན་པོ་ཡང་ཕམ་པ་དང་། སྐྲག་པ་དང་། བཅོམ་པ་དང་། གཞན་རྒྱལ་བ་དང་། རྒྱབ་ཀྱིས་ཕྱོགས་པར་བྱས་ཏེ། རྒྱལ་པོའི་ཁབ་ཏུ་ཞུགས་ནས་སྒོ་བཅད་དེ། ར་བ་དག་གི་ཁར་སྦྲེངས་ནས་འདུག་གོ། །ཨང་གའི་རྒྱལ་
+པོས་རྒྱལ་པོ་པད་མ་ཆེན་པོ་ལ་ཕོ་ཉ་བཏང་སྟེ། གལ་ཏེ་ཕྱིར་འབྱུང་ན་དེ་ལྟ་ན་ལེགས། གལ་ཏེ་ཕྱིར་མི་འབྱུང་ན་ཇི་སྟེ་སྟེང་གི་ནམ་མཁའ་ལ་འགྲོ་ན་ནི་མདའ་བརྒྱུད་པས་ཁྱོད་ལྟུང་བར་བྱའོ། །ཇི་སྟེ་སའི་འོག་ཏུ་འགྲོ་ན་ནི་མཆིལ་པ་དང་དྲང་བའི་ཚུལ་གྱིས་དྲང་བར་བྱའོ། །ཇི་སྟེ་རིའི་
+
+རྩེ་མོར་འཛེག་ན་ནི་དེར་ཡང་ཁྱོད་ཐར་པ་མེད་དོ་ཞེས་སྤྲིང་ངོ་། །རྒྱལ་པོ་པད་མ་ཆེན་པོས་ཕྲིན་ཡིག་བཀླགས་ནས་དེ་མི་བདེ་བར་གྱུར་ཏེ། ལག་པ་ལ་འགྲམ་པ་གཏད་ནས་སེམས་ཁོང་དུ་ཆུད་ཅིང་འདུག་འདུག་ནས། དེས་བློན་པོ་རྣམས་ལ་སྨྲས་པ། ཤེས་ལྡན་དག་ཨང་གའི་རྒྱལ་
+
+པོ་འདི་ནི་གདུག་པ། ཕ་རོལ་གནོན་པ། དཔུང་དང་མཐུ་ཆེ་བར་གྱུར་ལ། དེས་ཡུ་བུ་ཅག་ལ་འདི་དང་འདི་སྐད་ཅེས་སྤྲིང་ན། དེ་ལ་ཡུ་བུ་ཅག་གིས་ཇི་ལྟར་བསྒྲུབ་པར་བྱ། དེ་དག་གིས་ཚིགས་སུ་བཅད་པ་སྨྲས་པ། ཡུལ་དང་སྲོག་ལ་གནོད་གྱུར་ན། །
+སྐྱེས་བུས་ཀུན་དུ་སྲོག་བསྲུང་བྱ། །བློ་ཡིས་གཉིས་ཀ་དཔྱད་བྱས་ན། །ཡུལ་ནི་ཡང་རྙེད་སྲོག་རྣམས་མིན། །ལྷ་རྣམ་པ་ཐམས་ཅད་དུ་སླར་འབྱུང་བར་བགྱིའོ། །དེ་རལ་གྲི་མགུལ་དུ་ཐོགས་ཏེ་ཕྱིར་བྱུང་བ་དང་། ཨང་གའི་རྒྱལ་པོས་དེ་ལ་ལོ་ཐང་དང་དཔྱ་ཕབ་སྟེ་དེ་ཉིད་དུ་
+བཞག་གོ། །གང་གི་ཚེ་བཅོམ་ལྡན་འདས་བྱང་ཆུབ་སེམས་དཔའ་དགའ་ལྡན་གྱི་གནས་ན་བཞུགས་པས་གཟིགས་པ་ལྔ་པོ་དག་ལ་གཟིགས་ནས་འདོད་པ་ན་སྤྱོད་པའི་ལྷ་དྲུག་པོ་དག་ལ་ལན་གསུམ་བསྒོ་བ་མཛད་དེ། གླང་པོ་ཆེ་ལྟར་སྣང་བར་བསྒྱུར་ཏེ། ཡུམ་གྱི་ལྷུམས་སུ་
+ཞུགས་པ་དེའི་ཚེ་ན་ས་ཆེན་པོ་ཤིན་ཏུ་གཡོས་པར་གྱུར་ཅིང་འཇིག་རྟེན་འདི་ཐམས་ཅད་ཀྱང་སུམ་བཅུ་རྩ་གསུམ་པའི་ལྷ་རྣམས་ཀྱི་ཁ་དོག་གི་མཐུ་བས་ལྷག་པའི་སྣང་བ་རྒྱ་ཆེན་པོས་ཁྱབ་པར་གྱུར་ཅིང་། འཇིག་རྟེན་གྱི་འཇིག་རྟེན་གྱི་བར་གང་ན་ཉི་མ་དང་ཟླ་བ་འདི་ལྟར་རྫུ་འཕྲུལ་ཆེ་བ།
+འདི་ལྟར་མཐུ་ཆེ་བ་འདི་གཉིས་ཀྱི་འོད་དག་ཉམས་སུ་མི་མྱོང་བའི་མུན་པ་མུན་གནག་མུན་པར་བྱེད་པས། གནག་པར་གྱུར་པ་གང་དག་ཡིན་པ་དེ་དག་ཀྱང་དེའི་ཚེ་ན་སྣང་བ་རྒྱ་ཆེན་པོས་ཁྱབ་པར་གྱུར་ནས། སེམས་ཅན་གང་དག་དེར་སྐྱེས་པ་དག་གིས་རང་གི་ལག་པ་བརྐྱང་བ་ཡང་མི་
+མཐོང་བ་དེ་དག་གིས་ཀྱང་འོད་དེས་སེམས་ཅན་གཅིག་གིས་གཅིག་མཐོང་ནས་ཤེས་ལྡན་དག་སེམས་ཅན་གཞན་ཡང་འདིར་སྐྱེས་སོ། །ཤེས་ལྡན་དག་སེམས་ཅན་གཞན་ཡང་འདིར་སྐྱེས་སོ་ཞེས་ཤེས་པར་གྱུར་ཏོ། །གང་གི་ཚེ་བཅོམ་ལྡན་འདས་བྱང་ཆུབ་སེམས་དཔའ་
+བལྟམ་པ་དེའི་ཚེ་ན་གྲོང་ཁྱེར་ཆེན་པོ་བཞི་པོ་དག་ཏུ་རྒྱལ་པོ་ཆེན་པོ་བཞི་དག་གི་བུ་ཡང་བཙས་པར་གྱུར་ཏེ། རྒྱལ་པོའི་ཁབ་ཏུ་རྒྱལ་པོ་པད་མ་ཆེན་པོའི་བུ་བཙས་སོ། །མཉན་ཡོད་དུ་ནི་རྒྱལ་པོ་རྩིབས་ཀྱིས་འཕུར་ཚངས་བྱིན་གྱི་བུ་བཙས་སོ། །འཕགས་རྒྱལ་དུ་ནི་རྒྱལ་པོ་མུ་`,
+      'Anuttarayoga Tantra Text Content'
+    ),
+    createTextSection(
+      tantraYogaText.id,
+      `༄༅། །རྣལ་འབྱོར་རྒྱུད་ཀྱི་རྒྱལ་པོ་དཔལ་དེ་ཁོ་ན་ཉིད་བསྡུས་པའི་རྒྱུད་ཀྱི་རྒྱལ་པོ་ཞེས་བྱ་བ་བཞུགས་སོ། །
+
+རྒྱ་གར་སྐད་དུ། ཤྲཱི་ཏཏྭ་སཾ་གྲ་ཧ་ཏནྟྲ་རཱ་ཛ་ནཱ་མ།
+བོད་སྐད་དུ། དཔལ་དེ་ཁོ་ན་ཉིད་བསྡུས་པའི་རྒྱུད་ཀྱི་རྒྱལ་པོ་ཞེས་བྱ་བ།
+
+དཔལ་རྡོ་རྗེ་སེམས་དཔའ་ལ་ཕྱག་འཚལ་ལོ། །
+
+བཅོམ་ལྡན་འདས་ཀྱིས་བཀའ་སྩལ་པ། རྣལ་འབྱོར་པ་རྣམས་ཀྱི་དངོས་གྲུབ་ནི། །ལུས་ངག་ཡིད་ཀྱི་རྣལ་འབྱོར་ལས། །འབྱུང་བར་འགྱུར་གྱི་གཞན་དུ་མིན། །དེ་བས་རྣལ་འབྱོར་བརྩོན་པར་བྱ། །`,
+      'Yoga Tantra Text Content'
+    ),
+    createTextSection(
+      tantraCaryaText.id,
+      `༄༅། །སྤྱོད་པའི་རྒྱུད་ཀྱི་རྒྱལ་པོ་དཔལ་རྣམ་པར་སྣང་མཛད་མངོན་པར་བྱང་ཆུབ་པའི་རྒྱུད་ཅེས་བྱ་བ་བཞུགས་སོ། །
+
+རྒྱ་གར་སྐད་དུ། ཤྲཱི་མ་ཧཱ་བཻ་རོ་ཙ་ན་ཨ་བྷི་སམ་བོ་དྷི་ཏནྟྲ་རཱ་ཛ་ནཱ་མ།
+བོད་སྐད་དུ། དཔལ་རྣམ་པར་སྣང་མཛད་མངོན་པར་བྱང་ཆུབ་པའི་རྒྱུད་ཀྱི་རྒྱལ་པོ་ཞེས་བྱ་བ།
+
+དཔལ་རྣམ་པར་སྣང་མཛད་ལ་ཕྱག་འཚལ་ལོ། །
+
+འདི་སྐད་བདག་གིས་ཐོས་པ་དུས་གཅིག་ན། བཅོམ་ལྡན་འདས་དེ་བཞིན་གཤེགས་པ་ཐམས་ཅད་ཀྱི་བདག་པོ་རྣམ་པར་སྣང་མཛད་ཆེན་པོ་མངོན་པར་རྫོགས་པར་སངས་རྒྱས་ནས་རིང་པོ་མ་ལོན་པ་དེའི་ཚེ།`,
+      'Carya Tantra Text Content'
+    ),
+    createTextSection(
+      tantraKriyaText.id,
+      `༄༅། །བྱ་བའི་རྒྱུད་ཀྱི་རྒྱལ་པོ་དཔལ་མཆོག་དང་པོ་ཞེས་བྱ་བའི་རྒྱུད་ཀྱི་རྒྱལ་པོ་ཆེན་པོ་བཞུགས་སོ། །
+
+རྒྱ་གར་སྐད་དུ། ཤྲཱི་པ་ར་མཱ་དྱ་ནཱ་མ་མ་ཧཱ་ཏནྟྲ་རཱ་ཛ།
+བོད་སྐད་དུ། དཔལ་མཆོག་དང་པོ་ཞེས་བྱ་བའི་རྒྱུད་ཀྱི་རྒྱལ་པོ་ཆེན་པོ།
+
+འཇམ་དཔལ་གཞོན་ནུར་གྱུར་པ་ལ་ཕྱག་འཚལ་ལོ། །
+
+འདི་སྐད་བདག་གིས་ཐོས་པ་དུས་གཅིག་ན། བཅོམ་ལྡན་འདས་དེ་བཞིན་གཤེགས་པ་ཤཱཀྱ་ཐུབ་པ་རྡོ་རྗེ་གདན་ལ་བཞུགས་ཏེ།`,
+      'Kriya Tantra Text Content'
+    ),
+    createTextSection(
+      nyiTantraText.id,
+      `༄༅། །རྙིང་མའི་རྒྱུད་འབུམ་ལས། རྒྱུད་ཀྱི་རྒྱལ་པོ་ཆེན་པོ་སྒྱུ་འཕྲུལ་དྲ་བ་ཞེས་བྱ་བ་བཞུགས་སོ། །
+
+རྒྱ་གར་སྐད་དུ། མཱ་ཡཱ་ཛཱ་ལ་མ་ཧཱ་ཏནྟྲ་རཱ་ཛ།
+བོད་སྐད་དུ། སྒྱུ་འཕྲུལ་དྲ་བའི་རྒྱུད་ཀྱི་རྒྱལ་པོ་ཆེན་པོ།
+
+ཀུན་ཏུ་བཟང་པོ་དང་པོའི་མགོན་ལ་ཕྱག་འཚལ་ལོ། །
+
+ཨེ་མ་ཧོ། སྣང་སྲིད་འཁོར་འདས་ཡོངས་རྫོགས་ཀུན། །རང་བཞིན་ལྷུན་གྲུབ་བདེ་བ་ཆེ། །ཀུན་ཏུ་བཟང་པོའི་རང་བཞིན་ལས། །མ་གཡོས་བཞུགས་ལ་ཕྱག་འཚལ་ལོ། །`,
+      'Nying Tantra Text Content'
+    ),
+    createTextSection(
+      kalacakraText.id,
+      `༄༅། །དཔལ་དུས་ཀྱི་འཁོར་ལོའི་རྒྱུད་ཀྱི་རྒྱལ་པོ་བསྡུས་པའི་རྒྱུད་ཅེས་བྱ་བ་བཞུགས་སོ། །
+
+རྒྱ་གར་སྐད་དུ། ཤྲཱི་ཀཱ་ལ་ཙཀྲ་ལ་གྷུ་ཏནྟྲ་རཱ་ཛ་ནཱ་མ།
+བོད་སྐད་དུ། དཔལ་དུས་ཀྱི་འཁོར་ལོ་བསྡུས་པའི་རྒྱུད་ཀྱི་རྒྱལ་པོ་ཞེས་བྱ་བ།
+
+དཔལ་དུས་ཀྱི་འཁོར་ལོ་ལ་ཕྱག་འཚལ་ལོ། །
+
+ན་མོ་མཉྫུ་ཤྲཱི་ཡེ། འཇམ་དཔལ་གཞོན་ནུར་གྱུར་པ་ལ་ཕྱག་འཚལ་ལོ། །
+ཨོཾ་ཨཱཿཧཱུྃ་ཧོཿཧཾ་ཀྵཿ དཔལ་ལྡན་འཁོར་ལོ་སྡོམ་པ་ལ། །ཕྱག་འཚལ་བདེ་མཆོག་སྟོན་པ་པོ། །`,
+      'Kalacakra Tantra Text Content'
+    )
+  );
+
+  // Add Golden Sutra text from frontend data
+  const goldenSutraText = {
+    id: uuidv4(),
+    id_slug: 'golden-sutra',
+    category_id: goldenSutraCategory.id,
+    tibetan_title: 'འཕགས་པ་གསེར་གྱི་མདོ་ཞེས་བྱ་བ་ཐེག་པ་ཆེན་པོའི་མདོ།',
+    english_title: 'The Noble Golden Sutra, a Mahayana Discourse',
+    sanskrit_title: 'ཨཱརྱ་སུ་བརྞྞ་སཱུ་ཏྲ་མ་ཧཱ་ཡ་ན་ནཱ་མ་སཱུ་ཏྲ།',
+    chinese_title: '聖金經大乘經',
+    derge_text_id: 'D123',
+    yeshe_text_id: 'YD456',
+    derge_vol_number: null,
+    derge_start_page: null,
+    derge_end_page: null,
+    turning: 'First Turning of the Wheel',
+    vehicle: 'Mahayana',
+    translation_type: 'Early Translation',
+    summary: null,
+    keywords: ['golden', 'sutra', 'bodhicitta', 'mahayana'],
+    is_active: true,
+    order_index: 0,
+    created_at: new Date().toISOString(),
+    updated_at: new Date().toISOString(),
+  };
+
+  db.texts.push(goldenSutraText);
+
+  // Add text sections for golden sutra
+  const goldenSutraSections = [
+    {
+      id: uuidv4(),
+      text_id: goldenSutraText.id,
+      section_type: 'translation-homage',
+      title_tibetan: 'འགྱུར་ཕྱག',
+      title_english: 'Translation Homage',
+      content_tibetan: 'སངས་རྒྱས་དང་བྱང་ཆུབ་སེམས་དཔའ་ཐམས་ཅད་ལ་ཕྱག་འཚལ་ལོ།།',
+      content_english: 'Homage to all Buddhas and Bodhisattvas',
+      order_index: 0,
+      created_at: new Date().toISOString(),
+      updated_at: new Date().toISOString(),
+    },
+    {
+      id: uuidv4(),
+      text_id: goldenSutraText.id,
+      section_type: 'purpose',
+      title_tibetan: 'དགོས་དོན།',
+      title_english: 'Purpose',
+      content_tibetan: 'གདུལ་བྱ་རྣམས་ཀྱིས་བྱང་ཆུབ་སེམས་ཀྱི་རང་བཞིན་ཇི་ལྟར་ཡིན་པ་ཤེས་ནས་དེ་ལ་བརྩོན་པའི་ཆེད་དུ་སྟེ། དེ་ཡང་མདོ་ལས། བཅོམ་ལྡན་འདས་བྱང་ཆུབ་ཀྱི་སེམས་ཇི་ལྟར་བལྟ་བར་བགྱི། ཞེས་པས་བསྟན་ཏོ།།',
+      content_english: 'For sentient beings to understand the nature of bodhicitta and strive for it',
+      order_index: 1,
+      created_at: new Date().toISOString(),
+      updated_at: new Date().toISOString(),
+    },
+    {
+      id: uuidv4(),
+      text_id: goldenSutraText.id,
+      section_type: 'summary',
+      title_tibetan: 'བསྡུས་དོན།',
+      title_english: 'Summary',
+      content_tibetan: `ཕུན་སུམ་ཚོགས་པ་ལྔའི་སྒོ་ནས་ཤེས་པར་བྱ་སྟེ། 
+གནས་ཕུན་སུམ་ཚོགས་པ་ནི། རྒྱལ་བུ་རྒྱལ་བྱེད་ཀྱི་ཚལ་མགོན་མེད་ཟས་སྦྱིན་གྱི་ཀུན་དགའ་ར་བའོ།།
+སྟོན་པ་ཕུན་སུམ་ཚོགས་པ་ནི། བཅོམ་ལྡན་འདས་ཤཱཀྱ་ཐུབ་པའོ།།
+འཁོར་ཕུན་སུམ་ཚོགས་པ་ནི། ཚེ་དང་ལྡན་པ་ཀུན་དགའ་བོ་ལ་སོགས་པའོ།།
+དུས་ཕུན་སུམ་ཚོགས་པ་ནི། འདི་སྐད་བདག་གིས་ཐོས་པ་དུས་གཅིག་ན། ཞེས་སོ།།  
+ཆོས་ཕུན་སུམ་ཚོགས་པ་ནི། ཚེ་དང་ལྡན་པ་ཀུན་དགའ་བོས་བྱང་ཆུབ་ཀྱི་སེམས་ཇི་ལྟར་བལྟ་བར་བྱ་དགོས་ཞེས་ཞུས་པའི་ལན་དུ།  
+བཅོམ་ལྡན་འདས་ཀྱིས་བྱང་ཆུབ་ཀྱི་སེམས་ནི་གསེར་གྱི་རང་བཞིན་འདྲ་བར་གནས་པར་བལྟ་དགོས་པ་དང་། གསེར་རང་བཞིན་གྱིས་རྣམ་པར་དག་པ་ལྟར་བྱང་ཆུབ་སེམས་རྣམ་པར་དག་པ་དང་། མགར་བས་གསེར་ལ་བཟོའི་བྱེ་བྲག་ཐ་དད་པར་བྱས་ཀྱང་གསེར་གྱི་རང་བཞིན་མི་འགྱུར་བ་ལྟར་བྱང་ཆུབ་སེམས་ལ་ཡོན་ཏན་གྱི་ཁྱད་པར་སྣ་ཚོགས་པ་སྣང་ཡང་དོན་དམ་པར་བྱང་ཆུབ་ཀྱི་སེམས་ལས་མ་གཡོས་པས་རང་བཞིན་འགྱུར་བ་མེད་པར་བལྟ་དགོས་པར་བསྟན་ཏོ།།`,
+      content_english: 'Summary of the five perfections and the teaching on bodhicitta',
+      order_index: 2,
+      created_at: new Date().toISOString(),
+      updated_at: new Date().toISOString(),
+    },
+    {
+      id: uuidv4(),
+      text_id: goldenSutraText.id,
+      section_type: 'word-meaning',
+      title_tibetan: 'ཚིག་དོན།',
+      title_english: 'Word Meaning',
+      content_tibetan: 'ཚིག་གི་དོན་རེ་རེ་བཞིན་མདོ་དངོས་ལས་ཤེས་པར་བྱ་དགོས་ལ། འདིར་བྱང་ཆུབ་ཀྱི་སེམས་རིན་པོ་ཆེ་གསེར་གྱི་དཔེ་དང་སྦྱར་ནས་བསྟན་པས་མདོའི་མཚན་ལ་"འཕགས་པ་གསེར་གྱི་མདོ་ཞེས་བྱ་བ་ཐེག་པ་ཆེན་པོའི་མདོ།"ཞེས་དཔེའི་སྒོ་ནས་བཏགས་དེ་ལྟར་བཏགས་སོ། །',
+      content_english: 'Word meanings should be understood from the sutra itself',
+      order_index: 3,
+      created_at: new Date().toISOString(),
+      updated_at: new Date().toISOString(),
+    },
+    {
+      id: uuidv4(),
+      text_id: goldenSutraText.id,
+      section_type: 'connection',
+      title_tibetan: 'མཚམས་སྦྱར།',
+      title_english: 'Connection',
+      content_tibetan: '"བཅོམ་ལྡན་འདས་རྒྱལ་བུ་རྒྱལ་བྱེད་ཀྱི་ཚལ་མགོན་མེད་ཟས་སྦྱིན་གྱི་ཀུན་དགའ་ར་བ་ན་བཞུགས་ཏེ།" ཞེས་པས་བསྟན་ཏོ།།',
+      content_english: 'Connection to the setting',
+      order_index: 4,
+      created_at: new Date().toISOString(),
+      updated_at: new Date().toISOString(),
+    },
+    {
+      id: uuidv4(),
+      text_id: goldenSutraText.id,
+      section_type: 'questions-answers',
+      title_tibetan: 'བརྒལ་ལན།',
+      title_english: 'Questions and Answers',
+      content_tibetan: 'མི་གསལ།',
+      content_english: 'Not clear',
+      order_index: 5,
+      created_at: new Date().toISOString(),
+      updated_at: new Date().toISOString(),
+    },
+    {
+      id: uuidv4(),
+      text_id: goldenSutraText.id,
+      section_type: 'colophon',
+      title_tibetan: 'འགྱུར་བྱང་།',
+      title_english: 'Colophon',
+      content_tibetan: 'མི་གསལ།',
+      content_english: 'Not clear',
+      order_index: 6,
+      created_at: new Date().toISOString(),
+      updated_at: new Date().toISOString(),
+    },
+  ];
+
+  db.textSections.push(...goldenSutraSections);
+
+  // Add text metadata for golden sutra
+  const goldenSutraMetadata = [
+    { id: uuidv4(), text_id: goldenSutraText.id, metadata_key: 'tibetan-title', metadata_value: 'འཕགས་པ་གསེར་གྱི་མདོ་ཞེས་བྱ་བ་ཐེག་པ་ཆེན་པོའི་མདོ།', metadata_group: 'titles', label: 'Tibetan Title', order_index: 0, created_at: new Date().toISOString(), updated_at: new Date().toISOString() },
+    { id: uuidv4(), text_id: goldenSutraText.id, metadata_key: 'sanskrit-title', metadata_value: 'ཨཱརྱ་སུ་བརྞྞ་སཱུ་ཏྲ་མ་ཧཱ་ཡ་ན་ནཱ་མ་སཱུ་ཏྲ།', metadata_group: 'titles', label: 'Sanskrit Title', order_index: 1, created_at: new Date().toISOString(), updated_at: new Date().toISOString() },
+    { id: uuidv4(), text_id: goldenSutraText.id, metadata_key: 'chinese-title', metadata_value: '聖金經大乘經', metadata_group: 'titles', label: 'Chinese Title', order_index: 2, created_at: new Date().toISOString(), updated_at: new Date().toISOString() },
+    { id: uuidv4(), text_id: goldenSutraText.id, metadata_key: 'english-title', metadata_value: 'The Noble Golden Sutra, a Mahayana Discourse', metadata_group: 'titles', label: 'English Title', order_index: 3, created_at: new Date().toISOString(), updated_at: new Date().toISOString() },
+    { id: uuidv4(), text_id: goldenSutraText.id, metadata_key: 'derge-id', metadata_value: 'D123', metadata_group: 'catalog', label: 'Derge ID', order_index: 0, created_at: new Date().toISOString(), updated_at: new Date().toISOString() },
+    { id: uuidv4(), text_id: goldenSutraText.id, metadata_key: 'yeshe-de-id', metadata_value: 'YD456', metadata_group: 'catalog', label: 'Yeshe De ID', order_index: 1, created_at: new Date().toISOString(), updated_at: new Date().toISOString() },
+    { id: uuidv4(), text_id: goldenSutraText.id, metadata_key: 'yeshe-vol-number', metadata_value: 'Vol. 12', metadata_group: 'catalog', label: 'Yeshe De Volume Number', order_index: 2, created_at: new Date().toISOString(), updated_at: new Date().toISOString() },
+    { id: uuidv4(), text_id: goldenSutraText.id, metadata_key: 'yeshe-page-span', metadata_value: '125b-140a', metadata_group: 'catalog', label: 'Yeshe De Page Span', order_index: 3, created_at: new Date().toISOString(), updated_at: new Date().toISOString() },
+    { id: uuidv4(), text_id: goldenSutraText.id, metadata_key: 'turning', metadata_value: 'First Turning of the Wheel', metadata_group: 'content', label: 'Turning', order_index: 0, created_at: new Date().toISOString(), updated_at: new Date().toISOString() },
+    { id: uuidv4(), text_id: goldenSutraText.id, metadata_key: 'translation-period', metadata_value: 'Early Translation', metadata_group: 'content', label: 'Translation Period', order_index: 1, created_at: new Date().toISOString(), updated_at: new Date().toISOString() },
+    { id: uuidv4(), text_id: goldenSutraText.id, metadata_key: 'yana', metadata_value: 'Mahayana', metadata_group: 'content', label: 'Yana', order_index: 2, created_at: new Date().toISOString(), updated_at: new Date().toISOString() },
+    { id: uuidv4(), text_id: goldenSutraText.id, metadata_key: 'category', metadata_value: 'Discourses (mdo)', metadata_group: 'general', label: 'Category', order_index: 0, created_at: new Date().toISOString(), updated_at: new Date().toISOString() },
+    { id: uuidv4(), text_id: goldenSutraText.id, metadata_key: 'subcategory', metadata_value: 'General Sutras', metadata_group: 'general', label: 'Subcategory', order_index: 1, created_at: new Date().toISOString(), updated_at: new Date().toISOString() },
+  ];
+
+  db.textMetadata.push(...goldenSutraMetadata);
+
+  // Add collated content for golden sutra
+  const goldenSutraCollated = {
+    id: uuidv4(),
+    text_id: goldenSutraText.id,
+    collated_text: `༄། །བྱང་ཆུབ་སེམས་དཔའི་སྤྱོད་པ་ལ་འཇུག་པ་བཞུགས་སོ། །
+༄༅༅། །རྒྱ་གར་སྐད་དུ། བོ་<«Q»བོད་>དྷི་:སཏྭ་ཙརྱ་<«I»སཏྭ་ཙཪྻ་«N»སཏྭ་ཙརྨ་«Q»སཏྭ་ཙམླཻ་>ཨ་བ་ཏཱ་<«C»ཏ་>ར།
+ བོད་སྐད་དུ། བྱང་ཆུབ་སེམས་དཔའི་སྤྱོད་པ་ལ་འཇུག་པ།
+ སངས་རྒྱས་དང་བྱང་ཆུབ་སེམས་དཔའ་ཐམས་ཅད་ལ་ཕྱག་འཚལ་ལོ། །
+བདེ་གཤེགས་ཆོས་ཀྱི་སྐུ་མངའ་སྲས་བཅས་དང་། །ཕྱག་འོས་ཀུན་ལའང་གུས་པར་<«F,G,N,Q»པས་>ཕྱག་འཚལ་ཏེ། །བདེ་གཤེགས་སྲས་ཀྱི་སྡོམ་ལ་འཇུག་པ་ནི། །ལུང་བཞིན་མདོར་བསྡུས་ནས་ནི་བརྗོད་པར་བྱ། །`,
+    english_translation: `The Heart of the Perfection of Wisdom of the Blessed Lady 
+Bhagavatī Prajñāpāramitā Hṛdaya 
+In the Tibetan language: The Heart of the Perfection of Wisdom of the Blessed Lady 
+First Fascicle 
+I prostrate to the Blessed Mother Prajñāpāramitā.`,
+    created_at: new Date().toISOString(),
+    updated_at: new Date().toISOString(),
+  };
+
+  db.textCollatedContent.push(goldenSutraCollated);
+
+  // Add text editions for golden sutra
+  const pedurmaEdition = {
+    id: uuidv4(),
+    name_english: 'Pedurma Kangyur',
+    name_tibetan: 'པེ་དུར་མ་བཀའ་འགྱུར།',
+    description_english: 'Pedurma Kangyur edition',
+    description_tibetan: 'པེ་དུར་མ་བཀའ་འགྱུར།',
+    year: '2009',
+    location: 'Lhasa',
+    total_volumes: null,
+    total_texts: null,
+    is_active: true,
+    created_at: new Date().toISOString(),
+    updated_at: new Date().toISOString(),
+  };
+
+  db.editions.push(pedurmaEdition);
+
+  const goldenSutraTextEditions = [
+    {
+      id: uuidv4(),
+      text_id: goldenSutraText.id,
+      edition_id: dergeEdition.id,
+      source_id: 'Toh 123',
+      volume_number: null,
+      start_page: null,
+      end_page: null,
+      availability: 'Public Domain',
+      link_url: 'https://example.com/derge',
+      created_at: new Date().toISOString(),
+      updated_at: new Date().toISOString(),
+    },
+    {
+      id: uuidv4(),
+      text_id: goldenSutraText.id,
+      edition_id: pedurmaEdition.id,
+      source_id: 'PK 456',
+      volume_number: null,
+      start_page: null,
+      end_page: null,
+      availability: 'Restricted',
+      link_url: 'https://example.com/pedurma',
+      created_at: new Date().toISOString(),
+      updated_at: new Date().toISOString(),
+    },
+    {
+      id: uuidv4(),
+      text_id: goldenSutraText.id,
+      edition_id: lhasaEdition.id,
+      source_id: 'LK 789',
+      volume_number: null,
+      start_page: null,
+      end_page: null,
+      availability: 'Restricted',
+      link_url: 'https://example.com/lhassa',
+      created_at: new Date().toISOString(),
+      updated_at: new Date().toISOString(),
+    },
+  ];
+
+  db.textEditions.push(...goldenSutraTextEditions);
 };
 
 // Helper functions for database operations
