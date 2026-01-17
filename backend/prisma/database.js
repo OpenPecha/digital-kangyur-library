@@ -5,7 +5,7 @@ dotenv.config({override: true});
 const { PrismaPg } = require('@prisma/adapter-pg');
 
 const connectionString = process.env.DATABASE_URL;
-const adapter = new PrismaPg({ connectionString });
+const adapter = new PrismaPg({ connectionString});
 const prisma = new PrismaClient({ adapter });
 
 
@@ -68,8 +68,7 @@ const catalogCategoryService = {
       where: { id },
       include: {
         parent: true,
-        children: true,
-        texts: true
+        children: true
       }
     });
   },
@@ -79,8 +78,7 @@ const catalogCategoryService = {
       where: { id_slug: slug },
       include: {
         parent: true,
-        children: true,
-        texts: true
+        children: true
       }
     });
   },
@@ -124,304 +122,6 @@ const catalogCategoryService = {
       where: { parent_id: id }
     });
     return count > 0;
-  },
-  
-  hasTexts: async (id) => {
-    const count = await prisma.text.count({
-      where: { category_id: id }
-    });
-    return count > 0;
-  }
-};
-
-// Text operations
-const textService = {
-  findById: async (id, options = {}) => {
-    const { include_sections, include_collated, include_metadata, include_editions, include_category } = options;
-    const include = {};
-    
-    if (include_sections) {
-      include.sections = { orderBy: { order_index: 'asc' } };
-    }
-    if (include_collated) {
-      include.collatedContent = true;
-    }
-    if (include_metadata) {
-      include.metadata = { orderBy: { order_index: 'asc' } };
-    }
-    if (include_editions) {
-      include.textEditions = {
-        include: { edition: true }
-      };
-    }
-    if (include_category) {
-      include.category = true;
-    }
-    
-    return await prisma.text.findUnique({
-      where: { id },
-      include: Object.keys(include).length > 0 ? include : undefined
-    });
-  },
-  
-  findBySlug: async (slug, options = {}) => {
-    const { include_sections, include_collated, include_metadata, include_editions, include_category } = options;
-    const include = {};
-    
-    if (include_sections) {
-      include.sections = { orderBy: { order_index: 'asc' } };
-    }
-    if (include_collated) {
-      include.collatedContent = true;
-    }
-    if (include_metadata) {
-      include.metadata = { orderBy: { order_index: 'asc' } };
-    }
-    if (include_editions) {
-      include.textEditions = {
-        include: { edition: true }
-      };
-    }
-    if (include_category) {
-      include.category = true;
-    }
-    
-    return await prisma.text.findUnique({
-      where: { id_slug: slug },
-      include: Object.keys(include).length > 0 ? include : undefined
-    });
-  },
-  
-  findAll: async (options = {}) => {
-    const { 
-      category_id, 
-      is_active, 
-      search, 
-      sort = 'order_index', 
-      order = 'asc',
-      skip,
-      take
-    } = options;
-    
-    const where = {};
-    
-    if (category_id) {
-      where.category_id = category_id;
-    }
-    if (is_active !== undefined) {
-      where.is_active = is_active;
-    }
-    if (search) {
-      where.OR = [
-        { keywords: { has: search } },
-        { id_slug: { contains: search, mode: 'insensitive' } }
-      ];
-    }
-    
-    const orderBy = {};
-    if (sort === 'created_at') {
-      orderBy.created_at = order;
-    } else if (sort === 'order_index') {
-      orderBy.order_index = order;
-    } else {
-      orderBy[sort] = order;
-    }
-    
-    const [items, total] = await Promise.all([
-      prisma.text.findMany({
-        where,
-        orderBy,
-        skip,
-        take,
-        include: {
-          category: true
-        }
-      }),
-      prisma.text.count({ where })
-    ]);
-    
-    return { items, total };
-  },
-  
-  create: async (data) => {
-    return await prisma.text.create({ data });
-  },
-  
-  update: async (id, data) => {
-    return await prisma.text.update({
-      where: { id },
-      data
-    });
-  },
-  
-  delete: async (id) => {
-    return await prisma.text.delete({ where: { id } });
-  }
-};
-
-// Text Section operations
-const textSectionService = {
-  findByTextId: async (textId, options = {}) => {
-    const { section_type } = options;
-    const where = { text_id: textId };
-    if (section_type) {
-      where.section_type = section_type;
-    }
-    return await prisma.textSection.findMany({
-      where,
-      orderBy: { order_index: 'asc' }
-    });
-  },
-  
-  findById: async (id) => {
-    return await prisma.textSection.findUnique({ where: { id } });
-  },
-  
-  create: async (data) => {
-    return await prisma.textSection.create({ data });
-  },
-  
-  update: async (id, data) => {
-    return await prisma.textSection.update({
-      where: { id },
-      data
-    });
-  },
-  
-  delete: async (id) => {
-    return await prisma.textSection.delete({ where: { id } });
-  }
-};
-
-// Text Metadata operations
-const textMetadataService = {
-  findByTextId: async (textId) => {
-    return await prisma.textMetadata.findMany({
-      where: { text_id: textId },
-      orderBy: { order_index: 'asc' }
-    });
-  },
-  
-  create: async (data) => {
-    return await prisma.textMetadata.create({ data });
-  },
-  
-  update: async (id, data) => {
-    return await prisma.textMetadata.update({
-      where: { id },
-      data
-    });
-  },
-  
-  delete: async (id) => {
-    return await prisma.textMetadata.delete({ where: { id } });
-  }
-};
-
-// Text Collated Content operations
-const textCollatedContentService = {
-  findByTextId: async (textId) => {
-    return await prisma.textCollatedContent.findUnique({
-      where: { text_id: textId }
-    });
-  },
-  
-  create: async (data) => {
-    return await prisma.textCollatedContent.create({ data });
-  },
-  
-  update: async (textId, data) => {
-    return await prisma.textCollatedContent.upsert({
-      where: { text_id: textId },
-      update: data,
-      create: { text_id: textId, ...data }
-    });
-  },
-  
-  delete: async (textId) => {
-    return await prisma.textCollatedContent.delete({
-      where: { text_id: textId }
-    });
-  }
-};
-
-// Text Summary operations
-const textSummaryService = {
-  findByTextId: async (textId) => {
-    return await prisma.textSummary.findUnique({
-      where: { text_id: textId }
-    });
-  },
-  
-  create: async (data) => {
-    return await prisma.textSummary.create({ data });
-  },
-  
-  update: async (textId, data) => {
-    return await prisma.textSummary.upsert({
-      where: { text_id: textId },
-      update: data,
-      create: { text_id: textId, ...data }
-    });
-  }
-};
-
-// Edition operations
-const editionService = {
-  findById: async (id) => {
-    return await prisma.edition.findUnique({
-      where: { id },
-      include: { textEditions: true }
-    });
-  },
-  
-  findAll: async (options = {}) => {
-    const { is_active } = options;
-    const where = {};
-    if (is_active !== undefined) {
-      where.is_active = is_active;
-    }
-    return await prisma.edition.findMany({ where });
-  },
-  
-  create: async (data) => {
-    return await prisma.edition.create({ data });
-  },
-  
-  update: async (id, data) => {
-    return await prisma.edition.update({
-      where: { id },
-      data
-    });
-  },
-  
-  delete: async (id) => {
-    return await prisma.edition.delete({ where: { id } });
-  }
-};
-
-// Text Edition operations
-const textEditionService = {
-  findByTextId: async (textId) => {
-    return await prisma.textEdition.findMany({
-      where: { text_id: textId },
-      include: { edition: true }
-    });
-  },
-  
-  create: async (data) => {
-    return await prisma.textEdition.create({ data });
-  },
-  
-  update: async (id, data) => {
-    return await prisma.textEdition.update({
-      where: { id },
-      data
-    });
-  },
-  
-  delete: async (id) => {
-    return await prisma.textEdition.delete({ where: { id } });
   }
 };
 
@@ -650,13 +350,12 @@ const videoService = {
     return await prisma.video.delete({ where: { id } });
   }
 };
-
 // Karchag Main Category operations
 const karchagMainCategoryService = {
   findById: async (id) => {
     return await prisma.karchagMainCategory.findUnique({
       where: { id },
-      include: { subCategories: true }
+      include: { sub_categories: true }
     });
   },
   
@@ -668,7 +367,7 @@ const karchagMainCategoryService = {
     }
     return await prisma.karchagMainCategory.findMany({
       where,
-      include: { subCategories: true },
+      include: { sub_categories: true },
       orderBy: { order_index: 'asc' }
     });
   },
@@ -688,14 +387,13 @@ const karchagMainCategoryService = {
     return await prisma.karchagMainCategory.delete({ where: { id } });
   }
 };
-
 // Karchag Sub Category operations
 const karchagSubCategoryService = {
   findById: async (id) => {
     return await prisma.karchagSubCategory.findUnique({
       where: { id },
       include: {
-        mainCategory: true,
+        main_category: true,
         texts: true
       }
     });
@@ -720,7 +418,7 @@ const karchagSubCategoryService = {
     }
     return await prisma.karchagSubCategory.findMany({
       where,
-      include: { mainCategory: true },
+      include: { main_category: true },
       orderBy: { order_index: 'asc' }
     });
   },
@@ -740,52 +438,136 @@ const karchagSubCategoryService = {
     return await prisma.karchagSubCategory.delete({ where: { id } });
   }
 };
-
 // Karchag Text operations
 const karchagTextService = {
   findById: async (id) => {
-    return await prisma.karchagText.findUnique({
+    return await prisma.text.findUnique({
       where: { id },
-      include: { subCategory: true }
     });
   },
   
   findBySubCategoryId: async (subCategoryId) => {
-    return await prisma.karchagText.findMany({
+    return await prisma.text.findMany({
       where: { sub_category_id: subCategoryId },
       orderBy: { order_index: 'asc' }
     });
   },
   
   findAll: async (options = {}) => {
-    const { is_active, sub_category_id } = options;
     const where = {};
-    if (is_active !== undefined) {
-      where.is_active = is_active;
-    }
-    if (sub_category_id) {
-      where.sub_category_id = sub_category_id;
-    }
-    return await prisma.karchagText.findMany({
+    
+    return await prisma.text.findMany({
       where,
-      include: { subCategory: true },
       orderBy: { order_index: 'asc' }
     });
   },
   
   create: async (data) => {
-    return await prisma.karchagText.create({ data });
+    const text = await prisma.text.create({
+      data,
+      include: {
+        sub_category: {
+          include: { main_category: true }
+        },
+        summary: true
+      }
+    });
+    
+    return text;
   },
   
   update: async (id, data) => {
-    return await prisma.karchagText.update({
+    const text = await prisma.text.update({
       where: { id },
-      data
+      data,
+      include: {
+        sub_category: {
+          include: { main_category: true }
+        },
+        summary: true
+      }
     });
+    
+    return text;
   },
   
   delete: async (id) => {
-    return await prisma.karchagText.delete({ where: { id } });
+    return await prisma.text.delete({ where: { id } });
+  }
+};
+
+// Karchag Text Summary operations
+const karchagTextSummaryService = {
+  findByTextId: async (textId) => {
+    return await prisma.karchagTextSummary.findUnique({
+      where: { karchag_text_id: textId },
+      include: {
+        karchag_text: {
+          include: {
+            sub_category: {
+              include: { main_category: true }
+            }
+          }
+        }
+      }
+    });
+  },
+  
+  create: async (data) => {
+    return await prisma.karchagTextSummary.create({
+      data,
+      include: {
+        karchag_text: {
+          include: {
+            sub_category: {
+              include: { main_category: true }
+            }
+          }
+        }
+      }
+    });
+  },
+  
+  update: async (textId, data) => {
+    return await prisma.karchagTextSummary.update({
+      where: { karchag_text_id: textId },
+      data,
+      include: {
+        karchag_text: {
+          include: {
+            sub_category: {
+              include: { main_category: true }
+            }
+          }
+        }
+      }
+    });
+  },
+  
+  upsert: async (textId, data) => {
+    return await prisma.karchagTextSummary.upsert({
+      where: { karchag_text_id: textId },
+      update: data,
+      create: {
+        karchag_text_id: textId,
+        ...data
+      },
+      include: {
+        karchag_text: {
+          include: {
+            sub_category: {
+              include: { main_category: true }
+            }
+          }
+        }
+      }
+    });
+  },
+  
+  delete: async (textId) => {
+    return await prisma.karchagTextSummary.delete({
+      where: { karchag_text_id: textId }
+    });
   }
 };
 
@@ -795,16 +577,20 @@ const searchService = {
     const { skip, take } = options;
     const searchTerm = query.toLowerCase();
     
-    const [texts, categories, news, timelineEvents] = await Promise.all([
+    const [karchagTexts, categories, news, timelineEvents] = await Promise.all([
       prisma.text.findMany({
         where: {
           OR: [
-            { id_slug: { contains: searchTerm, mode: 'insensitive' } },
-            { keywords: { has: searchTerm } }
+            { english_title: { contains: searchTerm, mode: 'insensitive' } },
+            { tibetan_title: { contains: searchTerm, mode: 'insensitive' } },
+            { sanskrit_title: { contains: searchTerm, mode: 'insensitive' } },
+            { chinese_title: { contains: searchTerm, mode: 'insensitive' } },
+            { derge_id: { contains: searchTerm, mode: 'insensitive' } },
+            { yeshe_de_id: { contains: searchTerm, mode: 'insensitive' } }
           ],
           is_active: true
         },
-        include: { category: true },
+        include: { sub_category: true },
         skip,
         take
       }),
@@ -845,7 +631,7 @@ const searchService = {
     ]);
     
     return {
-      texts,
+      texts: karchagTexts,
       categories,
       news,
       timelineEvents
@@ -857,13 +643,6 @@ module.exports = {
   prisma,
   userService,
   catalogCategoryService,
-  textService,
-  textSectionService,
-  textMetadataService,
-  textCollatedContentService,
-  textSummaryService,
-  editionService,
-  textEditionService,
   newsService,
   timelinePeriodService,
   timelineEventService,
@@ -872,5 +651,6 @@ module.exports = {
   karchagMainCategoryService,
   karchagSubCategoryService,
   karchagTextService,
+  karchagTextSummaryService,
   searchService
 };

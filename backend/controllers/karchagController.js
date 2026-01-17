@@ -1,12 +1,15 @@
-const { karchagMainCategoryService, karchagSubCategoryService, karchagTextService } = require('../prisma/database');
+const { karchagMainCategoryService, karchagSubCategoryService, karchagTextService, karchagTextSummaryService } = require('../prisma/database');
 const { AppError } = require('../utils/errors');
 
 // Main Categories
 const getMainCategories = async (req, res, next) => {
   try {
     const { is_active } = req.query;
-    const isActiveFilter = is_active === 'true';
-    const categories = await karchagMainCategoryService.findAll({ is_active: isActiveFilter });
+    const options = {};
+    if (is_active !== undefined) {
+      options.is_active = is_active === 'true';
+    }
+    const categories = await karchagMainCategoryService.findAll(options);
 
     res.json({ categories });
   } catch (error) {
@@ -116,11 +119,14 @@ const deleteMainCategory = async (req, res, next) => {
 const getSubCategories = async (req, res, next) => {
   try {
     const { main_category_id, is_active } = req.query;
-    const isActiveFilter = is_active === 'true';
-    const categories = await karchagSubCategoryService.findAll({ 
-      is_active: isActiveFilter,
-      main_category_id 
-    });
+    const options = {};
+    if (is_active !== undefined) {
+      options.is_active = is_active === 'true';
+    }
+    if (main_category_id) {
+      options.main_category_id = main_category_id;
+    }
+    const categories = await karchagSubCategoryService.findAll(options);
 
     res.json({ categories });
   } catch (error) {
@@ -153,6 +159,8 @@ const createSubCategory = async (req, res, next) => {
       description_tibetan,
       order_index = 0,
       is_active = true,
+      only_content = false,
+      content,
     } = req.body;
 
     if (!main_category_id || !name_english || !name_tibetan) {
@@ -173,6 +181,8 @@ const createSubCategory = async (req, res, next) => {
       description_tibetan: description_tibetan || '',
       order_index,
       is_active,
+      only_content,
+      content: only_content ? (content || null) : null,
     });
 
     res.status(201).json(category);
@@ -192,6 +202,8 @@ const updateSubCategory = async (req, res, next) => {
       description_tibetan,
       order_index,
       is_active,
+      only_content,
+      content,
     } = req.body;
 
     if (main_category_id) {
@@ -201,7 +213,7 @@ const updateSubCategory = async (req, res, next) => {
       }
     }
 
-    const category = await karchagSubCategoryService.update(id, {
+    const updateData = {
       main_category_id,
       name_english,
       name_tibetan,
@@ -209,7 +221,15 @@ const updateSubCategory = async (req, res, next) => {
       description_tibetan,
       order_index,
       is_active,
-    });
+    };
+
+    // Only include only_content and content if they are provided
+    if (only_content !== undefined) {
+      updateData.only_content = only_content;
+      updateData.content = only_content ? (content || null) : null;
+    }
+
+    const category = await karchagSubCategoryService.update(id, updateData);
 
     if (!category) {
       throw new AppError('RESOURCE_NOT_FOUND', 'Sub category not found', 404);
@@ -247,11 +267,14 @@ const deleteSubCategory = async (req, res, next) => {
 const getTexts = async (req, res, next) => {
   try {
     const { sub_category_id, is_active } = req.query;
-    const isActiveFilter = is_active === 'true';
-    const texts = await karchagTextService.findAll({ 
-      is_active: isActiveFilter,
-      sub_category_id 
-    });
+    const options = {};
+    if (is_active !== undefined) {
+      options.is_active = is_active === 'true';
+    }
+    if (sub_category_id) {
+      options.sub_category_id = sub_category_id;
+    }
+    const texts = await karchagTextService.findAll(options);
 
     res.json({ texts });
   } catch (error) {
@@ -280,13 +303,17 @@ const createText = async (req, res, next) => {
       sub_category_id,
       derge_id,
       yeshe_de_id,
+      yeshe_de_volume_number,
+      yeshe_de_page_start,
+      yeshe_de_page_end,
       tibetan_title,
       chinese_title,
       sanskrit_title,
       english_title,
-      turning_id,
-      yana_id,
-      translation_period_id,
+      turning,
+      yana,
+      translation_period,
+      pdf_url,
       order_index = 0,
       is_active = true,
     } = req.body;
@@ -305,13 +332,17 @@ const createText = async (req, res, next) => {
       sub_category_id,
       derge_id,
       yeshe_de_id: yeshe_de_id || null,
+      yeshe_de_volume_number: yeshe_de_volume_number || null,
+      yeshe_de_page_start: yeshe_de_page_start || null,
+      yeshe_de_page_end: yeshe_de_page_end || null,
       tibetan_title,
       chinese_title: chinese_title || null,
       sanskrit_title: sanskrit_title || null,
       english_title,
-      turning_id: turning_id || null,
-      yana_id: yana_id || null,
-      translation_period_id: translation_period_id || null,
+      turning: turning || null,
+      yana: yana || null,
+      translation_period: translation_period || null,
+      pdf_url: pdf_url || null,
       order_index,
       is_active,
     });
@@ -329,13 +360,17 @@ const updateText = async (req, res, next) => {
       sub_category_id,
       derge_id,
       yeshe_de_id,
+      yeshe_de_volume_number,
+      yeshe_de_page_start,
+      yeshe_de_page_end,
       tibetan_title,
       chinese_title,
       sanskrit_title,
       english_title,
-      turning_id,
-      yana_id,
-      translation_period_id,
+      turning,
+      yana,
+      translation_period,
+      pdf_url,
       order_index,
       is_active,
     } = req.body;
@@ -351,13 +386,17 @@ const updateText = async (req, res, next) => {
       sub_category_id,
       derge_id,
       yeshe_de_id,
+      yeshe_de_volume_number,
+      yeshe_de_page_start,
+      yeshe_de_page_end,
       tibetan_title,
       chinese_title,
       sanskrit_title,
       english_title,
-      turning_id,
-      yana_id,
-      translation_period_id,
+      turning,
+      yana,
+      translation_period,
+      pdf_url,
       order_index,
       is_active,
     });
@@ -389,6 +428,103 @@ const deleteText = async (req, res, next) => {
   }
 };
 
+// Text Summary operations
+const getTextSummary = async (req, res, next) => {
+  try {
+    const { textId } = req.params;
+    
+    // Verify text exists
+    const text = await karchagTextService.findById(textId);
+    if (!text) {
+      throw new AppError('RESOURCE_NOT_FOUND', 'Text not found', 404);
+    }
+    
+    const summary = await karchagTextSummaryService.findByTextId(textId);
+    
+    if (!summary) {
+      return res.json(null);
+    }
+    
+    res.json(summary);
+  } catch (error) {
+    next(error);
+  }
+};
+
+const createOrUpdateTextSummary = async (req, res, next) => {
+  try {
+    const { textId } = req.params;
+    const {
+      translation_homage_tibetan,
+      translation_homage_english,
+      purpose_tibetan,
+      purpose_english,
+      summary_text_tibetan,
+      summary_text_english,
+      word_meaning_tibetan,
+      word_meaning_english,
+      connection_tibetan,
+      connection_english,
+      question_answers_tibetan,
+      question_answers_english,
+      colophon_tibetan,
+      colophon_english,
+    } = req.body;
+    
+    // Verify text exists
+    const text = await karchagTextService.findById(textId);
+    if (!text) {
+      throw new AppError('RESOURCE_NOT_FOUND', 'Text not found', 404);
+    }
+    
+    const summaryData = {
+      translation_homage_tibetan: translation_homage_tibetan || null,
+      translation_homage_english: translation_homage_english || null,
+      purpose_tibetan: purpose_tibetan || null,
+      purpose_english: purpose_english || null,
+      summary_text_tibetan: summary_text_tibetan || null,
+      summary_text_english: summary_text_english || null,
+      word_meaning_tibetan: word_meaning_tibetan || null,
+      word_meaning_english: word_meaning_english || null,
+      connection_tibetan: connection_tibetan || null,
+      connection_english: connection_english || null,
+      question_answers_tibetan: question_answers_tibetan || null,
+      question_answers_english: question_answers_english || null,
+      colophon_tibetan: colophon_tibetan || null,
+      colophon_english: colophon_english || null,
+    };
+    
+    const summary = await karchagTextSummaryService.upsert(textId, summaryData);
+    
+    res.json(summary);
+  } catch (error) {
+    next(error);
+  }
+};
+
+const deleteTextSummary = async (req, res, next) => {
+  try {
+    const { textId } = req.params;
+    
+    // Verify text exists
+    const text = await karchagTextService.findById(textId);
+    if (!text) {
+      throw new AppError('RESOURCE_NOT_FOUND', 'Text not found', 404);
+    }
+    
+    const summary = await karchagTextSummaryService.findByTextId(textId);
+    if (!summary) {
+      throw new AppError('RESOURCE_NOT_FOUND', 'Summary not found', 404);
+    }
+    
+    await karchagTextSummaryService.delete(textId);
+    
+    res.status(204).send();
+  } catch (error) {
+    next(error);
+  }
+};
+
 module.exports = {
   // Main Categories
   getMainCategories,
@@ -408,4 +544,8 @@ module.exports = {
   createText,
   updateText,
   deleteText,
+  // Text Summary
+  getTextSummary,
+  createOrUpdateTextSummary,
+  deleteTextSummary,
 };

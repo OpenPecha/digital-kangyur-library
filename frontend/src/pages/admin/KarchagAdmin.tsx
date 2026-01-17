@@ -1,10 +1,13 @@
 import React, { useState, useEffect } from 'react';
+import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import AdminLayout from '@/components/admin/AdminLayout';
+import { TextSummaryForm } from '@/components/admin/texts/TextSummaryForm';
 import api from '@/utils/api';
+import { toast } from 'sonner';
 import { Button } from '@/components/ui/atoms/button';
 import { Input } from '@/components/ui/atoms/input';
-import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/atoms/card';
-import { Edit, Trash2, Search, Plus, BookOpen, Calendar, FileText, FolderTree, ChevronRight, X } from 'lucide-react';
+import { Card } from '@/components/ui/atoms/card';
+import { Edit, Trash2, Search, Plus, BookOpen, FileText, FolderTree, X, FileText as SummaryIcon } from 'lucide-react';
 import {
   Select,
   SelectContent,
@@ -45,7 +48,9 @@ const CategoryForm = ({ isOpen, onClose, mode, data, mainCategories, onSave }: C
         order_index: data.order_index || 0,
         is_active: data.is_active !== undefined ? data.is_active : true,
         category_type: data.main_category_id ? 'sub' : 'main',
-        main_category_id: data.main_category_id || null
+        main_category_id: data.main_category_id || null,
+        only_content: data.only_content !== undefined ? data.only_content : false,
+        content: data.content || ''
       };
     }
     return {
@@ -56,7 +61,9 @@ const CategoryForm = ({ isOpen, onClose, mode, data, mainCategories, onSave }: C
       order_index: 0,
       is_active: true,
       category_type: 'main', // 'main' or 'sub'
-      main_category_id: null
+      main_category_id: null,
+      only_content: false,
+      content: ''
     };
   });
 
@@ -71,7 +78,9 @@ const CategoryForm = ({ isOpen, onClose, mode, data, mainCategories, onSave }: C
         order_index: data.order_index || 0,
         is_active: data.is_active !== undefined ? data.is_active : true,
         category_type: data.main_category_id ? 'sub' : 'main',
-        main_category_id: data.main_category_id || null
+        main_category_id: data.main_category_id || null,
+        only_content: data.only_content !== undefined ? data.only_content : false,
+        content: data.content || ''
       });
     } else {
       setFormData({
@@ -82,7 +91,9 @@ const CategoryForm = ({ isOpen, onClose, mode, data, mainCategories, onSave }: C
         order_index: 0,
         is_active: true,
         category_type: 'main',
-        main_category_id: null
+        main_category_id: null,
+        only_content: false,
+        content: ''
       });
     }
   }, [data]);
@@ -208,6 +219,34 @@ const CategoryForm = ({ isOpen, onClose, mode, data, mainCategories, onSave }: C
             </div>
           </div>
 
+          {/* Only Content Option (only for sub categories) */}
+          {formData.category_type === 'sub' && (
+            <div className="space-y-4">
+              <div className="flex items-center space-x-2">
+                <Switch
+                  id="only_content"
+                  checked={formData.only_content}
+                  onCheckedChange={(checked) => setFormData({ ...formData, only_content: checked, content: checked ? formData.content : '' })}
+                />
+                <Label htmlFor="only_content">Only Content (No Texts)</Label>
+              </div>
+              
+              {/* Content Field (only shown when only_content is true) */}
+              {formData.only_content && (
+                <div className="space-y-2">
+                  <Label htmlFor="content">Content</Label>
+                  <Textarea
+                    id="content"
+                    value={formData.content}
+                    onChange={(e) => setFormData({ ...formData, content: e.target.value })}
+                    rows={10}
+                    placeholder="Enter content here..."
+                  />
+                </div>
+              )}
+            </div>
+          )}
+
           <DialogFooter>
             <Button type="button" variant="outline" onClick={onClose}>
               Cancel
@@ -290,44 +329,15 @@ const TextForm = ({ isOpen, onClose, mode, data, subCategories, onSave }: TextFo
         chinese_title: data.chinese_title || '',
         sanskrit_title: data.sanskrit_title || '',
         english_title: data.english_title || '',
-        turning_id: data.turning_id || '',
-        yana_id: data.yana_id || '',
-        translation_period_id: data.translation_period_id || '',
+        turning: data.turning || '',
+        yana: data.yana || '',
+        translation_period: data.translation_period || '',
+        yeshe_de_volume_number: data.yeshe_de_volume_number || '',
+        yeshe_de_page_start: data.yeshe_de_page_start || '',
+        yeshe_de_page_end: data.yeshe_de_page_end || '',
+        pdf_url: data.pdf_url || '',
         order_index: data.order_index || 0,
         is_active: data.is_active !== undefined ? data.is_active : true,
-
-        // Text Summary - ensure summary object exists
-        summary: data.summary ? {
-          translator_homage_english: data.summary.translator_homage_english || '',
-          translator_homage_tibetan: data.summary.translator_homage_tibetan || '',
-          purpose_english: data.summary.purpose_english || '',
-          purpose_tibetan: data.summary.purpose_tibetan || '',
-          text_summary_english: data.summary.text_summary_english || '',
-          text_summary_tibetan: data.summary.text_summary_tibetan || '',
-          keyword_and_meaning_english: data.summary.keyword_and_meaning_english || '',
-          keyword_and_meaning_tibetan: data.summary.keyword_and_meaning_tibetan || '',
-          relation_english: data.summary.relation_english || '',
-          relation_tibetan: data.summary.relation_tibetan || '',
-          question_and_answer_english: data.summary.question_and_answer_english || '',
-          question_and_answer_tibetan: data.summary.question_and_answer_tibetan || '',
-          translator_notes_english: data.summary.translator_notes_english || '',
-          translator_notes_tibetan: data.summary.translator_notes_tibetan || '',
-        } : {
-          translator_homage_english: '',
-          translator_homage_tibetan: '',
-          purpose_english: '',
-          purpose_tibetan: '',
-          text_summary_english: '',
-          text_summary_tibetan: '',
-          keyword_and_meaning_english: '',
-          keyword_and_meaning_tibetan: '',
-          relation_english: '',
-          relation_tibetan: '',
-          question_and_answer_english: '',
-          question_and_answer_tibetan: '',
-          translator_notes_english: '',
-          translator_notes_tibetan: '',
-        },
 
         // Volume Information - ensure volumes array exists
         volumes: data.volumes && Array.isArray(data.volumes) && data.volumes.length > 0
@@ -350,33 +360,19 @@ const TextForm = ({ isOpen, onClose, mode, data, subCategories, onSave }: TextFo
       sub_category_id: '',
       derge_id: '',
       yeshe_de_id: '',
+      yeshe_de_volume_number: '',
+      yeshe_de_page_start: '',
+      yeshe_de_page_end: '',
       tibetan_title: '',
       chinese_title: '',
       sanskrit_title: '',
       english_title: '',
-      turning_id: '',
-      yana_id: '',
-      translation_period_id: '',
+      turning: '',
+      yana: '',
+      translation_period: '',
+      pdf_url: '',
       order_index: 0,
       is_active: true,
-
-      // Text Summary
-      summary: {
-        translator_homage_english: '',
-        translator_homage_tibetan: '',
-        purpose_english: '',
-        purpose_tibetan: '',
-        text_summary_english: '',
-        text_summary_tibetan: '',
-        keyword_and_meaning_english: '',
-        keyword_and_meaning_tibetan: '',
-        relation_english: '',
-        relation_tibetan: '',
-        question_and_answer_english: '',
-        question_and_answer_tibetan: '',
-        translator_notes_english: '',
-        translator_notes_tibetan: '',
-      },
 
       // Volume Information
       volumes: [{
@@ -400,44 +396,15 @@ const TextForm = ({ isOpen, onClose, mode, data, subCategories, onSave }: TextFo
         chinese_title: data.chinese_title || '',
         sanskrit_title: data.sanskrit_title || '',
         english_title: data.english_title || '',
-        turning_id: data.turning_id || '',
-        yana_id: data.yana_id || '',
-        translation_period_id: data.translation_period_id || '',
+        turning: data.turning || '',
+        yana: data.yana || '',
+        translation_period: data.translation_period || '',
+        yeshe_de_volume_number: data.yeshe_de_volume_number || '',
+        yeshe_de_page_start: data.yeshe_de_page_start || '',
+        yeshe_de_page_end: data.yeshe_de_page_end || '',
+        pdf_url: data.pdf_url || '',
         order_index: data.order_index || 0,
         is_active: data.is_active !== undefined ? data.is_active : true,
-
-        // Text Summary - ensure summary object exists
-        summary: data.summary ? {
-          translator_homage_english: data.summary.translator_homage_english || '',
-          translator_homage_tibetan: data.summary.translator_homage_tibetan || '',
-          purpose_english: data.summary.purpose_english || '',
-          purpose_tibetan: data.summary.purpose_tibetan || '',
-          text_summary_english: data.summary.text_summary_english || '',
-          text_summary_tibetan: data.summary.text_summary_tibetan || '',
-          keyword_and_meaning_english: data.summary.keyword_and_meaning_english || '',
-          keyword_and_meaning_tibetan: data.summary.keyword_and_meaning_tibetan || '',
-          relation_english: data.summary.relation_english || '',
-          relation_tibetan: data.summary.relation_tibetan || '',
-          question_and_answer_english: data.summary.question_and_answer_english || '',
-          question_and_answer_tibetan: data.summary.question_and_answer_tibetan || '',
-          translator_notes_english: data.summary.translator_notes_english || '',
-          translator_notes_tibetan: data.summary.translator_notes_tibetan || '',
-        } : {
-          translator_homage_english: '',
-          translator_homage_tibetan: '',
-          purpose_english: '',
-          purpose_tibetan: '',
-          text_summary_english: '',
-          text_summary_tibetan: '',
-          keyword_and_meaning_english: '',
-          keyword_and_meaning_tibetan: '',
-          relation_english: '',
-          relation_tibetan: '',
-          question_and_answer_english: '',
-          question_and_answer_tibetan: '',
-          translator_notes_english: '',
-          translator_notes_tibetan: '',
-        },
 
         // Volume Information - ensure volumes array exists
         volumes: data.volumes && Array.isArray(data.volumes) && data.volumes.length > 0
@@ -460,33 +427,19 @@ const TextForm = ({ isOpen, onClose, mode, data, subCategories, onSave }: TextFo
         sub_category_id: '',
         derge_id: '',
         yeshe_de_id: '',
+        yeshe_de_volume_number: '',
+        yeshe_de_page_start: '',
+        yeshe_de_page_end: '',
         tibetan_title: '',
         chinese_title: '',
         sanskrit_title: '',
         english_title: '',
-        turning_id: '',
-        yana_id: '',
-        translation_period_id: '',
+        turning: '',
+        yana: '',
+        translation_period: '',
+        pdf_url: '',
         order_index: 0,
         is_active: true,
-
-        // Text Summary
-        summary: {
-          translator_homage_english: '',
-          translator_homage_tibetan: '',
-          purpose_english: '',
-          purpose_tibetan: '',
-          text_summary_english: '',
-          text_summary_tibetan: '',
-          keyword_and_meaning_english: '',
-          keyword_and_meaning_tibetan: '',
-          relation_english: '',
-          relation_tibetan: '',
-          question_and_answer_english: '',
-          question_and_answer_tibetan: '',
-          translator_notes_english: '',
-          translator_notes_tibetan: '',
-        },
 
         // Volume Information
         volumes: [{
@@ -501,6 +454,28 @@ const TextForm = ({ isOpen, onClose, mode, data, subCategories, onSave }: TextFo
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    
+    // Validate required fields
+    if (!formData.sub_category_id) {
+      toast.error('Please select a category');
+      return;
+    }
+    
+    if (!formData.derge_id) {
+      toast.error('Derge ID is required');
+      return;
+    }
+    
+    if (!formData.tibetan_title) {
+      toast.error('Tibetan title is required');
+      return;
+    }
+    
+    if (!formData.english_title) {
+      toast.error('English title is required');
+      return;
+    }
+    
     onSave(formData);
   };
 
@@ -538,10 +513,11 @@ const TextForm = ({ isOpen, onClose, mode, data, subCategories, onSave }: TextFo
             <h3 className="text-lg font-semibold">Basic Information</h3>
             <div className="grid grid-cols-2 gap-4">
               <div className="space-y-2">
-                <Label htmlFor="sub_category_id">Category</Label>
+                <Label htmlFor="sub_category_id">Category *</Label>
               <Select
                 value={formData.sub_category_id?.toString() || ''}
                 onValueChange={(value) => setFormData({ ...formData, sub_category_id: value })}
+                required
               >
                   <SelectTrigger>
                     <SelectValue placeholder="Select category" />
@@ -561,7 +537,7 @@ const TextForm = ({ isOpen, onClose, mode, data, subCategories, onSave }: TextFo
                   id="order_index"
                   type="number"
                   value={formData.order_index}
-                  onChange={(e) => setFormData({ ...formData, order_index: parseInt(e.target.value) })}
+                  onChange={(e) => setFormData({ ...formData, order_index: Number.parseInt(e.target.value, 10) || 0 })}
                   required
                 />
               </div>
@@ -583,7 +559,6 @@ const TextForm = ({ isOpen, onClose, mode, data, subCategories, onSave }: TextFo
                   id="yeshe_de_id"
                   value={formData.yeshe_de_id}
                   onChange={(e) => setFormData({ ...formData, yeshe_de_id: e.target.value })}
-                  required
                 />
               </div>
             </div>
@@ -629,48 +604,71 @@ const TextForm = ({ isOpen, onClose, mode, data, subCategories, onSave }: TextFo
               </div>
             </div>
 
-            <div className="grid grid-3 gap-4">
+            <div className="grid grid-cols-2 gap-4">
               <div className="space-y-2">
-                <Label htmlFor="turning_id">Turning</Label>
-                <Select
-                  value={formData.turning_id?.toString() || ''}
-                  onValueChange={(value) => setFormData({ ...formData, turning_id: parseInt(value) })}
-                >
-                  <SelectTrigger>
-                    <SelectValue placeholder="Select turning" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    {/* Add turning options */}
-                  </SelectContent>
-                </Select>
+                <Label htmlFor="yeshe_de_volume_number">Yeshe De Volume Number</Label>
+                <Input
+                  id="yeshe_de_volume_number"
+                  value={formData.yeshe_de_volume_number}
+                  onChange={(e) => setFormData({ ...formData, yeshe_de_volume_number: e.target.value })}
+                />
               </div>
               <div className="space-y-2">
-                <Label htmlFor="yana_id">Yana</Label>
-                <Select
-                  value={formData.yana_id?.toString() || ''}
-                  onValueChange={(value) => setFormData({ ...formData, yana_id: parseInt(value) })}
-                >
-                  <SelectTrigger>
-                    <SelectValue placeholder="Select yana" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    {/* Add yana options */}
-                  </SelectContent>
-                </Select>
+                <Label htmlFor="pdf_url">PDF URL</Label>
+                <Input
+                  id="pdf_url"
+                  value={formData.pdf_url}
+                  onChange={(e) => setFormData({ ...formData, pdf_url: e.target.value })}
+                />
+              </div>
+            </div>
+
+            <div className="grid grid-cols-2 gap-4">
+              <div className="space-y-2">
+                <Label htmlFor="yeshe_de_page_start">Yeshe De Page Start</Label>
+                <Input
+                  id="yeshe_de_page_start"
+                  value={formData.yeshe_de_page_start}
+                  onChange={(e) => setFormData({ ...formData, yeshe_de_page_start: e.target.value })}
+                />
               </div>
               <div className="space-y-2">
-                <Label htmlFor="translation_period_id">Translation Period</Label>
-                <Select
-                  value={formData.translation_period_id?.toString() || ''}
-                  onValueChange={(value) => setFormData({ ...formData, translation_period_id: parseInt(value) })}
-                >
-                  <SelectTrigger>
-                    <SelectValue placeholder="Select type" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    {/* Add translation period options */}
-                  </SelectContent>
-                </Select>
+                <Label htmlFor="yeshe_de_page_end">Yeshe De Page End</Label>
+                <Input
+                  id="yeshe_de_page_end"
+                  value={formData.yeshe_de_page_end}
+                  onChange={(e) => setFormData({ ...formData, yeshe_de_page_end: e.target.value })}
+                />
+              </div>
+            </div>
+
+            <div className="grid grid-cols-3 gap-4">
+              <div className="space-y-2">
+                <Label htmlFor="turning">Turning</Label>
+                <Input
+                  id="turning"
+                  value={formData.turning}
+                  onChange={(e) => setFormData({ ...formData, turning: e.target.value })}
+                  placeholder="e.g., First Turning"
+                />
+              </div>
+              <div className="space-y-2">
+                <Label htmlFor="yana">Yana</Label>
+                <Input
+                  id="yana"
+                  value={formData.yana}
+                  onChange={(e) => setFormData({ ...formData, yana: e.target.value })}
+                  placeholder="e.g., Hinayana"
+                />
+              </div>
+              <div className="space-y-2">
+                <Label htmlFor="translation_period">Translation Period</Label>
+                <Input
+                  id="translation_period"
+                  value={formData.translation_period}
+                  onChange={(e) => setFormData({ ...formData, translation_period: e.target.value })}
+                  placeholder="e.g., Early Period"
+                />
               </div>
             </div>
 
@@ -682,90 +680,6 @@ const TextForm = ({ isOpen, onClose, mode, data, subCategories, onSave }: TextFo
               />
               <Label htmlFor="is_active">Active</Label>
             </div>
-          </div>
-
-          {/* Text Summary */}
-          <div className="space-y-4">
-            <h3 className="text-lg font-semibold">Text Summary</h3>
-            <div className="grid grid-cols-2 gap-4">
-              <div className="space-y-2">
-                <Label htmlFor="translator_homage_english">Translator Homage (English)</Label>
-                <Textarea
-                  id="translator_homage_english"
-                  value={formData.summary.translator_homage_english}
-                  onChange={(e) => setFormData({
-                    ...formData,
-                    summary: { ...formData.summary, translator_homage_english: e.target.value }
-                  })}
-                />
-              </div>
-              <div className="space-y-2">
-                <Label htmlFor="translator_homage_tibetan">Translator Homage (Tibetan)</Label>
-                <Textarea
-                  id="translator_homage_tibetan"
-                  value={formData.summary.translator_homage_tibetan}
-                  onChange={(e) => setFormData({
-                    ...formData,
-                    summary: { ...formData.summary, translator_homage_tibetan: e.target.value }
-                  })}
-                  className="font-tibetan"
-                />
-              </div>
-            </div>
-
-            <div className="grid grid-cols-2 gap-4">
-              <div className="space-y-2">
-                <Label htmlFor="purpose_english">Purpose (English)</Label>
-                <Textarea
-                  id="purpose_english"
-                  value={formData.summary.purpose_english}
-                  onChange={(e) => setFormData({
-                    ...formData,
-                    summary: { ...formData.summary, purpose_english: e.target.value }
-                  })}
-                />
-              </div>
-              <div className="space-y-2">
-                <Label htmlFor="purpose_tibetan">Purpose (Tibetan)</Label>
-                <Textarea
-                  id="purpose_tibetan"
-                  value={formData.summary.purpose_tibetan}
-                  onChange={(e) => setFormData({
-                    ...formData,
-                    summary: { ...formData.summary, purpose_tibetan: e.target.value }
-                  })}
-                  className="font-tibetan"
-                />
-              </div>
-            </div>
-
-            <div className="grid grid-cols-2 gap-4">
-              <div className="space-y-2">
-                <Label htmlFor="text_summary_english">Text Summary (English)</Label>
-                <Textarea
-                  id="text_summary_english"
-                  value={formData.summary.text_summary_english}
-                  onChange={(e) => setFormData({
-                    ...formData,
-                    summary: { ...formData.summary, text_summary_english: e.target.value }
-                  })}
-                />
-              </div>
-              <div className="space-y-2">
-                <Label htmlFor="text_summary_tibetan">Text Summary (Tibetan)</Label>
-                <Textarea
-                  id="text_summary_tibetan"
-                  value={formData.summary.text_summary_tibetan}
-                  onChange={(e) => setFormData({
-                    ...formData,
-                    summary: { ...formData.summary, text_summary_tibetan: e.target.value }
-                  })}
-                  className="font-tibetan"
-                />
-              </div>
-            </div>
-
-            {/* Add other summary fields similarly */}
           </div>
 
           {/* Volume Information */}
@@ -847,7 +761,7 @@ const TextForm = ({ isOpen, onClose, mode, data, subCategories, onSave }: TextFo
   );
 };
 
-const TextCard = ({ text, mainCategories, subCategories, onEdit }: { text: any, mainCategories: any[], subCategories: any[], onEdit: (item: any) => void }) => {
+const TextCard = ({ text, mainCategories, subCategories, onEdit, onManageSummary }: { text: any, mainCategories: any[], subCategories: any[], onEdit: (item: any) => void, onManageSummary: (textId: string, textTitle: string) => void }) => {
   const subCategory = subCategories.find(sc => sc.id === text.sub_category_id);
   const mainCategory = mainCategories.find(c => c.id === subCategory?.main_category_id);
 
@@ -884,6 +798,14 @@ const TextCard = ({ text, mainCategories, subCategories, onEdit }: { text: any, 
             <Button variant="outline" size="sm" onClick={() => onEdit(text)}>
               <Edit className="h-4 w-4" />
             </Button>
+            <Button 
+              variant="outline" 
+              size="sm" 
+              onClick={() => onManageSummary(text.id, text.english_title || text.tibetan_title || 'Untitled')}
+              title="Manage Summary"
+            >
+              <SummaryIcon className="h-4 w-4" />
+            </Button>
             <Button variant="outline" size="sm" className="text-red-600 hover:text-red-700">
               <Trash2 className="h-4 w-4" />
             </Button>
@@ -895,39 +817,46 @@ const TextCard = ({ text, mainCategories, subCategories, onEdit }: { text: any, 
 };
 
 const KarchagAdmin = () => {
+  const queryClient = useQueryClient();
   const [searchQuery, setSearchQuery] = useState('');
   const [activeTab, setActiveTab] = useState<'categories' | 'texts'>('categories');
   const [selectedMainCategory, setSelectedMainCategory] = useState<string>('all');
   const [editingItem, setEditingItem] = useState<any>(null);
   const [isFormOpen, setIsFormOpen] = useState(false);
   const [formMode, setFormMode] = useState<'create' | 'edit'>('create');
-  const [mainCategories, setMainCategories] = useState<any[]>([]);
-  const [subCategories, setSubCategories] = useState<any[]>([]);
-  const [texts, setTexts] = useState<any[]>([]);
-  const [loading, setLoading] = useState(true);
+  const [isSummaryFormOpen, setIsSummaryFormOpen] = useState(false);
+  const [selectedTextForSummary, setSelectedTextForSummary] = useState<{ id: string; title: string } | null>(null);
 
-  // Fetch data from API
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        setLoading(true);
-        const [mainCatsRes, subCatsRes, textsRes] = await Promise.all([
-          api.getKarchagMainCategories({ is_active: 'true' }),
-          api.getKarchagSubCategories({ is_active: 'true' }),
-          api.getKarchagTexts({ is_active: 'true' }),
-        ]);
-        setMainCategories(mainCatsRes.categories || []);
-        setSubCategories(subCatsRes.categories || []);
-        setTexts(textsRes.texts || []);
-      } catch (error) {
-        console.error('Error fetching karchag data:', error);
-      } finally {
-        setLoading(false);
-      }
-    };
+  // Fetch data using React Query
+  const { data: mainCategoriesData, isLoading: isLoadingMainCategories } = useQuery({
+    queryKey: ['karchag', 'main-categories'],
+    queryFn: async () => {
+      const res = await api.getKarchagMainCategories();
+      return res.categories || [];
+    },
+  });
 
-    fetchData();
-  }, []);
+  const { data: subCategoriesData, isLoading: isLoadingSubCategories } = useQuery({
+    queryKey: ['karchag', 'sub-categories'],
+    queryFn: async () => {
+      const res = await api.getKarchagSubCategories();
+      return res.categories || [];
+    },
+  });
+
+  const { data: textsData, isLoading: isLoadingTexts } = useQuery({
+    queryKey: ['karchag', 'texts'],
+    queryFn: async () => {
+      const res = await api.getKarchagTexts();
+      return res.texts || [];
+    },
+    retry: false,
+  });
+
+  const mainCategories = mainCategoriesData || [];
+  const subCategories = subCategoriesData || [];
+  const texts = textsData || [];
+  const loading = isLoadingMainCategories || isLoadingSubCategories || isLoadingTexts;
 
   const handleCreate = () => {
     setFormMode('create');
@@ -941,12 +870,94 @@ const KarchagAdmin = () => {
     setIsFormOpen(true);
   };
 
+  // Mutations for categories
+  const createMainCategoryMutation = useMutation({
+    mutationFn: (data: any) => api.createKarchagMainCategory(data),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['karchag', 'main-categories'] });
+      setIsFormOpen(false);
+      setEditingItem(null);
+    },
+    onError: (error) => {
+      console.error('Error creating main category:', error);
+      alert('Error creating category. Please try again.');
+    },
+  });
+
+  const updateMainCategoryMutation = useMutation({
+    mutationFn: ({ id, data }: { id: string; data: any }) => api.updateKarchagMainCategory(id, data),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['karchag', 'main-categories'] });
+      setIsFormOpen(false);
+      setEditingItem(null);
+    },
+    onError: (error) => {
+      console.error('Error updating main category:', error);
+      alert('Error updating category. Please try again.');
+    },
+  });
+
+  const createSubCategoryMutation = useMutation({
+    mutationFn: (data: any) => api.createKarchagSubCategory(data),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['karchag', 'sub-categories'] });
+      setIsFormOpen(false);
+      setEditingItem(null);
+    },
+    onError: (error) => {
+      console.error('Error creating sub category:', error);
+      alert('Error creating category. Please try again.');
+    },
+  });
+
+  const updateSubCategoryMutation = useMutation({
+    mutationFn: ({ id, data }: { id: string; data: any }) => api.updateKarchagSubCategory(id, data),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['karchag', 'sub-categories'] });
+      setIsFormOpen(false);
+      setEditingItem(null);
+    },
+    onError: (error) => {
+      console.error('Error updating sub category:', error);
+      alert('Error updating category. Please try again.');
+    },
+  });
+
+  // Mutations for texts
+  const createTextMutation = useMutation({
+    mutationFn: (data: any) => api.createKarchagText(data),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['karchag', 'texts'] });
+      setIsFormOpen(false);
+      setEditingItem(null);
+      toast.success('Text created successfully');
+    },
+    onError: (error: any) => {
+      console.error('Error creating text:', error);
+      toast.error(error?.message || 'Error creating text. Please try again.');
+    },
+  });
+
+  const updateTextMutation = useMutation({
+    mutationFn: ({ id, data }: { id: string; data: any }) => api.updateKarchagText(id, data),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['karchag', 'texts'] });
+      setIsFormOpen(false);
+      setEditingItem(null);
+      toast.success('Text updated successfully');
+    },
+    onError: (error: any) => {
+      console.error('Error updating text:', error);
+      toast.error(error?.message || 'Error updating text. Please try again.');
+    },
+  });
+
   const handleSave = async (updatedData: any) => {
     try {
       if (activeTab === 'categories') {
         if (formMode === 'create') {
           if (updatedData.category_type === 'main') {
-            await api.createKarchagMainCategory({
+            createMainCategoryMutation.mutate({
               name_english: updatedData.name_english,
               name_tibetan: updatedData.name_tibetan,
               description_english: updatedData.description_english,
@@ -955,7 +966,7 @@ const KarchagAdmin = () => {
               is_active: updatedData.is_active,
             });
           } else {
-            await api.createKarchagSubCategory({
+            createSubCategoryMutation.mutate({
               main_category_id: updatedData.main_category_id,
               name_english: updatedData.name_english,
               name_tibetan: updatedData.name_tibetan,
@@ -963,87 +974,93 @@ const KarchagAdmin = () => {
               description_tibetan: updatedData.description_tibetan,
               order_index: updatedData.order_index,
               is_active: updatedData.is_active,
+              only_content: updatedData.only_content || false,
+              content: updatedData.only_content ? updatedData.content : null,
             });
           }
         } else {
           if (updatedData.category_type === 'main' || !updatedData.main_category_id) {
-            await api.updateKarchagMainCategory(editingItem.id, {
-              name_english: updatedData.name_english,
-              name_tibetan: updatedData.name_tibetan,
-              description_english: updatedData.description_english,
-              description_tibetan: updatedData.description_tibetan,
-              order_index: updatedData.order_index,
-              is_active: updatedData.is_active,
+            updateMainCategoryMutation.mutate({
+              id: editingItem.id,
+              data: {
+                name_english: updatedData.name_english,
+                name_tibetan: updatedData.name_tibetan,
+                description_english: updatedData.description_english,
+                description_tibetan: updatedData.description_tibetan,
+                order_index: updatedData.order_index,
+                is_active: updatedData.is_active,
+              },
             });
           } else {
-            await api.updateKarchagSubCategory(editingItem.id, {
-              main_category_id: updatedData.main_category_id,
-              name_english: updatedData.name_english,
-              name_tibetan: updatedData.name_tibetan,
-              description_english: updatedData.description_english,
-              description_tibetan: updatedData.description_tibetan,
-              order_index: updatedData.order_index,
-              is_active: updatedData.is_active,
+            updateSubCategoryMutation.mutate({
+              id: editingItem.id,
+              data: {
+                main_category_id: updatedData.main_category_id,
+                name_english: updatedData.name_english,
+                name_tibetan: updatedData.name_tibetan,
+                description_english: updatedData.description_english,
+                description_tibetan: updatedData.description_tibetan,
+                order_index: updatedData.order_index,
+                is_active: updatedData.is_active,
+                only_content: updatedData.only_content || false,
+                content: updatedData.only_content ? updatedData.content : null,
+              },
             });
           }
         }
       } else {
+        const textData = {
+          sub_category_id: updatedData.sub_category_id,
+          derge_id: updatedData.derge_id,
+          yeshe_de_id: updatedData.yeshe_de_id,
+          tibetan_title: updatedData.tibetan_title,
+          chinese_title: updatedData.chinese_title,
+          sanskrit_title: updatedData.sanskrit_title,
+          english_title: updatedData.english_title,
+          turning: updatedData.turning,
+          yana: updatedData.yana,
+          translation_period: updatedData.translation_period,
+          yeshe_de_volume_number: updatedData.yeshe_de_volume_number,
+          yeshe_de_page_start: updatedData.yeshe_de_page_start,
+          yeshe_de_page_end: updatedData.yeshe_de_page_end,
+          pdf_url: updatedData.pdf_url,
+          order_index: updatedData.order_index,
+          is_active: updatedData.is_active,
+        };
+
         if (formMode === 'create') {
-          await api.createKarchagText({
-            sub_category_id: updatedData.sub_category_id,
-            derge_id: updatedData.derge_id,
-            yeshe_de_id: updatedData.yeshe_de_id,
-            tibetan_title: updatedData.tibetan_title,
-            chinese_title: updatedData.chinese_title,
-            sanskrit_title: updatedData.sanskrit_title,
-            english_title: updatedData.english_title,
-            turning_id: updatedData.turning_id,
-            yana_id: updatedData.yana_id,
-            translation_period_id: updatedData.translation_period_id,
-            order_index: updatedData.order_index,
-            is_active: updatedData.is_active,
-          });
+          createTextMutation.mutate(textData);
         } else {
-          await api.updateKarchagText(editingItem.id, {
-            sub_category_id: updatedData.sub_category_id,
-            derge_id: updatedData.derge_id,
-            yeshe_de_id: updatedData.yeshe_de_id,
-            tibetan_title: updatedData.tibetan_title,
-            chinese_title: updatedData.chinese_title,
-            sanskrit_title: updatedData.sanskrit_title,
-            english_title: updatedData.english_title,
-            turning_id: updatedData.turning_id,
-            yana_id: updatedData.yana_id,
-            translation_period_id: updatedData.translation_period_id,
-            order_index: updatedData.order_index,
-            is_active: updatedData.is_active,
+          updateTextMutation.mutate({
+            id: editingItem.id,
+            data: textData,
           });
         }
       }
-
-      // Refresh data
-      const [mainCatsRes, subCatsRes, textsRes] = await Promise.all([
-        api.getKarchagMainCategories({ is_active: 'true' }),
-        api.getKarchagSubCategories({ is_active: 'true' }),
-        api.getKarchagTexts({ is_active: 'true' }),
-      ]);
-      setMainCategories(mainCatsRes.categories || []);
-      setSubCategories(subCatsRes.categories || []);
-      setTexts(textsRes.texts || []);
-
-      setIsFormOpen(false);
-      setEditingItem(null);
     } catch (error) {
       console.error('Error saving karchag data:', error);
       alert('Error saving data. Please try again.');
     }
   };
 
-  const filteredTexts = texts.filter(text =>
-    text.english_title?.toLowerCase().includes(searchQuery.toLowerCase()) ||
-    text.tibetan_title?.toLowerCase().includes(searchQuery.toLowerCase()) ||
-    text.sanskrit_title?.toLowerCase().includes(searchQuery.toLowerCase())
-  );
+  const filteredTexts = texts.filter(text => {
+    // Filter by search query
+    const matchesSearch = !searchQuery || 
+      text.english_title?.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      text.tibetan_title?.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      text.sanskrit_title?.toLowerCase().includes(searchQuery.toLowerCase());
+    
+    // Filter by selected main category
+    if (selectedMainCategory === 'all') {
+      return matchesSearch;
+    }
+    
+    // Find the subcategory and check if it belongs to the selected main category
+    const subCategory = subCategories.find(sc => sc.id === text.sub_category_id);
+    if (!subCategory) return matchesSearch;
+    
+    return matchesSearch && subCategory.main_category_id === selectedMainCategory;
+  });
 
   const allCategories = [...mainCategories, ...subCategories];
   const filteredCategories = allCategories.filter(category =>
@@ -1132,12 +1149,16 @@ const KarchagAdmin = () => {
             ))
           ) : (
             filteredTexts.map(text => (
-              <TextCard 
-                key={text.id} 
-                text={text} 
+              <TextCard
+                key={text.id}
+                text={text}
                 mainCategories={mainCategories}
                 subCategories={subCategories}
-                onEdit={handleEdit} 
+                onEdit={handleEdit}
+                onManageSummary={(textId, textTitle) => {
+                  setSelectedTextForSummary({ id: textId, title: textTitle });
+                  setIsSummaryFormOpen(true);
+                }}
               />
             ))
           )}
@@ -1171,6 +1192,22 @@ const KarchagAdmin = () => {
             data={editingItem}
             subCategories={subCategories}
             onSave={handleSave}
+          />
+        )}
+
+        {/* Text Summary Form */}
+        {selectedTextForSummary && (
+          <TextSummaryForm
+            isOpen={isSummaryFormOpen}
+            onClose={() => {
+              setIsSummaryFormOpen(false);
+              setSelectedTextForSummary(null);
+            }}
+            textId={selectedTextForSummary.id}
+            textTitle={selectedTextForSummary.title}
+            onSave={() => {
+              queryClient.invalidateQueries({ queryKey: ['karchag', 'texts'] });
+            }}
           />
         )}
       </div>

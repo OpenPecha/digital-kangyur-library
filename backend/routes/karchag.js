@@ -319,6 +319,12 @@ router.get('/texts/:id', karchagController.getTextById);
  *                 type: string
  *               yeshe_de_id:
  *                 type: string
+ *               yeshe_de_volume_number:
+ *                 type: string
+ *               yeshe_de_page_start:
+ *                 type: string
+ *               yeshe_de_page_end:
+ *                 type: string
  *               tibetan_title:
  *                 type: string
  *               chinese_title:
@@ -327,12 +333,14 @@ router.get('/texts/:id', karchagController.getTextById);
  *                 type: string
  *               english_title:
  *                 type: string
- *               turning_id:
- *                 type: integer
- *               yana_id:
- *                 type: integer
- *               translation_period_id:
- *                 type: integer
+ *               turning:
+ *                 type: string
+ *               yana:
+ *                 type: string
+ *               translation_period:
+ *                 type: string
+ *               pdf_url:
+ *                 type: string
  *               order_index:
  *                 type: integer
  *               is_active:
@@ -386,5 +394,127 @@ router.put('/texts/:id', authenticate, authorize(['admin', 'editor']), karchagCo
  *         description: Text not found
  */
 router.delete('/texts/:id', authenticate, authorize(['admin']), karchagController.deleteText);
+
+// Text Summary Routes
+/**
+ * @swagger
+ * /karchag/texts/{textId}/summary:
+ *   get:
+ *     summary: Get text summary by text ID
+ *     tags: [Karchag]
+ *     parameters:
+ *       - in: path
+ *         name: textId
+ *         required: true
+ *         schema:
+ *           type: string
+ *     responses:
+ *       200:
+ *         description: Summary retrieved successfully
+ *       404:
+ *         description: Text or summary not found
+ */
+router.get('/texts/:textId/summary', karchagController.getTextSummary);
+
+/**
+ * @swagger
+ * /karchag/texts/{textId}/summary:
+ *   post:
+ *     summary: Create or update text summary
+ *     tags: [Karchag]
+ *     security:
+ *       - bearerAuth: []
+ *     parameters:
+ *       - in: path
+ *         name: textId
+ *         required: true
+ *         schema:
+ *           type: string
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               translation_homage_tibetan:
+ *                 type: string
+ *               translation_homage_english:
+ *                 type: string
+ *               purpose_tibetan:
+ *                 type: string
+ *               purpose_english:
+ *                 type: string
+ *               summary_text_tibetan:
+ *                 type: string
+ *               summary_text_english:
+ *                 type: string
+ *               word_meaning_tibetan:
+ *                 type: string
+ *               word_meaning_english:
+ *                 type: string
+ *               connection_tibetan:
+ *                 type: string
+ *               connection_english:
+ *                 type: string
+ *               question_answers_tibetan:
+ *                 type: string
+ *               question_answers_english:
+ *                 type: string
+ *               colophon_tibetan:
+ *                 type: string
+ *               colophon_english:
+ *                 type: string
+ *     responses:
+ *       200:
+ *         description: Summary created or updated successfully
+ *       404:
+ *         description: Text not found
+ */
+router.post('/texts/:textId/summary', authenticate, authorize(['admin', 'editor']), karchagController.createOrUpdateTextSummary);
+
+/**
+ * @swagger
+ * /karchag/texts/{textId}/summary:
+ *   put:
+ *     summary: Update text summary
+ *     tags: [Karchag]
+ *     security:
+ *       - bearerAuth: []
+ *     parameters:
+ *       - in: path
+ *         name: textId
+ *         required: true
+ *         schema:
+ *           type: string
+ *     responses:
+ *       200:
+ *         description: Summary updated successfully
+ *       404:
+ *         description: Text or summary not found
+ */
+router.put('/texts/:textId/summary', authenticate, authorize(['admin', 'editor']), karchagController.createOrUpdateTextSummary);
+
+/**
+ * @swagger
+ * /karchag/texts/{textId}/summary:
+ *   delete:
+ *     summary: Delete text summary
+ *     tags: [Karchag]
+ *     security:
+ *       - bearerAuth: []
+ *     parameters:
+ *       - in: path
+ *         name: textId
+ *         required: true
+ *         schema:
+ *           type: string
+ *     responses:
+ *       204:
+ *         description: Summary deleted successfully
+ *       404:
+ *         description: Text or summary not found
+ */
+router.delete('/texts/:textId/summary', authenticate, authorize(['admin']), karchagController.deleteTextSummary);
 
 module.exports = router;

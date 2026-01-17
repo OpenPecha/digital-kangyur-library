@@ -145,113 +145,6 @@ exports.Prisma.CatalogCategoryScalarFieldEnum = {
   updated_at: 'updated_at'
 };
 
-exports.Prisma.TextScalarFieldEnum = {
-  id: 'id',
-  id_slug: 'id_slug',
-  category_id: 'category_id',
-  keywords: 'keywords',
-  is_active: 'is_active',
-  order_index: 'order_index',
-  created_at: 'created_at',
-  updated_at: 'updated_at'
-};
-
-exports.Prisma.TextSectionScalarFieldEnum = {
-  id: 'id',
-  text_id: 'text_id',
-  section_type: 'section_type',
-  title_tibetan: 'title_tibetan',
-  title_english: 'title_english',
-  content_tibetan: 'content_tibetan',
-  content_english: 'content_english',
-  order_index: 'order_index',
-  created_at: 'created_at',
-  updated_at: 'updated_at'
-};
-
-exports.Prisma.TextSummaryScalarFieldEnum = {
-  id: 'id',
-  text_id: 'text_id',
-  translation_homage_tibetan: 'translation_homage_tibetan',
-  translation_homage_english: 'translation_homage_english',
-  purpose_tibetan: 'purpose_tibetan',
-  purpose_english: 'purpose_english',
-  summary_text_tibetan: 'summary_text_tibetan',
-  summary_text_english: 'summary_text_english',
-  word_meaning_tibetan: 'word_meaning_tibetan',
-  word_meaning_english: 'word_meaning_english',
-  connection_tibetan: 'connection_tibetan',
-  connection_english: 'connection_english',
-  question_answers_tibetan: 'question_answers_tibetan',
-  question_answers_english: 'question_answers_english',
-  colophon_tibetan: 'colophon_tibetan',
-  colophon_english: 'colophon_english',
-  created_at: 'created_at',
-  updated_at: 'updated_at'
-};
-
-exports.Prisma.TextCollatedContentScalarFieldEnum = {
-  id: 'id',
-  text_id: 'text_id',
-  collated_text: 'collated_text',
-  english_translation: 'english_translation',
-  created_at: 'created_at',
-  updated_at: 'updated_at'
-};
-
-exports.Prisma.TextMetadataScalarFieldEnum = {
-  id: 'id',
-  text_id: 'text_id',
-  metadata_key: 'metadata_key',
-  metadata_value: 'metadata_value',
-  metadata_group: 'metadata_group',
-  label: 'label',
-  tibetan_title: 'tibetan_title',
-  english_title: 'english_title',
-  sanskrit_title: 'sanskrit_title',
-  chinese_title: 'chinese_title',
-  derge_text_id: 'derge_text_id',
-  yeshe_text_id: 'yeshe_text_id',
-  derge_vol_number: 'derge_vol_number',
-  derge_start_page: 'derge_start_page',
-  derge_end_page: 'derge_end_page',
-  turning: 'turning',
-  yana: 'yana',
-  translation_period: 'translation_period',
-  order_index: 'order_index',
-  created_at: 'created_at',
-  updated_at: 'updated_at'
-};
-
-exports.Prisma.EditionScalarFieldEnum = {
-  id: 'id',
-  name_english: 'name_english',
-  name_tibetan: 'name_tibetan',
-  description_english: 'description_english',
-  description_tibetan: 'description_tibetan',
-  year: 'year',
-  location: 'location',
-  total_volumes: 'total_volumes',
-  total_texts: 'total_texts',
-  is_active: 'is_active',
-  created_at: 'created_at',
-  updated_at: 'updated_at'
-};
-
-exports.Prisma.TextEditionScalarFieldEnum = {
-  id: 'id',
-  text_id: 'text_id',
-  edition_id: 'edition_id',
-  source_id: 'source_id',
-  volume_number: 'volume_number',
-  start_page: 'start_page',
-  end_page: 'end_page',
-  availability: 'availability',
-  link_url: 'link_url',
-  created_at: 'created_at',
-  updated_at: 'updated_at'
-};
-
 exports.Prisma.NewsScalarFieldEnum = {
   id: 'id',
   tibetan_title: 'tibetan_title',
@@ -376,23 +269,62 @@ exports.Prisma.KarchagSubCategoryScalarFieldEnum = {
   order_index: 'order_index',
   is_active: 'is_active',
   created_at: 'created_at',
-  updated_at: 'updated_at'
+  updated_at: 'updated_at',
+  only_content: 'only_content',
+  content: 'content'
 };
 
-exports.Prisma.KarchagTextScalarFieldEnum = {
+exports.Prisma.TextScalarFieldEnum = {
   id: 'id',
   sub_category_id: 'sub_category_id',
-  derge_id: 'derge_id',
-  yeshe_de_id: 'yeshe_de_id',
   tibetan_title: 'tibetan_title',
   chinese_title: 'chinese_title',
   sanskrit_title: 'sanskrit_title',
   english_title: 'english_title',
-  turning_id: 'turning_id',
-  yana_id: 'yana_id',
-  translation_period_id: 'translation_period_id',
+  derge_id: 'derge_id',
+  yeshe_de_id: 'yeshe_de_id',
+  yeshe_de_volume_number: 'yeshe_de_volume_number',
+  yeshe_de_page_start: 'yeshe_de_page_start',
+  yeshe_de_page_end: 'yeshe_de_page_end',
+  turning: 'turning',
+  yana: 'yana',
+  translation_period: 'translation_period',
+  pdf_url: 'pdf_url',
   order_index: 'order_index',
   is_active: 'is_active',
+  created_at: 'created_at',
+  updated_at: 'updated_at'
+};
+
+exports.Prisma.KarchagTextSummaryScalarFieldEnum = {
+  id: 'id',
+  karchag_text_id: 'karchag_text_id',
+  translation_homage_tibetan: 'translation_homage_tibetan',
+  translation_homage_english: 'translation_homage_english',
+  purpose_tibetan: 'purpose_tibetan',
+  purpose_english: 'purpose_english',
+  summary_text_tibetan: 'summary_text_tibetan',
+  summary_text_english: 'summary_text_english',
+  word_meaning_tibetan: 'word_meaning_tibetan',
+  word_meaning_english: 'word_meaning_english',
+  connection_tibetan: 'connection_tibetan',
+  connection_english: 'connection_english',
+  question_answers_tibetan: 'question_answers_tibetan',
+  question_answers_english: 'question_answers_english',
+  colophon_tibetan: 'colophon_tibetan',
+  colophon_english: 'colophon_english',
+  created_at: 'created_at',
+  updated_at: 'updated_at'
+};
+
+exports.Prisma.KarchagTextMetadataScalarFieldEnum = {
+  id: 'id',
+  karchag_text_id: 'karchag_text_id',
+  metadata_key: 'metadata_key',
+  metadata_value: 'metadata_value',
+  metadata_group: 'metadata_group',
+  label: 'label',
+  order_index: 'order_index',
   created_at: 'created_at',
   updated_at: 'updated_at'
 };
@@ -416,13 +348,6 @@ exports.Prisma.NullsOrder = {
 exports.Prisma.ModelName = {
   User: 'User',
   CatalogCategory: 'CatalogCategory',
-  Text: 'Text',
-  TextSection: 'TextSection',
-  TextSummary: 'TextSummary',
-  TextCollatedContent: 'TextCollatedContent',
-  TextMetadata: 'TextMetadata',
-  Edition: 'Edition',
-  TextEdition: 'TextEdition',
   News: 'News',
   TimelinePeriod: 'TimelinePeriod',
   TimelineEvent: 'TimelineEvent',
@@ -433,7 +358,9 @@ exports.Prisma.ModelName = {
   Video: 'Video',
   KarchagMainCategory: 'KarchagMainCategory',
   KarchagSubCategory: 'KarchagSubCategory',
-  KarchagText: 'KarchagText'
+  Text: 'Text',
+  KarchagTextSummary: 'KarchagTextSummary',
+  KarchagTextMetadata: 'KarchagTextMetadata'
 };
 
 /**

@@ -1,12 +1,11 @@
 const bcrypt = require('bcryptjs');
 const { 
   userService, 
-  textService, 
   catalogCategoryService, 
   newsService, 
   timelineEventService, 
   audioRecordingService, 
-  editionService,
+  karchagTextService,
   prisma
 } = require('../prisma/database');
 const { AppError } = require('../utils/errors');
@@ -14,38 +13,38 @@ const { paginate, parsePaginationParams } = require('../utils/pagination');
 
 const getDashboard = async (req, res, next) => {
   try {
-    const [totalTexts, totalCategories, totalNews, totalTimelineEvents, totalAudioRecordings, totalEditions] = await Promise.all([
-      prisma.text.count(),
+    const [totalKarchagTexts, totalCategories, totalNews, totalTimelineEvents, totalAudioRecordings, totalVideos] = await Promise.all([
+      prisma.karchagText.count(),
       prisma.catalogCategory.count(),
       prisma.news.count(),
       prisma.timelineEvent.count(),
       prisma.audioRecording.count(),
-      prisma.edition.count()
+      prisma.video.count()
     ]);
 
     const statistics = {
-      total_texts: totalTexts,
+      total_karchag_texts: totalKarchagTexts,
       total_categories: totalCategories,
       total_news: totalNews,
       total_timeline_events: totalTimelineEvents,
       total_audio_recordings: totalAudioRecordings,
-      total_editions: totalEditions,
+      total_videos: totalVideos,
       recent_activity: [],
     };
 
     // Get recent activity (last 10 items)
     const activities = [];
     
-    // Recent texts
-    const recentTexts = await prisma.text.findMany({
+    // Recent karchag texts
+    const recentTexts = await prisma.karchagText.findMany({
       take: 5,
       orderBy: { created_at: 'desc' }
     });
     recentTexts.forEach(text => {
       activities.push({
-        type: 'text_created',
+        type: 'karchag_text_created',
         id: text.id,
-        title: text.id_slug || 'Untitled',
+        title: text.english_title || text.tibetan_title || 'Untitled',
         created_at: text.created_at,
       });
     });

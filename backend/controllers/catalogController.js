@@ -1,4 +1,4 @@
-const { catalogCategoryService, textService } = require('../prisma/database');
+const { catalogCategoryService } = require('../prisma/database');
 const { AppError } = require('../utils/errors');
 
 const buildCategoryTree = (categories, parentId = null) => {
@@ -66,15 +66,10 @@ const getCategoryBySlug = async (req, res, next) => {
       result.children = buildCategoryTree(allCategories, category.id);
     }
 
+    // Note: Texts are now managed through KarchagText model
+    // If needed, this can be updated to fetch karchag texts by category
     if (include_texts === 'true') {
-      const texts = await textService.findAll({ category_id: category.id });
-      result.texts = texts.items.map(text => ({
-        id: text.id,
-        title: {
-          tibetan: text.id_slug, // Note: schema uses id_slug
-          english: text.id_slug,
-        },
-      }));
+      result.texts = [];
     }
 
     res.json(result);
@@ -190,11 +185,8 @@ const deleteCategory = async (req, res, next) => {
       throw new AppError('DUPLICATE_RESOURCE', 'Category has children', 409);
     }
 
-    // Check if category has texts
-    const hasTexts = await catalogCategoryService.hasTexts(id);
-    if (hasTexts) {
-      throw new AppError('DUPLICATE_RESOURCE', 'Category has texts', 409);
-    }
+    // Note: Texts are now managed through KarchagText model
+    // Category text checking is no longer needed
 
     await catalogCategoryService.delete(id);
 

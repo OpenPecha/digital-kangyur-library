@@ -19,379 +19,250 @@ model User {
   id            String   @id @default(uuid())
   username      String   @unique
   email         String   @unique
-  password_hash String   @map("password_hash")
+  password_hash String
   role          String
-  is_active     Boolean  @default(true) @map("is_active")
-  created_at    DateTime @default(now()) @map("created_at")
-  updated_at    DateTime @updatedAt @map("updated_at")
-
-  @@map("users")
+  is_active     Boolean  @default(true)
+  created_at    DateTime @default(now())
+  updated_at    DateTime @updatedAt
 }
 
 model CatalogCategory {
   id           String   @id @default(uuid())
-  parent_id    String?  @map("parent_id")
-  id_slug      String   @unique @map("id_slug")
-  title_tibetan String? @map("title_tibetan")
-  title_english String  @map("title_english")
+  parent_id    String?
+  id_slug      String   @unique
+  title_tibetan String?
+  title_english String
   description  String?
   count        Int      @default(0)
-  order_index  Int      @default(0) @map("order_index")
-  is_active    Boolean  @default(true) @map("is_active")
-  created_at   DateTime @default(now()) @map("created_at")
-  updated_at   DateTime @updatedAt @map("updated_at")
+  order_index  Int      @default(0)
+  is_active    Boolean  @default(true)
+  created_at   DateTime @default(now())
+  updated_at   DateTime @updatedAt
 
   // Self-referential relationship
   parent       CatalogCategory? @relation("CategoryParent", fields: [parent_id], references: [id])
   children     CatalogCategory[] @relation("CategoryParent")
-
-  // Relations
-  texts        Text[]
-
-  @@map("catalog_categories")
 }
 
-model Text {
-  id                String   @id @default(uuid())
-  id_slug           String?  @unique @map("id_slug")
-  category_id       String?  @map("category_id")
-  keywords          String[] @default([])
-  is_active         Boolean  @default(true) @map("is_active")
-  order_index       Int      @default(0) @map("order_index")
-  created_at        DateTime @default(now()) @map("created_at")
-  updated_at        DateTime @updatedAt @map("updated_at")
-
-  // Relations
-  category          CatalogCategory? @relation(fields: [category_id], references: [id])
-  sections         TextSection[]
-  collatedContent  TextCollatedContent?
-  metadata         TextMetadata[]
-  textEditions     TextEdition[]
-  summary           TextSummary?
-
-  @@map("texts")
-}
-
-model TextSection {
-  id              String   @id @default(uuid())
-  text_id         String   @map("text_id")
-  section_type    String   @map("section_type")
-  title_tibetan   String?  @map("title_tibetan")
-  title_english   String?  @map("title_english")
-  content_tibetan String? @db.Text @map("content_tibetan")
-  content_english String? @db.Text @map("content_english")
-  order_index     Int      @default(0) @map("order_index")
-  created_at      DateTime @default(now()) @map("created_at")
-  updated_at      DateTime @updatedAt @map("updated_at")
-
-  // Relations
-  text            Text     @relation(fields: [text_id], references: [id], onDelete: Cascade)
-
-  @@map("text_sections")
-}
-
-model TextSummary {
-  id                    String   @id @default(uuid())
-  text_id               String   @unique @map("text_id")
-  translation_homage_tibetan String? @db.Text @map("translation_homage_tibetan")
-  translation_homage_english String? @db.Text @map("translation_homage_english")
-  purpose_tibetan       String?  @db.Text @map("purpose_tibetan")
-  purpose_english        String?  @db.Text @map("purpose_english")
-  summary_text_tibetan   String?  @db.Text @map("summary_text_tibetan")
-  summary_text_english   String?  @db.Text @map("summary_text_english")
-  word_meaning_tibetan   String?  @db.Text @map("word_meaning_tibetan")
-  word_meaning_english    String?  @db.Text @map("word_meaning_english")
-  connection_tibetan     String?  @db.Text @map("connection_tibetan")
-  connection_english      String?  @db.Text @map("connection_english")
-  question_answers_tibetan String? @db.Text @map("question_answers_tibetan")
-  question_answers_english String? @db.Text @map("question_answers_english")
-  colophon_tibetan       String?  @db.Text @map("colophon_tibetan")
-  colophon_english        String?  @db.Text @map("colophon_english")
-  created_at            DateTime @default(now()) @map("created_at")
-  updated_at            DateTime @updatedAt @map("updated_at")
-
-  // Relations
-  text                  Text     @relation(fields: [text_id], references: [id], onDelete: Cascade)
-
-  @@map("text_summaries")
-}
-
-model TextCollatedContent {
-  id                String   @id @default(uuid())
-  text_id           String   @unique @map("text_id")
-  collated_text     String?  @db.Text @map("collated_text")
-  english_translation String? @db.Text @map("english_translation")
-  created_at        DateTime @default(now()) @map("created_at")
-  updated_at        DateTime @updatedAt @map("updated_at")
-
-  // Relations
-  text              Text     @relation(fields: [text_id], references: [id], onDelete: Cascade)
-
-  @@map("text_collated_content")
-}
-
-model TextMetadata {
-  id            String   @id @default(uuid())
-  text_id       String   @map("text_id")
-  metadata_key  String   @map("metadata_key")
-  metadata_value String  @db.Text @map("metadata_value")
-  metadata_group String  @map("metadata_group")
-  label         String?
-  tibetan_title     String?  @map("tibetan_title")
-  english_title     String?  @map("english_title")
-  sanskrit_title    String?  @map("sanskrit_title")
-  chinese_title     String?  @map("chinese_title")
-  derge_text_id     String?  @map("derge_text_id")
-  yeshe_text_id     String?  @map("yeshe_text_id")
-  derge_vol_number  Int?     @map("derge_vol_number")
-  derge_start_page  Int?     @map("derge_start_page")
-  derge_end_page    Int?     @map("derge_end_page")
-  turning           String?
-  yana           String?
-
-  translation_period  String?  @map("translation_period")
-  order_index   Int      @default(0) @map("order_index")
-  created_at    DateTime @default(now()) @map("created_at")
-  updated_at    DateTime @updatedAt @map("updated_at")
-
-  // Relations
-  text          Text     @relation(fields: [text_id], references: [id], onDelete: Cascade)
-
-  @@map("text_metadata")
-}
-
-model Edition {
-  id                String   @id @default(uuid())
-  name_english      String   @map("name_english")
-  name_tibetan      String?  @map("name_tibetan")
-  description_english String? @db.Text @map("description_english")
-  description_tibetan String? @db.Text @map("description_tibetan")
-  year              String?
-  location          String?
-  total_volumes     Int?     @map("total_volumes")
-  total_texts       Int?     @map("total_texts")
-  is_active         Boolean  @default(true) @map("is_active")
-  created_at        DateTime @default(now()) @map("created_at")
-  updated_at        DateTime @updatedAt @map("updated_at")
-
-  // Relations
-  textEditions      TextEdition[]
-
-  @@map("editions")
-}
-
-model TextEdition {
-  id            String   @id @default(uuid())
-  text_id       String   @map("text_id")
-  edition_id    String   @map("edition_id")
-  source_id     String?  @map("source_id")
-  volume_number Int?     @map("volume_number")
-  start_page    Int?     @map("start_page")
-  end_page      Int?     @map("end_page")
-  availability  String?
-  link_url      String?  @map("link_url")
-  created_at    DateTime @default(now()) @map("created_at")
-  updated_at    DateTime @updatedAt @map("updated_at")
-
-  // Relations
-  text          Text     @relation(fields: [text_id], references: [id], onDelete: Cascade)
-  edition       Edition  @relation(fields: [edition_id], references: [id], onDelete: Cascade)
-
-  @@map("text_editions")
-}
 
 model News {
   id                String    @id @default(uuid())
-  tibetan_title     String?   @map("tibetan_title")
-  english_title     String    @map("english_title")
-  tibetan_description String?  @db.Text @map("tibetan_description")
-  english_description String   @db.Text @map("english_description")
-  thumbnail_url     String?   @map("thumbnail_url")
-  is_published       Boolean   @default(false) @map("is_published")
-  published_at       DateTime? @map("published_at")
-  created_at         DateTime  @default(now()) @map("created_at")
-  updated_at         DateTime  @updatedAt @map("updated_at")
-
-  @@map("news")
+  tibetan_title     String?
+  english_title     String
+  tibetan_description String?
+  english_description String
+  thumbnail_url     String?
+  is_published       Boolean   @default(false)
+  published_at       DateTime?
+  created_at         DateTime  @default(now())
+  updated_at         DateTime  @updatedAt
 }
 
 model TimelinePeriod {
   id            String   @id @default(uuid())
-  id_slug       String   @unique @map("id_slug")
-  name_tibetan  String?  @map("name_tibetan")
-  name_english  String   @map("name_english")
+  id_slug       String   @unique
+  name_tibetan  String?
+  name_english  String
   description   String?
-  start_year    Int      @map("start_year")
-  end_year      Int      @map("end_year")
-  created_at    DateTime @default(now()) @map("created_at")
-  updated_at    DateTime @updatedAt @map("updated_at")
+  start_year    Int
+  end_year      Int
+  created_at    DateTime @default(now())
+  updated_at    DateTime @updatedAt
 
   // Relations
   events        TimelineEvent[]
-
-  @@map("timeline_periods")
 }
 
 model TimelineEvent {
   id                String   @id @default(uuid())
-  period_id         String   @map("period_id")
-  title_english     String   @map("title_english")
-  title_tibetan     String?  @map("title_tibetan")
-  title_sanskrit    String?  @map("title_sanskrit")
-  description_english String? @db.Text @map("description_english")
-  description_tibetan String? @db.Text @map("description_tibetan")
+  period_id         String
+  title_english     String
+  title_tibetan     String?
+  title_sanskrit    String?
+  description_english String?
+  description_tibetan String?
   category          String?
   year              Int
   century           Int?
   era               String?  @default("CE")
-  is_approximate    Boolean  @default(false) @map("is_approximate")
-  location_english  String?  @map("location_english")
-  location_tibetan  String?  @map("location_tibetan")
+  is_approximate    Boolean  @default(false)
+  location_english  String?
+  location_tibetan  String?
   significance      String?
-  order_index       Int      @default(0) @map("order_index")
-  created_at        DateTime @default(now()) @map("created_at")
-  updated_at        DateTime @updatedAt @map("updated_at")
+  order_index       Int      @default(0)
+  created_at        DateTime @default(now())
+  updated_at        DateTime @updatedAt
 
   // Relations
   period            TimelinePeriod @relation(fields: [period_id], references: [id], onDelete: Cascade)
   figures           TimelineEventFigure[]
   relations         TimelineEventRelation[]
   sources           TimelineEventSource[]
-
-  @@map("timeline_events")
 }
 
 model TimelineEventFigure {
   id            String   @id @default(uuid())
-  event_id      String   @map("event_id")
-  name_english  String?  @map("name_english")
-  name_tibetan  String?  @map("name_tibetan")
+  event_id      String
+  name_english  String?
+  name_tibetan  String?
   role          String?
-  created_at    DateTime @default(now()) @map("created_at")
-  updated_at    DateTime @updatedAt @map("updated_at")
+  created_at    DateTime @default(now())
+  updated_at    DateTime @updatedAt
 
   // Relations
   event         TimelineEvent @relation(fields: [event_id], references: [id], onDelete: Cascade)
-
-  @@map("timeline_event_figures")
 }
 
 model TimelineEventRelation {
   id                String   @id @default(uuid())
-  event_id          String   @map("event_id")
-  related_event_id  String?  @map("related_event_id")
-  relation_type     String?  @map("relation_type")
-  created_at        DateTime @default(now()) @map("created_at")
-  updated_at        DateTime @updatedAt @map("updated_at")
+  event_id          String
+  related_event_id  String?
+  relation_type     String?
+  created_at        DateTime @default(now())
+  updated_at        DateTime @updatedAt
 
   // Relations
   event             TimelineEvent @relation(fields: [event_id], references: [id], onDelete: Cascade)
-
-  @@map("timeline_event_relations")
 }
 
 model TimelineEventSource {
   id            String   @id @default(uuid())
-  event_id      String   @map("event_id")
-  source_title  String?  @map("source_title")
-  source_url    String?  @map("source_url")
-  citation      String?  @db.Text
-  created_at    DateTime @default(now()) @map("created_at")
-  updated_at    DateTime @updatedAt @map("updated_at")
+  event_id      String
+  source_title  String?
+  source_url    String?
+  citation      String?
+  created_at    DateTime @default(now())
+  updated_at    DateTime @updatedAt
 
   // Relations
   event         TimelineEvent @relation(fields: [event_id], references: [id], onDelete: Cascade)
-
-  @@map("timeline_event_sources")
 }
 
 model AudioRecording {
   id                String   @id @default(uuid())
-  tibetan_title     String?  @map("tibetan_title")
-  english_title     String?  @map("english_title")
-  tibetan_description String? @db.Text @map("tibetan_description")
-  english_description String? @db.Text @map("english_description")
-  audio_url         String?  @map("audio_url")
-  thumbnail_url     String?  @map("thumbnail_url")
+  tibetan_title     String?
+  english_title     String?
+  tibetan_description String?
+  english_description String?
+  audio_url         String?
+  thumbnail_url     String?
   duration          Int?     // Duration in seconds
-  is_active         Boolean  @default(true) @map("is_active")
-  created_at        DateTime @default(now()) @map("created_at")
-  updated_at        DateTime @updatedAt @map("updated_at")
-
-  @@map("audio_recordings")
+  is_active         Boolean  @default(true)
+  created_at        DateTime @default(now())
+  updated_at        DateTime @updatedAt
 }
 
 model Video {
   id                String   @id @default(uuid())
-  tibetan_title     String?  @map("tibetan_title")
-  english_title     String?  @map("english_title")
-  tibetan_description String? @db.Text @map("tibetan_description")
-  english_description String? @db.Text @map("english_description")
-  video_link        String?  @map("video_link")
-  thumbnail_url     String?  @map("thumbnail_url")
-  is_active         Boolean  @default(true) @map("is_active")
-  created_at        DateTime @default(now()) @map("created_at")
-  updated_at        DateTime @updatedAt @map("updated_at")
-
-  @@map("videos")
+  tibetan_title     String?
+  english_title     String?
+  tibetan_description String?
+  english_description String?
+  video_link        String?
+  thumbnail_url     String?
+  is_active         Boolean  @default(true)
+  created_at        DateTime @default(now())
+  updated_at        DateTime @updatedAt
 }
 
 model KarchagMainCategory {
   id                String   @id @default(uuid())
-  name_english      String   @map("name_english")
-  name_tibetan      String?  @map("name_tibetan")
-  description_english String? @db.Text @map("description_english")
-  description_tibetan String? @db.Text @map("description_tibetan")
-  order_index       Int      @default(0) @map("order_index")
-  is_active         Boolean  @default(true) @map("is_active")
-  created_at        DateTime @default(now()) @map("created_at")
-  updated_at        DateTime @updatedAt @map("updated_at")
+  name_english      String
+  name_tibetan      String?
+  description_english String?
+  description_tibetan String?
+  order_index       Int      @default(0)
+  is_active         Boolean  @default(true)
+  created_at        DateTime @default(now())
+  updated_at        DateTime @updatedAt
 
   // Relations
-  subCategories     KarchagSubCategory[]
-
-  @@map("karchag_main_categories")
+  sub_categories     KarchagSubCategory[]
 }
 
 model KarchagSubCategory {
   id                String   @id @default(uuid())
-  main_category_id String   @map("main_category_id")
-  name_english      String   @map("name_english")
-  name_tibetan      String?  @map("name_tibetan")
-  description_english String? @db.Text @map("description_english")
-  description_tibetan String? @db.Text @map("description_tibetan")
-  order_index       Int      @default(0) @map("order_index")
-  is_active         Boolean  @default(true) @map("is_active")
-  created_at        DateTime @default(now()) @map("created_at")
-  updated_at        DateTime @updatedAt @map("updated_at")
-
+  main_category_id String
+  name_english      String
+  name_tibetan      String?
+  description_english String?
+  description_tibetan String?
+  order_index       Int      @default(0)
+  is_active         Boolean  @default(true)
+  created_at        DateTime @default(now())
+  updated_at        DateTime @updatedAt
+  only_content      Boolean  @default(false)
+  content           String?
   // Relations
-  mainCategory      KarchagMainCategory @relation(fields: [main_category_id], references: [id], onDelete: Cascade)
-  texts             KarchagText[]
-
-  @@map("karchag_sub_categories")
+  main_category      KarchagMainCategory @relation(fields: [main_category_id], references: [id], onDelete: Cascade)
+  texts             Text[]
 }
 
-model KarchagText {
+model Text {
   id                  String   @id @default(uuid())
-  sub_category_id     String   @map("sub_category_id")
-  derge_id            String?  @map("derge_id")
-  yeshe_de_id         String?  @map("yeshe_de_id")
-  tibetan_title       String?  @map("tibetan_title")
-  chinese_title       String?  @map("chinese_title")
-  sanskrit_title      String?  @map("sanskrit_title")
-  english_title       String?  @map("english_title")
-  turning_id          Int?     @map("turning_id")
-  yana_id             Int?     @map("yana_id")
-  translation_period_id Int?   @map("translation_period_id")
-  order_index         Int      @default(0) @map("order_index")
-  is_active           Boolean  @default(true) @map("is_active")
-  created_at          DateTime @default(now()) @map("created_at")
-  updated_at          DateTime @updatedAt @map("updated_at")
+  sub_category_id     String
+  
+  tibetan_title       String? 
+  chinese_title       String?  
+  sanskrit_title      String?  
+  english_title       String?  
+  
+  derge_id            String?  
+  yeshe_de_id         String?  
+  yeshe_de_volume_number String? 
+  yeshe_de_page_start String? 
+  yeshe_de_page_end   String? 
+  turning             String?  
+  yana                String?  
+  translation_period  String? 
+  
+  pdf_url             String? 
+  order_index         Int      @default(0)
+  is_active           Boolean  @default(true) 
+  created_at          DateTime @default(now()) 
+  updated_at          DateTime @updatedAt 
+
+  sub_category         KarchagSubCategory @relation(fields: [sub_category_id], references: [id], onDelete: Cascade)
+  summary             KarchagTextSummary?
+  metadata            KarchagTextMetadata[]
+}
+
+model KarchagTextSummary {
+  id                    String   @id @default(uuid())
+  karchag_text_id       String   @unique
+  translation_homage_tibetan String?
+  translation_homage_english String?
+  purpose_tibetan       String?
+  purpose_english        String?
+  summary_text_tibetan   String?
+  summary_text_english   String?
+  word_meaning_tibetan   String?
+  word_meaning_english    String?
+  connection_tibetan     String?
+  connection_english      String?
+  question_answers_tibetan String?
+  question_answers_english String?
+  colophon_tibetan       String?
+  colophon_english        String?
+  created_at            DateTime @default(now())
+  updated_at            DateTime @updatedAt
 
   // Relations
-  subCategory         KarchagSubCategory @relation(fields: [sub_category_id], references: [id], onDelete: Cascade)
+  karchag_text           Text @relation(fields: [karchag_text_id], references: [id], onDelete: Cascade)
+}
 
-  @@map("karchag_texts")
+model KarchagTextMetadata {
+  id            String   @id @default(uuid())
+  karchag_text_id       String
+  metadata_key  String
+  metadata_value String
+  metadata_group String
+  label         String?
+  order_index   Int      @default(0)
+  created_at    DateTime @default(now())
+  updated_at    DateTime @updatedAt
+
+  // Relations
+  text          Text @relation(fields: [karchag_text_id], references: [id], onDelete: Cascade)
 }
 

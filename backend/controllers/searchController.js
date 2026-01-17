@@ -43,9 +43,13 @@ const search = async (req, res, next) => {
         items: searchResults.texts.slice(0, 10).map(text => ({
           id: text.id,
           title: {
-            tibetan: text.id_slug, // Note: schema uses id_slug, not separate title fields
-            english: text.id_slug,
+            tibetan: text.tibetan_title,
+            english: text.english_title,
+            sanskrit: text.sanskrit_title,
+            chinese: text.chinese_title,
           },
+          derge_id: text.derge_id,
+          yeshe_de_id: text.yeshe_de_id,
         })),
         total: searchResults.texts.length,
       };

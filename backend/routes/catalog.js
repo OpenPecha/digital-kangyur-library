@@ -5,10 +5,10 @@ const { authenticate, authorize } = require('../middleware/auth');
 
 /**
  * @swagger
- * /catalog:
+ * /categories:
  *   get:
- *     summary: Get catalog structure
- *     tags: [Catalog]
+ *     summary: Get categories structure (main categories with subcategories)
+ *     tags: [Categories]
  *     parameters:
  *       - in: query
  *         name: lang
@@ -60,10 +60,10 @@ router.get('/', catalogController.getCatalog);
 
 /**
  * @swagger
- * /catalog/{id_slug}:
+ * /categories/{id_slug}:
  *   get:
  *     summary: Get category by slug
- *     tags: [Catalog]
+ *     tags: [Categories]
  *     parameters:
  *       - in: path
  *         name: id_slug
@@ -129,10 +129,10 @@ router.get('/:id_slug', catalogController.getCategoryBySlug);
 
 /**
  * @swagger
- * /catalog/categories:
+ * /categories/categories:
  *   post:
  *     summary: Create a new category
- *     tags: [Catalog]
+ *     tags: [Categories]
  *     security:
  *       - bearerAuth: []
  *     requestBody:
@@ -201,10 +201,10 @@ router.post('/categories', authenticate, authorize('admin', 'editor'), catalogCo
 
 /**
  * @swagger
- * /catalog/categories/{id}:
+ * /categories/categories/{id}:
  *   put:
  *     summary: Update a category
- *     tags: [Catalog]
+ *     tags: [Categories]
  *     security:
  *       - bearerAuth: []
  *     parameters:
@@ -255,10 +255,10 @@ router.put('/categories/:id', authenticate, authorize('admin', 'editor'), catalo
 
 /**
  * @swagger
- * /catalog/categories/{id}:
+ * /categories/categories/{id}:
  *   delete:
  *     summary: Delete a category
- *     tags: [Catalog]
+ *     tags: [Categories]
  *     security:
  *       - bearerAuth: []
  *     parameters:

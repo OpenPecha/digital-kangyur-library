@@ -19,7 +19,7 @@ const CatalogAdmin = () => {
   const fetchCategories = async () => {
     try {
       setLoading(true);
-      const response = await api.getCatalog({ active_only: 'false' });
+      const response = await api.getCategories({ active_only: 'false' });
       setCategories(response.categories || []);
     } catch (error) {
       console.error('Failed to fetch categories:', error);
@@ -51,8 +51,8 @@ const CatalogAdmin = () => {
       <div className="space-y-6">
         <div className="flex items-center justify-between gap-4">
           <div className="flex-1">
-            <h1 className="text-3xl font-bold text-gray-800 py-[10px]">Manage Catalog Categories</h1>
-            <p className="text-gray-600 mt-1">View and manage catalog categories</p>
+            <h1 className="text-3xl font-bold text-gray-800 py-[10px]">Manage Categories</h1>
+            <p className="text-gray-600 mt-1">View and manage main categories and subcategories</p>
           </div>
           <Button>
             <Plus className="mr-2 h-4 w-4" />

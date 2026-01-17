@@ -8,13 +8,11 @@ const { errorHandler, notFoundHandler } = require('./utils/errors');
 
 // Import routes
 const authRoutes = require('./routes/auth');
-const catalogRoutes = require('./routes/catalog');
-const textRoutes = require('./routes/texts');
+const categoryRoutes = require('./routes/catalog');
 const newsRoutes = require('./routes/news');
 const timelineRoutes = require('./routes/timeline');
 const audioRoutes = require('./routes/audio');
 const videoRoutes = require('./routes/videos');
-const editionRoutes = require('./routes/editions');
 const searchRoutes = require('./routes/search');
 const adminRoutes = require('./routes/admin');
 const karchagRoutes = require('./routes/karchag');
@@ -23,8 +21,9 @@ const app = express();
 
 // Middleware
 app.use(cors({ origin: config.corsOrigin }));
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
+
+app.use(express.json({ limit: "50mb" }))
+app.use(express.urlencoded({ limit: "50mb", extended: true }))
 
 // Swagger documentation
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec, {
@@ -40,13 +39,11 @@ app.get('/health', (req, res) => {
 // API routes
 const apiBase = `/api/${config.apiVersion}`;
 app.use(`${apiBase}/auth`, authRoutes);
-app.use(`${apiBase}/catalog`, catalogRoutes);
-app.use(`${apiBase}/texts`, textRoutes);
+app.use(`${apiBase}/categories`, categoryRoutes);
 app.use(`${apiBase}/news`, newsRoutes);
 app.use(`${apiBase}/timeline`, timelineRoutes);
 app.use(`${apiBase}/audio`, audioRoutes);
 app.use(`${apiBase}/videos`, videoRoutes);
-app.use(`${apiBase}/editions`, editionRoutes);
 app.use(`${apiBase}/search`, searchRoutes);
 app.use(`${apiBase}/admin`, adminRoutes);
 app.use(`${apiBase}/karchag`, karchagRoutes);

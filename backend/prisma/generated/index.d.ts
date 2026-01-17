@@ -24,41 +24,6 @@ export type User = $Result.DefaultSelection<Prisma.$UserPayload>
  */
 export type CatalogCategory = $Result.DefaultSelection<Prisma.$CatalogCategoryPayload>
 /**
- * Model Text
- * 
- */
-export type Text = $Result.DefaultSelection<Prisma.$TextPayload>
-/**
- * Model TextSection
- * 
- */
-export type TextSection = $Result.DefaultSelection<Prisma.$TextSectionPayload>
-/**
- * Model TextSummary
- * 
- */
-export type TextSummary = $Result.DefaultSelection<Prisma.$TextSummaryPayload>
-/**
- * Model TextCollatedContent
- * 
- */
-export type TextCollatedContent = $Result.DefaultSelection<Prisma.$TextCollatedContentPayload>
-/**
- * Model TextMetadata
- * 
- */
-export type TextMetadata = $Result.DefaultSelection<Prisma.$TextMetadataPayload>
-/**
- * Model Edition
- * 
- */
-export type Edition = $Result.DefaultSelection<Prisma.$EditionPayload>
-/**
- * Model TextEdition
- * 
- */
-export type TextEdition = $Result.DefaultSelection<Prisma.$TextEditionPayload>
-/**
  * Model News
  * 
  */
@@ -109,10 +74,20 @@ export type KarchagMainCategory = $Result.DefaultSelection<Prisma.$KarchagMainCa
  */
 export type KarchagSubCategory = $Result.DefaultSelection<Prisma.$KarchagSubCategoryPayload>
 /**
- * Model KarchagText
+ * Model Text
  * 
  */
-export type KarchagText = $Result.DefaultSelection<Prisma.$KarchagTextPayload>
+export type Text = $Result.DefaultSelection<Prisma.$TextPayload>
+/**
+ * Model KarchagTextSummary
+ * 
+ */
+export type KarchagTextSummary = $Result.DefaultSelection<Prisma.$KarchagTextSummaryPayload>
+/**
+ * Model KarchagTextMetadata
+ * 
+ */
+export type KarchagTextMetadata = $Result.DefaultSelection<Prisma.$KarchagTextMetadataPayload>
 
 /**
  * ##  Prisma Client ʲˢ
@@ -252,76 +227,6 @@ export class PrismaClient<
   get catalogCategory(): Prisma.CatalogCategoryDelegate<ExtArgs, ClientOptions>;
 
   /**
-   * `prisma.text`: Exposes CRUD operations for the **Text** model.
-    * Example usage:
-    * ```ts
-    * // Fetch zero or more Texts
-    * const texts = await prisma.text.findMany()
-    * ```
-    */
-  get text(): Prisma.TextDelegate<ExtArgs, ClientOptions>;
-
-  /**
-   * `prisma.textSection`: Exposes CRUD operations for the **TextSection** model.
-    * Example usage:
-    * ```ts
-    * // Fetch zero or more TextSections
-    * const textSections = await prisma.textSection.findMany()
-    * ```
-    */
-  get textSection(): Prisma.TextSectionDelegate<ExtArgs, ClientOptions>;
-
-  /**
-   * `prisma.textSummary`: Exposes CRUD operations for the **TextSummary** model.
-    * Example usage:
-    * ```ts
-    * // Fetch zero or more TextSummaries
-    * const textSummaries = await prisma.textSummary.findMany()
-    * ```
-    */
-  get textSummary(): Prisma.TextSummaryDelegate<ExtArgs, ClientOptions>;
-
-  /**
-   * `prisma.textCollatedContent`: Exposes CRUD operations for the **TextCollatedContent** model.
-    * Example usage:
-    * ```ts
-    * // Fetch zero or more TextCollatedContents
-    * const textCollatedContents = await prisma.textCollatedContent.findMany()
-    * ```
-    */
-  get textCollatedContent(): Prisma.TextCollatedContentDelegate<ExtArgs, ClientOptions>;
-
-  /**
-   * `prisma.textMetadata`: Exposes CRUD operations for the **TextMetadata** model.
-    * Example usage:
-    * ```ts
-    * // Fetch zero or more TextMetadata
-    * const textMetadata = await prisma.textMetadata.findMany()
-    * ```
-    */
-  get textMetadata(): Prisma.TextMetadataDelegate<ExtArgs, ClientOptions>;
-
-  /**
-   * `prisma.edition`: Exposes CRUD operations for the **Edition** model.
-    * Example usage:
-    * ```ts
-    * // Fetch zero or more Editions
-    * const editions = await prisma.edition.findMany()
-    * ```
-    */
-  get edition(): Prisma.EditionDelegate<ExtArgs, ClientOptions>;
-
-  /**
-   * `prisma.textEdition`: Exposes CRUD operations for the **TextEdition** model.
-    * Example usage:
-    * ```ts
-    * // Fetch zero or more TextEditions
-    * const textEditions = await prisma.textEdition.findMany()
-    * ```
-    */
-  get textEdition(): Prisma.TextEditionDelegate<ExtArgs, ClientOptions>;
-
-  /**
    * `prisma.news`: Exposes CRUD operations for the **News** model.
     * Example usage:
     * ```ts
@@ -422,14 +327,34 @@ export class PrismaClient<
   get karchagSubCategory(): Prisma.KarchagSubCategoryDelegate<ExtArgs, ClientOptions>;
 
   /**
-   * `prisma.karchagText`: Exposes CRUD operations for the **KarchagText** model.
+   * `prisma.text`: Exposes CRUD operations for the **Text** model.
     * Example usage:
     * ```ts
-    * // Fetch zero or more KarchagTexts
-    * const karchagTexts = await prisma.karchagText.findMany()
+    * // Fetch zero or more Texts
+    * const texts = await prisma.text.findMany()
     * ```
     */
-  get karchagText(): Prisma.KarchagTextDelegate<ExtArgs, ClientOptions>;
+  get text(): Prisma.TextDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.karchagTextSummary`: Exposes CRUD operations for the **KarchagTextSummary** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more KarchagTextSummaries
+    * const karchagTextSummaries = await prisma.karchagTextSummary.findMany()
+    * ```
+    */
+  get karchagTextSummary(): Prisma.KarchagTextSummaryDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.karchagTextMetadata`: Exposes CRUD operations for the **KarchagTextMetadata** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more KarchagTextMetadata
+    * const karchagTextMetadata = await prisma.karchagTextMetadata.findMany()
+    * ```
+    */
+  get karchagTextMetadata(): Prisma.KarchagTextMetadataDelegate<ExtArgs, ClientOptions>;
 }
 
 export namespace Prisma {
@@ -866,13 +791,6 @@ export namespace Prisma {
   export const ModelName: {
     User: 'User',
     CatalogCategory: 'CatalogCategory',
-    Text: 'Text',
-    TextSection: 'TextSection',
-    TextSummary: 'TextSummary',
-    TextCollatedContent: 'TextCollatedContent',
-    TextMetadata: 'TextMetadata',
-    Edition: 'Edition',
-    TextEdition: 'TextEdition',
     News: 'News',
     TimelinePeriod: 'TimelinePeriod',
     TimelineEvent: 'TimelineEvent',
@@ -883,7 +801,9 @@ export namespace Prisma {
     Video: 'Video',
     KarchagMainCategory: 'KarchagMainCategory',
     KarchagSubCategory: 'KarchagSubCategory',
-    KarchagText: 'KarchagText'
+    Text: 'Text',
+    KarchagTextSummary: 'KarchagTextSummary',
+    KarchagTextMetadata: 'KarchagTextMetadata'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -899,7 +819,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "user" | "catalogCategory" | "text" | "textSection" | "textSummary" | "textCollatedContent" | "textMetadata" | "edition" | "textEdition" | "news" | "timelinePeriod" | "timelineEvent" | "timelineEventFigure" | "timelineEventRelation" | "timelineEventSource" | "audioRecording" | "video" | "karchagMainCategory" | "karchagSubCategory" | "karchagText"
+      modelProps: "user" | "catalogCategory" | "news" | "timelinePeriod" | "timelineEvent" | "timelineEventFigure" | "timelineEventRelation" | "timelineEventSource" | "audioRecording" | "video" | "karchagMainCategory" | "karchagSubCategory" | "text" | "karchagTextSummary" | "karchagTextMetadata"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -1048,524 +968,6 @@ export namespace Prisma {
           count: {
             args: Prisma.CatalogCategoryCountArgs<ExtArgs>
             result: $Utils.Optional<CatalogCategoryCountAggregateOutputType> | number
-          }
-        }
-      }
-      Text: {
-        payload: Prisma.$TextPayload<ExtArgs>
-        fields: Prisma.TextFieldRefs
-        operations: {
-          findUnique: {
-            args: Prisma.TextFindUniqueArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$TextPayload> | null
-          }
-          findUniqueOrThrow: {
-            args: Prisma.TextFindUniqueOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$TextPayload>
-          }
-          findFirst: {
-            args: Prisma.TextFindFirstArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$TextPayload> | null
-          }
-          findFirstOrThrow: {
-            args: Prisma.TextFindFirstOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$TextPayload>
-          }
-          findMany: {
-            args: Prisma.TextFindManyArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$TextPayload>[]
-          }
-          create: {
-            args: Prisma.TextCreateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$TextPayload>
-          }
-          createMany: {
-            args: Prisma.TextCreateManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          createManyAndReturn: {
-            args: Prisma.TextCreateManyAndReturnArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$TextPayload>[]
-          }
-          delete: {
-            args: Prisma.TextDeleteArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$TextPayload>
-          }
-          update: {
-            args: Prisma.TextUpdateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$TextPayload>
-          }
-          deleteMany: {
-            args: Prisma.TextDeleteManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          updateMany: {
-            args: Prisma.TextUpdateManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          updateManyAndReturn: {
-            args: Prisma.TextUpdateManyAndReturnArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$TextPayload>[]
-          }
-          upsert: {
-            args: Prisma.TextUpsertArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$TextPayload>
-          }
-          aggregate: {
-            args: Prisma.TextAggregateArgs<ExtArgs>
-            result: $Utils.Optional<AggregateText>
-          }
-          groupBy: {
-            args: Prisma.TextGroupByArgs<ExtArgs>
-            result: $Utils.Optional<TextGroupByOutputType>[]
-          }
-          count: {
-            args: Prisma.TextCountArgs<ExtArgs>
-            result: $Utils.Optional<TextCountAggregateOutputType> | number
-          }
-        }
-      }
-      TextSection: {
-        payload: Prisma.$TextSectionPayload<ExtArgs>
-        fields: Prisma.TextSectionFieldRefs
-        operations: {
-          findUnique: {
-            args: Prisma.TextSectionFindUniqueArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$TextSectionPayload> | null
-          }
-          findUniqueOrThrow: {
-            args: Prisma.TextSectionFindUniqueOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$TextSectionPayload>
-          }
-          findFirst: {
-            args: Prisma.TextSectionFindFirstArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$TextSectionPayload> | null
-          }
-          findFirstOrThrow: {
-            args: Prisma.TextSectionFindFirstOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$TextSectionPayload>
-          }
-          findMany: {
-            args: Prisma.TextSectionFindManyArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$TextSectionPayload>[]
-          }
-          create: {
-            args: Prisma.TextSectionCreateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$TextSectionPayload>
-          }
-          createMany: {
-            args: Prisma.TextSectionCreateManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          createManyAndReturn: {
-            args: Prisma.TextSectionCreateManyAndReturnArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$TextSectionPayload>[]
-          }
-          delete: {
-            args: Prisma.TextSectionDeleteArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$TextSectionPayload>
-          }
-          update: {
-            args: Prisma.TextSectionUpdateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$TextSectionPayload>
-          }
-          deleteMany: {
-            args: Prisma.TextSectionDeleteManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          updateMany: {
-            args: Prisma.TextSectionUpdateManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          updateManyAndReturn: {
-            args: Prisma.TextSectionUpdateManyAndReturnArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$TextSectionPayload>[]
-          }
-          upsert: {
-            args: Prisma.TextSectionUpsertArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$TextSectionPayload>
-          }
-          aggregate: {
-            args: Prisma.TextSectionAggregateArgs<ExtArgs>
-            result: $Utils.Optional<AggregateTextSection>
-          }
-          groupBy: {
-            args: Prisma.TextSectionGroupByArgs<ExtArgs>
-            result: $Utils.Optional<TextSectionGroupByOutputType>[]
-          }
-          count: {
-            args: Prisma.TextSectionCountArgs<ExtArgs>
-            result: $Utils.Optional<TextSectionCountAggregateOutputType> | number
-          }
-        }
-      }
-      TextSummary: {
-        payload: Prisma.$TextSummaryPayload<ExtArgs>
-        fields: Prisma.TextSummaryFieldRefs
-        operations: {
-          findUnique: {
-            args: Prisma.TextSummaryFindUniqueArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$TextSummaryPayload> | null
-          }
-          findUniqueOrThrow: {
-            args: Prisma.TextSummaryFindUniqueOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$TextSummaryPayload>
-          }
-          findFirst: {
-            args: Prisma.TextSummaryFindFirstArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$TextSummaryPayload> | null
-          }
-          findFirstOrThrow: {
-            args: Prisma.TextSummaryFindFirstOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$TextSummaryPayload>
-          }
-          findMany: {
-            args: Prisma.TextSummaryFindManyArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$TextSummaryPayload>[]
-          }
-          create: {
-            args: Prisma.TextSummaryCreateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$TextSummaryPayload>
-          }
-          createMany: {
-            args: Prisma.TextSummaryCreateManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          createManyAndReturn: {
-            args: Prisma.TextSummaryCreateManyAndReturnArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$TextSummaryPayload>[]
-          }
-          delete: {
-            args: Prisma.TextSummaryDeleteArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$TextSummaryPayload>
-          }
-          update: {
-            args: Prisma.TextSummaryUpdateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$TextSummaryPayload>
-          }
-          deleteMany: {
-            args: Prisma.TextSummaryDeleteManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          updateMany: {
-            args: Prisma.TextSummaryUpdateManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          updateManyAndReturn: {
-            args: Prisma.TextSummaryUpdateManyAndReturnArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$TextSummaryPayload>[]
-          }
-          upsert: {
-            args: Prisma.TextSummaryUpsertArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$TextSummaryPayload>
-          }
-          aggregate: {
-            args: Prisma.TextSummaryAggregateArgs<ExtArgs>
-            result: $Utils.Optional<AggregateTextSummary>
-          }
-          groupBy: {
-            args: Prisma.TextSummaryGroupByArgs<ExtArgs>
-            result: $Utils.Optional<TextSummaryGroupByOutputType>[]
-          }
-          count: {
-            args: Prisma.TextSummaryCountArgs<ExtArgs>
-            result: $Utils.Optional<TextSummaryCountAggregateOutputType> | number
-          }
-        }
-      }
-      TextCollatedContent: {
-        payload: Prisma.$TextCollatedContentPayload<ExtArgs>
-        fields: Prisma.TextCollatedContentFieldRefs
-        operations: {
-          findUnique: {
-            args: Prisma.TextCollatedContentFindUniqueArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$TextCollatedContentPayload> | null
-          }
-          findUniqueOrThrow: {
-            args: Prisma.TextCollatedContentFindUniqueOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$TextCollatedContentPayload>
-          }
-          findFirst: {
-            args: Prisma.TextCollatedContentFindFirstArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$TextCollatedContentPayload> | null
-          }
-          findFirstOrThrow: {
-            args: Prisma.TextCollatedContentFindFirstOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$TextCollatedContentPayload>
-          }
-          findMany: {
-            args: Prisma.TextCollatedContentFindManyArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$TextCollatedContentPayload>[]
-          }
-          create: {
-            args: Prisma.TextCollatedContentCreateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$TextCollatedContentPayload>
-          }
-          createMany: {
-            args: Prisma.TextCollatedContentCreateManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          createManyAndReturn: {
-            args: Prisma.TextCollatedContentCreateManyAndReturnArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$TextCollatedContentPayload>[]
-          }
-          delete: {
-            args: Prisma.TextCollatedContentDeleteArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$TextCollatedContentPayload>
-          }
-          update: {
-            args: Prisma.TextCollatedContentUpdateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$TextCollatedContentPayload>
-          }
-          deleteMany: {
-            args: Prisma.TextCollatedContentDeleteManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          updateMany: {
-            args: Prisma.TextCollatedContentUpdateManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          updateManyAndReturn: {
-            args: Prisma.TextCollatedContentUpdateManyAndReturnArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$TextCollatedContentPayload>[]
-          }
-          upsert: {
-            args: Prisma.TextCollatedContentUpsertArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$TextCollatedContentPayload>
-          }
-          aggregate: {
-            args: Prisma.TextCollatedContentAggregateArgs<ExtArgs>
-            result: $Utils.Optional<AggregateTextCollatedContent>
-          }
-          groupBy: {
-            args: Prisma.TextCollatedContentGroupByArgs<ExtArgs>
-            result: $Utils.Optional<TextCollatedContentGroupByOutputType>[]
-          }
-          count: {
-            args: Prisma.TextCollatedContentCountArgs<ExtArgs>
-            result: $Utils.Optional<TextCollatedContentCountAggregateOutputType> | number
-          }
-        }
-      }
-      TextMetadata: {
-        payload: Prisma.$TextMetadataPayload<ExtArgs>
-        fields: Prisma.TextMetadataFieldRefs
-        operations: {
-          findUnique: {
-            args: Prisma.TextMetadataFindUniqueArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$TextMetadataPayload> | null
-          }
-          findUniqueOrThrow: {
-            args: Prisma.TextMetadataFindUniqueOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$TextMetadataPayload>
-          }
-          findFirst: {
-            args: Prisma.TextMetadataFindFirstArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$TextMetadataPayload> | null
-          }
-          findFirstOrThrow: {
-            args: Prisma.TextMetadataFindFirstOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$TextMetadataPayload>
-          }
-          findMany: {
-            args: Prisma.TextMetadataFindManyArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$TextMetadataPayload>[]
-          }
-          create: {
-            args: Prisma.TextMetadataCreateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$TextMetadataPayload>
-          }
-          createMany: {
-            args: Prisma.TextMetadataCreateManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          createManyAndReturn: {
-            args: Prisma.TextMetadataCreateManyAndReturnArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$TextMetadataPayload>[]
-          }
-          delete: {
-            args: Prisma.TextMetadataDeleteArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$TextMetadataPayload>
-          }
-          update: {
-            args: Prisma.TextMetadataUpdateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$TextMetadataPayload>
-          }
-          deleteMany: {
-            args: Prisma.TextMetadataDeleteManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          updateMany: {
-            args: Prisma.TextMetadataUpdateManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          updateManyAndReturn: {
-            args: Prisma.TextMetadataUpdateManyAndReturnArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$TextMetadataPayload>[]
-          }
-          upsert: {
-            args: Prisma.TextMetadataUpsertArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$TextMetadataPayload>
-          }
-          aggregate: {
-            args: Prisma.TextMetadataAggregateArgs<ExtArgs>
-            result: $Utils.Optional<AggregateTextMetadata>
-          }
-          groupBy: {
-            args: Prisma.TextMetadataGroupByArgs<ExtArgs>
-            result: $Utils.Optional<TextMetadataGroupByOutputType>[]
-          }
-          count: {
-            args: Prisma.TextMetadataCountArgs<ExtArgs>
-            result: $Utils.Optional<TextMetadataCountAggregateOutputType> | number
-          }
-        }
-      }
-      Edition: {
-        payload: Prisma.$EditionPayload<ExtArgs>
-        fields: Prisma.EditionFieldRefs
-        operations: {
-          findUnique: {
-            args: Prisma.EditionFindUniqueArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$EditionPayload> | null
-          }
-          findUniqueOrThrow: {
-            args: Prisma.EditionFindUniqueOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$EditionPayload>
-          }
-          findFirst: {
-            args: Prisma.EditionFindFirstArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$EditionPayload> | null
-          }
-          findFirstOrThrow: {
-            args: Prisma.EditionFindFirstOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$EditionPayload>
-          }
-          findMany: {
-            args: Prisma.EditionFindManyArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$EditionPayload>[]
-          }
-          create: {
-            args: Prisma.EditionCreateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$EditionPayload>
-          }
-          createMany: {
-            args: Prisma.EditionCreateManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          createManyAndReturn: {
-            args: Prisma.EditionCreateManyAndReturnArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$EditionPayload>[]
-          }
-          delete: {
-            args: Prisma.EditionDeleteArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$EditionPayload>
-          }
-          update: {
-            args: Prisma.EditionUpdateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$EditionPayload>
-          }
-          deleteMany: {
-            args: Prisma.EditionDeleteManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          updateMany: {
-            args: Prisma.EditionUpdateManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          updateManyAndReturn: {
-            args: Prisma.EditionUpdateManyAndReturnArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$EditionPayload>[]
-          }
-          upsert: {
-            args: Prisma.EditionUpsertArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$EditionPayload>
-          }
-          aggregate: {
-            args: Prisma.EditionAggregateArgs<ExtArgs>
-            result: $Utils.Optional<AggregateEdition>
-          }
-          groupBy: {
-            args: Prisma.EditionGroupByArgs<ExtArgs>
-            result: $Utils.Optional<EditionGroupByOutputType>[]
-          }
-          count: {
-            args: Prisma.EditionCountArgs<ExtArgs>
-            result: $Utils.Optional<EditionCountAggregateOutputType> | number
-          }
-        }
-      }
-      TextEdition: {
-        payload: Prisma.$TextEditionPayload<ExtArgs>
-        fields: Prisma.TextEditionFieldRefs
-        operations: {
-          findUnique: {
-            args: Prisma.TextEditionFindUniqueArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$TextEditionPayload> | null
-          }
-          findUniqueOrThrow: {
-            args: Prisma.TextEditionFindUniqueOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$TextEditionPayload>
-          }
-          findFirst: {
-            args: Prisma.TextEditionFindFirstArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$TextEditionPayload> | null
-          }
-          findFirstOrThrow: {
-            args: Prisma.TextEditionFindFirstOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$TextEditionPayload>
-          }
-          findMany: {
-            args: Prisma.TextEditionFindManyArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$TextEditionPayload>[]
-          }
-          create: {
-            args: Prisma.TextEditionCreateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$TextEditionPayload>
-          }
-          createMany: {
-            args: Prisma.TextEditionCreateManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          createManyAndReturn: {
-            args: Prisma.TextEditionCreateManyAndReturnArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$TextEditionPayload>[]
-          }
-          delete: {
-            args: Prisma.TextEditionDeleteArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$TextEditionPayload>
-          }
-          update: {
-            args: Prisma.TextEditionUpdateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$TextEditionPayload>
-          }
-          deleteMany: {
-            args: Prisma.TextEditionDeleteManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          updateMany: {
-            args: Prisma.TextEditionUpdateManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          updateManyAndReturn: {
-            args: Prisma.TextEditionUpdateManyAndReturnArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$TextEditionPayload>[]
-          }
-          upsert: {
-            args: Prisma.TextEditionUpsertArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$TextEditionPayload>
-          }
-          aggregate: {
-            args: Prisma.TextEditionAggregateArgs<ExtArgs>
-            result: $Utils.Optional<AggregateTextEdition>
-          }
-          groupBy: {
-            args: Prisma.TextEditionGroupByArgs<ExtArgs>
-            result: $Utils.Optional<TextEditionGroupByOutputType>[]
-          }
-          count: {
-            args: Prisma.TextEditionCountArgs<ExtArgs>
-            result: $Utils.Optional<TextEditionCountAggregateOutputType> | number
           }
         }
       }
@@ -2309,77 +1711,225 @@ export namespace Prisma {
           }
         }
       }
-      KarchagText: {
-        payload: Prisma.$KarchagTextPayload<ExtArgs>
-        fields: Prisma.KarchagTextFieldRefs
+      Text: {
+        payload: Prisma.$TextPayload<ExtArgs>
+        fields: Prisma.TextFieldRefs
         operations: {
           findUnique: {
-            args: Prisma.KarchagTextFindUniqueArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$KarchagTextPayload> | null
+            args: Prisma.TextFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TextPayload> | null
           }
           findUniqueOrThrow: {
-            args: Prisma.KarchagTextFindUniqueOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$KarchagTextPayload>
+            args: Prisma.TextFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TextPayload>
           }
           findFirst: {
-            args: Prisma.KarchagTextFindFirstArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$KarchagTextPayload> | null
+            args: Prisma.TextFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TextPayload> | null
           }
           findFirstOrThrow: {
-            args: Prisma.KarchagTextFindFirstOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$KarchagTextPayload>
+            args: Prisma.TextFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TextPayload>
           }
           findMany: {
-            args: Prisma.KarchagTextFindManyArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$KarchagTextPayload>[]
+            args: Prisma.TextFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TextPayload>[]
           }
           create: {
-            args: Prisma.KarchagTextCreateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$KarchagTextPayload>
+            args: Prisma.TextCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TextPayload>
           }
           createMany: {
-            args: Prisma.KarchagTextCreateManyArgs<ExtArgs>
+            args: Prisma.TextCreateManyArgs<ExtArgs>
             result: BatchPayload
           }
           createManyAndReturn: {
-            args: Prisma.KarchagTextCreateManyAndReturnArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$KarchagTextPayload>[]
+            args: Prisma.TextCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TextPayload>[]
           }
           delete: {
-            args: Prisma.KarchagTextDeleteArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$KarchagTextPayload>
+            args: Prisma.TextDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TextPayload>
           }
           update: {
-            args: Prisma.KarchagTextUpdateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$KarchagTextPayload>
+            args: Prisma.TextUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TextPayload>
           }
           deleteMany: {
-            args: Prisma.KarchagTextDeleteManyArgs<ExtArgs>
+            args: Prisma.TextDeleteManyArgs<ExtArgs>
             result: BatchPayload
           }
           updateMany: {
-            args: Prisma.KarchagTextUpdateManyArgs<ExtArgs>
+            args: Prisma.TextUpdateManyArgs<ExtArgs>
             result: BatchPayload
           }
           updateManyAndReturn: {
-            args: Prisma.KarchagTextUpdateManyAndReturnArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$KarchagTextPayload>[]
+            args: Prisma.TextUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TextPayload>[]
           }
           upsert: {
-            args: Prisma.KarchagTextUpsertArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$KarchagTextPayload>
+            args: Prisma.TextUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TextPayload>
           }
           aggregate: {
-            args: Prisma.KarchagTextAggregateArgs<ExtArgs>
-            result: $Utils.Optional<AggregateKarchagText>
+            args: Prisma.TextAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateText>
           }
           groupBy: {
-            args: Prisma.KarchagTextGroupByArgs<ExtArgs>
-            result: $Utils.Optional<KarchagTextGroupByOutputType>[]
+            args: Prisma.TextGroupByArgs<ExtArgs>
+            result: $Utils.Optional<TextGroupByOutputType>[]
           }
           count: {
-            args: Prisma.KarchagTextCountArgs<ExtArgs>
-            result: $Utils.Optional<KarchagTextCountAggregateOutputType> | number
+            args: Prisma.TextCountArgs<ExtArgs>
+            result: $Utils.Optional<TextCountAggregateOutputType> | number
+          }
+        }
+      }
+      KarchagTextSummary: {
+        payload: Prisma.$KarchagTextSummaryPayload<ExtArgs>
+        fields: Prisma.KarchagTextSummaryFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.KarchagTextSummaryFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$KarchagTextSummaryPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.KarchagTextSummaryFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$KarchagTextSummaryPayload>
+          }
+          findFirst: {
+            args: Prisma.KarchagTextSummaryFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$KarchagTextSummaryPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.KarchagTextSummaryFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$KarchagTextSummaryPayload>
+          }
+          findMany: {
+            args: Prisma.KarchagTextSummaryFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$KarchagTextSummaryPayload>[]
+          }
+          create: {
+            args: Prisma.KarchagTextSummaryCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$KarchagTextSummaryPayload>
+          }
+          createMany: {
+            args: Prisma.KarchagTextSummaryCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.KarchagTextSummaryCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$KarchagTextSummaryPayload>[]
+          }
+          delete: {
+            args: Prisma.KarchagTextSummaryDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$KarchagTextSummaryPayload>
+          }
+          update: {
+            args: Prisma.KarchagTextSummaryUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$KarchagTextSummaryPayload>
+          }
+          deleteMany: {
+            args: Prisma.KarchagTextSummaryDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.KarchagTextSummaryUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.KarchagTextSummaryUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$KarchagTextSummaryPayload>[]
+          }
+          upsert: {
+            args: Prisma.KarchagTextSummaryUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$KarchagTextSummaryPayload>
+          }
+          aggregate: {
+            args: Prisma.KarchagTextSummaryAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateKarchagTextSummary>
+          }
+          groupBy: {
+            args: Prisma.KarchagTextSummaryGroupByArgs<ExtArgs>
+            result: $Utils.Optional<KarchagTextSummaryGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.KarchagTextSummaryCountArgs<ExtArgs>
+            result: $Utils.Optional<KarchagTextSummaryCountAggregateOutputType> | number
+          }
+        }
+      }
+      KarchagTextMetadata: {
+        payload: Prisma.$KarchagTextMetadataPayload<ExtArgs>
+        fields: Prisma.KarchagTextMetadataFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.KarchagTextMetadataFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$KarchagTextMetadataPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.KarchagTextMetadataFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$KarchagTextMetadataPayload>
+          }
+          findFirst: {
+            args: Prisma.KarchagTextMetadataFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$KarchagTextMetadataPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.KarchagTextMetadataFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$KarchagTextMetadataPayload>
+          }
+          findMany: {
+            args: Prisma.KarchagTextMetadataFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$KarchagTextMetadataPayload>[]
+          }
+          create: {
+            args: Prisma.KarchagTextMetadataCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$KarchagTextMetadataPayload>
+          }
+          createMany: {
+            args: Prisma.KarchagTextMetadataCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.KarchagTextMetadataCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$KarchagTextMetadataPayload>[]
+          }
+          delete: {
+            args: Prisma.KarchagTextMetadataDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$KarchagTextMetadataPayload>
+          }
+          update: {
+            args: Prisma.KarchagTextMetadataUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$KarchagTextMetadataPayload>
+          }
+          deleteMany: {
+            args: Prisma.KarchagTextMetadataDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.KarchagTextMetadataUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.KarchagTextMetadataUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$KarchagTextMetadataPayload>[]
+          }
+          upsert: {
+            args: Prisma.KarchagTextMetadataUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$KarchagTextMetadataPayload>
+          }
+          aggregate: {
+            args: Prisma.KarchagTextMetadataAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateKarchagTextMetadata>
+          }
+          groupBy: {
+            args: Prisma.KarchagTextMetadataGroupByArgs<ExtArgs>
+            result: $Utils.Optional<KarchagTextMetadataGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.KarchagTextMetadataCountArgs<ExtArgs>
+            result: $Utils.Optional<KarchagTextMetadataCountAggregateOutputType> | number
           }
         }
       }
@@ -2493,13 +2043,6 @@ export namespace Prisma {
   export type GlobalOmitConfig = {
     user?: UserOmit
     catalogCategory?: CatalogCategoryOmit
-    text?: TextOmit
-    textSection?: TextSectionOmit
-    textSummary?: TextSummaryOmit
-    textCollatedContent?: TextCollatedContentOmit
-    textMetadata?: TextMetadataOmit
-    edition?: EditionOmit
-    textEdition?: TextEditionOmit
     news?: NewsOmit
     timelinePeriod?: TimelinePeriodOmit
     timelineEvent?: TimelineEventOmit
@@ -2510,7 +2053,9 @@ export namespace Prisma {
     video?: VideoOmit
     karchagMainCategory?: KarchagMainCategoryOmit
     karchagSubCategory?: KarchagSubCategoryOmit
-    karchagText?: KarchagTextOmit
+    text?: TextOmit
+    karchagTextSummary?: KarchagTextSummaryOmit
+    karchagTextMetadata?: KarchagTextMetadataOmit
   }
 
   /* Types for Logging */
@@ -2592,12 +2137,10 @@ export namespace Prisma {
 
   export type CatalogCategoryCountOutputType = {
     children: number
-    texts: number
   }
 
   export type CatalogCategoryCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     children?: boolean | CatalogCategoryCountOutputTypeCountChildrenArgs
-    texts?: boolean | CatalogCategoryCountOutputTypeCountTextsArgs
   }
 
   // Custom InputTypes
@@ -2616,93 +2159,6 @@ export namespace Prisma {
    */
   export type CatalogCategoryCountOutputTypeCountChildrenArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: CatalogCategoryWhereInput
-  }
-
-  /**
-   * CatalogCategoryCountOutputType without action
-   */
-  export type CatalogCategoryCountOutputTypeCountTextsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: TextWhereInput
-  }
-
-
-  /**
-   * Count Type TextCountOutputType
-   */
-
-  export type TextCountOutputType = {
-    sections: number
-    metadata: number
-    textEditions: number
-  }
-
-  export type TextCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    sections?: boolean | TextCountOutputTypeCountSectionsArgs
-    metadata?: boolean | TextCountOutputTypeCountMetadataArgs
-    textEditions?: boolean | TextCountOutputTypeCountTextEditionsArgs
-  }
-
-  // Custom InputTypes
-  /**
-   * TextCountOutputType without action
-   */
-  export type TextCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the TextCountOutputType
-     */
-    select?: TextCountOutputTypeSelect<ExtArgs> | null
-  }
-
-  /**
-   * TextCountOutputType without action
-   */
-  export type TextCountOutputTypeCountSectionsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: TextSectionWhereInput
-  }
-
-  /**
-   * TextCountOutputType without action
-   */
-  export type TextCountOutputTypeCountMetadataArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: TextMetadataWhereInput
-  }
-
-  /**
-   * TextCountOutputType without action
-   */
-  export type TextCountOutputTypeCountTextEditionsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: TextEditionWhereInput
-  }
-
-
-  /**
-   * Count Type EditionCountOutputType
-   */
-
-  export type EditionCountOutputType = {
-    textEditions: number
-  }
-
-  export type EditionCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    textEditions?: boolean | EditionCountOutputTypeCountTextEditionsArgs
-  }
-
-  // Custom InputTypes
-  /**
-   * EditionCountOutputType without action
-   */
-  export type EditionCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the EditionCountOutputType
-     */
-    select?: EditionCountOutputTypeSelect<ExtArgs> | null
-  }
-
-  /**
-   * EditionCountOutputType without action
-   */
-  export type EditionCountOutputTypeCountTextEditionsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: TextEditionWhereInput
   }
 
 
@@ -2791,11 +2247,11 @@ export namespace Prisma {
    */
 
   export type KarchagMainCategoryCountOutputType = {
-    subCategories: number
+    sub_categories: number
   }
 
   export type KarchagMainCategoryCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    subCategories?: boolean | KarchagMainCategoryCountOutputTypeCountSubCategoriesArgs
+    sub_categories?: boolean | KarchagMainCategoryCountOutputTypeCountSub_categoriesArgs
   }
 
   // Custom InputTypes
@@ -2812,7 +2268,7 @@ export namespace Prisma {
   /**
    * KarchagMainCategoryCountOutputType without action
    */
-  export type KarchagMainCategoryCountOutputTypeCountSubCategoriesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type KarchagMainCategoryCountOutputTypeCountSub_categoriesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: KarchagSubCategoryWhereInput
   }
 
@@ -2844,7 +2300,38 @@ export namespace Prisma {
    * KarchagSubCategoryCountOutputType without action
    */
   export type KarchagSubCategoryCountOutputTypeCountTextsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: KarchagTextWhereInput
+    where?: TextWhereInput
+  }
+
+
+  /**
+   * Count Type TextCountOutputType
+   */
+
+  export type TextCountOutputType = {
+    metadata: number
+  }
+
+  export type TextCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    metadata?: boolean | TextCountOutputTypeCountMetadataArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * TextCountOutputType without action
+   */
+  export type TextCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TextCountOutputType
+     */
+    select?: TextCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * TextCountOutputType without action
+   */
+  export type TextCountOutputTypeCountMetadataArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: KarchagTextMetadataWhereInput
   }
 
 
@@ -4138,7 +3625,6 @@ export namespace Prisma {
     updated_at?: boolean
     parent?: boolean | CatalogCategory$parentArgs<ExtArgs>
     children?: boolean | CatalogCategory$childrenArgs<ExtArgs>
-    texts?: boolean | CatalogCategory$textsArgs<ExtArgs>
     _count?: boolean | CatalogCategoryCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["catalogCategory"]>
 
@@ -4190,7 +3676,6 @@ export namespace Prisma {
   export type CatalogCategoryInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     parent?: boolean | CatalogCategory$parentArgs<ExtArgs>
     children?: boolean | CatalogCategory$childrenArgs<ExtArgs>
-    texts?: boolean | CatalogCategory$textsArgs<ExtArgs>
     _count?: boolean | CatalogCategoryCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type CatalogCategoryIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -4205,7 +3690,6 @@ export namespace Prisma {
     objects: {
       parent: Prisma.$CatalogCategoryPayload<ExtArgs> | null
       children: Prisma.$CatalogCategoryPayload<ExtArgs>[]
-      texts: Prisma.$TextPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -4615,7 +4099,6 @@ export namespace Prisma {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     parent<T extends CatalogCategory$parentArgs<ExtArgs> = {}>(args?: Subset<T, CatalogCategory$parentArgs<ExtArgs>>): Prisma__CatalogCategoryClient<$Result.GetResult<Prisma.$CatalogCategoryPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     children<T extends CatalogCategory$childrenArgs<ExtArgs> = {}>(args?: Subset<T, CatalogCategory$childrenArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CatalogCategoryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-    texts<T extends CatalogCategory$textsArgs<ExtArgs> = {}>(args?: Subset<T, CatalogCategory$textsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TextPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -5095,30 +4578,6 @@ export namespace Prisma {
   }
 
   /**
-   * CatalogCategory.texts
-   */
-  export type CatalogCategory$textsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Text
-     */
-    select?: TextSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Text
-     */
-    omit?: TextOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: TextInclude<ExtArgs> | null
-    where?: TextWhereInput
-    orderBy?: TextOrderByWithRelationInput | TextOrderByWithRelationInput[]
-    cursor?: TextWhereUniqueInput
-    take?: number
-    skip?: number
-    distinct?: TextScalarFieldEnum | TextScalarFieldEnum[]
-  }
-
-  /**
    * CatalogCategory without action
    */
   export type CatalogCategoryDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -5134,8436 +4593,6 @@ export namespace Prisma {
      * Choose, which related nodes to fetch as well
      */
     include?: CatalogCategoryInclude<ExtArgs> | null
-  }
-
-
-  /**
-   * Model Text
-   */
-
-  export type AggregateText = {
-    _count: TextCountAggregateOutputType | null
-    _avg: TextAvgAggregateOutputType | null
-    _sum: TextSumAggregateOutputType | null
-    _min: TextMinAggregateOutputType | null
-    _max: TextMaxAggregateOutputType | null
-  }
-
-  export type TextAvgAggregateOutputType = {
-    order_index: number | null
-  }
-
-  export type TextSumAggregateOutputType = {
-    order_index: number | null
-  }
-
-  export type TextMinAggregateOutputType = {
-    id: string | null
-    id_slug: string | null
-    category_id: string | null
-    is_active: boolean | null
-    order_index: number | null
-    created_at: Date | null
-    updated_at: Date | null
-  }
-
-  export type TextMaxAggregateOutputType = {
-    id: string | null
-    id_slug: string | null
-    category_id: string | null
-    is_active: boolean | null
-    order_index: number | null
-    created_at: Date | null
-    updated_at: Date | null
-  }
-
-  export type TextCountAggregateOutputType = {
-    id: number
-    id_slug: number
-    category_id: number
-    keywords: number
-    is_active: number
-    order_index: number
-    created_at: number
-    updated_at: number
-    _all: number
-  }
-
-
-  export type TextAvgAggregateInputType = {
-    order_index?: true
-  }
-
-  export type TextSumAggregateInputType = {
-    order_index?: true
-  }
-
-  export type TextMinAggregateInputType = {
-    id?: true
-    id_slug?: true
-    category_id?: true
-    is_active?: true
-    order_index?: true
-    created_at?: true
-    updated_at?: true
-  }
-
-  export type TextMaxAggregateInputType = {
-    id?: true
-    id_slug?: true
-    category_id?: true
-    is_active?: true
-    order_index?: true
-    created_at?: true
-    updated_at?: true
-  }
-
-  export type TextCountAggregateInputType = {
-    id?: true
-    id_slug?: true
-    category_id?: true
-    keywords?: true
-    is_active?: true
-    order_index?: true
-    created_at?: true
-    updated_at?: true
-    _all?: true
-  }
-
-  export type TextAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Filter which Text to aggregate.
-     */
-    where?: TextWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of Texts to fetch.
-     */
-    orderBy?: TextOrderByWithRelationInput | TextOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the start position
-     */
-    cursor?: TextWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` Texts from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` Texts.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Count returned Texts
-    **/
-    _count?: true | TextCountAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to average
-    **/
-    _avg?: TextAvgAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to sum
-    **/
-    _sum?: TextSumAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to find the minimum value
-    **/
-    _min?: TextMinAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to find the maximum value
-    **/
-    _max?: TextMaxAggregateInputType
-  }
-
-  export type GetTextAggregateType<T extends TextAggregateArgs> = {
-        [P in keyof T & keyof AggregateText]: P extends '_count' | 'count'
-      ? T[P] extends true
-        ? number
-        : GetScalarType<T[P], AggregateText[P]>
-      : GetScalarType<T[P], AggregateText[P]>
-  }
-
-
-
-
-  export type TextGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: TextWhereInput
-    orderBy?: TextOrderByWithAggregationInput | TextOrderByWithAggregationInput[]
-    by: TextScalarFieldEnum[] | TextScalarFieldEnum
-    having?: TextScalarWhereWithAggregatesInput
-    take?: number
-    skip?: number
-    _count?: TextCountAggregateInputType | true
-    _avg?: TextAvgAggregateInputType
-    _sum?: TextSumAggregateInputType
-    _min?: TextMinAggregateInputType
-    _max?: TextMaxAggregateInputType
-  }
-
-  export type TextGroupByOutputType = {
-    id: string
-    id_slug: string | null
-    category_id: string | null
-    keywords: string[]
-    is_active: boolean
-    order_index: number
-    created_at: Date
-    updated_at: Date
-    _count: TextCountAggregateOutputType | null
-    _avg: TextAvgAggregateOutputType | null
-    _sum: TextSumAggregateOutputType | null
-    _min: TextMinAggregateOutputType | null
-    _max: TextMaxAggregateOutputType | null
-  }
-
-  type GetTextGroupByPayload<T extends TextGroupByArgs> = Prisma.PrismaPromise<
-    Array<
-      PickEnumerable<TextGroupByOutputType, T['by']> &
-        {
-          [P in ((keyof T) & (keyof TextGroupByOutputType))]: P extends '_count'
-            ? T[P] extends boolean
-              ? number
-              : GetScalarType<T[P], TextGroupByOutputType[P]>
-            : GetScalarType<T[P], TextGroupByOutputType[P]>
-        }
-      >
-    >
-
-
-  export type TextSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
-    id_slug?: boolean
-    category_id?: boolean
-    keywords?: boolean
-    is_active?: boolean
-    order_index?: boolean
-    created_at?: boolean
-    updated_at?: boolean
-    category?: boolean | Text$categoryArgs<ExtArgs>
-    sections?: boolean | Text$sectionsArgs<ExtArgs>
-    collatedContent?: boolean | Text$collatedContentArgs<ExtArgs>
-    metadata?: boolean | Text$metadataArgs<ExtArgs>
-    textEditions?: boolean | Text$textEditionsArgs<ExtArgs>
-    summary?: boolean | Text$summaryArgs<ExtArgs>
-    _count?: boolean | TextCountOutputTypeDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["text"]>
-
-  export type TextSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
-    id_slug?: boolean
-    category_id?: boolean
-    keywords?: boolean
-    is_active?: boolean
-    order_index?: boolean
-    created_at?: boolean
-    updated_at?: boolean
-    category?: boolean | Text$categoryArgs<ExtArgs>
-  }, ExtArgs["result"]["text"]>
-
-  export type TextSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
-    id_slug?: boolean
-    category_id?: boolean
-    keywords?: boolean
-    is_active?: boolean
-    order_index?: boolean
-    created_at?: boolean
-    updated_at?: boolean
-    category?: boolean | Text$categoryArgs<ExtArgs>
-  }, ExtArgs["result"]["text"]>
-
-  export type TextSelectScalar = {
-    id?: boolean
-    id_slug?: boolean
-    category_id?: boolean
-    keywords?: boolean
-    is_active?: boolean
-    order_index?: boolean
-    created_at?: boolean
-    updated_at?: boolean
-  }
-
-  export type TextOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "id_slug" | "category_id" | "keywords" | "is_active" | "order_index" | "created_at" | "updated_at", ExtArgs["result"]["text"]>
-  export type TextInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    category?: boolean | Text$categoryArgs<ExtArgs>
-    sections?: boolean | Text$sectionsArgs<ExtArgs>
-    collatedContent?: boolean | Text$collatedContentArgs<ExtArgs>
-    metadata?: boolean | Text$metadataArgs<ExtArgs>
-    textEditions?: boolean | Text$textEditionsArgs<ExtArgs>
-    summary?: boolean | Text$summaryArgs<ExtArgs>
-    _count?: boolean | TextCountOutputTypeDefaultArgs<ExtArgs>
-  }
-  export type TextIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    category?: boolean | Text$categoryArgs<ExtArgs>
-  }
-  export type TextIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    category?: boolean | Text$categoryArgs<ExtArgs>
-  }
-
-  export type $TextPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    name: "Text"
-    objects: {
-      category: Prisma.$CatalogCategoryPayload<ExtArgs> | null
-      sections: Prisma.$TextSectionPayload<ExtArgs>[]
-      collatedContent: Prisma.$TextCollatedContentPayload<ExtArgs> | null
-      metadata: Prisma.$TextMetadataPayload<ExtArgs>[]
-      textEditions: Prisma.$TextEditionPayload<ExtArgs>[]
-      summary: Prisma.$TextSummaryPayload<ExtArgs> | null
-    }
-    scalars: $Extensions.GetPayloadResult<{
-      id: string
-      id_slug: string | null
-      category_id: string | null
-      keywords: string[]
-      is_active: boolean
-      order_index: number
-      created_at: Date
-      updated_at: Date
-    }, ExtArgs["result"]["text"]>
-    composites: {}
-  }
-
-  type TextGetPayload<S extends boolean | null | undefined | TextDefaultArgs> = $Result.GetResult<Prisma.$TextPayload, S>
-
-  type TextCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
-    Omit<TextFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
-      select?: TextCountAggregateInputType | true
-    }
-
-  export interface TextDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
-    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Text'], meta: { name: 'Text' } }
-    /**
-     * Find zero or one Text that matches the filter.
-     * @param {TextFindUniqueArgs} args - Arguments to find a Text
-     * @example
-     * // Get one Text
-     * const text = await prisma.text.findUnique({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findUnique<T extends TextFindUniqueArgs>(args: SelectSubset<T, TextFindUniqueArgs<ExtArgs>>): Prisma__TextClient<$Result.GetResult<Prisma.$TextPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find one Text that matches the filter or throw an error with `error.code='P2025'`
-     * if no matches were found.
-     * @param {TextFindUniqueOrThrowArgs} args - Arguments to find a Text
-     * @example
-     * // Get one Text
-     * const text = await prisma.text.findUniqueOrThrow({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findUniqueOrThrow<T extends TextFindUniqueOrThrowArgs>(args: SelectSubset<T, TextFindUniqueOrThrowArgs<ExtArgs>>): Prisma__TextClient<$Result.GetResult<Prisma.$TextPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find the first Text that matches the filter.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {TextFindFirstArgs} args - Arguments to find a Text
-     * @example
-     * // Get one Text
-     * const text = await prisma.text.findFirst({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findFirst<T extends TextFindFirstArgs>(args?: SelectSubset<T, TextFindFirstArgs<ExtArgs>>): Prisma__TextClient<$Result.GetResult<Prisma.$TextPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find the first Text that matches the filter or
-     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {TextFindFirstOrThrowArgs} args - Arguments to find a Text
-     * @example
-     * // Get one Text
-     * const text = await prisma.text.findFirstOrThrow({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findFirstOrThrow<T extends TextFindFirstOrThrowArgs>(args?: SelectSubset<T, TextFindFirstOrThrowArgs<ExtArgs>>): Prisma__TextClient<$Result.GetResult<Prisma.$TextPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find zero or more Texts that matches the filter.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {TextFindManyArgs} args - Arguments to filter and select certain fields only.
-     * @example
-     * // Get all Texts
-     * const texts = await prisma.text.findMany()
-     * 
-     * // Get first 10 Texts
-     * const texts = await prisma.text.findMany({ take: 10 })
-     * 
-     * // Only select the `id`
-     * const textWithIdOnly = await prisma.text.findMany({ select: { id: true } })
-     * 
-     */
-    findMany<T extends TextFindManyArgs>(args?: SelectSubset<T, TextFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TextPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
-
-    /**
-     * Create a Text.
-     * @param {TextCreateArgs} args - Arguments to create a Text.
-     * @example
-     * // Create one Text
-     * const Text = await prisma.text.create({
-     *   data: {
-     *     // ... data to create a Text
-     *   }
-     * })
-     * 
-     */
-    create<T extends TextCreateArgs>(args: SelectSubset<T, TextCreateArgs<ExtArgs>>): Prisma__TextClient<$Result.GetResult<Prisma.$TextPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Create many Texts.
-     * @param {TextCreateManyArgs} args - Arguments to create many Texts.
-     * @example
-     * // Create many Texts
-     * const text = await prisma.text.createMany({
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     *     
-     */
-    createMany<T extends TextCreateManyArgs>(args?: SelectSubset<T, TextCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Create many Texts and returns the data saved in the database.
-     * @param {TextCreateManyAndReturnArgs} args - Arguments to create many Texts.
-     * @example
-     * // Create many Texts
-     * const text = await prisma.text.createManyAndReturn({
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * 
-     * // Create many Texts and only return the `id`
-     * const textWithIdOnly = await prisma.text.createManyAndReturn({
-     *   select: { id: true },
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * 
-     */
-    createManyAndReturn<T extends TextCreateManyAndReturnArgs>(args?: SelectSubset<T, TextCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TextPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
-
-    /**
-     * Delete a Text.
-     * @param {TextDeleteArgs} args - Arguments to delete one Text.
-     * @example
-     * // Delete one Text
-     * const Text = await prisma.text.delete({
-     *   where: {
-     *     // ... filter to delete one Text
-     *   }
-     * })
-     * 
-     */
-    delete<T extends TextDeleteArgs>(args: SelectSubset<T, TextDeleteArgs<ExtArgs>>): Prisma__TextClient<$Result.GetResult<Prisma.$TextPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Update one Text.
-     * @param {TextUpdateArgs} args - Arguments to update one Text.
-     * @example
-     * // Update one Text
-     * const text = await prisma.text.update({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: {
-     *     // ... provide data here
-     *   }
-     * })
-     * 
-     */
-    update<T extends TextUpdateArgs>(args: SelectSubset<T, TextUpdateArgs<ExtArgs>>): Prisma__TextClient<$Result.GetResult<Prisma.$TextPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Delete zero or more Texts.
-     * @param {TextDeleteManyArgs} args - Arguments to filter Texts to delete.
-     * @example
-     * // Delete a few Texts
-     * const { count } = await prisma.text.deleteMany({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     * 
-     */
-    deleteMany<T extends TextDeleteManyArgs>(args?: SelectSubset<T, TextDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Update zero or more Texts.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {TextUpdateManyArgs} args - Arguments to update one or more rows.
-     * @example
-     * // Update many Texts
-     * const text = await prisma.text.updateMany({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: {
-     *     // ... provide data here
-     *   }
-     * })
-     * 
-     */
-    updateMany<T extends TextUpdateManyArgs>(args: SelectSubset<T, TextUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Update zero or more Texts and returns the data updated in the database.
-     * @param {TextUpdateManyAndReturnArgs} args - Arguments to update many Texts.
-     * @example
-     * // Update many Texts
-     * const text = await prisma.text.updateManyAndReturn({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * 
-     * // Update zero or more Texts and only return the `id`
-     * const textWithIdOnly = await prisma.text.updateManyAndReturn({
-     *   select: { id: true },
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * 
-     */
-    updateManyAndReturn<T extends TextUpdateManyAndReturnArgs>(args: SelectSubset<T, TextUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TextPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
-
-    /**
-     * Create or update one Text.
-     * @param {TextUpsertArgs} args - Arguments to update or create a Text.
-     * @example
-     * // Update or create a Text
-     * const text = await prisma.text.upsert({
-     *   create: {
-     *     // ... data to create a Text
-     *   },
-     *   update: {
-     *     // ... in case it already exists, update
-     *   },
-     *   where: {
-     *     // ... the filter for the Text we want to update
-     *   }
-     * })
-     */
-    upsert<T extends TextUpsertArgs>(args: SelectSubset<T, TextUpsertArgs<ExtArgs>>): Prisma__TextClient<$Result.GetResult<Prisma.$TextPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-
-    /**
-     * Count the number of Texts.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {TextCountArgs} args - Arguments to filter Texts to count.
-     * @example
-     * // Count the number of Texts
-     * const count = await prisma.text.count({
-     *   where: {
-     *     // ... the filter for the Texts we want to count
-     *   }
-     * })
-    **/
-    count<T extends TextCountArgs>(
-      args?: Subset<T, TextCountArgs>,
-    ): Prisma.PrismaPromise<
-      T extends $Utils.Record<'select', any>
-        ? T['select'] extends true
-          ? number
-          : GetScalarType<T['select'], TextCountAggregateOutputType>
-        : number
-    >
-
-    /**
-     * Allows you to perform aggregations operations on a Text.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {TextAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
-     * @example
-     * // Ordered by age ascending
-     * // Where email contains prisma.io
-     * // Limited to the 10 users
-     * const aggregations = await prisma.user.aggregate({
-     *   _avg: {
-     *     age: true,
-     *   },
-     *   where: {
-     *     email: {
-     *       contains: "prisma.io",
-     *     },
-     *   },
-     *   orderBy: {
-     *     age: "asc",
-     *   },
-     *   take: 10,
-     * })
-    **/
-    aggregate<T extends TextAggregateArgs>(args: Subset<T, TextAggregateArgs>): Prisma.PrismaPromise<GetTextAggregateType<T>>
-
-    /**
-     * Group by Text.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {TextGroupByArgs} args - Group by arguments.
-     * @example
-     * // Group by city, order by createdAt, get count
-     * const result = await prisma.user.groupBy({
-     *   by: ['city', 'createdAt'],
-     *   orderBy: {
-     *     createdAt: true
-     *   },
-     *   _count: {
-     *     _all: true
-     *   },
-     * })
-     * 
-    **/
-    groupBy<
-      T extends TextGroupByArgs,
-      HasSelectOrTake extends Or<
-        Extends<'skip', Keys<T>>,
-        Extends<'take', Keys<T>>
-      >,
-      OrderByArg extends True extends HasSelectOrTake
-        ? { orderBy: TextGroupByArgs['orderBy'] }
-        : { orderBy?: TextGroupByArgs['orderBy'] },
-      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
-      ByFields extends MaybeTupleToUnion<T['by']>,
-      ByValid extends Has<ByFields, OrderFields>,
-      HavingFields extends GetHavingFields<T['having']>,
-      HavingValid extends Has<ByFields, HavingFields>,
-      ByEmpty extends T['by'] extends never[] ? True : False,
-      InputErrors extends ByEmpty extends True
-      ? `Error: "by" must not be empty.`
-      : HavingValid extends False
-      ? {
-          [P in HavingFields]: P extends ByFields
-            ? never
-            : P extends string
-            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
-            : [
-                Error,
-                'Field ',
-                P,
-                ` in "having" needs to be provided in "by"`,
-              ]
-        }[HavingFields]
-      : 'take' extends Keys<T>
-      ? 'orderBy' extends Keys<T>
-        ? ByValid extends True
-          ? {}
-          : {
-              [P in OrderFields]: P extends ByFields
-                ? never
-                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-            }[OrderFields]
-        : 'Error: If you provide "take", you also need to provide "orderBy"'
-      : 'skip' extends Keys<T>
-      ? 'orderBy' extends Keys<T>
-        ? ByValid extends True
-          ? {}
-          : {
-              [P in OrderFields]: P extends ByFields
-                ? never
-                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-            }[OrderFields]
-        : 'Error: If you provide "skip", you also need to provide "orderBy"'
-      : ByValid extends True
-      ? {}
-      : {
-          [P in OrderFields]: P extends ByFields
-            ? never
-            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-        }[OrderFields]
-    >(args: SubsetIntersection<T, TextGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetTextGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
-  /**
-   * Fields of the Text model
-   */
-  readonly fields: TextFieldRefs;
-  }
-
-  /**
-   * The delegate class that acts as a "Promise-like" for Text.
-   * Why is this prefixed with `Prisma__`?
-   * Because we want to prevent naming conflicts as mentioned in
-   * https://github.com/prisma/prisma-client-js/issues/707
-   */
-  export interface Prisma__TextClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
-    readonly [Symbol.toStringTag]: "PrismaPromise"
-    category<T extends Text$categoryArgs<ExtArgs> = {}>(args?: Subset<T, Text$categoryArgs<ExtArgs>>): Prisma__CatalogCategoryClient<$Result.GetResult<Prisma.$CatalogCategoryPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-    sections<T extends Text$sectionsArgs<ExtArgs> = {}>(args?: Subset<T, Text$sectionsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TextSectionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-    collatedContent<T extends Text$collatedContentArgs<ExtArgs> = {}>(args?: Subset<T, Text$collatedContentArgs<ExtArgs>>): Prisma__TextCollatedContentClient<$Result.GetResult<Prisma.$TextCollatedContentPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-    metadata<T extends Text$metadataArgs<ExtArgs> = {}>(args?: Subset<T, Text$metadataArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TextMetadataPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-    textEditions<T extends Text$textEditionsArgs<ExtArgs> = {}>(args?: Subset<T, Text$textEditionsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TextEditionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-    summary<T extends Text$summaryArgs<ExtArgs> = {}>(args?: Subset<T, Text$summaryArgs<ExtArgs>>): Prisma__TextSummaryClient<$Result.GetResult<Prisma.$TextSummaryPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-    /**
-     * Attaches callbacks for the resolution and/or rejection of the Promise.
-     * @param onfulfilled The callback to execute when the Promise is resolved.
-     * @param onrejected The callback to execute when the Promise is rejected.
-     * @returns A Promise for the completion of which ever callback is executed.
-     */
-    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
-    /**
-     * Attaches a callback for only the rejection of the Promise.
-     * @param onrejected The callback to execute when the Promise is rejected.
-     * @returns A Promise for the completion of the callback.
-     */
-    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
-    /**
-     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
-     * resolved value cannot be modified from the callback.
-     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
-     * @returns A Promise for the completion of the callback.
-     */
-    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
-  }
-
-
-
-
-  /**
-   * Fields of the Text model
-   */
-  interface TextFieldRefs {
-    readonly id: FieldRef<"Text", 'String'>
-    readonly id_slug: FieldRef<"Text", 'String'>
-    readonly category_id: FieldRef<"Text", 'String'>
-    readonly keywords: FieldRef<"Text", 'String[]'>
-    readonly is_active: FieldRef<"Text", 'Boolean'>
-    readonly order_index: FieldRef<"Text", 'Int'>
-    readonly created_at: FieldRef<"Text", 'DateTime'>
-    readonly updated_at: FieldRef<"Text", 'DateTime'>
-  }
-    
-
-  // Custom InputTypes
-  /**
-   * Text findUnique
-   */
-  export type TextFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Text
-     */
-    select?: TextSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Text
-     */
-    omit?: TextOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: TextInclude<ExtArgs> | null
-    /**
-     * Filter, which Text to fetch.
-     */
-    where: TextWhereUniqueInput
-  }
-
-  /**
-   * Text findUniqueOrThrow
-   */
-  export type TextFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Text
-     */
-    select?: TextSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Text
-     */
-    omit?: TextOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: TextInclude<ExtArgs> | null
-    /**
-     * Filter, which Text to fetch.
-     */
-    where: TextWhereUniqueInput
-  }
-
-  /**
-   * Text findFirst
-   */
-  export type TextFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Text
-     */
-    select?: TextSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Text
-     */
-    omit?: TextOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: TextInclude<ExtArgs> | null
-    /**
-     * Filter, which Text to fetch.
-     */
-    where?: TextWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of Texts to fetch.
-     */
-    orderBy?: TextOrderByWithRelationInput | TextOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for searching for Texts.
-     */
-    cursor?: TextWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` Texts from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` Texts.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
-     * Filter by unique combinations of Texts.
-     */
-    distinct?: TextScalarFieldEnum | TextScalarFieldEnum[]
-  }
-
-  /**
-   * Text findFirstOrThrow
-   */
-  export type TextFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Text
-     */
-    select?: TextSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Text
-     */
-    omit?: TextOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: TextInclude<ExtArgs> | null
-    /**
-     * Filter, which Text to fetch.
-     */
-    where?: TextWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of Texts to fetch.
-     */
-    orderBy?: TextOrderByWithRelationInput | TextOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for searching for Texts.
-     */
-    cursor?: TextWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` Texts from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` Texts.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
-     * Filter by unique combinations of Texts.
-     */
-    distinct?: TextScalarFieldEnum | TextScalarFieldEnum[]
-  }
-
-  /**
-   * Text findMany
-   */
-  export type TextFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Text
-     */
-    select?: TextSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Text
-     */
-    omit?: TextOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: TextInclude<ExtArgs> | null
-    /**
-     * Filter, which Texts to fetch.
-     */
-    where?: TextWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of Texts to fetch.
-     */
-    orderBy?: TextOrderByWithRelationInput | TextOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for listing Texts.
-     */
-    cursor?: TextWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` Texts from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` Texts.
-     */
-    skip?: number
-    distinct?: TextScalarFieldEnum | TextScalarFieldEnum[]
-  }
-
-  /**
-   * Text create
-   */
-  export type TextCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Text
-     */
-    select?: TextSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Text
-     */
-    omit?: TextOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: TextInclude<ExtArgs> | null
-    /**
-     * The data needed to create a Text.
-     */
-    data: XOR<TextCreateInput, TextUncheckedCreateInput>
-  }
-
-  /**
-   * Text createMany
-   */
-  export type TextCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * The data used to create many Texts.
-     */
-    data: TextCreateManyInput | TextCreateManyInput[]
-    skipDuplicates?: boolean
-  }
-
-  /**
-   * Text createManyAndReturn
-   */
-  export type TextCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Text
-     */
-    select?: TextSelectCreateManyAndReturn<ExtArgs> | null
-    /**
-     * Omit specific fields from the Text
-     */
-    omit?: TextOmit<ExtArgs> | null
-    /**
-     * The data used to create many Texts.
-     */
-    data: TextCreateManyInput | TextCreateManyInput[]
-    skipDuplicates?: boolean
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: TextIncludeCreateManyAndReturn<ExtArgs> | null
-  }
-
-  /**
-   * Text update
-   */
-  export type TextUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Text
-     */
-    select?: TextSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Text
-     */
-    omit?: TextOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: TextInclude<ExtArgs> | null
-    /**
-     * The data needed to update a Text.
-     */
-    data: XOR<TextUpdateInput, TextUncheckedUpdateInput>
-    /**
-     * Choose, which Text to update.
-     */
-    where: TextWhereUniqueInput
-  }
-
-  /**
-   * Text updateMany
-   */
-  export type TextUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * The data used to update Texts.
-     */
-    data: XOR<TextUpdateManyMutationInput, TextUncheckedUpdateManyInput>
-    /**
-     * Filter which Texts to update
-     */
-    where?: TextWhereInput
-    /**
-     * Limit how many Texts to update.
-     */
-    limit?: number
-  }
-
-  /**
-   * Text updateManyAndReturn
-   */
-  export type TextUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Text
-     */
-    select?: TextSelectUpdateManyAndReturn<ExtArgs> | null
-    /**
-     * Omit specific fields from the Text
-     */
-    omit?: TextOmit<ExtArgs> | null
-    /**
-     * The data used to update Texts.
-     */
-    data: XOR<TextUpdateManyMutationInput, TextUncheckedUpdateManyInput>
-    /**
-     * Filter which Texts to update
-     */
-    where?: TextWhereInput
-    /**
-     * Limit how many Texts to update.
-     */
-    limit?: number
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: TextIncludeUpdateManyAndReturn<ExtArgs> | null
-  }
-
-  /**
-   * Text upsert
-   */
-  export type TextUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Text
-     */
-    select?: TextSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Text
-     */
-    omit?: TextOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: TextInclude<ExtArgs> | null
-    /**
-     * The filter to search for the Text to update in case it exists.
-     */
-    where: TextWhereUniqueInput
-    /**
-     * In case the Text found by the `where` argument doesn't exist, create a new Text with this data.
-     */
-    create: XOR<TextCreateInput, TextUncheckedCreateInput>
-    /**
-     * In case the Text was found with the provided `where` argument, update it with this data.
-     */
-    update: XOR<TextUpdateInput, TextUncheckedUpdateInput>
-  }
-
-  /**
-   * Text delete
-   */
-  export type TextDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Text
-     */
-    select?: TextSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Text
-     */
-    omit?: TextOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: TextInclude<ExtArgs> | null
-    /**
-     * Filter which Text to delete.
-     */
-    where: TextWhereUniqueInput
-  }
-
-  /**
-   * Text deleteMany
-   */
-  export type TextDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Filter which Texts to delete
-     */
-    where?: TextWhereInput
-    /**
-     * Limit how many Texts to delete.
-     */
-    limit?: number
-  }
-
-  /**
-   * Text.category
-   */
-  export type Text$categoryArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the CatalogCategory
-     */
-    select?: CatalogCategorySelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the CatalogCategory
-     */
-    omit?: CatalogCategoryOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: CatalogCategoryInclude<ExtArgs> | null
-    where?: CatalogCategoryWhereInput
-  }
-
-  /**
-   * Text.sections
-   */
-  export type Text$sectionsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the TextSection
-     */
-    select?: TextSectionSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the TextSection
-     */
-    omit?: TextSectionOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: TextSectionInclude<ExtArgs> | null
-    where?: TextSectionWhereInput
-    orderBy?: TextSectionOrderByWithRelationInput | TextSectionOrderByWithRelationInput[]
-    cursor?: TextSectionWhereUniqueInput
-    take?: number
-    skip?: number
-    distinct?: TextSectionScalarFieldEnum | TextSectionScalarFieldEnum[]
-  }
-
-  /**
-   * Text.collatedContent
-   */
-  export type Text$collatedContentArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the TextCollatedContent
-     */
-    select?: TextCollatedContentSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the TextCollatedContent
-     */
-    omit?: TextCollatedContentOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: TextCollatedContentInclude<ExtArgs> | null
-    where?: TextCollatedContentWhereInput
-  }
-
-  /**
-   * Text.metadata
-   */
-  export type Text$metadataArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the TextMetadata
-     */
-    select?: TextMetadataSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the TextMetadata
-     */
-    omit?: TextMetadataOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: TextMetadataInclude<ExtArgs> | null
-    where?: TextMetadataWhereInput
-    orderBy?: TextMetadataOrderByWithRelationInput | TextMetadataOrderByWithRelationInput[]
-    cursor?: TextMetadataWhereUniqueInput
-    take?: number
-    skip?: number
-    distinct?: TextMetadataScalarFieldEnum | TextMetadataScalarFieldEnum[]
-  }
-
-  /**
-   * Text.textEditions
-   */
-  export type Text$textEditionsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the TextEdition
-     */
-    select?: TextEditionSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the TextEdition
-     */
-    omit?: TextEditionOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: TextEditionInclude<ExtArgs> | null
-    where?: TextEditionWhereInput
-    orderBy?: TextEditionOrderByWithRelationInput | TextEditionOrderByWithRelationInput[]
-    cursor?: TextEditionWhereUniqueInput
-    take?: number
-    skip?: number
-    distinct?: TextEditionScalarFieldEnum | TextEditionScalarFieldEnum[]
-  }
-
-  /**
-   * Text.summary
-   */
-  export type Text$summaryArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the TextSummary
-     */
-    select?: TextSummarySelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the TextSummary
-     */
-    omit?: TextSummaryOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: TextSummaryInclude<ExtArgs> | null
-    where?: TextSummaryWhereInput
-  }
-
-  /**
-   * Text without action
-   */
-  export type TextDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Text
-     */
-    select?: TextSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Text
-     */
-    omit?: TextOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: TextInclude<ExtArgs> | null
-  }
-
-
-  /**
-   * Model TextSection
-   */
-
-  export type AggregateTextSection = {
-    _count: TextSectionCountAggregateOutputType | null
-    _avg: TextSectionAvgAggregateOutputType | null
-    _sum: TextSectionSumAggregateOutputType | null
-    _min: TextSectionMinAggregateOutputType | null
-    _max: TextSectionMaxAggregateOutputType | null
-  }
-
-  export type TextSectionAvgAggregateOutputType = {
-    order_index: number | null
-  }
-
-  export type TextSectionSumAggregateOutputType = {
-    order_index: number | null
-  }
-
-  export type TextSectionMinAggregateOutputType = {
-    id: string | null
-    text_id: string | null
-    section_type: string | null
-    title_tibetan: string | null
-    title_english: string | null
-    content_tibetan: string | null
-    content_english: string | null
-    order_index: number | null
-    created_at: Date | null
-    updated_at: Date | null
-  }
-
-  export type TextSectionMaxAggregateOutputType = {
-    id: string | null
-    text_id: string | null
-    section_type: string | null
-    title_tibetan: string | null
-    title_english: string | null
-    content_tibetan: string | null
-    content_english: string | null
-    order_index: number | null
-    created_at: Date | null
-    updated_at: Date | null
-  }
-
-  export type TextSectionCountAggregateOutputType = {
-    id: number
-    text_id: number
-    section_type: number
-    title_tibetan: number
-    title_english: number
-    content_tibetan: number
-    content_english: number
-    order_index: number
-    created_at: number
-    updated_at: number
-    _all: number
-  }
-
-
-  export type TextSectionAvgAggregateInputType = {
-    order_index?: true
-  }
-
-  export type TextSectionSumAggregateInputType = {
-    order_index?: true
-  }
-
-  export type TextSectionMinAggregateInputType = {
-    id?: true
-    text_id?: true
-    section_type?: true
-    title_tibetan?: true
-    title_english?: true
-    content_tibetan?: true
-    content_english?: true
-    order_index?: true
-    created_at?: true
-    updated_at?: true
-  }
-
-  export type TextSectionMaxAggregateInputType = {
-    id?: true
-    text_id?: true
-    section_type?: true
-    title_tibetan?: true
-    title_english?: true
-    content_tibetan?: true
-    content_english?: true
-    order_index?: true
-    created_at?: true
-    updated_at?: true
-  }
-
-  export type TextSectionCountAggregateInputType = {
-    id?: true
-    text_id?: true
-    section_type?: true
-    title_tibetan?: true
-    title_english?: true
-    content_tibetan?: true
-    content_english?: true
-    order_index?: true
-    created_at?: true
-    updated_at?: true
-    _all?: true
-  }
-
-  export type TextSectionAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Filter which TextSection to aggregate.
-     */
-    where?: TextSectionWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of TextSections to fetch.
-     */
-    orderBy?: TextSectionOrderByWithRelationInput | TextSectionOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the start position
-     */
-    cursor?: TextSectionWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` TextSections from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` TextSections.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Count returned TextSections
-    **/
-    _count?: true | TextSectionCountAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to average
-    **/
-    _avg?: TextSectionAvgAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to sum
-    **/
-    _sum?: TextSectionSumAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to find the minimum value
-    **/
-    _min?: TextSectionMinAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to find the maximum value
-    **/
-    _max?: TextSectionMaxAggregateInputType
-  }
-
-  export type GetTextSectionAggregateType<T extends TextSectionAggregateArgs> = {
-        [P in keyof T & keyof AggregateTextSection]: P extends '_count' | 'count'
-      ? T[P] extends true
-        ? number
-        : GetScalarType<T[P], AggregateTextSection[P]>
-      : GetScalarType<T[P], AggregateTextSection[P]>
-  }
-
-
-
-
-  export type TextSectionGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: TextSectionWhereInput
-    orderBy?: TextSectionOrderByWithAggregationInput | TextSectionOrderByWithAggregationInput[]
-    by: TextSectionScalarFieldEnum[] | TextSectionScalarFieldEnum
-    having?: TextSectionScalarWhereWithAggregatesInput
-    take?: number
-    skip?: number
-    _count?: TextSectionCountAggregateInputType | true
-    _avg?: TextSectionAvgAggregateInputType
-    _sum?: TextSectionSumAggregateInputType
-    _min?: TextSectionMinAggregateInputType
-    _max?: TextSectionMaxAggregateInputType
-  }
-
-  export type TextSectionGroupByOutputType = {
-    id: string
-    text_id: string
-    section_type: string
-    title_tibetan: string | null
-    title_english: string | null
-    content_tibetan: string | null
-    content_english: string | null
-    order_index: number
-    created_at: Date
-    updated_at: Date
-    _count: TextSectionCountAggregateOutputType | null
-    _avg: TextSectionAvgAggregateOutputType | null
-    _sum: TextSectionSumAggregateOutputType | null
-    _min: TextSectionMinAggregateOutputType | null
-    _max: TextSectionMaxAggregateOutputType | null
-  }
-
-  type GetTextSectionGroupByPayload<T extends TextSectionGroupByArgs> = Prisma.PrismaPromise<
-    Array<
-      PickEnumerable<TextSectionGroupByOutputType, T['by']> &
-        {
-          [P in ((keyof T) & (keyof TextSectionGroupByOutputType))]: P extends '_count'
-            ? T[P] extends boolean
-              ? number
-              : GetScalarType<T[P], TextSectionGroupByOutputType[P]>
-            : GetScalarType<T[P], TextSectionGroupByOutputType[P]>
-        }
-      >
-    >
-
-
-  export type TextSectionSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
-    text_id?: boolean
-    section_type?: boolean
-    title_tibetan?: boolean
-    title_english?: boolean
-    content_tibetan?: boolean
-    content_english?: boolean
-    order_index?: boolean
-    created_at?: boolean
-    updated_at?: boolean
-    text?: boolean | TextDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["textSection"]>
-
-  export type TextSectionSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
-    text_id?: boolean
-    section_type?: boolean
-    title_tibetan?: boolean
-    title_english?: boolean
-    content_tibetan?: boolean
-    content_english?: boolean
-    order_index?: boolean
-    created_at?: boolean
-    updated_at?: boolean
-    text?: boolean | TextDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["textSection"]>
-
-  export type TextSectionSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
-    text_id?: boolean
-    section_type?: boolean
-    title_tibetan?: boolean
-    title_english?: boolean
-    content_tibetan?: boolean
-    content_english?: boolean
-    order_index?: boolean
-    created_at?: boolean
-    updated_at?: boolean
-    text?: boolean | TextDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["textSection"]>
-
-  export type TextSectionSelectScalar = {
-    id?: boolean
-    text_id?: boolean
-    section_type?: boolean
-    title_tibetan?: boolean
-    title_english?: boolean
-    content_tibetan?: boolean
-    content_english?: boolean
-    order_index?: boolean
-    created_at?: boolean
-    updated_at?: boolean
-  }
-
-  export type TextSectionOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "text_id" | "section_type" | "title_tibetan" | "title_english" | "content_tibetan" | "content_english" | "order_index" | "created_at" | "updated_at", ExtArgs["result"]["textSection"]>
-  export type TextSectionInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    text?: boolean | TextDefaultArgs<ExtArgs>
-  }
-  export type TextSectionIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    text?: boolean | TextDefaultArgs<ExtArgs>
-  }
-  export type TextSectionIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    text?: boolean | TextDefaultArgs<ExtArgs>
-  }
-
-  export type $TextSectionPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    name: "TextSection"
-    objects: {
-      text: Prisma.$TextPayload<ExtArgs>
-    }
-    scalars: $Extensions.GetPayloadResult<{
-      id: string
-      text_id: string
-      section_type: string
-      title_tibetan: string | null
-      title_english: string | null
-      content_tibetan: string | null
-      content_english: string | null
-      order_index: number
-      created_at: Date
-      updated_at: Date
-    }, ExtArgs["result"]["textSection"]>
-    composites: {}
-  }
-
-  type TextSectionGetPayload<S extends boolean | null | undefined | TextSectionDefaultArgs> = $Result.GetResult<Prisma.$TextSectionPayload, S>
-
-  type TextSectionCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
-    Omit<TextSectionFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
-      select?: TextSectionCountAggregateInputType | true
-    }
-
-  export interface TextSectionDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
-    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['TextSection'], meta: { name: 'TextSection' } }
-    /**
-     * Find zero or one TextSection that matches the filter.
-     * @param {TextSectionFindUniqueArgs} args - Arguments to find a TextSection
-     * @example
-     * // Get one TextSection
-     * const textSection = await prisma.textSection.findUnique({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findUnique<T extends TextSectionFindUniqueArgs>(args: SelectSubset<T, TextSectionFindUniqueArgs<ExtArgs>>): Prisma__TextSectionClient<$Result.GetResult<Prisma.$TextSectionPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find one TextSection that matches the filter or throw an error with `error.code='P2025'`
-     * if no matches were found.
-     * @param {TextSectionFindUniqueOrThrowArgs} args - Arguments to find a TextSection
-     * @example
-     * // Get one TextSection
-     * const textSection = await prisma.textSection.findUniqueOrThrow({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findUniqueOrThrow<T extends TextSectionFindUniqueOrThrowArgs>(args: SelectSubset<T, TextSectionFindUniqueOrThrowArgs<ExtArgs>>): Prisma__TextSectionClient<$Result.GetResult<Prisma.$TextSectionPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find the first TextSection that matches the filter.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {TextSectionFindFirstArgs} args - Arguments to find a TextSection
-     * @example
-     * // Get one TextSection
-     * const textSection = await prisma.textSection.findFirst({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findFirst<T extends TextSectionFindFirstArgs>(args?: SelectSubset<T, TextSectionFindFirstArgs<ExtArgs>>): Prisma__TextSectionClient<$Result.GetResult<Prisma.$TextSectionPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find the first TextSection that matches the filter or
-     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {TextSectionFindFirstOrThrowArgs} args - Arguments to find a TextSection
-     * @example
-     * // Get one TextSection
-     * const textSection = await prisma.textSection.findFirstOrThrow({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findFirstOrThrow<T extends TextSectionFindFirstOrThrowArgs>(args?: SelectSubset<T, TextSectionFindFirstOrThrowArgs<ExtArgs>>): Prisma__TextSectionClient<$Result.GetResult<Prisma.$TextSectionPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find zero or more TextSections that matches the filter.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {TextSectionFindManyArgs} args - Arguments to filter and select certain fields only.
-     * @example
-     * // Get all TextSections
-     * const textSections = await prisma.textSection.findMany()
-     * 
-     * // Get first 10 TextSections
-     * const textSections = await prisma.textSection.findMany({ take: 10 })
-     * 
-     * // Only select the `id`
-     * const textSectionWithIdOnly = await prisma.textSection.findMany({ select: { id: true } })
-     * 
-     */
-    findMany<T extends TextSectionFindManyArgs>(args?: SelectSubset<T, TextSectionFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TextSectionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
-
-    /**
-     * Create a TextSection.
-     * @param {TextSectionCreateArgs} args - Arguments to create a TextSection.
-     * @example
-     * // Create one TextSection
-     * const TextSection = await prisma.textSection.create({
-     *   data: {
-     *     // ... data to create a TextSection
-     *   }
-     * })
-     * 
-     */
-    create<T extends TextSectionCreateArgs>(args: SelectSubset<T, TextSectionCreateArgs<ExtArgs>>): Prisma__TextSectionClient<$Result.GetResult<Prisma.$TextSectionPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Create many TextSections.
-     * @param {TextSectionCreateManyArgs} args - Arguments to create many TextSections.
-     * @example
-     * // Create many TextSections
-     * const textSection = await prisma.textSection.createMany({
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     *     
-     */
-    createMany<T extends TextSectionCreateManyArgs>(args?: SelectSubset<T, TextSectionCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Create many TextSections and returns the data saved in the database.
-     * @param {TextSectionCreateManyAndReturnArgs} args - Arguments to create many TextSections.
-     * @example
-     * // Create many TextSections
-     * const textSection = await prisma.textSection.createManyAndReturn({
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * 
-     * // Create many TextSections and only return the `id`
-     * const textSectionWithIdOnly = await prisma.textSection.createManyAndReturn({
-     *   select: { id: true },
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * 
-     */
-    createManyAndReturn<T extends TextSectionCreateManyAndReturnArgs>(args?: SelectSubset<T, TextSectionCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TextSectionPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
-
-    /**
-     * Delete a TextSection.
-     * @param {TextSectionDeleteArgs} args - Arguments to delete one TextSection.
-     * @example
-     * // Delete one TextSection
-     * const TextSection = await prisma.textSection.delete({
-     *   where: {
-     *     // ... filter to delete one TextSection
-     *   }
-     * })
-     * 
-     */
-    delete<T extends TextSectionDeleteArgs>(args: SelectSubset<T, TextSectionDeleteArgs<ExtArgs>>): Prisma__TextSectionClient<$Result.GetResult<Prisma.$TextSectionPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Update one TextSection.
-     * @param {TextSectionUpdateArgs} args - Arguments to update one TextSection.
-     * @example
-     * // Update one TextSection
-     * const textSection = await prisma.textSection.update({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: {
-     *     // ... provide data here
-     *   }
-     * })
-     * 
-     */
-    update<T extends TextSectionUpdateArgs>(args: SelectSubset<T, TextSectionUpdateArgs<ExtArgs>>): Prisma__TextSectionClient<$Result.GetResult<Prisma.$TextSectionPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Delete zero or more TextSections.
-     * @param {TextSectionDeleteManyArgs} args - Arguments to filter TextSections to delete.
-     * @example
-     * // Delete a few TextSections
-     * const { count } = await prisma.textSection.deleteMany({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     * 
-     */
-    deleteMany<T extends TextSectionDeleteManyArgs>(args?: SelectSubset<T, TextSectionDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Update zero or more TextSections.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {TextSectionUpdateManyArgs} args - Arguments to update one or more rows.
-     * @example
-     * // Update many TextSections
-     * const textSection = await prisma.textSection.updateMany({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: {
-     *     // ... provide data here
-     *   }
-     * })
-     * 
-     */
-    updateMany<T extends TextSectionUpdateManyArgs>(args: SelectSubset<T, TextSectionUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Update zero or more TextSections and returns the data updated in the database.
-     * @param {TextSectionUpdateManyAndReturnArgs} args - Arguments to update many TextSections.
-     * @example
-     * // Update many TextSections
-     * const textSection = await prisma.textSection.updateManyAndReturn({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * 
-     * // Update zero or more TextSections and only return the `id`
-     * const textSectionWithIdOnly = await prisma.textSection.updateManyAndReturn({
-     *   select: { id: true },
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * 
-     */
-    updateManyAndReturn<T extends TextSectionUpdateManyAndReturnArgs>(args: SelectSubset<T, TextSectionUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TextSectionPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
-
-    /**
-     * Create or update one TextSection.
-     * @param {TextSectionUpsertArgs} args - Arguments to update or create a TextSection.
-     * @example
-     * // Update or create a TextSection
-     * const textSection = await prisma.textSection.upsert({
-     *   create: {
-     *     // ... data to create a TextSection
-     *   },
-     *   update: {
-     *     // ... in case it already exists, update
-     *   },
-     *   where: {
-     *     // ... the filter for the TextSection we want to update
-     *   }
-     * })
-     */
-    upsert<T extends TextSectionUpsertArgs>(args: SelectSubset<T, TextSectionUpsertArgs<ExtArgs>>): Prisma__TextSectionClient<$Result.GetResult<Prisma.$TextSectionPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-
-    /**
-     * Count the number of TextSections.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {TextSectionCountArgs} args - Arguments to filter TextSections to count.
-     * @example
-     * // Count the number of TextSections
-     * const count = await prisma.textSection.count({
-     *   where: {
-     *     // ... the filter for the TextSections we want to count
-     *   }
-     * })
-    **/
-    count<T extends TextSectionCountArgs>(
-      args?: Subset<T, TextSectionCountArgs>,
-    ): Prisma.PrismaPromise<
-      T extends $Utils.Record<'select', any>
-        ? T['select'] extends true
-          ? number
-          : GetScalarType<T['select'], TextSectionCountAggregateOutputType>
-        : number
-    >
-
-    /**
-     * Allows you to perform aggregations operations on a TextSection.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {TextSectionAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
-     * @example
-     * // Ordered by age ascending
-     * // Where email contains prisma.io
-     * // Limited to the 10 users
-     * const aggregations = await prisma.user.aggregate({
-     *   _avg: {
-     *     age: true,
-     *   },
-     *   where: {
-     *     email: {
-     *       contains: "prisma.io",
-     *     },
-     *   },
-     *   orderBy: {
-     *     age: "asc",
-     *   },
-     *   take: 10,
-     * })
-    **/
-    aggregate<T extends TextSectionAggregateArgs>(args: Subset<T, TextSectionAggregateArgs>): Prisma.PrismaPromise<GetTextSectionAggregateType<T>>
-
-    /**
-     * Group by TextSection.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {TextSectionGroupByArgs} args - Group by arguments.
-     * @example
-     * // Group by city, order by createdAt, get count
-     * const result = await prisma.user.groupBy({
-     *   by: ['city', 'createdAt'],
-     *   orderBy: {
-     *     createdAt: true
-     *   },
-     *   _count: {
-     *     _all: true
-     *   },
-     * })
-     * 
-    **/
-    groupBy<
-      T extends TextSectionGroupByArgs,
-      HasSelectOrTake extends Or<
-        Extends<'skip', Keys<T>>,
-        Extends<'take', Keys<T>>
-      >,
-      OrderByArg extends True extends HasSelectOrTake
-        ? { orderBy: TextSectionGroupByArgs['orderBy'] }
-        : { orderBy?: TextSectionGroupByArgs['orderBy'] },
-      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
-      ByFields extends MaybeTupleToUnion<T['by']>,
-      ByValid extends Has<ByFields, OrderFields>,
-      HavingFields extends GetHavingFields<T['having']>,
-      HavingValid extends Has<ByFields, HavingFields>,
-      ByEmpty extends T['by'] extends never[] ? True : False,
-      InputErrors extends ByEmpty extends True
-      ? `Error: "by" must not be empty.`
-      : HavingValid extends False
-      ? {
-          [P in HavingFields]: P extends ByFields
-            ? never
-            : P extends string
-            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
-            : [
-                Error,
-                'Field ',
-                P,
-                ` in "having" needs to be provided in "by"`,
-              ]
-        }[HavingFields]
-      : 'take' extends Keys<T>
-      ? 'orderBy' extends Keys<T>
-        ? ByValid extends True
-          ? {}
-          : {
-              [P in OrderFields]: P extends ByFields
-                ? never
-                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-            }[OrderFields]
-        : 'Error: If you provide "take", you also need to provide "orderBy"'
-      : 'skip' extends Keys<T>
-      ? 'orderBy' extends Keys<T>
-        ? ByValid extends True
-          ? {}
-          : {
-              [P in OrderFields]: P extends ByFields
-                ? never
-                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-            }[OrderFields]
-        : 'Error: If you provide "skip", you also need to provide "orderBy"'
-      : ByValid extends True
-      ? {}
-      : {
-          [P in OrderFields]: P extends ByFields
-            ? never
-            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-        }[OrderFields]
-    >(args: SubsetIntersection<T, TextSectionGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetTextSectionGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
-  /**
-   * Fields of the TextSection model
-   */
-  readonly fields: TextSectionFieldRefs;
-  }
-
-  /**
-   * The delegate class that acts as a "Promise-like" for TextSection.
-   * Why is this prefixed with `Prisma__`?
-   * Because we want to prevent naming conflicts as mentioned in
-   * https://github.com/prisma/prisma-client-js/issues/707
-   */
-  export interface Prisma__TextSectionClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
-    readonly [Symbol.toStringTag]: "PrismaPromise"
-    text<T extends TextDefaultArgs<ExtArgs> = {}>(args?: Subset<T, TextDefaultArgs<ExtArgs>>): Prisma__TextClient<$Result.GetResult<Prisma.$TextPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-    /**
-     * Attaches callbacks for the resolution and/or rejection of the Promise.
-     * @param onfulfilled The callback to execute when the Promise is resolved.
-     * @param onrejected The callback to execute when the Promise is rejected.
-     * @returns A Promise for the completion of which ever callback is executed.
-     */
-    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
-    /**
-     * Attaches a callback for only the rejection of the Promise.
-     * @param onrejected The callback to execute when the Promise is rejected.
-     * @returns A Promise for the completion of the callback.
-     */
-    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
-    /**
-     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
-     * resolved value cannot be modified from the callback.
-     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
-     * @returns A Promise for the completion of the callback.
-     */
-    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
-  }
-
-
-
-
-  /**
-   * Fields of the TextSection model
-   */
-  interface TextSectionFieldRefs {
-    readonly id: FieldRef<"TextSection", 'String'>
-    readonly text_id: FieldRef<"TextSection", 'String'>
-    readonly section_type: FieldRef<"TextSection", 'String'>
-    readonly title_tibetan: FieldRef<"TextSection", 'String'>
-    readonly title_english: FieldRef<"TextSection", 'String'>
-    readonly content_tibetan: FieldRef<"TextSection", 'String'>
-    readonly content_english: FieldRef<"TextSection", 'String'>
-    readonly order_index: FieldRef<"TextSection", 'Int'>
-    readonly created_at: FieldRef<"TextSection", 'DateTime'>
-    readonly updated_at: FieldRef<"TextSection", 'DateTime'>
-  }
-    
-
-  // Custom InputTypes
-  /**
-   * TextSection findUnique
-   */
-  export type TextSectionFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the TextSection
-     */
-    select?: TextSectionSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the TextSection
-     */
-    omit?: TextSectionOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: TextSectionInclude<ExtArgs> | null
-    /**
-     * Filter, which TextSection to fetch.
-     */
-    where: TextSectionWhereUniqueInput
-  }
-
-  /**
-   * TextSection findUniqueOrThrow
-   */
-  export type TextSectionFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the TextSection
-     */
-    select?: TextSectionSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the TextSection
-     */
-    omit?: TextSectionOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: TextSectionInclude<ExtArgs> | null
-    /**
-     * Filter, which TextSection to fetch.
-     */
-    where: TextSectionWhereUniqueInput
-  }
-
-  /**
-   * TextSection findFirst
-   */
-  export type TextSectionFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the TextSection
-     */
-    select?: TextSectionSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the TextSection
-     */
-    omit?: TextSectionOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: TextSectionInclude<ExtArgs> | null
-    /**
-     * Filter, which TextSection to fetch.
-     */
-    where?: TextSectionWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of TextSections to fetch.
-     */
-    orderBy?: TextSectionOrderByWithRelationInput | TextSectionOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for searching for TextSections.
-     */
-    cursor?: TextSectionWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` TextSections from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` TextSections.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
-     * Filter by unique combinations of TextSections.
-     */
-    distinct?: TextSectionScalarFieldEnum | TextSectionScalarFieldEnum[]
-  }
-
-  /**
-   * TextSection findFirstOrThrow
-   */
-  export type TextSectionFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the TextSection
-     */
-    select?: TextSectionSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the TextSection
-     */
-    omit?: TextSectionOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: TextSectionInclude<ExtArgs> | null
-    /**
-     * Filter, which TextSection to fetch.
-     */
-    where?: TextSectionWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of TextSections to fetch.
-     */
-    orderBy?: TextSectionOrderByWithRelationInput | TextSectionOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for searching for TextSections.
-     */
-    cursor?: TextSectionWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` TextSections from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` TextSections.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
-     * Filter by unique combinations of TextSections.
-     */
-    distinct?: TextSectionScalarFieldEnum | TextSectionScalarFieldEnum[]
-  }
-
-  /**
-   * TextSection findMany
-   */
-  export type TextSectionFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the TextSection
-     */
-    select?: TextSectionSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the TextSection
-     */
-    omit?: TextSectionOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: TextSectionInclude<ExtArgs> | null
-    /**
-     * Filter, which TextSections to fetch.
-     */
-    where?: TextSectionWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of TextSections to fetch.
-     */
-    orderBy?: TextSectionOrderByWithRelationInput | TextSectionOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for listing TextSections.
-     */
-    cursor?: TextSectionWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` TextSections from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` TextSections.
-     */
-    skip?: number
-    distinct?: TextSectionScalarFieldEnum | TextSectionScalarFieldEnum[]
-  }
-
-  /**
-   * TextSection create
-   */
-  export type TextSectionCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the TextSection
-     */
-    select?: TextSectionSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the TextSection
-     */
-    omit?: TextSectionOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: TextSectionInclude<ExtArgs> | null
-    /**
-     * The data needed to create a TextSection.
-     */
-    data: XOR<TextSectionCreateInput, TextSectionUncheckedCreateInput>
-  }
-
-  /**
-   * TextSection createMany
-   */
-  export type TextSectionCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * The data used to create many TextSections.
-     */
-    data: TextSectionCreateManyInput | TextSectionCreateManyInput[]
-    skipDuplicates?: boolean
-  }
-
-  /**
-   * TextSection createManyAndReturn
-   */
-  export type TextSectionCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the TextSection
-     */
-    select?: TextSectionSelectCreateManyAndReturn<ExtArgs> | null
-    /**
-     * Omit specific fields from the TextSection
-     */
-    omit?: TextSectionOmit<ExtArgs> | null
-    /**
-     * The data used to create many TextSections.
-     */
-    data: TextSectionCreateManyInput | TextSectionCreateManyInput[]
-    skipDuplicates?: boolean
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: TextSectionIncludeCreateManyAndReturn<ExtArgs> | null
-  }
-
-  /**
-   * TextSection update
-   */
-  export type TextSectionUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the TextSection
-     */
-    select?: TextSectionSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the TextSection
-     */
-    omit?: TextSectionOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: TextSectionInclude<ExtArgs> | null
-    /**
-     * The data needed to update a TextSection.
-     */
-    data: XOR<TextSectionUpdateInput, TextSectionUncheckedUpdateInput>
-    /**
-     * Choose, which TextSection to update.
-     */
-    where: TextSectionWhereUniqueInput
-  }
-
-  /**
-   * TextSection updateMany
-   */
-  export type TextSectionUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * The data used to update TextSections.
-     */
-    data: XOR<TextSectionUpdateManyMutationInput, TextSectionUncheckedUpdateManyInput>
-    /**
-     * Filter which TextSections to update
-     */
-    where?: TextSectionWhereInput
-    /**
-     * Limit how many TextSections to update.
-     */
-    limit?: number
-  }
-
-  /**
-   * TextSection updateManyAndReturn
-   */
-  export type TextSectionUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the TextSection
-     */
-    select?: TextSectionSelectUpdateManyAndReturn<ExtArgs> | null
-    /**
-     * Omit specific fields from the TextSection
-     */
-    omit?: TextSectionOmit<ExtArgs> | null
-    /**
-     * The data used to update TextSections.
-     */
-    data: XOR<TextSectionUpdateManyMutationInput, TextSectionUncheckedUpdateManyInput>
-    /**
-     * Filter which TextSections to update
-     */
-    where?: TextSectionWhereInput
-    /**
-     * Limit how many TextSections to update.
-     */
-    limit?: number
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: TextSectionIncludeUpdateManyAndReturn<ExtArgs> | null
-  }
-
-  /**
-   * TextSection upsert
-   */
-  export type TextSectionUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the TextSection
-     */
-    select?: TextSectionSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the TextSection
-     */
-    omit?: TextSectionOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: TextSectionInclude<ExtArgs> | null
-    /**
-     * The filter to search for the TextSection to update in case it exists.
-     */
-    where: TextSectionWhereUniqueInput
-    /**
-     * In case the TextSection found by the `where` argument doesn't exist, create a new TextSection with this data.
-     */
-    create: XOR<TextSectionCreateInput, TextSectionUncheckedCreateInput>
-    /**
-     * In case the TextSection was found with the provided `where` argument, update it with this data.
-     */
-    update: XOR<TextSectionUpdateInput, TextSectionUncheckedUpdateInput>
-  }
-
-  /**
-   * TextSection delete
-   */
-  export type TextSectionDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the TextSection
-     */
-    select?: TextSectionSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the TextSection
-     */
-    omit?: TextSectionOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: TextSectionInclude<ExtArgs> | null
-    /**
-     * Filter which TextSection to delete.
-     */
-    where: TextSectionWhereUniqueInput
-  }
-
-  /**
-   * TextSection deleteMany
-   */
-  export type TextSectionDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Filter which TextSections to delete
-     */
-    where?: TextSectionWhereInput
-    /**
-     * Limit how many TextSections to delete.
-     */
-    limit?: number
-  }
-
-  /**
-   * TextSection without action
-   */
-  export type TextSectionDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the TextSection
-     */
-    select?: TextSectionSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the TextSection
-     */
-    omit?: TextSectionOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: TextSectionInclude<ExtArgs> | null
-  }
-
-
-  /**
-   * Model TextSummary
-   */
-
-  export type AggregateTextSummary = {
-    _count: TextSummaryCountAggregateOutputType | null
-    _min: TextSummaryMinAggregateOutputType | null
-    _max: TextSummaryMaxAggregateOutputType | null
-  }
-
-  export type TextSummaryMinAggregateOutputType = {
-    id: string | null
-    text_id: string | null
-    translation_homage_tibetan: string | null
-    translation_homage_english: string | null
-    purpose_tibetan: string | null
-    purpose_english: string | null
-    summary_text_tibetan: string | null
-    summary_text_english: string | null
-    word_meaning_tibetan: string | null
-    word_meaning_english: string | null
-    connection_tibetan: string | null
-    connection_english: string | null
-    question_answers_tibetan: string | null
-    question_answers_english: string | null
-    colophon_tibetan: string | null
-    colophon_english: string | null
-    created_at: Date | null
-    updated_at: Date | null
-  }
-
-  export type TextSummaryMaxAggregateOutputType = {
-    id: string | null
-    text_id: string | null
-    translation_homage_tibetan: string | null
-    translation_homage_english: string | null
-    purpose_tibetan: string | null
-    purpose_english: string | null
-    summary_text_tibetan: string | null
-    summary_text_english: string | null
-    word_meaning_tibetan: string | null
-    word_meaning_english: string | null
-    connection_tibetan: string | null
-    connection_english: string | null
-    question_answers_tibetan: string | null
-    question_answers_english: string | null
-    colophon_tibetan: string | null
-    colophon_english: string | null
-    created_at: Date | null
-    updated_at: Date | null
-  }
-
-  export type TextSummaryCountAggregateOutputType = {
-    id: number
-    text_id: number
-    translation_homage_tibetan: number
-    translation_homage_english: number
-    purpose_tibetan: number
-    purpose_english: number
-    summary_text_tibetan: number
-    summary_text_english: number
-    word_meaning_tibetan: number
-    word_meaning_english: number
-    connection_tibetan: number
-    connection_english: number
-    question_answers_tibetan: number
-    question_answers_english: number
-    colophon_tibetan: number
-    colophon_english: number
-    created_at: number
-    updated_at: number
-    _all: number
-  }
-
-
-  export type TextSummaryMinAggregateInputType = {
-    id?: true
-    text_id?: true
-    translation_homage_tibetan?: true
-    translation_homage_english?: true
-    purpose_tibetan?: true
-    purpose_english?: true
-    summary_text_tibetan?: true
-    summary_text_english?: true
-    word_meaning_tibetan?: true
-    word_meaning_english?: true
-    connection_tibetan?: true
-    connection_english?: true
-    question_answers_tibetan?: true
-    question_answers_english?: true
-    colophon_tibetan?: true
-    colophon_english?: true
-    created_at?: true
-    updated_at?: true
-  }
-
-  export type TextSummaryMaxAggregateInputType = {
-    id?: true
-    text_id?: true
-    translation_homage_tibetan?: true
-    translation_homage_english?: true
-    purpose_tibetan?: true
-    purpose_english?: true
-    summary_text_tibetan?: true
-    summary_text_english?: true
-    word_meaning_tibetan?: true
-    word_meaning_english?: true
-    connection_tibetan?: true
-    connection_english?: true
-    question_answers_tibetan?: true
-    question_answers_english?: true
-    colophon_tibetan?: true
-    colophon_english?: true
-    created_at?: true
-    updated_at?: true
-  }
-
-  export type TextSummaryCountAggregateInputType = {
-    id?: true
-    text_id?: true
-    translation_homage_tibetan?: true
-    translation_homage_english?: true
-    purpose_tibetan?: true
-    purpose_english?: true
-    summary_text_tibetan?: true
-    summary_text_english?: true
-    word_meaning_tibetan?: true
-    word_meaning_english?: true
-    connection_tibetan?: true
-    connection_english?: true
-    question_answers_tibetan?: true
-    question_answers_english?: true
-    colophon_tibetan?: true
-    colophon_english?: true
-    created_at?: true
-    updated_at?: true
-    _all?: true
-  }
-
-  export type TextSummaryAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Filter which TextSummary to aggregate.
-     */
-    where?: TextSummaryWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of TextSummaries to fetch.
-     */
-    orderBy?: TextSummaryOrderByWithRelationInput | TextSummaryOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the start position
-     */
-    cursor?: TextSummaryWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` TextSummaries from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` TextSummaries.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Count returned TextSummaries
-    **/
-    _count?: true | TextSummaryCountAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to find the minimum value
-    **/
-    _min?: TextSummaryMinAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to find the maximum value
-    **/
-    _max?: TextSummaryMaxAggregateInputType
-  }
-
-  export type GetTextSummaryAggregateType<T extends TextSummaryAggregateArgs> = {
-        [P in keyof T & keyof AggregateTextSummary]: P extends '_count' | 'count'
-      ? T[P] extends true
-        ? number
-        : GetScalarType<T[P], AggregateTextSummary[P]>
-      : GetScalarType<T[P], AggregateTextSummary[P]>
-  }
-
-
-
-
-  export type TextSummaryGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: TextSummaryWhereInput
-    orderBy?: TextSummaryOrderByWithAggregationInput | TextSummaryOrderByWithAggregationInput[]
-    by: TextSummaryScalarFieldEnum[] | TextSummaryScalarFieldEnum
-    having?: TextSummaryScalarWhereWithAggregatesInput
-    take?: number
-    skip?: number
-    _count?: TextSummaryCountAggregateInputType | true
-    _min?: TextSummaryMinAggregateInputType
-    _max?: TextSummaryMaxAggregateInputType
-  }
-
-  export type TextSummaryGroupByOutputType = {
-    id: string
-    text_id: string
-    translation_homage_tibetan: string | null
-    translation_homage_english: string | null
-    purpose_tibetan: string | null
-    purpose_english: string | null
-    summary_text_tibetan: string | null
-    summary_text_english: string | null
-    word_meaning_tibetan: string | null
-    word_meaning_english: string | null
-    connection_tibetan: string | null
-    connection_english: string | null
-    question_answers_tibetan: string | null
-    question_answers_english: string | null
-    colophon_tibetan: string | null
-    colophon_english: string | null
-    created_at: Date
-    updated_at: Date
-    _count: TextSummaryCountAggregateOutputType | null
-    _min: TextSummaryMinAggregateOutputType | null
-    _max: TextSummaryMaxAggregateOutputType | null
-  }
-
-  type GetTextSummaryGroupByPayload<T extends TextSummaryGroupByArgs> = Prisma.PrismaPromise<
-    Array<
-      PickEnumerable<TextSummaryGroupByOutputType, T['by']> &
-        {
-          [P in ((keyof T) & (keyof TextSummaryGroupByOutputType))]: P extends '_count'
-            ? T[P] extends boolean
-              ? number
-              : GetScalarType<T[P], TextSummaryGroupByOutputType[P]>
-            : GetScalarType<T[P], TextSummaryGroupByOutputType[P]>
-        }
-      >
-    >
-
-
-  export type TextSummarySelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
-    text_id?: boolean
-    translation_homage_tibetan?: boolean
-    translation_homage_english?: boolean
-    purpose_tibetan?: boolean
-    purpose_english?: boolean
-    summary_text_tibetan?: boolean
-    summary_text_english?: boolean
-    word_meaning_tibetan?: boolean
-    word_meaning_english?: boolean
-    connection_tibetan?: boolean
-    connection_english?: boolean
-    question_answers_tibetan?: boolean
-    question_answers_english?: boolean
-    colophon_tibetan?: boolean
-    colophon_english?: boolean
-    created_at?: boolean
-    updated_at?: boolean
-    text?: boolean | TextDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["textSummary"]>
-
-  export type TextSummarySelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
-    text_id?: boolean
-    translation_homage_tibetan?: boolean
-    translation_homage_english?: boolean
-    purpose_tibetan?: boolean
-    purpose_english?: boolean
-    summary_text_tibetan?: boolean
-    summary_text_english?: boolean
-    word_meaning_tibetan?: boolean
-    word_meaning_english?: boolean
-    connection_tibetan?: boolean
-    connection_english?: boolean
-    question_answers_tibetan?: boolean
-    question_answers_english?: boolean
-    colophon_tibetan?: boolean
-    colophon_english?: boolean
-    created_at?: boolean
-    updated_at?: boolean
-    text?: boolean | TextDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["textSummary"]>
-
-  export type TextSummarySelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
-    text_id?: boolean
-    translation_homage_tibetan?: boolean
-    translation_homage_english?: boolean
-    purpose_tibetan?: boolean
-    purpose_english?: boolean
-    summary_text_tibetan?: boolean
-    summary_text_english?: boolean
-    word_meaning_tibetan?: boolean
-    word_meaning_english?: boolean
-    connection_tibetan?: boolean
-    connection_english?: boolean
-    question_answers_tibetan?: boolean
-    question_answers_english?: boolean
-    colophon_tibetan?: boolean
-    colophon_english?: boolean
-    created_at?: boolean
-    updated_at?: boolean
-    text?: boolean | TextDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["textSummary"]>
-
-  export type TextSummarySelectScalar = {
-    id?: boolean
-    text_id?: boolean
-    translation_homage_tibetan?: boolean
-    translation_homage_english?: boolean
-    purpose_tibetan?: boolean
-    purpose_english?: boolean
-    summary_text_tibetan?: boolean
-    summary_text_english?: boolean
-    word_meaning_tibetan?: boolean
-    word_meaning_english?: boolean
-    connection_tibetan?: boolean
-    connection_english?: boolean
-    question_answers_tibetan?: boolean
-    question_answers_english?: boolean
-    colophon_tibetan?: boolean
-    colophon_english?: boolean
-    created_at?: boolean
-    updated_at?: boolean
-  }
-
-  export type TextSummaryOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "text_id" | "translation_homage_tibetan" | "translation_homage_english" | "purpose_tibetan" | "purpose_english" | "summary_text_tibetan" | "summary_text_english" | "word_meaning_tibetan" | "word_meaning_english" | "connection_tibetan" | "connection_english" | "question_answers_tibetan" | "question_answers_english" | "colophon_tibetan" | "colophon_english" | "created_at" | "updated_at", ExtArgs["result"]["textSummary"]>
-  export type TextSummaryInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    text?: boolean | TextDefaultArgs<ExtArgs>
-  }
-  export type TextSummaryIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    text?: boolean | TextDefaultArgs<ExtArgs>
-  }
-  export type TextSummaryIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    text?: boolean | TextDefaultArgs<ExtArgs>
-  }
-
-  export type $TextSummaryPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    name: "TextSummary"
-    objects: {
-      text: Prisma.$TextPayload<ExtArgs>
-    }
-    scalars: $Extensions.GetPayloadResult<{
-      id: string
-      text_id: string
-      translation_homage_tibetan: string | null
-      translation_homage_english: string | null
-      purpose_tibetan: string | null
-      purpose_english: string | null
-      summary_text_tibetan: string | null
-      summary_text_english: string | null
-      word_meaning_tibetan: string | null
-      word_meaning_english: string | null
-      connection_tibetan: string | null
-      connection_english: string | null
-      question_answers_tibetan: string | null
-      question_answers_english: string | null
-      colophon_tibetan: string | null
-      colophon_english: string | null
-      created_at: Date
-      updated_at: Date
-    }, ExtArgs["result"]["textSummary"]>
-    composites: {}
-  }
-
-  type TextSummaryGetPayload<S extends boolean | null | undefined | TextSummaryDefaultArgs> = $Result.GetResult<Prisma.$TextSummaryPayload, S>
-
-  type TextSummaryCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
-    Omit<TextSummaryFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
-      select?: TextSummaryCountAggregateInputType | true
-    }
-
-  export interface TextSummaryDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
-    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['TextSummary'], meta: { name: 'TextSummary' } }
-    /**
-     * Find zero or one TextSummary that matches the filter.
-     * @param {TextSummaryFindUniqueArgs} args - Arguments to find a TextSummary
-     * @example
-     * // Get one TextSummary
-     * const textSummary = await prisma.textSummary.findUnique({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findUnique<T extends TextSummaryFindUniqueArgs>(args: SelectSubset<T, TextSummaryFindUniqueArgs<ExtArgs>>): Prisma__TextSummaryClient<$Result.GetResult<Prisma.$TextSummaryPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find one TextSummary that matches the filter or throw an error with `error.code='P2025'`
-     * if no matches were found.
-     * @param {TextSummaryFindUniqueOrThrowArgs} args - Arguments to find a TextSummary
-     * @example
-     * // Get one TextSummary
-     * const textSummary = await prisma.textSummary.findUniqueOrThrow({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findUniqueOrThrow<T extends TextSummaryFindUniqueOrThrowArgs>(args: SelectSubset<T, TextSummaryFindUniqueOrThrowArgs<ExtArgs>>): Prisma__TextSummaryClient<$Result.GetResult<Prisma.$TextSummaryPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find the first TextSummary that matches the filter.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {TextSummaryFindFirstArgs} args - Arguments to find a TextSummary
-     * @example
-     * // Get one TextSummary
-     * const textSummary = await prisma.textSummary.findFirst({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findFirst<T extends TextSummaryFindFirstArgs>(args?: SelectSubset<T, TextSummaryFindFirstArgs<ExtArgs>>): Prisma__TextSummaryClient<$Result.GetResult<Prisma.$TextSummaryPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find the first TextSummary that matches the filter or
-     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {TextSummaryFindFirstOrThrowArgs} args - Arguments to find a TextSummary
-     * @example
-     * // Get one TextSummary
-     * const textSummary = await prisma.textSummary.findFirstOrThrow({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findFirstOrThrow<T extends TextSummaryFindFirstOrThrowArgs>(args?: SelectSubset<T, TextSummaryFindFirstOrThrowArgs<ExtArgs>>): Prisma__TextSummaryClient<$Result.GetResult<Prisma.$TextSummaryPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find zero or more TextSummaries that matches the filter.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {TextSummaryFindManyArgs} args - Arguments to filter and select certain fields only.
-     * @example
-     * // Get all TextSummaries
-     * const textSummaries = await prisma.textSummary.findMany()
-     * 
-     * // Get first 10 TextSummaries
-     * const textSummaries = await prisma.textSummary.findMany({ take: 10 })
-     * 
-     * // Only select the `id`
-     * const textSummaryWithIdOnly = await prisma.textSummary.findMany({ select: { id: true } })
-     * 
-     */
-    findMany<T extends TextSummaryFindManyArgs>(args?: SelectSubset<T, TextSummaryFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TextSummaryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
-
-    /**
-     * Create a TextSummary.
-     * @param {TextSummaryCreateArgs} args - Arguments to create a TextSummary.
-     * @example
-     * // Create one TextSummary
-     * const TextSummary = await prisma.textSummary.create({
-     *   data: {
-     *     // ... data to create a TextSummary
-     *   }
-     * })
-     * 
-     */
-    create<T extends TextSummaryCreateArgs>(args: SelectSubset<T, TextSummaryCreateArgs<ExtArgs>>): Prisma__TextSummaryClient<$Result.GetResult<Prisma.$TextSummaryPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Create many TextSummaries.
-     * @param {TextSummaryCreateManyArgs} args - Arguments to create many TextSummaries.
-     * @example
-     * // Create many TextSummaries
-     * const textSummary = await prisma.textSummary.createMany({
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     *     
-     */
-    createMany<T extends TextSummaryCreateManyArgs>(args?: SelectSubset<T, TextSummaryCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Create many TextSummaries and returns the data saved in the database.
-     * @param {TextSummaryCreateManyAndReturnArgs} args - Arguments to create many TextSummaries.
-     * @example
-     * // Create many TextSummaries
-     * const textSummary = await prisma.textSummary.createManyAndReturn({
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * 
-     * // Create many TextSummaries and only return the `id`
-     * const textSummaryWithIdOnly = await prisma.textSummary.createManyAndReturn({
-     *   select: { id: true },
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * 
-     */
-    createManyAndReturn<T extends TextSummaryCreateManyAndReturnArgs>(args?: SelectSubset<T, TextSummaryCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TextSummaryPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
-
-    /**
-     * Delete a TextSummary.
-     * @param {TextSummaryDeleteArgs} args - Arguments to delete one TextSummary.
-     * @example
-     * // Delete one TextSummary
-     * const TextSummary = await prisma.textSummary.delete({
-     *   where: {
-     *     // ... filter to delete one TextSummary
-     *   }
-     * })
-     * 
-     */
-    delete<T extends TextSummaryDeleteArgs>(args: SelectSubset<T, TextSummaryDeleteArgs<ExtArgs>>): Prisma__TextSummaryClient<$Result.GetResult<Prisma.$TextSummaryPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Update one TextSummary.
-     * @param {TextSummaryUpdateArgs} args - Arguments to update one TextSummary.
-     * @example
-     * // Update one TextSummary
-     * const textSummary = await prisma.textSummary.update({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: {
-     *     // ... provide data here
-     *   }
-     * })
-     * 
-     */
-    update<T extends TextSummaryUpdateArgs>(args: SelectSubset<T, TextSummaryUpdateArgs<ExtArgs>>): Prisma__TextSummaryClient<$Result.GetResult<Prisma.$TextSummaryPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Delete zero or more TextSummaries.
-     * @param {TextSummaryDeleteManyArgs} args - Arguments to filter TextSummaries to delete.
-     * @example
-     * // Delete a few TextSummaries
-     * const { count } = await prisma.textSummary.deleteMany({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     * 
-     */
-    deleteMany<T extends TextSummaryDeleteManyArgs>(args?: SelectSubset<T, TextSummaryDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Update zero or more TextSummaries.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {TextSummaryUpdateManyArgs} args - Arguments to update one or more rows.
-     * @example
-     * // Update many TextSummaries
-     * const textSummary = await prisma.textSummary.updateMany({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: {
-     *     // ... provide data here
-     *   }
-     * })
-     * 
-     */
-    updateMany<T extends TextSummaryUpdateManyArgs>(args: SelectSubset<T, TextSummaryUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Update zero or more TextSummaries and returns the data updated in the database.
-     * @param {TextSummaryUpdateManyAndReturnArgs} args - Arguments to update many TextSummaries.
-     * @example
-     * // Update many TextSummaries
-     * const textSummary = await prisma.textSummary.updateManyAndReturn({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * 
-     * // Update zero or more TextSummaries and only return the `id`
-     * const textSummaryWithIdOnly = await prisma.textSummary.updateManyAndReturn({
-     *   select: { id: true },
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * 
-     */
-    updateManyAndReturn<T extends TextSummaryUpdateManyAndReturnArgs>(args: SelectSubset<T, TextSummaryUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TextSummaryPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
-
-    /**
-     * Create or update one TextSummary.
-     * @param {TextSummaryUpsertArgs} args - Arguments to update or create a TextSummary.
-     * @example
-     * // Update or create a TextSummary
-     * const textSummary = await prisma.textSummary.upsert({
-     *   create: {
-     *     // ... data to create a TextSummary
-     *   },
-     *   update: {
-     *     // ... in case it already exists, update
-     *   },
-     *   where: {
-     *     // ... the filter for the TextSummary we want to update
-     *   }
-     * })
-     */
-    upsert<T extends TextSummaryUpsertArgs>(args: SelectSubset<T, TextSummaryUpsertArgs<ExtArgs>>): Prisma__TextSummaryClient<$Result.GetResult<Prisma.$TextSummaryPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-
-    /**
-     * Count the number of TextSummaries.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {TextSummaryCountArgs} args - Arguments to filter TextSummaries to count.
-     * @example
-     * // Count the number of TextSummaries
-     * const count = await prisma.textSummary.count({
-     *   where: {
-     *     // ... the filter for the TextSummaries we want to count
-     *   }
-     * })
-    **/
-    count<T extends TextSummaryCountArgs>(
-      args?: Subset<T, TextSummaryCountArgs>,
-    ): Prisma.PrismaPromise<
-      T extends $Utils.Record<'select', any>
-        ? T['select'] extends true
-          ? number
-          : GetScalarType<T['select'], TextSummaryCountAggregateOutputType>
-        : number
-    >
-
-    /**
-     * Allows you to perform aggregations operations on a TextSummary.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {TextSummaryAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
-     * @example
-     * // Ordered by age ascending
-     * // Where email contains prisma.io
-     * // Limited to the 10 users
-     * const aggregations = await prisma.user.aggregate({
-     *   _avg: {
-     *     age: true,
-     *   },
-     *   where: {
-     *     email: {
-     *       contains: "prisma.io",
-     *     },
-     *   },
-     *   orderBy: {
-     *     age: "asc",
-     *   },
-     *   take: 10,
-     * })
-    **/
-    aggregate<T extends TextSummaryAggregateArgs>(args: Subset<T, TextSummaryAggregateArgs>): Prisma.PrismaPromise<GetTextSummaryAggregateType<T>>
-
-    /**
-     * Group by TextSummary.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {TextSummaryGroupByArgs} args - Group by arguments.
-     * @example
-     * // Group by city, order by createdAt, get count
-     * const result = await prisma.user.groupBy({
-     *   by: ['city', 'createdAt'],
-     *   orderBy: {
-     *     createdAt: true
-     *   },
-     *   _count: {
-     *     _all: true
-     *   },
-     * })
-     * 
-    **/
-    groupBy<
-      T extends TextSummaryGroupByArgs,
-      HasSelectOrTake extends Or<
-        Extends<'skip', Keys<T>>,
-        Extends<'take', Keys<T>>
-      >,
-      OrderByArg extends True extends HasSelectOrTake
-        ? { orderBy: TextSummaryGroupByArgs['orderBy'] }
-        : { orderBy?: TextSummaryGroupByArgs['orderBy'] },
-      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
-      ByFields extends MaybeTupleToUnion<T['by']>,
-      ByValid extends Has<ByFields, OrderFields>,
-      HavingFields extends GetHavingFields<T['having']>,
-      HavingValid extends Has<ByFields, HavingFields>,
-      ByEmpty extends T['by'] extends never[] ? True : False,
-      InputErrors extends ByEmpty extends True
-      ? `Error: "by" must not be empty.`
-      : HavingValid extends False
-      ? {
-          [P in HavingFields]: P extends ByFields
-            ? never
-            : P extends string
-            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
-            : [
-                Error,
-                'Field ',
-                P,
-                ` in "having" needs to be provided in "by"`,
-              ]
-        }[HavingFields]
-      : 'take' extends Keys<T>
-      ? 'orderBy' extends Keys<T>
-        ? ByValid extends True
-          ? {}
-          : {
-              [P in OrderFields]: P extends ByFields
-                ? never
-                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-            }[OrderFields]
-        : 'Error: If you provide "take", you also need to provide "orderBy"'
-      : 'skip' extends Keys<T>
-      ? 'orderBy' extends Keys<T>
-        ? ByValid extends True
-          ? {}
-          : {
-              [P in OrderFields]: P extends ByFields
-                ? never
-                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-            }[OrderFields]
-        : 'Error: If you provide "skip", you also need to provide "orderBy"'
-      : ByValid extends True
-      ? {}
-      : {
-          [P in OrderFields]: P extends ByFields
-            ? never
-            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-        }[OrderFields]
-    >(args: SubsetIntersection<T, TextSummaryGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetTextSummaryGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
-  /**
-   * Fields of the TextSummary model
-   */
-  readonly fields: TextSummaryFieldRefs;
-  }
-
-  /**
-   * The delegate class that acts as a "Promise-like" for TextSummary.
-   * Why is this prefixed with `Prisma__`?
-   * Because we want to prevent naming conflicts as mentioned in
-   * https://github.com/prisma/prisma-client-js/issues/707
-   */
-  export interface Prisma__TextSummaryClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
-    readonly [Symbol.toStringTag]: "PrismaPromise"
-    text<T extends TextDefaultArgs<ExtArgs> = {}>(args?: Subset<T, TextDefaultArgs<ExtArgs>>): Prisma__TextClient<$Result.GetResult<Prisma.$TextPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-    /**
-     * Attaches callbacks for the resolution and/or rejection of the Promise.
-     * @param onfulfilled The callback to execute when the Promise is resolved.
-     * @param onrejected The callback to execute when the Promise is rejected.
-     * @returns A Promise for the completion of which ever callback is executed.
-     */
-    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
-    /**
-     * Attaches a callback for only the rejection of the Promise.
-     * @param onrejected The callback to execute when the Promise is rejected.
-     * @returns A Promise for the completion of the callback.
-     */
-    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
-    /**
-     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
-     * resolved value cannot be modified from the callback.
-     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
-     * @returns A Promise for the completion of the callback.
-     */
-    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
-  }
-
-
-
-
-  /**
-   * Fields of the TextSummary model
-   */
-  interface TextSummaryFieldRefs {
-    readonly id: FieldRef<"TextSummary", 'String'>
-    readonly text_id: FieldRef<"TextSummary", 'String'>
-    readonly translation_homage_tibetan: FieldRef<"TextSummary", 'String'>
-    readonly translation_homage_english: FieldRef<"TextSummary", 'String'>
-    readonly purpose_tibetan: FieldRef<"TextSummary", 'String'>
-    readonly purpose_english: FieldRef<"TextSummary", 'String'>
-    readonly summary_text_tibetan: FieldRef<"TextSummary", 'String'>
-    readonly summary_text_english: FieldRef<"TextSummary", 'String'>
-    readonly word_meaning_tibetan: FieldRef<"TextSummary", 'String'>
-    readonly word_meaning_english: FieldRef<"TextSummary", 'String'>
-    readonly connection_tibetan: FieldRef<"TextSummary", 'String'>
-    readonly connection_english: FieldRef<"TextSummary", 'String'>
-    readonly question_answers_tibetan: FieldRef<"TextSummary", 'String'>
-    readonly question_answers_english: FieldRef<"TextSummary", 'String'>
-    readonly colophon_tibetan: FieldRef<"TextSummary", 'String'>
-    readonly colophon_english: FieldRef<"TextSummary", 'String'>
-    readonly created_at: FieldRef<"TextSummary", 'DateTime'>
-    readonly updated_at: FieldRef<"TextSummary", 'DateTime'>
-  }
-    
-
-  // Custom InputTypes
-  /**
-   * TextSummary findUnique
-   */
-  export type TextSummaryFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the TextSummary
-     */
-    select?: TextSummarySelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the TextSummary
-     */
-    omit?: TextSummaryOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: TextSummaryInclude<ExtArgs> | null
-    /**
-     * Filter, which TextSummary to fetch.
-     */
-    where: TextSummaryWhereUniqueInput
-  }
-
-  /**
-   * TextSummary findUniqueOrThrow
-   */
-  export type TextSummaryFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the TextSummary
-     */
-    select?: TextSummarySelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the TextSummary
-     */
-    omit?: TextSummaryOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: TextSummaryInclude<ExtArgs> | null
-    /**
-     * Filter, which TextSummary to fetch.
-     */
-    where: TextSummaryWhereUniqueInput
-  }
-
-  /**
-   * TextSummary findFirst
-   */
-  export type TextSummaryFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the TextSummary
-     */
-    select?: TextSummarySelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the TextSummary
-     */
-    omit?: TextSummaryOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: TextSummaryInclude<ExtArgs> | null
-    /**
-     * Filter, which TextSummary to fetch.
-     */
-    where?: TextSummaryWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of TextSummaries to fetch.
-     */
-    orderBy?: TextSummaryOrderByWithRelationInput | TextSummaryOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for searching for TextSummaries.
-     */
-    cursor?: TextSummaryWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` TextSummaries from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` TextSummaries.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
-     * Filter by unique combinations of TextSummaries.
-     */
-    distinct?: TextSummaryScalarFieldEnum | TextSummaryScalarFieldEnum[]
-  }
-
-  /**
-   * TextSummary findFirstOrThrow
-   */
-  export type TextSummaryFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the TextSummary
-     */
-    select?: TextSummarySelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the TextSummary
-     */
-    omit?: TextSummaryOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: TextSummaryInclude<ExtArgs> | null
-    /**
-     * Filter, which TextSummary to fetch.
-     */
-    where?: TextSummaryWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of TextSummaries to fetch.
-     */
-    orderBy?: TextSummaryOrderByWithRelationInput | TextSummaryOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for searching for TextSummaries.
-     */
-    cursor?: TextSummaryWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` TextSummaries from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` TextSummaries.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
-     * Filter by unique combinations of TextSummaries.
-     */
-    distinct?: TextSummaryScalarFieldEnum | TextSummaryScalarFieldEnum[]
-  }
-
-  /**
-   * TextSummary findMany
-   */
-  export type TextSummaryFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the TextSummary
-     */
-    select?: TextSummarySelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the TextSummary
-     */
-    omit?: TextSummaryOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: TextSummaryInclude<ExtArgs> | null
-    /**
-     * Filter, which TextSummaries to fetch.
-     */
-    where?: TextSummaryWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of TextSummaries to fetch.
-     */
-    orderBy?: TextSummaryOrderByWithRelationInput | TextSummaryOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for listing TextSummaries.
-     */
-    cursor?: TextSummaryWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` TextSummaries from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` TextSummaries.
-     */
-    skip?: number
-    distinct?: TextSummaryScalarFieldEnum | TextSummaryScalarFieldEnum[]
-  }
-
-  /**
-   * TextSummary create
-   */
-  export type TextSummaryCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the TextSummary
-     */
-    select?: TextSummarySelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the TextSummary
-     */
-    omit?: TextSummaryOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: TextSummaryInclude<ExtArgs> | null
-    /**
-     * The data needed to create a TextSummary.
-     */
-    data: XOR<TextSummaryCreateInput, TextSummaryUncheckedCreateInput>
-  }
-
-  /**
-   * TextSummary createMany
-   */
-  export type TextSummaryCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * The data used to create many TextSummaries.
-     */
-    data: TextSummaryCreateManyInput | TextSummaryCreateManyInput[]
-    skipDuplicates?: boolean
-  }
-
-  /**
-   * TextSummary createManyAndReturn
-   */
-  export type TextSummaryCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the TextSummary
-     */
-    select?: TextSummarySelectCreateManyAndReturn<ExtArgs> | null
-    /**
-     * Omit specific fields from the TextSummary
-     */
-    omit?: TextSummaryOmit<ExtArgs> | null
-    /**
-     * The data used to create many TextSummaries.
-     */
-    data: TextSummaryCreateManyInput | TextSummaryCreateManyInput[]
-    skipDuplicates?: boolean
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: TextSummaryIncludeCreateManyAndReturn<ExtArgs> | null
-  }
-
-  /**
-   * TextSummary update
-   */
-  export type TextSummaryUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the TextSummary
-     */
-    select?: TextSummarySelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the TextSummary
-     */
-    omit?: TextSummaryOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: TextSummaryInclude<ExtArgs> | null
-    /**
-     * The data needed to update a TextSummary.
-     */
-    data: XOR<TextSummaryUpdateInput, TextSummaryUncheckedUpdateInput>
-    /**
-     * Choose, which TextSummary to update.
-     */
-    where: TextSummaryWhereUniqueInput
-  }
-
-  /**
-   * TextSummary updateMany
-   */
-  export type TextSummaryUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * The data used to update TextSummaries.
-     */
-    data: XOR<TextSummaryUpdateManyMutationInput, TextSummaryUncheckedUpdateManyInput>
-    /**
-     * Filter which TextSummaries to update
-     */
-    where?: TextSummaryWhereInput
-    /**
-     * Limit how many TextSummaries to update.
-     */
-    limit?: number
-  }
-
-  /**
-   * TextSummary updateManyAndReturn
-   */
-  export type TextSummaryUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the TextSummary
-     */
-    select?: TextSummarySelectUpdateManyAndReturn<ExtArgs> | null
-    /**
-     * Omit specific fields from the TextSummary
-     */
-    omit?: TextSummaryOmit<ExtArgs> | null
-    /**
-     * The data used to update TextSummaries.
-     */
-    data: XOR<TextSummaryUpdateManyMutationInput, TextSummaryUncheckedUpdateManyInput>
-    /**
-     * Filter which TextSummaries to update
-     */
-    where?: TextSummaryWhereInput
-    /**
-     * Limit how many TextSummaries to update.
-     */
-    limit?: number
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: TextSummaryIncludeUpdateManyAndReturn<ExtArgs> | null
-  }
-
-  /**
-   * TextSummary upsert
-   */
-  export type TextSummaryUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the TextSummary
-     */
-    select?: TextSummarySelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the TextSummary
-     */
-    omit?: TextSummaryOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: TextSummaryInclude<ExtArgs> | null
-    /**
-     * The filter to search for the TextSummary to update in case it exists.
-     */
-    where: TextSummaryWhereUniqueInput
-    /**
-     * In case the TextSummary found by the `where` argument doesn't exist, create a new TextSummary with this data.
-     */
-    create: XOR<TextSummaryCreateInput, TextSummaryUncheckedCreateInput>
-    /**
-     * In case the TextSummary was found with the provided `where` argument, update it with this data.
-     */
-    update: XOR<TextSummaryUpdateInput, TextSummaryUncheckedUpdateInput>
-  }
-
-  /**
-   * TextSummary delete
-   */
-  export type TextSummaryDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the TextSummary
-     */
-    select?: TextSummarySelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the TextSummary
-     */
-    omit?: TextSummaryOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: TextSummaryInclude<ExtArgs> | null
-    /**
-     * Filter which TextSummary to delete.
-     */
-    where: TextSummaryWhereUniqueInput
-  }
-
-  /**
-   * TextSummary deleteMany
-   */
-  export type TextSummaryDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Filter which TextSummaries to delete
-     */
-    where?: TextSummaryWhereInput
-    /**
-     * Limit how many TextSummaries to delete.
-     */
-    limit?: number
-  }
-
-  /**
-   * TextSummary without action
-   */
-  export type TextSummaryDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the TextSummary
-     */
-    select?: TextSummarySelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the TextSummary
-     */
-    omit?: TextSummaryOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: TextSummaryInclude<ExtArgs> | null
-  }
-
-
-  /**
-   * Model TextCollatedContent
-   */
-
-  export type AggregateTextCollatedContent = {
-    _count: TextCollatedContentCountAggregateOutputType | null
-    _min: TextCollatedContentMinAggregateOutputType | null
-    _max: TextCollatedContentMaxAggregateOutputType | null
-  }
-
-  export type TextCollatedContentMinAggregateOutputType = {
-    id: string | null
-    text_id: string | null
-    collated_text: string | null
-    english_translation: string | null
-    created_at: Date | null
-    updated_at: Date | null
-  }
-
-  export type TextCollatedContentMaxAggregateOutputType = {
-    id: string | null
-    text_id: string | null
-    collated_text: string | null
-    english_translation: string | null
-    created_at: Date | null
-    updated_at: Date | null
-  }
-
-  export type TextCollatedContentCountAggregateOutputType = {
-    id: number
-    text_id: number
-    collated_text: number
-    english_translation: number
-    created_at: number
-    updated_at: number
-    _all: number
-  }
-
-
-  export type TextCollatedContentMinAggregateInputType = {
-    id?: true
-    text_id?: true
-    collated_text?: true
-    english_translation?: true
-    created_at?: true
-    updated_at?: true
-  }
-
-  export type TextCollatedContentMaxAggregateInputType = {
-    id?: true
-    text_id?: true
-    collated_text?: true
-    english_translation?: true
-    created_at?: true
-    updated_at?: true
-  }
-
-  export type TextCollatedContentCountAggregateInputType = {
-    id?: true
-    text_id?: true
-    collated_text?: true
-    english_translation?: true
-    created_at?: true
-    updated_at?: true
-    _all?: true
-  }
-
-  export type TextCollatedContentAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Filter which TextCollatedContent to aggregate.
-     */
-    where?: TextCollatedContentWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of TextCollatedContents to fetch.
-     */
-    orderBy?: TextCollatedContentOrderByWithRelationInput | TextCollatedContentOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the start position
-     */
-    cursor?: TextCollatedContentWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` TextCollatedContents from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` TextCollatedContents.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Count returned TextCollatedContents
-    **/
-    _count?: true | TextCollatedContentCountAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to find the minimum value
-    **/
-    _min?: TextCollatedContentMinAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to find the maximum value
-    **/
-    _max?: TextCollatedContentMaxAggregateInputType
-  }
-
-  export type GetTextCollatedContentAggregateType<T extends TextCollatedContentAggregateArgs> = {
-        [P in keyof T & keyof AggregateTextCollatedContent]: P extends '_count' | 'count'
-      ? T[P] extends true
-        ? number
-        : GetScalarType<T[P], AggregateTextCollatedContent[P]>
-      : GetScalarType<T[P], AggregateTextCollatedContent[P]>
-  }
-
-
-
-
-  export type TextCollatedContentGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: TextCollatedContentWhereInput
-    orderBy?: TextCollatedContentOrderByWithAggregationInput | TextCollatedContentOrderByWithAggregationInput[]
-    by: TextCollatedContentScalarFieldEnum[] | TextCollatedContentScalarFieldEnum
-    having?: TextCollatedContentScalarWhereWithAggregatesInput
-    take?: number
-    skip?: number
-    _count?: TextCollatedContentCountAggregateInputType | true
-    _min?: TextCollatedContentMinAggregateInputType
-    _max?: TextCollatedContentMaxAggregateInputType
-  }
-
-  export type TextCollatedContentGroupByOutputType = {
-    id: string
-    text_id: string
-    collated_text: string | null
-    english_translation: string | null
-    created_at: Date
-    updated_at: Date
-    _count: TextCollatedContentCountAggregateOutputType | null
-    _min: TextCollatedContentMinAggregateOutputType | null
-    _max: TextCollatedContentMaxAggregateOutputType | null
-  }
-
-  type GetTextCollatedContentGroupByPayload<T extends TextCollatedContentGroupByArgs> = Prisma.PrismaPromise<
-    Array<
-      PickEnumerable<TextCollatedContentGroupByOutputType, T['by']> &
-        {
-          [P in ((keyof T) & (keyof TextCollatedContentGroupByOutputType))]: P extends '_count'
-            ? T[P] extends boolean
-              ? number
-              : GetScalarType<T[P], TextCollatedContentGroupByOutputType[P]>
-            : GetScalarType<T[P], TextCollatedContentGroupByOutputType[P]>
-        }
-      >
-    >
-
-
-  export type TextCollatedContentSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
-    text_id?: boolean
-    collated_text?: boolean
-    english_translation?: boolean
-    created_at?: boolean
-    updated_at?: boolean
-    text?: boolean | TextDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["textCollatedContent"]>
-
-  export type TextCollatedContentSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
-    text_id?: boolean
-    collated_text?: boolean
-    english_translation?: boolean
-    created_at?: boolean
-    updated_at?: boolean
-    text?: boolean | TextDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["textCollatedContent"]>
-
-  export type TextCollatedContentSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
-    text_id?: boolean
-    collated_text?: boolean
-    english_translation?: boolean
-    created_at?: boolean
-    updated_at?: boolean
-    text?: boolean | TextDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["textCollatedContent"]>
-
-  export type TextCollatedContentSelectScalar = {
-    id?: boolean
-    text_id?: boolean
-    collated_text?: boolean
-    english_translation?: boolean
-    created_at?: boolean
-    updated_at?: boolean
-  }
-
-  export type TextCollatedContentOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "text_id" | "collated_text" | "english_translation" | "created_at" | "updated_at", ExtArgs["result"]["textCollatedContent"]>
-  export type TextCollatedContentInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    text?: boolean | TextDefaultArgs<ExtArgs>
-  }
-  export type TextCollatedContentIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    text?: boolean | TextDefaultArgs<ExtArgs>
-  }
-  export type TextCollatedContentIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    text?: boolean | TextDefaultArgs<ExtArgs>
-  }
-
-  export type $TextCollatedContentPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    name: "TextCollatedContent"
-    objects: {
-      text: Prisma.$TextPayload<ExtArgs>
-    }
-    scalars: $Extensions.GetPayloadResult<{
-      id: string
-      text_id: string
-      collated_text: string | null
-      english_translation: string | null
-      created_at: Date
-      updated_at: Date
-    }, ExtArgs["result"]["textCollatedContent"]>
-    composites: {}
-  }
-
-  type TextCollatedContentGetPayload<S extends boolean | null | undefined | TextCollatedContentDefaultArgs> = $Result.GetResult<Prisma.$TextCollatedContentPayload, S>
-
-  type TextCollatedContentCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
-    Omit<TextCollatedContentFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
-      select?: TextCollatedContentCountAggregateInputType | true
-    }
-
-  export interface TextCollatedContentDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
-    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['TextCollatedContent'], meta: { name: 'TextCollatedContent' } }
-    /**
-     * Find zero or one TextCollatedContent that matches the filter.
-     * @param {TextCollatedContentFindUniqueArgs} args - Arguments to find a TextCollatedContent
-     * @example
-     * // Get one TextCollatedContent
-     * const textCollatedContent = await prisma.textCollatedContent.findUnique({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findUnique<T extends TextCollatedContentFindUniqueArgs>(args: SelectSubset<T, TextCollatedContentFindUniqueArgs<ExtArgs>>): Prisma__TextCollatedContentClient<$Result.GetResult<Prisma.$TextCollatedContentPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find one TextCollatedContent that matches the filter or throw an error with `error.code='P2025'`
-     * if no matches were found.
-     * @param {TextCollatedContentFindUniqueOrThrowArgs} args - Arguments to find a TextCollatedContent
-     * @example
-     * // Get one TextCollatedContent
-     * const textCollatedContent = await prisma.textCollatedContent.findUniqueOrThrow({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findUniqueOrThrow<T extends TextCollatedContentFindUniqueOrThrowArgs>(args: SelectSubset<T, TextCollatedContentFindUniqueOrThrowArgs<ExtArgs>>): Prisma__TextCollatedContentClient<$Result.GetResult<Prisma.$TextCollatedContentPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find the first TextCollatedContent that matches the filter.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {TextCollatedContentFindFirstArgs} args - Arguments to find a TextCollatedContent
-     * @example
-     * // Get one TextCollatedContent
-     * const textCollatedContent = await prisma.textCollatedContent.findFirst({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findFirst<T extends TextCollatedContentFindFirstArgs>(args?: SelectSubset<T, TextCollatedContentFindFirstArgs<ExtArgs>>): Prisma__TextCollatedContentClient<$Result.GetResult<Prisma.$TextCollatedContentPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find the first TextCollatedContent that matches the filter or
-     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {TextCollatedContentFindFirstOrThrowArgs} args - Arguments to find a TextCollatedContent
-     * @example
-     * // Get one TextCollatedContent
-     * const textCollatedContent = await prisma.textCollatedContent.findFirstOrThrow({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findFirstOrThrow<T extends TextCollatedContentFindFirstOrThrowArgs>(args?: SelectSubset<T, TextCollatedContentFindFirstOrThrowArgs<ExtArgs>>): Prisma__TextCollatedContentClient<$Result.GetResult<Prisma.$TextCollatedContentPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find zero or more TextCollatedContents that matches the filter.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {TextCollatedContentFindManyArgs} args - Arguments to filter and select certain fields only.
-     * @example
-     * // Get all TextCollatedContents
-     * const textCollatedContents = await prisma.textCollatedContent.findMany()
-     * 
-     * // Get first 10 TextCollatedContents
-     * const textCollatedContents = await prisma.textCollatedContent.findMany({ take: 10 })
-     * 
-     * // Only select the `id`
-     * const textCollatedContentWithIdOnly = await prisma.textCollatedContent.findMany({ select: { id: true } })
-     * 
-     */
-    findMany<T extends TextCollatedContentFindManyArgs>(args?: SelectSubset<T, TextCollatedContentFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TextCollatedContentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
-
-    /**
-     * Create a TextCollatedContent.
-     * @param {TextCollatedContentCreateArgs} args - Arguments to create a TextCollatedContent.
-     * @example
-     * // Create one TextCollatedContent
-     * const TextCollatedContent = await prisma.textCollatedContent.create({
-     *   data: {
-     *     // ... data to create a TextCollatedContent
-     *   }
-     * })
-     * 
-     */
-    create<T extends TextCollatedContentCreateArgs>(args: SelectSubset<T, TextCollatedContentCreateArgs<ExtArgs>>): Prisma__TextCollatedContentClient<$Result.GetResult<Prisma.$TextCollatedContentPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Create many TextCollatedContents.
-     * @param {TextCollatedContentCreateManyArgs} args - Arguments to create many TextCollatedContents.
-     * @example
-     * // Create many TextCollatedContents
-     * const textCollatedContent = await prisma.textCollatedContent.createMany({
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     *     
-     */
-    createMany<T extends TextCollatedContentCreateManyArgs>(args?: SelectSubset<T, TextCollatedContentCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Create many TextCollatedContents and returns the data saved in the database.
-     * @param {TextCollatedContentCreateManyAndReturnArgs} args - Arguments to create many TextCollatedContents.
-     * @example
-     * // Create many TextCollatedContents
-     * const textCollatedContent = await prisma.textCollatedContent.createManyAndReturn({
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * 
-     * // Create many TextCollatedContents and only return the `id`
-     * const textCollatedContentWithIdOnly = await prisma.textCollatedContent.createManyAndReturn({
-     *   select: { id: true },
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * 
-     */
-    createManyAndReturn<T extends TextCollatedContentCreateManyAndReturnArgs>(args?: SelectSubset<T, TextCollatedContentCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TextCollatedContentPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
-
-    /**
-     * Delete a TextCollatedContent.
-     * @param {TextCollatedContentDeleteArgs} args - Arguments to delete one TextCollatedContent.
-     * @example
-     * // Delete one TextCollatedContent
-     * const TextCollatedContent = await prisma.textCollatedContent.delete({
-     *   where: {
-     *     // ... filter to delete one TextCollatedContent
-     *   }
-     * })
-     * 
-     */
-    delete<T extends TextCollatedContentDeleteArgs>(args: SelectSubset<T, TextCollatedContentDeleteArgs<ExtArgs>>): Prisma__TextCollatedContentClient<$Result.GetResult<Prisma.$TextCollatedContentPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Update one TextCollatedContent.
-     * @param {TextCollatedContentUpdateArgs} args - Arguments to update one TextCollatedContent.
-     * @example
-     * // Update one TextCollatedContent
-     * const textCollatedContent = await prisma.textCollatedContent.update({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: {
-     *     // ... provide data here
-     *   }
-     * })
-     * 
-     */
-    update<T extends TextCollatedContentUpdateArgs>(args: SelectSubset<T, TextCollatedContentUpdateArgs<ExtArgs>>): Prisma__TextCollatedContentClient<$Result.GetResult<Prisma.$TextCollatedContentPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Delete zero or more TextCollatedContents.
-     * @param {TextCollatedContentDeleteManyArgs} args - Arguments to filter TextCollatedContents to delete.
-     * @example
-     * // Delete a few TextCollatedContents
-     * const { count } = await prisma.textCollatedContent.deleteMany({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     * 
-     */
-    deleteMany<T extends TextCollatedContentDeleteManyArgs>(args?: SelectSubset<T, TextCollatedContentDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Update zero or more TextCollatedContents.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {TextCollatedContentUpdateManyArgs} args - Arguments to update one or more rows.
-     * @example
-     * // Update many TextCollatedContents
-     * const textCollatedContent = await prisma.textCollatedContent.updateMany({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: {
-     *     // ... provide data here
-     *   }
-     * })
-     * 
-     */
-    updateMany<T extends TextCollatedContentUpdateManyArgs>(args: SelectSubset<T, TextCollatedContentUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Update zero or more TextCollatedContents and returns the data updated in the database.
-     * @param {TextCollatedContentUpdateManyAndReturnArgs} args - Arguments to update many TextCollatedContents.
-     * @example
-     * // Update many TextCollatedContents
-     * const textCollatedContent = await prisma.textCollatedContent.updateManyAndReturn({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * 
-     * // Update zero or more TextCollatedContents and only return the `id`
-     * const textCollatedContentWithIdOnly = await prisma.textCollatedContent.updateManyAndReturn({
-     *   select: { id: true },
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * 
-     */
-    updateManyAndReturn<T extends TextCollatedContentUpdateManyAndReturnArgs>(args: SelectSubset<T, TextCollatedContentUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TextCollatedContentPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
-
-    /**
-     * Create or update one TextCollatedContent.
-     * @param {TextCollatedContentUpsertArgs} args - Arguments to update or create a TextCollatedContent.
-     * @example
-     * // Update or create a TextCollatedContent
-     * const textCollatedContent = await prisma.textCollatedContent.upsert({
-     *   create: {
-     *     // ... data to create a TextCollatedContent
-     *   },
-     *   update: {
-     *     // ... in case it already exists, update
-     *   },
-     *   where: {
-     *     // ... the filter for the TextCollatedContent we want to update
-     *   }
-     * })
-     */
-    upsert<T extends TextCollatedContentUpsertArgs>(args: SelectSubset<T, TextCollatedContentUpsertArgs<ExtArgs>>): Prisma__TextCollatedContentClient<$Result.GetResult<Prisma.$TextCollatedContentPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-
-    /**
-     * Count the number of TextCollatedContents.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {TextCollatedContentCountArgs} args - Arguments to filter TextCollatedContents to count.
-     * @example
-     * // Count the number of TextCollatedContents
-     * const count = await prisma.textCollatedContent.count({
-     *   where: {
-     *     // ... the filter for the TextCollatedContents we want to count
-     *   }
-     * })
-    **/
-    count<T extends TextCollatedContentCountArgs>(
-      args?: Subset<T, TextCollatedContentCountArgs>,
-    ): Prisma.PrismaPromise<
-      T extends $Utils.Record<'select', any>
-        ? T['select'] extends true
-          ? number
-          : GetScalarType<T['select'], TextCollatedContentCountAggregateOutputType>
-        : number
-    >
-
-    /**
-     * Allows you to perform aggregations operations on a TextCollatedContent.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {TextCollatedContentAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
-     * @example
-     * // Ordered by age ascending
-     * // Where email contains prisma.io
-     * // Limited to the 10 users
-     * const aggregations = await prisma.user.aggregate({
-     *   _avg: {
-     *     age: true,
-     *   },
-     *   where: {
-     *     email: {
-     *       contains: "prisma.io",
-     *     },
-     *   },
-     *   orderBy: {
-     *     age: "asc",
-     *   },
-     *   take: 10,
-     * })
-    **/
-    aggregate<T extends TextCollatedContentAggregateArgs>(args: Subset<T, TextCollatedContentAggregateArgs>): Prisma.PrismaPromise<GetTextCollatedContentAggregateType<T>>
-
-    /**
-     * Group by TextCollatedContent.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {TextCollatedContentGroupByArgs} args - Group by arguments.
-     * @example
-     * // Group by city, order by createdAt, get count
-     * const result = await prisma.user.groupBy({
-     *   by: ['city', 'createdAt'],
-     *   orderBy: {
-     *     createdAt: true
-     *   },
-     *   _count: {
-     *     _all: true
-     *   },
-     * })
-     * 
-    **/
-    groupBy<
-      T extends TextCollatedContentGroupByArgs,
-      HasSelectOrTake extends Or<
-        Extends<'skip', Keys<T>>,
-        Extends<'take', Keys<T>>
-      >,
-      OrderByArg extends True extends HasSelectOrTake
-        ? { orderBy: TextCollatedContentGroupByArgs['orderBy'] }
-        : { orderBy?: TextCollatedContentGroupByArgs['orderBy'] },
-      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
-      ByFields extends MaybeTupleToUnion<T['by']>,
-      ByValid extends Has<ByFields, OrderFields>,
-      HavingFields extends GetHavingFields<T['having']>,
-      HavingValid extends Has<ByFields, HavingFields>,
-      ByEmpty extends T['by'] extends never[] ? True : False,
-      InputErrors extends ByEmpty extends True
-      ? `Error: "by" must not be empty.`
-      : HavingValid extends False
-      ? {
-          [P in HavingFields]: P extends ByFields
-            ? never
-            : P extends string
-            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
-            : [
-                Error,
-                'Field ',
-                P,
-                ` in "having" needs to be provided in "by"`,
-              ]
-        }[HavingFields]
-      : 'take' extends Keys<T>
-      ? 'orderBy' extends Keys<T>
-        ? ByValid extends True
-          ? {}
-          : {
-              [P in OrderFields]: P extends ByFields
-                ? never
-                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-            }[OrderFields]
-        : 'Error: If you provide "take", you also need to provide "orderBy"'
-      : 'skip' extends Keys<T>
-      ? 'orderBy' extends Keys<T>
-        ? ByValid extends True
-          ? {}
-          : {
-              [P in OrderFields]: P extends ByFields
-                ? never
-                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-            }[OrderFields]
-        : 'Error: If you provide "skip", you also need to provide "orderBy"'
-      : ByValid extends True
-      ? {}
-      : {
-          [P in OrderFields]: P extends ByFields
-            ? never
-            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-        }[OrderFields]
-    >(args: SubsetIntersection<T, TextCollatedContentGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetTextCollatedContentGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
-  /**
-   * Fields of the TextCollatedContent model
-   */
-  readonly fields: TextCollatedContentFieldRefs;
-  }
-
-  /**
-   * The delegate class that acts as a "Promise-like" for TextCollatedContent.
-   * Why is this prefixed with `Prisma__`?
-   * Because we want to prevent naming conflicts as mentioned in
-   * https://github.com/prisma/prisma-client-js/issues/707
-   */
-  export interface Prisma__TextCollatedContentClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
-    readonly [Symbol.toStringTag]: "PrismaPromise"
-    text<T extends TextDefaultArgs<ExtArgs> = {}>(args?: Subset<T, TextDefaultArgs<ExtArgs>>): Prisma__TextClient<$Result.GetResult<Prisma.$TextPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-    /**
-     * Attaches callbacks for the resolution and/or rejection of the Promise.
-     * @param onfulfilled The callback to execute when the Promise is resolved.
-     * @param onrejected The callback to execute when the Promise is rejected.
-     * @returns A Promise for the completion of which ever callback is executed.
-     */
-    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
-    /**
-     * Attaches a callback for only the rejection of the Promise.
-     * @param onrejected The callback to execute when the Promise is rejected.
-     * @returns A Promise for the completion of the callback.
-     */
-    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
-    /**
-     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
-     * resolved value cannot be modified from the callback.
-     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
-     * @returns A Promise for the completion of the callback.
-     */
-    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
-  }
-
-
-
-
-  /**
-   * Fields of the TextCollatedContent model
-   */
-  interface TextCollatedContentFieldRefs {
-    readonly id: FieldRef<"TextCollatedContent", 'String'>
-    readonly text_id: FieldRef<"TextCollatedContent", 'String'>
-    readonly collated_text: FieldRef<"TextCollatedContent", 'String'>
-    readonly english_translation: FieldRef<"TextCollatedContent", 'String'>
-    readonly created_at: FieldRef<"TextCollatedContent", 'DateTime'>
-    readonly updated_at: FieldRef<"TextCollatedContent", 'DateTime'>
-  }
-    
-
-  // Custom InputTypes
-  /**
-   * TextCollatedContent findUnique
-   */
-  export type TextCollatedContentFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the TextCollatedContent
-     */
-    select?: TextCollatedContentSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the TextCollatedContent
-     */
-    omit?: TextCollatedContentOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: TextCollatedContentInclude<ExtArgs> | null
-    /**
-     * Filter, which TextCollatedContent to fetch.
-     */
-    where: TextCollatedContentWhereUniqueInput
-  }
-
-  /**
-   * TextCollatedContent findUniqueOrThrow
-   */
-  export type TextCollatedContentFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the TextCollatedContent
-     */
-    select?: TextCollatedContentSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the TextCollatedContent
-     */
-    omit?: TextCollatedContentOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: TextCollatedContentInclude<ExtArgs> | null
-    /**
-     * Filter, which TextCollatedContent to fetch.
-     */
-    where: TextCollatedContentWhereUniqueInput
-  }
-
-  /**
-   * TextCollatedContent findFirst
-   */
-  export type TextCollatedContentFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the TextCollatedContent
-     */
-    select?: TextCollatedContentSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the TextCollatedContent
-     */
-    omit?: TextCollatedContentOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: TextCollatedContentInclude<ExtArgs> | null
-    /**
-     * Filter, which TextCollatedContent to fetch.
-     */
-    where?: TextCollatedContentWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of TextCollatedContents to fetch.
-     */
-    orderBy?: TextCollatedContentOrderByWithRelationInput | TextCollatedContentOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for searching for TextCollatedContents.
-     */
-    cursor?: TextCollatedContentWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` TextCollatedContents from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` TextCollatedContents.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
-     * Filter by unique combinations of TextCollatedContents.
-     */
-    distinct?: TextCollatedContentScalarFieldEnum | TextCollatedContentScalarFieldEnum[]
-  }
-
-  /**
-   * TextCollatedContent findFirstOrThrow
-   */
-  export type TextCollatedContentFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the TextCollatedContent
-     */
-    select?: TextCollatedContentSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the TextCollatedContent
-     */
-    omit?: TextCollatedContentOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: TextCollatedContentInclude<ExtArgs> | null
-    /**
-     * Filter, which TextCollatedContent to fetch.
-     */
-    where?: TextCollatedContentWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of TextCollatedContents to fetch.
-     */
-    orderBy?: TextCollatedContentOrderByWithRelationInput | TextCollatedContentOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for searching for TextCollatedContents.
-     */
-    cursor?: TextCollatedContentWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` TextCollatedContents from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` TextCollatedContents.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
-     * Filter by unique combinations of TextCollatedContents.
-     */
-    distinct?: TextCollatedContentScalarFieldEnum | TextCollatedContentScalarFieldEnum[]
-  }
-
-  /**
-   * TextCollatedContent findMany
-   */
-  export type TextCollatedContentFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the TextCollatedContent
-     */
-    select?: TextCollatedContentSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the TextCollatedContent
-     */
-    omit?: TextCollatedContentOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: TextCollatedContentInclude<ExtArgs> | null
-    /**
-     * Filter, which TextCollatedContents to fetch.
-     */
-    where?: TextCollatedContentWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of TextCollatedContents to fetch.
-     */
-    orderBy?: TextCollatedContentOrderByWithRelationInput | TextCollatedContentOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for listing TextCollatedContents.
-     */
-    cursor?: TextCollatedContentWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` TextCollatedContents from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` TextCollatedContents.
-     */
-    skip?: number
-    distinct?: TextCollatedContentScalarFieldEnum | TextCollatedContentScalarFieldEnum[]
-  }
-
-  /**
-   * TextCollatedContent create
-   */
-  export type TextCollatedContentCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the TextCollatedContent
-     */
-    select?: TextCollatedContentSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the TextCollatedContent
-     */
-    omit?: TextCollatedContentOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: TextCollatedContentInclude<ExtArgs> | null
-    /**
-     * The data needed to create a TextCollatedContent.
-     */
-    data: XOR<TextCollatedContentCreateInput, TextCollatedContentUncheckedCreateInput>
-  }
-
-  /**
-   * TextCollatedContent createMany
-   */
-  export type TextCollatedContentCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * The data used to create many TextCollatedContents.
-     */
-    data: TextCollatedContentCreateManyInput | TextCollatedContentCreateManyInput[]
-    skipDuplicates?: boolean
-  }
-
-  /**
-   * TextCollatedContent createManyAndReturn
-   */
-  export type TextCollatedContentCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the TextCollatedContent
-     */
-    select?: TextCollatedContentSelectCreateManyAndReturn<ExtArgs> | null
-    /**
-     * Omit specific fields from the TextCollatedContent
-     */
-    omit?: TextCollatedContentOmit<ExtArgs> | null
-    /**
-     * The data used to create many TextCollatedContents.
-     */
-    data: TextCollatedContentCreateManyInput | TextCollatedContentCreateManyInput[]
-    skipDuplicates?: boolean
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: TextCollatedContentIncludeCreateManyAndReturn<ExtArgs> | null
-  }
-
-  /**
-   * TextCollatedContent update
-   */
-  export type TextCollatedContentUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the TextCollatedContent
-     */
-    select?: TextCollatedContentSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the TextCollatedContent
-     */
-    omit?: TextCollatedContentOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: TextCollatedContentInclude<ExtArgs> | null
-    /**
-     * The data needed to update a TextCollatedContent.
-     */
-    data: XOR<TextCollatedContentUpdateInput, TextCollatedContentUncheckedUpdateInput>
-    /**
-     * Choose, which TextCollatedContent to update.
-     */
-    where: TextCollatedContentWhereUniqueInput
-  }
-
-  /**
-   * TextCollatedContent updateMany
-   */
-  export type TextCollatedContentUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * The data used to update TextCollatedContents.
-     */
-    data: XOR<TextCollatedContentUpdateManyMutationInput, TextCollatedContentUncheckedUpdateManyInput>
-    /**
-     * Filter which TextCollatedContents to update
-     */
-    where?: TextCollatedContentWhereInput
-    /**
-     * Limit how many TextCollatedContents to update.
-     */
-    limit?: number
-  }
-
-  /**
-   * TextCollatedContent updateManyAndReturn
-   */
-  export type TextCollatedContentUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the TextCollatedContent
-     */
-    select?: TextCollatedContentSelectUpdateManyAndReturn<ExtArgs> | null
-    /**
-     * Omit specific fields from the TextCollatedContent
-     */
-    omit?: TextCollatedContentOmit<ExtArgs> | null
-    /**
-     * The data used to update TextCollatedContents.
-     */
-    data: XOR<TextCollatedContentUpdateManyMutationInput, TextCollatedContentUncheckedUpdateManyInput>
-    /**
-     * Filter which TextCollatedContents to update
-     */
-    where?: TextCollatedContentWhereInput
-    /**
-     * Limit how many TextCollatedContents to update.
-     */
-    limit?: number
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: TextCollatedContentIncludeUpdateManyAndReturn<ExtArgs> | null
-  }
-
-  /**
-   * TextCollatedContent upsert
-   */
-  export type TextCollatedContentUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the TextCollatedContent
-     */
-    select?: TextCollatedContentSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the TextCollatedContent
-     */
-    omit?: TextCollatedContentOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: TextCollatedContentInclude<ExtArgs> | null
-    /**
-     * The filter to search for the TextCollatedContent to update in case it exists.
-     */
-    where: TextCollatedContentWhereUniqueInput
-    /**
-     * In case the TextCollatedContent found by the `where` argument doesn't exist, create a new TextCollatedContent with this data.
-     */
-    create: XOR<TextCollatedContentCreateInput, TextCollatedContentUncheckedCreateInput>
-    /**
-     * In case the TextCollatedContent was found with the provided `where` argument, update it with this data.
-     */
-    update: XOR<TextCollatedContentUpdateInput, TextCollatedContentUncheckedUpdateInput>
-  }
-
-  /**
-   * TextCollatedContent delete
-   */
-  export type TextCollatedContentDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the TextCollatedContent
-     */
-    select?: TextCollatedContentSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the TextCollatedContent
-     */
-    omit?: TextCollatedContentOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: TextCollatedContentInclude<ExtArgs> | null
-    /**
-     * Filter which TextCollatedContent to delete.
-     */
-    where: TextCollatedContentWhereUniqueInput
-  }
-
-  /**
-   * TextCollatedContent deleteMany
-   */
-  export type TextCollatedContentDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Filter which TextCollatedContents to delete
-     */
-    where?: TextCollatedContentWhereInput
-    /**
-     * Limit how many TextCollatedContents to delete.
-     */
-    limit?: number
-  }
-
-  /**
-   * TextCollatedContent without action
-   */
-  export type TextCollatedContentDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the TextCollatedContent
-     */
-    select?: TextCollatedContentSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the TextCollatedContent
-     */
-    omit?: TextCollatedContentOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: TextCollatedContentInclude<ExtArgs> | null
-  }
-
-
-  /**
-   * Model TextMetadata
-   */
-
-  export type AggregateTextMetadata = {
-    _count: TextMetadataCountAggregateOutputType | null
-    _avg: TextMetadataAvgAggregateOutputType | null
-    _sum: TextMetadataSumAggregateOutputType | null
-    _min: TextMetadataMinAggregateOutputType | null
-    _max: TextMetadataMaxAggregateOutputType | null
-  }
-
-  export type TextMetadataAvgAggregateOutputType = {
-    derge_vol_number: number | null
-    derge_start_page: number | null
-    derge_end_page: number | null
-    order_index: number | null
-  }
-
-  export type TextMetadataSumAggregateOutputType = {
-    derge_vol_number: number | null
-    derge_start_page: number | null
-    derge_end_page: number | null
-    order_index: number | null
-  }
-
-  export type TextMetadataMinAggregateOutputType = {
-    id: string | null
-    text_id: string | null
-    metadata_key: string | null
-    metadata_value: string | null
-    metadata_group: string | null
-    label: string | null
-    tibetan_title: string | null
-    english_title: string | null
-    sanskrit_title: string | null
-    chinese_title: string | null
-    derge_text_id: string | null
-    yeshe_text_id: string | null
-    derge_vol_number: number | null
-    derge_start_page: number | null
-    derge_end_page: number | null
-    turning: string | null
-    yana: string | null
-    translation_period: string | null
-    order_index: number | null
-    created_at: Date | null
-    updated_at: Date | null
-  }
-
-  export type TextMetadataMaxAggregateOutputType = {
-    id: string | null
-    text_id: string | null
-    metadata_key: string | null
-    metadata_value: string | null
-    metadata_group: string | null
-    label: string | null
-    tibetan_title: string | null
-    english_title: string | null
-    sanskrit_title: string | null
-    chinese_title: string | null
-    derge_text_id: string | null
-    yeshe_text_id: string | null
-    derge_vol_number: number | null
-    derge_start_page: number | null
-    derge_end_page: number | null
-    turning: string | null
-    yana: string | null
-    translation_period: string | null
-    order_index: number | null
-    created_at: Date | null
-    updated_at: Date | null
-  }
-
-  export type TextMetadataCountAggregateOutputType = {
-    id: number
-    text_id: number
-    metadata_key: number
-    metadata_value: number
-    metadata_group: number
-    label: number
-    tibetan_title: number
-    english_title: number
-    sanskrit_title: number
-    chinese_title: number
-    derge_text_id: number
-    yeshe_text_id: number
-    derge_vol_number: number
-    derge_start_page: number
-    derge_end_page: number
-    turning: number
-    yana: number
-    translation_period: number
-    order_index: number
-    created_at: number
-    updated_at: number
-    _all: number
-  }
-
-
-  export type TextMetadataAvgAggregateInputType = {
-    derge_vol_number?: true
-    derge_start_page?: true
-    derge_end_page?: true
-    order_index?: true
-  }
-
-  export type TextMetadataSumAggregateInputType = {
-    derge_vol_number?: true
-    derge_start_page?: true
-    derge_end_page?: true
-    order_index?: true
-  }
-
-  export type TextMetadataMinAggregateInputType = {
-    id?: true
-    text_id?: true
-    metadata_key?: true
-    metadata_value?: true
-    metadata_group?: true
-    label?: true
-    tibetan_title?: true
-    english_title?: true
-    sanskrit_title?: true
-    chinese_title?: true
-    derge_text_id?: true
-    yeshe_text_id?: true
-    derge_vol_number?: true
-    derge_start_page?: true
-    derge_end_page?: true
-    turning?: true
-    yana?: true
-    translation_period?: true
-    order_index?: true
-    created_at?: true
-    updated_at?: true
-  }
-
-  export type TextMetadataMaxAggregateInputType = {
-    id?: true
-    text_id?: true
-    metadata_key?: true
-    metadata_value?: true
-    metadata_group?: true
-    label?: true
-    tibetan_title?: true
-    english_title?: true
-    sanskrit_title?: true
-    chinese_title?: true
-    derge_text_id?: true
-    yeshe_text_id?: true
-    derge_vol_number?: true
-    derge_start_page?: true
-    derge_end_page?: true
-    turning?: true
-    yana?: true
-    translation_period?: true
-    order_index?: true
-    created_at?: true
-    updated_at?: true
-  }
-
-  export type TextMetadataCountAggregateInputType = {
-    id?: true
-    text_id?: true
-    metadata_key?: true
-    metadata_value?: true
-    metadata_group?: true
-    label?: true
-    tibetan_title?: true
-    english_title?: true
-    sanskrit_title?: true
-    chinese_title?: true
-    derge_text_id?: true
-    yeshe_text_id?: true
-    derge_vol_number?: true
-    derge_start_page?: true
-    derge_end_page?: true
-    turning?: true
-    yana?: true
-    translation_period?: true
-    order_index?: true
-    created_at?: true
-    updated_at?: true
-    _all?: true
-  }
-
-  export type TextMetadataAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Filter which TextMetadata to aggregate.
-     */
-    where?: TextMetadataWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of TextMetadata to fetch.
-     */
-    orderBy?: TextMetadataOrderByWithRelationInput | TextMetadataOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the start position
-     */
-    cursor?: TextMetadataWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` TextMetadata from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` TextMetadata.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Count returned TextMetadata
-    **/
-    _count?: true | TextMetadataCountAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to average
-    **/
-    _avg?: TextMetadataAvgAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to sum
-    **/
-    _sum?: TextMetadataSumAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to find the minimum value
-    **/
-    _min?: TextMetadataMinAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to find the maximum value
-    **/
-    _max?: TextMetadataMaxAggregateInputType
-  }
-
-  export type GetTextMetadataAggregateType<T extends TextMetadataAggregateArgs> = {
-        [P in keyof T & keyof AggregateTextMetadata]: P extends '_count' | 'count'
-      ? T[P] extends true
-        ? number
-        : GetScalarType<T[P], AggregateTextMetadata[P]>
-      : GetScalarType<T[P], AggregateTextMetadata[P]>
-  }
-
-
-
-
-  export type TextMetadataGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: TextMetadataWhereInput
-    orderBy?: TextMetadataOrderByWithAggregationInput | TextMetadataOrderByWithAggregationInput[]
-    by: TextMetadataScalarFieldEnum[] | TextMetadataScalarFieldEnum
-    having?: TextMetadataScalarWhereWithAggregatesInput
-    take?: number
-    skip?: number
-    _count?: TextMetadataCountAggregateInputType | true
-    _avg?: TextMetadataAvgAggregateInputType
-    _sum?: TextMetadataSumAggregateInputType
-    _min?: TextMetadataMinAggregateInputType
-    _max?: TextMetadataMaxAggregateInputType
-  }
-
-  export type TextMetadataGroupByOutputType = {
-    id: string
-    text_id: string
-    metadata_key: string
-    metadata_value: string
-    metadata_group: string
-    label: string | null
-    tibetan_title: string | null
-    english_title: string | null
-    sanskrit_title: string | null
-    chinese_title: string | null
-    derge_text_id: string | null
-    yeshe_text_id: string | null
-    derge_vol_number: number | null
-    derge_start_page: number | null
-    derge_end_page: number | null
-    turning: string | null
-    yana: string | null
-    translation_period: string | null
-    order_index: number
-    created_at: Date
-    updated_at: Date
-    _count: TextMetadataCountAggregateOutputType | null
-    _avg: TextMetadataAvgAggregateOutputType | null
-    _sum: TextMetadataSumAggregateOutputType | null
-    _min: TextMetadataMinAggregateOutputType | null
-    _max: TextMetadataMaxAggregateOutputType | null
-  }
-
-  type GetTextMetadataGroupByPayload<T extends TextMetadataGroupByArgs> = Prisma.PrismaPromise<
-    Array<
-      PickEnumerable<TextMetadataGroupByOutputType, T['by']> &
-        {
-          [P in ((keyof T) & (keyof TextMetadataGroupByOutputType))]: P extends '_count'
-            ? T[P] extends boolean
-              ? number
-              : GetScalarType<T[P], TextMetadataGroupByOutputType[P]>
-            : GetScalarType<T[P], TextMetadataGroupByOutputType[P]>
-        }
-      >
-    >
-
-
-  export type TextMetadataSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
-    text_id?: boolean
-    metadata_key?: boolean
-    metadata_value?: boolean
-    metadata_group?: boolean
-    label?: boolean
-    tibetan_title?: boolean
-    english_title?: boolean
-    sanskrit_title?: boolean
-    chinese_title?: boolean
-    derge_text_id?: boolean
-    yeshe_text_id?: boolean
-    derge_vol_number?: boolean
-    derge_start_page?: boolean
-    derge_end_page?: boolean
-    turning?: boolean
-    yana?: boolean
-    translation_period?: boolean
-    order_index?: boolean
-    created_at?: boolean
-    updated_at?: boolean
-    text?: boolean | TextDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["textMetadata"]>
-
-  export type TextMetadataSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
-    text_id?: boolean
-    metadata_key?: boolean
-    metadata_value?: boolean
-    metadata_group?: boolean
-    label?: boolean
-    tibetan_title?: boolean
-    english_title?: boolean
-    sanskrit_title?: boolean
-    chinese_title?: boolean
-    derge_text_id?: boolean
-    yeshe_text_id?: boolean
-    derge_vol_number?: boolean
-    derge_start_page?: boolean
-    derge_end_page?: boolean
-    turning?: boolean
-    yana?: boolean
-    translation_period?: boolean
-    order_index?: boolean
-    created_at?: boolean
-    updated_at?: boolean
-    text?: boolean | TextDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["textMetadata"]>
-
-  export type TextMetadataSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
-    text_id?: boolean
-    metadata_key?: boolean
-    metadata_value?: boolean
-    metadata_group?: boolean
-    label?: boolean
-    tibetan_title?: boolean
-    english_title?: boolean
-    sanskrit_title?: boolean
-    chinese_title?: boolean
-    derge_text_id?: boolean
-    yeshe_text_id?: boolean
-    derge_vol_number?: boolean
-    derge_start_page?: boolean
-    derge_end_page?: boolean
-    turning?: boolean
-    yana?: boolean
-    translation_period?: boolean
-    order_index?: boolean
-    created_at?: boolean
-    updated_at?: boolean
-    text?: boolean | TextDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["textMetadata"]>
-
-  export type TextMetadataSelectScalar = {
-    id?: boolean
-    text_id?: boolean
-    metadata_key?: boolean
-    metadata_value?: boolean
-    metadata_group?: boolean
-    label?: boolean
-    tibetan_title?: boolean
-    english_title?: boolean
-    sanskrit_title?: boolean
-    chinese_title?: boolean
-    derge_text_id?: boolean
-    yeshe_text_id?: boolean
-    derge_vol_number?: boolean
-    derge_start_page?: boolean
-    derge_end_page?: boolean
-    turning?: boolean
-    yana?: boolean
-    translation_period?: boolean
-    order_index?: boolean
-    created_at?: boolean
-    updated_at?: boolean
-  }
-
-  export type TextMetadataOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "text_id" | "metadata_key" | "metadata_value" | "metadata_group" | "label" | "tibetan_title" | "english_title" | "sanskrit_title" | "chinese_title" | "derge_text_id" | "yeshe_text_id" | "derge_vol_number" | "derge_start_page" | "derge_end_page" | "turning" | "yana" | "translation_period" | "order_index" | "created_at" | "updated_at", ExtArgs["result"]["textMetadata"]>
-  export type TextMetadataInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    text?: boolean | TextDefaultArgs<ExtArgs>
-  }
-  export type TextMetadataIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    text?: boolean | TextDefaultArgs<ExtArgs>
-  }
-  export type TextMetadataIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    text?: boolean | TextDefaultArgs<ExtArgs>
-  }
-
-  export type $TextMetadataPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    name: "TextMetadata"
-    objects: {
-      text: Prisma.$TextPayload<ExtArgs>
-    }
-    scalars: $Extensions.GetPayloadResult<{
-      id: string
-      text_id: string
-      metadata_key: string
-      metadata_value: string
-      metadata_group: string
-      label: string | null
-      tibetan_title: string | null
-      english_title: string | null
-      sanskrit_title: string | null
-      chinese_title: string | null
-      derge_text_id: string | null
-      yeshe_text_id: string | null
-      derge_vol_number: number | null
-      derge_start_page: number | null
-      derge_end_page: number | null
-      turning: string | null
-      yana: string | null
-      translation_period: string | null
-      order_index: number
-      created_at: Date
-      updated_at: Date
-    }, ExtArgs["result"]["textMetadata"]>
-    composites: {}
-  }
-
-  type TextMetadataGetPayload<S extends boolean | null | undefined | TextMetadataDefaultArgs> = $Result.GetResult<Prisma.$TextMetadataPayload, S>
-
-  type TextMetadataCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
-    Omit<TextMetadataFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
-      select?: TextMetadataCountAggregateInputType | true
-    }
-
-  export interface TextMetadataDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
-    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['TextMetadata'], meta: { name: 'TextMetadata' } }
-    /**
-     * Find zero or one TextMetadata that matches the filter.
-     * @param {TextMetadataFindUniqueArgs} args - Arguments to find a TextMetadata
-     * @example
-     * // Get one TextMetadata
-     * const textMetadata = await prisma.textMetadata.findUnique({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findUnique<T extends TextMetadataFindUniqueArgs>(args: SelectSubset<T, TextMetadataFindUniqueArgs<ExtArgs>>): Prisma__TextMetadataClient<$Result.GetResult<Prisma.$TextMetadataPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find one TextMetadata that matches the filter or throw an error with `error.code='P2025'`
-     * if no matches were found.
-     * @param {TextMetadataFindUniqueOrThrowArgs} args - Arguments to find a TextMetadata
-     * @example
-     * // Get one TextMetadata
-     * const textMetadata = await prisma.textMetadata.findUniqueOrThrow({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findUniqueOrThrow<T extends TextMetadataFindUniqueOrThrowArgs>(args: SelectSubset<T, TextMetadataFindUniqueOrThrowArgs<ExtArgs>>): Prisma__TextMetadataClient<$Result.GetResult<Prisma.$TextMetadataPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find the first TextMetadata that matches the filter.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {TextMetadataFindFirstArgs} args - Arguments to find a TextMetadata
-     * @example
-     * // Get one TextMetadata
-     * const textMetadata = await prisma.textMetadata.findFirst({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findFirst<T extends TextMetadataFindFirstArgs>(args?: SelectSubset<T, TextMetadataFindFirstArgs<ExtArgs>>): Prisma__TextMetadataClient<$Result.GetResult<Prisma.$TextMetadataPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find the first TextMetadata that matches the filter or
-     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {TextMetadataFindFirstOrThrowArgs} args - Arguments to find a TextMetadata
-     * @example
-     * // Get one TextMetadata
-     * const textMetadata = await prisma.textMetadata.findFirstOrThrow({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findFirstOrThrow<T extends TextMetadataFindFirstOrThrowArgs>(args?: SelectSubset<T, TextMetadataFindFirstOrThrowArgs<ExtArgs>>): Prisma__TextMetadataClient<$Result.GetResult<Prisma.$TextMetadataPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find zero or more TextMetadata that matches the filter.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {TextMetadataFindManyArgs} args - Arguments to filter and select certain fields only.
-     * @example
-     * // Get all TextMetadata
-     * const textMetadata = await prisma.textMetadata.findMany()
-     * 
-     * // Get first 10 TextMetadata
-     * const textMetadata = await prisma.textMetadata.findMany({ take: 10 })
-     * 
-     * // Only select the `id`
-     * const textMetadataWithIdOnly = await prisma.textMetadata.findMany({ select: { id: true } })
-     * 
-     */
-    findMany<T extends TextMetadataFindManyArgs>(args?: SelectSubset<T, TextMetadataFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TextMetadataPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
-
-    /**
-     * Create a TextMetadata.
-     * @param {TextMetadataCreateArgs} args - Arguments to create a TextMetadata.
-     * @example
-     * // Create one TextMetadata
-     * const TextMetadata = await prisma.textMetadata.create({
-     *   data: {
-     *     // ... data to create a TextMetadata
-     *   }
-     * })
-     * 
-     */
-    create<T extends TextMetadataCreateArgs>(args: SelectSubset<T, TextMetadataCreateArgs<ExtArgs>>): Prisma__TextMetadataClient<$Result.GetResult<Prisma.$TextMetadataPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Create many TextMetadata.
-     * @param {TextMetadataCreateManyArgs} args - Arguments to create many TextMetadata.
-     * @example
-     * // Create many TextMetadata
-     * const textMetadata = await prisma.textMetadata.createMany({
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     *     
-     */
-    createMany<T extends TextMetadataCreateManyArgs>(args?: SelectSubset<T, TextMetadataCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Create many TextMetadata and returns the data saved in the database.
-     * @param {TextMetadataCreateManyAndReturnArgs} args - Arguments to create many TextMetadata.
-     * @example
-     * // Create many TextMetadata
-     * const textMetadata = await prisma.textMetadata.createManyAndReturn({
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * 
-     * // Create many TextMetadata and only return the `id`
-     * const textMetadataWithIdOnly = await prisma.textMetadata.createManyAndReturn({
-     *   select: { id: true },
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * 
-     */
-    createManyAndReturn<T extends TextMetadataCreateManyAndReturnArgs>(args?: SelectSubset<T, TextMetadataCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TextMetadataPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
-
-    /**
-     * Delete a TextMetadata.
-     * @param {TextMetadataDeleteArgs} args - Arguments to delete one TextMetadata.
-     * @example
-     * // Delete one TextMetadata
-     * const TextMetadata = await prisma.textMetadata.delete({
-     *   where: {
-     *     // ... filter to delete one TextMetadata
-     *   }
-     * })
-     * 
-     */
-    delete<T extends TextMetadataDeleteArgs>(args: SelectSubset<T, TextMetadataDeleteArgs<ExtArgs>>): Prisma__TextMetadataClient<$Result.GetResult<Prisma.$TextMetadataPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Update one TextMetadata.
-     * @param {TextMetadataUpdateArgs} args - Arguments to update one TextMetadata.
-     * @example
-     * // Update one TextMetadata
-     * const textMetadata = await prisma.textMetadata.update({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: {
-     *     // ... provide data here
-     *   }
-     * })
-     * 
-     */
-    update<T extends TextMetadataUpdateArgs>(args: SelectSubset<T, TextMetadataUpdateArgs<ExtArgs>>): Prisma__TextMetadataClient<$Result.GetResult<Prisma.$TextMetadataPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Delete zero or more TextMetadata.
-     * @param {TextMetadataDeleteManyArgs} args - Arguments to filter TextMetadata to delete.
-     * @example
-     * // Delete a few TextMetadata
-     * const { count } = await prisma.textMetadata.deleteMany({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     * 
-     */
-    deleteMany<T extends TextMetadataDeleteManyArgs>(args?: SelectSubset<T, TextMetadataDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Update zero or more TextMetadata.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {TextMetadataUpdateManyArgs} args - Arguments to update one or more rows.
-     * @example
-     * // Update many TextMetadata
-     * const textMetadata = await prisma.textMetadata.updateMany({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: {
-     *     // ... provide data here
-     *   }
-     * })
-     * 
-     */
-    updateMany<T extends TextMetadataUpdateManyArgs>(args: SelectSubset<T, TextMetadataUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Update zero or more TextMetadata and returns the data updated in the database.
-     * @param {TextMetadataUpdateManyAndReturnArgs} args - Arguments to update many TextMetadata.
-     * @example
-     * // Update many TextMetadata
-     * const textMetadata = await prisma.textMetadata.updateManyAndReturn({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * 
-     * // Update zero or more TextMetadata and only return the `id`
-     * const textMetadataWithIdOnly = await prisma.textMetadata.updateManyAndReturn({
-     *   select: { id: true },
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * 
-     */
-    updateManyAndReturn<T extends TextMetadataUpdateManyAndReturnArgs>(args: SelectSubset<T, TextMetadataUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TextMetadataPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
-
-    /**
-     * Create or update one TextMetadata.
-     * @param {TextMetadataUpsertArgs} args - Arguments to update or create a TextMetadata.
-     * @example
-     * // Update or create a TextMetadata
-     * const textMetadata = await prisma.textMetadata.upsert({
-     *   create: {
-     *     // ... data to create a TextMetadata
-     *   },
-     *   update: {
-     *     // ... in case it already exists, update
-     *   },
-     *   where: {
-     *     // ... the filter for the TextMetadata we want to update
-     *   }
-     * })
-     */
-    upsert<T extends TextMetadataUpsertArgs>(args: SelectSubset<T, TextMetadataUpsertArgs<ExtArgs>>): Prisma__TextMetadataClient<$Result.GetResult<Prisma.$TextMetadataPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-
-    /**
-     * Count the number of TextMetadata.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {TextMetadataCountArgs} args - Arguments to filter TextMetadata to count.
-     * @example
-     * // Count the number of TextMetadata
-     * const count = await prisma.textMetadata.count({
-     *   where: {
-     *     // ... the filter for the TextMetadata we want to count
-     *   }
-     * })
-    **/
-    count<T extends TextMetadataCountArgs>(
-      args?: Subset<T, TextMetadataCountArgs>,
-    ): Prisma.PrismaPromise<
-      T extends $Utils.Record<'select', any>
-        ? T['select'] extends true
-          ? number
-          : GetScalarType<T['select'], TextMetadataCountAggregateOutputType>
-        : number
-    >
-
-    /**
-     * Allows you to perform aggregations operations on a TextMetadata.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {TextMetadataAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
-     * @example
-     * // Ordered by age ascending
-     * // Where email contains prisma.io
-     * // Limited to the 10 users
-     * const aggregations = await prisma.user.aggregate({
-     *   _avg: {
-     *     age: true,
-     *   },
-     *   where: {
-     *     email: {
-     *       contains: "prisma.io",
-     *     },
-     *   },
-     *   orderBy: {
-     *     age: "asc",
-     *   },
-     *   take: 10,
-     * })
-    **/
-    aggregate<T extends TextMetadataAggregateArgs>(args: Subset<T, TextMetadataAggregateArgs>): Prisma.PrismaPromise<GetTextMetadataAggregateType<T>>
-
-    /**
-     * Group by TextMetadata.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {TextMetadataGroupByArgs} args - Group by arguments.
-     * @example
-     * // Group by city, order by createdAt, get count
-     * const result = await prisma.user.groupBy({
-     *   by: ['city', 'createdAt'],
-     *   orderBy: {
-     *     createdAt: true
-     *   },
-     *   _count: {
-     *     _all: true
-     *   },
-     * })
-     * 
-    **/
-    groupBy<
-      T extends TextMetadataGroupByArgs,
-      HasSelectOrTake extends Or<
-        Extends<'skip', Keys<T>>,
-        Extends<'take', Keys<T>>
-      >,
-      OrderByArg extends True extends HasSelectOrTake
-        ? { orderBy: TextMetadataGroupByArgs['orderBy'] }
-        : { orderBy?: TextMetadataGroupByArgs['orderBy'] },
-      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
-      ByFields extends MaybeTupleToUnion<T['by']>,
-      ByValid extends Has<ByFields, OrderFields>,
-      HavingFields extends GetHavingFields<T['having']>,
-      HavingValid extends Has<ByFields, HavingFields>,
-      ByEmpty extends T['by'] extends never[] ? True : False,
-      InputErrors extends ByEmpty extends True
-      ? `Error: "by" must not be empty.`
-      : HavingValid extends False
-      ? {
-          [P in HavingFields]: P extends ByFields
-            ? never
-            : P extends string
-            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
-            : [
-                Error,
-                'Field ',
-                P,
-                ` in "having" needs to be provided in "by"`,
-              ]
-        }[HavingFields]
-      : 'take' extends Keys<T>
-      ? 'orderBy' extends Keys<T>
-        ? ByValid extends True
-          ? {}
-          : {
-              [P in OrderFields]: P extends ByFields
-                ? never
-                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-            }[OrderFields]
-        : 'Error: If you provide "take", you also need to provide "orderBy"'
-      : 'skip' extends Keys<T>
-      ? 'orderBy' extends Keys<T>
-        ? ByValid extends True
-          ? {}
-          : {
-              [P in OrderFields]: P extends ByFields
-                ? never
-                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-            }[OrderFields]
-        : 'Error: If you provide "skip", you also need to provide "orderBy"'
-      : ByValid extends True
-      ? {}
-      : {
-          [P in OrderFields]: P extends ByFields
-            ? never
-            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-        }[OrderFields]
-    >(args: SubsetIntersection<T, TextMetadataGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetTextMetadataGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
-  /**
-   * Fields of the TextMetadata model
-   */
-  readonly fields: TextMetadataFieldRefs;
-  }
-
-  /**
-   * The delegate class that acts as a "Promise-like" for TextMetadata.
-   * Why is this prefixed with `Prisma__`?
-   * Because we want to prevent naming conflicts as mentioned in
-   * https://github.com/prisma/prisma-client-js/issues/707
-   */
-  export interface Prisma__TextMetadataClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
-    readonly [Symbol.toStringTag]: "PrismaPromise"
-    text<T extends TextDefaultArgs<ExtArgs> = {}>(args?: Subset<T, TextDefaultArgs<ExtArgs>>): Prisma__TextClient<$Result.GetResult<Prisma.$TextPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-    /**
-     * Attaches callbacks for the resolution and/or rejection of the Promise.
-     * @param onfulfilled The callback to execute when the Promise is resolved.
-     * @param onrejected The callback to execute when the Promise is rejected.
-     * @returns A Promise for the completion of which ever callback is executed.
-     */
-    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
-    /**
-     * Attaches a callback for only the rejection of the Promise.
-     * @param onrejected The callback to execute when the Promise is rejected.
-     * @returns A Promise for the completion of the callback.
-     */
-    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
-    /**
-     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
-     * resolved value cannot be modified from the callback.
-     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
-     * @returns A Promise for the completion of the callback.
-     */
-    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
-  }
-
-
-
-
-  /**
-   * Fields of the TextMetadata model
-   */
-  interface TextMetadataFieldRefs {
-    readonly id: FieldRef<"TextMetadata", 'String'>
-    readonly text_id: FieldRef<"TextMetadata", 'String'>
-    readonly metadata_key: FieldRef<"TextMetadata", 'String'>
-    readonly metadata_value: FieldRef<"TextMetadata", 'String'>
-    readonly metadata_group: FieldRef<"TextMetadata", 'String'>
-    readonly label: FieldRef<"TextMetadata", 'String'>
-    readonly tibetan_title: FieldRef<"TextMetadata", 'String'>
-    readonly english_title: FieldRef<"TextMetadata", 'String'>
-    readonly sanskrit_title: FieldRef<"TextMetadata", 'String'>
-    readonly chinese_title: FieldRef<"TextMetadata", 'String'>
-    readonly derge_text_id: FieldRef<"TextMetadata", 'String'>
-    readonly yeshe_text_id: FieldRef<"TextMetadata", 'String'>
-    readonly derge_vol_number: FieldRef<"TextMetadata", 'Int'>
-    readonly derge_start_page: FieldRef<"TextMetadata", 'Int'>
-    readonly derge_end_page: FieldRef<"TextMetadata", 'Int'>
-    readonly turning: FieldRef<"TextMetadata", 'String'>
-    readonly yana: FieldRef<"TextMetadata", 'String'>
-    readonly translation_period: FieldRef<"TextMetadata", 'String'>
-    readonly order_index: FieldRef<"TextMetadata", 'Int'>
-    readonly created_at: FieldRef<"TextMetadata", 'DateTime'>
-    readonly updated_at: FieldRef<"TextMetadata", 'DateTime'>
-  }
-    
-
-  // Custom InputTypes
-  /**
-   * TextMetadata findUnique
-   */
-  export type TextMetadataFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the TextMetadata
-     */
-    select?: TextMetadataSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the TextMetadata
-     */
-    omit?: TextMetadataOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: TextMetadataInclude<ExtArgs> | null
-    /**
-     * Filter, which TextMetadata to fetch.
-     */
-    where: TextMetadataWhereUniqueInput
-  }
-
-  /**
-   * TextMetadata findUniqueOrThrow
-   */
-  export type TextMetadataFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the TextMetadata
-     */
-    select?: TextMetadataSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the TextMetadata
-     */
-    omit?: TextMetadataOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: TextMetadataInclude<ExtArgs> | null
-    /**
-     * Filter, which TextMetadata to fetch.
-     */
-    where: TextMetadataWhereUniqueInput
-  }
-
-  /**
-   * TextMetadata findFirst
-   */
-  export type TextMetadataFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the TextMetadata
-     */
-    select?: TextMetadataSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the TextMetadata
-     */
-    omit?: TextMetadataOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: TextMetadataInclude<ExtArgs> | null
-    /**
-     * Filter, which TextMetadata to fetch.
-     */
-    where?: TextMetadataWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of TextMetadata to fetch.
-     */
-    orderBy?: TextMetadataOrderByWithRelationInput | TextMetadataOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for searching for TextMetadata.
-     */
-    cursor?: TextMetadataWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` TextMetadata from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` TextMetadata.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
-     * Filter by unique combinations of TextMetadata.
-     */
-    distinct?: TextMetadataScalarFieldEnum | TextMetadataScalarFieldEnum[]
-  }
-
-  /**
-   * TextMetadata findFirstOrThrow
-   */
-  export type TextMetadataFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the TextMetadata
-     */
-    select?: TextMetadataSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the TextMetadata
-     */
-    omit?: TextMetadataOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: TextMetadataInclude<ExtArgs> | null
-    /**
-     * Filter, which TextMetadata to fetch.
-     */
-    where?: TextMetadataWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of TextMetadata to fetch.
-     */
-    orderBy?: TextMetadataOrderByWithRelationInput | TextMetadataOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for searching for TextMetadata.
-     */
-    cursor?: TextMetadataWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` TextMetadata from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` TextMetadata.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
-     * Filter by unique combinations of TextMetadata.
-     */
-    distinct?: TextMetadataScalarFieldEnum | TextMetadataScalarFieldEnum[]
-  }
-
-  /**
-   * TextMetadata findMany
-   */
-  export type TextMetadataFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the TextMetadata
-     */
-    select?: TextMetadataSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the TextMetadata
-     */
-    omit?: TextMetadataOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: TextMetadataInclude<ExtArgs> | null
-    /**
-     * Filter, which TextMetadata to fetch.
-     */
-    where?: TextMetadataWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of TextMetadata to fetch.
-     */
-    orderBy?: TextMetadataOrderByWithRelationInput | TextMetadataOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for listing TextMetadata.
-     */
-    cursor?: TextMetadataWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` TextMetadata from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` TextMetadata.
-     */
-    skip?: number
-    distinct?: TextMetadataScalarFieldEnum | TextMetadataScalarFieldEnum[]
-  }
-
-  /**
-   * TextMetadata create
-   */
-  export type TextMetadataCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the TextMetadata
-     */
-    select?: TextMetadataSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the TextMetadata
-     */
-    omit?: TextMetadataOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: TextMetadataInclude<ExtArgs> | null
-    /**
-     * The data needed to create a TextMetadata.
-     */
-    data: XOR<TextMetadataCreateInput, TextMetadataUncheckedCreateInput>
-  }
-
-  /**
-   * TextMetadata createMany
-   */
-  export type TextMetadataCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * The data used to create many TextMetadata.
-     */
-    data: TextMetadataCreateManyInput | TextMetadataCreateManyInput[]
-    skipDuplicates?: boolean
-  }
-
-  /**
-   * TextMetadata createManyAndReturn
-   */
-  export type TextMetadataCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the TextMetadata
-     */
-    select?: TextMetadataSelectCreateManyAndReturn<ExtArgs> | null
-    /**
-     * Omit specific fields from the TextMetadata
-     */
-    omit?: TextMetadataOmit<ExtArgs> | null
-    /**
-     * The data used to create many TextMetadata.
-     */
-    data: TextMetadataCreateManyInput | TextMetadataCreateManyInput[]
-    skipDuplicates?: boolean
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: TextMetadataIncludeCreateManyAndReturn<ExtArgs> | null
-  }
-
-  /**
-   * TextMetadata update
-   */
-  export type TextMetadataUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the TextMetadata
-     */
-    select?: TextMetadataSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the TextMetadata
-     */
-    omit?: TextMetadataOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: TextMetadataInclude<ExtArgs> | null
-    /**
-     * The data needed to update a TextMetadata.
-     */
-    data: XOR<TextMetadataUpdateInput, TextMetadataUncheckedUpdateInput>
-    /**
-     * Choose, which TextMetadata to update.
-     */
-    where: TextMetadataWhereUniqueInput
-  }
-
-  /**
-   * TextMetadata updateMany
-   */
-  export type TextMetadataUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * The data used to update TextMetadata.
-     */
-    data: XOR<TextMetadataUpdateManyMutationInput, TextMetadataUncheckedUpdateManyInput>
-    /**
-     * Filter which TextMetadata to update
-     */
-    where?: TextMetadataWhereInput
-    /**
-     * Limit how many TextMetadata to update.
-     */
-    limit?: number
-  }
-
-  /**
-   * TextMetadata updateManyAndReturn
-   */
-  export type TextMetadataUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the TextMetadata
-     */
-    select?: TextMetadataSelectUpdateManyAndReturn<ExtArgs> | null
-    /**
-     * Omit specific fields from the TextMetadata
-     */
-    omit?: TextMetadataOmit<ExtArgs> | null
-    /**
-     * The data used to update TextMetadata.
-     */
-    data: XOR<TextMetadataUpdateManyMutationInput, TextMetadataUncheckedUpdateManyInput>
-    /**
-     * Filter which TextMetadata to update
-     */
-    where?: TextMetadataWhereInput
-    /**
-     * Limit how many TextMetadata to update.
-     */
-    limit?: number
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: TextMetadataIncludeUpdateManyAndReturn<ExtArgs> | null
-  }
-
-  /**
-   * TextMetadata upsert
-   */
-  export type TextMetadataUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the TextMetadata
-     */
-    select?: TextMetadataSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the TextMetadata
-     */
-    omit?: TextMetadataOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: TextMetadataInclude<ExtArgs> | null
-    /**
-     * The filter to search for the TextMetadata to update in case it exists.
-     */
-    where: TextMetadataWhereUniqueInput
-    /**
-     * In case the TextMetadata found by the `where` argument doesn't exist, create a new TextMetadata with this data.
-     */
-    create: XOR<TextMetadataCreateInput, TextMetadataUncheckedCreateInput>
-    /**
-     * In case the TextMetadata was found with the provided `where` argument, update it with this data.
-     */
-    update: XOR<TextMetadataUpdateInput, TextMetadataUncheckedUpdateInput>
-  }
-
-  /**
-   * TextMetadata delete
-   */
-  export type TextMetadataDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the TextMetadata
-     */
-    select?: TextMetadataSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the TextMetadata
-     */
-    omit?: TextMetadataOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: TextMetadataInclude<ExtArgs> | null
-    /**
-     * Filter which TextMetadata to delete.
-     */
-    where: TextMetadataWhereUniqueInput
-  }
-
-  /**
-   * TextMetadata deleteMany
-   */
-  export type TextMetadataDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Filter which TextMetadata to delete
-     */
-    where?: TextMetadataWhereInput
-    /**
-     * Limit how many TextMetadata to delete.
-     */
-    limit?: number
-  }
-
-  /**
-   * TextMetadata without action
-   */
-  export type TextMetadataDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the TextMetadata
-     */
-    select?: TextMetadataSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the TextMetadata
-     */
-    omit?: TextMetadataOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: TextMetadataInclude<ExtArgs> | null
-  }
-
-
-  /**
-   * Model Edition
-   */
-
-  export type AggregateEdition = {
-    _count: EditionCountAggregateOutputType | null
-    _avg: EditionAvgAggregateOutputType | null
-    _sum: EditionSumAggregateOutputType | null
-    _min: EditionMinAggregateOutputType | null
-    _max: EditionMaxAggregateOutputType | null
-  }
-
-  export type EditionAvgAggregateOutputType = {
-    total_volumes: number | null
-    total_texts: number | null
-  }
-
-  export type EditionSumAggregateOutputType = {
-    total_volumes: number | null
-    total_texts: number | null
-  }
-
-  export type EditionMinAggregateOutputType = {
-    id: string | null
-    name_english: string | null
-    name_tibetan: string | null
-    description_english: string | null
-    description_tibetan: string | null
-    year: string | null
-    location: string | null
-    total_volumes: number | null
-    total_texts: number | null
-    is_active: boolean | null
-    created_at: Date | null
-    updated_at: Date | null
-  }
-
-  export type EditionMaxAggregateOutputType = {
-    id: string | null
-    name_english: string | null
-    name_tibetan: string | null
-    description_english: string | null
-    description_tibetan: string | null
-    year: string | null
-    location: string | null
-    total_volumes: number | null
-    total_texts: number | null
-    is_active: boolean | null
-    created_at: Date | null
-    updated_at: Date | null
-  }
-
-  export type EditionCountAggregateOutputType = {
-    id: number
-    name_english: number
-    name_tibetan: number
-    description_english: number
-    description_tibetan: number
-    year: number
-    location: number
-    total_volumes: number
-    total_texts: number
-    is_active: number
-    created_at: number
-    updated_at: number
-    _all: number
-  }
-
-
-  export type EditionAvgAggregateInputType = {
-    total_volumes?: true
-    total_texts?: true
-  }
-
-  export type EditionSumAggregateInputType = {
-    total_volumes?: true
-    total_texts?: true
-  }
-
-  export type EditionMinAggregateInputType = {
-    id?: true
-    name_english?: true
-    name_tibetan?: true
-    description_english?: true
-    description_tibetan?: true
-    year?: true
-    location?: true
-    total_volumes?: true
-    total_texts?: true
-    is_active?: true
-    created_at?: true
-    updated_at?: true
-  }
-
-  export type EditionMaxAggregateInputType = {
-    id?: true
-    name_english?: true
-    name_tibetan?: true
-    description_english?: true
-    description_tibetan?: true
-    year?: true
-    location?: true
-    total_volumes?: true
-    total_texts?: true
-    is_active?: true
-    created_at?: true
-    updated_at?: true
-  }
-
-  export type EditionCountAggregateInputType = {
-    id?: true
-    name_english?: true
-    name_tibetan?: true
-    description_english?: true
-    description_tibetan?: true
-    year?: true
-    location?: true
-    total_volumes?: true
-    total_texts?: true
-    is_active?: true
-    created_at?: true
-    updated_at?: true
-    _all?: true
-  }
-
-  export type EditionAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Filter which Edition to aggregate.
-     */
-    where?: EditionWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of Editions to fetch.
-     */
-    orderBy?: EditionOrderByWithRelationInput | EditionOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the start position
-     */
-    cursor?: EditionWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` Editions from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` Editions.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Count returned Editions
-    **/
-    _count?: true | EditionCountAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to average
-    **/
-    _avg?: EditionAvgAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to sum
-    **/
-    _sum?: EditionSumAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to find the minimum value
-    **/
-    _min?: EditionMinAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to find the maximum value
-    **/
-    _max?: EditionMaxAggregateInputType
-  }
-
-  export type GetEditionAggregateType<T extends EditionAggregateArgs> = {
-        [P in keyof T & keyof AggregateEdition]: P extends '_count' | 'count'
-      ? T[P] extends true
-        ? number
-        : GetScalarType<T[P], AggregateEdition[P]>
-      : GetScalarType<T[P], AggregateEdition[P]>
-  }
-
-
-
-
-  export type EditionGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: EditionWhereInput
-    orderBy?: EditionOrderByWithAggregationInput | EditionOrderByWithAggregationInput[]
-    by: EditionScalarFieldEnum[] | EditionScalarFieldEnum
-    having?: EditionScalarWhereWithAggregatesInput
-    take?: number
-    skip?: number
-    _count?: EditionCountAggregateInputType | true
-    _avg?: EditionAvgAggregateInputType
-    _sum?: EditionSumAggregateInputType
-    _min?: EditionMinAggregateInputType
-    _max?: EditionMaxAggregateInputType
-  }
-
-  export type EditionGroupByOutputType = {
-    id: string
-    name_english: string
-    name_tibetan: string | null
-    description_english: string | null
-    description_tibetan: string | null
-    year: string | null
-    location: string | null
-    total_volumes: number | null
-    total_texts: number | null
-    is_active: boolean
-    created_at: Date
-    updated_at: Date
-    _count: EditionCountAggregateOutputType | null
-    _avg: EditionAvgAggregateOutputType | null
-    _sum: EditionSumAggregateOutputType | null
-    _min: EditionMinAggregateOutputType | null
-    _max: EditionMaxAggregateOutputType | null
-  }
-
-  type GetEditionGroupByPayload<T extends EditionGroupByArgs> = Prisma.PrismaPromise<
-    Array<
-      PickEnumerable<EditionGroupByOutputType, T['by']> &
-        {
-          [P in ((keyof T) & (keyof EditionGroupByOutputType))]: P extends '_count'
-            ? T[P] extends boolean
-              ? number
-              : GetScalarType<T[P], EditionGroupByOutputType[P]>
-            : GetScalarType<T[P], EditionGroupByOutputType[P]>
-        }
-      >
-    >
-
-
-  export type EditionSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
-    name_english?: boolean
-    name_tibetan?: boolean
-    description_english?: boolean
-    description_tibetan?: boolean
-    year?: boolean
-    location?: boolean
-    total_volumes?: boolean
-    total_texts?: boolean
-    is_active?: boolean
-    created_at?: boolean
-    updated_at?: boolean
-    textEditions?: boolean | Edition$textEditionsArgs<ExtArgs>
-    _count?: boolean | EditionCountOutputTypeDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["edition"]>
-
-  export type EditionSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
-    name_english?: boolean
-    name_tibetan?: boolean
-    description_english?: boolean
-    description_tibetan?: boolean
-    year?: boolean
-    location?: boolean
-    total_volumes?: boolean
-    total_texts?: boolean
-    is_active?: boolean
-    created_at?: boolean
-    updated_at?: boolean
-  }, ExtArgs["result"]["edition"]>
-
-  export type EditionSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
-    name_english?: boolean
-    name_tibetan?: boolean
-    description_english?: boolean
-    description_tibetan?: boolean
-    year?: boolean
-    location?: boolean
-    total_volumes?: boolean
-    total_texts?: boolean
-    is_active?: boolean
-    created_at?: boolean
-    updated_at?: boolean
-  }, ExtArgs["result"]["edition"]>
-
-  export type EditionSelectScalar = {
-    id?: boolean
-    name_english?: boolean
-    name_tibetan?: boolean
-    description_english?: boolean
-    description_tibetan?: boolean
-    year?: boolean
-    location?: boolean
-    total_volumes?: boolean
-    total_texts?: boolean
-    is_active?: boolean
-    created_at?: boolean
-    updated_at?: boolean
-  }
-
-  export type EditionOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name_english" | "name_tibetan" | "description_english" | "description_tibetan" | "year" | "location" | "total_volumes" | "total_texts" | "is_active" | "created_at" | "updated_at", ExtArgs["result"]["edition"]>
-  export type EditionInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    textEditions?: boolean | Edition$textEditionsArgs<ExtArgs>
-    _count?: boolean | EditionCountOutputTypeDefaultArgs<ExtArgs>
-  }
-  export type EditionIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
-  export type EditionIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
-
-  export type $EditionPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    name: "Edition"
-    objects: {
-      textEditions: Prisma.$TextEditionPayload<ExtArgs>[]
-    }
-    scalars: $Extensions.GetPayloadResult<{
-      id: string
-      name_english: string
-      name_tibetan: string | null
-      description_english: string | null
-      description_tibetan: string | null
-      year: string | null
-      location: string | null
-      total_volumes: number | null
-      total_texts: number | null
-      is_active: boolean
-      created_at: Date
-      updated_at: Date
-    }, ExtArgs["result"]["edition"]>
-    composites: {}
-  }
-
-  type EditionGetPayload<S extends boolean | null | undefined | EditionDefaultArgs> = $Result.GetResult<Prisma.$EditionPayload, S>
-
-  type EditionCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
-    Omit<EditionFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
-      select?: EditionCountAggregateInputType | true
-    }
-
-  export interface EditionDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
-    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Edition'], meta: { name: 'Edition' } }
-    /**
-     * Find zero or one Edition that matches the filter.
-     * @param {EditionFindUniqueArgs} args - Arguments to find a Edition
-     * @example
-     * // Get one Edition
-     * const edition = await prisma.edition.findUnique({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findUnique<T extends EditionFindUniqueArgs>(args: SelectSubset<T, EditionFindUniqueArgs<ExtArgs>>): Prisma__EditionClient<$Result.GetResult<Prisma.$EditionPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find one Edition that matches the filter or throw an error with `error.code='P2025'`
-     * if no matches were found.
-     * @param {EditionFindUniqueOrThrowArgs} args - Arguments to find a Edition
-     * @example
-     * // Get one Edition
-     * const edition = await prisma.edition.findUniqueOrThrow({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findUniqueOrThrow<T extends EditionFindUniqueOrThrowArgs>(args: SelectSubset<T, EditionFindUniqueOrThrowArgs<ExtArgs>>): Prisma__EditionClient<$Result.GetResult<Prisma.$EditionPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find the first Edition that matches the filter.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {EditionFindFirstArgs} args - Arguments to find a Edition
-     * @example
-     * // Get one Edition
-     * const edition = await prisma.edition.findFirst({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findFirst<T extends EditionFindFirstArgs>(args?: SelectSubset<T, EditionFindFirstArgs<ExtArgs>>): Prisma__EditionClient<$Result.GetResult<Prisma.$EditionPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find the first Edition that matches the filter or
-     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {EditionFindFirstOrThrowArgs} args - Arguments to find a Edition
-     * @example
-     * // Get one Edition
-     * const edition = await prisma.edition.findFirstOrThrow({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findFirstOrThrow<T extends EditionFindFirstOrThrowArgs>(args?: SelectSubset<T, EditionFindFirstOrThrowArgs<ExtArgs>>): Prisma__EditionClient<$Result.GetResult<Prisma.$EditionPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find zero or more Editions that matches the filter.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {EditionFindManyArgs} args - Arguments to filter and select certain fields only.
-     * @example
-     * // Get all Editions
-     * const editions = await prisma.edition.findMany()
-     * 
-     * // Get first 10 Editions
-     * const editions = await prisma.edition.findMany({ take: 10 })
-     * 
-     * // Only select the `id`
-     * const editionWithIdOnly = await prisma.edition.findMany({ select: { id: true } })
-     * 
-     */
-    findMany<T extends EditionFindManyArgs>(args?: SelectSubset<T, EditionFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$EditionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
-
-    /**
-     * Create a Edition.
-     * @param {EditionCreateArgs} args - Arguments to create a Edition.
-     * @example
-     * // Create one Edition
-     * const Edition = await prisma.edition.create({
-     *   data: {
-     *     // ... data to create a Edition
-     *   }
-     * })
-     * 
-     */
-    create<T extends EditionCreateArgs>(args: SelectSubset<T, EditionCreateArgs<ExtArgs>>): Prisma__EditionClient<$Result.GetResult<Prisma.$EditionPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Create many Editions.
-     * @param {EditionCreateManyArgs} args - Arguments to create many Editions.
-     * @example
-     * // Create many Editions
-     * const edition = await prisma.edition.createMany({
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     *     
-     */
-    createMany<T extends EditionCreateManyArgs>(args?: SelectSubset<T, EditionCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Create many Editions and returns the data saved in the database.
-     * @param {EditionCreateManyAndReturnArgs} args - Arguments to create many Editions.
-     * @example
-     * // Create many Editions
-     * const edition = await prisma.edition.createManyAndReturn({
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * 
-     * // Create many Editions and only return the `id`
-     * const editionWithIdOnly = await prisma.edition.createManyAndReturn({
-     *   select: { id: true },
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * 
-     */
-    createManyAndReturn<T extends EditionCreateManyAndReturnArgs>(args?: SelectSubset<T, EditionCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$EditionPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
-
-    /**
-     * Delete a Edition.
-     * @param {EditionDeleteArgs} args - Arguments to delete one Edition.
-     * @example
-     * // Delete one Edition
-     * const Edition = await prisma.edition.delete({
-     *   where: {
-     *     // ... filter to delete one Edition
-     *   }
-     * })
-     * 
-     */
-    delete<T extends EditionDeleteArgs>(args: SelectSubset<T, EditionDeleteArgs<ExtArgs>>): Prisma__EditionClient<$Result.GetResult<Prisma.$EditionPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Update one Edition.
-     * @param {EditionUpdateArgs} args - Arguments to update one Edition.
-     * @example
-     * // Update one Edition
-     * const edition = await prisma.edition.update({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: {
-     *     // ... provide data here
-     *   }
-     * })
-     * 
-     */
-    update<T extends EditionUpdateArgs>(args: SelectSubset<T, EditionUpdateArgs<ExtArgs>>): Prisma__EditionClient<$Result.GetResult<Prisma.$EditionPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Delete zero or more Editions.
-     * @param {EditionDeleteManyArgs} args - Arguments to filter Editions to delete.
-     * @example
-     * // Delete a few Editions
-     * const { count } = await prisma.edition.deleteMany({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     * 
-     */
-    deleteMany<T extends EditionDeleteManyArgs>(args?: SelectSubset<T, EditionDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Update zero or more Editions.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {EditionUpdateManyArgs} args - Arguments to update one or more rows.
-     * @example
-     * // Update many Editions
-     * const edition = await prisma.edition.updateMany({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: {
-     *     // ... provide data here
-     *   }
-     * })
-     * 
-     */
-    updateMany<T extends EditionUpdateManyArgs>(args: SelectSubset<T, EditionUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Update zero or more Editions and returns the data updated in the database.
-     * @param {EditionUpdateManyAndReturnArgs} args - Arguments to update many Editions.
-     * @example
-     * // Update many Editions
-     * const edition = await prisma.edition.updateManyAndReturn({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * 
-     * // Update zero or more Editions and only return the `id`
-     * const editionWithIdOnly = await prisma.edition.updateManyAndReturn({
-     *   select: { id: true },
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * 
-     */
-    updateManyAndReturn<T extends EditionUpdateManyAndReturnArgs>(args: SelectSubset<T, EditionUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$EditionPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
-
-    /**
-     * Create or update one Edition.
-     * @param {EditionUpsertArgs} args - Arguments to update or create a Edition.
-     * @example
-     * // Update or create a Edition
-     * const edition = await prisma.edition.upsert({
-     *   create: {
-     *     // ... data to create a Edition
-     *   },
-     *   update: {
-     *     // ... in case it already exists, update
-     *   },
-     *   where: {
-     *     // ... the filter for the Edition we want to update
-     *   }
-     * })
-     */
-    upsert<T extends EditionUpsertArgs>(args: SelectSubset<T, EditionUpsertArgs<ExtArgs>>): Prisma__EditionClient<$Result.GetResult<Prisma.$EditionPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-
-    /**
-     * Count the number of Editions.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {EditionCountArgs} args - Arguments to filter Editions to count.
-     * @example
-     * // Count the number of Editions
-     * const count = await prisma.edition.count({
-     *   where: {
-     *     // ... the filter for the Editions we want to count
-     *   }
-     * })
-    **/
-    count<T extends EditionCountArgs>(
-      args?: Subset<T, EditionCountArgs>,
-    ): Prisma.PrismaPromise<
-      T extends $Utils.Record<'select', any>
-        ? T['select'] extends true
-          ? number
-          : GetScalarType<T['select'], EditionCountAggregateOutputType>
-        : number
-    >
-
-    /**
-     * Allows you to perform aggregations operations on a Edition.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {EditionAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
-     * @example
-     * // Ordered by age ascending
-     * // Where email contains prisma.io
-     * // Limited to the 10 users
-     * const aggregations = await prisma.user.aggregate({
-     *   _avg: {
-     *     age: true,
-     *   },
-     *   where: {
-     *     email: {
-     *       contains: "prisma.io",
-     *     },
-     *   },
-     *   orderBy: {
-     *     age: "asc",
-     *   },
-     *   take: 10,
-     * })
-    **/
-    aggregate<T extends EditionAggregateArgs>(args: Subset<T, EditionAggregateArgs>): Prisma.PrismaPromise<GetEditionAggregateType<T>>
-
-    /**
-     * Group by Edition.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {EditionGroupByArgs} args - Group by arguments.
-     * @example
-     * // Group by city, order by createdAt, get count
-     * const result = await prisma.user.groupBy({
-     *   by: ['city', 'createdAt'],
-     *   orderBy: {
-     *     createdAt: true
-     *   },
-     *   _count: {
-     *     _all: true
-     *   },
-     * })
-     * 
-    **/
-    groupBy<
-      T extends EditionGroupByArgs,
-      HasSelectOrTake extends Or<
-        Extends<'skip', Keys<T>>,
-        Extends<'take', Keys<T>>
-      >,
-      OrderByArg extends True extends HasSelectOrTake
-        ? { orderBy: EditionGroupByArgs['orderBy'] }
-        : { orderBy?: EditionGroupByArgs['orderBy'] },
-      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
-      ByFields extends MaybeTupleToUnion<T['by']>,
-      ByValid extends Has<ByFields, OrderFields>,
-      HavingFields extends GetHavingFields<T['having']>,
-      HavingValid extends Has<ByFields, HavingFields>,
-      ByEmpty extends T['by'] extends never[] ? True : False,
-      InputErrors extends ByEmpty extends True
-      ? `Error: "by" must not be empty.`
-      : HavingValid extends False
-      ? {
-          [P in HavingFields]: P extends ByFields
-            ? never
-            : P extends string
-            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
-            : [
-                Error,
-                'Field ',
-                P,
-                ` in "having" needs to be provided in "by"`,
-              ]
-        }[HavingFields]
-      : 'take' extends Keys<T>
-      ? 'orderBy' extends Keys<T>
-        ? ByValid extends True
-          ? {}
-          : {
-              [P in OrderFields]: P extends ByFields
-                ? never
-                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-            }[OrderFields]
-        : 'Error: If you provide "take", you also need to provide "orderBy"'
-      : 'skip' extends Keys<T>
-      ? 'orderBy' extends Keys<T>
-        ? ByValid extends True
-          ? {}
-          : {
-              [P in OrderFields]: P extends ByFields
-                ? never
-                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-            }[OrderFields]
-        : 'Error: If you provide "skip", you also need to provide "orderBy"'
-      : ByValid extends True
-      ? {}
-      : {
-          [P in OrderFields]: P extends ByFields
-            ? never
-            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-        }[OrderFields]
-    >(args: SubsetIntersection<T, EditionGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetEditionGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
-  /**
-   * Fields of the Edition model
-   */
-  readonly fields: EditionFieldRefs;
-  }
-
-  /**
-   * The delegate class that acts as a "Promise-like" for Edition.
-   * Why is this prefixed with `Prisma__`?
-   * Because we want to prevent naming conflicts as mentioned in
-   * https://github.com/prisma/prisma-client-js/issues/707
-   */
-  export interface Prisma__EditionClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
-    readonly [Symbol.toStringTag]: "PrismaPromise"
-    textEditions<T extends Edition$textEditionsArgs<ExtArgs> = {}>(args?: Subset<T, Edition$textEditionsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TextEditionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-    /**
-     * Attaches callbacks for the resolution and/or rejection of the Promise.
-     * @param onfulfilled The callback to execute when the Promise is resolved.
-     * @param onrejected The callback to execute when the Promise is rejected.
-     * @returns A Promise for the completion of which ever callback is executed.
-     */
-    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
-    /**
-     * Attaches a callback for only the rejection of the Promise.
-     * @param onrejected The callback to execute when the Promise is rejected.
-     * @returns A Promise for the completion of the callback.
-     */
-    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
-    /**
-     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
-     * resolved value cannot be modified from the callback.
-     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
-     * @returns A Promise for the completion of the callback.
-     */
-    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
-  }
-
-
-
-
-  /**
-   * Fields of the Edition model
-   */
-  interface EditionFieldRefs {
-    readonly id: FieldRef<"Edition", 'String'>
-    readonly name_english: FieldRef<"Edition", 'String'>
-    readonly name_tibetan: FieldRef<"Edition", 'String'>
-    readonly description_english: FieldRef<"Edition", 'String'>
-    readonly description_tibetan: FieldRef<"Edition", 'String'>
-    readonly year: FieldRef<"Edition", 'String'>
-    readonly location: FieldRef<"Edition", 'String'>
-    readonly total_volumes: FieldRef<"Edition", 'Int'>
-    readonly total_texts: FieldRef<"Edition", 'Int'>
-    readonly is_active: FieldRef<"Edition", 'Boolean'>
-    readonly created_at: FieldRef<"Edition", 'DateTime'>
-    readonly updated_at: FieldRef<"Edition", 'DateTime'>
-  }
-    
-
-  // Custom InputTypes
-  /**
-   * Edition findUnique
-   */
-  export type EditionFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Edition
-     */
-    select?: EditionSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Edition
-     */
-    omit?: EditionOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: EditionInclude<ExtArgs> | null
-    /**
-     * Filter, which Edition to fetch.
-     */
-    where: EditionWhereUniqueInput
-  }
-
-  /**
-   * Edition findUniqueOrThrow
-   */
-  export type EditionFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Edition
-     */
-    select?: EditionSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Edition
-     */
-    omit?: EditionOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: EditionInclude<ExtArgs> | null
-    /**
-     * Filter, which Edition to fetch.
-     */
-    where: EditionWhereUniqueInput
-  }
-
-  /**
-   * Edition findFirst
-   */
-  export type EditionFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Edition
-     */
-    select?: EditionSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Edition
-     */
-    omit?: EditionOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: EditionInclude<ExtArgs> | null
-    /**
-     * Filter, which Edition to fetch.
-     */
-    where?: EditionWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of Editions to fetch.
-     */
-    orderBy?: EditionOrderByWithRelationInput | EditionOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for searching for Editions.
-     */
-    cursor?: EditionWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` Editions from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` Editions.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
-     * Filter by unique combinations of Editions.
-     */
-    distinct?: EditionScalarFieldEnum | EditionScalarFieldEnum[]
-  }
-
-  /**
-   * Edition findFirstOrThrow
-   */
-  export type EditionFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Edition
-     */
-    select?: EditionSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Edition
-     */
-    omit?: EditionOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: EditionInclude<ExtArgs> | null
-    /**
-     * Filter, which Edition to fetch.
-     */
-    where?: EditionWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of Editions to fetch.
-     */
-    orderBy?: EditionOrderByWithRelationInput | EditionOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for searching for Editions.
-     */
-    cursor?: EditionWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` Editions from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` Editions.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
-     * Filter by unique combinations of Editions.
-     */
-    distinct?: EditionScalarFieldEnum | EditionScalarFieldEnum[]
-  }
-
-  /**
-   * Edition findMany
-   */
-  export type EditionFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Edition
-     */
-    select?: EditionSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Edition
-     */
-    omit?: EditionOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: EditionInclude<ExtArgs> | null
-    /**
-     * Filter, which Editions to fetch.
-     */
-    where?: EditionWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of Editions to fetch.
-     */
-    orderBy?: EditionOrderByWithRelationInput | EditionOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for listing Editions.
-     */
-    cursor?: EditionWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` Editions from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` Editions.
-     */
-    skip?: number
-    distinct?: EditionScalarFieldEnum | EditionScalarFieldEnum[]
-  }
-
-  /**
-   * Edition create
-   */
-  export type EditionCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Edition
-     */
-    select?: EditionSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Edition
-     */
-    omit?: EditionOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: EditionInclude<ExtArgs> | null
-    /**
-     * The data needed to create a Edition.
-     */
-    data: XOR<EditionCreateInput, EditionUncheckedCreateInput>
-  }
-
-  /**
-   * Edition createMany
-   */
-  export type EditionCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * The data used to create many Editions.
-     */
-    data: EditionCreateManyInput | EditionCreateManyInput[]
-    skipDuplicates?: boolean
-  }
-
-  /**
-   * Edition createManyAndReturn
-   */
-  export type EditionCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Edition
-     */
-    select?: EditionSelectCreateManyAndReturn<ExtArgs> | null
-    /**
-     * Omit specific fields from the Edition
-     */
-    omit?: EditionOmit<ExtArgs> | null
-    /**
-     * The data used to create many Editions.
-     */
-    data: EditionCreateManyInput | EditionCreateManyInput[]
-    skipDuplicates?: boolean
-  }
-
-  /**
-   * Edition update
-   */
-  export type EditionUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Edition
-     */
-    select?: EditionSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Edition
-     */
-    omit?: EditionOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: EditionInclude<ExtArgs> | null
-    /**
-     * The data needed to update a Edition.
-     */
-    data: XOR<EditionUpdateInput, EditionUncheckedUpdateInput>
-    /**
-     * Choose, which Edition to update.
-     */
-    where: EditionWhereUniqueInput
-  }
-
-  /**
-   * Edition updateMany
-   */
-  export type EditionUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * The data used to update Editions.
-     */
-    data: XOR<EditionUpdateManyMutationInput, EditionUncheckedUpdateManyInput>
-    /**
-     * Filter which Editions to update
-     */
-    where?: EditionWhereInput
-    /**
-     * Limit how many Editions to update.
-     */
-    limit?: number
-  }
-
-  /**
-   * Edition updateManyAndReturn
-   */
-  export type EditionUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Edition
-     */
-    select?: EditionSelectUpdateManyAndReturn<ExtArgs> | null
-    /**
-     * Omit specific fields from the Edition
-     */
-    omit?: EditionOmit<ExtArgs> | null
-    /**
-     * The data used to update Editions.
-     */
-    data: XOR<EditionUpdateManyMutationInput, EditionUncheckedUpdateManyInput>
-    /**
-     * Filter which Editions to update
-     */
-    where?: EditionWhereInput
-    /**
-     * Limit how many Editions to update.
-     */
-    limit?: number
-  }
-
-  /**
-   * Edition upsert
-   */
-  export type EditionUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Edition
-     */
-    select?: EditionSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Edition
-     */
-    omit?: EditionOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: EditionInclude<ExtArgs> | null
-    /**
-     * The filter to search for the Edition to update in case it exists.
-     */
-    where: EditionWhereUniqueInput
-    /**
-     * In case the Edition found by the `where` argument doesn't exist, create a new Edition with this data.
-     */
-    create: XOR<EditionCreateInput, EditionUncheckedCreateInput>
-    /**
-     * In case the Edition was found with the provided `where` argument, update it with this data.
-     */
-    update: XOR<EditionUpdateInput, EditionUncheckedUpdateInput>
-  }
-
-  /**
-   * Edition delete
-   */
-  export type EditionDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Edition
-     */
-    select?: EditionSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Edition
-     */
-    omit?: EditionOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: EditionInclude<ExtArgs> | null
-    /**
-     * Filter which Edition to delete.
-     */
-    where: EditionWhereUniqueInput
-  }
-
-  /**
-   * Edition deleteMany
-   */
-  export type EditionDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Filter which Editions to delete
-     */
-    where?: EditionWhereInput
-    /**
-     * Limit how many Editions to delete.
-     */
-    limit?: number
-  }
-
-  /**
-   * Edition.textEditions
-   */
-  export type Edition$textEditionsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the TextEdition
-     */
-    select?: TextEditionSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the TextEdition
-     */
-    omit?: TextEditionOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: TextEditionInclude<ExtArgs> | null
-    where?: TextEditionWhereInput
-    orderBy?: TextEditionOrderByWithRelationInput | TextEditionOrderByWithRelationInput[]
-    cursor?: TextEditionWhereUniqueInput
-    take?: number
-    skip?: number
-    distinct?: TextEditionScalarFieldEnum | TextEditionScalarFieldEnum[]
-  }
-
-  /**
-   * Edition without action
-   */
-  export type EditionDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Edition
-     */
-    select?: EditionSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Edition
-     */
-    omit?: EditionOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: EditionInclude<ExtArgs> | null
-  }
-
-
-  /**
-   * Model TextEdition
-   */
-
-  export type AggregateTextEdition = {
-    _count: TextEditionCountAggregateOutputType | null
-    _avg: TextEditionAvgAggregateOutputType | null
-    _sum: TextEditionSumAggregateOutputType | null
-    _min: TextEditionMinAggregateOutputType | null
-    _max: TextEditionMaxAggregateOutputType | null
-  }
-
-  export type TextEditionAvgAggregateOutputType = {
-    volume_number: number | null
-    start_page: number | null
-    end_page: number | null
-  }
-
-  export type TextEditionSumAggregateOutputType = {
-    volume_number: number | null
-    start_page: number | null
-    end_page: number | null
-  }
-
-  export type TextEditionMinAggregateOutputType = {
-    id: string | null
-    text_id: string | null
-    edition_id: string | null
-    source_id: string | null
-    volume_number: number | null
-    start_page: number | null
-    end_page: number | null
-    availability: string | null
-    link_url: string | null
-    created_at: Date | null
-    updated_at: Date | null
-  }
-
-  export type TextEditionMaxAggregateOutputType = {
-    id: string | null
-    text_id: string | null
-    edition_id: string | null
-    source_id: string | null
-    volume_number: number | null
-    start_page: number | null
-    end_page: number | null
-    availability: string | null
-    link_url: string | null
-    created_at: Date | null
-    updated_at: Date | null
-  }
-
-  export type TextEditionCountAggregateOutputType = {
-    id: number
-    text_id: number
-    edition_id: number
-    source_id: number
-    volume_number: number
-    start_page: number
-    end_page: number
-    availability: number
-    link_url: number
-    created_at: number
-    updated_at: number
-    _all: number
-  }
-
-
-  export type TextEditionAvgAggregateInputType = {
-    volume_number?: true
-    start_page?: true
-    end_page?: true
-  }
-
-  export type TextEditionSumAggregateInputType = {
-    volume_number?: true
-    start_page?: true
-    end_page?: true
-  }
-
-  export type TextEditionMinAggregateInputType = {
-    id?: true
-    text_id?: true
-    edition_id?: true
-    source_id?: true
-    volume_number?: true
-    start_page?: true
-    end_page?: true
-    availability?: true
-    link_url?: true
-    created_at?: true
-    updated_at?: true
-  }
-
-  export type TextEditionMaxAggregateInputType = {
-    id?: true
-    text_id?: true
-    edition_id?: true
-    source_id?: true
-    volume_number?: true
-    start_page?: true
-    end_page?: true
-    availability?: true
-    link_url?: true
-    created_at?: true
-    updated_at?: true
-  }
-
-  export type TextEditionCountAggregateInputType = {
-    id?: true
-    text_id?: true
-    edition_id?: true
-    source_id?: true
-    volume_number?: true
-    start_page?: true
-    end_page?: true
-    availability?: true
-    link_url?: true
-    created_at?: true
-    updated_at?: true
-    _all?: true
-  }
-
-  export type TextEditionAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Filter which TextEdition to aggregate.
-     */
-    where?: TextEditionWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of TextEditions to fetch.
-     */
-    orderBy?: TextEditionOrderByWithRelationInput | TextEditionOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the start position
-     */
-    cursor?: TextEditionWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` TextEditions from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` TextEditions.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Count returned TextEditions
-    **/
-    _count?: true | TextEditionCountAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to average
-    **/
-    _avg?: TextEditionAvgAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to sum
-    **/
-    _sum?: TextEditionSumAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to find the minimum value
-    **/
-    _min?: TextEditionMinAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to find the maximum value
-    **/
-    _max?: TextEditionMaxAggregateInputType
-  }
-
-  export type GetTextEditionAggregateType<T extends TextEditionAggregateArgs> = {
-        [P in keyof T & keyof AggregateTextEdition]: P extends '_count' | 'count'
-      ? T[P] extends true
-        ? number
-        : GetScalarType<T[P], AggregateTextEdition[P]>
-      : GetScalarType<T[P], AggregateTextEdition[P]>
-  }
-
-
-
-
-  export type TextEditionGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: TextEditionWhereInput
-    orderBy?: TextEditionOrderByWithAggregationInput | TextEditionOrderByWithAggregationInput[]
-    by: TextEditionScalarFieldEnum[] | TextEditionScalarFieldEnum
-    having?: TextEditionScalarWhereWithAggregatesInput
-    take?: number
-    skip?: number
-    _count?: TextEditionCountAggregateInputType | true
-    _avg?: TextEditionAvgAggregateInputType
-    _sum?: TextEditionSumAggregateInputType
-    _min?: TextEditionMinAggregateInputType
-    _max?: TextEditionMaxAggregateInputType
-  }
-
-  export type TextEditionGroupByOutputType = {
-    id: string
-    text_id: string
-    edition_id: string
-    source_id: string | null
-    volume_number: number | null
-    start_page: number | null
-    end_page: number | null
-    availability: string | null
-    link_url: string | null
-    created_at: Date
-    updated_at: Date
-    _count: TextEditionCountAggregateOutputType | null
-    _avg: TextEditionAvgAggregateOutputType | null
-    _sum: TextEditionSumAggregateOutputType | null
-    _min: TextEditionMinAggregateOutputType | null
-    _max: TextEditionMaxAggregateOutputType | null
-  }
-
-  type GetTextEditionGroupByPayload<T extends TextEditionGroupByArgs> = Prisma.PrismaPromise<
-    Array<
-      PickEnumerable<TextEditionGroupByOutputType, T['by']> &
-        {
-          [P in ((keyof T) & (keyof TextEditionGroupByOutputType))]: P extends '_count'
-            ? T[P] extends boolean
-              ? number
-              : GetScalarType<T[P], TextEditionGroupByOutputType[P]>
-            : GetScalarType<T[P], TextEditionGroupByOutputType[P]>
-        }
-      >
-    >
-
-
-  export type TextEditionSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
-    text_id?: boolean
-    edition_id?: boolean
-    source_id?: boolean
-    volume_number?: boolean
-    start_page?: boolean
-    end_page?: boolean
-    availability?: boolean
-    link_url?: boolean
-    created_at?: boolean
-    updated_at?: boolean
-    text?: boolean | TextDefaultArgs<ExtArgs>
-    edition?: boolean | EditionDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["textEdition"]>
-
-  export type TextEditionSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
-    text_id?: boolean
-    edition_id?: boolean
-    source_id?: boolean
-    volume_number?: boolean
-    start_page?: boolean
-    end_page?: boolean
-    availability?: boolean
-    link_url?: boolean
-    created_at?: boolean
-    updated_at?: boolean
-    text?: boolean | TextDefaultArgs<ExtArgs>
-    edition?: boolean | EditionDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["textEdition"]>
-
-  export type TextEditionSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
-    text_id?: boolean
-    edition_id?: boolean
-    source_id?: boolean
-    volume_number?: boolean
-    start_page?: boolean
-    end_page?: boolean
-    availability?: boolean
-    link_url?: boolean
-    created_at?: boolean
-    updated_at?: boolean
-    text?: boolean | TextDefaultArgs<ExtArgs>
-    edition?: boolean | EditionDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["textEdition"]>
-
-  export type TextEditionSelectScalar = {
-    id?: boolean
-    text_id?: boolean
-    edition_id?: boolean
-    source_id?: boolean
-    volume_number?: boolean
-    start_page?: boolean
-    end_page?: boolean
-    availability?: boolean
-    link_url?: boolean
-    created_at?: boolean
-    updated_at?: boolean
-  }
-
-  export type TextEditionOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "text_id" | "edition_id" | "source_id" | "volume_number" | "start_page" | "end_page" | "availability" | "link_url" | "created_at" | "updated_at", ExtArgs["result"]["textEdition"]>
-  export type TextEditionInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    text?: boolean | TextDefaultArgs<ExtArgs>
-    edition?: boolean | EditionDefaultArgs<ExtArgs>
-  }
-  export type TextEditionIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    text?: boolean | TextDefaultArgs<ExtArgs>
-    edition?: boolean | EditionDefaultArgs<ExtArgs>
-  }
-  export type TextEditionIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    text?: boolean | TextDefaultArgs<ExtArgs>
-    edition?: boolean | EditionDefaultArgs<ExtArgs>
-  }
-
-  export type $TextEditionPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    name: "TextEdition"
-    objects: {
-      text: Prisma.$TextPayload<ExtArgs>
-      edition: Prisma.$EditionPayload<ExtArgs>
-    }
-    scalars: $Extensions.GetPayloadResult<{
-      id: string
-      text_id: string
-      edition_id: string
-      source_id: string | null
-      volume_number: number | null
-      start_page: number | null
-      end_page: number | null
-      availability: string | null
-      link_url: string | null
-      created_at: Date
-      updated_at: Date
-    }, ExtArgs["result"]["textEdition"]>
-    composites: {}
-  }
-
-  type TextEditionGetPayload<S extends boolean | null | undefined | TextEditionDefaultArgs> = $Result.GetResult<Prisma.$TextEditionPayload, S>
-
-  type TextEditionCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
-    Omit<TextEditionFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
-      select?: TextEditionCountAggregateInputType | true
-    }
-
-  export interface TextEditionDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
-    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['TextEdition'], meta: { name: 'TextEdition' } }
-    /**
-     * Find zero or one TextEdition that matches the filter.
-     * @param {TextEditionFindUniqueArgs} args - Arguments to find a TextEdition
-     * @example
-     * // Get one TextEdition
-     * const textEdition = await prisma.textEdition.findUnique({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findUnique<T extends TextEditionFindUniqueArgs>(args: SelectSubset<T, TextEditionFindUniqueArgs<ExtArgs>>): Prisma__TextEditionClient<$Result.GetResult<Prisma.$TextEditionPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find one TextEdition that matches the filter or throw an error with `error.code='P2025'`
-     * if no matches were found.
-     * @param {TextEditionFindUniqueOrThrowArgs} args - Arguments to find a TextEdition
-     * @example
-     * // Get one TextEdition
-     * const textEdition = await prisma.textEdition.findUniqueOrThrow({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findUniqueOrThrow<T extends TextEditionFindUniqueOrThrowArgs>(args: SelectSubset<T, TextEditionFindUniqueOrThrowArgs<ExtArgs>>): Prisma__TextEditionClient<$Result.GetResult<Prisma.$TextEditionPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find the first TextEdition that matches the filter.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {TextEditionFindFirstArgs} args - Arguments to find a TextEdition
-     * @example
-     * // Get one TextEdition
-     * const textEdition = await prisma.textEdition.findFirst({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findFirst<T extends TextEditionFindFirstArgs>(args?: SelectSubset<T, TextEditionFindFirstArgs<ExtArgs>>): Prisma__TextEditionClient<$Result.GetResult<Prisma.$TextEditionPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find the first TextEdition that matches the filter or
-     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {TextEditionFindFirstOrThrowArgs} args - Arguments to find a TextEdition
-     * @example
-     * // Get one TextEdition
-     * const textEdition = await prisma.textEdition.findFirstOrThrow({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findFirstOrThrow<T extends TextEditionFindFirstOrThrowArgs>(args?: SelectSubset<T, TextEditionFindFirstOrThrowArgs<ExtArgs>>): Prisma__TextEditionClient<$Result.GetResult<Prisma.$TextEditionPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find zero or more TextEditions that matches the filter.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {TextEditionFindManyArgs} args - Arguments to filter and select certain fields only.
-     * @example
-     * // Get all TextEditions
-     * const textEditions = await prisma.textEdition.findMany()
-     * 
-     * // Get first 10 TextEditions
-     * const textEditions = await prisma.textEdition.findMany({ take: 10 })
-     * 
-     * // Only select the `id`
-     * const textEditionWithIdOnly = await prisma.textEdition.findMany({ select: { id: true } })
-     * 
-     */
-    findMany<T extends TextEditionFindManyArgs>(args?: SelectSubset<T, TextEditionFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TextEditionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
-
-    /**
-     * Create a TextEdition.
-     * @param {TextEditionCreateArgs} args - Arguments to create a TextEdition.
-     * @example
-     * // Create one TextEdition
-     * const TextEdition = await prisma.textEdition.create({
-     *   data: {
-     *     // ... data to create a TextEdition
-     *   }
-     * })
-     * 
-     */
-    create<T extends TextEditionCreateArgs>(args: SelectSubset<T, TextEditionCreateArgs<ExtArgs>>): Prisma__TextEditionClient<$Result.GetResult<Prisma.$TextEditionPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Create many TextEditions.
-     * @param {TextEditionCreateManyArgs} args - Arguments to create many TextEditions.
-     * @example
-     * // Create many TextEditions
-     * const textEdition = await prisma.textEdition.createMany({
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     *     
-     */
-    createMany<T extends TextEditionCreateManyArgs>(args?: SelectSubset<T, TextEditionCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Create many TextEditions and returns the data saved in the database.
-     * @param {TextEditionCreateManyAndReturnArgs} args - Arguments to create many TextEditions.
-     * @example
-     * // Create many TextEditions
-     * const textEdition = await prisma.textEdition.createManyAndReturn({
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * 
-     * // Create many TextEditions and only return the `id`
-     * const textEditionWithIdOnly = await prisma.textEdition.createManyAndReturn({
-     *   select: { id: true },
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * 
-     */
-    createManyAndReturn<T extends TextEditionCreateManyAndReturnArgs>(args?: SelectSubset<T, TextEditionCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TextEditionPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
-
-    /**
-     * Delete a TextEdition.
-     * @param {TextEditionDeleteArgs} args - Arguments to delete one TextEdition.
-     * @example
-     * // Delete one TextEdition
-     * const TextEdition = await prisma.textEdition.delete({
-     *   where: {
-     *     // ... filter to delete one TextEdition
-     *   }
-     * })
-     * 
-     */
-    delete<T extends TextEditionDeleteArgs>(args: SelectSubset<T, TextEditionDeleteArgs<ExtArgs>>): Prisma__TextEditionClient<$Result.GetResult<Prisma.$TextEditionPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Update one TextEdition.
-     * @param {TextEditionUpdateArgs} args - Arguments to update one TextEdition.
-     * @example
-     * // Update one TextEdition
-     * const textEdition = await prisma.textEdition.update({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: {
-     *     // ... provide data here
-     *   }
-     * })
-     * 
-     */
-    update<T extends TextEditionUpdateArgs>(args: SelectSubset<T, TextEditionUpdateArgs<ExtArgs>>): Prisma__TextEditionClient<$Result.GetResult<Prisma.$TextEditionPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Delete zero or more TextEditions.
-     * @param {TextEditionDeleteManyArgs} args - Arguments to filter TextEditions to delete.
-     * @example
-     * // Delete a few TextEditions
-     * const { count } = await prisma.textEdition.deleteMany({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     * 
-     */
-    deleteMany<T extends TextEditionDeleteManyArgs>(args?: SelectSubset<T, TextEditionDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Update zero or more TextEditions.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {TextEditionUpdateManyArgs} args - Arguments to update one or more rows.
-     * @example
-     * // Update many TextEditions
-     * const textEdition = await prisma.textEdition.updateMany({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: {
-     *     // ... provide data here
-     *   }
-     * })
-     * 
-     */
-    updateMany<T extends TextEditionUpdateManyArgs>(args: SelectSubset<T, TextEditionUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Update zero or more TextEditions and returns the data updated in the database.
-     * @param {TextEditionUpdateManyAndReturnArgs} args - Arguments to update many TextEditions.
-     * @example
-     * // Update many TextEditions
-     * const textEdition = await prisma.textEdition.updateManyAndReturn({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * 
-     * // Update zero or more TextEditions and only return the `id`
-     * const textEditionWithIdOnly = await prisma.textEdition.updateManyAndReturn({
-     *   select: { id: true },
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * 
-     */
-    updateManyAndReturn<T extends TextEditionUpdateManyAndReturnArgs>(args: SelectSubset<T, TextEditionUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TextEditionPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
-
-    /**
-     * Create or update one TextEdition.
-     * @param {TextEditionUpsertArgs} args - Arguments to update or create a TextEdition.
-     * @example
-     * // Update or create a TextEdition
-     * const textEdition = await prisma.textEdition.upsert({
-     *   create: {
-     *     // ... data to create a TextEdition
-     *   },
-     *   update: {
-     *     // ... in case it already exists, update
-     *   },
-     *   where: {
-     *     // ... the filter for the TextEdition we want to update
-     *   }
-     * })
-     */
-    upsert<T extends TextEditionUpsertArgs>(args: SelectSubset<T, TextEditionUpsertArgs<ExtArgs>>): Prisma__TextEditionClient<$Result.GetResult<Prisma.$TextEditionPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-
-    /**
-     * Count the number of TextEditions.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {TextEditionCountArgs} args - Arguments to filter TextEditions to count.
-     * @example
-     * // Count the number of TextEditions
-     * const count = await prisma.textEdition.count({
-     *   where: {
-     *     // ... the filter for the TextEditions we want to count
-     *   }
-     * })
-    **/
-    count<T extends TextEditionCountArgs>(
-      args?: Subset<T, TextEditionCountArgs>,
-    ): Prisma.PrismaPromise<
-      T extends $Utils.Record<'select', any>
-        ? T['select'] extends true
-          ? number
-          : GetScalarType<T['select'], TextEditionCountAggregateOutputType>
-        : number
-    >
-
-    /**
-     * Allows you to perform aggregations operations on a TextEdition.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {TextEditionAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
-     * @example
-     * // Ordered by age ascending
-     * // Where email contains prisma.io
-     * // Limited to the 10 users
-     * const aggregations = await prisma.user.aggregate({
-     *   _avg: {
-     *     age: true,
-     *   },
-     *   where: {
-     *     email: {
-     *       contains: "prisma.io",
-     *     },
-     *   },
-     *   orderBy: {
-     *     age: "asc",
-     *   },
-     *   take: 10,
-     * })
-    **/
-    aggregate<T extends TextEditionAggregateArgs>(args: Subset<T, TextEditionAggregateArgs>): Prisma.PrismaPromise<GetTextEditionAggregateType<T>>
-
-    /**
-     * Group by TextEdition.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {TextEditionGroupByArgs} args - Group by arguments.
-     * @example
-     * // Group by city, order by createdAt, get count
-     * const result = await prisma.user.groupBy({
-     *   by: ['city', 'createdAt'],
-     *   orderBy: {
-     *     createdAt: true
-     *   },
-     *   _count: {
-     *     _all: true
-     *   },
-     * })
-     * 
-    **/
-    groupBy<
-      T extends TextEditionGroupByArgs,
-      HasSelectOrTake extends Or<
-        Extends<'skip', Keys<T>>,
-        Extends<'take', Keys<T>>
-      >,
-      OrderByArg extends True extends HasSelectOrTake
-        ? { orderBy: TextEditionGroupByArgs['orderBy'] }
-        : { orderBy?: TextEditionGroupByArgs['orderBy'] },
-      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
-      ByFields extends MaybeTupleToUnion<T['by']>,
-      ByValid extends Has<ByFields, OrderFields>,
-      HavingFields extends GetHavingFields<T['having']>,
-      HavingValid extends Has<ByFields, HavingFields>,
-      ByEmpty extends T['by'] extends never[] ? True : False,
-      InputErrors extends ByEmpty extends True
-      ? `Error: "by" must not be empty.`
-      : HavingValid extends False
-      ? {
-          [P in HavingFields]: P extends ByFields
-            ? never
-            : P extends string
-            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
-            : [
-                Error,
-                'Field ',
-                P,
-                ` in "having" needs to be provided in "by"`,
-              ]
-        }[HavingFields]
-      : 'take' extends Keys<T>
-      ? 'orderBy' extends Keys<T>
-        ? ByValid extends True
-          ? {}
-          : {
-              [P in OrderFields]: P extends ByFields
-                ? never
-                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-            }[OrderFields]
-        : 'Error: If you provide "take", you also need to provide "orderBy"'
-      : 'skip' extends Keys<T>
-      ? 'orderBy' extends Keys<T>
-        ? ByValid extends True
-          ? {}
-          : {
-              [P in OrderFields]: P extends ByFields
-                ? never
-                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-            }[OrderFields]
-        : 'Error: If you provide "skip", you also need to provide "orderBy"'
-      : ByValid extends True
-      ? {}
-      : {
-          [P in OrderFields]: P extends ByFields
-            ? never
-            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-        }[OrderFields]
-    >(args: SubsetIntersection<T, TextEditionGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetTextEditionGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
-  /**
-   * Fields of the TextEdition model
-   */
-  readonly fields: TextEditionFieldRefs;
-  }
-
-  /**
-   * The delegate class that acts as a "Promise-like" for TextEdition.
-   * Why is this prefixed with `Prisma__`?
-   * Because we want to prevent naming conflicts as mentioned in
-   * https://github.com/prisma/prisma-client-js/issues/707
-   */
-  export interface Prisma__TextEditionClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
-    readonly [Symbol.toStringTag]: "PrismaPromise"
-    text<T extends TextDefaultArgs<ExtArgs> = {}>(args?: Subset<T, TextDefaultArgs<ExtArgs>>): Prisma__TextClient<$Result.GetResult<Prisma.$TextPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-    edition<T extends EditionDefaultArgs<ExtArgs> = {}>(args?: Subset<T, EditionDefaultArgs<ExtArgs>>): Prisma__EditionClient<$Result.GetResult<Prisma.$EditionPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-    /**
-     * Attaches callbacks for the resolution and/or rejection of the Promise.
-     * @param onfulfilled The callback to execute when the Promise is resolved.
-     * @param onrejected The callback to execute when the Promise is rejected.
-     * @returns A Promise for the completion of which ever callback is executed.
-     */
-    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
-    /**
-     * Attaches a callback for only the rejection of the Promise.
-     * @param onrejected The callback to execute when the Promise is rejected.
-     * @returns A Promise for the completion of the callback.
-     */
-    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
-    /**
-     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
-     * resolved value cannot be modified from the callback.
-     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
-     * @returns A Promise for the completion of the callback.
-     */
-    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
-  }
-
-
-
-
-  /**
-   * Fields of the TextEdition model
-   */
-  interface TextEditionFieldRefs {
-    readonly id: FieldRef<"TextEdition", 'String'>
-    readonly text_id: FieldRef<"TextEdition", 'String'>
-    readonly edition_id: FieldRef<"TextEdition", 'String'>
-    readonly source_id: FieldRef<"TextEdition", 'String'>
-    readonly volume_number: FieldRef<"TextEdition", 'Int'>
-    readonly start_page: FieldRef<"TextEdition", 'Int'>
-    readonly end_page: FieldRef<"TextEdition", 'Int'>
-    readonly availability: FieldRef<"TextEdition", 'String'>
-    readonly link_url: FieldRef<"TextEdition", 'String'>
-    readonly created_at: FieldRef<"TextEdition", 'DateTime'>
-    readonly updated_at: FieldRef<"TextEdition", 'DateTime'>
-  }
-    
-
-  // Custom InputTypes
-  /**
-   * TextEdition findUnique
-   */
-  export type TextEditionFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the TextEdition
-     */
-    select?: TextEditionSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the TextEdition
-     */
-    omit?: TextEditionOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: TextEditionInclude<ExtArgs> | null
-    /**
-     * Filter, which TextEdition to fetch.
-     */
-    where: TextEditionWhereUniqueInput
-  }
-
-  /**
-   * TextEdition findUniqueOrThrow
-   */
-  export type TextEditionFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the TextEdition
-     */
-    select?: TextEditionSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the TextEdition
-     */
-    omit?: TextEditionOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: TextEditionInclude<ExtArgs> | null
-    /**
-     * Filter, which TextEdition to fetch.
-     */
-    where: TextEditionWhereUniqueInput
-  }
-
-  /**
-   * TextEdition findFirst
-   */
-  export type TextEditionFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the TextEdition
-     */
-    select?: TextEditionSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the TextEdition
-     */
-    omit?: TextEditionOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: TextEditionInclude<ExtArgs> | null
-    /**
-     * Filter, which TextEdition to fetch.
-     */
-    where?: TextEditionWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of TextEditions to fetch.
-     */
-    orderBy?: TextEditionOrderByWithRelationInput | TextEditionOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for searching for TextEditions.
-     */
-    cursor?: TextEditionWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` TextEditions from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` TextEditions.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
-     * Filter by unique combinations of TextEditions.
-     */
-    distinct?: TextEditionScalarFieldEnum | TextEditionScalarFieldEnum[]
-  }
-
-  /**
-   * TextEdition findFirstOrThrow
-   */
-  export type TextEditionFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the TextEdition
-     */
-    select?: TextEditionSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the TextEdition
-     */
-    omit?: TextEditionOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: TextEditionInclude<ExtArgs> | null
-    /**
-     * Filter, which TextEdition to fetch.
-     */
-    where?: TextEditionWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of TextEditions to fetch.
-     */
-    orderBy?: TextEditionOrderByWithRelationInput | TextEditionOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for searching for TextEditions.
-     */
-    cursor?: TextEditionWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` TextEditions from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` TextEditions.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
-     * Filter by unique combinations of TextEditions.
-     */
-    distinct?: TextEditionScalarFieldEnum | TextEditionScalarFieldEnum[]
-  }
-
-  /**
-   * TextEdition findMany
-   */
-  export type TextEditionFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the TextEdition
-     */
-    select?: TextEditionSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the TextEdition
-     */
-    omit?: TextEditionOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: TextEditionInclude<ExtArgs> | null
-    /**
-     * Filter, which TextEditions to fetch.
-     */
-    where?: TextEditionWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of TextEditions to fetch.
-     */
-    orderBy?: TextEditionOrderByWithRelationInput | TextEditionOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for listing TextEditions.
-     */
-    cursor?: TextEditionWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` TextEditions from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` TextEditions.
-     */
-    skip?: number
-    distinct?: TextEditionScalarFieldEnum | TextEditionScalarFieldEnum[]
-  }
-
-  /**
-   * TextEdition create
-   */
-  export type TextEditionCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the TextEdition
-     */
-    select?: TextEditionSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the TextEdition
-     */
-    omit?: TextEditionOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: TextEditionInclude<ExtArgs> | null
-    /**
-     * The data needed to create a TextEdition.
-     */
-    data: XOR<TextEditionCreateInput, TextEditionUncheckedCreateInput>
-  }
-
-  /**
-   * TextEdition createMany
-   */
-  export type TextEditionCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * The data used to create many TextEditions.
-     */
-    data: TextEditionCreateManyInput | TextEditionCreateManyInput[]
-    skipDuplicates?: boolean
-  }
-
-  /**
-   * TextEdition createManyAndReturn
-   */
-  export type TextEditionCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the TextEdition
-     */
-    select?: TextEditionSelectCreateManyAndReturn<ExtArgs> | null
-    /**
-     * Omit specific fields from the TextEdition
-     */
-    omit?: TextEditionOmit<ExtArgs> | null
-    /**
-     * The data used to create many TextEditions.
-     */
-    data: TextEditionCreateManyInput | TextEditionCreateManyInput[]
-    skipDuplicates?: boolean
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: TextEditionIncludeCreateManyAndReturn<ExtArgs> | null
-  }
-
-  /**
-   * TextEdition update
-   */
-  export type TextEditionUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the TextEdition
-     */
-    select?: TextEditionSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the TextEdition
-     */
-    omit?: TextEditionOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: TextEditionInclude<ExtArgs> | null
-    /**
-     * The data needed to update a TextEdition.
-     */
-    data: XOR<TextEditionUpdateInput, TextEditionUncheckedUpdateInput>
-    /**
-     * Choose, which TextEdition to update.
-     */
-    where: TextEditionWhereUniqueInput
-  }
-
-  /**
-   * TextEdition updateMany
-   */
-  export type TextEditionUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * The data used to update TextEditions.
-     */
-    data: XOR<TextEditionUpdateManyMutationInput, TextEditionUncheckedUpdateManyInput>
-    /**
-     * Filter which TextEditions to update
-     */
-    where?: TextEditionWhereInput
-    /**
-     * Limit how many TextEditions to update.
-     */
-    limit?: number
-  }
-
-  /**
-   * TextEdition updateManyAndReturn
-   */
-  export type TextEditionUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the TextEdition
-     */
-    select?: TextEditionSelectUpdateManyAndReturn<ExtArgs> | null
-    /**
-     * Omit specific fields from the TextEdition
-     */
-    omit?: TextEditionOmit<ExtArgs> | null
-    /**
-     * The data used to update TextEditions.
-     */
-    data: XOR<TextEditionUpdateManyMutationInput, TextEditionUncheckedUpdateManyInput>
-    /**
-     * Filter which TextEditions to update
-     */
-    where?: TextEditionWhereInput
-    /**
-     * Limit how many TextEditions to update.
-     */
-    limit?: number
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: TextEditionIncludeUpdateManyAndReturn<ExtArgs> | null
-  }
-
-  /**
-   * TextEdition upsert
-   */
-  export type TextEditionUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the TextEdition
-     */
-    select?: TextEditionSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the TextEdition
-     */
-    omit?: TextEditionOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: TextEditionInclude<ExtArgs> | null
-    /**
-     * The filter to search for the TextEdition to update in case it exists.
-     */
-    where: TextEditionWhereUniqueInput
-    /**
-     * In case the TextEdition found by the `where` argument doesn't exist, create a new TextEdition with this data.
-     */
-    create: XOR<TextEditionCreateInput, TextEditionUncheckedCreateInput>
-    /**
-     * In case the TextEdition was found with the provided `where` argument, update it with this data.
-     */
-    update: XOR<TextEditionUpdateInput, TextEditionUncheckedUpdateInput>
-  }
-
-  /**
-   * TextEdition delete
-   */
-  export type TextEditionDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the TextEdition
-     */
-    select?: TextEditionSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the TextEdition
-     */
-    omit?: TextEditionOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: TextEditionInclude<ExtArgs> | null
-    /**
-     * Filter which TextEdition to delete.
-     */
-    where: TextEditionWhereUniqueInput
-  }
-
-  /**
-   * TextEdition deleteMany
-   */
-  export type TextEditionDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Filter which TextEditions to delete
-     */
-    where?: TextEditionWhereInput
-    /**
-     * Limit how many TextEditions to delete.
-     */
-    limit?: number
-  }
-
-  /**
-   * TextEdition without action
-   */
-  export type TextEditionDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the TextEdition
-     */
-    select?: TextEditionSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the TextEdition
-     */
-    omit?: TextEditionOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: TextEditionInclude<ExtArgs> | null
   }
 
 
@@ -22778,7 +13807,7 @@ export namespace Prisma {
     is_active?: boolean
     created_at?: boolean
     updated_at?: boolean
-    subCategories?: boolean | KarchagMainCategory$subCategoriesArgs<ExtArgs>
+    sub_categories?: boolean | KarchagMainCategory$sub_categoriesArgs<ExtArgs>
     _count?: boolean | KarchagMainCategoryCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["karchagMainCategory"]>
 
@@ -22820,7 +13849,7 @@ export namespace Prisma {
 
   export type KarchagMainCategoryOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name_english" | "name_tibetan" | "description_english" | "description_tibetan" | "order_index" | "is_active" | "created_at" | "updated_at", ExtArgs["result"]["karchagMainCategory"]>
   export type KarchagMainCategoryInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    subCategories?: boolean | KarchagMainCategory$subCategoriesArgs<ExtArgs>
+    sub_categories?: boolean | KarchagMainCategory$sub_categoriesArgs<ExtArgs>
     _count?: boolean | KarchagMainCategoryCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type KarchagMainCategoryIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
@@ -22829,7 +13858,7 @@ export namespace Prisma {
   export type $KarchagMainCategoryPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "KarchagMainCategory"
     objects: {
-      subCategories: Prisma.$KarchagSubCategoryPayload<ExtArgs>[]
+      sub_categories: Prisma.$KarchagSubCategoryPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -23235,7 +14264,7 @@ export namespace Prisma {
    */
   export interface Prisma__KarchagMainCategoryClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
-    subCategories<T extends KarchagMainCategory$subCategoriesArgs<ExtArgs> = {}>(args?: Subset<T, KarchagMainCategory$subCategoriesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$KarchagSubCategoryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    sub_categories<T extends KarchagMainCategory$sub_categoriesArgs<ExtArgs> = {}>(args?: Subset<T, KarchagMainCategory$sub_categoriesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$KarchagSubCategoryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -23662,9 +14691,9 @@ export namespace Prisma {
   }
 
   /**
-   * KarchagMainCategory.subCategories
+   * KarchagMainCategory.sub_categories
    */
-  export type KarchagMainCategory$subCategoriesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type KarchagMainCategory$sub_categoriesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the KarchagSubCategory
      */
@@ -23735,6 +14764,8 @@ export namespace Prisma {
     is_active: boolean | null
     created_at: Date | null
     updated_at: Date | null
+    only_content: boolean | null
+    content: string | null
   }
 
   export type KarchagSubCategoryMaxAggregateOutputType = {
@@ -23748,6 +14779,8 @@ export namespace Prisma {
     is_active: boolean | null
     created_at: Date | null
     updated_at: Date | null
+    only_content: boolean | null
+    content: string | null
   }
 
   export type KarchagSubCategoryCountAggregateOutputType = {
@@ -23761,6 +14794,8 @@ export namespace Prisma {
     is_active: number
     created_at: number
     updated_at: number
+    only_content: number
+    content: number
     _all: number
   }
 
@@ -23784,6 +14819,8 @@ export namespace Prisma {
     is_active?: true
     created_at?: true
     updated_at?: true
+    only_content?: true
+    content?: true
   }
 
   export type KarchagSubCategoryMaxAggregateInputType = {
@@ -23797,6 +14834,8 @@ export namespace Prisma {
     is_active?: true
     created_at?: true
     updated_at?: true
+    only_content?: true
+    content?: true
   }
 
   export type KarchagSubCategoryCountAggregateInputType = {
@@ -23810,6 +14849,8 @@ export namespace Prisma {
     is_active?: true
     created_at?: true
     updated_at?: true
+    only_content?: true
+    content?: true
     _all?: true
   }
 
@@ -23910,6 +14951,8 @@ export namespace Prisma {
     is_active: boolean
     created_at: Date
     updated_at: Date
+    only_content: boolean
+    content: string | null
     _count: KarchagSubCategoryCountAggregateOutputType | null
     _avg: KarchagSubCategoryAvgAggregateOutputType | null
     _sum: KarchagSubCategorySumAggregateOutputType | null
@@ -23942,7 +14985,9 @@ export namespace Prisma {
     is_active?: boolean
     created_at?: boolean
     updated_at?: boolean
-    mainCategory?: boolean | KarchagMainCategoryDefaultArgs<ExtArgs>
+    only_content?: boolean
+    content?: boolean
+    main_category?: boolean | KarchagMainCategoryDefaultArgs<ExtArgs>
     texts?: boolean | KarchagSubCategory$textsArgs<ExtArgs>
     _count?: boolean | KarchagSubCategoryCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["karchagSubCategory"]>
@@ -23958,7 +15003,9 @@ export namespace Prisma {
     is_active?: boolean
     created_at?: boolean
     updated_at?: boolean
-    mainCategory?: boolean | KarchagMainCategoryDefaultArgs<ExtArgs>
+    only_content?: boolean
+    content?: boolean
+    main_category?: boolean | KarchagMainCategoryDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["karchagSubCategory"]>
 
   export type KarchagSubCategorySelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -23972,7 +15019,9 @@ export namespace Prisma {
     is_active?: boolean
     created_at?: boolean
     updated_at?: boolean
-    mainCategory?: boolean | KarchagMainCategoryDefaultArgs<ExtArgs>
+    only_content?: boolean
+    content?: boolean
+    main_category?: boolean | KarchagMainCategoryDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["karchagSubCategory"]>
 
   export type KarchagSubCategorySelectScalar = {
@@ -23986,26 +15035,28 @@ export namespace Prisma {
     is_active?: boolean
     created_at?: boolean
     updated_at?: boolean
+    only_content?: boolean
+    content?: boolean
   }
 
-  export type KarchagSubCategoryOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "main_category_id" | "name_english" | "name_tibetan" | "description_english" | "description_tibetan" | "order_index" | "is_active" | "created_at" | "updated_at", ExtArgs["result"]["karchagSubCategory"]>
+  export type KarchagSubCategoryOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "main_category_id" | "name_english" | "name_tibetan" | "description_english" | "description_tibetan" | "order_index" | "is_active" | "created_at" | "updated_at" | "only_content" | "content", ExtArgs["result"]["karchagSubCategory"]>
   export type KarchagSubCategoryInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    mainCategory?: boolean | KarchagMainCategoryDefaultArgs<ExtArgs>
+    main_category?: boolean | KarchagMainCategoryDefaultArgs<ExtArgs>
     texts?: boolean | KarchagSubCategory$textsArgs<ExtArgs>
     _count?: boolean | KarchagSubCategoryCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type KarchagSubCategoryIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    mainCategory?: boolean | KarchagMainCategoryDefaultArgs<ExtArgs>
+    main_category?: boolean | KarchagMainCategoryDefaultArgs<ExtArgs>
   }
   export type KarchagSubCategoryIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    mainCategory?: boolean | KarchagMainCategoryDefaultArgs<ExtArgs>
+    main_category?: boolean | KarchagMainCategoryDefaultArgs<ExtArgs>
   }
 
   export type $KarchagSubCategoryPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "KarchagSubCategory"
     objects: {
-      mainCategory: Prisma.$KarchagMainCategoryPayload<ExtArgs>
-      texts: Prisma.$KarchagTextPayload<ExtArgs>[]
+      main_category: Prisma.$KarchagMainCategoryPayload<ExtArgs>
+      texts: Prisma.$TextPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -24018,6 +15069,8 @@ export namespace Prisma {
       is_active: boolean
       created_at: Date
       updated_at: Date
+      only_content: boolean
+      content: string | null
     }, ExtArgs["result"]["karchagSubCategory"]>
     composites: {}
   }
@@ -24412,8 +15465,8 @@ export namespace Prisma {
    */
   export interface Prisma__KarchagSubCategoryClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
-    mainCategory<T extends KarchagMainCategoryDefaultArgs<ExtArgs> = {}>(args?: Subset<T, KarchagMainCategoryDefaultArgs<ExtArgs>>): Prisma__KarchagMainCategoryClient<$Result.GetResult<Prisma.$KarchagMainCategoryPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-    texts<T extends KarchagSubCategory$textsArgs<ExtArgs> = {}>(args?: Subset<T, KarchagSubCategory$textsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$KarchagTextPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    main_category<T extends KarchagMainCategoryDefaultArgs<ExtArgs> = {}>(args?: Subset<T, KarchagMainCategoryDefaultArgs<ExtArgs>>): Prisma__KarchagMainCategoryClient<$Result.GetResult<Prisma.$KarchagMainCategoryPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    texts<T extends KarchagSubCategory$textsArgs<ExtArgs> = {}>(args?: Subset<T, KarchagSubCategory$textsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TextPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -24453,6 +15506,8 @@ export namespace Prisma {
     readonly is_active: FieldRef<"KarchagSubCategory", 'Boolean'>
     readonly created_at: FieldRef<"KarchagSubCategory", 'DateTime'>
     readonly updated_at: FieldRef<"KarchagSubCategory", 'DateTime'>
+    readonly only_content: FieldRef<"KarchagSubCategory", 'Boolean'>
+    readonly content: FieldRef<"KarchagSubCategory", 'String'>
   }
     
 
@@ -24853,23 +15908,23 @@ export namespace Prisma {
    */
   export type KarchagSubCategory$textsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the KarchagText
+     * Select specific fields to fetch from the Text
      */
-    select?: KarchagTextSelect<ExtArgs> | null
+    select?: TextSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the KarchagText
+     * Omit specific fields from the Text
      */
-    omit?: KarchagTextOmit<ExtArgs> | null
+    omit?: TextOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: KarchagTextInclude<ExtArgs> | null
-    where?: KarchagTextWhereInput
-    orderBy?: KarchagTextOrderByWithRelationInput | KarchagTextOrderByWithRelationInput[]
-    cursor?: KarchagTextWhereUniqueInput
+    include?: TextInclude<ExtArgs> | null
+    where?: TextWhereInput
+    orderBy?: TextOrderByWithRelationInput | TextOrderByWithRelationInput[]
+    cursor?: TextWhereUniqueInput
     take?: number
     skip?: number
-    distinct?: KarchagTextScalarFieldEnum | KarchagTextScalarFieldEnum[]
+    distinct?: TextScalarFieldEnum | TextScalarFieldEnum[]
   }
 
   /**
@@ -24892,79 +15947,85 @@ export namespace Prisma {
 
 
   /**
-   * Model KarchagText
+   * Model Text
    */
 
-  export type AggregateKarchagText = {
-    _count: KarchagTextCountAggregateOutputType | null
-    _avg: KarchagTextAvgAggregateOutputType | null
-    _sum: KarchagTextSumAggregateOutputType | null
-    _min: KarchagTextMinAggregateOutputType | null
-    _max: KarchagTextMaxAggregateOutputType | null
+  export type AggregateText = {
+    _count: TextCountAggregateOutputType | null
+    _avg: TextAvgAggregateOutputType | null
+    _sum: TextSumAggregateOutputType | null
+    _min: TextMinAggregateOutputType | null
+    _max: TextMaxAggregateOutputType | null
   }
 
-  export type KarchagTextAvgAggregateOutputType = {
-    turning_id: number | null
-    yana_id: number | null
-    translation_period_id: number | null
+  export type TextAvgAggregateOutputType = {
     order_index: number | null
   }
 
-  export type KarchagTextSumAggregateOutputType = {
-    turning_id: number | null
-    yana_id: number | null
-    translation_period_id: number | null
+  export type TextSumAggregateOutputType = {
     order_index: number | null
   }
 
-  export type KarchagTextMinAggregateOutputType = {
+  export type TextMinAggregateOutputType = {
     id: string | null
     sub_category_id: string | null
-    derge_id: string | null
-    yeshe_de_id: string | null
     tibetan_title: string | null
     chinese_title: string | null
     sanskrit_title: string | null
     english_title: string | null
-    turning_id: number | null
-    yana_id: number | null
-    translation_period_id: number | null
+    derge_id: string | null
+    yeshe_de_id: string | null
+    yeshe_de_volume_number: string | null
+    yeshe_de_page_start: string | null
+    yeshe_de_page_end: string | null
+    turning: string | null
+    yana: string | null
+    translation_period: string | null
+    pdf_url: string | null
     order_index: number | null
     is_active: boolean | null
     created_at: Date | null
     updated_at: Date | null
   }
 
-  export type KarchagTextMaxAggregateOutputType = {
+  export type TextMaxAggregateOutputType = {
     id: string | null
     sub_category_id: string | null
-    derge_id: string | null
-    yeshe_de_id: string | null
     tibetan_title: string | null
     chinese_title: string | null
     sanskrit_title: string | null
     english_title: string | null
-    turning_id: number | null
-    yana_id: number | null
-    translation_period_id: number | null
+    derge_id: string | null
+    yeshe_de_id: string | null
+    yeshe_de_volume_number: string | null
+    yeshe_de_page_start: string | null
+    yeshe_de_page_end: string | null
+    turning: string | null
+    yana: string | null
+    translation_period: string | null
+    pdf_url: string | null
     order_index: number | null
     is_active: boolean | null
     created_at: Date | null
     updated_at: Date | null
   }
 
-  export type KarchagTextCountAggregateOutputType = {
+  export type TextCountAggregateOutputType = {
     id: number
     sub_category_id: number
-    derge_id: number
-    yeshe_de_id: number
     tibetan_title: number
     chinese_title: number
     sanskrit_title: number
     english_title: number
-    turning_id: number
-    yana_id: number
-    translation_period_id: number
+    derge_id: number
+    yeshe_de_id: number
+    yeshe_de_volume_number: number
+    yeshe_de_page_start: number
+    yeshe_de_page_end: number
+    turning: number
+    yana: number
+    translation_period: number
+    pdf_url: number
     order_index: number
     is_active: number
     created_at: number
@@ -24973,68 +16034,74 @@ export namespace Prisma {
   }
 
 
-  export type KarchagTextAvgAggregateInputType = {
-    turning_id?: true
-    yana_id?: true
-    translation_period_id?: true
+  export type TextAvgAggregateInputType = {
     order_index?: true
   }
 
-  export type KarchagTextSumAggregateInputType = {
-    turning_id?: true
-    yana_id?: true
-    translation_period_id?: true
+  export type TextSumAggregateInputType = {
     order_index?: true
   }
 
-  export type KarchagTextMinAggregateInputType = {
+  export type TextMinAggregateInputType = {
     id?: true
     sub_category_id?: true
-    derge_id?: true
-    yeshe_de_id?: true
     tibetan_title?: true
     chinese_title?: true
     sanskrit_title?: true
     english_title?: true
-    turning_id?: true
-    yana_id?: true
-    translation_period_id?: true
+    derge_id?: true
+    yeshe_de_id?: true
+    yeshe_de_volume_number?: true
+    yeshe_de_page_start?: true
+    yeshe_de_page_end?: true
+    turning?: true
+    yana?: true
+    translation_period?: true
+    pdf_url?: true
     order_index?: true
     is_active?: true
     created_at?: true
     updated_at?: true
   }
 
-  export type KarchagTextMaxAggregateInputType = {
+  export type TextMaxAggregateInputType = {
     id?: true
     sub_category_id?: true
-    derge_id?: true
-    yeshe_de_id?: true
     tibetan_title?: true
     chinese_title?: true
     sanskrit_title?: true
     english_title?: true
-    turning_id?: true
-    yana_id?: true
-    translation_period_id?: true
+    derge_id?: true
+    yeshe_de_id?: true
+    yeshe_de_volume_number?: true
+    yeshe_de_page_start?: true
+    yeshe_de_page_end?: true
+    turning?: true
+    yana?: true
+    translation_period?: true
+    pdf_url?: true
     order_index?: true
     is_active?: true
     created_at?: true
     updated_at?: true
   }
 
-  export type KarchagTextCountAggregateInputType = {
+  export type TextCountAggregateInputType = {
     id?: true
     sub_category_id?: true
-    derge_id?: true
-    yeshe_de_id?: true
     tibetan_title?: true
     chinese_title?: true
     sanskrit_title?: true
     english_title?: true
-    turning_id?: true
-    yana_id?: true
-    translation_period_id?: true
+    derge_id?: true
+    yeshe_de_id?: true
+    yeshe_de_volume_number?: true
+    yeshe_de_page_start?: true
+    yeshe_de_page_end?: true
+    turning?: true
+    yana?: true
+    translation_period?: true
+    pdf_url?: true
     order_index?: true
     is_active?: true
     created_at?: true
@@ -25042,366 +16109,398 @@ export namespace Prisma {
     _all?: true
   }
 
-  export type KarchagTextAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type TextAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Filter which KarchagText to aggregate.
+     * Filter which Text to aggregate.
      */
-    where?: KarchagTextWhereInput
+    where?: TextWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
-     * Determine the order of KarchagTexts to fetch.
+     * Determine the order of Texts to fetch.
      */
-    orderBy?: KarchagTextOrderByWithRelationInput | KarchagTextOrderByWithRelationInput[]
+    orderBy?: TextOrderByWithRelationInput | TextOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
      * Sets the start position
      */
-    cursor?: KarchagTextWhereUniqueInput
+    cursor?: TextWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Take `±n` KarchagTexts from the position of the cursor.
+     * Take `±n` Texts from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Skip the first `n` KarchagTexts.
+     * Skip the first `n` Texts.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
-     * Count returned KarchagTexts
+     * Count returned Texts
     **/
-    _count?: true | KarchagTextCountAggregateInputType
+    _count?: true | TextCountAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
      * Select which fields to average
     **/
-    _avg?: KarchagTextAvgAggregateInputType
+    _avg?: TextAvgAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
      * Select which fields to sum
     **/
-    _sum?: KarchagTextSumAggregateInputType
+    _sum?: TextSumAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
      * Select which fields to find the minimum value
     **/
-    _min?: KarchagTextMinAggregateInputType
+    _min?: TextMinAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
      * Select which fields to find the maximum value
     **/
-    _max?: KarchagTextMaxAggregateInputType
+    _max?: TextMaxAggregateInputType
   }
 
-  export type GetKarchagTextAggregateType<T extends KarchagTextAggregateArgs> = {
-        [P in keyof T & keyof AggregateKarchagText]: P extends '_count' | 'count'
+  export type GetTextAggregateType<T extends TextAggregateArgs> = {
+        [P in keyof T & keyof AggregateText]: P extends '_count' | 'count'
       ? T[P] extends true
         ? number
-        : GetScalarType<T[P], AggregateKarchagText[P]>
-      : GetScalarType<T[P], AggregateKarchagText[P]>
+        : GetScalarType<T[P], AggregateText[P]>
+      : GetScalarType<T[P], AggregateText[P]>
   }
 
 
 
 
-  export type KarchagTextGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: KarchagTextWhereInput
-    orderBy?: KarchagTextOrderByWithAggregationInput | KarchagTextOrderByWithAggregationInput[]
-    by: KarchagTextScalarFieldEnum[] | KarchagTextScalarFieldEnum
-    having?: KarchagTextScalarWhereWithAggregatesInput
+  export type TextGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: TextWhereInput
+    orderBy?: TextOrderByWithAggregationInput | TextOrderByWithAggregationInput[]
+    by: TextScalarFieldEnum[] | TextScalarFieldEnum
+    having?: TextScalarWhereWithAggregatesInput
     take?: number
     skip?: number
-    _count?: KarchagTextCountAggregateInputType | true
-    _avg?: KarchagTextAvgAggregateInputType
-    _sum?: KarchagTextSumAggregateInputType
-    _min?: KarchagTextMinAggregateInputType
-    _max?: KarchagTextMaxAggregateInputType
+    _count?: TextCountAggregateInputType | true
+    _avg?: TextAvgAggregateInputType
+    _sum?: TextSumAggregateInputType
+    _min?: TextMinAggregateInputType
+    _max?: TextMaxAggregateInputType
   }
 
-  export type KarchagTextGroupByOutputType = {
+  export type TextGroupByOutputType = {
     id: string
     sub_category_id: string
-    derge_id: string | null
-    yeshe_de_id: string | null
     tibetan_title: string | null
     chinese_title: string | null
     sanskrit_title: string | null
     english_title: string | null
-    turning_id: number | null
-    yana_id: number | null
-    translation_period_id: number | null
+    derge_id: string | null
+    yeshe_de_id: string | null
+    yeshe_de_volume_number: string | null
+    yeshe_de_page_start: string | null
+    yeshe_de_page_end: string | null
+    turning: string | null
+    yana: string | null
+    translation_period: string | null
+    pdf_url: string | null
     order_index: number
     is_active: boolean
     created_at: Date
     updated_at: Date
-    _count: KarchagTextCountAggregateOutputType | null
-    _avg: KarchagTextAvgAggregateOutputType | null
-    _sum: KarchagTextSumAggregateOutputType | null
-    _min: KarchagTextMinAggregateOutputType | null
-    _max: KarchagTextMaxAggregateOutputType | null
+    _count: TextCountAggregateOutputType | null
+    _avg: TextAvgAggregateOutputType | null
+    _sum: TextSumAggregateOutputType | null
+    _min: TextMinAggregateOutputType | null
+    _max: TextMaxAggregateOutputType | null
   }
 
-  type GetKarchagTextGroupByPayload<T extends KarchagTextGroupByArgs> = Prisma.PrismaPromise<
+  type GetTextGroupByPayload<T extends TextGroupByArgs> = Prisma.PrismaPromise<
     Array<
-      PickEnumerable<KarchagTextGroupByOutputType, T['by']> &
+      PickEnumerable<TextGroupByOutputType, T['by']> &
         {
-          [P in ((keyof T) & (keyof KarchagTextGroupByOutputType))]: P extends '_count'
+          [P in ((keyof T) & (keyof TextGroupByOutputType))]: P extends '_count'
             ? T[P] extends boolean
               ? number
-              : GetScalarType<T[P], KarchagTextGroupByOutputType[P]>
-            : GetScalarType<T[P], KarchagTextGroupByOutputType[P]>
+              : GetScalarType<T[P], TextGroupByOutputType[P]>
+            : GetScalarType<T[P], TextGroupByOutputType[P]>
         }
       >
     >
 
 
-  export type KarchagTextSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+  export type TextSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     sub_category_id?: boolean
-    derge_id?: boolean
-    yeshe_de_id?: boolean
     tibetan_title?: boolean
     chinese_title?: boolean
     sanskrit_title?: boolean
     english_title?: boolean
-    turning_id?: boolean
-    yana_id?: boolean
-    translation_period_id?: boolean
+    derge_id?: boolean
+    yeshe_de_id?: boolean
+    yeshe_de_volume_number?: boolean
+    yeshe_de_page_start?: boolean
+    yeshe_de_page_end?: boolean
+    turning?: boolean
+    yana?: boolean
+    translation_period?: boolean
+    pdf_url?: boolean
     order_index?: boolean
     is_active?: boolean
     created_at?: boolean
     updated_at?: boolean
-    subCategory?: boolean | KarchagSubCategoryDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["karchagText"]>
+    sub_category?: boolean | KarchagSubCategoryDefaultArgs<ExtArgs>
+    summary?: boolean | Text$summaryArgs<ExtArgs>
+    metadata?: boolean | Text$metadataArgs<ExtArgs>
+    _count?: boolean | TextCountOutputTypeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["text"]>
 
-  export type KarchagTextSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+  export type TextSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     sub_category_id?: boolean
-    derge_id?: boolean
-    yeshe_de_id?: boolean
     tibetan_title?: boolean
     chinese_title?: boolean
     sanskrit_title?: boolean
     english_title?: boolean
-    turning_id?: boolean
-    yana_id?: boolean
-    translation_period_id?: boolean
+    derge_id?: boolean
+    yeshe_de_id?: boolean
+    yeshe_de_volume_number?: boolean
+    yeshe_de_page_start?: boolean
+    yeshe_de_page_end?: boolean
+    turning?: boolean
+    yana?: boolean
+    translation_period?: boolean
+    pdf_url?: boolean
     order_index?: boolean
     is_active?: boolean
     created_at?: boolean
     updated_at?: boolean
-    subCategory?: boolean | KarchagSubCategoryDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["karchagText"]>
+    sub_category?: boolean | KarchagSubCategoryDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["text"]>
 
-  export type KarchagTextSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+  export type TextSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     sub_category_id?: boolean
-    derge_id?: boolean
-    yeshe_de_id?: boolean
     tibetan_title?: boolean
     chinese_title?: boolean
     sanskrit_title?: boolean
     english_title?: boolean
-    turning_id?: boolean
-    yana_id?: boolean
-    translation_period_id?: boolean
+    derge_id?: boolean
+    yeshe_de_id?: boolean
+    yeshe_de_volume_number?: boolean
+    yeshe_de_page_start?: boolean
+    yeshe_de_page_end?: boolean
+    turning?: boolean
+    yana?: boolean
+    translation_period?: boolean
+    pdf_url?: boolean
     order_index?: boolean
     is_active?: boolean
     created_at?: boolean
     updated_at?: boolean
-    subCategory?: boolean | KarchagSubCategoryDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["karchagText"]>
+    sub_category?: boolean | KarchagSubCategoryDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["text"]>
 
-  export type KarchagTextSelectScalar = {
+  export type TextSelectScalar = {
     id?: boolean
     sub_category_id?: boolean
-    derge_id?: boolean
-    yeshe_de_id?: boolean
     tibetan_title?: boolean
     chinese_title?: boolean
     sanskrit_title?: boolean
     english_title?: boolean
-    turning_id?: boolean
-    yana_id?: boolean
-    translation_period_id?: boolean
+    derge_id?: boolean
+    yeshe_de_id?: boolean
+    yeshe_de_volume_number?: boolean
+    yeshe_de_page_start?: boolean
+    yeshe_de_page_end?: boolean
+    turning?: boolean
+    yana?: boolean
+    translation_period?: boolean
+    pdf_url?: boolean
     order_index?: boolean
     is_active?: boolean
     created_at?: boolean
     updated_at?: boolean
   }
 
-  export type KarchagTextOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "sub_category_id" | "derge_id" | "yeshe_de_id" | "tibetan_title" | "chinese_title" | "sanskrit_title" | "english_title" | "turning_id" | "yana_id" | "translation_period_id" | "order_index" | "is_active" | "created_at" | "updated_at", ExtArgs["result"]["karchagText"]>
-  export type KarchagTextInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    subCategory?: boolean | KarchagSubCategoryDefaultArgs<ExtArgs>
+  export type TextOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "sub_category_id" | "tibetan_title" | "chinese_title" | "sanskrit_title" | "english_title" | "derge_id" | "yeshe_de_id" | "yeshe_de_volume_number" | "yeshe_de_page_start" | "yeshe_de_page_end" | "turning" | "yana" | "translation_period" | "pdf_url" | "order_index" | "is_active" | "created_at" | "updated_at", ExtArgs["result"]["text"]>
+  export type TextInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    sub_category?: boolean | KarchagSubCategoryDefaultArgs<ExtArgs>
+    summary?: boolean | Text$summaryArgs<ExtArgs>
+    metadata?: boolean | Text$metadataArgs<ExtArgs>
+    _count?: boolean | TextCountOutputTypeDefaultArgs<ExtArgs>
   }
-  export type KarchagTextIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    subCategory?: boolean | KarchagSubCategoryDefaultArgs<ExtArgs>
+  export type TextIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    sub_category?: boolean | KarchagSubCategoryDefaultArgs<ExtArgs>
   }
-  export type KarchagTextIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    subCategory?: boolean | KarchagSubCategoryDefaultArgs<ExtArgs>
+  export type TextIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    sub_category?: boolean | KarchagSubCategoryDefaultArgs<ExtArgs>
   }
 
-  export type $KarchagTextPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    name: "KarchagText"
+  export type $TextPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "Text"
     objects: {
-      subCategory: Prisma.$KarchagSubCategoryPayload<ExtArgs>
+      sub_category: Prisma.$KarchagSubCategoryPayload<ExtArgs>
+      summary: Prisma.$KarchagTextSummaryPayload<ExtArgs> | null
+      metadata: Prisma.$KarchagTextMetadataPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
       sub_category_id: string
-      derge_id: string | null
-      yeshe_de_id: string | null
       tibetan_title: string | null
       chinese_title: string | null
       sanskrit_title: string | null
       english_title: string | null
-      turning_id: number | null
-      yana_id: number | null
-      translation_period_id: number | null
+      derge_id: string | null
+      yeshe_de_id: string | null
+      yeshe_de_volume_number: string | null
+      yeshe_de_page_start: string | null
+      yeshe_de_page_end: string | null
+      turning: string | null
+      yana: string | null
+      translation_period: string | null
+      pdf_url: string | null
       order_index: number
       is_active: boolean
       created_at: Date
       updated_at: Date
-    }, ExtArgs["result"]["karchagText"]>
+    }, ExtArgs["result"]["text"]>
     composites: {}
   }
 
-  type KarchagTextGetPayload<S extends boolean | null | undefined | KarchagTextDefaultArgs> = $Result.GetResult<Prisma.$KarchagTextPayload, S>
+  type TextGetPayload<S extends boolean | null | undefined | TextDefaultArgs> = $Result.GetResult<Prisma.$TextPayload, S>
 
-  type KarchagTextCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
-    Omit<KarchagTextFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
-      select?: KarchagTextCountAggregateInputType | true
+  type TextCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<TextFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: TextCountAggregateInputType | true
     }
 
-  export interface KarchagTextDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
-    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['KarchagText'], meta: { name: 'KarchagText' } }
+  export interface TextDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Text'], meta: { name: 'Text' } }
     /**
-     * Find zero or one KarchagText that matches the filter.
-     * @param {KarchagTextFindUniqueArgs} args - Arguments to find a KarchagText
+     * Find zero or one Text that matches the filter.
+     * @param {TextFindUniqueArgs} args - Arguments to find a Text
      * @example
-     * // Get one KarchagText
-     * const karchagText = await prisma.karchagText.findUnique({
+     * // Get one Text
+     * const text = await prisma.text.findUnique({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
      */
-    findUnique<T extends KarchagTextFindUniqueArgs>(args: SelectSubset<T, KarchagTextFindUniqueArgs<ExtArgs>>): Prisma__KarchagTextClient<$Result.GetResult<Prisma.$KarchagTextPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    findUnique<T extends TextFindUniqueArgs>(args: SelectSubset<T, TextFindUniqueArgs<ExtArgs>>): Prisma__TextClient<$Result.GetResult<Prisma.$TextPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Find one KarchagText that matches the filter or throw an error with `error.code='P2025'`
+     * Find one Text that matches the filter or throw an error with `error.code='P2025'`
      * if no matches were found.
-     * @param {KarchagTextFindUniqueOrThrowArgs} args - Arguments to find a KarchagText
+     * @param {TextFindUniqueOrThrowArgs} args - Arguments to find a Text
      * @example
-     * // Get one KarchagText
-     * const karchagText = await prisma.karchagText.findUniqueOrThrow({
+     * // Get one Text
+     * const text = await prisma.text.findUniqueOrThrow({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
      */
-    findUniqueOrThrow<T extends KarchagTextFindUniqueOrThrowArgs>(args: SelectSubset<T, KarchagTextFindUniqueOrThrowArgs<ExtArgs>>): Prisma__KarchagTextClient<$Result.GetResult<Prisma.$KarchagTextPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    findUniqueOrThrow<T extends TextFindUniqueOrThrowArgs>(args: SelectSubset<T, TextFindUniqueOrThrowArgs<ExtArgs>>): Prisma__TextClient<$Result.GetResult<Prisma.$TextPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Find the first KarchagText that matches the filter.
+     * Find the first Text that matches the filter.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {KarchagTextFindFirstArgs} args - Arguments to find a KarchagText
+     * @param {TextFindFirstArgs} args - Arguments to find a Text
      * @example
-     * // Get one KarchagText
-     * const karchagText = await prisma.karchagText.findFirst({
+     * // Get one Text
+     * const text = await prisma.text.findFirst({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
      */
-    findFirst<T extends KarchagTextFindFirstArgs>(args?: SelectSubset<T, KarchagTextFindFirstArgs<ExtArgs>>): Prisma__KarchagTextClient<$Result.GetResult<Prisma.$KarchagTextPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    findFirst<T extends TextFindFirstArgs>(args?: SelectSubset<T, TextFindFirstArgs<ExtArgs>>): Prisma__TextClient<$Result.GetResult<Prisma.$TextPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Find the first KarchagText that matches the filter or
+     * Find the first Text that matches the filter or
      * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {KarchagTextFindFirstOrThrowArgs} args - Arguments to find a KarchagText
+     * @param {TextFindFirstOrThrowArgs} args - Arguments to find a Text
      * @example
-     * // Get one KarchagText
-     * const karchagText = await prisma.karchagText.findFirstOrThrow({
+     * // Get one Text
+     * const text = await prisma.text.findFirstOrThrow({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
      */
-    findFirstOrThrow<T extends KarchagTextFindFirstOrThrowArgs>(args?: SelectSubset<T, KarchagTextFindFirstOrThrowArgs<ExtArgs>>): Prisma__KarchagTextClient<$Result.GetResult<Prisma.$KarchagTextPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    findFirstOrThrow<T extends TextFindFirstOrThrowArgs>(args?: SelectSubset<T, TextFindFirstOrThrowArgs<ExtArgs>>): Prisma__TextClient<$Result.GetResult<Prisma.$TextPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Find zero or more KarchagTexts that matches the filter.
+     * Find zero or more Texts that matches the filter.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {KarchagTextFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @param {TextFindManyArgs} args - Arguments to filter and select certain fields only.
      * @example
-     * // Get all KarchagTexts
-     * const karchagTexts = await prisma.karchagText.findMany()
+     * // Get all Texts
+     * const texts = await prisma.text.findMany()
      * 
-     * // Get first 10 KarchagTexts
-     * const karchagTexts = await prisma.karchagText.findMany({ take: 10 })
+     * // Get first 10 Texts
+     * const texts = await prisma.text.findMany({ take: 10 })
      * 
      * // Only select the `id`
-     * const karchagTextWithIdOnly = await prisma.karchagText.findMany({ select: { id: true } })
+     * const textWithIdOnly = await prisma.text.findMany({ select: { id: true } })
      * 
      */
-    findMany<T extends KarchagTextFindManyArgs>(args?: SelectSubset<T, KarchagTextFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$KarchagTextPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+    findMany<T extends TextFindManyArgs>(args?: SelectSubset<T, TextFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TextPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
 
     /**
-     * Create a KarchagText.
-     * @param {KarchagTextCreateArgs} args - Arguments to create a KarchagText.
+     * Create a Text.
+     * @param {TextCreateArgs} args - Arguments to create a Text.
      * @example
-     * // Create one KarchagText
-     * const KarchagText = await prisma.karchagText.create({
+     * // Create one Text
+     * const Text = await prisma.text.create({
      *   data: {
-     *     // ... data to create a KarchagText
+     *     // ... data to create a Text
      *   }
      * })
      * 
      */
-    create<T extends KarchagTextCreateArgs>(args: SelectSubset<T, KarchagTextCreateArgs<ExtArgs>>): Prisma__KarchagTextClient<$Result.GetResult<Prisma.$KarchagTextPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    create<T extends TextCreateArgs>(args: SelectSubset<T, TextCreateArgs<ExtArgs>>): Prisma__TextClient<$Result.GetResult<Prisma.$TextPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Create many KarchagTexts.
-     * @param {KarchagTextCreateManyArgs} args - Arguments to create many KarchagTexts.
+     * Create many Texts.
+     * @param {TextCreateManyArgs} args - Arguments to create many Texts.
      * @example
-     * // Create many KarchagTexts
-     * const karchagText = await prisma.karchagText.createMany({
+     * // Create many Texts
+     * const text = await prisma.text.createMany({
      *   data: [
      *     // ... provide data here
      *   ]
      * })
      *     
      */
-    createMany<T extends KarchagTextCreateManyArgs>(args?: SelectSubset<T, KarchagTextCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+    createMany<T extends TextCreateManyArgs>(args?: SelectSubset<T, TextCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
     /**
-     * Create many KarchagTexts and returns the data saved in the database.
-     * @param {KarchagTextCreateManyAndReturnArgs} args - Arguments to create many KarchagTexts.
+     * Create many Texts and returns the data saved in the database.
+     * @param {TextCreateManyAndReturnArgs} args - Arguments to create many Texts.
      * @example
-     * // Create many KarchagTexts
-     * const karchagText = await prisma.karchagText.createManyAndReturn({
+     * // Create many Texts
+     * const text = await prisma.text.createManyAndReturn({
      *   data: [
      *     // ... provide data here
      *   ]
      * })
      * 
-     * // Create many KarchagTexts and only return the `id`
-     * const karchagTextWithIdOnly = await prisma.karchagText.createManyAndReturn({
+     * // Create many Texts and only return the `id`
+     * const textWithIdOnly = await prisma.text.createManyAndReturn({
      *   select: { id: true },
      *   data: [
      *     // ... provide data here
@@ -25411,28 +16510,28 @@ export namespace Prisma {
      * Read more here: https://pris.ly/d/null-undefined
      * 
      */
-    createManyAndReturn<T extends KarchagTextCreateManyAndReturnArgs>(args?: SelectSubset<T, KarchagTextCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$KarchagTextPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+    createManyAndReturn<T extends TextCreateManyAndReturnArgs>(args?: SelectSubset<T, TextCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TextPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
 
     /**
-     * Delete a KarchagText.
-     * @param {KarchagTextDeleteArgs} args - Arguments to delete one KarchagText.
+     * Delete a Text.
+     * @param {TextDeleteArgs} args - Arguments to delete one Text.
      * @example
-     * // Delete one KarchagText
-     * const KarchagText = await prisma.karchagText.delete({
+     * // Delete one Text
+     * const Text = await prisma.text.delete({
      *   where: {
-     *     // ... filter to delete one KarchagText
+     *     // ... filter to delete one Text
      *   }
      * })
      * 
      */
-    delete<T extends KarchagTextDeleteArgs>(args: SelectSubset<T, KarchagTextDeleteArgs<ExtArgs>>): Prisma__KarchagTextClient<$Result.GetResult<Prisma.$KarchagTextPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    delete<T extends TextDeleteArgs>(args: SelectSubset<T, TextDeleteArgs<ExtArgs>>): Prisma__TextClient<$Result.GetResult<Prisma.$TextPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Update one KarchagText.
-     * @param {KarchagTextUpdateArgs} args - Arguments to update one KarchagText.
+     * Update one Text.
+     * @param {TextUpdateArgs} args - Arguments to update one Text.
      * @example
-     * // Update one KarchagText
-     * const karchagText = await prisma.karchagText.update({
+     * // Update one Text
+     * const text = await prisma.text.update({
      *   where: {
      *     // ... provide filter here
      *   },
@@ -25442,30 +16541,30 @@ export namespace Prisma {
      * })
      * 
      */
-    update<T extends KarchagTextUpdateArgs>(args: SelectSubset<T, KarchagTextUpdateArgs<ExtArgs>>): Prisma__KarchagTextClient<$Result.GetResult<Prisma.$KarchagTextPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    update<T extends TextUpdateArgs>(args: SelectSubset<T, TextUpdateArgs<ExtArgs>>): Prisma__TextClient<$Result.GetResult<Prisma.$TextPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Delete zero or more KarchagTexts.
-     * @param {KarchagTextDeleteManyArgs} args - Arguments to filter KarchagTexts to delete.
+     * Delete zero or more Texts.
+     * @param {TextDeleteManyArgs} args - Arguments to filter Texts to delete.
      * @example
-     * // Delete a few KarchagTexts
-     * const { count } = await prisma.karchagText.deleteMany({
+     * // Delete a few Texts
+     * const { count } = await prisma.text.deleteMany({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
      * 
      */
-    deleteMany<T extends KarchagTextDeleteManyArgs>(args?: SelectSubset<T, KarchagTextDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+    deleteMany<T extends TextDeleteManyArgs>(args?: SelectSubset<T, TextDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
     /**
-     * Update zero or more KarchagTexts.
+     * Update zero or more Texts.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {KarchagTextUpdateManyArgs} args - Arguments to update one or more rows.
+     * @param {TextUpdateManyArgs} args - Arguments to update one or more rows.
      * @example
-     * // Update many KarchagTexts
-     * const karchagText = await prisma.karchagText.updateMany({
+     * // Update many Texts
+     * const text = await prisma.text.updateMany({
      *   where: {
      *     // ... provide filter here
      *   },
@@ -25475,14 +16574,14 @@ export namespace Prisma {
      * })
      * 
      */
-    updateMany<T extends KarchagTextUpdateManyArgs>(args: SelectSubset<T, KarchagTextUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+    updateMany<T extends TextUpdateManyArgs>(args: SelectSubset<T, TextUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
     /**
-     * Update zero or more KarchagTexts and returns the data updated in the database.
-     * @param {KarchagTextUpdateManyAndReturnArgs} args - Arguments to update many KarchagTexts.
+     * Update zero or more Texts and returns the data updated in the database.
+     * @param {TextUpdateManyAndReturnArgs} args - Arguments to update many Texts.
      * @example
-     * // Update many KarchagTexts
-     * const karchagText = await prisma.karchagText.updateManyAndReturn({
+     * // Update many Texts
+     * const text = await prisma.text.updateManyAndReturn({
      *   where: {
      *     // ... provide filter here
      *   },
@@ -25491,8 +16590,8 @@ export namespace Prisma {
      *   ]
      * })
      * 
-     * // Update zero or more KarchagTexts and only return the `id`
-     * const karchagTextWithIdOnly = await prisma.karchagText.updateManyAndReturn({
+     * // Update zero or more Texts and only return the `id`
+     * const textWithIdOnly = await prisma.text.updateManyAndReturn({
      *   select: { id: true },
      *   where: {
      *     // ... provide filter here
@@ -25505,56 +16604,56 @@ export namespace Prisma {
      * Read more here: https://pris.ly/d/null-undefined
      * 
      */
-    updateManyAndReturn<T extends KarchagTextUpdateManyAndReturnArgs>(args: SelectSubset<T, KarchagTextUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$KarchagTextPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+    updateManyAndReturn<T extends TextUpdateManyAndReturnArgs>(args: SelectSubset<T, TextUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TextPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
 
     /**
-     * Create or update one KarchagText.
-     * @param {KarchagTextUpsertArgs} args - Arguments to update or create a KarchagText.
+     * Create or update one Text.
+     * @param {TextUpsertArgs} args - Arguments to update or create a Text.
      * @example
-     * // Update or create a KarchagText
-     * const karchagText = await prisma.karchagText.upsert({
+     * // Update or create a Text
+     * const text = await prisma.text.upsert({
      *   create: {
-     *     // ... data to create a KarchagText
+     *     // ... data to create a Text
      *   },
      *   update: {
      *     // ... in case it already exists, update
      *   },
      *   where: {
-     *     // ... the filter for the KarchagText we want to update
+     *     // ... the filter for the Text we want to update
      *   }
      * })
      */
-    upsert<T extends KarchagTextUpsertArgs>(args: SelectSubset<T, KarchagTextUpsertArgs<ExtArgs>>): Prisma__KarchagTextClient<$Result.GetResult<Prisma.$KarchagTextPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    upsert<T extends TextUpsertArgs>(args: SelectSubset<T, TextUpsertArgs<ExtArgs>>): Prisma__TextClient<$Result.GetResult<Prisma.$TextPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
 
     /**
-     * Count the number of KarchagTexts.
+     * Count the number of Texts.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {KarchagTextCountArgs} args - Arguments to filter KarchagTexts to count.
+     * @param {TextCountArgs} args - Arguments to filter Texts to count.
      * @example
-     * // Count the number of KarchagTexts
-     * const count = await prisma.karchagText.count({
+     * // Count the number of Texts
+     * const count = await prisma.text.count({
      *   where: {
-     *     // ... the filter for the KarchagTexts we want to count
+     *     // ... the filter for the Texts we want to count
      *   }
      * })
     **/
-    count<T extends KarchagTextCountArgs>(
-      args?: Subset<T, KarchagTextCountArgs>,
+    count<T extends TextCountArgs>(
+      args?: Subset<T, TextCountArgs>,
     ): Prisma.PrismaPromise<
       T extends $Utils.Record<'select', any>
         ? T['select'] extends true
           ? number
-          : GetScalarType<T['select'], KarchagTextCountAggregateOutputType>
+          : GetScalarType<T['select'], TextCountAggregateOutputType>
         : number
     >
 
     /**
-     * Allows you to perform aggregations operations on a KarchagText.
+     * Allows you to perform aggregations operations on a Text.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {KarchagTextAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @param {TextAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
      * @example
      * // Ordered by age ascending
      * // Where email contains prisma.io
@@ -25574,13 +16673,13 @@ export namespace Prisma {
      *   take: 10,
      * })
     **/
-    aggregate<T extends KarchagTextAggregateArgs>(args: Subset<T, KarchagTextAggregateArgs>): Prisma.PrismaPromise<GetKarchagTextAggregateType<T>>
+    aggregate<T extends TextAggregateArgs>(args: Subset<T, TextAggregateArgs>): Prisma.PrismaPromise<GetTextAggregateType<T>>
 
     /**
-     * Group by KarchagText.
+     * Group by Text.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {KarchagTextGroupByArgs} args - Group by arguments.
+     * @param {TextGroupByArgs} args - Group by arguments.
      * @example
      * // Group by city, order by createdAt, get count
      * const result = await prisma.user.groupBy({
@@ -25595,14 +16694,14 @@ export namespace Prisma {
      * 
     **/
     groupBy<
-      T extends KarchagTextGroupByArgs,
+      T extends TextGroupByArgs,
       HasSelectOrTake extends Or<
         Extends<'skip', Keys<T>>,
         Extends<'take', Keys<T>>
       >,
       OrderByArg extends True extends HasSelectOrTake
-        ? { orderBy: KarchagTextGroupByArgs['orderBy'] }
-        : { orderBy?: KarchagTextGroupByArgs['orderBy'] },
+        ? { orderBy: TextGroupByArgs['orderBy'] }
+        : { orderBy?: TextGroupByArgs['orderBy'] },
       OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
       ByFields extends MaybeTupleToUnion<T['by']>,
       ByValid extends Has<ByFields, OrderFields>,
@@ -25651,22 +16750,24 @@ export namespace Prisma {
             ? never
             : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
         }[OrderFields]
-    >(args: SubsetIntersection<T, KarchagTextGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetKarchagTextGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+    >(args: SubsetIntersection<T, TextGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetTextGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
   /**
-   * Fields of the KarchagText model
+   * Fields of the Text model
    */
-  readonly fields: KarchagTextFieldRefs;
+  readonly fields: TextFieldRefs;
   }
 
   /**
-   * The delegate class that acts as a "Promise-like" for KarchagText.
+   * The delegate class that acts as a "Promise-like" for Text.
    * Why is this prefixed with `Prisma__`?
    * Because we want to prevent naming conflicts as mentioned in
    * https://github.com/prisma/prisma-client-js/issues/707
    */
-  export interface Prisma__KarchagTextClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+  export interface Prisma__TextClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
-    subCategory<T extends KarchagSubCategoryDefaultArgs<ExtArgs> = {}>(args?: Subset<T, KarchagSubCategoryDefaultArgs<ExtArgs>>): Prisma__KarchagSubCategoryClient<$Result.GetResult<Prisma.$KarchagSubCategoryPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    sub_category<T extends KarchagSubCategoryDefaultArgs<ExtArgs> = {}>(args?: Subset<T, KarchagSubCategoryDefaultArgs<ExtArgs>>): Prisma__KarchagSubCategoryClient<$Result.GetResult<Prisma.$KarchagSubCategoryPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    summary<T extends Text$summaryArgs<ExtArgs> = {}>(args?: Subset<T, Text$summaryArgs<ExtArgs>>): Prisma__KarchagTextSummaryClient<$Result.GetResult<Prisma.$KarchagTextSummaryPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    metadata<T extends Text$metadataArgs<ExtArgs> = {}>(args?: Subset<T, Text$metadataArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$KarchagTextMetadataPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -25693,435 +16794,2853 @@ export namespace Prisma {
 
 
   /**
-   * Fields of the KarchagText model
+   * Fields of the Text model
    */
-  interface KarchagTextFieldRefs {
-    readonly id: FieldRef<"KarchagText", 'String'>
-    readonly sub_category_id: FieldRef<"KarchagText", 'String'>
-    readonly derge_id: FieldRef<"KarchagText", 'String'>
-    readonly yeshe_de_id: FieldRef<"KarchagText", 'String'>
-    readonly tibetan_title: FieldRef<"KarchagText", 'String'>
-    readonly chinese_title: FieldRef<"KarchagText", 'String'>
-    readonly sanskrit_title: FieldRef<"KarchagText", 'String'>
-    readonly english_title: FieldRef<"KarchagText", 'String'>
-    readonly turning_id: FieldRef<"KarchagText", 'Int'>
-    readonly yana_id: FieldRef<"KarchagText", 'Int'>
-    readonly translation_period_id: FieldRef<"KarchagText", 'Int'>
-    readonly order_index: FieldRef<"KarchagText", 'Int'>
-    readonly is_active: FieldRef<"KarchagText", 'Boolean'>
-    readonly created_at: FieldRef<"KarchagText", 'DateTime'>
-    readonly updated_at: FieldRef<"KarchagText", 'DateTime'>
+  interface TextFieldRefs {
+    readonly id: FieldRef<"Text", 'String'>
+    readonly sub_category_id: FieldRef<"Text", 'String'>
+    readonly tibetan_title: FieldRef<"Text", 'String'>
+    readonly chinese_title: FieldRef<"Text", 'String'>
+    readonly sanskrit_title: FieldRef<"Text", 'String'>
+    readonly english_title: FieldRef<"Text", 'String'>
+    readonly derge_id: FieldRef<"Text", 'String'>
+    readonly yeshe_de_id: FieldRef<"Text", 'String'>
+    readonly yeshe_de_volume_number: FieldRef<"Text", 'String'>
+    readonly yeshe_de_page_start: FieldRef<"Text", 'String'>
+    readonly yeshe_de_page_end: FieldRef<"Text", 'String'>
+    readonly turning: FieldRef<"Text", 'String'>
+    readonly yana: FieldRef<"Text", 'String'>
+    readonly translation_period: FieldRef<"Text", 'String'>
+    readonly pdf_url: FieldRef<"Text", 'String'>
+    readonly order_index: FieldRef<"Text", 'Int'>
+    readonly is_active: FieldRef<"Text", 'Boolean'>
+    readonly created_at: FieldRef<"Text", 'DateTime'>
+    readonly updated_at: FieldRef<"Text", 'DateTime'>
   }
     
 
   // Custom InputTypes
   /**
-   * KarchagText findUnique
+   * Text findUnique
    */
-  export type KarchagTextFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type TextFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the KarchagText
+     * Select specific fields to fetch from the Text
      */
-    select?: KarchagTextSelect<ExtArgs> | null
+    select?: TextSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the KarchagText
+     * Omit specific fields from the Text
      */
-    omit?: KarchagTextOmit<ExtArgs> | null
+    omit?: TextOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: KarchagTextInclude<ExtArgs> | null
+    include?: TextInclude<ExtArgs> | null
     /**
-     * Filter, which KarchagText to fetch.
+     * Filter, which Text to fetch.
      */
-    where: KarchagTextWhereUniqueInput
+    where: TextWhereUniqueInput
   }
 
   /**
-   * KarchagText findUniqueOrThrow
+   * Text findUniqueOrThrow
    */
-  export type KarchagTextFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type TextFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the KarchagText
+     * Select specific fields to fetch from the Text
      */
-    select?: KarchagTextSelect<ExtArgs> | null
+    select?: TextSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the KarchagText
+     * Omit specific fields from the Text
      */
-    omit?: KarchagTextOmit<ExtArgs> | null
+    omit?: TextOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: KarchagTextInclude<ExtArgs> | null
+    include?: TextInclude<ExtArgs> | null
     /**
-     * Filter, which KarchagText to fetch.
+     * Filter, which Text to fetch.
      */
-    where: KarchagTextWhereUniqueInput
+    where: TextWhereUniqueInput
   }
 
   /**
-   * KarchagText findFirst
+   * Text findFirst
    */
-  export type KarchagTextFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type TextFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the KarchagText
+     * Select specific fields to fetch from the Text
      */
-    select?: KarchagTextSelect<ExtArgs> | null
+    select?: TextSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the KarchagText
+     * Omit specific fields from the Text
      */
-    omit?: KarchagTextOmit<ExtArgs> | null
+    omit?: TextOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: KarchagTextInclude<ExtArgs> | null
+    include?: TextInclude<ExtArgs> | null
     /**
-     * Filter, which KarchagText to fetch.
+     * Filter, which Text to fetch.
      */
-    where?: KarchagTextWhereInput
+    where?: TextWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
-     * Determine the order of KarchagTexts to fetch.
+     * Determine the order of Texts to fetch.
      */
-    orderBy?: KarchagTextOrderByWithRelationInput | KarchagTextOrderByWithRelationInput[]
+    orderBy?: TextOrderByWithRelationInput | TextOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
-     * Sets the position for searching for KarchagTexts.
+     * Sets the position for searching for Texts.
      */
-    cursor?: KarchagTextWhereUniqueInput
+    cursor?: TextWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Take `±n` KarchagTexts from the position of the cursor.
+     * Take `±n` Texts from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Skip the first `n` KarchagTexts.
+     * Skip the first `n` Texts.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
      * 
-     * Filter by unique combinations of KarchagTexts.
+     * Filter by unique combinations of Texts.
      */
-    distinct?: KarchagTextScalarFieldEnum | KarchagTextScalarFieldEnum[]
+    distinct?: TextScalarFieldEnum | TextScalarFieldEnum[]
   }
 
   /**
-   * KarchagText findFirstOrThrow
+   * Text findFirstOrThrow
    */
-  export type KarchagTextFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type TextFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the KarchagText
+     * Select specific fields to fetch from the Text
      */
-    select?: KarchagTextSelect<ExtArgs> | null
+    select?: TextSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the KarchagText
+     * Omit specific fields from the Text
      */
-    omit?: KarchagTextOmit<ExtArgs> | null
+    omit?: TextOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: KarchagTextInclude<ExtArgs> | null
+    include?: TextInclude<ExtArgs> | null
     /**
-     * Filter, which KarchagText to fetch.
+     * Filter, which Text to fetch.
      */
-    where?: KarchagTextWhereInput
+    where?: TextWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
-     * Determine the order of KarchagTexts to fetch.
+     * Determine the order of Texts to fetch.
      */
-    orderBy?: KarchagTextOrderByWithRelationInput | KarchagTextOrderByWithRelationInput[]
+    orderBy?: TextOrderByWithRelationInput | TextOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
-     * Sets the position for searching for KarchagTexts.
+     * Sets the position for searching for Texts.
      */
-    cursor?: KarchagTextWhereUniqueInput
+    cursor?: TextWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Take `±n` KarchagTexts from the position of the cursor.
+     * Take `±n` Texts from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Skip the first `n` KarchagTexts.
+     * Skip the first `n` Texts.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
      * 
-     * Filter by unique combinations of KarchagTexts.
+     * Filter by unique combinations of Texts.
      */
-    distinct?: KarchagTextScalarFieldEnum | KarchagTextScalarFieldEnum[]
+    distinct?: TextScalarFieldEnum | TextScalarFieldEnum[]
   }
 
   /**
-   * KarchagText findMany
+   * Text findMany
    */
-  export type KarchagTextFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type TextFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the KarchagText
+     * Select specific fields to fetch from the Text
      */
-    select?: KarchagTextSelect<ExtArgs> | null
+    select?: TextSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the KarchagText
+     * Omit specific fields from the Text
      */
-    omit?: KarchagTextOmit<ExtArgs> | null
+    omit?: TextOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: KarchagTextInclude<ExtArgs> | null
+    include?: TextInclude<ExtArgs> | null
     /**
-     * Filter, which KarchagTexts to fetch.
+     * Filter, which Texts to fetch.
      */
-    where?: KarchagTextWhereInput
+    where?: TextWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
-     * Determine the order of KarchagTexts to fetch.
+     * Determine the order of Texts to fetch.
      */
-    orderBy?: KarchagTextOrderByWithRelationInput | KarchagTextOrderByWithRelationInput[]
+    orderBy?: TextOrderByWithRelationInput | TextOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
-     * Sets the position for listing KarchagTexts.
+     * Sets the position for listing Texts.
      */
-    cursor?: KarchagTextWhereUniqueInput
+    cursor?: TextWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Take `±n` KarchagTexts from the position of the cursor.
+     * Take `±n` Texts from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Skip the first `n` KarchagTexts.
+     * Skip the first `n` Texts.
      */
     skip?: number
-    distinct?: KarchagTextScalarFieldEnum | KarchagTextScalarFieldEnum[]
+    distinct?: TextScalarFieldEnum | TextScalarFieldEnum[]
   }
 
   /**
-   * KarchagText create
+   * Text create
    */
-  export type KarchagTextCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type TextCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the KarchagText
+     * Select specific fields to fetch from the Text
      */
-    select?: KarchagTextSelect<ExtArgs> | null
+    select?: TextSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the KarchagText
+     * Omit specific fields from the Text
      */
-    omit?: KarchagTextOmit<ExtArgs> | null
+    omit?: TextOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: KarchagTextInclude<ExtArgs> | null
+    include?: TextInclude<ExtArgs> | null
     /**
-     * The data needed to create a KarchagText.
+     * The data needed to create a Text.
      */
-    data: XOR<KarchagTextCreateInput, KarchagTextUncheckedCreateInput>
+    data: XOR<TextCreateInput, TextUncheckedCreateInput>
   }
 
   /**
-   * KarchagText createMany
+   * Text createMany
    */
-  export type KarchagTextCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type TextCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * The data used to create many KarchagTexts.
+     * The data used to create many Texts.
      */
-    data: KarchagTextCreateManyInput | KarchagTextCreateManyInput[]
+    data: TextCreateManyInput | TextCreateManyInput[]
     skipDuplicates?: boolean
   }
 
   /**
-   * KarchagText createManyAndReturn
+   * Text createManyAndReturn
    */
-  export type KarchagTextCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type TextCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the KarchagText
+     * Select specific fields to fetch from the Text
      */
-    select?: KarchagTextSelectCreateManyAndReturn<ExtArgs> | null
+    select?: TextSelectCreateManyAndReturn<ExtArgs> | null
     /**
-     * Omit specific fields from the KarchagText
+     * Omit specific fields from the Text
      */
-    omit?: KarchagTextOmit<ExtArgs> | null
+    omit?: TextOmit<ExtArgs> | null
     /**
-     * The data used to create many KarchagTexts.
+     * The data used to create many Texts.
      */
-    data: KarchagTextCreateManyInput | KarchagTextCreateManyInput[]
+    data: TextCreateManyInput | TextCreateManyInput[]
     skipDuplicates?: boolean
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: KarchagTextIncludeCreateManyAndReturn<ExtArgs> | null
+    include?: TextIncludeCreateManyAndReturn<ExtArgs> | null
   }
 
   /**
-   * KarchagText update
+   * Text update
    */
-  export type KarchagTextUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type TextUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the KarchagText
+     * Select specific fields to fetch from the Text
      */
-    select?: KarchagTextSelect<ExtArgs> | null
+    select?: TextSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the KarchagText
+     * Omit specific fields from the Text
      */
-    omit?: KarchagTextOmit<ExtArgs> | null
+    omit?: TextOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: KarchagTextInclude<ExtArgs> | null
+    include?: TextInclude<ExtArgs> | null
     /**
-     * The data needed to update a KarchagText.
+     * The data needed to update a Text.
      */
-    data: XOR<KarchagTextUpdateInput, KarchagTextUncheckedUpdateInput>
+    data: XOR<TextUpdateInput, TextUncheckedUpdateInput>
     /**
-     * Choose, which KarchagText to update.
+     * Choose, which Text to update.
      */
-    where: KarchagTextWhereUniqueInput
+    where: TextWhereUniqueInput
   }
 
   /**
-   * KarchagText updateMany
+   * Text updateMany
    */
-  export type KarchagTextUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type TextUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * The data used to update KarchagTexts.
+     * The data used to update Texts.
      */
-    data: XOR<KarchagTextUpdateManyMutationInput, KarchagTextUncheckedUpdateManyInput>
+    data: XOR<TextUpdateManyMutationInput, TextUncheckedUpdateManyInput>
     /**
-     * Filter which KarchagTexts to update
+     * Filter which Texts to update
      */
-    where?: KarchagTextWhereInput
+    where?: TextWhereInput
     /**
-     * Limit how many KarchagTexts to update.
+     * Limit how many Texts to update.
      */
     limit?: number
   }
 
   /**
-   * KarchagText updateManyAndReturn
+   * Text updateManyAndReturn
    */
-  export type KarchagTextUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type TextUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the KarchagText
+     * Select specific fields to fetch from the Text
      */
-    select?: KarchagTextSelectUpdateManyAndReturn<ExtArgs> | null
+    select?: TextSelectUpdateManyAndReturn<ExtArgs> | null
     /**
-     * Omit specific fields from the KarchagText
+     * Omit specific fields from the Text
      */
-    omit?: KarchagTextOmit<ExtArgs> | null
+    omit?: TextOmit<ExtArgs> | null
     /**
-     * The data used to update KarchagTexts.
+     * The data used to update Texts.
      */
-    data: XOR<KarchagTextUpdateManyMutationInput, KarchagTextUncheckedUpdateManyInput>
+    data: XOR<TextUpdateManyMutationInput, TextUncheckedUpdateManyInput>
     /**
-     * Filter which KarchagTexts to update
+     * Filter which Texts to update
      */
-    where?: KarchagTextWhereInput
+    where?: TextWhereInput
     /**
-     * Limit how many KarchagTexts to update.
+     * Limit how many Texts to update.
      */
     limit?: number
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: KarchagTextIncludeUpdateManyAndReturn<ExtArgs> | null
+    include?: TextIncludeUpdateManyAndReturn<ExtArgs> | null
   }
 
   /**
-   * KarchagText upsert
+   * Text upsert
    */
-  export type KarchagTextUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type TextUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the KarchagText
+     * Select specific fields to fetch from the Text
      */
-    select?: KarchagTextSelect<ExtArgs> | null
+    select?: TextSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the KarchagText
+     * Omit specific fields from the Text
      */
-    omit?: KarchagTextOmit<ExtArgs> | null
+    omit?: TextOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: KarchagTextInclude<ExtArgs> | null
+    include?: TextInclude<ExtArgs> | null
     /**
-     * The filter to search for the KarchagText to update in case it exists.
+     * The filter to search for the Text to update in case it exists.
      */
-    where: KarchagTextWhereUniqueInput
+    where: TextWhereUniqueInput
     /**
-     * In case the KarchagText found by the `where` argument doesn't exist, create a new KarchagText with this data.
+     * In case the Text found by the `where` argument doesn't exist, create a new Text with this data.
      */
-    create: XOR<KarchagTextCreateInput, KarchagTextUncheckedCreateInput>
+    create: XOR<TextCreateInput, TextUncheckedCreateInput>
     /**
-     * In case the KarchagText was found with the provided `where` argument, update it with this data.
+     * In case the Text was found with the provided `where` argument, update it with this data.
      */
-    update: XOR<KarchagTextUpdateInput, KarchagTextUncheckedUpdateInput>
+    update: XOR<TextUpdateInput, TextUncheckedUpdateInput>
   }
 
   /**
-   * KarchagText delete
+   * Text delete
    */
-  export type KarchagTextDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type TextDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the KarchagText
+     * Select specific fields to fetch from the Text
      */
-    select?: KarchagTextSelect<ExtArgs> | null
+    select?: TextSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the KarchagText
+     * Omit specific fields from the Text
      */
-    omit?: KarchagTextOmit<ExtArgs> | null
+    omit?: TextOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: KarchagTextInclude<ExtArgs> | null
+    include?: TextInclude<ExtArgs> | null
     /**
-     * Filter which KarchagText to delete.
+     * Filter which Text to delete.
      */
-    where: KarchagTextWhereUniqueInput
+    where: TextWhereUniqueInput
   }
 
   /**
-   * KarchagText deleteMany
+   * Text deleteMany
    */
-  export type KarchagTextDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type TextDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Filter which KarchagTexts to delete
+     * Filter which Texts to delete
      */
-    where?: KarchagTextWhereInput
+    where?: TextWhereInput
     /**
-     * Limit how many KarchagTexts to delete.
+     * Limit how many Texts to delete.
      */
     limit?: number
   }
 
   /**
-   * KarchagText without action
+   * Text.summary
    */
-  export type KarchagTextDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type Text$summaryArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the KarchagText
+     * Select specific fields to fetch from the KarchagTextSummary
      */
-    select?: KarchagTextSelect<ExtArgs> | null
+    select?: KarchagTextSummarySelect<ExtArgs> | null
     /**
-     * Omit specific fields from the KarchagText
+     * Omit specific fields from the KarchagTextSummary
      */
-    omit?: KarchagTextOmit<ExtArgs> | null
+    omit?: KarchagTextSummaryOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: KarchagTextInclude<ExtArgs> | null
+    include?: KarchagTextSummaryInclude<ExtArgs> | null
+    where?: KarchagTextSummaryWhereInput
+  }
+
+  /**
+   * Text.metadata
+   */
+  export type Text$metadataArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the KarchagTextMetadata
+     */
+    select?: KarchagTextMetadataSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the KarchagTextMetadata
+     */
+    omit?: KarchagTextMetadataOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: KarchagTextMetadataInclude<ExtArgs> | null
+    where?: KarchagTextMetadataWhereInput
+    orderBy?: KarchagTextMetadataOrderByWithRelationInput | KarchagTextMetadataOrderByWithRelationInput[]
+    cursor?: KarchagTextMetadataWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: KarchagTextMetadataScalarFieldEnum | KarchagTextMetadataScalarFieldEnum[]
+  }
+
+  /**
+   * Text without action
+   */
+  export type TextDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Text
+     */
+    select?: TextSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Text
+     */
+    omit?: TextOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TextInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model KarchagTextSummary
+   */
+
+  export type AggregateKarchagTextSummary = {
+    _count: KarchagTextSummaryCountAggregateOutputType | null
+    _min: KarchagTextSummaryMinAggregateOutputType | null
+    _max: KarchagTextSummaryMaxAggregateOutputType | null
+  }
+
+  export type KarchagTextSummaryMinAggregateOutputType = {
+    id: string | null
+    karchag_text_id: string | null
+    translation_homage_tibetan: string | null
+    translation_homage_english: string | null
+    purpose_tibetan: string | null
+    purpose_english: string | null
+    summary_text_tibetan: string | null
+    summary_text_english: string | null
+    word_meaning_tibetan: string | null
+    word_meaning_english: string | null
+    connection_tibetan: string | null
+    connection_english: string | null
+    question_answers_tibetan: string | null
+    question_answers_english: string | null
+    colophon_tibetan: string | null
+    colophon_english: string | null
+    created_at: Date | null
+    updated_at: Date | null
+  }
+
+  export type KarchagTextSummaryMaxAggregateOutputType = {
+    id: string | null
+    karchag_text_id: string | null
+    translation_homage_tibetan: string | null
+    translation_homage_english: string | null
+    purpose_tibetan: string | null
+    purpose_english: string | null
+    summary_text_tibetan: string | null
+    summary_text_english: string | null
+    word_meaning_tibetan: string | null
+    word_meaning_english: string | null
+    connection_tibetan: string | null
+    connection_english: string | null
+    question_answers_tibetan: string | null
+    question_answers_english: string | null
+    colophon_tibetan: string | null
+    colophon_english: string | null
+    created_at: Date | null
+    updated_at: Date | null
+  }
+
+  export type KarchagTextSummaryCountAggregateOutputType = {
+    id: number
+    karchag_text_id: number
+    translation_homage_tibetan: number
+    translation_homage_english: number
+    purpose_tibetan: number
+    purpose_english: number
+    summary_text_tibetan: number
+    summary_text_english: number
+    word_meaning_tibetan: number
+    word_meaning_english: number
+    connection_tibetan: number
+    connection_english: number
+    question_answers_tibetan: number
+    question_answers_english: number
+    colophon_tibetan: number
+    colophon_english: number
+    created_at: number
+    updated_at: number
+    _all: number
+  }
+
+
+  export type KarchagTextSummaryMinAggregateInputType = {
+    id?: true
+    karchag_text_id?: true
+    translation_homage_tibetan?: true
+    translation_homage_english?: true
+    purpose_tibetan?: true
+    purpose_english?: true
+    summary_text_tibetan?: true
+    summary_text_english?: true
+    word_meaning_tibetan?: true
+    word_meaning_english?: true
+    connection_tibetan?: true
+    connection_english?: true
+    question_answers_tibetan?: true
+    question_answers_english?: true
+    colophon_tibetan?: true
+    colophon_english?: true
+    created_at?: true
+    updated_at?: true
+  }
+
+  export type KarchagTextSummaryMaxAggregateInputType = {
+    id?: true
+    karchag_text_id?: true
+    translation_homage_tibetan?: true
+    translation_homage_english?: true
+    purpose_tibetan?: true
+    purpose_english?: true
+    summary_text_tibetan?: true
+    summary_text_english?: true
+    word_meaning_tibetan?: true
+    word_meaning_english?: true
+    connection_tibetan?: true
+    connection_english?: true
+    question_answers_tibetan?: true
+    question_answers_english?: true
+    colophon_tibetan?: true
+    colophon_english?: true
+    created_at?: true
+    updated_at?: true
+  }
+
+  export type KarchagTextSummaryCountAggregateInputType = {
+    id?: true
+    karchag_text_id?: true
+    translation_homage_tibetan?: true
+    translation_homage_english?: true
+    purpose_tibetan?: true
+    purpose_english?: true
+    summary_text_tibetan?: true
+    summary_text_english?: true
+    word_meaning_tibetan?: true
+    word_meaning_english?: true
+    connection_tibetan?: true
+    connection_english?: true
+    question_answers_tibetan?: true
+    question_answers_english?: true
+    colophon_tibetan?: true
+    colophon_english?: true
+    created_at?: true
+    updated_at?: true
+    _all?: true
+  }
+
+  export type KarchagTextSummaryAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which KarchagTextSummary to aggregate.
+     */
+    where?: KarchagTextSummaryWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of KarchagTextSummaries to fetch.
+     */
+    orderBy?: KarchagTextSummaryOrderByWithRelationInput | KarchagTextSummaryOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: KarchagTextSummaryWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` KarchagTextSummaries from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` KarchagTextSummaries.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned KarchagTextSummaries
+    **/
+    _count?: true | KarchagTextSummaryCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: KarchagTextSummaryMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: KarchagTextSummaryMaxAggregateInputType
+  }
+
+  export type GetKarchagTextSummaryAggregateType<T extends KarchagTextSummaryAggregateArgs> = {
+        [P in keyof T & keyof AggregateKarchagTextSummary]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateKarchagTextSummary[P]>
+      : GetScalarType<T[P], AggregateKarchagTextSummary[P]>
+  }
+
+
+
+
+  export type KarchagTextSummaryGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: KarchagTextSummaryWhereInput
+    orderBy?: KarchagTextSummaryOrderByWithAggregationInput | KarchagTextSummaryOrderByWithAggregationInput[]
+    by: KarchagTextSummaryScalarFieldEnum[] | KarchagTextSummaryScalarFieldEnum
+    having?: KarchagTextSummaryScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: KarchagTextSummaryCountAggregateInputType | true
+    _min?: KarchagTextSummaryMinAggregateInputType
+    _max?: KarchagTextSummaryMaxAggregateInputType
+  }
+
+  export type KarchagTextSummaryGroupByOutputType = {
+    id: string
+    karchag_text_id: string
+    translation_homage_tibetan: string | null
+    translation_homage_english: string | null
+    purpose_tibetan: string | null
+    purpose_english: string | null
+    summary_text_tibetan: string | null
+    summary_text_english: string | null
+    word_meaning_tibetan: string | null
+    word_meaning_english: string | null
+    connection_tibetan: string | null
+    connection_english: string | null
+    question_answers_tibetan: string | null
+    question_answers_english: string | null
+    colophon_tibetan: string | null
+    colophon_english: string | null
+    created_at: Date
+    updated_at: Date
+    _count: KarchagTextSummaryCountAggregateOutputType | null
+    _min: KarchagTextSummaryMinAggregateOutputType | null
+    _max: KarchagTextSummaryMaxAggregateOutputType | null
+  }
+
+  type GetKarchagTextSummaryGroupByPayload<T extends KarchagTextSummaryGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<KarchagTextSummaryGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof KarchagTextSummaryGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], KarchagTextSummaryGroupByOutputType[P]>
+            : GetScalarType<T[P], KarchagTextSummaryGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type KarchagTextSummarySelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    karchag_text_id?: boolean
+    translation_homage_tibetan?: boolean
+    translation_homage_english?: boolean
+    purpose_tibetan?: boolean
+    purpose_english?: boolean
+    summary_text_tibetan?: boolean
+    summary_text_english?: boolean
+    word_meaning_tibetan?: boolean
+    word_meaning_english?: boolean
+    connection_tibetan?: boolean
+    connection_english?: boolean
+    question_answers_tibetan?: boolean
+    question_answers_english?: boolean
+    colophon_tibetan?: boolean
+    colophon_english?: boolean
+    created_at?: boolean
+    updated_at?: boolean
+    karchag_text?: boolean | TextDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["karchagTextSummary"]>
+
+  export type KarchagTextSummarySelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    karchag_text_id?: boolean
+    translation_homage_tibetan?: boolean
+    translation_homage_english?: boolean
+    purpose_tibetan?: boolean
+    purpose_english?: boolean
+    summary_text_tibetan?: boolean
+    summary_text_english?: boolean
+    word_meaning_tibetan?: boolean
+    word_meaning_english?: boolean
+    connection_tibetan?: boolean
+    connection_english?: boolean
+    question_answers_tibetan?: boolean
+    question_answers_english?: boolean
+    colophon_tibetan?: boolean
+    colophon_english?: boolean
+    created_at?: boolean
+    updated_at?: boolean
+    karchag_text?: boolean | TextDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["karchagTextSummary"]>
+
+  export type KarchagTextSummarySelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    karchag_text_id?: boolean
+    translation_homage_tibetan?: boolean
+    translation_homage_english?: boolean
+    purpose_tibetan?: boolean
+    purpose_english?: boolean
+    summary_text_tibetan?: boolean
+    summary_text_english?: boolean
+    word_meaning_tibetan?: boolean
+    word_meaning_english?: boolean
+    connection_tibetan?: boolean
+    connection_english?: boolean
+    question_answers_tibetan?: boolean
+    question_answers_english?: boolean
+    colophon_tibetan?: boolean
+    colophon_english?: boolean
+    created_at?: boolean
+    updated_at?: boolean
+    karchag_text?: boolean | TextDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["karchagTextSummary"]>
+
+  export type KarchagTextSummarySelectScalar = {
+    id?: boolean
+    karchag_text_id?: boolean
+    translation_homage_tibetan?: boolean
+    translation_homage_english?: boolean
+    purpose_tibetan?: boolean
+    purpose_english?: boolean
+    summary_text_tibetan?: boolean
+    summary_text_english?: boolean
+    word_meaning_tibetan?: boolean
+    word_meaning_english?: boolean
+    connection_tibetan?: boolean
+    connection_english?: boolean
+    question_answers_tibetan?: boolean
+    question_answers_english?: boolean
+    colophon_tibetan?: boolean
+    colophon_english?: boolean
+    created_at?: boolean
+    updated_at?: boolean
+  }
+
+  export type KarchagTextSummaryOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "karchag_text_id" | "translation_homage_tibetan" | "translation_homage_english" | "purpose_tibetan" | "purpose_english" | "summary_text_tibetan" | "summary_text_english" | "word_meaning_tibetan" | "word_meaning_english" | "connection_tibetan" | "connection_english" | "question_answers_tibetan" | "question_answers_english" | "colophon_tibetan" | "colophon_english" | "created_at" | "updated_at", ExtArgs["result"]["karchagTextSummary"]>
+  export type KarchagTextSummaryInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    karchag_text?: boolean | TextDefaultArgs<ExtArgs>
+  }
+  export type KarchagTextSummaryIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    karchag_text?: boolean | TextDefaultArgs<ExtArgs>
+  }
+  export type KarchagTextSummaryIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    karchag_text?: boolean | TextDefaultArgs<ExtArgs>
+  }
+
+  export type $KarchagTextSummaryPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "KarchagTextSummary"
+    objects: {
+      karchag_text: Prisma.$TextPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      karchag_text_id: string
+      translation_homage_tibetan: string | null
+      translation_homage_english: string | null
+      purpose_tibetan: string | null
+      purpose_english: string | null
+      summary_text_tibetan: string | null
+      summary_text_english: string | null
+      word_meaning_tibetan: string | null
+      word_meaning_english: string | null
+      connection_tibetan: string | null
+      connection_english: string | null
+      question_answers_tibetan: string | null
+      question_answers_english: string | null
+      colophon_tibetan: string | null
+      colophon_english: string | null
+      created_at: Date
+      updated_at: Date
+    }, ExtArgs["result"]["karchagTextSummary"]>
+    composites: {}
+  }
+
+  type KarchagTextSummaryGetPayload<S extends boolean | null | undefined | KarchagTextSummaryDefaultArgs> = $Result.GetResult<Prisma.$KarchagTextSummaryPayload, S>
+
+  type KarchagTextSummaryCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<KarchagTextSummaryFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: KarchagTextSummaryCountAggregateInputType | true
+    }
+
+  export interface KarchagTextSummaryDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['KarchagTextSummary'], meta: { name: 'KarchagTextSummary' } }
+    /**
+     * Find zero or one KarchagTextSummary that matches the filter.
+     * @param {KarchagTextSummaryFindUniqueArgs} args - Arguments to find a KarchagTextSummary
+     * @example
+     * // Get one KarchagTextSummary
+     * const karchagTextSummary = await prisma.karchagTextSummary.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends KarchagTextSummaryFindUniqueArgs>(args: SelectSubset<T, KarchagTextSummaryFindUniqueArgs<ExtArgs>>): Prisma__KarchagTextSummaryClient<$Result.GetResult<Prisma.$KarchagTextSummaryPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one KarchagTextSummary that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {KarchagTextSummaryFindUniqueOrThrowArgs} args - Arguments to find a KarchagTextSummary
+     * @example
+     * // Get one KarchagTextSummary
+     * const karchagTextSummary = await prisma.karchagTextSummary.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends KarchagTextSummaryFindUniqueOrThrowArgs>(args: SelectSubset<T, KarchagTextSummaryFindUniqueOrThrowArgs<ExtArgs>>): Prisma__KarchagTextSummaryClient<$Result.GetResult<Prisma.$KarchagTextSummaryPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first KarchagTextSummary that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {KarchagTextSummaryFindFirstArgs} args - Arguments to find a KarchagTextSummary
+     * @example
+     * // Get one KarchagTextSummary
+     * const karchagTextSummary = await prisma.karchagTextSummary.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends KarchagTextSummaryFindFirstArgs>(args?: SelectSubset<T, KarchagTextSummaryFindFirstArgs<ExtArgs>>): Prisma__KarchagTextSummaryClient<$Result.GetResult<Prisma.$KarchagTextSummaryPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first KarchagTextSummary that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {KarchagTextSummaryFindFirstOrThrowArgs} args - Arguments to find a KarchagTextSummary
+     * @example
+     * // Get one KarchagTextSummary
+     * const karchagTextSummary = await prisma.karchagTextSummary.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends KarchagTextSummaryFindFirstOrThrowArgs>(args?: SelectSubset<T, KarchagTextSummaryFindFirstOrThrowArgs<ExtArgs>>): Prisma__KarchagTextSummaryClient<$Result.GetResult<Prisma.$KarchagTextSummaryPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more KarchagTextSummaries that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {KarchagTextSummaryFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all KarchagTextSummaries
+     * const karchagTextSummaries = await prisma.karchagTextSummary.findMany()
+     * 
+     * // Get first 10 KarchagTextSummaries
+     * const karchagTextSummaries = await prisma.karchagTextSummary.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const karchagTextSummaryWithIdOnly = await prisma.karchagTextSummary.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends KarchagTextSummaryFindManyArgs>(args?: SelectSubset<T, KarchagTextSummaryFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$KarchagTextSummaryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a KarchagTextSummary.
+     * @param {KarchagTextSummaryCreateArgs} args - Arguments to create a KarchagTextSummary.
+     * @example
+     * // Create one KarchagTextSummary
+     * const KarchagTextSummary = await prisma.karchagTextSummary.create({
+     *   data: {
+     *     // ... data to create a KarchagTextSummary
+     *   }
+     * })
+     * 
+     */
+    create<T extends KarchagTextSummaryCreateArgs>(args: SelectSubset<T, KarchagTextSummaryCreateArgs<ExtArgs>>): Prisma__KarchagTextSummaryClient<$Result.GetResult<Prisma.$KarchagTextSummaryPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many KarchagTextSummaries.
+     * @param {KarchagTextSummaryCreateManyArgs} args - Arguments to create many KarchagTextSummaries.
+     * @example
+     * // Create many KarchagTextSummaries
+     * const karchagTextSummary = await prisma.karchagTextSummary.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends KarchagTextSummaryCreateManyArgs>(args?: SelectSubset<T, KarchagTextSummaryCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many KarchagTextSummaries and returns the data saved in the database.
+     * @param {KarchagTextSummaryCreateManyAndReturnArgs} args - Arguments to create many KarchagTextSummaries.
+     * @example
+     * // Create many KarchagTextSummaries
+     * const karchagTextSummary = await prisma.karchagTextSummary.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many KarchagTextSummaries and only return the `id`
+     * const karchagTextSummaryWithIdOnly = await prisma.karchagTextSummary.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends KarchagTextSummaryCreateManyAndReturnArgs>(args?: SelectSubset<T, KarchagTextSummaryCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$KarchagTextSummaryPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a KarchagTextSummary.
+     * @param {KarchagTextSummaryDeleteArgs} args - Arguments to delete one KarchagTextSummary.
+     * @example
+     * // Delete one KarchagTextSummary
+     * const KarchagTextSummary = await prisma.karchagTextSummary.delete({
+     *   where: {
+     *     // ... filter to delete one KarchagTextSummary
+     *   }
+     * })
+     * 
+     */
+    delete<T extends KarchagTextSummaryDeleteArgs>(args: SelectSubset<T, KarchagTextSummaryDeleteArgs<ExtArgs>>): Prisma__KarchagTextSummaryClient<$Result.GetResult<Prisma.$KarchagTextSummaryPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one KarchagTextSummary.
+     * @param {KarchagTextSummaryUpdateArgs} args - Arguments to update one KarchagTextSummary.
+     * @example
+     * // Update one KarchagTextSummary
+     * const karchagTextSummary = await prisma.karchagTextSummary.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends KarchagTextSummaryUpdateArgs>(args: SelectSubset<T, KarchagTextSummaryUpdateArgs<ExtArgs>>): Prisma__KarchagTextSummaryClient<$Result.GetResult<Prisma.$KarchagTextSummaryPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more KarchagTextSummaries.
+     * @param {KarchagTextSummaryDeleteManyArgs} args - Arguments to filter KarchagTextSummaries to delete.
+     * @example
+     * // Delete a few KarchagTextSummaries
+     * const { count } = await prisma.karchagTextSummary.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends KarchagTextSummaryDeleteManyArgs>(args?: SelectSubset<T, KarchagTextSummaryDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more KarchagTextSummaries.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {KarchagTextSummaryUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many KarchagTextSummaries
+     * const karchagTextSummary = await prisma.karchagTextSummary.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends KarchagTextSummaryUpdateManyArgs>(args: SelectSubset<T, KarchagTextSummaryUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more KarchagTextSummaries and returns the data updated in the database.
+     * @param {KarchagTextSummaryUpdateManyAndReturnArgs} args - Arguments to update many KarchagTextSummaries.
+     * @example
+     * // Update many KarchagTextSummaries
+     * const karchagTextSummary = await prisma.karchagTextSummary.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more KarchagTextSummaries and only return the `id`
+     * const karchagTextSummaryWithIdOnly = await prisma.karchagTextSummary.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends KarchagTextSummaryUpdateManyAndReturnArgs>(args: SelectSubset<T, KarchagTextSummaryUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$KarchagTextSummaryPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one KarchagTextSummary.
+     * @param {KarchagTextSummaryUpsertArgs} args - Arguments to update or create a KarchagTextSummary.
+     * @example
+     * // Update or create a KarchagTextSummary
+     * const karchagTextSummary = await prisma.karchagTextSummary.upsert({
+     *   create: {
+     *     // ... data to create a KarchagTextSummary
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the KarchagTextSummary we want to update
+     *   }
+     * })
+     */
+    upsert<T extends KarchagTextSummaryUpsertArgs>(args: SelectSubset<T, KarchagTextSummaryUpsertArgs<ExtArgs>>): Prisma__KarchagTextSummaryClient<$Result.GetResult<Prisma.$KarchagTextSummaryPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of KarchagTextSummaries.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {KarchagTextSummaryCountArgs} args - Arguments to filter KarchagTextSummaries to count.
+     * @example
+     * // Count the number of KarchagTextSummaries
+     * const count = await prisma.karchagTextSummary.count({
+     *   where: {
+     *     // ... the filter for the KarchagTextSummaries we want to count
+     *   }
+     * })
+    **/
+    count<T extends KarchagTextSummaryCountArgs>(
+      args?: Subset<T, KarchagTextSummaryCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], KarchagTextSummaryCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a KarchagTextSummary.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {KarchagTextSummaryAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends KarchagTextSummaryAggregateArgs>(args: Subset<T, KarchagTextSummaryAggregateArgs>): Prisma.PrismaPromise<GetKarchagTextSummaryAggregateType<T>>
+
+    /**
+     * Group by KarchagTextSummary.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {KarchagTextSummaryGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends KarchagTextSummaryGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: KarchagTextSummaryGroupByArgs['orderBy'] }
+        : { orderBy?: KarchagTextSummaryGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, KarchagTextSummaryGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetKarchagTextSummaryGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the KarchagTextSummary model
+   */
+  readonly fields: KarchagTextSummaryFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for KarchagTextSummary.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__KarchagTextSummaryClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    karchag_text<T extends TextDefaultArgs<ExtArgs> = {}>(args?: Subset<T, TextDefaultArgs<ExtArgs>>): Prisma__TextClient<$Result.GetResult<Prisma.$TextPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the KarchagTextSummary model
+   */
+  interface KarchagTextSummaryFieldRefs {
+    readonly id: FieldRef<"KarchagTextSummary", 'String'>
+    readonly karchag_text_id: FieldRef<"KarchagTextSummary", 'String'>
+    readonly translation_homage_tibetan: FieldRef<"KarchagTextSummary", 'String'>
+    readonly translation_homage_english: FieldRef<"KarchagTextSummary", 'String'>
+    readonly purpose_tibetan: FieldRef<"KarchagTextSummary", 'String'>
+    readonly purpose_english: FieldRef<"KarchagTextSummary", 'String'>
+    readonly summary_text_tibetan: FieldRef<"KarchagTextSummary", 'String'>
+    readonly summary_text_english: FieldRef<"KarchagTextSummary", 'String'>
+    readonly word_meaning_tibetan: FieldRef<"KarchagTextSummary", 'String'>
+    readonly word_meaning_english: FieldRef<"KarchagTextSummary", 'String'>
+    readonly connection_tibetan: FieldRef<"KarchagTextSummary", 'String'>
+    readonly connection_english: FieldRef<"KarchagTextSummary", 'String'>
+    readonly question_answers_tibetan: FieldRef<"KarchagTextSummary", 'String'>
+    readonly question_answers_english: FieldRef<"KarchagTextSummary", 'String'>
+    readonly colophon_tibetan: FieldRef<"KarchagTextSummary", 'String'>
+    readonly colophon_english: FieldRef<"KarchagTextSummary", 'String'>
+    readonly created_at: FieldRef<"KarchagTextSummary", 'DateTime'>
+    readonly updated_at: FieldRef<"KarchagTextSummary", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * KarchagTextSummary findUnique
+   */
+  export type KarchagTextSummaryFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the KarchagTextSummary
+     */
+    select?: KarchagTextSummarySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the KarchagTextSummary
+     */
+    omit?: KarchagTextSummaryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: KarchagTextSummaryInclude<ExtArgs> | null
+    /**
+     * Filter, which KarchagTextSummary to fetch.
+     */
+    where: KarchagTextSummaryWhereUniqueInput
+  }
+
+  /**
+   * KarchagTextSummary findUniqueOrThrow
+   */
+  export type KarchagTextSummaryFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the KarchagTextSummary
+     */
+    select?: KarchagTextSummarySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the KarchagTextSummary
+     */
+    omit?: KarchagTextSummaryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: KarchagTextSummaryInclude<ExtArgs> | null
+    /**
+     * Filter, which KarchagTextSummary to fetch.
+     */
+    where: KarchagTextSummaryWhereUniqueInput
+  }
+
+  /**
+   * KarchagTextSummary findFirst
+   */
+  export type KarchagTextSummaryFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the KarchagTextSummary
+     */
+    select?: KarchagTextSummarySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the KarchagTextSummary
+     */
+    omit?: KarchagTextSummaryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: KarchagTextSummaryInclude<ExtArgs> | null
+    /**
+     * Filter, which KarchagTextSummary to fetch.
+     */
+    where?: KarchagTextSummaryWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of KarchagTextSummaries to fetch.
+     */
+    orderBy?: KarchagTextSummaryOrderByWithRelationInput | KarchagTextSummaryOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for KarchagTextSummaries.
+     */
+    cursor?: KarchagTextSummaryWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` KarchagTextSummaries from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` KarchagTextSummaries.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of KarchagTextSummaries.
+     */
+    distinct?: KarchagTextSummaryScalarFieldEnum | KarchagTextSummaryScalarFieldEnum[]
+  }
+
+  /**
+   * KarchagTextSummary findFirstOrThrow
+   */
+  export type KarchagTextSummaryFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the KarchagTextSummary
+     */
+    select?: KarchagTextSummarySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the KarchagTextSummary
+     */
+    omit?: KarchagTextSummaryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: KarchagTextSummaryInclude<ExtArgs> | null
+    /**
+     * Filter, which KarchagTextSummary to fetch.
+     */
+    where?: KarchagTextSummaryWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of KarchagTextSummaries to fetch.
+     */
+    orderBy?: KarchagTextSummaryOrderByWithRelationInput | KarchagTextSummaryOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for KarchagTextSummaries.
+     */
+    cursor?: KarchagTextSummaryWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` KarchagTextSummaries from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` KarchagTextSummaries.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of KarchagTextSummaries.
+     */
+    distinct?: KarchagTextSummaryScalarFieldEnum | KarchagTextSummaryScalarFieldEnum[]
+  }
+
+  /**
+   * KarchagTextSummary findMany
+   */
+  export type KarchagTextSummaryFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the KarchagTextSummary
+     */
+    select?: KarchagTextSummarySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the KarchagTextSummary
+     */
+    omit?: KarchagTextSummaryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: KarchagTextSummaryInclude<ExtArgs> | null
+    /**
+     * Filter, which KarchagTextSummaries to fetch.
+     */
+    where?: KarchagTextSummaryWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of KarchagTextSummaries to fetch.
+     */
+    orderBy?: KarchagTextSummaryOrderByWithRelationInput | KarchagTextSummaryOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing KarchagTextSummaries.
+     */
+    cursor?: KarchagTextSummaryWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` KarchagTextSummaries from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` KarchagTextSummaries.
+     */
+    skip?: number
+    distinct?: KarchagTextSummaryScalarFieldEnum | KarchagTextSummaryScalarFieldEnum[]
+  }
+
+  /**
+   * KarchagTextSummary create
+   */
+  export type KarchagTextSummaryCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the KarchagTextSummary
+     */
+    select?: KarchagTextSummarySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the KarchagTextSummary
+     */
+    omit?: KarchagTextSummaryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: KarchagTextSummaryInclude<ExtArgs> | null
+    /**
+     * The data needed to create a KarchagTextSummary.
+     */
+    data: XOR<KarchagTextSummaryCreateInput, KarchagTextSummaryUncheckedCreateInput>
+  }
+
+  /**
+   * KarchagTextSummary createMany
+   */
+  export type KarchagTextSummaryCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many KarchagTextSummaries.
+     */
+    data: KarchagTextSummaryCreateManyInput | KarchagTextSummaryCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * KarchagTextSummary createManyAndReturn
+   */
+  export type KarchagTextSummaryCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the KarchagTextSummary
+     */
+    select?: KarchagTextSummarySelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the KarchagTextSummary
+     */
+    omit?: KarchagTextSummaryOmit<ExtArgs> | null
+    /**
+     * The data used to create many KarchagTextSummaries.
+     */
+    data: KarchagTextSummaryCreateManyInput | KarchagTextSummaryCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: KarchagTextSummaryIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * KarchagTextSummary update
+   */
+  export type KarchagTextSummaryUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the KarchagTextSummary
+     */
+    select?: KarchagTextSummarySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the KarchagTextSummary
+     */
+    omit?: KarchagTextSummaryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: KarchagTextSummaryInclude<ExtArgs> | null
+    /**
+     * The data needed to update a KarchagTextSummary.
+     */
+    data: XOR<KarchagTextSummaryUpdateInput, KarchagTextSummaryUncheckedUpdateInput>
+    /**
+     * Choose, which KarchagTextSummary to update.
+     */
+    where: KarchagTextSummaryWhereUniqueInput
+  }
+
+  /**
+   * KarchagTextSummary updateMany
+   */
+  export type KarchagTextSummaryUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update KarchagTextSummaries.
+     */
+    data: XOR<KarchagTextSummaryUpdateManyMutationInput, KarchagTextSummaryUncheckedUpdateManyInput>
+    /**
+     * Filter which KarchagTextSummaries to update
+     */
+    where?: KarchagTextSummaryWhereInput
+    /**
+     * Limit how many KarchagTextSummaries to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * KarchagTextSummary updateManyAndReturn
+   */
+  export type KarchagTextSummaryUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the KarchagTextSummary
+     */
+    select?: KarchagTextSummarySelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the KarchagTextSummary
+     */
+    omit?: KarchagTextSummaryOmit<ExtArgs> | null
+    /**
+     * The data used to update KarchagTextSummaries.
+     */
+    data: XOR<KarchagTextSummaryUpdateManyMutationInput, KarchagTextSummaryUncheckedUpdateManyInput>
+    /**
+     * Filter which KarchagTextSummaries to update
+     */
+    where?: KarchagTextSummaryWhereInput
+    /**
+     * Limit how many KarchagTextSummaries to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: KarchagTextSummaryIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * KarchagTextSummary upsert
+   */
+  export type KarchagTextSummaryUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the KarchagTextSummary
+     */
+    select?: KarchagTextSummarySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the KarchagTextSummary
+     */
+    omit?: KarchagTextSummaryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: KarchagTextSummaryInclude<ExtArgs> | null
+    /**
+     * The filter to search for the KarchagTextSummary to update in case it exists.
+     */
+    where: KarchagTextSummaryWhereUniqueInput
+    /**
+     * In case the KarchagTextSummary found by the `where` argument doesn't exist, create a new KarchagTextSummary with this data.
+     */
+    create: XOR<KarchagTextSummaryCreateInput, KarchagTextSummaryUncheckedCreateInput>
+    /**
+     * In case the KarchagTextSummary was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<KarchagTextSummaryUpdateInput, KarchagTextSummaryUncheckedUpdateInput>
+  }
+
+  /**
+   * KarchagTextSummary delete
+   */
+  export type KarchagTextSummaryDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the KarchagTextSummary
+     */
+    select?: KarchagTextSummarySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the KarchagTextSummary
+     */
+    omit?: KarchagTextSummaryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: KarchagTextSummaryInclude<ExtArgs> | null
+    /**
+     * Filter which KarchagTextSummary to delete.
+     */
+    where: KarchagTextSummaryWhereUniqueInput
+  }
+
+  /**
+   * KarchagTextSummary deleteMany
+   */
+  export type KarchagTextSummaryDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which KarchagTextSummaries to delete
+     */
+    where?: KarchagTextSummaryWhereInput
+    /**
+     * Limit how many KarchagTextSummaries to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * KarchagTextSummary without action
+   */
+  export type KarchagTextSummaryDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the KarchagTextSummary
+     */
+    select?: KarchagTextSummarySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the KarchagTextSummary
+     */
+    omit?: KarchagTextSummaryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: KarchagTextSummaryInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model KarchagTextMetadata
+   */
+
+  export type AggregateKarchagTextMetadata = {
+    _count: KarchagTextMetadataCountAggregateOutputType | null
+    _avg: KarchagTextMetadataAvgAggregateOutputType | null
+    _sum: KarchagTextMetadataSumAggregateOutputType | null
+    _min: KarchagTextMetadataMinAggregateOutputType | null
+    _max: KarchagTextMetadataMaxAggregateOutputType | null
+  }
+
+  export type KarchagTextMetadataAvgAggregateOutputType = {
+    order_index: number | null
+  }
+
+  export type KarchagTextMetadataSumAggregateOutputType = {
+    order_index: number | null
+  }
+
+  export type KarchagTextMetadataMinAggregateOutputType = {
+    id: string | null
+    karchag_text_id: string | null
+    metadata_key: string | null
+    metadata_value: string | null
+    metadata_group: string | null
+    label: string | null
+    order_index: number | null
+    created_at: Date | null
+    updated_at: Date | null
+  }
+
+  export type KarchagTextMetadataMaxAggregateOutputType = {
+    id: string | null
+    karchag_text_id: string | null
+    metadata_key: string | null
+    metadata_value: string | null
+    metadata_group: string | null
+    label: string | null
+    order_index: number | null
+    created_at: Date | null
+    updated_at: Date | null
+  }
+
+  export type KarchagTextMetadataCountAggregateOutputType = {
+    id: number
+    karchag_text_id: number
+    metadata_key: number
+    metadata_value: number
+    metadata_group: number
+    label: number
+    order_index: number
+    created_at: number
+    updated_at: number
+    _all: number
+  }
+
+
+  export type KarchagTextMetadataAvgAggregateInputType = {
+    order_index?: true
+  }
+
+  export type KarchagTextMetadataSumAggregateInputType = {
+    order_index?: true
+  }
+
+  export type KarchagTextMetadataMinAggregateInputType = {
+    id?: true
+    karchag_text_id?: true
+    metadata_key?: true
+    metadata_value?: true
+    metadata_group?: true
+    label?: true
+    order_index?: true
+    created_at?: true
+    updated_at?: true
+  }
+
+  export type KarchagTextMetadataMaxAggregateInputType = {
+    id?: true
+    karchag_text_id?: true
+    metadata_key?: true
+    metadata_value?: true
+    metadata_group?: true
+    label?: true
+    order_index?: true
+    created_at?: true
+    updated_at?: true
+  }
+
+  export type KarchagTextMetadataCountAggregateInputType = {
+    id?: true
+    karchag_text_id?: true
+    metadata_key?: true
+    metadata_value?: true
+    metadata_group?: true
+    label?: true
+    order_index?: true
+    created_at?: true
+    updated_at?: true
+    _all?: true
+  }
+
+  export type KarchagTextMetadataAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which KarchagTextMetadata to aggregate.
+     */
+    where?: KarchagTextMetadataWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of KarchagTextMetadata to fetch.
+     */
+    orderBy?: KarchagTextMetadataOrderByWithRelationInput | KarchagTextMetadataOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: KarchagTextMetadataWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` KarchagTextMetadata from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` KarchagTextMetadata.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned KarchagTextMetadata
+    **/
+    _count?: true | KarchagTextMetadataCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: KarchagTextMetadataAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: KarchagTextMetadataSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: KarchagTextMetadataMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: KarchagTextMetadataMaxAggregateInputType
+  }
+
+  export type GetKarchagTextMetadataAggregateType<T extends KarchagTextMetadataAggregateArgs> = {
+        [P in keyof T & keyof AggregateKarchagTextMetadata]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateKarchagTextMetadata[P]>
+      : GetScalarType<T[P], AggregateKarchagTextMetadata[P]>
+  }
+
+
+
+
+  export type KarchagTextMetadataGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: KarchagTextMetadataWhereInput
+    orderBy?: KarchagTextMetadataOrderByWithAggregationInput | KarchagTextMetadataOrderByWithAggregationInput[]
+    by: KarchagTextMetadataScalarFieldEnum[] | KarchagTextMetadataScalarFieldEnum
+    having?: KarchagTextMetadataScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: KarchagTextMetadataCountAggregateInputType | true
+    _avg?: KarchagTextMetadataAvgAggregateInputType
+    _sum?: KarchagTextMetadataSumAggregateInputType
+    _min?: KarchagTextMetadataMinAggregateInputType
+    _max?: KarchagTextMetadataMaxAggregateInputType
+  }
+
+  export type KarchagTextMetadataGroupByOutputType = {
+    id: string
+    karchag_text_id: string
+    metadata_key: string
+    metadata_value: string
+    metadata_group: string
+    label: string | null
+    order_index: number
+    created_at: Date
+    updated_at: Date
+    _count: KarchagTextMetadataCountAggregateOutputType | null
+    _avg: KarchagTextMetadataAvgAggregateOutputType | null
+    _sum: KarchagTextMetadataSumAggregateOutputType | null
+    _min: KarchagTextMetadataMinAggregateOutputType | null
+    _max: KarchagTextMetadataMaxAggregateOutputType | null
+  }
+
+  type GetKarchagTextMetadataGroupByPayload<T extends KarchagTextMetadataGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<KarchagTextMetadataGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof KarchagTextMetadataGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], KarchagTextMetadataGroupByOutputType[P]>
+            : GetScalarType<T[P], KarchagTextMetadataGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type KarchagTextMetadataSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    karchag_text_id?: boolean
+    metadata_key?: boolean
+    metadata_value?: boolean
+    metadata_group?: boolean
+    label?: boolean
+    order_index?: boolean
+    created_at?: boolean
+    updated_at?: boolean
+    text?: boolean | TextDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["karchagTextMetadata"]>
+
+  export type KarchagTextMetadataSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    karchag_text_id?: boolean
+    metadata_key?: boolean
+    metadata_value?: boolean
+    metadata_group?: boolean
+    label?: boolean
+    order_index?: boolean
+    created_at?: boolean
+    updated_at?: boolean
+    text?: boolean | TextDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["karchagTextMetadata"]>
+
+  export type KarchagTextMetadataSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    karchag_text_id?: boolean
+    metadata_key?: boolean
+    metadata_value?: boolean
+    metadata_group?: boolean
+    label?: boolean
+    order_index?: boolean
+    created_at?: boolean
+    updated_at?: boolean
+    text?: boolean | TextDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["karchagTextMetadata"]>
+
+  export type KarchagTextMetadataSelectScalar = {
+    id?: boolean
+    karchag_text_id?: boolean
+    metadata_key?: boolean
+    metadata_value?: boolean
+    metadata_group?: boolean
+    label?: boolean
+    order_index?: boolean
+    created_at?: boolean
+    updated_at?: boolean
+  }
+
+  export type KarchagTextMetadataOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "karchag_text_id" | "metadata_key" | "metadata_value" | "metadata_group" | "label" | "order_index" | "created_at" | "updated_at", ExtArgs["result"]["karchagTextMetadata"]>
+  export type KarchagTextMetadataInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    text?: boolean | TextDefaultArgs<ExtArgs>
+  }
+  export type KarchagTextMetadataIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    text?: boolean | TextDefaultArgs<ExtArgs>
+  }
+  export type KarchagTextMetadataIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    text?: boolean | TextDefaultArgs<ExtArgs>
+  }
+
+  export type $KarchagTextMetadataPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "KarchagTextMetadata"
+    objects: {
+      text: Prisma.$TextPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      karchag_text_id: string
+      metadata_key: string
+      metadata_value: string
+      metadata_group: string
+      label: string | null
+      order_index: number
+      created_at: Date
+      updated_at: Date
+    }, ExtArgs["result"]["karchagTextMetadata"]>
+    composites: {}
+  }
+
+  type KarchagTextMetadataGetPayload<S extends boolean | null | undefined | KarchagTextMetadataDefaultArgs> = $Result.GetResult<Prisma.$KarchagTextMetadataPayload, S>
+
+  type KarchagTextMetadataCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<KarchagTextMetadataFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: KarchagTextMetadataCountAggregateInputType | true
+    }
+
+  export interface KarchagTextMetadataDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['KarchagTextMetadata'], meta: { name: 'KarchagTextMetadata' } }
+    /**
+     * Find zero or one KarchagTextMetadata that matches the filter.
+     * @param {KarchagTextMetadataFindUniqueArgs} args - Arguments to find a KarchagTextMetadata
+     * @example
+     * // Get one KarchagTextMetadata
+     * const karchagTextMetadata = await prisma.karchagTextMetadata.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends KarchagTextMetadataFindUniqueArgs>(args: SelectSubset<T, KarchagTextMetadataFindUniqueArgs<ExtArgs>>): Prisma__KarchagTextMetadataClient<$Result.GetResult<Prisma.$KarchagTextMetadataPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one KarchagTextMetadata that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {KarchagTextMetadataFindUniqueOrThrowArgs} args - Arguments to find a KarchagTextMetadata
+     * @example
+     * // Get one KarchagTextMetadata
+     * const karchagTextMetadata = await prisma.karchagTextMetadata.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends KarchagTextMetadataFindUniqueOrThrowArgs>(args: SelectSubset<T, KarchagTextMetadataFindUniqueOrThrowArgs<ExtArgs>>): Prisma__KarchagTextMetadataClient<$Result.GetResult<Prisma.$KarchagTextMetadataPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first KarchagTextMetadata that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {KarchagTextMetadataFindFirstArgs} args - Arguments to find a KarchagTextMetadata
+     * @example
+     * // Get one KarchagTextMetadata
+     * const karchagTextMetadata = await prisma.karchagTextMetadata.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends KarchagTextMetadataFindFirstArgs>(args?: SelectSubset<T, KarchagTextMetadataFindFirstArgs<ExtArgs>>): Prisma__KarchagTextMetadataClient<$Result.GetResult<Prisma.$KarchagTextMetadataPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first KarchagTextMetadata that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {KarchagTextMetadataFindFirstOrThrowArgs} args - Arguments to find a KarchagTextMetadata
+     * @example
+     * // Get one KarchagTextMetadata
+     * const karchagTextMetadata = await prisma.karchagTextMetadata.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends KarchagTextMetadataFindFirstOrThrowArgs>(args?: SelectSubset<T, KarchagTextMetadataFindFirstOrThrowArgs<ExtArgs>>): Prisma__KarchagTextMetadataClient<$Result.GetResult<Prisma.$KarchagTextMetadataPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more KarchagTextMetadata that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {KarchagTextMetadataFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all KarchagTextMetadata
+     * const karchagTextMetadata = await prisma.karchagTextMetadata.findMany()
+     * 
+     * // Get first 10 KarchagTextMetadata
+     * const karchagTextMetadata = await prisma.karchagTextMetadata.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const karchagTextMetadataWithIdOnly = await prisma.karchagTextMetadata.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends KarchagTextMetadataFindManyArgs>(args?: SelectSubset<T, KarchagTextMetadataFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$KarchagTextMetadataPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a KarchagTextMetadata.
+     * @param {KarchagTextMetadataCreateArgs} args - Arguments to create a KarchagTextMetadata.
+     * @example
+     * // Create one KarchagTextMetadata
+     * const KarchagTextMetadata = await prisma.karchagTextMetadata.create({
+     *   data: {
+     *     // ... data to create a KarchagTextMetadata
+     *   }
+     * })
+     * 
+     */
+    create<T extends KarchagTextMetadataCreateArgs>(args: SelectSubset<T, KarchagTextMetadataCreateArgs<ExtArgs>>): Prisma__KarchagTextMetadataClient<$Result.GetResult<Prisma.$KarchagTextMetadataPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many KarchagTextMetadata.
+     * @param {KarchagTextMetadataCreateManyArgs} args - Arguments to create many KarchagTextMetadata.
+     * @example
+     * // Create many KarchagTextMetadata
+     * const karchagTextMetadata = await prisma.karchagTextMetadata.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends KarchagTextMetadataCreateManyArgs>(args?: SelectSubset<T, KarchagTextMetadataCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many KarchagTextMetadata and returns the data saved in the database.
+     * @param {KarchagTextMetadataCreateManyAndReturnArgs} args - Arguments to create many KarchagTextMetadata.
+     * @example
+     * // Create many KarchagTextMetadata
+     * const karchagTextMetadata = await prisma.karchagTextMetadata.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many KarchagTextMetadata and only return the `id`
+     * const karchagTextMetadataWithIdOnly = await prisma.karchagTextMetadata.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends KarchagTextMetadataCreateManyAndReturnArgs>(args?: SelectSubset<T, KarchagTextMetadataCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$KarchagTextMetadataPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a KarchagTextMetadata.
+     * @param {KarchagTextMetadataDeleteArgs} args - Arguments to delete one KarchagTextMetadata.
+     * @example
+     * // Delete one KarchagTextMetadata
+     * const KarchagTextMetadata = await prisma.karchagTextMetadata.delete({
+     *   where: {
+     *     // ... filter to delete one KarchagTextMetadata
+     *   }
+     * })
+     * 
+     */
+    delete<T extends KarchagTextMetadataDeleteArgs>(args: SelectSubset<T, KarchagTextMetadataDeleteArgs<ExtArgs>>): Prisma__KarchagTextMetadataClient<$Result.GetResult<Prisma.$KarchagTextMetadataPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one KarchagTextMetadata.
+     * @param {KarchagTextMetadataUpdateArgs} args - Arguments to update one KarchagTextMetadata.
+     * @example
+     * // Update one KarchagTextMetadata
+     * const karchagTextMetadata = await prisma.karchagTextMetadata.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends KarchagTextMetadataUpdateArgs>(args: SelectSubset<T, KarchagTextMetadataUpdateArgs<ExtArgs>>): Prisma__KarchagTextMetadataClient<$Result.GetResult<Prisma.$KarchagTextMetadataPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more KarchagTextMetadata.
+     * @param {KarchagTextMetadataDeleteManyArgs} args - Arguments to filter KarchagTextMetadata to delete.
+     * @example
+     * // Delete a few KarchagTextMetadata
+     * const { count } = await prisma.karchagTextMetadata.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends KarchagTextMetadataDeleteManyArgs>(args?: SelectSubset<T, KarchagTextMetadataDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more KarchagTextMetadata.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {KarchagTextMetadataUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many KarchagTextMetadata
+     * const karchagTextMetadata = await prisma.karchagTextMetadata.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends KarchagTextMetadataUpdateManyArgs>(args: SelectSubset<T, KarchagTextMetadataUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more KarchagTextMetadata and returns the data updated in the database.
+     * @param {KarchagTextMetadataUpdateManyAndReturnArgs} args - Arguments to update many KarchagTextMetadata.
+     * @example
+     * // Update many KarchagTextMetadata
+     * const karchagTextMetadata = await prisma.karchagTextMetadata.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more KarchagTextMetadata and only return the `id`
+     * const karchagTextMetadataWithIdOnly = await prisma.karchagTextMetadata.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends KarchagTextMetadataUpdateManyAndReturnArgs>(args: SelectSubset<T, KarchagTextMetadataUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$KarchagTextMetadataPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one KarchagTextMetadata.
+     * @param {KarchagTextMetadataUpsertArgs} args - Arguments to update or create a KarchagTextMetadata.
+     * @example
+     * // Update or create a KarchagTextMetadata
+     * const karchagTextMetadata = await prisma.karchagTextMetadata.upsert({
+     *   create: {
+     *     // ... data to create a KarchagTextMetadata
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the KarchagTextMetadata we want to update
+     *   }
+     * })
+     */
+    upsert<T extends KarchagTextMetadataUpsertArgs>(args: SelectSubset<T, KarchagTextMetadataUpsertArgs<ExtArgs>>): Prisma__KarchagTextMetadataClient<$Result.GetResult<Prisma.$KarchagTextMetadataPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of KarchagTextMetadata.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {KarchagTextMetadataCountArgs} args - Arguments to filter KarchagTextMetadata to count.
+     * @example
+     * // Count the number of KarchagTextMetadata
+     * const count = await prisma.karchagTextMetadata.count({
+     *   where: {
+     *     // ... the filter for the KarchagTextMetadata we want to count
+     *   }
+     * })
+    **/
+    count<T extends KarchagTextMetadataCountArgs>(
+      args?: Subset<T, KarchagTextMetadataCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], KarchagTextMetadataCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a KarchagTextMetadata.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {KarchagTextMetadataAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends KarchagTextMetadataAggregateArgs>(args: Subset<T, KarchagTextMetadataAggregateArgs>): Prisma.PrismaPromise<GetKarchagTextMetadataAggregateType<T>>
+
+    /**
+     * Group by KarchagTextMetadata.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {KarchagTextMetadataGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends KarchagTextMetadataGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: KarchagTextMetadataGroupByArgs['orderBy'] }
+        : { orderBy?: KarchagTextMetadataGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, KarchagTextMetadataGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetKarchagTextMetadataGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the KarchagTextMetadata model
+   */
+  readonly fields: KarchagTextMetadataFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for KarchagTextMetadata.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__KarchagTextMetadataClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    text<T extends TextDefaultArgs<ExtArgs> = {}>(args?: Subset<T, TextDefaultArgs<ExtArgs>>): Prisma__TextClient<$Result.GetResult<Prisma.$TextPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the KarchagTextMetadata model
+   */
+  interface KarchagTextMetadataFieldRefs {
+    readonly id: FieldRef<"KarchagTextMetadata", 'String'>
+    readonly karchag_text_id: FieldRef<"KarchagTextMetadata", 'String'>
+    readonly metadata_key: FieldRef<"KarchagTextMetadata", 'String'>
+    readonly metadata_value: FieldRef<"KarchagTextMetadata", 'String'>
+    readonly metadata_group: FieldRef<"KarchagTextMetadata", 'String'>
+    readonly label: FieldRef<"KarchagTextMetadata", 'String'>
+    readonly order_index: FieldRef<"KarchagTextMetadata", 'Int'>
+    readonly created_at: FieldRef<"KarchagTextMetadata", 'DateTime'>
+    readonly updated_at: FieldRef<"KarchagTextMetadata", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * KarchagTextMetadata findUnique
+   */
+  export type KarchagTextMetadataFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the KarchagTextMetadata
+     */
+    select?: KarchagTextMetadataSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the KarchagTextMetadata
+     */
+    omit?: KarchagTextMetadataOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: KarchagTextMetadataInclude<ExtArgs> | null
+    /**
+     * Filter, which KarchagTextMetadata to fetch.
+     */
+    where: KarchagTextMetadataWhereUniqueInput
+  }
+
+  /**
+   * KarchagTextMetadata findUniqueOrThrow
+   */
+  export type KarchagTextMetadataFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the KarchagTextMetadata
+     */
+    select?: KarchagTextMetadataSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the KarchagTextMetadata
+     */
+    omit?: KarchagTextMetadataOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: KarchagTextMetadataInclude<ExtArgs> | null
+    /**
+     * Filter, which KarchagTextMetadata to fetch.
+     */
+    where: KarchagTextMetadataWhereUniqueInput
+  }
+
+  /**
+   * KarchagTextMetadata findFirst
+   */
+  export type KarchagTextMetadataFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the KarchagTextMetadata
+     */
+    select?: KarchagTextMetadataSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the KarchagTextMetadata
+     */
+    omit?: KarchagTextMetadataOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: KarchagTextMetadataInclude<ExtArgs> | null
+    /**
+     * Filter, which KarchagTextMetadata to fetch.
+     */
+    where?: KarchagTextMetadataWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of KarchagTextMetadata to fetch.
+     */
+    orderBy?: KarchagTextMetadataOrderByWithRelationInput | KarchagTextMetadataOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for KarchagTextMetadata.
+     */
+    cursor?: KarchagTextMetadataWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` KarchagTextMetadata from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` KarchagTextMetadata.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of KarchagTextMetadata.
+     */
+    distinct?: KarchagTextMetadataScalarFieldEnum | KarchagTextMetadataScalarFieldEnum[]
+  }
+
+  /**
+   * KarchagTextMetadata findFirstOrThrow
+   */
+  export type KarchagTextMetadataFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the KarchagTextMetadata
+     */
+    select?: KarchagTextMetadataSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the KarchagTextMetadata
+     */
+    omit?: KarchagTextMetadataOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: KarchagTextMetadataInclude<ExtArgs> | null
+    /**
+     * Filter, which KarchagTextMetadata to fetch.
+     */
+    where?: KarchagTextMetadataWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of KarchagTextMetadata to fetch.
+     */
+    orderBy?: KarchagTextMetadataOrderByWithRelationInput | KarchagTextMetadataOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for KarchagTextMetadata.
+     */
+    cursor?: KarchagTextMetadataWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` KarchagTextMetadata from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` KarchagTextMetadata.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of KarchagTextMetadata.
+     */
+    distinct?: KarchagTextMetadataScalarFieldEnum | KarchagTextMetadataScalarFieldEnum[]
+  }
+
+  /**
+   * KarchagTextMetadata findMany
+   */
+  export type KarchagTextMetadataFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the KarchagTextMetadata
+     */
+    select?: KarchagTextMetadataSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the KarchagTextMetadata
+     */
+    omit?: KarchagTextMetadataOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: KarchagTextMetadataInclude<ExtArgs> | null
+    /**
+     * Filter, which KarchagTextMetadata to fetch.
+     */
+    where?: KarchagTextMetadataWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of KarchagTextMetadata to fetch.
+     */
+    orderBy?: KarchagTextMetadataOrderByWithRelationInput | KarchagTextMetadataOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing KarchagTextMetadata.
+     */
+    cursor?: KarchagTextMetadataWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` KarchagTextMetadata from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` KarchagTextMetadata.
+     */
+    skip?: number
+    distinct?: KarchagTextMetadataScalarFieldEnum | KarchagTextMetadataScalarFieldEnum[]
+  }
+
+  /**
+   * KarchagTextMetadata create
+   */
+  export type KarchagTextMetadataCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the KarchagTextMetadata
+     */
+    select?: KarchagTextMetadataSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the KarchagTextMetadata
+     */
+    omit?: KarchagTextMetadataOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: KarchagTextMetadataInclude<ExtArgs> | null
+    /**
+     * The data needed to create a KarchagTextMetadata.
+     */
+    data: XOR<KarchagTextMetadataCreateInput, KarchagTextMetadataUncheckedCreateInput>
+  }
+
+  /**
+   * KarchagTextMetadata createMany
+   */
+  export type KarchagTextMetadataCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many KarchagTextMetadata.
+     */
+    data: KarchagTextMetadataCreateManyInput | KarchagTextMetadataCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * KarchagTextMetadata createManyAndReturn
+   */
+  export type KarchagTextMetadataCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the KarchagTextMetadata
+     */
+    select?: KarchagTextMetadataSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the KarchagTextMetadata
+     */
+    omit?: KarchagTextMetadataOmit<ExtArgs> | null
+    /**
+     * The data used to create many KarchagTextMetadata.
+     */
+    data: KarchagTextMetadataCreateManyInput | KarchagTextMetadataCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: KarchagTextMetadataIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * KarchagTextMetadata update
+   */
+  export type KarchagTextMetadataUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the KarchagTextMetadata
+     */
+    select?: KarchagTextMetadataSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the KarchagTextMetadata
+     */
+    omit?: KarchagTextMetadataOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: KarchagTextMetadataInclude<ExtArgs> | null
+    /**
+     * The data needed to update a KarchagTextMetadata.
+     */
+    data: XOR<KarchagTextMetadataUpdateInput, KarchagTextMetadataUncheckedUpdateInput>
+    /**
+     * Choose, which KarchagTextMetadata to update.
+     */
+    where: KarchagTextMetadataWhereUniqueInput
+  }
+
+  /**
+   * KarchagTextMetadata updateMany
+   */
+  export type KarchagTextMetadataUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update KarchagTextMetadata.
+     */
+    data: XOR<KarchagTextMetadataUpdateManyMutationInput, KarchagTextMetadataUncheckedUpdateManyInput>
+    /**
+     * Filter which KarchagTextMetadata to update
+     */
+    where?: KarchagTextMetadataWhereInput
+    /**
+     * Limit how many KarchagTextMetadata to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * KarchagTextMetadata updateManyAndReturn
+   */
+  export type KarchagTextMetadataUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the KarchagTextMetadata
+     */
+    select?: KarchagTextMetadataSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the KarchagTextMetadata
+     */
+    omit?: KarchagTextMetadataOmit<ExtArgs> | null
+    /**
+     * The data used to update KarchagTextMetadata.
+     */
+    data: XOR<KarchagTextMetadataUpdateManyMutationInput, KarchagTextMetadataUncheckedUpdateManyInput>
+    /**
+     * Filter which KarchagTextMetadata to update
+     */
+    where?: KarchagTextMetadataWhereInput
+    /**
+     * Limit how many KarchagTextMetadata to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: KarchagTextMetadataIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * KarchagTextMetadata upsert
+   */
+  export type KarchagTextMetadataUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the KarchagTextMetadata
+     */
+    select?: KarchagTextMetadataSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the KarchagTextMetadata
+     */
+    omit?: KarchagTextMetadataOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: KarchagTextMetadataInclude<ExtArgs> | null
+    /**
+     * The filter to search for the KarchagTextMetadata to update in case it exists.
+     */
+    where: KarchagTextMetadataWhereUniqueInput
+    /**
+     * In case the KarchagTextMetadata found by the `where` argument doesn't exist, create a new KarchagTextMetadata with this data.
+     */
+    create: XOR<KarchagTextMetadataCreateInput, KarchagTextMetadataUncheckedCreateInput>
+    /**
+     * In case the KarchagTextMetadata was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<KarchagTextMetadataUpdateInput, KarchagTextMetadataUncheckedUpdateInput>
+  }
+
+  /**
+   * KarchagTextMetadata delete
+   */
+  export type KarchagTextMetadataDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the KarchagTextMetadata
+     */
+    select?: KarchagTextMetadataSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the KarchagTextMetadata
+     */
+    omit?: KarchagTextMetadataOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: KarchagTextMetadataInclude<ExtArgs> | null
+    /**
+     * Filter which KarchagTextMetadata to delete.
+     */
+    where: KarchagTextMetadataWhereUniqueInput
+  }
+
+  /**
+   * KarchagTextMetadata deleteMany
+   */
+  export type KarchagTextMetadataDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which KarchagTextMetadata to delete
+     */
+    where?: KarchagTextMetadataWhereInput
+    /**
+     * Limit how many KarchagTextMetadata to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * KarchagTextMetadata without action
+   */
+  export type KarchagTextMetadataDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the KarchagTextMetadata
+     */
+    select?: KarchagTextMetadataSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the KarchagTextMetadata
+     */
+    omit?: KarchagTextMetadataOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: KarchagTextMetadataInclude<ExtArgs> | null
   }
 
 
@@ -26168,134 +19687,6 @@ export namespace Prisma {
   };
 
   export type CatalogCategoryScalarFieldEnum = (typeof CatalogCategoryScalarFieldEnum)[keyof typeof CatalogCategoryScalarFieldEnum]
-
-
-  export const TextScalarFieldEnum: {
-    id: 'id',
-    id_slug: 'id_slug',
-    category_id: 'category_id',
-    keywords: 'keywords',
-    is_active: 'is_active',
-    order_index: 'order_index',
-    created_at: 'created_at',
-    updated_at: 'updated_at'
-  };
-
-  export type TextScalarFieldEnum = (typeof TextScalarFieldEnum)[keyof typeof TextScalarFieldEnum]
-
-
-  export const TextSectionScalarFieldEnum: {
-    id: 'id',
-    text_id: 'text_id',
-    section_type: 'section_type',
-    title_tibetan: 'title_tibetan',
-    title_english: 'title_english',
-    content_tibetan: 'content_tibetan',
-    content_english: 'content_english',
-    order_index: 'order_index',
-    created_at: 'created_at',
-    updated_at: 'updated_at'
-  };
-
-  export type TextSectionScalarFieldEnum = (typeof TextSectionScalarFieldEnum)[keyof typeof TextSectionScalarFieldEnum]
-
-
-  export const TextSummaryScalarFieldEnum: {
-    id: 'id',
-    text_id: 'text_id',
-    translation_homage_tibetan: 'translation_homage_tibetan',
-    translation_homage_english: 'translation_homage_english',
-    purpose_tibetan: 'purpose_tibetan',
-    purpose_english: 'purpose_english',
-    summary_text_tibetan: 'summary_text_tibetan',
-    summary_text_english: 'summary_text_english',
-    word_meaning_tibetan: 'word_meaning_tibetan',
-    word_meaning_english: 'word_meaning_english',
-    connection_tibetan: 'connection_tibetan',
-    connection_english: 'connection_english',
-    question_answers_tibetan: 'question_answers_tibetan',
-    question_answers_english: 'question_answers_english',
-    colophon_tibetan: 'colophon_tibetan',
-    colophon_english: 'colophon_english',
-    created_at: 'created_at',
-    updated_at: 'updated_at'
-  };
-
-  export type TextSummaryScalarFieldEnum = (typeof TextSummaryScalarFieldEnum)[keyof typeof TextSummaryScalarFieldEnum]
-
-
-  export const TextCollatedContentScalarFieldEnum: {
-    id: 'id',
-    text_id: 'text_id',
-    collated_text: 'collated_text',
-    english_translation: 'english_translation',
-    created_at: 'created_at',
-    updated_at: 'updated_at'
-  };
-
-  export type TextCollatedContentScalarFieldEnum = (typeof TextCollatedContentScalarFieldEnum)[keyof typeof TextCollatedContentScalarFieldEnum]
-
-
-  export const TextMetadataScalarFieldEnum: {
-    id: 'id',
-    text_id: 'text_id',
-    metadata_key: 'metadata_key',
-    metadata_value: 'metadata_value',
-    metadata_group: 'metadata_group',
-    label: 'label',
-    tibetan_title: 'tibetan_title',
-    english_title: 'english_title',
-    sanskrit_title: 'sanskrit_title',
-    chinese_title: 'chinese_title',
-    derge_text_id: 'derge_text_id',
-    yeshe_text_id: 'yeshe_text_id',
-    derge_vol_number: 'derge_vol_number',
-    derge_start_page: 'derge_start_page',
-    derge_end_page: 'derge_end_page',
-    turning: 'turning',
-    yana: 'yana',
-    translation_period: 'translation_period',
-    order_index: 'order_index',
-    created_at: 'created_at',
-    updated_at: 'updated_at'
-  };
-
-  export type TextMetadataScalarFieldEnum = (typeof TextMetadataScalarFieldEnum)[keyof typeof TextMetadataScalarFieldEnum]
-
-
-  export const EditionScalarFieldEnum: {
-    id: 'id',
-    name_english: 'name_english',
-    name_tibetan: 'name_tibetan',
-    description_english: 'description_english',
-    description_tibetan: 'description_tibetan',
-    year: 'year',
-    location: 'location',
-    total_volumes: 'total_volumes',
-    total_texts: 'total_texts',
-    is_active: 'is_active',
-    created_at: 'created_at',
-    updated_at: 'updated_at'
-  };
-
-  export type EditionScalarFieldEnum = (typeof EditionScalarFieldEnum)[keyof typeof EditionScalarFieldEnum]
-
-
-  export const TextEditionScalarFieldEnum: {
-    id: 'id',
-    text_id: 'text_id',
-    edition_id: 'edition_id',
-    source_id: 'source_id',
-    volume_number: 'volume_number',
-    start_page: 'start_page',
-    end_page: 'end_page',
-    availability: 'availability',
-    link_url: 'link_url',
-    created_at: 'created_at',
-    updated_at: 'updated_at'
-  };
-
-  export type TextEditionScalarFieldEnum = (typeof TextEditionScalarFieldEnum)[keyof typeof TextEditionScalarFieldEnum]
 
 
   export const NewsScalarFieldEnum: {
@@ -26449,31 +19840,76 @@ export namespace Prisma {
     order_index: 'order_index',
     is_active: 'is_active',
     created_at: 'created_at',
-    updated_at: 'updated_at'
+    updated_at: 'updated_at',
+    only_content: 'only_content',
+    content: 'content'
   };
 
   export type KarchagSubCategoryScalarFieldEnum = (typeof KarchagSubCategoryScalarFieldEnum)[keyof typeof KarchagSubCategoryScalarFieldEnum]
 
 
-  export const KarchagTextScalarFieldEnum: {
+  export const TextScalarFieldEnum: {
     id: 'id',
     sub_category_id: 'sub_category_id',
-    derge_id: 'derge_id',
-    yeshe_de_id: 'yeshe_de_id',
     tibetan_title: 'tibetan_title',
     chinese_title: 'chinese_title',
     sanskrit_title: 'sanskrit_title',
     english_title: 'english_title',
-    turning_id: 'turning_id',
-    yana_id: 'yana_id',
-    translation_period_id: 'translation_period_id',
+    derge_id: 'derge_id',
+    yeshe_de_id: 'yeshe_de_id',
+    yeshe_de_volume_number: 'yeshe_de_volume_number',
+    yeshe_de_page_start: 'yeshe_de_page_start',
+    yeshe_de_page_end: 'yeshe_de_page_end',
+    turning: 'turning',
+    yana: 'yana',
+    translation_period: 'translation_period',
+    pdf_url: 'pdf_url',
     order_index: 'order_index',
     is_active: 'is_active',
     created_at: 'created_at',
     updated_at: 'updated_at'
   };
 
-  export type KarchagTextScalarFieldEnum = (typeof KarchagTextScalarFieldEnum)[keyof typeof KarchagTextScalarFieldEnum]
+  export type TextScalarFieldEnum = (typeof TextScalarFieldEnum)[keyof typeof TextScalarFieldEnum]
+
+
+  export const KarchagTextSummaryScalarFieldEnum: {
+    id: 'id',
+    karchag_text_id: 'karchag_text_id',
+    translation_homage_tibetan: 'translation_homage_tibetan',
+    translation_homage_english: 'translation_homage_english',
+    purpose_tibetan: 'purpose_tibetan',
+    purpose_english: 'purpose_english',
+    summary_text_tibetan: 'summary_text_tibetan',
+    summary_text_english: 'summary_text_english',
+    word_meaning_tibetan: 'word_meaning_tibetan',
+    word_meaning_english: 'word_meaning_english',
+    connection_tibetan: 'connection_tibetan',
+    connection_english: 'connection_english',
+    question_answers_tibetan: 'question_answers_tibetan',
+    question_answers_english: 'question_answers_english',
+    colophon_tibetan: 'colophon_tibetan',
+    colophon_english: 'colophon_english',
+    created_at: 'created_at',
+    updated_at: 'updated_at'
+  };
+
+  export type KarchagTextSummaryScalarFieldEnum = (typeof KarchagTextSummaryScalarFieldEnum)[keyof typeof KarchagTextSummaryScalarFieldEnum]
+
+
+  export const KarchagTextMetadataScalarFieldEnum: {
+    id: 'id',
+    karchag_text_id: 'karchag_text_id',
+    metadata_key: 'metadata_key',
+    metadata_value: 'metadata_value',
+    metadata_group: 'metadata_group',
+    label: 'label',
+    order_index: 'order_index',
+    created_at: 'created_at',
+    updated_at: 'updated_at'
+  };
+
+  export type KarchagTextMetadataScalarFieldEnum = (typeof KarchagTextMetadataScalarFieldEnum)[keyof typeof KarchagTextMetadataScalarFieldEnum]
 
 
   export const SortOrder: {
@@ -26655,7 +20091,6 @@ export namespace Prisma {
     updated_at?: DateTimeFilter<"CatalogCategory"> | Date | string
     parent?: XOR<CatalogCategoryNullableScalarRelationFilter, CatalogCategoryWhereInput> | null
     children?: CatalogCategoryListRelationFilter
-    texts?: TextListRelationFilter
   }
 
   export type CatalogCategoryOrderByWithRelationInput = {
@@ -26672,7 +20107,6 @@ export namespace Prisma {
     updated_at?: SortOrder
     parent?: CatalogCategoryOrderByWithRelationInput
     children?: CatalogCategoryOrderByRelationAggregateInput
-    texts?: TextOrderByRelationAggregateInput
   }
 
   export type CatalogCategoryWhereUniqueInput = Prisma.AtLeast<{
@@ -26692,7 +20126,6 @@ export namespace Prisma {
     updated_at?: DateTimeFilter<"CatalogCategory"> | Date | string
     parent?: XOR<CatalogCategoryNullableScalarRelationFilter, CatalogCategoryWhereInput> | null
     children?: CatalogCategoryListRelationFilter
-    texts?: TextListRelationFilter
   }, "id" | "id_slug">
 
   export type CatalogCategoryOrderByWithAggregationInput = {
@@ -26729,674 +20162,6 @@ export namespace Prisma {
     is_active?: BoolWithAggregatesFilter<"CatalogCategory"> | boolean
     created_at?: DateTimeWithAggregatesFilter<"CatalogCategory"> | Date | string
     updated_at?: DateTimeWithAggregatesFilter<"CatalogCategory"> | Date | string
-  }
-
-  export type TextWhereInput = {
-    AND?: TextWhereInput | TextWhereInput[]
-    OR?: TextWhereInput[]
-    NOT?: TextWhereInput | TextWhereInput[]
-    id?: StringFilter<"Text"> | string
-    id_slug?: StringNullableFilter<"Text"> | string | null
-    category_id?: StringNullableFilter<"Text"> | string | null
-    keywords?: StringNullableListFilter<"Text">
-    is_active?: BoolFilter<"Text"> | boolean
-    order_index?: IntFilter<"Text"> | number
-    created_at?: DateTimeFilter<"Text"> | Date | string
-    updated_at?: DateTimeFilter<"Text"> | Date | string
-    category?: XOR<CatalogCategoryNullableScalarRelationFilter, CatalogCategoryWhereInput> | null
-    sections?: TextSectionListRelationFilter
-    collatedContent?: XOR<TextCollatedContentNullableScalarRelationFilter, TextCollatedContentWhereInput> | null
-    metadata?: TextMetadataListRelationFilter
-    textEditions?: TextEditionListRelationFilter
-    summary?: XOR<TextSummaryNullableScalarRelationFilter, TextSummaryWhereInput> | null
-  }
-
-  export type TextOrderByWithRelationInput = {
-    id?: SortOrder
-    id_slug?: SortOrderInput | SortOrder
-    category_id?: SortOrderInput | SortOrder
-    keywords?: SortOrder
-    is_active?: SortOrder
-    order_index?: SortOrder
-    created_at?: SortOrder
-    updated_at?: SortOrder
-    category?: CatalogCategoryOrderByWithRelationInput
-    sections?: TextSectionOrderByRelationAggregateInput
-    collatedContent?: TextCollatedContentOrderByWithRelationInput
-    metadata?: TextMetadataOrderByRelationAggregateInput
-    textEditions?: TextEditionOrderByRelationAggregateInput
-    summary?: TextSummaryOrderByWithRelationInput
-  }
-
-  export type TextWhereUniqueInput = Prisma.AtLeast<{
-    id?: string
-    id_slug?: string
-    AND?: TextWhereInput | TextWhereInput[]
-    OR?: TextWhereInput[]
-    NOT?: TextWhereInput | TextWhereInput[]
-    category_id?: StringNullableFilter<"Text"> | string | null
-    keywords?: StringNullableListFilter<"Text">
-    is_active?: BoolFilter<"Text"> | boolean
-    order_index?: IntFilter<"Text"> | number
-    created_at?: DateTimeFilter<"Text"> | Date | string
-    updated_at?: DateTimeFilter<"Text"> | Date | string
-    category?: XOR<CatalogCategoryNullableScalarRelationFilter, CatalogCategoryWhereInput> | null
-    sections?: TextSectionListRelationFilter
-    collatedContent?: XOR<TextCollatedContentNullableScalarRelationFilter, TextCollatedContentWhereInput> | null
-    metadata?: TextMetadataListRelationFilter
-    textEditions?: TextEditionListRelationFilter
-    summary?: XOR<TextSummaryNullableScalarRelationFilter, TextSummaryWhereInput> | null
-  }, "id" | "id_slug">
-
-  export type TextOrderByWithAggregationInput = {
-    id?: SortOrder
-    id_slug?: SortOrderInput | SortOrder
-    category_id?: SortOrderInput | SortOrder
-    keywords?: SortOrder
-    is_active?: SortOrder
-    order_index?: SortOrder
-    created_at?: SortOrder
-    updated_at?: SortOrder
-    _count?: TextCountOrderByAggregateInput
-    _avg?: TextAvgOrderByAggregateInput
-    _max?: TextMaxOrderByAggregateInput
-    _min?: TextMinOrderByAggregateInput
-    _sum?: TextSumOrderByAggregateInput
-  }
-
-  export type TextScalarWhereWithAggregatesInput = {
-    AND?: TextScalarWhereWithAggregatesInput | TextScalarWhereWithAggregatesInput[]
-    OR?: TextScalarWhereWithAggregatesInput[]
-    NOT?: TextScalarWhereWithAggregatesInput | TextScalarWhereWithAggregatesInput[]
-    id?: StringWithAggregatesFilter<"Text"> | string
-    id_slug?: StringNullableWithAggregatesFilter<"Text"> | string | null
-    category_id?: StringNullableWithAggregatesFilter<"Text"> | string | null
-    keywords?: StringNullableListFilter<"Text">
-    is_active?: BoolWithAggregatesFilter<"Text"> | boolean
-    order_index?: IntWithAggregatesFilter<"Text"> | number
-    created_at?: DateTimeWithAggregatesFilter<"Text"> | Date | string
-    updated_at?: DateTimeWithAggregatesFilter<"Text"> | Date | string
-  }
-
-  export type TextSectionWhereInput = {
-    AND?: TextSectionWhereInput | TextSectionWhereInput[]
-    OR?: TextSectionWhereInput[]
-    NOT?: TextSectionWhereInput | TextSectionWhereInput[]
-    id?: StringFilter<"TextSection"> | string
-    text_id?: StringFilter<"TextSection"> | string
-    section_type?: StringFilter<"TextSection"> | string
-    title_tibetan?: StringNullableFilter<"TextSection"> | string | null
-    title_english?: StringNullableFilter<"TextSection"> | string | null
-    content_tibetan?: StringNullableFilter<"TextSection"> | string | null
-    content_english?: StringNullableFilter<"TextSection"> | string | null
-    order_index?: IntFilter<"TextSection"> | number
-    created_at?: DateTimeFilter<"TextSection"> | Date | string
-    updated_at?: DateTimeFilter<"TextSection"> | Date | string
-    text?: XOR<TextScalarRelationFilter, TextWhereInput>
-  }
-
-  export type TextSectionOrderByWithRelationInput = {
-    id?: SortOrder
-    text_id?: SortOrder
-    section_type?: SortOrder
-    title_tibetan?: SortOrderInput | SortOrder
-    title_english?: SortOrderInput | SortOrder
-    content_tibetan?: SortOrderInput | SortOrder
-    content_english?: SortOrderInput | SortOrder
-    order_index?: SortOrder
-    created_at?: SortOrder
-    updated_at?: SortOrder
-    text?: TextOrderByWithRelationInput
-  }
-
-  export type TextSectionWhereUniqueInput = Prisma.AtLeast<{
-    id?: string
-    AND?: TextSectionWhereInput | TextSectionWhereInput[]
-    OR?: TextSectionWhereInput[]
-    NOT?: TextSectionWhereInput | TextSectionWhereInput[]
-    text_id?: StringFilter<"TextSection"> | string
-    section_type?: StringFilter<"TextSection"> | string
-    title_tibetan?: StringNullableFilter<"TextSection"> | string | null
-    title_english?: StringNullableFilter<"TextSection"> | string | null
-    content_tibetan?: StringNullableFilter<"TextSection"> | string | null
-    content_english?: StringNullableFilter<"TextSection"> | string | null
-    order_index?: IntFilter<"TextSection"> | number
-    created_at?: DateTimeFilter<"TextSection"> | Date | string
-    updated_at?: DateTimeFilter<"TextSection"> | Date | string
-    text?: XOR<TextScalarRelationFilter, TextWhereInput>
-  }, "id">
-
-  export type TextSectionOrderByWithAggregationInput = {
-    id?: SortOrder
-    text_id?: SortOrder
-    section_type?: SortOrder
-    title_tibetan?: SortOrderInput | SortOrder
-    title_english?: SortOrderInput | SortOrder
-    content_tibetan?: SortOrderInput | SortOrder
-    content_english?: SortOrderInput | SortOrder
-    order_index?: SortOrder
-    created_at?: SortOrder
-    updated_at?: SortOrder
-    _count?: TextSectionCountOrderByAggregateInput
-    _avg?: TextSectionAvgOrderByAggregateInput
-    _max?: TextSectionMaxOrderByAggregateInput
-    _min?: TextSectionMinOrderByAggregateInput
-    _sum?: TextSectionSumOrderByAggregateInput
-  }
-
-  export type TextSectionScalarWhereWithAggregatesInput = {
-    AND?: TextSectionScalarWhereWithAggregatesInput | TextSectionScalarWhereWithAggregatesInput[]
-    OR?: TextSectionScalarWhereWithAggregatesInput[]
-    NOT?: TextSectionScalarWhereWithAggregatesInput | TextSectionScalarWhereWithAggregatesInput[]
-    id?: StringWithAggregatesFilter<"TextSection"> | string
-    text_id?: StringWithAggregatesFilter<"TextSection"> | string
-    section_type?: StringWithAggregatesFilter<"TextSection"> | string
-    title_tibetan?: StringNullableWithAggregatesFilter<"TextSection"> | string | null
-    title_english?: StringNullableWithAggregatesFilter<"TextSection"> | string | null
-    content_tibetan?: StringNullableWithAggregatesFilter<"TextSection"> | string | null
-    content_english?: StringNullableWithAggregatesFilter<"TextSection"> | string | null
-    order_index?: IntWithAggregatesFilter<"TextSection"> | number
-    created_at?: DateTimeWithAggregatesFilter<"TextSection"> | Date | string
-    updated_at?: DateTimeWithAggregatesFilter<"TextSection"> | Date | string
-  }
-
-  export type TextSummaryWhereInput = {
-    AND?: TextSummaryWhereInput | TextSummaryWhereInput[]
-    OR?: TextSummaryWhereInput[]
-    NOT?: TextSummaryWhereInput | TextSummaryWhereInput[]
-    id?: StringFilter<"TextSummary"> | string
-    text_id?: StringFilter<"TextSummary"> | string
-    translation_homage_tibetan?: StringNullableFilter<"TextSummary"> | string | null
-    translation_homage_english?: StringNullableFilter<"TextSummary"> | string | null
-    purpose_tibetan?: StringNullableFilter<"TextSummary"> | string | null
-    purpose_english?: StringNullableFilter<"TextSummary"> | string | null
-    summary_text_tibetan?: StringNullableFilter<"TextSummary"> | string | null
-    summary_text_english?: StringNullableFilter<"TextSummary"> | string | null
-    word_meaning_tibetan?: StringNullableFilter<"TextSummary"> | string | null
-    word_meaning_english?: StringNullableFilter<"TextSummary"> | string | null
-    connection_tibetan?: StringNullableFilter<"TextSummary"> | string | null
-    connection_english?: StringNullableFilter<"TextSummary"> | string | null
-    question_answers_tibetan?: StringNullableFilter<"TextSummary"> | string | null
-    question_answers_english?: StringNullableFilter<"TextSummary"> | string | null
-    colophon_tibetan?: StringNullableFilter<"TextSummary"> | string | null
-    colophon_english?: StringNullableFilter<"TextSummary"> | string | null
-    created_at?: DateTimeFilter<"TextSummary"> | Date | string
-    updated_at?: DateTimeFilter<"TextSummary"> | Date | string
-    text?: XOR<TextScalarRelationFilter, TextWhereInput>
-  }
-
-  export type TextSummaryOrderByWithRelationInput = {
-    id?: SortOrder
-    text_id?: SortOrder
-    translation_homage_tibetan?: SortOrderInput | SortOrder
-    translation_homage_english?: SortOrderInput | SortOrder
-    purpose_tibetan?: SortOrderInput | SortOrder
-    purpose_english?: SortOrderInput | SortOrder
-    summary_text_tibetan?: SortOrderInput | SortOrder
-    summary_text_english?: SortOrderInput | SortOrder
-    word_meaning_tibetan?: SortOrderInput | SortOrder
-    word_meaning_english?: SortOrderInput | SortOrder
-    connection_tibetan?: SortOrderInput | SortOrder
-    connection_english?: SortOrderInput | SortOrder
-    question_answers_tibetan?: SortOrderInput | SortOrder
-    question_answers_english?: SortOrderInput | SortOrder
-    colophon_tibetan?: SortOrderInput | SortOrder
-    colophon_english?: SortOrderInput | SortOrder
-    created_at?: SortOrder
-    updated_at?: SortOrder
-    text?: TextOrderByWithRelationInput
-  }
-
-  export type TextSummaryWhereUniqueInput = Prisma.AtLeast<{
-    id?: string
-    text_id?: string
-    AND?: TextSummaryWhereInput | TextSummaryWhereInput[]
-    OR?: TextSummaryWhereInput[]
-    NOT?: TextSummaryWhereInput | TextSummaryWhereInput[]
-    translation_homage_tibetan?: StringNullableFilter<"TextSummary"> | string | null
-    translation_homage_english?: StringNullableFilter<"TextSummary"> | string | null
-    purpose_tibetan?: StringNullableFilter<"TextSummary"> | string | null
-    purpose_english?: StringNullableFilter<"TextSummary"> | string | null
-    summary_text_tibetan?: StringNullableFilter<"TextSummary"> | string | null
-    summary_text_english?: StringNullableFilter<"TextSummary"> | string | null
-    word_meaning_tibetan?: StringNullableFilter<"TextSummary"> | string | null
-    word_meaning_english?: StringNullableFilter<"TextSummary"> | string | null
-    connection_tibetan?: StringNullableFilter<"TextSummary"> | string | null
-    connection_english?: StringNullableFilter<"TextSummary"> | string | null
-    question_answers_tibetan?: StringNullableFilter<"TextSummary"> | string | null
-    question_answers_english?: StringNullableFilter<"TextSummary"> | string | null
-    colophon_tibetan?: StringNullableFilter<"TextSummary"> | string | null
-    colophon_english?: StringNullableFilter<"TextSummary"> | string | null
-    created_at?: DateTimeFilter<"TextSummary"> | Date | string
-    updated_at?: DateTimeFilter<"TextSummary"> | Date | string
-    text?: XOR<TextScalarRelationFilter, TextWhereInput>
-  }, "id" | "text_id">
-
-  export type TextSummaryOrderByWithAggregationInput = {
-    id?: SortOrder
-    text_id?: SortOrder
-    translation_homage_tibetan?: SortOrderInput | SortOrder
-    translation_homage_english?: SortOrderInput | SortOrder
-    purpose_tibetan?: SortOrderInput | SortOrder
-    purpose_english?: SortOrderInput | SortOrder
-    summary_text_tibetan?: SortOrderInput | SortOrder
-    summary_text_english?: SortOrderInput | SortOrder
-    word_meaning_tibetan?: SortOrderInput | SortOrder
-    word_meaning_english?: SortOrderInput | SortOrder
-    connection_tibetan?: SortOrderInput | SortOrder
-    connection_english?: SortOrderInput | SortOrder
-    question_answers_tibetan?: SortOrderInput | SortOrder
-    question_answers_english?: SortOrderInput | SortOrder
-    colophon_tibetan?: SortOrderInput | SortOrder
-    colophon_english?: SortOrderInput | SortOrder
-    created_at?: SortOrder
-    updated_at?: SortOrder
-    _count?: TextSummaryCountOrderByAggregateInput
-    _max?: TextSummaryMaxOrderByAggregateInput
-    _min?: TextSummaryMinOrderByAggregateInput
-  }
-
-  export type TextSummaryScalarWhereWithAggregatesInput = {
-    AND?: TextSummaryScalarWhereWithAggregatesInput | TextSummaryScalarWhereWithAggregatesInput[]
-    OR?: TextSummaryScalarWhereWithAggregatesInput[]
-    NOT?: TextSummaryScalarWhereWithAggregatesInput | TextSummaryScalarWhereWithAggregatesInput[]
-    id?: StringWithAggregatesFilter<"TextSummary"> | string
-    text_id?: StringWithAggregatesFilter<"TextSummary"> | string
-    translation_homage_tibetan?: StringNullableWithAggregatesFilter<"TextSummary"> | string | null
-    translation_homage_english?: StringNullableWithAggregatesFilter<"TextSummary"> | string | null
-    purpose_tibetan?: StringNullableWithAggregatesFilter<"TextSummary"> | string | null
-    purpose_english?: StringNullableWithAggregatesFilter<"TextSummary"> | string | null
-    summary_text_tibetan?: StringNullableWithAggregatesFilter<"TextSummary"> | string | null
-    summary_text_english?: StringNullableWithAggregatesFilter<"TextSummary"> | string | null
-    word_meaning_tibetan?: StringNullableWithAggregatesFilter<"TextSummary"> | string | null
-    word_meaning_english?: StringNullableWithAggregatesFilter<"TextSummary"> | string | null
-    connection_tibetan?: StringNullableWithAggregatesFilter<"TextSummary"> | string | null
-    connection_english?: StringNullableWithAggregatesFilter<"TextSummary"> | string | null
-    question_answers_tibetan?: StringNullableWithAggregatesFilter<"TextSummary"> | string | null
-    question_answers_english?: StringNullableWithAggregatesFilter<"TextSummary"> | string | null
-    colophon_tibetan?: StringNullableWithAggregatesFilter<"TextSummary"> | string | null
-    colophon_english?: StringNullableWithAggregatesFilter<"TextSummary"> | string | null
-    created_at?: DateTimeWithAggregatesFilter<"TextSummary"> | Date | string
-    updated_at?: DateTimeWithAggregatesFilter<"TextSummary"> | Date | string
-  }
-
-  export type TextCollatedContentWhereInput = {
-    AND?: TextCollatedContentWhereInput | TextCollatedContentWhereInput[]
-    OR?: TextCollatedContentWhereInput[]
-    NOT?: TextCollatedContentWhereInput | TextCollatedContentWhereInput[]
-    id?: StringFilter<"TextCollatedContent"> | string
-    text_id?: StringFilter<"TextCollatedContent"> | string
-    collated_text?: StringNullableFilter<"TextCollatedContent"> | string | null
-    english_translation?: StringNullableFilter<"TextCollatedContent"> | string | null
-    created_at?: DateTimeFilter<"TextCollatedContent"> | Date | string
-    updated_at?: DateTimeFilter<"TextCollatedContent"> | Date | string
-    text?: XOR<TextScalarRelationFilter, TextWhereInput>
-  }
-
-  export type TextCollatedContentOrderByWithRelationInput = {
-    id?: SortOrder
-    text_id?: SortOrder
-    collated_text?: SortOrderInput | SortOrder
-    english_translation?: SortOrderInput | SortOrder
-    created_at?: SortOrder
-    updated_at?: SortOrder
-    text?: TextOrderByWithRelationInput
-  }
-
-  export type TextCollatedContentWhereUniqueInput = Prisma.AtLeast<{
-    id?: string
-    text_id?: string
-    AND?: TextCollatedContentWhereInput | TextCollatedContentWhereInput[]
-    OR?: TextCollatedContentWhereInput[]
-    NOT?: TextCollatedContentWhereInput | TextCollatedContentWhereInput[]
-    collated_text?: StringNullableFilter<"TextCollatedContent"> | string | null
-    english_translation?: StringNullableFilter<"TextCollatedContent"> | string | null
-    created_at?: DateTimeFilter<"TextCollatedContent"> | Date | string
-    updated_at?: DateTimeFilter<"TextCollatedContent"> | Date | string
-    text?: XOR<TextScalarRelationFilter, TextWhereInput>
-  }, "id" | "text_id">
-
-  export type TextCollatedContentOrderByWithAggregationInput = {
-    id?: SortOrder
-    text_id?: SortOrder
-    collated_text?: SortOrderInput | SortOrder
-    english_translation?: SortOrderInput | SortOrder
-    created_at?: SortOrder
-    updated_at?: SortOrder
-    _count?: TextCollatedContentCountOrderByAggregateInput
-    _max?: TextCollatedContentMaxOrderByAggregateInput
-    _min?: TextCollatedContentMinOrderByAggregateInput
-  }
-
-  export type TextCollatedContentScalarWhereWithAggregatesInput = {
-    AND?: TextCollatedContentScalarWhereWithAggregatesInput | TextCollatedContentScalarWhereWithAggregatesInput[]
-    OR?: TextCollatedContentScalarWhereWithAggregatesInput[]
-    NOT?: TextCollatedContentScalarWhereWithAggregatesInput | TextCollatedContentScalarWhereWithAggregatesInput[]
-    id?: StringWithAggregatesFilter<"TextCollatedContent"> | string
-    text_id?: StringWithAggregatesFilter<"TextCollatedContent"> | string
-    collated_text?: StringNullableWithAggregatesFilter<"TextCollatedContent"> | string | null
-    english_translation?: StringNullableWithAggregatesFilter<"TextCollatedContent"> | string | null
-    created_at?: DateTimeWithAggregatesFilter<"TextCollatedContent"> | Date | string
-    updated_at?: DateTimeWithAggregatesFilter<"TextCollatedContent"> | Date | string
-  }
-
-  export type TextMetadataWhereInput = {
-    AND?: TextMetadataWhereInput | TextMetadataWhereInput[]
-    OR?: TextMetadataWhereInput[]
-    NOT?: TextMetadataWhereInput | TextMetadataWhereInput[]
-    id?: StringFilter<"TextMetadata"> | string
-    text_id?: StringFilter<"TextMetadata"> | string
-    metadata_key?: StringFilter<"TextMetadata"> | string
-    metadata_value?: StringFilter<"TextMetadata"> | string
-    metadata_group?: StringFilter<"TextMetadata"> | string
-    label?: StringNullableFilter<"TextMetadata"> | string | null
-    tibetan_title?: StringNullableFilter<"TextMetadata"> | string | null
-    english_title?: StringNullableFilter<"TextMetadata"> | string | null
-    sanskrit_title?: StringNullableFilter<"TextMetadata"> | string | null
-    chinese_title?: StringNullableFilter<"TextMetadata"> | string | null
-    derge_text_id?: StringNullableFilter<"TextMetadata"> | string | null
-    yeshe_text_id?: StringNullableFilter<"TextMetadata"> | string | null
-    derge_vol_number?: IntNullableFilter<"TextMetadata"> | number | null
-    derge_start_page?: IntNullableFilter<"TextMetadata"> | number | null
-    derge_end_page?: IntNullableFilter<"TextMetadata"> | number | null
-    turning?: StringNullableFilter<"TextMetadata"> | string | null
-    yana?: StringNullableFilter<"TextMetadata"> | string | null
-    translation_period?: StringNullableFilter<"TextMetadata"> | string | null
-    order_index?: IntFilter<"TextMetadata"> | number
-    created_at?: DateTimeFilter<"TextMetadata"> | Date | string
-    updated_at?: DateTimeFilter<"TextMetadata"> | Date | string
-    text?: XOR<TextScalarRelationFilter, TextWhereInput>
-  }
-
-  export type TextMetadataOrderByWithRelationInput = {
-    id?: SortOrder
-    text_id?: SortOrder
-    metadata_key?: SortOrder
-    metadata_value?: SortOrder
-    metadata_group?: SortOrder
-    label?: SortOrderInput | SortOrder
-    tibetan_title?: SortOrderInput | SortOrder
-    english_title?: SortOrderInput | SortOrder
-    sanskrit_title?: SortOrderInput | SortOrder
-    chinese_title?: SortOrderInput | SortOrder
-    derge_text_id?: SortOrderInput | SortOrder
-    yeshe_text_id?: SortOrderInput | SortOrder
-    derge_vol_number?: SortOrderInput | SortOrder
-    derge_start_page?: SortOrderInput | SortOrder
-    derge_end_page?: SortOrderInput | SortOrder
-    turning?: SortOrderInput | SortOrder
-    yana?: SortOrderInput | SortOrder
-    translation_period?: SortOrderInput | SortOrder
-    order_index?: SortOrder
-    created_at?: SortOrder
-    updated_at?: SortOrder
-    text?: TextOrderByWithRelationInput
-  }
-
-  export type TextMetadataWhereUniqueInput = Prisma.AtLeast<{
-    id?: string
-    AND?: TextMetadataWhereInput | TextMetadataWhereInput[]
-    OR?: TextMetadataWhereInput[]
-    NOT?: TextMetadataWhereInput | TextMetadataWhereInput[]
-    text_id?: StringFilter<"TextMetadata"> | string
-    metadata_key?: StringFilter<"TextMetadata"> | string
-    metadata_value?: StringFilter<"TextMetadata"> | string
-    metadata_group?: StringFilter<"TextMetadata"> | string
-    label?: StringNullableFilter<"TextMetadata"> | string | null
-    tibetan_title?: StringNullableFilter<"TextMetadata"> | string | null
-    english_title?: StringNullableFilter<"TextMetadata"> | string | null
-    sanskrit_title?: StringNullableFilter<"TextMetadata"> | string | null
-    chinese_title?: StringNullableFilter<"TextMetadata"> | string | null
-    derge_text_id?: StringNullableFilter<"TextMetadata"> | string | null
-    yeshe_text_id?: StringNullableFilter<"TextMetadata"> | string | null
-    derge_vol_number?: IntNullableFilter<"TextMetadata"> | number | null
-    derge_start_page?: IntNullableFilter<"TextMetadata"> | number | null
-    derge_end_page?: IntNullableFilter<"TextMetadata"> | number | null
-    turning?: StringNullableFilter<"TextMetadata"> | string | null
-    yana?: StringNullableFilter<"TextMetadata"> | string | null
-    translation_period?: StringNullableFilter<"TextMetadata"> | string | null
-    order_index?: IntFilter<"TextMetadata"> | number
-    created_at?: DateTimeFilter<"TextMetadata"> | Date | string
-    updated_at?: DateTimeFilter<"TextMetadata"> | Date | string
-    text?: XOR<TextScalarRelationFilter, TextWhereInput>
-  }, "id">
-
-  export type TextMetadataOrderByWithAggregationInput = {
-    id?: SortOrder
-    text_id?: SortOrder
-    metadata_key?: SortOrder
-    metadata_value?: SortOrder
-    metadata_group?: SortOrder
-    label?: SortOrderInput | SortOrder
-    tibetan_title?: SortOrderInput | SortOrder
-    english_title?: SortOrderInput | SortOrder
-    sanskrit_title?: SortOrderInput | SortOrder
-    chinese_title?: SortOrderInput | SortOrder
-    derge_text_id?: SortOrderInput | SortOrder
-    yeshe_text_id?: SortOrderInput | SortOrder
-    derge_vol_number?: SortOrderInput | SortOrder
-    derge_start_page?: SortOrderInput | SortOrder
-    derge_end_page?: SortOrderInput | SortOrder
-    turning?: SortOrderInput | SortOrder
-    yana?: SortOrderInput | SortOrder
-    translation_period?: SortOrderInput | SortOrder
-    order_index?: SortOrder
-    created_at?: SortOrder
-    updated_at?: SortOrder
-    _count?: TextMetadataCountOrderByAggregateInput
-    _avg?: TextMetadataAvgOrderByAggregateInput
-    _max?: TextMetadataMaxOrderByAggregateInput
-    _min?: TextMetadataMinOrderByAggregateInput
-    _sum?: TextMetadataSumOrderByAggregateInput
-  }
-
-  export type TextMetadataScalarWhereWithAggregatesInput = {
-    AND?: TextMetadataScalarWhereWithAggregatesInput | TextMetadataScalarWhereWithAggregatesInput[]
-    OR?: TextMetadataScalarWhereWithAggregatesInput[]
-    NOT?: TextMetadataScalarWhereWithAggregatesInput | TextMetadataScalarWhereWithAggregatesInput[]
-    id?: StringWithAggregatesFilter<"TextMetadata"> | string
-    text_id?: StringWithAggregatesFilter<"TextMetadata"> | string
-    metadata_key?: StringWithAggregatesFilter<"TextMetadata"> | string
-    metadata_value?: StringWithAggregatesFilter<"TextMetadata"> | string
-    metadata_group?: StringWithAggregatesFilter<"TextMetadata"> | string
-    label?: StringNullableWithAggregatesFilter<"TextMetadata"> | string | null
-    tibetan_title?: StringNullableWithAggregatesFilter<"TextMetadata"> | string | null
-    english_title?: StringNullableWithAggregatesFilter<"TextMetadata"> | string | null
-    sanskrit_title?: StringNullableWithAggregatesFilter<"TextMetadata"> | string | null
-    chinese_title?: StringNullableWithAggregatesFilter<"TextMetadata"> | string | null
-    derge_text_id?: StringNullableWithAggregatesFilter<"TextMetadata"> | string | null
-    yeshe_text_id?: StringNullableWithAggregatesFilter<"TextMetadata"> | string | null
-    derge_vol_number?: IntNullableWithAggregatesFilter<"TextMetadata"> | number | null
-    derge_start_page?: IntNullableWithAggregatesFilter<"TextMetadata"> | number | null
-    derge_end_page?: IntNullableWithAggregatesFilter<"TextMetadata"> | number | null
-    turning?: StringNullableWithAggregatesFilter<"TextMetadata"> | string | null
-    yana?: StringNullableWithAggregatesFilter<"TextMetadata"> | string | null
-    translation_period?: StringNullableWithAggregatesFilter<"TextMetadata"> | string | null
-    order_index?: IntWithAggregatesFilter<"TextMetadata"> | number
-    created_at?: DateTimeWithAggregatesFilter<"TextMetadata"> | Date | string
-    updated_at?: DateTimeWithAggregatesFilter<"TextMetadata"> | Date | string
-  }
-
-  export type EditionWhereInput = {
-    AND?: EditionWhereInput | EditionWhereInput[]
-    OR?: EditionWhereInput[]
-    NOT?: EditionWhereInput | EditionWhereInput[]
-    id?: StringFilter<"Edition"> | string
-    name_english?: StringFilter<"Edition"> | string
-    name_tibetan?: StringNullableFilter<"Edition"> | string | null
-    description_english?: StringNullableFilter<"Edition"> | string | null
-    description_tibetan?: StringNullableFilter<"Edition"> | string | null
-    year?: StringNullableFilter<"Edition"> | string | null
-    location?: StringNullableFilter<"Edition"> | string | null
-    total_volumes?: IntNullableFilter<"Edition"> | number | null
-    total_texts?: IntNullableFilter<"Edition"> | number | null
-    is_active?: BoolFilter<"Edition"> | boolean
-    created_at?: DateTimeFilter<"Edition"> | Date | string
-    updated_at?: DateTimeFilter<"Edition"> | Date | string
-    textEditions?: TextEditionListRelationFilter
-  }
-
-  export type EditionOrderByWithRelationInput = {
-    id?: SortOrder
-    name_english?: SortOrder
-    name_tibetan?: SortOrderInput | SortOrder
-    description_english?: SortOrderInput | SortOrder
-    description_tibetan?: SortOrderInput | SortOrder
-    year?: SortOrderInput | SortOrder
-    location?: SortOrderInput | SortOrder
-    total_volumes?: SortOrderInput | SortOrder
-    total_texts?: SortOrderInput | SortOrder
-    is_active?: SortOrder
-    created_at?: SortOrder
-    updated_at?: SortOrder
-    textEditions?: TextEditionOrderByRelationAggregateInput
-  }
-
-  export type EditionWhereUniqueInput = Prisma.AtLeast<{
-    id?: string
-    AND?: EditionWhereInput | EditionWhereInput[]
-    OR?: EditionWhereInput[]
-    NOT?: EditionWhereInput | EditionWhereInput[]
-    name_english?: StringFilter<"Edition"> | string
-    name_tibetan?: StringNullableFilter<"Edition"> | string | null
-    description_english?: StringNullableFilter<"Edition"> | string | null
-    description_tibetan?: StringNullableFilter<"Edition"> | string | null
-    year?: StringNullableFilter<"Edition"> | string | null
-    location?: StringNullableFilter<"Edition"> | string | null
-    total_volumes?: IntNullableFilter<"Edition"> | number | null
-    total_texts?: IntNullableFilter<"Edition"> | number | null
-    is_active?: BoolFilter<"Edition"> | boolean
-    created_at?: DateTimeFilter<"Edition"> | Date | string
-    updated_at?: DateTimeFilter<"Edition"> | Date | string
-    textEditions?: TextEditionListRelationFilter
-  }, "id">
-
-  export type EditionOrderByWithAggregationInput = {
-    id?: SortOrder
-    name_english?: SortOrder
-    name_tibetan?: SortOrderInput | SortOrder
-    description_english?: SortOrderInput | SortOrder
-    description_tibetan?: SortOrderInput | SortOrder
-    year?: SortOrderInput | SortOrder
-    location?: SortOrderInput | SortOrder
-    total_volumes?: SortOrderInput | SortOrder
-    total_texts?: SortOrderInput | SortOrder
-    is_active?: SortOrder
-    created_at?: SortOrder
-    updated_at?: SortOrder
-    _count?: EditionCountOrderByAggregateInput
-    _avg?: EditionAvgOrderByAggregateInput
-    _max?: EditionMaxOrderByAggregateInput
-    _min?: EditionMinOrderByAggregateInput
-    _sum?: EditionSumOrderByAggregateInput
-  }
-
-  export type EditionScalarWhereWithAggregatesInput = {
-    AND?: EditionScalarWhereWithAggregatesInput | EditionScalarWhereWithAggregatesInput[]
-    OR?: EditionScalarWhereWithAggregatesInput[]
-    NOT?: EditionScalarWhereWithAggregatesInput | EditionScalarWhereWithAggregatesInput[]
-    id?: StringWithAggregatesFilter<"Edition"> | string
-    name_english?: StringWithAggregatesFilter<"Edition"> | string
-    name_tibetan?: StringNullableWithAggregatesFilter<"Edition"> | string | null
-    description_english?: StringNullableWithAggregatesFilter<"Edition"> | string | null
-    description_tibetan?: StringNullableWithAggregatesFilter<"Edition"> | string | null
-    year?: StringNullableWithAggregatesFilter<"Edition"> | string | null
-    location?: StringNullableWithAggregatesFilter<"Edition"> | string | null
-    total_volumes?: IntNullableWithAggregatesFilter<"Edition"> | number | null
-    total_texts?: IntNullableWithAggregatesFilter<"Edition"> | number | null
-    is_active?: BoolWithAggregatesFilter<"Edition"> | boolean
-    created_at?: DateTimeWithAggregatesFilter<"Edition"> | Date | string
-    updated_at?: DateTimeWithAggregatesFilter<"Edition"> | Date | string
-  }
-
-  export type TextEditionWhereInput = {
-    AND?: TextEditionWhereInput | TextEditionWhereInput[]
-    OR?: TextEditionWhereInput[]
-    NOT?: TextEditionWhereInput | TextEditionWhereInput[]
-    id?: StringFilter<"TextEdition"> | string
-    text_id?: StringFilter<"TextEdition"> | string
-    edition_id?: StringFilter<"TextEdition"> | string
-    source_id?: StringNullableFilter<"TextEdition"> | string | null
-    volume_number?: IntNullableFilter<"TextEdition"> | number | null
-    start_page?: IntNullableFilter<"TextEdition"> | number | null
-    end_page?: IntNullableFilter<"TextEdition"> | number | null
-    availability?: StringNullableFilter<"TextEdition"> | string | null
-    link_url?: StringNullableFilter<"TextEdition"> | string | null
-    created_at?: DateTimeFilter<"TextEdition"> | Date | string
-    updated_at?: DateTimeFilter<"TextEdition"> | Date | string
-    text?: XOR<TextScalarRelationFilter, TextWhereInput>
-    edition?: XOR<EditionScalarRelationFilter, EditionWhereInput>
-  }
-
-  export type TextEditionOrderByWithRelationInput = {
-    id?: SortOrder
-    text_id?: SortOrder
-    edition_id?: SortOrder
-    source_id?: SortOrderInput | SortOrder
-    volume_number?: SortOrderInput | SortOrder
-    start_page?: SortOrderInput | SortOrder
-    end_page?: SortOrderInput | SortOrder
-    availability?: SortOrderInput | SortOrder
-    link_url?: SortOrderInput | SortOrder
-    created_at?: SortOrder
-    updated_at?: SortOrder
-    text?: TextOrderByWithRelationInput
-    edition?: EditionOrderByWithRelationInput
-  }
-
-  export type TextEditionWhereUniqueInput = Prisma.AtLeast<{
-    id?: string
-    AND?: TextEditionWhereInput | TextEditionWhereInput[]
-    OR?: TextEditionWhereInput[]
-    NOT?: TextEditionWhereInput | TextEditionWhereInput[]
-    text_id?: StringFilter<"TextEdition"> | string
-    edition_id?: StringFilter<"TextEdition"> | string
-    source_id?: StringNullableFilter<"TextEdition"> | string | null
-    volume_number?: IntNullableFilter<"TextEdition"> | number | null
-    start_page?: IntNullableFilter<"TextEdition"> | number | null
-    end_page?: IntNullableFilter<"TextEdition"> | number | null
-    availability?: StringNullableFilter<"TextEdition"> | string | null
-    link_url?: StringNullableFilter<"TextEdition"> | string | null
-    created_at?: DateTimeFilter<"TextEdition"> | Date | string
-    updated_at?: DateTimeFilter<"TextEdition"> | Date | string
-    text?: XOR<TextScalarRelationFilter, TextWhereInput>
-    edition?: XOR<EditionScalarRelationFilter, EditionWhereInput>
-  }, "id">
-
-  export type TextEditionOrderByWithAggregationInput = {
-    id?: SortOrder
-    text_id?: SortOrder
-    edition_id?: SortOrder
-    source_id?: SortOrderInput | SortOrder
-    volume_number?: SortOrderInput | SortOrder
-    start_page?: SortOrderInput | SortOrder
-    end_page?: SortOrderInput | SortOrder
-    availability?: SortOrderInput | SortOrder
-    link_url?: SortOrderInput | SortOrder
-    created_at?: SortOrder
-    updated_at?: SortOrder
-    _count?: TextEditionCountOrderByAggregateInput
-    _avg?: TextEditionAvgOrderByAggregateInput
-    _max?: TextEditionMaxOrderByAggregateInput
-    _min?: TextEditionMinOrderByAggregateInput
-    _sum?: TextEditionSumOrderByAggregateInput
-  }
-
-  export type TextEditionScalarWhereWithAggregatesInput = {
-    AND?: TextEditionScalarWhereWithAggregatesInput | TextEditionScalarWhereWithAggregatesInput[]
-    OR?: TextEditionScalarWhereWithAggregatesInput[]
-    NOT?: TextEditionScalarWhereWithAggregatesInput | TextEditionScalarWhereWithAggregatesInput[]
-    id?: StringWithAggregatesFilter<"TextEdition"> | string
-    text_id?: StringWithAggregatesFilter<"TextEdition"> | string
-    edition_id?: StringWithAggregatesFilter<"TextEdition"> | string
-    source_id?: StringNullableWithAggregatesFilter<"TextEdition"> | string | null
-    volume_number?: IntNullableWithAggregatesFilter<"TextEdition"> | number | null
-    start_page?: IntNullableWithAggregatesFilter<"TextEdition"> | number | null
-    end_page?: IntNullableWithAggregatesFilter<"TextEdition"> | number | null
-    availability?: StringNullableWithAggregatesFilter<"TextEdition"> | string | null
-    link_url?: StringNullableWithAggregatesFilter<"TextEdition"> | string | null
-    created_at?: DateTimeWithAggregatesFilter<"TextEdition"> | Date | string
-    updated_at?: DateTimeWithAggregatesFilter<"TextEdition"> | Date | string
   }
 
   export type NewsWhereInput = {
@@ -28048,7 +20813,7 @@ export namespace Prisma {
     is_active?: BoolFilter<"KarchagMainCategory"> | boolean
     created_at?: DateTimeFilter<"KarchagMainCategory"> | Date | string
     updated_at?: DateTimeFilter<"KarchagMainCategory"> | Date | string
-    subCategories?: KarchagSubCategoryListRelationFilter
+    sub_categories?: KarchagSubCategoryListRelationFilter
   }
 
   export type KarchagMainCategoryOrderByWithRelationInput = {
@@ -28061,7 +20826,7 @@ export namespace Prisma {
     is_active?: SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
-    subCategories?: KarchagSubCategoryOrderByRelationAggregateInput
+    sub_categories?: KarchagSubCategoryOrderByRelationAggregateInput
   }
 
   export type KarchagMainCategoryWhereUniqueInput = Prisma.AtLeast<{
@@ -28077,7 +20842,7 @@ export namespace Prisma {
     is_active?: BoolFilter<"KarchagMainCategory"> | boolean
     created_at?: DateTimeFilter<"KarchagMainCategory"> | Date | string
     updated_at?: DateTimeFilter<"KarchagMainCategory"> | Date | string
-    subCategories?: KarchagSubCategoryListRelationFilter
+    sub_categories?: KarchagSubCategoryListRelationFilter
   }, "id">
 
   export type KarchagMainCategoryOrderByWithAggregationInput = {
@@ -28126,8 +20891,10 @@ export namespace Prisma {
     is_active?: BoolFilter<"KarchagSubCategory"> | boolean
     created_at?: DateTimeFilter<"KarchagSubCategory"> | Date | string
     updated_at?: DateTimeFilter<"KarchagSubCategory"> | Date | string
-    mainCategory?: XOR<KarchagMainCategoryScalarRelationFilter, KarchagMainCategoryWhereInput>
-    texts?: KarchagTextListRelationFilter
+    only_content?: BoolFilter<"KarchagSubCategory"> | boolean
+    content?: StringNullableFilter<"KarchagSubCategory"> | string | null
+    main_category?: XOR<KarchagMainCategoryScalarRelationFilter, KarchagMainCategoryWhereInput>
+    texts?: TextListRelationFilter
   }
 
   export type KarchagSubCategoryOrderByWithRelationInput = {
@@ -28141,8 +20908,10 @@ export namespace Prisma {
     is_active?: SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
-    mainCategory?: KarchagMainCategoryOrderByWithRelationInput
-    texts?: KarchagTextOrderByRelationAggregateInput
+    only_content?: SortOrder
+    content?: SortOrderInput | SortOrder
+    main_category?: KarchagMainCategoryOrderByWithRelationInput
+    texts?: TextOrderByRelationAggregateInput
   }
 
   export type KarchagSubCategoryWhereUniqueInput = Prisma.AtLeast<{
@@ -28159,8 +20928,10 @@ export namespace Prisma {
     is_active?: BoolFilter<"KarchagSubCategory"> | boolean
     created_at?: DateTimeFilter<"KarchagSubCategory"> | Date | string
     updated_at?: DateTimeFilter<"KarchagSubCategory"> | Date | string
-    mainCategory?: XOR<KarchagMainCategoryScalarRelationFilter, KarchagMainCategoryWhereInput>
-    texts?: KarchagTextListRelationFilter
+    only_content?: BoolFilter<"KarchagSubCategory"> | boolean
+    content?: StringNullableFilter<"KarchagSubCategory"> | string | null
+    main_category?: XOR<KarchagMainCategoryScalarRelationFilter, KarchagMainCategoryWhereInput>
+    texts?: TextListRelationFilter
   }, "id">
 
   export type KarchagSubCategoryOrderByWithAggregationInput = {
@@ -28174,6 +20945,8 @@ export namespace Prisma {
     is_active?: SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
+    only_content?: SortOrder
+    content?: SortOrderInput | SortOrder
     _count?: KarchagSubCategoryCountOrderByAggregateInput
     _avg?: KarchagSubCategoryAvgOrderByAggregateInput
     _max?: KarchagSubCategoryMaxOrderByAggregateInput
@@ -28195,113 +20968,338 @@ export namespace Prisma {
     is_active?: BoolWithAggregatesFilter<"KarchagSubCategory"> | boolean
     created_at?: DateTimeWithAggregatesFilter<"KarchagSubCategory"> | Date | string
     updated_at?: DateTimeWithAggregatesFilter<"KarchagSubCategory"> | Date | string
+    only_content?: BoolWithAggregatesFilter<"KarchagSubCategory"> | boolean
+    content?: StringNullableWithAggregatesFilter<"KarchagSubCategory"> | string | null
   }
 
-  export type KarchagTextWhereInput = {
-    AND?: KarchagTextWhereInput | KarchagTextWhereInput[]
-    OR?: KarchagTextWhereInput[]
-    NOT?: KarchagTextWhereInput | KarchagTextWhereInput[]
-    id?: StringFilter<"KarchagText"> | string
-    sub_category_id?: StringFilter<"KarchagText"> | string
-    derge_id?: StringNullableFilter<"KarchagText"> | string | null
-    yeshe_de_id?: StringNullableFilter<"KarchagText"> | string | null
-    tibetan_title?: StringNullableFilter<"KarchagText"> | string | null
-    chinese_title?: StringNullableFilter<"KarchagText"> | string | null
-    sanskrit_title?: StringNullableFilter<"KarchagText"> | string | null
-    english_title?: StringNullableFilter<"KarchagText"> | string | null
-    turning_id?: IntNullableFilter<"KarchagText"> | number | null
-    yana_id?: IntNullableFilter<"KarchagText"> | number | null
-    translation_period_id?: IntNullableFilter<"KarchagText"> | number | null
-    order_index?: IntFilter<"KarchagText"> | number
-    is_active?: BoolFilter<"KarchagText"> | boolean
-    created_at?: DateTimeFilter<"KarchagText"> | Date | string
-    updated_at?: DateTimeFilter<"KarchagText"> | Date | string
-    subCategory?: XOR<KarchagSubCategoryScalarRelationFilter, KarchagSubCategoryWhereInput>
+  export type TextWhereInput = {
+    AND?: TextWhereInput | TextWhereInput[]
+    OR?: TextWhereInput[]
+    NOT?: TextWhereInput | TextWhereInput[]
+    id?: StringFilter<"Text"> | string
+    sub_category_id?: StringFilter<"Text"> | string
+    tibetan_title?: StringNullableFilter<"Text"> | string | null
+    chinese_title?: StringNullableFilter<"Text"> | string | null
+    sanskrit_title?: StringNullableFilter<"Text"> | string | null
+    english_title?: StringNullableFilter<"Text"> | string | null
+    derge_id?: StringNullableFilter<"Text"> | string | null
+    yeshe_de_id?: StringNullableFilter<"Text"> | string | null
+    yeshe_de_volume_number?: StringNullableFilter<"Text"> | string | null
+    yeshe_de_page_start?: StringNullableFilter<"Text"> | string | null
+    yeshe_de_page_end?: StringNullableFilter<"Text"> | string | null
+    turning?: StringNullableFilter<"Text"> | string | null
+    yana?: StringNullableFilter<"Text"> | string | null
+    translation_period?: StringNullableFilter<"Text"> | string | null
+    pdf_url?: StringNullableFilter<"Text"> | string | null
+    order_index?: IntFilter<"Text"> | number
+    is_active?: BoolFilter<"Text"> | boolean
+    created_at?: DateTimeFilter<"Text"> | Date | string
+    updated_at?: DateTimeFilter<"Text"> | Date | string
+    sub_category?: XOR<KarchagSubCategoryScalarRelationFilter, KarchagSubCategoryWhereInput>
+    summary?: XOR<KarchagTextSummaryNullableScalarRelationFilter, KarchagTextSummaryWhereInput> | null
+    metadata?: KarchagTextMetadataListRelationFilter
   }
 
-  export type KarchagTextOrderByWithRelationInput = {
+  export type TextOrderByWithRelationInput = {
     id?: SortOrder
     sub_category_id?: SortOrder
-    derge_id?: SortOrderInput | SortOrder
-    yeshe_de_id?: SortOrderInput | SortOrder
     tibetan_title?: SortOrderInput | SortOrder
     chinese_title?: SortOrderInput | SortOrder
     sanskrit_title?: SortOrderInput | SortOrder
     english_title?: SortOrderInput | SortOrder
-    turning_id?: SortOrderInput | SortOrder
-    yana_id?: SortOrderInput | SortOrder
-    translation_period_id?: SortOrderInput | SortOrder
+    derge_id?: SortOrderInput | SortOrder
+    yeshe_de_id?: SortOrderInput | SortOrder
+    yeshe_de_volume_number?: SortOrderInput | SortOrder
+    yeshe_de_page_start?: SortOrderInput | SortOrder
+    yeshe_de_page_end?: SortOrderInput | SortOrder
+    turning?: SortOrderInput | SortOrder
+    yana?: SortOrderInput | SortOrder
+    translation_period?: SortOrderInput | SortOrder
+    pdf_url?: SortOrderInput | SortOrder
     order_index?: SortOrder
     is_active?: SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
-    subCategory?: KarchagSubCategoryOrderByWithRelationInput
+    sub_category?: KarchagSubCategoryOrderByWithRelationInput
+    summary?: KarchagTextSummaryOrderByWithRelationInput
+    metadata?: KarchagTextMetadataOrderByRelationAggregateInput
   }
 
-  export type KarchagTextWhereUniqueInput = Prisma.AtLeast<{
+  export type TextWhereUniqueInput = Prisma.AtLeast<{
     id?: string
-    AND?: KarchagTextWhereInput | KarchagTextWhereInput[]
-    OR?: KarchagTextWhereInput[]
-    NOT?: KarchagTextWhereInput | KarchagTextWhereInput[]
-    sub_category_id?: StringFilter<"KarchagText"> | string
-    derge_id?: StringNullableFilter<"KarchagText"> | string | null
-    yeshe_de_id?: StringNullableFilter<"KarchagText"> | string | null
-    tibetan_title?: StringNullableFilter<"KarchagText"> | string | null
-    chinese_title?: StringNullableFilter<"KarchagText"> | string | null
-    sanskrit_title?: StringNullableFilter<"KarchagText"> | string | null
-    english_title?: StringNullableFilter<"KarchagText"> | string | null
-    turning_id?: IntNullableFilter<"KarchagText"> | number | null
-    yana_id?: IntNullableFilter<"KarchagText"> | number | null
-    translation_period_id?: IntNullableFilter<"KarchagText"> | number | null
-    order_index?: IntFilter<"KarchagText"> | number
-    is_active?: BoolFilter<"KarchagText"> | boolean
-    created_at?: DateTimeFilter<"KarchagText"> | Date | string
-    updated_at?: DateTimeFilter<"KarchagText"> | Date | string
-    subCategory?: XOR<KarchagSubCategoryScalarRelationFilter, KarchagSubCategoryWhereInput>
+    AND?: TextWhereInput | TextWhereInput[]
+    OR?: TextWhereInput[]
+    NOT?: TextWhereInput | TextWhereInput[]
+    sub_category_id?: StringFilter<"Text"> | string
+    tibetan_title?: StringNullableFilter<"Text"> | string | null
+    chinese_title?: StringNullableFilter<"Text"> | string | null
+    sanskrit_title?: StringNullableFilter<"Text"> | string | null
+    english_title?: StringNullableFilter<"Text"> | string | null
+    derge_id?: StringNullableFilter<"Text"> | string | null
+    yeshe_de_id?: StringNullableFilter<"Text"> | string | null
+    yeshe_de_volume_number?: StringNullableFilter<"Text"> | string | null
+    yeshe_de_page_start?: StringNullableFilter<"Text"> | string | null
+    yeshe_de_page_end?: StringNullableFilter<"Text"> | string | null
+    turning?: StringNullableFilter<"Text"> | string | null
+    yana?: StringNullableFilter<"Text"> | string | null
+    translation_period?: StringNullableFilter<"Text"> | string | null
+    pdf_url?: StringNullableFilter<"Text"> | string | null
+    order_index?: IntFilter<"Text"> | number
+    is_active?: BoolFilter<"Text"> | boolean
+    created_at?: DateTimeFilter<"Text"> | Date | string
+    updated_at?: DateTimeFilter<"Text"> | Date | string
+    sub_category?: XOR<KarchagSubCategoryScalarRelationFilter, KarchagSubCategoryWhereInput>
+    summary?: XOR<KarchagTextSummaryNullableScalarRelationFilter, KarchagTextSummaryWhereInput> | null
+    metadata?: KarchagTextMetadataListRelationFilter
   }, "id">
 
-  export type KarchagTextOrderByWithAggregationInput = {
+  export type TextOrderByWithAggregationInput = {
     id?: SortOrder
     sub_category_id?: SortOrder
-    derge_id?: SortOrderInput | SortOrder
-    yeshe_de_id?: SortOrderInput | SortOrder
     tibetan_title?: SortOrderInput | SortOrder
     chinese_title?: SortOrderInput | SortOrder
     sanskrit_title?: SortOrderInput | SortOrder
     english_title?: SortOrderInput | SortOrder
-    turning_id?: SortOrderInput | SortOrder
-    yana_id?: SortOrderInput | SortOrder
-    translation_period_id?: SortOrderInput | SortOrder
+    derge_id?: SortOrderInput | SortOrder
+    yeshe_de_id?: SortOrderInput | SortOrder
+    yeshe_de_volume_number?: SortOrderInput | SortOrder
+    yeshe_de_page_start?: SortOrderInput | SortOrder
+    yeshe_de_page_end?: SortOrderInput | SortOrder
+    turning?: SortOrderInput | SortOrder
+    yana?: SortOrderInput | SortOrder
+    translation_period?: SortOrderInput | SortOrder
+    pdf_url?: SortOrderInput | SortOrder
     order_index?: SortOrder
     is_active?: SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
-    _count?: KarchagTextCountOrderByAggregateInput
-    _avg?: KarchagTextAvgOrderByAggregateInput
-    _max?: KarchagTextMaxOrderByAggregateInput
-    _min?: KarchagTextMinOrderByAggregateInput
-    _sum?: KarchagTextSumOrderByAggregateInput
+    _count?: TextCountOrderByAggregateInput
+    _avg?: TextAvgOrderByAggregateInput
+    _max?: TextMaxOrderByAggregateInput
+    _min?: TextMinOrderByAggregateInput
+    _sum?: TextSumOrderByAggregateInput
   }
 
-  export type KarchagTextScalarWhereWithAggregatesInput = {
-    AND?: KarchagTextScalarWhereWithAggregatesInput | KarchagTextScalarWhereWithAggregatesInput[]
-    OR?: KarchagTextScalarWhereWithAggregatesInput[]
-    NOT?: KarchagTextScalarWhereWithAggregatesInput | KarchagTextScalarWhereWithAggregatesInput[]
-    id?: StringWithAggregatesFilter<"KarchagText"> | string
-    sub_category_id?: StringWithAggregatesFilter<"KarchagText"> | string
-    derge_id?: StringNullableWithAggregatesFilter<"KarchagText"> | string | null
-    yeshe_de_id?: StringNullableWithAggregatesFilter<"KarchagText"> | string | null
-    tibetan_title?: StringNullableWithAggregatesFilter<"KarchagText"> | string | null
-    chinese_title?: StringNullableWithAggregatesFilter<"KarchagText"> | string | null
-    sanskrit_title?: StringNullableWithAggregatesFilter<"KarchagText"> | string | null
-    english_title?: StringNullableWithAggregatesFilter<"KarchagText"> | string | null
-    turning_id?: IntNullableWithAggregatesFilter<"KarchagText"> | number | null
-    yana_id?: IntNullableWithAggregatesFilter<"KarchagText"> | number | null
-    translation_period_id?: IntNullableWithAggregatesFilter<"KarchagText"> | number | null
-    order_index?: IntWithAggregatesFilter<"KarchagText"> | number
-    is_active?: BoolWithAggregatesFilter<"KarchagText"> | boolean
-    created_at?: DateTimeWithAggregatesFilter<"KarchagText"> | Date | string
-    updated_at?: DateTimeWithAggregatesFilter<"KarchagText"> | Date | string
+  export type TextScalarWhereWithAggregatesInput = {
+    AND?: TextScalarWhereWithAggregatesInput | TextScalarWhereWithAggregatesInput[]
+    OR?: TextScalarWhereWithAggregatesInput[]
+    NOT?: TextScalarWhereWithAggregatesInput | TextScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"Text"> | string
+    sub_category_id?: StringWithAggregatesFilter<"Text"> | string
+    tibetan_title?: StringNullableWithAggregatesFilter<"Text"> | string | null
+    chinese_title?: StringNullableWithAggregatesFilter<"Text"> | string | null
+    sanskrit_title?: StringNullableWithAggregatesFilter<"Text"> | string | null
+    english_title?: StringNullableWithAggregatesFilter<"Text"> | string | null
+    derge_id?: StringNullableWithAggregatesFilter<"Text"> | string | null
+    yeshe_de_id?: StringNullableWithAggregatesFilter<"Text"> | string | null
+    yeshe_de_volume_number?: StringNullableWithAggregatesFilter<"Text"> | string | null
+    yeshe_de_page_start?: StringNullableWithAggregatesFilter<"Text"> | string | null
+    yeshe_de_page_end?: StringNullableWithAggregatesFilter<"Text"> | string | null
+    turning?: StringNullableWithAggregatesFilter<"Text"> | string | null
+    yana?: StringNullableWithAggregatesFilter<"Text"> | string | null
+    translation_period?: StringNullableWithAggregatesFilter<"Text"> | string | null
+    pdf_url?: StringNullableWithAggregatesFilter<"Text"> | string | null
+    order_index?: IntWithAggregatesFilter<"Text"> | number
+    is_active?: BoolWithAggregatesFilter<"Text"> | boolean
+    created_at?: DateTimeWithAggregatesFilter<"Text"> | Date | string
+    updated_at?: DateTimeWithAggregatesFilter<"Text"> | Date | string
+  }
+
+  export type KarchagTextSummaryWhereInput = {
+    AND?: KarchagTextSummaryWhereInput | KarchagTextSummaryWhereInput[]
+    OR?: KarchagTextSummaryWhereInput[]
+    NOT?: KarchagTextSummaryWhereInput | KarchagTextSummaryWhereInput[]
+    id?: StringFilter<"KarchagTextSummary"> | string
+    karchag_text_id?: StringFilter<"KarchagTextSummary"> | string
+    translation_homage_tibetan?: StringNullableFilter<"KarchagTextSummary"> | string | null
+    translation_homage_english?: StringNullableFilter<"KarchagTextSummary"> | string | null
+    purpose_tibetan?: StringNullableFilter<"KarchagTextSummary"> | string | null
+    purpose_english?: StringNullableFilter<"KarchagTextSummary"> | string | null
+    summary_text_tibetan?: StringNullableFilter<"KarchagTextSummary"> | string | null
+    summary_text_english?: StringNullableFilter<"KarchagTextSummary"> | string | null
+    word_meaning_tibetan?: StringNullableFilter<"KarchagTextSummary"> | string | null
+    word_meaning_english?: StringNullableFilter<"KarchagTextSummary"> | string | null
+    connection_tibetan?: StringNullableFilter<"KarchagTextSummary"> | string | null
+    connection_english?: StringNullableFilter<"KarchagTextSummary"> | string | null
+    question_answers_tibetan?: StringNullableFilter<"KarchagTextSummary"> | string | null
+    question_answers_english?: StringNullableFilter<"KarchagTextSummary"> | string | null
+    colophon_tibetan?: StringNullableFilter<"KarchagTextSummary"> | string | null
+    colophon_english?: StringNullableFilter<"KarchagTextSummary"> | string | null
+    created_at?: DateTimeFilter<"KarchagTextSummary"> | Date | string
+    updated_at?: DateTimeFilter<"KarchagTextSummary"> | Date | string
+    karchag_text?: XOR<TextScalarRelationFilter, TextWhereInput>
+  }
+
+  export type KarchagTextSummaryOrderByWithRelationInput = {
+    id?: SortOrder
+    karchag_text_id?: SortOrder
+    translation_homage_tibetan?: SortOrderInput | SortOrder
+    translation_homage_english?: SortOrderInput | SortOrder
+    purpose_tibetan?: SortOrderInput | SortOrder
+    purpose_english?: SortOrderInput | SortOrder
+    summary_text_tibetan?: SortOrderInput | SortOrder
+    summary_text_english?: SortOrderInput | SortOrder
+    word_meaning_tibetan?: SortOrderInput | SortOrder
+    word_meaning_english?: SortOrderInput | SortOrder
+    connection_tibetan?: SortOrderInput | SortOrder
+    connection_english?: SortOrderInput | SortOrder
+    question_answers_tibetan?: SortOrderInput | SortOrder
+    question_answers_english?: SortOrderInput | SortOrder
+    colophon_tibetan?: SortOrderInput | SortOrder
+    colophon_english?: SortOrderInput | SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
+    karchag_text?: TextOrderByWithRelationInput
+  }
+
+  export type KarchagTextSummaryWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    karchag_text_id?: string
+    AND?: KarchagTextSummaryWhereInput | KarchagTextSummaryWhereInput[]
+    OR?: KarchagTextSummaryWhereInput[]
+    NOT?: KarchagTextSummaryWhereInput | KarchagTextSummaryWhereInput[]
+    translation_homage_tibetan?: StringNullableFilter<"KarchagTextSummary"> | string | null
+    translation_homage_english?: StringNullableFilter<"KarchagTextSummary"> | string | null
+    purpose_tibetan?: StringNullableFilter<"KarchagTextSummary"> | string | null
+    purpose_english?: StringNullableFilter<"KarchagTextSummary"> | string | null
+    summary_text_tibetan?: StringNullableFilter<"KarchagTextSummary"> | string | null
+    summary_text_english?: StringNullableFilter<"KarchagTextSummary"> | string | null
+    word_meaning_tibetan?: StringNullableFilter<"KarchagTextSummary"> | string | null
+    word_meaning_english?: StringNullableFilter<"KarchagTextSummary"> | string | null
+    connection_tibetan?: StringNullableFilter<"KarchagTextSummary"> | string | null
+    connection_english?: StringNullableFilter<"KarchagTextSummary"> | string | null
+    question_answers_tibetan?: StringNullableFilter<"KarchagTextSummary"> | string | null
+    question_answers_english?: StringNullableFilter<"KarchagTextSummary"> | string | null
+    colophon_tibetan?: StringNullableFilter<"KarchagTextSummary"> | string | null
+    colophon_english?: StringNullableFilter<"KarchagTextSummary"> | string | null
+    created_at?: DateTimeFilter<"KarchagTextSummary"> | Date | string
+    updated_at?: DateTimeFilter<"KarchagTextSummary"> | Date | string
+    karchag_text?: XOR<TextScalarRelationFilter, TextWhereInput>
+  }, "id" | "karchag_text_id">
+
+  export type KarchagTextSummaryOrderByWithAggregationInput = {
+    id?: SortOrder
+    karchag_text_id?: SortOrder
+    translation_homage_tibetan?: SortOrderInput | SortOrder
+    translation_homage_english?: SortOrderInput | SortOrder
+    purpose_tibetan?: SortOrderInput | SortOrder
+    purpose_english?: SortOrderInput | SortOrder
+    summary_text_tibetan?: SortOrderInput | SortOrder
+    summary_text_english?: SortOrderInput | SortOrder
+    word_meaning_tibetan?: SortOrderInput | SortOrder
+    word_meaning_english?: SortOrderInput | SortOrder
+    connection_tibetan?: SortOrderInput | SortOrder
+    connection_english?: SortOrderInput | SortOrder
+    question_answers_tibetan?: SortOrderInput | SortOrder
+    question_answers_english?: SortOrderInput | SortOrder
+    colophon_tibetan?: SortOrderInput | SortOrder
+    colophon_english?: SortOrderInput | SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
+    _count?: KarchagTextSummaryCountOrderByAggregateInput
+    _max?: KarchagTextSummaryMaxOrderByAggregateInput
+    _min?: KarchagTextSummaryMinOrderByAggregateInput
+  }
+
+  export type KarchagTextSummaryScalarWhereWithAggregatesInput = {
+    AND?: KarchagTextSummaryScalarWhereWithAggregatesInput | KarchagTextSummaryScalarWhereWithAggregatesInput[]
+    OR?: KarchagTextSummaryScalarWhereWithAggregatesInput[]
+    NOT?: KarchagTextSummaryScalarWhereWithAggregatesInput | KarchagTextSummaryScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"KarchagTextSummary"> | string
+    karchag_text_id?: StringWithAggregatesFilter<"KarchagTextSummary"> | string
+    translation_homage_tibetan?: StringNullableWithAggregatesFilter<"KarchagTextSummary"> | string | null
+    translation_homage_english?: StringNullableWithAggregatesFilter<"KarchagTextSummary"> | string | null
+    purpose_tibetan?: StringNullableWithAggregatesFilter<"KarchagTextSummary"> | string | null
+    purpose_english?: StringNullableWithAggregatesFilter<"KarchagTextSummary"> | string | null
+    summary_text_tibetan?: StringNullableWithAggregatesFilter<"KarchagTextSummary"> | string | null
+    summary_text_english?: StringNullableWithAggregatesFilter<"KarchagTextSummary"> | string | null
+    word_meaning_tibetan?: StringNullableWithAggregatesFilter<"KarchagTextSummary"> | string | null
+    word_meaning_english?: StringNullableWithAggregatesFilter<"KarchagTextSummary"> | string | null
+    connection_tibetan?: StringNullableWithAggregatesFilter<"KarchagTextSummary"> | string | null
+    connection_english?: StringNullableWithAggregatesFilter<"KarchagTextSummary"> | string | null
+    question_answers_tibetan?: StringNullableWithAggregatesFilter<"KarchagTextSummary"> | string | null
+    question_answers_english?: StringNullableWithAggregatesFilter<"KarchagTextSummary"> | string | null
+    colophon_tibetan?: StringNullableWithAggregatesFilter<"KarchagTextSummary"> | string | null
+    colophon_english?: StringNullableWithAggregatesFilter<"KarchagTextSummary"> | string | null
+    created_at?: DateTimeWithAggregatesFilter<"KarchagTextSummary"> | Date | string
+    updated_at?: DateTimeWithAggregatesFilter<"KarchagTextSummary"> | Date | string
+  }
+
+  export type KarchagTextMetadataWhereInput = {
+    AND?: KarchagTextMetadataWhereInput | KarchagTextMetadataWhereInput[]
+    OR?: KarchagTextMetadataWhereInput[]
+    NOT?: KarchagTextMetadataWhereInput | KarchagTextMetadataWhereInput[]
+    id?: StringFilter<"KarchagTextMetadata"> | string
+    karchag_text_id?: StringFilter<"KarchagTextMetadata"> | string
+    metadata_key?: StringFilter<"KarchagTextMetadata"> | string
+    metadata_value?: StringFilter<"KarchagTextMetadata"> | string
+    metadata_group?: StringFilter<"KarchagTextMetadata"> | string
+    label?: StringNullableFilter<"KarchagTextMetadata"> | string | null
+    order_index?: IntFilter<"KarchagTextMetadata"> | number
+    created_at?: DateTimeFilter<"KarchagTextMetadata"> | Date | string
+    updated_at?: DateTimeFilter<"KarchagTextMetadata"> | Date | string
+    text?: XOR<TextScalarRelationFilter, TextWhereInput>
+  }
+
+  export type KarchagTextMetadataOrderByWithRelationInput = {
+    id?: SortOrder
+    karchag_text_id?: SortOrder
+    metadata_key?: SortOrder
+    metadata_value?: SortOrder
+    metadata_group?: SortOrder
+    label?: SortOrderInput | SortOrder
+    order_index?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
+    text?: TextOrderByWithRelationInput
+  }
+
+  export type KarchagTextMetadataWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: KarchagTextMetadataWhereInput | KarchagTextMetadataWhereInput[]
+    OR?: KarchagTextMetadataWhereInput[]
+    NOT?: KarchagTextMetadataWhereInput | KarchagTextMetadataWhereInput[]
+    karchag_text_id?: StringFilter<"KarchagTextMetadata"> | string
+    metadata_key?: StringFilter<"KarchagTextMetadata"> | string
+    metadata_value?: StringFilter<"KarchagTextMetadata"> | string
+    metadata_group?: StringFilter<"KarchagTextMetadata"> | string
+    label?: StringNullableFilter<"KarchagTextMetadata"> | string | null
+    order_index?: IntFilter<"KarchagTextMetadata"> | number
+    created_at?: DateTimeFilter<"KarchagTextMetadata"> | Date | string
+    updated_at?: DateTimeFilter<"KarchagTextMetadata"> | Date | string
+    text?: XOR<TextScalarRelationFilter, TextWhereInput>
+  }, "id">
+
+  export type KarchagTextMetadataOrderByWithAggregationInput = {
+    id?: SortOrder
+    karchag_text_id?: SortOrder
+    metadata_key?: SortOrder
+    metadata_value?: SortOrder
+    metadata_group?: SortOrder
+    label?: SortOrderInput | SortOrder
+    order_index?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
+    _count?: KarchagTextMetadataCountOrderByAggregateInput
+    _avg?: KarchagTextMetadataAvgOrderByAggregateInput
+    _max?: KarchagTextMetadataMaxOrderByAggregateInput
+    _min?: KarchagTextMetadataMinOrderByAggregateInput
+    _sum?: KarchagTextMetadataSumOrderByAggregateInput
+  }
+
+  export type KarchagTextMetadataScalarWhereWithAggregatesInput = {
+    AND?: KarchagTextMetadataScalarWhereWithAggregatesInput | KarchagTextMetadataScalarWhereWithAggregatesInput[]
+    OR?: KarchagTextMetadataScalarWhereWithAggregatesInput[]
+    NOT?: KarchagTextMetadataScalarWhereWithAggregatesInput | KarchagTextMetadataScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"KarchagTextMetadata"> | string
+    karchag_text_id?: StringWithAggregatesFilter<"KarchagTextMetadata"> | string
+    metadata_key?: StringWithAggregatesFilter<"KarchagTextMetadata"> | string
+    metadata_value?: StringWithAggregatesFilter<"KarchagTextMetadata"> | string
+    metadata_group?: StringWithAggregatesFilter<"KarchagTextMetadata"> | string
+    label?: StringNullableWithAggregatesFilter<"KarchagTextMetadata"> | string | null
+    order_index?: IntWithAggregatesFilter<"KarchagTextMetadata"> | number
+    created_at?: DateTimeWithAggregatesFilter<"KarchagTextMetadata"> | Date | string
+    updated_at?: DateTimeWithAggregatesFilter<"KarchagTextMetadata"> | Date | string
   }
 
   export type UserCreateInput = {
@@ -28394,7 +21392,6 @@ export namespace Prisma {
     updated_at?: Date | string
     parent?: CatalogCategoryCreateNestedOneWithoutChildrenInput
     children?: CatalogCategoryCreateNestedManyWithoutParentInput
-    texts?: TextCreateNestedManyWithoutCategoryInput
   }
 
   export type CatalogCategoryUncheckedCreateInput = {
@@ -28410,7 +21407,6 @@ export namespace Prisma {
     created_at?: Date | string
     updated_at?: Date | string
     children?: CatalogCategoryUncheckedCreateNestedManyWithoutParentInput
-    texts?: TextUncheckedCreateNestedManyWithoutCategoryInput
   }
 
   export type CatalogCategoryUpdateInput = {
@@ -28426,7 +21422,6 @@ export namespace Prisma {
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     parent?: CatalogCategoryUpdateOneWithoutChildrenNestedInput
     children?: CatalogCategoryUpdateManyWithoutParentNestedInput
-    texts?: TextUpdateManyWithoutCategoryNestedInput
   }
 
   export type CatalogCategoryUncheckedUpdateInput = {
@@ -28442,7 +21437,6 @@ export namespace Prisma {
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     children?: CatalogCategoryUncheckedUpdateManyWithoutParentNestedInput
-    texts?: TextUncheckedUpdateManyWithoutCategoryNestedInput
   }
 
   export type CatalogCategoryCreateManyInput = {
@@ -28482,772 +21476,6 @@ export namespace Prisma {
     count?: IntFieldUpdateOperationsInput | number
     order_index?: IntFieldUpdateOperationsInput | number
     is_active?: BoolFieldUpdateOperationsInput | boolean
-    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type TextCreateInput = {
-    id?: string
-    id_slug?: string | null
-    keywords?: TextCreatekeywordsInput | string[]
-    is_active?: boolean
-    order_index?: number
-    created_at?: Date | string
-    updated_at?: Date | string
-    category?: CatalogCategoryCreateNestedOneWithoutTextsInput
-    sections?: TextSectionCreateNestedManyWithoutTextInput
-    collatedContent?: TextCollatedContentCreateNestedOneWithoutTextInput
-    metadata?: TextMetadataCreateNestedManyWithoutTextInput
-    textEditions?: TextEditionCreateNestedManyWithoutTextInput
-    summary?: TextSummaryCreateNestedOneWithoutTextInput
-  }
-
-  export type TextUncheckedCreateInput = {
-    id?: string
-    id_slug?: string | null
-    category_id?: string | null
-    keywords?: TextCreatekeywordsInput | string[]
-    is_active?: boolean
-    order_index?: number
-    created_at?: Date | string
-    updated_at?: Date | string
-    sections?: TextSectionUncheckedCreateNestedManyWithoutTextInput
-    collatedContent?: TextCollatedContentUncheckedCreateNestedOneWithoutTextInput
-    metadata?: TextMetadataUncheckedCreateNestedManyWithoutTextInput
-    textEditions?: TextEditionUncheckedCreateNestedManyWithoutTextInput
-    summary?: TextSummaryUncheckedCreateNestedOneWithoutTextInput
-  }
-
-  export type TextUpdateInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    id_slug?: NullableStringFieldUpdateOperationsInput | string | null
-    keywords?: TextUpdatekeywordsInput | string[]
-    is_active?: BoolFieldUpdateOperationsInput | boolean
-    order_index?: IntFieldUpdateOperationsInput | number
-    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    category?: CatalogCategoryUpdateOneWithoutTextsNestedInput
-    sections?: TextSectionUpdateManyWithoutTextNestedInput
-    collatedContent?: TextCollatedContentUpdateOneWithoutTextNestedInput
-    metadata?: TextMetadataUpdateManyWithoutTextNestedInput
-    textEditions?: TextEditionUpdateManyWithoutTextNestedInput
-    summary?: TextSummaryUpdateOneWithoutTextNestedInput
-  }
-
-  export type TextUncheckedUpdateInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    id_slug?: NullableStringFieldUpdateOperationsInput | string | null
-    category_id?: NullableStringFieldUpdateOperationsInput | string | null
-    keywords?: TextUpdatekeywordsInput | string[]
-    is_active?: BoolFieldUpdateOperationsInput | boolean
-    order_index?: IntFieldUpdateOperationsInput | number
-    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    sections?: TextSectionUncheckedUpdateManyWithoutTextNestedInput
-    collatedContent?: TextCollatedContentUncheckedUpdateOneWithoutTextNestedInput
-    metadata?: TextMetadataUncheckedUpdateManyWithoutTextNestedInput
-    textEditions?: TextEditionUncheckedUpdateManyWithoutTextNestedInput
-    summary?: TextSummaryUncheckedUpdateOneWithoutTextNestedInput
-  }
-
-  export type TextCreateManyInput = {
-    id?: string
-    id_slug?: string | null
-    category_id?: string | null
-    keywords?: TextCreatekeywordsInput | string[]
-    is_active?: boolean
-    order_index?: number
-    created_at?: Date | string
-    updated_at?: Date | string
-  }
-
-  export type TextUpdateManyMutationInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    id_slug?: NullableStringFieldUpdateOperationsInput | string | null
-    keywords?: TextUpdatekeywordsInput | string[]
-    is_active?: BoolFieldUpdateOperationsInput | boolean
-    order_index?: IntFieldUpdateOperationsInput | number
-    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type TextUncheckedUpdateManyInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    id_slug?: NullableStringFieldUpdateOperationsInput | string | null
-    category_id?: NullableStringFieldUpdateOperationsInput | string | null
-    keywords?: TextUpdatekeywordsInput | string[]
-    is_active?: BoolFieldUpdateOperationsInput | boolean
-    order_index?: IntFieldUpdateOperationsInput | number
-    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type TextSectionCreateInput = {
-    id?: string
-    section_type: string
-    title_tibetan?: string | null
-    title_english?: string | null
-    content_tibetan?: string | null
-    content_english?: string | null
-    order_index?: number
-    created_at?: Date | string
-    updated_at?: Date | string
-    text: TextCreateNestedOneWithoutSectionsInput
-  }
-
-  export type TextSectionUncheckedCreateInput = {
-    id?: string
-    text_id: string
-    section_type: string
-    title_tibetan?: string | null
-    title_english?: string | null
-    content_tibetan?: string | null
-    content_english?: string | null
-    order_index?: number
-    created_at?: Date | string
-    updated_at?: Date | string
-  }
-
-  export type TextSectionUpdateInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    section_type?: StringFieldUpdateOperationsInput | string
-    title_tibetan?: NullableStringFieldUpdateOperationsInput | string | null
-    title_english?: NullableStringFieldUpdateOperationsInput | string | null
-    content_tibetan?: NullableStringFieldUpdateOperationsInput | string | null
-    content_english?: NullableStringFieldUpdateOperationsInput | string | null
-    order_index?: IntFieldUpdateOperationsInput | number
-    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    text?: TextUpdateOneRequiredWithoutSectionsNestedInput
-  }
-
-  export type TextSectionUncheckedUpdateInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    text_id?: StringFieldUpdateOperationsInput | string
-    section_type?: StringFieldUpdateOperationsInput | string
-    title_tibetan?: NullableStringFieldUpdateOperationsInput | string | null
-    title_english?: NullableStringFieldUpdateOperationsInput | string | null
-    content_tibetan?: NullableStringFieldUpdateOperationsInput | string | null
-    content_english?: NullableStringFieldUpdateOperationsInput | string | null
-    order_index?: IntFieldUpdateOperationsInput | number
-    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type TextSectionCreateManyInput = {
-    id?: string
-    text_id: string
-    section_type: string
-    title_tibetan?: string | null
-    title_english?: string | null
-    content_tibetan?: string | null
-    content_english?: string | null
-    order_index?: number
-    created_at?: Date | string
-    updated_at?: Date | string
-  }
-
-  export type TextSectionUpdateManyMutationInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    section_type?: StringFieldUpdateOperationsInput | string
-    title_tibetan?: NullableStringFieldUpdateOperationsInput | string | null
-    title_english?: NullableStringFieldUpdateOperationsInput | string | null
-    content_tibetan?: NullableStringFieldUpdateOperationsInput | string | null
-    content_english?: NullableStringFieldUpdateOperationsInput | string | null
-    order_index?: IntFieldUpdateOperationsInput | number
-    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type TextSectionUncheckedUpdateManyInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    text_id?: StringFieldUpdateOperationsInput | string
-    section_type?: StringFieldUpdateOperationsInput | string
-    title_tibetan?: NullableStringFieldUpdateOperationsInput | string | null
-    title_english?: NullableStringFieldUpdateOperationsInput | string | null
-    content_tibetan?: NullableStringFieldUpdateOperationsInput | string | null
-    content_english?: NullableStringFieldUpdateOperationsInput | string | null
-    order_index?: IntFieldUpdateOperationsInput | number
-    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type TextSummaryCreateInput = {
-    id?: string
-    translation_homage_tibetan?: string | null
-    translation_homage_english?: string | null
-    purpose_tibetan?: string | null
-    purpose_english?: string | null
-    summary_text_tibetan?: string | null
-    summary_text_english?: string | null
-    word_meaning_tibetan?: string | null
-    word_meaning_english?: string | null
-    connection_tibetan?: string | null
-    connection_english?: string | null
-    question_answers_tibetan?: string | null
-    question_answers_english?: string | null
-    colophon_tibetan?: string | null
-    colophon_english?: string | null
-    created_at?: Date | string
-    updated_at?: Date | string
-    text: TextCreateNestedOneWithoutSummaryInput
-  }
-
-  export type TextSummaryUncheckedCreateInput = {
-    id?: string
-    text_id: string
-    translation_homage_tibetan?: string | null
-    translation_homage_english?: string | null
-    purpose_tibetan?: string | null
-    purpose_english?: string | null
-    summary_text_tibetan?: string | null
-    summary_text_english?: string | null
-    word_meaning_tibetan?: string | null
-    word_meaning_english?: string | null
-    connection_tibetan?: string | null
-    connection_english?: string | null
-    question_answers_tibetan?: string | null
-    question_answers_english?: string | null
-    colophon_tibetan?: string | null
-    colophon_english?: string | null
-    created_at?: Date | string
-    updated_at?: Date | string
-  }
-
-  export type TextSummaryUpdateInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    translation_homage_tibetan?: NullableStringFieldUpdateOperationsInput | string | null
-    translation_homage_english?: NullableStringFieldUpdateOperationsInput | string | null
-    purpose_tibetan?: NullableStringFieldUpdateOperationsInput | string | null
-    purpose_english?: NullableStringFieldUpdateOperationsInput | string | null
-    summary_text_tibetan?: NullableStringFieldUpdateOperationsInput | string | null
-    summary_text_english?: NullableStringFieldUpdateOperationsInput | string | null
-    word_meaning_tibetan?: NullableStringFieldUpdateOperationsInput | string | null
-    word_meaning_english?: NullableStringFieldUpdateOperationsInput | string | null
-    connection_tibetan?: NullableStringFieldUpdateOperationsInput | string | null
-    connection_english?: NullableStringFieldUpdateOperationsInput | string | null
-    question_answers_tibetan?: NullableStringFieldUpdateOperationsInput | string | null
-    question_answers_english?: NullableStringFieldUpdateOperationsInput | string | null
-    colophon_tibetan?: NullableStringFieldUpdateOperationsInput | string | null
-    colophon_english?: NullableStringFieldUpdateOperationsInput | string | null
-    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    text?: TextUpdateOneRequiredWithoutSummaryNestedInput
-  }
-
-  export type TextSummaryUncheckedUpdateInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    text_id?: StringFieldUpdateOperationsInput | string
-    translation_homage_tibetan?: NullableStringFieldUpdateOperationsInput | string | null
-    translation_homage_english?: NullableStringFieldUpdateOperationsInput | string | null
-    purpose_tibetan?: NullableStringFieldUpdateOperationsInput | string | null
-    purpose_english?: NullableStringFieldUpdateOperationsInput | string | null
-    summary_text_tibetan?: NullableStringFieldUpdateOperationsInput | string | null
-    summary_text_english?: NullableStringFieldUpdateOperationsInput | string | null
-    word_meaning_tibetan?: NullableStringFieldUpdateOperationsInput | string | null
-    word_meaning_english?: NullableStringFieldUpdateOperationsInput | string | null
-    connection_tibetan?: NullableStringFieldUpdateOperationsInput | string | null
-    connection_english?: NullableStringFieldUpdateOperationsInput | string | null
-    question_answers_tibetan?: NullableStringFieldUpdateOperationsInput | string | null
-    question_answers_english?: NullableStringFieldUpdateOperationsInput | string | null
-    colophon_tibetan?: NullableStringFieldUpdateOperationsInput | string | null
-    colophon_english?: NullableStringFieldUpdateOperationsInput | string | null
-    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type TextSummaryCreateManyInput = {
-    id?: string
-    text_id: string
-    translation_homage_tibetan?: string | null
-    translation_homage_english?: string | null
-    purpose_tibetan?: string | null
-    purpose_english?: string | null
-    summary_text_tibetan?: string | null
-    summary_text_english?: string | null
-    word_meaning_tibetan?: string | null
-    word_meaning_english?: string | null
-    connection_tibetan?: string | null
-    connection_english?: string | null
-    question_answers_tibetan?: string | null
-    question_answers_english?: string | null
-    colophon_tibetan?: string | null
-    colophon_english?: string | null
-    created_at?: Date | string
-    updated_at?: Date | string
-  }
-
-  export type TextSummaryUpdateManyMutationInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    translation_homage_tibetan?: NullableStringFieldUpdateOperationsInput | string | null
-    translation_homage_english?: NullableStringFieldUpdateOperationsInput | string | null
-    purpose_tibetan?: NullableStringFieldUpdateOperationsInput | string | null
-    purpose_english?: NullableStringFieldUpdateOperationsInput | string | null
-    summary_text_tibetan?: NullableStringFieldUpdateOperationsInput | string | null
-    summary_text_english?: NullableStringFieldUpdateOperationsInput | string | null
-    word_meaning_tibetan?: NullableStringFieldUpdateOperationsInput | string | null
-    word_meaning_english?: NullableStringFieldUpdateOperationsInput | string | null
-    connection_tibetan?: NullableStringFieldUpdateOperationsInput | string | null
-    connection_english?: NullableStringFieldUpdateOperationsInput | string | null
-    question_answers_tibetan?: NullableStringFieldUpdateOperationsInput | string | null
-    question_answers_english?: NullableStringFieldUpdateOperationsInput | string | null
-    colophon_tibetan?: NullableStringFieldUpdateOperationsInput | string | null
-    colophon_english?: NullableStringFieldUpdateOperationsInput | string | null
-    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type TextSummaryUncheckedUpdateManyInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    text_id?: StringFieldUpdateOperationsInput | string
-    translation_homage_tibetan?: NullableStringFieldUpdateOperationsInput | string | null
-    translation_homage_english?: NullableStringFieldUpdateOperationsInput | string | null
-    purpose_tibetan?: NullableStringFieldUpdateOperationsInput | string | null
-    purpose_english?: NullableStringFieldUpdateOperationsInput | string | null
-    summary_text_tibetan?: NullableStringFieldUpdateOperationsInput | string | null
-    summary_text_english?: NullableStringFieldUpdateOperationsInput | string | null
-    word_meaning_tibetan?: NullableStringFieldUpdateOperationsInput | string | null
-    word_meaning_english?: NullableStringFieldUpdateOperationsInput | string | null
-    connection_tibetan?: NullableStringFieldUpdateOperationsInput | string | null
-    connection_english?: NullableStringFieldUpdateOperationsInput | string | null
-    question_answers_tibetan?: NullableStringFieldUpdateOperationsInput | string | null
-    question_answers_english?: NullableStringFieldUpdateOperationsInput | string | null
-    colophon_tibetan?: NullableStringFieldUpdateOperationsInput | string | null
-    colophon_english?: NullableStringFieldUpdateOperationsInput | string | null
-    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type TextCollatedContentCreateInput = {
-    id?: string
-    collated_text?: string | null
-    english_translation?: string | null
-    created_at?: Date | string
-    updated_at?: Date | string
-    text: TextCreateNestedOneWithoutCollatedContentInput
-  }
-
-  export type TextCollatedContentUncheckedCreateInput = {
-    id?: string
-    text_id: string
-    collated_text?: string | null
-    english_translation?: string | null
-    created_at?: Date | string
-    updated_at?: Date | string
-  }
-
-  export type TextCollatedContentUpdateInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    collated_text?: NullableStringFieldUpdateOperationsInput | string | null
-    english_translation?: NullableStringFieldUpdateOperationsInput | string | null
-    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    text?: TextUpdateOneRequiredWithoutCollatedContentNestedInput
-  }
-
-  export type TextCollatedContentUncheckedUpdateInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    text_id?: StringFieldUpdateOperationsInput | string
-    collated_text?: NullableStringFieldUpdateOperationsInput | string | null
-    english_translation?: NullableStringFieldUpdateOperationsInput | string | null
-    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type TextCollatedContentCreateManyInput = {
-    id?: string
-    text_id: string
-    collated_text?: string | null
-    english_translation?: string | null
-    created_at?: Date | string
-    updated_at?: Date | string
-  }
-
-  export type TextCollatedContentUpdateManyMutationInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    collated_text?: NullableStringFieldUpdateOperationsInput | string | null
-    english_translation?: NullableStringFieldUpdateOperationsInput | string | null
-    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type TextCollatedContentUncheckedUpdateManyInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    text_id?: StringFieldUpdateOperationsInput | string
-    collated_text?: NullableStringFieldUpdateOperationsInput | string | null
-    english_translation?: NullableStringFieldUpdateOperationsInput | string | null
-    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type TextMetadataCreateInput = {
-    id?: string
-    metadata_key: string
-    metadata_value: string
-    metadata_group: string
-    label?: string | null
-    tibetan_title?: string | null
-    english_title?: string | null
-    sanskrit_title?: string | null
-    chinese_title?: string | null
-    derge_text_id?: string | null
-    yeshe_text_id?: string | null
-    derge_vol_number?: number | null
-    derge_start_page?: number | null
-    derge_end_page?: number | null
-    turning?: string | null
-    yana?: string | null
-    translation_period?: string | null
-    order_index?: number
-    created_at?: Date | string
-    updated_at?: Date | string
-    text: TextCreateNestedOneWithoutMetadataInput
-  }
-
-  export type TextMetadataUncheckedCreateInput = {
-    id?: string
-    text_id: string
-    metadata_key: string
-    metadata_value: string
-    metadata_group: string
-    label?: string | null
-    tibetan_title?: string | null
-    english_title?: string | null
-    sanskrit_title?: string | null
-    chinese_title?: string | null
-    derge_text_id?: string | null
-    yeshe_text_id?: string | null
-    derge_vol_number?: number | null
-    derge_start_page?: number | null
-    derge_end_page?: number | null
-    turning?: string | null
-    yana?: string | null
-    translation_period?: string | null
-    order_index?: number
-    created_at?: Date | string
-    updated_at?: Date | string
-  }
-
-  export type TextMetadataUpdateInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    metadata_key?: StringFieldUpdateOperationsInput | string
-    metadata_value?: StringFieldUpdateOperationsInput | string
-    metadata_group?: StringFieldUpdateOperationsInput | string
-    label?: NullableStringFieldUpdateOperationsInput | string | null
-    tibetan_title?: NullableStringFieldUpdateOperationsInput | string | null
-    english_title?: NullableStringFieldUpdateOperationsInput | string | null
-    sanskrit_title?: NullableStringFieldUpdateOperationsInput | string | null
-    chinese_title?: NullableStringFieldUpdateOperationsInput | string | null
-    derge_text_id?: NullableStringFieldUpdateOperationsInput | string | null
-    yeshe_text_id?: NullableStringFieldUpdateOperationsInput | string | null
-    derge_vol_number?: NullableIntFieldUpdateOperationsInput | number | null
-    derge_start_page?: NullableIntFieldUpdateOperationsInput | number | null
-    derge_end_page?: NullableIntFieldUpdateOperationsInput | number | null
-    turning?: NullableStringFieldUpdateOperationsInput | string | null
-    yana?: NullableStringFieldUpdateOperationsInput | string | null
-    translation_period?: NullableStringFieldUpdateOperationsInput | string | null
-    order_index?: IntFieldUpdateOperationsInput | number
-    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    text?: TextUpdateOneRequiredWithoutMetadataNestedInput
-  }
-
-  export type TextMetadataUncheckedUpdateInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    text_id?: StringFieldUpdateOperationsInput | string
-    metadata_key?: StringFieldUpdateOperationsInput | string
-    metadata_value?: StringFieldUpdateOperationsInput | string
-    metadata_group?: StringFieldUpdateOperationsInput | string
-    label?: NullableStringFieldUpdateOperationsInput | string | null
-    tibetan_title?: NullableStringFieldUpdateOperationsInput | string | null
-    english_title?: NullableStringFieldUpdateOperationsInput | string | null
-    sanskrit_title?: NullableStringFieldUpdateOperationsInput | string | null
-    chinese_title?: NullableStringFieldUpdateOperationsInput | string | null
-    derge_text_id?: NullableStringFieldUpdateOperationsInput | string | null
-    yeshe_text_id?: NullableStringFieldUpdateOperationsInput | string | null
-    derge_vol_number?: NullableIntFieldUpdateOperationsInput | number | null
-    derge_start_page?: NullableIntFieldUpdateOperationsInput | number | null
-    derge_end_page?: NullableIntFieldUpdateOperationsInput | number | null
-    turning?: NullableStringFieldUpdateOperationsInput | string | null
-    yana?: NullableStringFieldUpdateOperationsInput | string | null
-    translation_period?: NullableStringFieldUpdateOperationsInput | string | null
-    order_index?: IntFieldUpdateOperationsInput | number
-    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type TextMetadataCreateManyInput = {
-    id?: string
-    text_id: string
-    metadata_key: string
-    metadata_value: string
-    metadata_group: string
-    label?: string | null
-    tibetan_title?: string | null
-    english_title?: string | null
-    sanskrit_title?: string | null
-    chinese_title?: string | null
-    derge_text_id?: string | null
-    yeshe_text_id?: string | null
-    derge_vol_number?: number | null
-    derge_start_page?: number | null
-    derge_end_page?: number | null
-    turning?: string | null
-    yana?: string | null
-    translation_period?: string | null
-    order_index?: number
-    created_at?: Date | string
-    updated_at?: Date | string
-  }
-
-  export type TextMetadataUpdateManyMutationInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    metadata_key?: StringFieldUpdateOperationsInput | string
-    metadata_value?: StringFieldUpdateOperationsInput | string
-    metadata_group?: StringFieldUpdateOperationsInput | string
-    label?: NullableStringFieldUpdateOperationsInput | string | null
-    tibetan_title?: NullableStringFieldUpdateOperationsInput | string | null
-    english_title?: NullableStringFieldUpdateOperationsInput | string | null
-    sanskrit_title?: NullableStringFieldUpdateOperationsInput | string | null
-    chinese_title?: NullableStringFieldUpdateOperationsInput | string | null
-    derge_text_id?: NullableStringFieldUpdateOperationsInput | string | null
-    yeshe_text_id?: NullableStringFieldUpdateOperationsInput | string | null
-    derge_vol_number?: NullableIntFieldUpdateOperationsInput | number | null
-    derge_start_page?: NullableIntFieldUpdateOperationsInput | number | null
-    derge_end_page?: NullableIntFieldUpdateOperationsInput | number | null
-    turning?: NullableStringFieldUpdateOperationsInput | string | null
-    yana?: NullableStringFieldUpdateOperationsInput | string | null
-    translation_period?: NullableStringFieldUpdateOperationsInput | string | null
-    order_index?: IntFieldUpdateOperationsInput | number
-    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type TextMetadataUncheckedUpdateManyInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    text_id?: StringFieldUpdateOperationsInput | string
-    metadata_key?: StringFieldUpdateOperationsInput | string
-    metadata_value?: StringFieldUpdateOperationsInput | string
-    metadata_group?: StringFieldUpdateOperationsInput | string
-    label?: NullableStringFieldUpdateOperationsInput | string | null
-    tibetan_title?: NullableStringFieldUpdateOperationsInput | string | null
-    english_title?: NullableStringFieldUpdateOperationsInput | string | null
-    sanskrit_title?: NullableStringFieldUpdateOperationsInput | string | null
-    chinese_title?: NullableStringFieldUpdateOperationsInput | string | null
-    derge_text_id?: NullableStringFieldUpdateOperationsInput | string | null
-    yeshe_text_id?: NullableStringFieldUpdateOperationsInput | string | null
-    derge_vol_number?: NullableIntFieldUpdateOperationsInput | number | null
-    derge_start_page?: NullableIntFieldUpdateOperationsInput | number | null
-    derge_end_page?: NullableIntFieldUpdateOperationsInput | number | null
-    turning?: NullableStringFieldUpdateOperationsInput | string | null
-    yana?: NullableStringFieldUpdateOperationsInput | string | null
-    translation_period?: NullableStringFieldUpdateOperationsInput | string | null
-    order_index?: IntFieldUpdateOperationsInput | number
-    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type EditionCreateInput = {
-    id?: string
-    name_english: string
-    name_tibetan?: string | null
-    description_english?: string | null
-    description_tibetan?: string | null
-    year?: string | null
-    location?: string | null
-    total_volumes?: number | null
-    total_texts?: number | null
-    is_active?: boolean
-    created_at?: Date | string
-    updated_at?: Date | string
-    textEditions?: TextEditionCreateNestedManyWithoutEditionInput
-  }
-
-  export type EditionUncheckedCreateInput = {
-    id?: string
-    name_english: string
-    name_tibetan?: string | null
-    description_english?: string | null
-    description_tibetan?: string | null
-    year?: string | null
-    location?: string | null
-    total_volumes?: number | null
-    total_texts?: number | null
-    is_active?: boolean
-    created_at?: Date | string
-    updated_at?: Date | string
-    textEditions?: TextEditionUncheckedCreateNestedManyWithoutEditionInput
-  }
-
-  export type EditionUpdateInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    name_english?: StringFieldUpdateOperationsInput | string
-    name_tibetan?: NullableStringFieldUpdateOperationsInput | string | null
-    description_english?: NullableStringFieldUpdateOperationsInput | string | null
-    description_tibetan?: NullableStringFieldUpdateOperationsInput | string | null
-    year?: NullableStringFieldUpdateOperationsInput | string | null
-    location?: NullableStringFieldUpdateOperationsInput | string | null
-    total_volumes?: NullableIntFieldUpdateOperationsInput | number | null
-    total_texts?: NullableIntFieldUpdateOperationsInput | number | null
-    is_active?: BoolFieldUpdateOperationsInput | boolean
-    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    textEditions?: TextEditionUpdateManyWithoutEditionNestedInput
-  }
-
-  export type EditionUncheckedUpdateInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    name_english?: StringFieldUpdateOperationsInput | string
-    name_tibetan?: NullableStringFieldUpdateOperationsInput | string | null
-    description_english?: NullableStringFieldUpdateOperationsInput | string | null
-    description_tibetan?: NullableStringFieldUpdateOperationsInput | string | null
-    year?: NullableStringFieldUpdateOperationsInput | string | null
-    location?: NullableStringFieldUpdateOperationsInput | string | null
-    total_volumes?: NullableIntFieldUpdateOperationsInput | number | null
-    total_texts?: NullableIntFieldUpdateOperationsInput | number | null
-    is_active?: BoolFieldUpdateOperationsInput | boolean
-    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    textEditions?: TextEditionUncheckedUpdateManyWithoutEditionNestedInput
-  }
-
-  export type EditionCreateManyInput = {
-    id?: string
-    name_english: string
-    name_tibetan?: string | null
-    description_english?: string | null
-    description_tibetan?: string | null
-    year?: string | null
-    location?: string | null
-    total_volumes?: number | null
-    total_texts?: number | null
-    is_active?: boolean
-    created_at?: Date | string
-    updated_at?: Date | string
-  }
-
-  export type EditionUpdateManyMutationInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    name_english?: StringFieldUpdateOperationsInput | string
-    name_tibetan?: NullableStringFieldUpdateOperationsInput | string | null
-    description_english?: NullableStringFieldUpdateOperationsInput | string | null
-    description_tibetan?: NullableStringFieldUpdateOperationsInput | string | null
-    year?: NullableStringFieldUpdateOperationsInput | string | null
-    location?: NullableStringFieldUpdateOperationsInput | string | null
-    total_volumes?: NullableIntFieldUpdateOperationsInput | number | null
-    total_texts?: NullableIntFieldUpdateOperationsInput | number | null
-    is_active?: BoolFieldUpdateOperationsInput | boolean
-    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type EditionUncheckedUpdateManyInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    name_english?: StringFieldUpdateOperationsInput | string
-    name_tibetan?: NullableStringFieldUpdateOperationsInput | string | null
-    description_english?: NullableStringFieldUpdateOperationsInput | string | null
-    description_tibetan?: NullableStringFieldUpdateOperationsInput | string | null
-    year?: NullableStringFieldUpdateOperationsInput | string | null
-    location?: NullableStringFieldUpdateOperationsInput | string | null
-    total_volumes?: NullableIntFieldUpdateOperationsInput | number | null
-    total_texts?: NullableIntFieldUpdateOperationsInput | number | null
-    is_active?: BoolFieldUpdateOperationsInput | boolean
-    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type TextEditionCreateInput = {
-    id?: string
-    source_id?: string | null
-    volume_number?: number | null
-    start_page?: number | null
-    end_page?: number | null
-    availability?: string | null
-    link_url?: string | null
-    created_at?: Date | string
-    updated_at?: Date | string
-    text: TextCreateNestedOneWithoutTextEditionsInput
-    edition: EditionCreateNestedOneWithoutTextEditionsInput
-  }
-
-  export type TextEditionUncheckedCreateInput = {
-    id?: string
-    text_id: string
-    edition_id: string
-    source_id?: string | null
-    volume_number?: number | null
-    start_page?: number | null
-    end_page?: number | null
-    availability?: string | null
-    link_url?: string | null
-    created_at?: Date | string
-    updated_at?: Date | string
-  }
-
-  export type TextEditionUpdateInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    source_id?: NullableStringFieldUpdateOperationsInput | string | null
-    volume_number?: NullableIntFieldUpdateOperationsInput | number | null
-    start_page?: NullableIntFieldUpdateOperationsInput | number | null
-    end_page?: NullableIntFieldUpdateOperationsInput | number | null
-    availability?: NullableStringFieldUpdateOperationsInput | string | null
-    link_url?: NullableStringFieldUpdateOperationsInput | string | null
-    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    text?: TextUpdateOneRequiredWithoutTextEditionsNestedInput
-    edition?: EditionUpdateOneRequiredWithoutTextEditionsNestedInput
-  }
-
-  export type TextEditionUncheckedUpdateInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    text_id?: StringFieldUpdateOperationsInput | string
-    edition_id?: StringFieldUpdateOperationsInput | string
-    source_id?: NullableStringFieldUpdateOperationsInput | string | null
-    volume_number?: NullableIntFieldUpdateOperationsInput | number | null
-    start_page?: NullableIntFieldUpdateOperationsInput | number | null
-    end_page?: NullableIntFieldUpdateOperationsInput | number | null
-    availability?: NullableStringFieldUpdateOperationsInput | string | null
-    link_url?: NullableStringFieldUpdateOperationsInput | string | null
-    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type TextEditionCreateManyInput = {
-    id?: string
-    text_id: string
-    edition_id: string
-    source_id?: string | null
-    volume_number?: number | null
-    start_page?: number | null
-    end_page?: number | null
-    availability?: string | null
-    link_url?: string | null
-    created_at?: Date | string
-    updated_at?: Date | string
-  }
-
-  export type TextEditionUpdateManyMutationInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    source_id?: NullableStringFieldUpdateOperationsInput | string | null
-    volume_number?: NullableIntFieldUpdateOperationsInput | number | null
-    start_page?: NullableIntFieldUpdateOperationsInput | number | null
-    end_page?: NullableIntFieldUpdateOperationsInput | number | null
-    availability?: NullableStringFieldUpdateOperationsInput | string | null
-    link_url?: NullableStringFieldUpdateOperationsInput | string | null
-    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type TextEditionUncheckedUpdateManyInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    text_id?: StringFieldUpdateOperationsInput | string
-    edition_id?: StringFieldUpdateOperationsInput | string
-    source_id?: NullableStringFieldUpdateOperationsInput | string | null
-    volume_number?: NullableIntFieldUpdateOperationsInput | number | null
-    start_page?: NullableIntFieldUpdateOperationsInput | number | null
-    end_page?: NullableIntFieldUpdateOperationsInput | number | null
-    availability?: NullableStringFieldUpdateOperationsInput | string | null
-    link_url?: NullableStringFieldUpdateOperationsInput | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -29988,7 +22216,7 @@ export namespace Prisma {
     is_active?: boolean
     created_at?: Date | string
     updated_at?: Date | string
-    subCategories?: KarchagSubCategoryCreateNestedManyWithoutMainCategoryInput
+    sub_categories?: KarchagSubCategoryCreateNestedManyWithoutMain_categoryInput
   }
 
   export type KarchagMainCategoryUncheckedCreateInput = {
@@ -30001,7 +22229,7 @@ export namespace Prisma {
     is_active?: boolean
     created_at?: Date | string
     updated_at?: Date | string
-    subCategories?: KarchagSubCategoryUncheckedCreateNestedManyWithoutMainCategoryInput
+    sub_categories?: KarchagSubCategoryUncheckedCreateNestedManyWithoutMain_categoryInput
   }
 
   export type KarchagMainCategoryUpdateInput = {
@@ -30014,7 +22242,7 @@ export namespace Prisma {
     is_active?: BoolFieldUpdateOperationsInput | boolean
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    subCategories?: KarchagSubCategoryUpdateManyWithoutMainCategoryNestedInput
+    sub_categories?: KarchagSubCategoryUpdateManyWithoutMain_categoryNestedInput
   }
 
   export type KarchagMainCategoryUncheckedUpdateInput = {
@@ -30027,7 +22255,7 @@ export namespace Prisma {
     is_active?: BoolFieldUpdateOperationsInput | boolean
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    subCategories?: KarchagSubCategoryUncheckedUpdateManyWithoutMainCategoryNestedInput
+    sub_categories?: KarchagSubCategoryUncheckedUpdateManyWithoutMain_categoryNestedInput
   }
 
   export type KarchagMainCategoryCreateManyInput = {
@@ -30076,8 +22304,10 @@ export namespace Prisma {
     is_active?: boolean
     created_at?: Date | string
     updated_at?: Date | string
-    mainCategory: KarchagMainCategoryCreateNestedOneWithoutSubCategoriesInput
-    texts?: KarchagTextCreateNestedManyWithoutSubCategoryInput
+    only_content?: boolean
+    content?: string | null
+    main_category: KarchagMainCategoryCreateNestedOneWithoutSub_categoriesInput
+    texts?: TextCreateNestedManyWithoutSub_categoryInput
   }
 
   export type KarchagSubCategoryUncheckedCreateInput = {
@@ -30091,7 +22321,9 @@ export namespace Prisma {
     is_active?: boolean
     created_at?: Date | string
     updated_at?: Date | string
-    texts?: KarchagTextUncheckedCreateNestedManyWithoutSubCategoryInput
+    only_content?: boolean
+    content?: string | null
+    texts?: TextUncheckedCreateNestedManyWithoutSub_categoryInput
   }
 
   export type KarchagSubCategoryUpdateInput = {
@@ -30104,8 +22336,10 @@ export namespace Prisma {
     is_active?: BoolFieldUpdateOperationsInput | boolean
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    mainCategory?: KarchagMainCategoryUpdateOneRequiredWithoutSubCategoriesNestedInput
-    texts?: KarchagTextUpdateManyWithoutSubCategoryNestedInput
+    only_content?: BoolFieldUpdateOperationsInput | boolean
+    content?: NullableStringFieldUpdateOperationsInput | string | null
+    main_category?: KarchagMainCategoryUpdateOneRequiredWithoutSub_categoriesNestedInput
+    texts?: TextUpdateManyWithoutSub_categoryNestedInput
   }
 
   export type KarchagSubCategoryUncheckedUpdateInput = {
@@ -30119,7 +22353,9 @@ export namespace Prisma {
     is_active?: BoolFieldUpdateOperationsInput | boolean
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    texts?: KarchagTextUncheckedUpdateManyWithoutSubCategoryNestedInput
+    only_content?: BoolFieldUpdateOperationsInput | boolean
+    content?: NullableStringFieldUpdateOperationsInput | string | null
+    texts?: TextUncheckedUpdateManyWithoutSub_categoryNestedInput
   }
 
   export type KarchagSubCategoryCreateManyInput = {
@@ -30133,6 +22369,8 @@ export namespace Prisma {
     is_active?: boolean
     created_at?: Date | string
     updated_at?: Date | string
+    only_content?: boolean
+    content?: string | null
   }
 
   export type KarchagSubCategoryUpdateManyMutationInput = {
@@ -30145,6 +22383,8 @@ export namespace Prisma {
     is_active?: BoolFieldUpdateOperationsInput | boolean
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    only_content?: BoolFieldUpdateOperationsInput | boolean
+    content?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type KarchagSubCategoryUncheckedUpdateManyInput = {
@@ -30158,129 +22398,396 @@ export namespace Prisma {
     is_active?: BoolFieldUpdateOperationsInput | boolean
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    only_content?: BoolFieldUpdateOperationsInput | boolean
+    content?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
-  export type KarchagTextCreateInput = {
+  export type TextCreateInput = {
     id?: string
-    derge_id?: string | null
-    yeshe_de_id?: string | null
     tibetan_title?: string | null
     chinese_title?: string | null
     sanskrit_title?: string | null
     english_title?: string | null
-    turning_id?: number | null
-    yana_id?: number | null
-    translation_period_id?: number | null
-    order_index?: number
-    is_active?: boolean
-    created_at?: Date | string
-    updated_at?: Date | string
-    subCategory: KarchagSubCategoryCreateNestedOneWithoutTextsInput
-  }
-
-  export type KarchagTextUncheckedCreateInput = {
-    id?: string
-    sub_category_id: string
     derge_id?: string | null
     yeshe_de_id?: string | null
-    tibetan_title?: string | null
-    chinese_title?: string | null
-    sanskrit_title?: string | null
-    english_title?: string | null
-    turning_id?: number | null
-    yana_id?: number | null
-    translation_period_id?: number | null
+    yeshe_de_volume_number?: string | null
+    yeshe_de_page_start?: string | null
+    yeshe_de_page_end?: string | null
+    turning?: string | null
+    yana?: string | null
+    translation_period?: string | null
+    pdf_url?: string | null
     order_index?: number
     is_active?: boolean
     created_at?: Date | string
     updated_at?: Date | string
+    sub_category: KarchagSubCategoryCreateNestedOneWithoutTextsInput
+    summary?: KarchagTextSummaryCreateNestedOneWithoutKarchag_textInput
+    metadata?: KarchagTextMetadataCreateNestedManyWithoutTextInput
   }
 
-  export type KarchagTextUpdateInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    derge_id?: NullableStringFieldUpdateOperationsInput | string | null
-    yeshe_de_id?: NullableStringFieldUpdateOperationsInput | string | null
-    tibetan_title?: NullableStringFieldUpdateOperationsInput | string | null
-    chinese_title?: NullableStringFieldUpdateOperationsInput | string | null
-    sanskrit_title?: NullableStringFieldUpdateOperationsInput | string | null
-    english_title?: NullableStringFieldUpdateOperationsInput | string | null
-    turning_id?: NullableIntFieldUpdateOperationsInput | number | null
-    yana_id?: NullableIntFieldUpdateOperationsInput | number | null
-    translation_period_id?: NullableIntFieldUpdateOperationsInput | number | null
-    order_index?: IntFieldUpdateOperationsInput | number
-    is_active?: BoolFieldUpdateOperationsInput | boolean
-    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    subCategory?: KarchagSubCategoryUpdateOneRequiredWithoutTextsNestedInput
-  }
-
-  export type KarchagTextUncheckedUpdateInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    sub_category_id?: StringFieldUpdateOperationsInput | string
-    derge_id?: NullableStringFieldUpdateOperationsInput | string | null
-    yeshe_de_id?: NullableStringFieldUpdateOperationsInput | string | null
-    tibetan_title?: NullableStringFieldUpdateOperationsInput | string | null
-    chinese_title?: NullableStringFieldUpdateOperationsInput | string | null
-    sanskrit_title?: NullableStringFieldUpdateOperationsInput | string | null
-    english_title?: NullableStringFieldUpdateOperationsInput | string | null
-    turning_id?: NullableIntFieldUpdateOperationsInput | number | null
-    yana_id?: NullableIntFieldUpdateOperationsInput | number | null
-    translation_period_id?: NullableIntFieldUpdateOperationsInput | number | null
-    order_index?: IntFieldUpdateOperationsInput | number
-    is_active?: BoolFieldUpdateOperationsInput | boolean
-    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type KarchagTextCreateManyInput = {
+  export type TextUncheckedCreateInput = {
     id?: string
     sub_category_id: string
-    derge_id?: string | null
-    yeshe_de_id?: string | null
     tibetan_title?: string | null
     chinese_title?: string | null
     sanskrit_title?: string | null
     english_title?: string | null
-    turning_id?: number | null
-    yana_id?: number | null
-    translation_period_id?: number | null
+    derge_id?: string | null
+    yeshe_de_id?: string | null
+    yeshe_de_volume_number?: string | null
+    yeshe_de_page_start?: string | null
+    yeshe_de_page_end?: string | null
+    turning?: string | null
+    yana?: string | null
+    translation_period?: string | null
+    pdf_url?: string | null
+    order_index?: number
+    is_active?: boolean
+    created_at?: Date | string
+    updated_at?: Date | string
+    summary?: KarchagTextSummaryUncheckedCreateNestedOneWithoutKarchag_textInput
+    metadata?: KarchagTextMetadataUncheckedCreateNestedManyWithoutTextInput
+  }
+
+  export type TextUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    tibetan_title?: NullableStringFieldUpdateOperationsInput | string | null
+    chinese_title?: NullableStringFieldUpdateOperationsInput | string | null
+    sanskrit_title?: NullableStringFieldUpdateOperationsInput | string | null
+    english_title?: NullableStringFieldUpdateOperationsInput | string | null
+    derge_id?: NullableStringFieldUpdateOperationsInput | string | null
+    yeshe_de_id?: NullableStringFieldUpdateOperationsInput | string | null
+    yeshe_de_volume_number?: NullableStringFieldUpdateOperationsInput | string | null
+    yeshe_de_page_start?: NullableStringFieldUpdateOperationsInput | string | null
+    yeshe_de_page_end?: NullableStringFieldUpdateOperationsInput | string | null
+    turning?: NullableStringFieldUpdateOperationsInput | string | null
+    yana?: NullableStringFieldUpdateOperationsInput | string | null
+    translation_period?: NullableStringFieldUpdateOperationsInput | string | null
+    pdf_url?: NullableStringFieldUpdateOperationsInput | string | null
+    order_index?: IntFieldUpdateOperationsInput | number
+    is_active?: BoolFieldUpdateOperationsInput | boolean
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    sub_category?: KarchagSubCategoryUpdateOneRequiredWithoutTextsNestedInput
+    summary?: KarchagTextSummaryUpdateOneWithoutKarchag_textNestedInput
+    metadata?: KarchagTextMetadataUpdateManyWithoutTextNestedInput
+  }
+
+  export type TextUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    sub_category_id?: StringFieldUpdateOperationsInput | string
+    tibetan_title?: NullableStringFieldUpdateOperationsInput | string | null
+    chinese_title?: NullableStringFieldUpdateOperationsInput | string | null
+    sanskrit_title?: NullableStringFieldUpdateOperationsInput | string | null
+    english_title?: NullableStringFieldUpdateOperationsInput | string | null
+    derge_id?: NullableStringFieldUpdateOperationsInput | string | null
+    yeshe_de_id?: NullableStringFieldUpdateOperationsInput | string | null
+    yeshe_de_volume_number?: NullableStringFieldUpdateOperationsInput | string | null
+    yeshe_de_page_start?: NullableStringFieldUpdateOperationsInput | string | null
+    yeshe_de_page_end?: NullableStringFieldUpdateOperationsInput | string | null
+    turning?: NullableStringFieldUpdateOperationsInput | string | null
+    yana?: NullableStringFieldUpdateOperationsInput | string | null
+    translation_period?: NullableStringFieldUpdateOperationsInput | string | null
+    pdf_url?: NullableStringFieldUpdateOperationsInput | string | null
+    order_index?: IntFieldUpdateOperationsInput | number
+    is_active?: BoolFieldUpdateOperationsInput | boolean
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    summary?: KarchagTextSummaryUncheckedUpdateOneWithoutKarchag_textNestedInput
+    metadata?: KarchagTextMetadataUncheckedUpdateManyWithoutTextNestedInput
+  }
+
+  export type TextCreateManyInput = {
+    id?: string
+    sub_category_id: string
+    tibetan_title?: string | null
+    chinese_title?: string | null
+    sanskrit_title?: string | null
+    english_title?: string | null
+    derge_id?: string | null
+    yeshe_de_id?: string | null
+    yeshe_de_volume_number?: string | null
+    yeshe_de_page_start?: string | null
+    yeshe_de_page_end?: string | null
+    turning?: string | null
+    yana?: string | null
+    translation_period?: string | null
+    pdf_url?: string | null
     order_index?: number
     is_active?: boolean
     created_at?: Date | string
     updated_at?: Date | string
   }
 
-  export type KarchagTextUpdateManyMutationInput = {
+  export type TextUpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
-    derge_id?: NullableStringFieldUpdateOperationsInput | string | null
-    yeshe_de_id?: NullableStringFieldUpdateOperationsInput | string | null
     tibetan_title?: NullableStringFieldUpdateOperationsInput | string | null
     chinese_title?: NullableStringFieldUpdateOperationsInput | string | null
     sanskrit_title?: NullableStringFieldUpdateOperationsInput | string | null
     english_title?: NullableStringFieldUpdateOperationsInput | string | null
-    turning_id?: NullableIntFieldUpdateOperationsInput | number | null
-    yana_id?: NullableIntFieldUpdateOperationsInput | number | null
-    translation_period_id?: NullableIntFieldUpdateOperationsInput | number | null
+    derge_id?: NullableStringFieldUpdateOperationsInput | string | null
+    yeshe_de_id?: NullableStringFieldUpdateOperationsInput | string | null
+    yeshe_de_volume_number?: NullableStringFieldUpdateOperationsInput | string | null
+    yeshe_de_page_start?: NullableStringFieldUpdateOperationsInput | string | null
+    yeshe_de_page_end?: NullableStringFieldUpdateOperationsInput | string | null
+    turning?: NullableStringFieldUpdateOperationsInput | string | null
+    yana?: NullableStringFieldUpdateOperationsInput | string | null
+    translation_period?: NullableStringFieldUpdateOperationsInput | string | null
+    pdf_url?: NullableStringFieldUpdateOperationsInput | string | null
     order_index?: IntFieldUpdateOperationsInput | number
     is_active?: BoolFieldUpdateOperationsInput | boolean
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
-  export type KarchagTextUncheckedUpdateManyInput = {
+  export type TextUncheckedUpdateManyInput = {
     id?: StringFieldUpdateOperationsInput | string
     sub_category_id?: StringFieldUpdateOperationsInput | string
-    derge_id?: NullableStringFieldUpdateOperationsInput | string | null
-    yeshe_de_id?: NullableStringFieldUpdateOperationsInput | string | null
     tibetan_title?: NullableStringFieldUpdateOperationsInput | string | null
     chinese_title?: NullableStringFieldUpdateOperationsInput | string | null
     sanskrit_title?: NullableStringFieldUpdateOperationsInput | string | null
     english_title?: NullableStringFieldUpdateOperationsInput | string | null
-    turning_id?: NullableIntFieldUpdateOperationsInput | number | null
-    yana_id?: NullableIntFieldUpdateOperationsInput | number | null
-    translation_period_id?: NullableIntFieldUpdateOperationsInput | number | null
+    derge_id?: NullableStringFieldUpdateOperationsInput | string | null
+    yeshe_de_id?: NullableStringFieldUpdateOperationsInput | string | null
+    yeshe_de_volume_number?: NullableStringFieldUpdateOperationsInput | string | null
+    yeshe_de_page_start?: NullableStringFieldUpdateOperationsInput | string | null
+    yeshe_de_page_end?: NullableStringFieldUpdateOperationsInput | string | null
+    turning?: NullableStringFieldUpdateOperationsInput | string | null
+    yana?: NullableStringFieldUpdateOperationsInput | string | null
+    translation_period?: NullableStringFieldUpdateOperationsInput | string | null
+    pdf_url?: NullableStringFieldUpdateOperationsInput | string | null
     order_index?: IntFieldUpdateOperationsInput | number
     is_active?: BoolFieldUpdateOperationsInput | boolean
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type KarchagTextSummaryCreateInput = {
+    id?: string
+    translation_homage_tibetan?: string | null
+    translation_homage_english?: string | null
+    purpose_tibetan?: string | null
+    purpose_english?: string | null
+    summary_text_tibetan?: string | null
+    summary_text_english?: string | null
+    word_meaning_tibetan?: string | null
+    word_meaning_english?: string | null
+    connection_tibetan?: string | null
+    connection_english?: string | null
+    question_answers_tibetan?: string | null
+    question_answers_english?: string | null
+    colophon_tibetan?: string | null
+    colophon_english?: string | null
+    created_at?: Date | string
+    updated_at?: Date | string
+    karchag_text: TextCreateNestedOneWithoutSummaryInput
+  }
+
+  export type KarchagTextSummaryUncheckedCreateInput = {
+    id?: string
+    karchag_text_id: string
+    translation_homage_tibetan?: string | null
+    translation_homage_english?: string | null
+    purpose_tibetan?: string | null
+    purpose_english?: string | null
+    summary_text_tibetan?: string | null
+    summary_text_english?: string | null
+    word_meaning_tibetan?: string | null
+    word_meaning_english?: string | null
+    connection_tibetan?: string | null
+    connection_english?: string | null
+    question_answers_tibetan?: string | null
+    question_answers_english?: string | null
+    colophon_tibetan?: string | null
+    colophon_english?: string | null
+    created_at?: Date | string
+    updated_at?: Date | string
+  }
+
+  export type KarchagTextSummaryUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    translation_homage_tibetan?: NullableStringFieldUpdateOperationsInput | string | null
+    translation_homage_english?: NullableStringFieldUpdateOperationsInput | string | null
+    purpose_tibetan?: NullableStringFieldUpdateOperationsInput | string | null
+    purpose_english?: NullableStringFieldUpdateOperationsInput | string | null
+    summary_text_tibetan?: NullableStringFieldUpdateOperationsInput | string | null
+    summary_text_english?: NullableStringFieldUpdateOperationsInput | string | null
+    word_meaning_tibetan?: NullableStringFieldUpdateOperationsInput | string | null
+    word_meaning_english?: NullableStringFieldUpdateOperationsInput | string | null
+    connection_tibetan?: NullableStringFieldUpdateOperationsInput | string | null
+    connection_english?: NullableStringFieldUpdateOperationsInput | string | null
+    question_answers_tibetan?: NullableStringFieldUpdateOperationsInput | string | null
+    question_answers_english?: NullableStringFieldUpdateOperationsInput | string | null
+    colophon_tibetan?: NullableStringFieldUpdateOperationsInput | string | null
+    colophon_english?: NullableStringFieldUpdateOperationsInput | string | null
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    karchag_text?: TextUpdateOneRequiredWithoutSummaryNestedInput
+  }
+
+  export type KarchagTextSummaryUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    karchag_text_id?: StringFieldUpdateOperationsInput | string
+    translation_homage_tibetan?: NullableStringFieldUpdateOperationsInput | string | null
+    translation_homage_english?: NullableStringFieldUpdateOperationsInput | string | null
+    purpose_tibetan?: NullableStringFieldUpdateOperationsInput | string | null
+    purpose_english?: NullableStringFieldUpdateOperationsInput | string | null
+    summary_text_tibetan?: NullableStringFieldUpdateOperationsInput | string | null
+    summary_text_english?: NullableStringFieldUpdateOperationsInput | string | null
+    word_meaning_tibetan?: NullableStringFieldUpdateOperationsInput | string | null
+    word_meaning_english?: NullableStringFieldUpdateOperationsInput | string | null
+    connection_tibetan?: NullableStringFieldUpdateOperationsInput | string | null
+    connection_english?: NullableStringFieldUpdateOperationsInput | string | null
+    question_answers_tibetan?: NullableStringFieldUpdateOperationsInput | string | null
+    question_answers_english?: NullableStringFieldUpdateOperationsInput | string | null
+    colophon_tibetan?: NullableStringFieldUpdateOperationsInput | string | null
+    colophon_english?: NullableStringFieldUpdateOperationsInput | string | null
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type KarchagTextSummaryCreateManyInput = {
+    id?: string
+    karchag_text_id: string
+    translation_homage_tibetan?: string | null
+    translation_homage_english?: string | null
+    purpose_tibetan?: string | null
+    purpose_english?: string | null
+    summary_text_tibetan?: string | null
+    summary_text_english?: string | null
+    word_meaning_tibetan?: string | null
+    word_meaning_english?: string | null
+    connection_tibetan?: string | null
+    connection_english?: string | null
+    question_answers_tibetan?: string | null
+    question_answers_english?: string | null
+    colophon_tibetan?: string | null
+    colophon_english?: string | null
+    created_at?: Date | string
+    updated_at?: Date | string
+  }
+
+  export type KarchagTextSummaryUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    translation_homage_tibetan?: NullableStringFieldUpdateOperationsInput | string | null
+    translation_homage_english?: NullableStringFieldUpdateOperationsInput | string | null
+    purpose_tibetan?: NullableStringFieldUpdateOperationsInput | string | null
+    purpose_english?: NullableStringFieldUpdateOperationsInput | string | null
+    summary_text_tibetan?: NullableStringFieldUpdateOperationsInput | string | null
+    summary_text_english?: NullableStringFieldUpdateOperationsInput | string | null
+    word_meaning_tibetan?: NullableStringFieldUpdateOperationsInput | string | null
+    word_meaning_english?: NullableStringFieldUpdateOperationsInput | string | null
+    connection_tibetan?: NullableStringFieldUpdateOperationsInput | string | null
+    connection_english?: NullableStringFieldUpdateOperationsInput | string | null
+    question_answers_tibetan?: NullableStringFieldUpdateOperationsInput | string | null
+    question_answers_english?: NullableStringFieldUpdateOperationsInput | string | null
+    colophon_tibetan?: NullableStringFieldUpdateOperationsInput | string | null
+    colophon_english?: NullableStringFieldUpdateOperationsInput | string | null
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type KarchagTextSummaryUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    karchag_text_id?: StringFieldUpdateOperationsInput | string
+    translation_homage_tibetan?: NullableStringFieldUpdateOperationsInput | string | null
+    translation_homage_english?: NullableStringFieldUpdateOperationsInput | string | null
+    purpose_tibetan?: NullableStringFieldUpdateOperationsInput | string | null
+    purpose_english?: NullableStringFieldUpdateOperationsInput | string | null
+    summary_text_tibetan?: NullableStringFieldUpdateOperationsInput | string | null
+    summary_text_english?: NullableStringFieldUpdateOperationsInput | string | null
+    word_meaning_tibetan?: NullableStringFieldUpdateOperationsInput | string | null
+    word_meaning_english?: NullableStringFieldUpdateOperationsInput | string | null
+    connection_tibetan?: NullableStringFieldUpdateOperationsInput | string | null
+    connection_english?: NullableStringFieldUpdateOperationsInput | string | null
+    question_answers_tibetan?: NullableStringFieldUpdateOperationsInput | string | null
+    question_answers_english?: NullableStringFieldUpdateOperationsInput | string | null
+    colophon_tibetan?: NullableStringFieldUpdateOperationsInput | string | null
+    colophon_english?: NullableStringFieldUpdateOperationsInput | string | null
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type KarchagTextMetadataCreateInput = {
+    id?: string
+    metadata_key: string
+    metadata_value: string
+    metadata_group: string
+    label?: string | null
+    order_index?: number
+    created_at?: Date | string
+    updated_at?: Date | string
+    text: TextCreateNestedOneWithoutMetadataInput
+  }
+
+  export type KarchagTextMetadataUncheckedCreateInput = {
+    id?: string
+    karchag_text_id: string
+    metadata_key: string
+    metadata_value: string
+    metadata_group: string
+    label?: string | null
+    order_index?: number
+    created_at?: Date | string
+    updated_at?: Date | string
+  }
+
+  export type KarchagTextMetadataUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    metadata_key?: StringFieldUpdateOperationsInput | string
+    metadata_value?: StringFieldUpdateOperationsInput | string
+    metadata_group?: StringFieldUpdateOperationsInput | string
+    label?: NullableStringFieldUpdateOperationsInput | string | null
+    order_index?: IntFieldUpdateOperationsInput | number
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    text?: TextUpdateOneRequiredWithoutMetadataNestedInput
+  }
+
+  export type KarchagTextMetadataUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    karchag_text_id?: StringFieldUpdateOperationsInput | string
+    metadata_key?: StringFieldUpdateOperationsInput | string
+    metadata_value?: StringFieldUpdateOperationsInput | string
+    metadata_group?: StringFieldUpdateOperationsInput | string
+    label?: NullableStringFieldUpdateOperationsInput | string | null
+    order_index?: IntFieldUpdateOperationsInput | number
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type KarchagTextMetadataCreateManyInput = {
+    id?: string
+    karchag_text_id: string
+    metadata_key: string
+    metadata_value: string
+    metadata_group: string
+    label?: string | null
+    order_index?: number
+    created_at?: Date | string
+    updated_at?: Date | string
+  }
+
+  export type KarchagTextMetadataUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    metadata_key?: StringFieldUpdateOperationsInput | string
+    metadata_value?: StringFieldUpdateOperationsInput | string
+    metadata_group?: StringFieldUpdateOperationsInput | string
+    label?: NullableStringFieldUpdateOperationsInput | string | null
+    order_index?: IntFieldUpdateOperationsInput | number
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type KarchagTextMetadataUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    karchag_text_id?: StringFieldUpdateOperationsInput | string
+    metadata_key?: StringFieldUpdateOperationsInput | string
+    metadata_value?: StringFieldUpdateOperationsInput | string
+    metadata_group?: StringFieldUpdateOperationsInput | string
+    label?: NullableStringFieldUpdateOperationsInput | string | null
+    order_index?: IntFieldUpdateOperationsInput | number
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -30426,22 +22933,12 @@ export namespace Prisma {
     none?: CatalogCategoryWhereInput
   }
 
-  export type TextListRelationFilter = {
-    every?: TextWhereInput
-    some?: TextWhereInput
-    none?: TextWhereInput
-  }
-
   export type SortOrderInput = {
     sort: SortOrder
     nulls?: NullsOrder
   }
 
   export type CatalogCategoryOrderByRelationAggregateInput = {
-    _count?: SortOrder
-  }
-
-  export type TextOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -30529,462 +23026,6 @@ export namespace Prisma {
     _sum?: NestedIntFilter<$PrismaModel>
     _min?: NestedIntFilter<$PrismaModel>
     _max?: NestedIntFilter<$PrismaModel>
-  }
-
-  export type StringNullableListFilter<$PrismaModel = never> = {
-    equals?: string[] | ListStringFieldRefInput<$PrismaModel> | null
-    has?: string | StringFieldRefInput<$PrismaModel> | null
-    hasEvery?: string[] | ListStringFieldRefInput<$PrismaModel>
-    hasSome?: string[] | ListStringFieldRefInput<$PrismaModel>
-    isEmpty?: boolean
-  }
-
-  export type TextSectionListRelationFilter = {
-    every?: TextSectionWhereInput
-    some?: TextSectionWhereInput
-    none?: TextSectionWhereInput
-  }
-
-  export type TextCollatedContentNullableScalarRelationFilter = {
-    is?: TextCollatedContentWhereInput | null
-    isNot?: TextCollatedContentWhereInput | null
-  }
-
-  export type TextMetadataListRelationFilter = {
-    every?: TextMetadataWhereInput
-    some?: TextMetadataWhereInput
-    none?: TextMetadataWhereInput
-  }
-
-  export type TextEditionListRelationFilter = {
-    every?: TextEditionWhereInput
-    some?: TextEditionWhereInput
-    none?: TextEditionWhereInput
-  }
-
-  export type TextSummaryNullableScalarRelationFilter = {
-    is?: TextSummaryWhereInput | null
-    isNot?: TextSummaryWhereInput | null
-  }
-
-  export type TextSectionOrderByRelationAggregateInput = {
-    _count?: SortOrder
-  }
-
-  export type TextMetadataOrderByRelationAggregateInput = {
-    _count?: SortOrder
-  }
-
-  export type TextEditionOrderByRelationAggregateInput = {
-    _count?: SortOrder
-  }
-
-  export type TextCountOrderByAggregateInput = {
-    id?: SortOrder
-    id_slug?: SortOrder
-    category_id?: SortOrder
-    keywords?: SortOrder
-    is_active?: SortOrder
-    order_index?: SortOrder
-    created_at?: SortOrder
-    updated_at?: SortOrder
-  }
-
-  export type TextAvgOrderByAggregateInput = {
-    order_index?: SortOrder
-  }
-
-  export type TextMaxOrderByAggregateInput = {
-    id?: SortOrder
-    id_slug?: SortOrder
-    category_id?: SortOrder
-    is_active?: SortOrder
-    order_index?: SortOrder
-    created_at?: SortOrder
-    updated_at?: SortOrder
-  }
-
-  export type TextMinOrderByAggregateInput = {
-    id?: SortOrder
-    id_slug?: SortOrder
-    category_id?: SortOrder
-    is_active?: SortOrder
-    order_index?: SortOrder
-    created_at?: SortOrder
-    updated_at?: SortOrder
-  }
-
-  export type TextSumOrderByAggregateInput = {
-    order_index?: SortOrder
-  }
-
-  export type TextScalarRelationFilter = {
-    is?: TextWhereInput
-    isNot?: TextWhereInput
-  }
-
-  export type TextSectionCountOrderByAggregateInput = {
-    id?: SortOrder
-    text_id?: SortOrder
-    section_type?: SortOrder
-    title_tibetan?: SortOrder
-    title_english?: SortOrder
-    content_tibetan?: SortOrder
-    content_english?: SortOrder
-    order_index?: SortOrder
-    created_at?: SortOrder
-    updated_at?: SortOrder
-  }
-
-  export type TextSectionAvgOrderByAggregateInput = {
-    order_index?: SortOrder
-  }
-
-  export type TextSectionMaxOrderByAggregateInput = {
-    id?: SortOrder
-    text_id?: SortOrder
-    section_type?: SortOrder
-    title_tibetan?: SortOrder
-    title_english?: SortOrder
-    content_tibetan?: SortOrder
-    content_english?: SortOrder
-    order_index?: SortOrder
-    created_at?: SortOrder
-    updated_at?: SortOrder
-  }
-
-  export type TextSectionMinOrderByAggregateInput = {
-    id?: SortOrder
-    text_id?: SortOrder
-    section_type?: SortOrder
-    title_tibetan?: SortOrder
-    title_english?: SortOrder
-    content_tibetan?: SortOrder
-    content_english?: SortOrder
-    order_index?: SortOrder
-    created_at?: SortOrder
-    updated_at?: SortOrder
-  }
-
-  export type TextSectionSumOrderByAggregateInput = {
-    order_index?: SortOrder
-  }
-
-  export type TextSummaryCountOrderByAggregateInput = {
-    id?: SortOrder
-    text_id?: SortOrder
-    translation_homage_tibetan?: SortOrder
-    translation_homage_english?: SortOrder
-    purpose_tibetan?: SortOrder
-    purpose_english?: SortOrder
-    summary_text_tibetan?: SortOrder
-    summary_text_english?: SortOrder
-    word_meaning_tibetan?: SortOrder
-    word_meaning_english?: SortOrder
-    connection_tibetan?: SortOrder
-    connection_english?: SortOrder
-    question_answers_tibetan?: SortOrder
-    question_answers_english?: SortOrder
-    colophon_tibetan?: SortOrder
-    colophon_english?: SortOrder
-    created_at?: SortOrder
-    updated_at?: SortOrder
-  }
-
-  export type TextSummaryMaxOrderByAggregateInput = {
-    id?: SortOrder
-    text_id?: SortOrder
-    translation_homage_tibetan?: SortOrder
-    translation_homage_english?: SortOrder
-    purpose_tibetan?: SortOrder
-    purpose_english?: SortOrder
-    summary_text_tibetan?: SortOrder
-    summary_text_english?: SortOrder
-    word_meaning_tibetan?: SortOrder
-    word_meaning_english?: SortOrder
-    connection_tibetan?: SortOrder
-    connection_english?: SortOrder
-    question_answers_tibetan?: SortOrder
-    question_answers_english?: SortOrder
-    colophon_tibetan?: SortOrder
-    colophon_english?: SortOrder
-    created_at?: SortOrder
-    updated_at?: SortOrder
-  }
-
-  export type TextSummaryMinOrderByAggregateInput = {
-    id?: SortOrder
-    text_id?: SortOrder
-    translation_homage_tibetan?: SortOrder
-    translation_homage_english?: SortOrder
-    purpose_tibetan?: SortOrder
-    purpose_english?: SortOrder
-    summary_text_tibetan?: SortOrder
-    summary_text_english?: SortOrder
-    word_meaning_tibetan?: SortOrder
-    word_meaning_english?: SortOrder
-    connection_tibetan?: SortOrder
-    connection_english?: SortOrder
-    question_answers_tibetan?: SortOrder
-    question_answers_english?: SortOrder
-    colophon_tibetan?: SortOrder
-    colophon_english?: SortOrder
-    created_at?: SortOrder
-    updated_at?: SortOrder
-  }
-
-  export type TextCollatedContentCountOrderByAggregateInput = {
-    id?: SortOrder
-    text_id?: SortOrder
-    collated_text?: SortOrder
-    english_translation?: SortOrder
-    created_at?: SortOrder
-    updated_at?: SortOrder
-  }
-
-  export type TextCollatedContentMaxOrderByAggregateInput = {
-    id?: SortOrder
-    text_id?: SortOrder
-    collated_text?: SortOrder
-    english_translation?: SortOrder
-    created_at?: SortOrder
-    updated_at?: SortOrder
-  }
-
-  export type TextCollatedContentMinOrderByAggregateInput = {
-    id?: SortOrder
-    text_id?: SortOrder
-    collated_text?: SortOrder
-    english_translation?: SortOrder
-    created_at?: SortOrder
-    updated_at?: SortOrder
-  }
-
-  export type IntNullableFilter<$PrismaModel = never> = {
-    equals?: number | IntFieldRefInput<$PrismaModel> | null
-    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
-    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
-    lt?: number | IntFieldRefInput<$PrismaModel>
-    lte?: number | IntFieldRefInput<$PrismaModel>
-    gt?: number | IntFieldRefInput<$PrismaModel>
-    gte?: number | IntFieldRefInput<$PrismaModel>
-    not?: NestedIntNullableFilter<$PrismaModel> | number | null
-  }
-
-  export type TextMetadataCountOrderByAggregateInput = {
-    id?: SortOrder
-    text_id?: SortOrder
-    metadata_key?: SortOrder
-    metadata_value?: SortOrder
-    metadata_group?: SortOrder
-    label?: SortOrder
-    tibetan_title?: SortOrder
-    english_title?: SortOrder
-    sanskrit_title?: SortOrder
-    chinese_title?: SortOrder
-    derge_text_id?: SortOrder
-    yeshe_text_id?: SortOrder
-    derge_vol_number?: SortOrder
-    derge_start_page?: SortOrder
-    derge_end_page?: SortOrder
-    turning?: SortOrder
-    yana?: SortOrder
-    translation_period?: SortOrder
-    order_index?: SortOrder
-    created_at?: SortOrder
-    updated_at?: SortOrder
-  }
-
-  export type TextMetadataAvgOrderByAggregateInput = {
-    derge_vol_number?: SortOrder
-    derge_start_page?: SortOrder
-    derge_end_page?: SortOrder
-    order_index?: SortOrder
-  }
-
-  export type TextMetadataMaxOrderByAggregateInput = {
-    id?: SortOrder
-    text_id?: SortOrder
-    metadata_key?: SortOrder
-    metadata_value?: SortOrder
-    metadata_group?: SortOrder
-    label?: SortOrder
-    tibetan_title?: SortOrder
-    english_title?: SortOrder
-    sanskrit_title?: SortOrder
-    chinese_title?: SortOrder
-    derge_text_id?: SortOrder
-    yeshe_text_id?: SortOrder
-    derge_vol_number?: SortOrder
-    derge_start_page?: SortOrder
-    derge_end_page?: SortOrder
-    turning?: SortOrder
-    yana?: SortOrder
-    translation_period?: SortOrder
-    order_index?: SortOrder
-    created_at?: SortOrder
-    updated_at?: SortOrder
-  }
-
-  export type TextMetadataMinOrderByAggregateInput = {
-    id?: SortOrder
-    text_id?: SortOrder
-    metadata_key?: SortOrder
-    metadata_value?: SortOrder
-    metadata_group?: SortOrder
-    label?: SortOrder
-    tibetan_title?: SortOrder
-    english_title?: SortOrder
-    sanskrit_title?: SortOrder
-    chinese_title?: SortOrder
-    derge_text_id?: SortOrder
-    yeshe_text_id?: SortOrder
-    derge_vol_number?: SortOrder
-    derge_start_page?: SortOrder
-    derge_end_page?: SortOrder
-    turning?: SortOrder
-    yana?: SortOrder
-    translation_period?: SortOrder
-    order_index?: SortOrder
-    created_at?: SortOrder
-    updated_at?: SortOrder
-  }
-
-  export type TextMetadataSumOrderByAggregateInput = {
-    derge_vol_number?: SortOrder
-    derge_start_page?: SortOrder
-    derge_end_page?: SortOrder
-    order_index?: SortOrder
-  }
-
-  export type IntNullableWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: number | IntFieldRefInput<$PrismaModel> | null
-    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
-    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
-    lt?: number | IntFieldRefInput<$PrismaModel>
-    lte?: number | IntFieldRefInput<$PrismaModel>
-    gt?: number | IntFieldRefInput<$PrismaModel>
-    gte?: number | IntFieldRefInput<$PrismaModel>
-    not?: NestedIntNullableWithAggregatesFilter<$PrismaModel> | number | null
-    _count?: NestedIntNullableFilter<$PrismaModel>
-    _avg?: NestedFloatNullableFilter<$PrismaModel>
-    _sum?: NestedIntNullableFilter<$PrismaModel>
-    _min?: NestedIntNullableFilter<$PrismaModel>
-    _max?: NestedIntNullableFilter<$PrismaModel>
-  }
-
-  export type EditionCountOrderByAggregateInput = {
-    id?: SortOrder
-    name_english?: SortOrder
-    name_tibetan?: SortOrder
-    description_english?: SortOrder
-    description_tibetan?: SortOrder
-    year?: SortOrder
-    location?: SortOrder
-    total_volumes?: SortOrder
-    total_texts?: SortOrder
-    is_active?: SortOrder
-    created_at?: SortOrder
-    updated_at?: SortOrder
-  }
-
-  export type EditionAvgOrderByAggregateInput = {
-    total_volumes?: SortOrder
-    total_texts?: SortOrder
-  }
-
-  export type EditionMaxOrderByAggregateInput = {
-    id?: SortOrder
-    name_english?: SortOrder
-    name_tibetan?: SortOrder
-    description_english?: SortOrder
-    description_tibetan?: SortOrder
-    year?: SortOrder
-    location?: SortOrder
-    total_volumes?: SortOrder
-    total_texts?: SortOrder
-    is_active?: SortOrder
-    created_at?: SortOrder
-    updated_at?: SortOrder
-  }
-
-  export type EditionMinOrderByAggregateInput = {
-    id?: SortOrder
-    name_english?: SortOrder
-    name_tibetan?: SortOrder
-    description_english?: SortOrder
-    description_tibetan?: SortOrder
-    year?: SortOrder
-    location?: SortOrder
-    total_volumes?: SortOrder
-    total_texts?: SortOrder
-    is_active?: SortOrder
-    created_at?: SortOrder
-    updated_at?: SortOrder
-  }
-
-  export type EditionSumOrderByAggregateInput = {
-    total_volumes?: SortOrder
-    total_texts?: SortOrder
-  }
-
-  export type EditionScalarRelationFilter = {
-    is?: EditionWhereInput
-    isNot?: EditionWhereInput
-  }
-
-  export type TextEditionCountOrderByAggregateInput = {
-    id?: SortOrder
-    text_id?: SortOrder
-    edition_id?: SortOrder
-    source_id?: SortOrder
-    volume_number?: SortOrder
-    start_page?: SortOrder
-    end_page?: SortOrder
-    availability?: SortOrder
-    link_url?: SortOrder
-    created_at?: SortOrder
-    updated_at?: SortOrder
-  }
-
-  export type TextEditionAvgOrderByAggregateInput = {
-    volume_number?: SortOrder
-    start_page?: SortOrder
-    end_page?: SortOrder
-  }
-
-  export type TextEditionMaxOrderByAggregateInput = {
-    id?: SortOrder
-    text_id?: SortOrder
-    edition_id?: SortOrder
-    source_id?: SortOrder
-    volume_number?: SortOrder
-    start_page?: SortOrder
-    end_page?: SortOrder
-    availability?: SortOrder
-    link_url?: SortOrder
-    created_at?: SortOrder
-    updated_at?: SortOrder
-  }
-
-  export type TextEditionMinOrderByAggregateInput = {
-    id?: SortOrder
-    text_id?: SortOrder
-    edition_id?: SortOrder
-    source_id?: SortOrder
-    volume_number?: SortOrder
-    start_page?: SortOrder
-    end_page?: SortOrder
-    availability?: SortOrder
-    link_url?: SortOrder
-    created_at?: SortOrder
-    updated_at?: SortOrder
-  }
-
-  export type TextEditionSumOrderByAggregateInput = {
-    volume_number?: SortOrder
-    start_page?: SortOrder
-    end_page?: SortOrder
   }
 
   export type DateTimeNullableFilter<$PrismaModel = never> = {
@@ -31107,6 +23148,17 @@ export namespace Prisma {
     end_year?: SortOrder
   }
 
+  export type IntNullableFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntNullableFilter<$PrismaModel> | number | null
+  }
+
   export type TimelinePeriodScalarRelationFilter = {
     is?: TimelinePeriodWhereInput
     isNot?: TimelinePeriodWhereInput
@@ -31215,6 +23267,22 @@ export namespace Prisma {
     year?: SortOrder
     century?: SortOrder
     order_index?: SortOrder
+  }
+
+  export type IntNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntNullableWithAggregatesFilter<$PrismaModel> | number | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _avg?: NestedFloatNullableFilter<$PrismaModel>
+    _sum?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedIntNullableFilter<$PrismaModel>
+    _max?: NestedIntNullableFilter<$PrismaModel>
   }
 
   export type TimelineEventScalarRelationFilter = {
@@ -31457,13 +23525,13 @@ export namespace Prisma {
     isNot?: KarchagMainCategoryWhereInput
   }
 
-  export type KarchagTextListRelationFilter = {
-    every?: KarchagTextWhereInput
-    some?: KarchagTextWhereInput
-    none?: KarchagTextWhereInput
+  export type TextListRelationFilter = {
+    every?: TextWhereInput
+    some?: TextWhereInput
+    none?: TextWhereInput
   }
 
-  export type KarchagTextOrderByRelationAggregateInput = {
+  export type TextOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -31478,6 +23546,8 @@ export namespace Prisma {
     is_active?: SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
+    only_content?: SortOrder
+    content?: SortOrder
   }
 
   export type KarchagSubCategoryAvgOrderByAggregateInput = {
@@ -31495,6 +23565,8 @@ export namespace Prisma {
     is_active?: SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
+    only_content?: SortOrder
+    content?: SortOrder
   }
 
   export type KarchagSubCategoryMinOrderByAggregateInput = {
@@ -31508,6 +23580,8 @@ export namespace Prisma {
     is_active?: SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
+    only_content?: SortOrder
+    content?: SortOrder
   }
 
   export type KarchagSubCategorySumOrderByAggregateInput = {
@@ -31519,71 +23593,204 @@ export namespace Prisma {
     isNot?: KarchagSubCategoryWhereInput
   }
 
-  export type KarchagTextCountOrderByAggregateInput = {
+  export type KarchagTextSummaryNullableScalarRelationFilter = {
+    is?: KarchagTextSummaryWhereInput | null
+    isNot?: KarchagTextSummaryWhereInput | null
+  }
+
+  export type KarchagTextMetadataListRelationFilter = {
+    every?: KarchagTextMetadataWhereInput
+    some?: KarchagTextMetadataWhereInput
+    none?: KarchagTextMetadataWhereInput
+  }
+
+  export type KarchagTextMetadataOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type TextCountOrderByAggregateInput = {
     id?: SortOrder
     sub_category_id?: SortOrder
-    derge_id?: SortOrder
-    yeshe_de_id?: SortOrder
     tibetan_title?: SortOrder
     chinese_title?: SortOrder
     sanskrit_title?: SortOrder
     english_title?: SortOrder
-    turning_id?: SortOrder
-    yana_id?: SortOrder
-    translation_period_id?: SortOrder
+    derge_id?: SortOrder
+    yeshe_de_id?: SortOrder
+    yeshe_de_volume_number?: SortOrder
+    yeshe_de_page_start?: SortOrder
+    yeshe_de_page_end?: SortOrder
+    turning?: SortOrder
+    yana?: SortOrder
+    translation_period?: SortOrder
+    pdf_url?: SortOrder
     order_index?: SortOrder
     is_active?: SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
   }
 
-  export type KarchagTextAvgOrderByAggregateInput = {
-    turning_id?: SortOrder
-    yana_id?: SortOrder
-    translation_period_id?: SortOrder
+  export type TextAvgOrderByAggregateInput = {
     order_index?: SortOrder
   }
 
-  export type KarchagTextMaxOrderByAggregateInput = {
+  export type TextMaxOrderByAggregateInput = {
     id?: SortOrder
     sub_category_id?: SortOrder
-    derge_id?: SortOrder
-    yeshe_de_id?: SortOrder
     tibetan_title?: SortOrder
     chinese_title?: SortOrder
     sanskrit_title?: SortOrder
     english_title?: SortOrder
-    turning_id?: SortOrder
-    yana_id?: SortOrder
-    translation_period_id?: SortOrder
+    derge_id?: SortOrder
+    yeshe_de_id?: SortOrder
+    yeshe_de_volume_number?: SortOrder
+    yeshe_de_page_start?: SortOrder
+    yeshe_de_page_end?: SortOrder
+    turning?: SortOrder
+    yana?: SortOrder
+    translation_period?: SortOrder
+    pdf_url?: SortOrder
     order_index?: SortOrder
     is_active?: SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
   }
 
-  export type KarchagTextMinOrderByAggregateInput = {
+  export type TextMinOrderByAggregateInput = {
     id?: SortOrder
     sub_category_id?: SortOrder
-    derge_id?: SortOrder
-    yeshe_de_id?: SortOrder
     tibetan_title?: SortOrder
     chinese_title?: SortOrder
     sanskrit_title?: SortOrder
     english_title?: SortOrder
-    turning_id?: SortOrder
-    yana_id?: SortOrder
-    translation_period_id?: SortOrder
+    derge_id?: SortOrder
+    yeshe_de_id?: SortOrder
+    yeshe_de_volume_number?: SortOrder
+    yeshe_de_page_start?: SortOrder
+    yeshe_de_page_end?: SortOrder
+    turning?: SortOrder
+    yana?: SortOrder
+    translation_period?: SortOrder
+    pdf_url?: SortOrder
     order_index?: SortOrder
     is_active?: SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
   }
 
-  export type KarchagTextSumOrderByAggregateInput = {
-    turning_id?: SortOrder
-    yana_id?: SortOrder
-    translation_period_id?: SortOrder
+  export type TextSumOrderByAggregateInput = {
+    order_index?: SortOrder
+  }
+
+  export type TextScalarRelationFilter = {
+    is?: TextWhereInput
+    isNot?: TextWhereInput
+  }
+
+  export type KarchagTextSummaryCountOrderByAggregateInput = {
+    id?: SortOrder
+    karchag_text_id?: SortOrder
+    translation_homage_tibetan?: SortOrder
+    translation_homage_english?: SortOrder
+    purpose_tibetan?: SortOrder
+    purpose_english?: SortOrder
+    summary_text_tibetan?: SortOrder
+    summary_text_english?: SortOrder
+    word_meaning_tibetan?: SortOrder
+    word_meaning_english?: SortOrder
+    connection_tibetan?: SortOrder
+    connection_english?: SortOrder
+    question_answers_tibetan?: SortOrder
+    question_answers_english?: SortOrder
+    colophon_tibetan?: SortOrder
+    colophon_english?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
+  }
+
+  export type KarchagTextSummaryMaxOrderByAggregateInput = {
+    id?: SortOrder
+    karchag_text_id?: SortOrder
+    translation_homage_tibetan?: SortOrder
+    translation_homage_english?: SortOrder
+    purpose_tibetan?: SortOrder
+    purpose_english?: SortOrder
+    summary_text_tibetan?: SortOrder
+    summary_text_english?: SortOrder
+    word_meaning_tibetan?: SortOrder
+    word_meaning_english?: SortOrder
+    connection_tibetan?: SortOrder
+    connection_english?: SortOrder
+    question_answers_tibetan?: SortOrder
+    question_answers_english?: SortOrder
+    colophon_tibetan?: SortOrder
+    colophon_english?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
+  }
+
+  export type KarchagTextSummaryMinOrderByAggregateInput = {
+    id?: SortOrder
+    karchag_text_id?: SortOrder
+    translation_homage_tibetan?: SortOrder
+    translation_homage_english?: SortOrder
+    purpose_tibetan?: SortOrder
+    purpose_english?: SortOrder
+    summary_text_tibetan?: SortOrder
+    summary_text_english?: SortOrder
+    word_meaning_tibetan?: SortOrder
+    word_meaning_english?: SortOrder
+    connection_tibetan?: SortOrder
+    connection_english?: SortOrder
+    question_answers_tibetan?: SortOrder
+    question_answers_english?: SortOrder
+    colophon_tibetan?: SortOrder
+    colophon_english?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
+  }
+
+  export type KarchagTextMetadataCountOrderByAggregateInput = {
+    id?: SortOrder
+    karchag_text_id?: SortOrder
+    metadata_key?: SortOrder
+    metadata_value?: SortOrder
+    metadata_group?: SortOrder
+    label?: SortOrder
+    order_index?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
+  }
+
+  export type KarchagTextMetadataAvgOrderByAggregateInput = {
+    order_index?: SortOrder
+  }
+
+  export type KarchagTextMetadataMaxOrderByAggregateInput = {
+    id?: SortOrder
+    karchag_text_id?: SortOrder
+    metadata_key?: SortOrder
+    metadata_value?: SortOrder
+    metadata_group?: SortOrder
+    label?: SortOrder
+    order_index?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
+  }
+
+  export type KarchagTextMetadataMinOrderByAggregateInput = {
+    id?: SortOrder
+    karchag_text_id?: SortOrder
+    metadata_key?: SortOrder
+    metadata_value?: SortOrder
+    metadata_group?: SortOrder
+    label?: SortOrder
+    order_index?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
+  }
+
+  export type KarchagTextMetadataSumOrderByAggregateInput = {
     order_index?: SortOrder
   }
 
@@ -31612,25 +23819,11 @@ export namespace Prisma {
     connect?: CatalogCategoryWhereUniqueInput | CatalogCategoryWhereUniqueInput[]
   }
 
-  export type TextCreateNestedManyWithoutCategoryInput = {
-    create?: XOR<TextCreateWithoutCategoryInput, TextUncheckedCreateWithoutCategoryInput> | TextCreateWithoutCategoryInput[] | TextUncheckedCreateWithoutCategoryInput[]
-    connectOrCreate?: TextCreateOrConnectWithoutCategoryInput | TextCreateOrConnectWithoutCategoryInput[]
-    createMany?: TextCreateManyCategoryInputEnvelope
-    connect?: TextWhereUniqueInput | TextWhereUniqueInput[]
-  }
-
   export type CatalogCategoryUncheckedCreateNestedManyWithoutParentInput = {
     create?: XOR<CatalogCategoryCreateWithoutParentInput, CatalogCategoryUncheckedCreateWithoutParentInput> | CatalogCategoryCreateWithoutParentInput[] | CatalogCategoryUncheckedCreateWithoutParentInput[]
     connectOrCreate?: CatalogCategoryCreateOrConnectWithoutParentInput | CatalogCategoryCreateOrConnectWithoutParentInput[]
     createMany?: CatalogCategoryCreateManyParentInputEnvelope
     connect?: CatalogCategoryWhereUniqueInput | CatalogCategoryWhereUniqueInput[]
-  }
-
-  export type TextUncheckedCreateNestedManyWithoutCategoryInput = {
-    create?: XOR<TextCreateWithoutCategoryInput, TextUncheckedCreateWithoutCategoryInput> | TextCreateWithoutCategoryInput[] | TextUncheckedCreateWithoutCategoryInput[]
-    connectOrCreate?: TextCreateOrConnectWithoutCategoryInput | TextCreateOrConnectWithoutCategoryInput[]
-    createMany?: TextCreateManyCategoryInputEnvelope
-    connect?: TextWhereUniqueInput | TextWhereUniqueInput[]
   }
 
   export type NullableStringFieldUpdateOperationsInput = {
@@ -31669,20 +23862,6 @@ export namespace Prisma {
     deleteMany?: CatalogCategoryScalarWhereInput | CatalogCategoryScalarWhereInput[]
   }
 
-  export type TextUpdateManyWithoutCategoryNestedInput = {
-    create?: XOR<TextCreateWithoutCategoryInput, TextUncheckedCreateWithoutCategoryInput> | TextCreateWithoutCategoryInput[] | TextUncheckedCreateWithoutCategoryInput[]
-    connectOrCreate?: TextCreateOrConnectWithoutCategoryInput | TextCreateOrConnectWithoutCategoryInput[]
-    upsert?: TextUpsertWithWhereUniqueWithoutCategoryInput | TextUpsertWithWhereUniqueWithoutCategoryInput[]
-    createMany?: TextCreateManyCategoryInputEnvelope
-    set?: TextWhereUniqueInput | TextWhereUniqueInput[]
-    disconnect?: TextWhereUniqueInput | TextWhereUniqueInput[]
-    delete?: TextWhereUniqueInput | TextWhereUniqueInput[]
-    connect?: TextWhereUniqueInput | TextWhereUniqueInput[]
-    update?: TextUpdateWithWhereUniqueWithoutCategoryInput | TextUpdateWithWhereUniqueWithoutCategoryInput[]
-    updateMany?: TextUpdateManyWithWhereWithoutCategoryInput | TextUpdateManyWithWhereWithoutCategoryInput[]
-    deleteMany?: TextScalarWhereInput | TextScalarWhereInput[]
-  }
-
   export type CatalogCategoryUncheckedUpdateManyWithoutParentNestedInput = {
     create?: XOR<CatalogCategoryCreateWithoutParentInput, CatalogCategoryUncheckedCreateWithoutParentInput> | CatalogCategoryCreateWithoutParentInput[] | CatalogCategoryUncheckedCreateWithoutParentInput[]
     connectOrCreate?: CatalogCategoryCreateOrConnectWithoutParentInput | CatalogCategoryCreateOrConnectWithoutParentInput[]
@@ -31695,369 +23874,6 @@ export namespace Prisma {
     update?: CatalogCategoryUpdateWithWhereUniqueWithoutParentInput | CatalogCategoryUpdateWithWhereUniqueWithoutParentInput[]
     updateMany?: CatalogCategoryUpdateManyWithWhereWithoutParentInput | CatalogCategoryUpdateManyWithWhereWithoutParentInput[]
     deleteMany?: CatalogCategoryScalarWhereInput | CatalogCategoryScalarWhereInput[]
-  }
-
-  export type TextUncheckedUpdateManyWithoutCategoryNestedInput = {
-    create?: XOR<TextCreateWithoutCategoryInput, TextUncheckedCreateWithoutCategoryInput> | TextCreateWithoutCategoryInput[] | TextUncheckedCreateWithoutCategoryInput[]
-    connectOrCreate?: TextCreateOrConnectWithoutCategoryInput | TextCreateOrConnectWithoutCategoryInput[]
-    upsert?: TextUpsertWithWhereUniqueWithoutCategoryInput | TextUpsertWithWhereUniqueWithoutCategoryInput[]
-    createMany?: TextCreateManyCategoryInputEnvelope
-    set?: TextWhereUniqueInput | TextWhereUniqueInput[]
-    disconnect?: TextWhereUniqueInput | TextWhereUniqueInput[]
-    delete?: TextWhereUniqueInput | TextWhereUniqueInput[]
-    connect?: TextWhereUniqueInput | TextWhereUniqueInput[]
-    update?: TextUpdateWithWhereUniqueWithoutCategoryInput | TextUpdateWithWhereUniqueWithoutCategoryInput[]
-    updateMany?: TextUpdateManyWithWhereWithoutCategoryInput | TextUpdateManyWithWhereWithoutCategoryInput[]
-    deleteMany?: TextScalarWhereInput | TextScalarWhereInput[]
-  }
-
-  export type TextCreatekeywordsInput = {
-    set: string[]
-  }
-
-  export type CatalogCategoryCreateNestedOneWithoutTextsInput = {
-    create?: XOR<CatalogCategoryCreateWithoutTextsInput, CatalogCategoryUncheckedCreateWithoutTextsInput>
-    connectOrCreate?: CatalogCategoryCreateOrConnectWithoutTextsInput
-    connect?: CatalogCategoryWhereUniqueInput
-  }
-
-  export type TextSectionCreateNestedManyWithoutTextInput = {
-    create?: XOR<TextSectionCreateWithoutTextInput, TextSectionUncheckedCreateWithoutTextInput> | TextSectionCreateWithoutTextInput[] | TextSectionUncheckedCreateWithoutTextInput[]
-    connectOrCreate?: TextSectionCreateOrConnectWithoutTextInput | TextSectionCreateOrConnectWithoutTextInput[]
-    createMany?: TextSectionCreateManyTextInputEnvelope
-    connect?: TextSectionWhereUniqueInput | TextSectionWhereUniqueInput[]
-  }
-
-  export type TextCollatedContentCreateNestedOneWithoutTextInput = {
-    create?: XOR<TextCollatedContentCreateWithoutTextInput, TextCollatedContentUncheckedCreateWithoutTextInput>
-    connectOrCreate?: TextCollatedContentCreateOrConnectWithoutTextInput
-    connect?: TextCollatedContentWhereUniqueInput
-  }
-
-  export type TextMetadataCreateNestedManyWithoutTextInput = {
-    create?: XOR<TextMetadataCreateWithoutTextInput, TextMetadataUncheckedCreateWithoutTextInput> | TextMetadataCreateWithoutTextInput[] | TextMetadataUncheckedCreateWithoutTextInput[]
-    connectOrCreate?: TextMetadataCreateOrConnectWithoutTextInput | TextMetadataCreateOrConnectWithoutTextInput[]
-    createMany?: TextMetadataCreateManyTextInputEnvelope
-    connect?: TextMetadataWhereUniqueInput | TextMetadataWhereUniqueInput[]
-  }
-
-  export type TextEditionCreateNestedManyWithoutTextInput = {
-    create?: XOR<TextEditionCreateWithoutTextInput, TextEditionUncheckedCreateWithoutTextInput> | TextEditionCreateWithoutTextInput[] | TextEditionUncheckedCreateWithoutTextInput[]
-    connectOrCreate?: TextEditionCreateOrConnectWithoutTextInput | TextEditionCreateOrConnectWithoutTextInput[]
-    createMany?: TextEditionCreateManyTextInputEnvelope
-    connect?: TextEditionWhereUniqueInput | TextEditionWhereUniqueInput[]
-  }
-
-  export type TextSummaryCreateNestedOneWithoutTextInput = {
-    create?: XOR<TextSummaryCreateWithoutTextInput, TextSummaryUncheckedCreateWithoutTextInput>
-    connectOrCreate?: TextSummaryCreateOrConnectWithoutTextInput
-    connect?: TextSummaryWhereUniqueInput
-  }
-
-  export type TextSectionUncheckedCreateNestedManyWithoutTextInput = {
-    create?: XOR<TextSectionCreateWithoutTextInput, TextSectionUncheckedCreateWithoutTextInput> | TextSectionCreateWithoutTextInput[] | TextSectionUncheckedCreateWithoutTextInput[]
-    connectOrCreate?: TextSectionCreateOrConnectWithoutTextInput | TextSectionCreateOrConnectWithoutTextInput[]
-    createMany?: TextSectionCreateManyTextInputEnvelope
-    connect?: TextSectionWhereUniqueInput | TextSectionWhereUniqueInput[]
-  }
-
-  export type TextCollatedContentUncheckedCreateNestedOneWithoutTextInput = {
-    create?: XOR<TextCollatedContentCreateWithoutTextInput, TextCollatedContentUncheckedCreateWithoutTextInput>
-    connectOrCreate?: TextCollatedContentCreateOrConnectWithoutTextInput
-    connect?: TextCollatedContentWhereUniqueInput
-  }
-
-  export type TextMetadataUncheckedCreateNestedManyWithoutTextInput = {
-    create?: XOR<TextMetadataCreateWithoutTextInput, TextMetadataUncheckedCreateWithoutTextInput> | TextMetadataCreateWithoutTextInput[] | TextMetadataUncheckedCreateWithoutTextInput[]
-    connectOrCreate?: TextMetadataCreateOrConnectWithoutTextInput | TextMetadataCreateOrConnectWithoutTextInput[]
-    createMany?: TextMetadataCreateManyTextInputEnvelope
-    connect?: TextMetadataWhereUniqueInput | TextMetadataWhereUniqueInput[]
-  }
-
-  export type TextEditionUncheckedCreateNestedManyWithoutTextInput = {
-    create?: XOR<TextEditionCreateWithoutTextInput, TextEditionUncheckedCreateWithoutTextInput> | TextEditionCreateWithoutTextInput[] | TextEditionUncheckedCreateWithoutTextInput[]
-    connectOrCreate?: TextEditionCreateOrConnectWithoutTextInput | TextEditionCreateOrConnectWithoutTextInput[]
-    createMany?: TextEditionCreateManyTextInputEnvelope
-    connect?: TextEditionWhereUniqueInput | TextEditionWhereUniqueInput[]
-  }
-
-  export type TextSummaryUncheckedCreateNestedOneWithoutTextInput = {
-    create?: XOR<TextSummaryCreateWithoutTextInput, TextSummaryUncheckedCreateWithoutTextInput>
-    connectOrCreate?: TextSummaryCreateOrConnectWithoutTextInput
-    connect?: TextSummaryWhereUniqueInput
-  }
-
-  export type TextUpdatekeywordsInput = {
-    set?: string[]
-    push?: string | string[]
-  }
-
-  export type CatalogCategoryUpdateOneWithoutTextsNestedInput = {
-    create?: XOR<CatalogCategoryCreateWithoutTextsInput, CatalogCategoryUncheckedCreateWithoutTextsInput>
-    connectOrCreate?: CatalogCategoryCreateOrConnectWithoutTextsInput
-    upsert?: CatalogCategoryUpsertWithoutTextsInput
-    disconnect?: CatalogCategoryWhereInput | boolean
-    delete?: CatalogCategoryWhereInput | boolean
-    connect?: CatalogCategoryWhereUniqueInput
-    update?: XOR<XOR<CatalogCategoryUpdateToOneWithWhereWithoutTextsInput, CatalogCategoryUpdateWithoutTextsInput>, CatalogCategoryUncheckedUpdateWithoutTextsInput>
-  }
-
-  export type TextSectionUpdateManyWithoutTextNestedInput = {
-    create?: XOR<TextSectionCreateWithoutTextInput, TextSectionUncheckedCreateWithoutTextInput> | TextSectionCreateWithoutTextInput[] | TextSectionUncheckedCreateWithoutTextInput[]
-    connectOrCreate?: TextSectionCreateOrConnectWithoutTextInput | TextSectionCreateOrConnectWithoutTextInput[]
-    upsert?: TextSectionUpsertWithWhereUniqueWithoutTextInput | TextSectionUpsertWithWhereUniqueWithoutTextInput[]
-    createMany?: TextSectionCreateManyTextInputEnvelope
-    set?: TextSectionWhereUniqueInput | TextSectionWhereUniqueInput[]
-    disconnect?: TextSectionWhereUniqueInput | TextSectionWhereUniqueInput[]
-    delete?: TextSectionWhereUniqueInput | TextSectionWhereUniqueInput[]
-    connect?: TextSectionWhereUniqueInput | TextSectionWhereUniqueInput[]
-    update?: TextSectionUpdateWithWhereUniqueWithoutTextInput | TextSectionUpdateWithWhereUniqueWithoutTextInput[]
-    updateMany?: TextSectionUpdateManyWithWhereWithoutTextInput | TextSectionUpdateManyWithWhereWithoutTextInput[]
-    deleteMany?: TextSectionScalarWhereInput | TextSectionScalarWhereInput[]
-  }
-
-  export type TextCollatedContentUpdateOneWithoutTextNestedInput = {
-    create?: XOR<TextCollatedContentCreateWithoutTextInput, TextCollatedContentUncheckedCreateWithoutTextInput>
-    connectOrCreate?: TextCollatedContentCreateOrConnectWithoutTextInput
-    upsert?: TextCollatedContentUpsertWithoutTextInput
-    disconnect?: TextCollatedContentWhereInput | boolean
-    delete?: TextCollatedContentWhereInput | boolean
-    connect?: TextCollatedContentWhereUniqueInput
-    update?: XOR<XOR<TextCollatedContentUpdateToOneWithWhereWithoutTextInput, TextCollatedContentUpdateWithoutTextInput>, TextCollatedContentUncheckedUpdateWithoutTextInput>
-  }
-
-  export type TextMetadataUpdateManyWithoutTextNestedInput = {
-    create?: XOR<TextMetadataCreateWithoutTextInput, TextMetadataUncheckedCreateWithoutTextInput> | TextMetadataCreateWithoutTextInput[] | TextMetadataUncheckedCreateWithoutTextInput[]
-    connectOrCreate?: TextMetadataCreateOrConnectWithoutTextInput | TextMetadataCreateOrConnectWithoutTextInput[]
-    upsert?: TextMetadataUpsertWithWhereUniqueWithoutTextInput | TextMetadataUpsertWithWhereUniqueWithoutTextInput[]
-    createMany?: TextMetadataCreateManyTextInputEnvelope
-    set?: TextMetadataWhereUniqueInput | TextMetadataWhereUniqueInput[]
-    disconnect?: TextMetadataWhereUniqueInput | TextMetadataWhereUniqueInput[]
-    delete?: TextMetadataWhereUniqueInput | TextMetadataWhereUniqueInput[]
-    connect?: TextMetadataWhereUniqueInput | TextMetadataWhereUniqueInput[]
-    update?: TextMetadataUpdateWithWhereUniqueWithoutTextInput | TextMetadataUpdateWithWhereUniqueWithoutTextInput[]
-    updateMany?: TextMetadataUpdateManyWithWhereWithoutTextInput | TextMetadataUpdateManyWithWhereWithoutTextInput[]
-    deleteMany?: TextMetadataScalarWhereInput | TextMetadataScalarWhereInput[]
-  }
-
-  export type TextEditionUpdateManyWithoutTextNestedInput = {
-    create?: XOR<TextEditionCreateWithoutTextInput, TextEditionUncheckedCreateWithoutTextInput> | TextEditionCreateWithoutTextInput[] | TextEditionUncheckedCreateWithoutTextInput[]
-    connectOrCreate?: TextEditionCreateOrConnectWithoutTextInput | TextEditionCreateOrConnectWithoutTextInput[]
-    upsert?: TextEditionUpsertWithWhereUniqueWithoutTextInput | TextEditionUpsertWithWhereUniqueWithoutTextInput[]
-    createMany?: TextEditionCreateManyTextInputEnvelope
-    set?: TextEditionWhereUniqueInput | TextEditionWhereUniqueInput[]
-    disconnect?: TextEditionWhereUniqueInput | TextEditionWhereUniqueInput[]
-    delete?: TextEditionWhereUniqueInput | TextEditionWhereUniqueInput[]
-    connect?: TextEditionWhereUniqueInput | TextEditionWhereUniqueInput[]
-    update?: TextEditionUpdateWithWhereUniqueWithoutTextInput | TextEditionUpdateWithWhereUniqueWithoutTextInput[]
-    updateMany?: TextEditionUpdateManyWithWhereWithoutTextInput | TextEditionUpdateManyWithWhereWithoutTextInput[]
-    deleteMany?: TextEditionScalarWhereInput | TextEditionScalarWhereInput[]
-  }
-
-  export type TextSummaryUpdateOneWithoutTextNestedInput = {
-    create?: XOR<TextSummaryCreateWithoutTextInput, TextSummaryUncheckedCreateWithoutTextInput>
-    connectOrCreate?: TextSummaryCreateOrConnectWithoutTextInput
-    upsert?: TextSummaryUpsertWithoutTextInput
-    disconnect?: TextSummaryWhereInput | boolean
-    delete?: TextSummaryWhereInput | boolean
-    connect?: TextSummaryWhereUniqueInput
-    update?: XOR<XOR<TextSummaryUpdateToOneWithWhereWithoutTextInput, TextSummaryUpdateWithoutTextInput>, TextSummaryUncheckedUpdateWithoutTextInput>
-  }
-
-  export type TextSectionUncheckedUpdateManyWithoutTextNestedInput = {
-    create?: XOR<TextSectionCreateWithoutTextInput, TextSectionUncheckedCreateWithoutTextInput> | TextSectionCreateWithoutTextInput[] | TextSectionUncheckedCreateWithoutTextInput[]
-    connectOrCreate?: TextSectionCreateOrConnectWithoutTextInput | TextSectionCreateOrConnectWithoutTextInput[]
-    upsert?: TextSectionUpsertWithWhereUniqueWithoutTextInput | TextSectionUpsertWithWhereUniqueWithoutTextInput[]
-    createMany?: TextSectionCreateManyTextInputEnvelope
-    set?: TextSectionWhereUniqueInput | TextSectionWhereUniqueInput[]
-    disconnect?: TextSectionWhereUniqueInput | TextSectionWhereUniqueInput[]
-    delete?: TextSectionWhereUniqueInput | TextSectionWhereUniqueInput[]
-    connect?: TextSectionWhereUniqueInput | TextSectionWhereUniqueInput[]
-    update?: TextSectionUpdateWithWhereUniqueWithoutTextInput | TextSectionUpdateWithWhereUniqueWithoutTextInput[]
-    updateMany?: TextSectionUpdateManyWithWhereWithoutTextInput | TextSectionUpdateManyWithWhereWithoutTextInput[]
-    deleteMany?: TextSectionScalarWhereInput | TextSectionScalarWhereInput[]
-  }
-
-  export type TextCollatedContentUncheckedUpdateOneWithoutTextNestedInput = {
-    create?: XOR<TextCollatedContentCreateWithoutTextInput, TextCollatedContentUncheckedCreateWithoutTextInput>
-    connectOrCreate?: TextCollatedContentCreateOrConnectWithoutTextInput
-    upsert?: TextCollatedContentUpsertWithoutTextInput
-    disconnect?: TextCollatedContentWhereInput | boolean
-    delete?: TextCollatedContentWhereInput | boolean
-    connect?: TextCollatedContentWhereUniqueInput
-    update?: XOR<XOR<TextCollatedContentUpdateToOneWithWhereWithoutTextInput, TextCollatedContentUpdateWithoutTextInput>, TextCollatedContentUncheckedUpdateWithoutTextInput>
-  }
-
-  export type TextMetadataUncheckedUpdateManyWithoutTextNestedInput = {
-    create?: XOR<TextMetadataCreateWithoutTextInput, TextMetadataUncheckedCreateWithoutTextInput> | TextMetadataCreateWithoutTextInput[] | TextMetadataUncheckedCreateWithoutTextInput[]
-    connectOrCreate?: TextMetadataCreateOrConnectWithoutTextInput | TextMetadataCreateOrConnectWithoutTextInput[]
-    upsert?: TextMetadataUpsertWithWhereUniqueWithoutTextInput | TextMetadataUpsertWithWhereUniqueWithoutTextInput[]
-    createMany?: TextMetadataCreateManyTextInputEnvelope
-    set?: TextMetadataWhereUniqueInput | TextMetadataWhereUniqueInput[]
-    disconnect?: TextMetadataWhereUniqueInput | TextMetadataWhereUniqueInput[]
-    delete?: TextMetadataWhereUniqueInput | TextMetadataWhereUniqueInput[]
-    connect?: TextMetadataWhereUniqueInput | TextMetadataWhereUniqueInput[]
-    update?: TextMetadataUpdateWithWhereUniqueWithoutTextInput | TextMetadataUpdateWithWhereUniqueWithoutTextInput[]
-    updateMany?: TextMetadataUpdateManyWithWhereWithoutTextInput | TextMetadataUpdateManyWithWhereWithoutTextInput[]
-    deleteMany?: TextMetadataScalarWhereInput | TextMetadataScalarWhereInput[]
-  }
-
-  export type TextEditionUncheckedUpdateManyWithoutTextNestedInput = {
-    create?: XOR<TextEditionCreateWithoutTextInput, TextEditionUncheckedCreateWithoutTextInput> | TextEditionCreateWithoutTextInput[] | TextEditionUncheckedCreateWithoutTextInput[]
-    connectOrCreate?: TextEditionCreateOrConnectWithoutTextInput | TextEditionCreateOrConnectWithoutTextInput[]
-    upsert?: TextEditionUpsertWithWhereUniqueWithoutTextInput | TextEditionUpsertWithWhereUniqueWithoutTextInput[]
-    createMany?: TextEditionCreateManyTextInputEnvelope
-    set?: TextEditionWhereUniqueInput | TextEditionWhereUniqueInput[]
-    disconnect?: TextEditionWhereUniqueInput | TextEditionWhereUniqueInput[]
-    delete?: TextEditionWhereUniqueInput | TextEditionWhereUniqueInput[]
-    connect?: TextEditionWhereUniqueInput | TextEditionWhereUniqueInput[]
-    update?: TextEditionUpdateWithWhereUniqueWithoutTextInput | TextEditionUpdateWithWhereUniqueWithoutTextInput[]
-    updateMany?: TextEditionUpdateManyWithWhereWithoutTextInput | TextEditionUpdateManyWithWhereWithoutTextInput[]
-    deleteMany?: TextEditionScalarWhereInput | TextEditionScalarWhereInput[]
-  }
-
-  export type TextSummaryUncheckedUpdateOneWithoutTextNestedInput = {
-    create?: XOR<TextSummaryCreateWithoutTextInput, TextSummaryUncheckedCreateWithoutTextInput>
-    connectOrCreate?: TextSummaryCreateOrConnectWithoutTextInput
-    upsert?: TextSummaryUpsertWithoutTextInput
-    disconnect?: TextSummaryWhereInput | boolean
-    delete?: TextSummaryWhereInput | boolean
-    connect?: TextSummaryWhereUniqueInput
-    update?: XOR<XOR<TextSummaryUpdateToOneWithWhereWithoutTextInput, TextSummaryUpdateWithoutTextInput>, TextSummaryUncheckedUpdateWithoutTextInput>
-  }
-
-  export type TextCreateNestedOneWithoutSectionsInput = {
-    create?: XOR<TextCreateWithoutSectionsInput, TextUncheckedCreateWithoutSectionsInput>
-    connectOrCreate?: TextCreateOrConnectWithoutSectionsInput
-    connect?: TextWhereUniqueInput
-  }
-
-  export type TextUpdateOneRequiredWithoutSectionsNestedInput = {
-    create?: XOR<TextCreateWithoutSectionsInput, TextUncheckedCreateWithoutSectionsInput>
-    connectOrCreate?: TextCreateOrConnectWithoutSectionsInput
-    upsert?: TextUpsertWithoutSectionsInput
-    connect?: TextWhereUniqueInput
-    update?: XOR<XOR<TextUpdateToOneWithWhereWithoutSectionsInput, TextUpdateWithoutSectionsInput>, TextUncheckedUpdateWithoutSectionsInput>
-  }
-
-  export type TextCreateNestedOneWithoutSummaryInput = {
-    create?: XOR<TextCreateWithoutSummaryInput, TextUncheckedCreateWithoutSummaryInput>
-    connectOrCreate?: TextCreateOrConnectWithoutSummaryInput
-    connect?: TextWhereUniqueInput
-  }
-
-  export type TextUpdateOneRequiredWithoutSummaryNestedInput = {
-    create?: XOR<TextCreateWithoutSummaryInput, TextUncheckedCreateWithoutSummaryInput>
-    connectOrCreate?: TextCreateOrConnectWithoutSummaryInput
-    upsert?: TextUpsertWithoutSummaryInput
-    connect?: TextWhereUniqueInput
-    update?: XOR<XOR<TextUpdateToOneWithWhereWithoutSummaryInput, TextUpdateWithoutSummaryInput>, TextUncheckedUpdateWithoutSummaryInput>
-  }
-
-  export type TextCreateNestedOneWithoutCollatedContentInput = {
-    create?: XOR<TextCreateWithoutCollatedContentInput, TextUncheckedCreateWithoutCollatedContentInput>
-    connectOrCreate?: TextCreateOrConnectWithoutCollatedContentInput
-    connect?: TextWhereUniqueInput
-  }
-
-  export type TextUpdateOneRequiredWithoutCollatedContentNestedInput = {
-    create?: XOR<TextCreateWithoutCollatedContentInput, TextUncheckedCreateWithoutCollatedContentInput>
-    connectOrCreate?: TextCreateOrConnectWithoutCollatedContentInput
-    upsert?: TextUpsertWithoutCollatedContentInput
-    connect?: TextWhereUniqueInput
-    update?: XOR<XOR<TextUpdateToOneWithWhereWithoutCollatedContentInput, TextUpdateWithoutCollatedContentInput>, TextUncheckedUpdateWithoutCollatedContentInput>
-  }
-
-  export type TextCreateNestedOneWithoutMetadataInput = {
-    create?: XOR<TextCreateWithoutMetadataInput, TextUncheckedCreateWithoutMetadataInput>
-    connectOrCreate?: TextCreateOrConnectWithoutMetadataInput
-    connect?: TextWhereUniqueInput
-  }
-
-  export type NullableIntFieldUpdateOperationsInput = {
-    set?: number | null
-    increment?: number
-    decrement?: number
-    multiply?: number
-    divide?: number
-  }
-
-  export type TextUpdateOneRequiredWithoutMetadataNestedInput = {
-    create?: XOR<TextCreateWithoutMetadataInput, TextUncheckedCreateWithoutMetadataInput>
-    connectOrCreate?: TextCreateOrConnectWithoutMetadataInput
-    upsert?: TextUpsertWithoutMetadataInput
-    connect?: TextWhereUniqueInput
-    update?: XOR<XOR<TextUpdateToOneWithWhereWithoutMetadataInput, TextUpdateWithoutMetadataInput>, TextUncheckedUpdateWithoutMetadataInput>
-  }
-
-  export type TextEditionCreateNestedManyWithoutEditionInput = {
-    create?: XOR<TextEditionCreateWithoutEditionInput, TextEditionUncheckedCreateWithoutEditionInput> | TextEditionCreateWithoutEditionInput[] | TextEditionUncheckedCreateWithoutEditionInput[]
-    connectOrCreate?: TextEditionCreateOrConnectWithoutEditionInput | TextEditionCreateOrConnectWithoutEditionInput[]
-    createMany?: TextEditionCreateManyEditionInputEnvelope
-    connect?: TextEditionWhereUniqueInput | TextEditionWhereUniqueInput[]
-  }
-
-  export type TextEditionUncheckedCreateNestedManyWithoutEditionInput = {
-    create?: XOR<TextEditionCreateWithoutEditionInput, TextEditionUncheckedCreateWithoutEditionInput> | TextEditionCreateWithoutEditionInput[] | TextEditionUncheckedCreateWithoutEditionInput[]
-    connectOrCreate?: TextEditionCreateOrConnectWithoutEditionInput | TextEditionCreateOrConnectWithoutEditionInput[]
-    createMany?: TextEditionCreateManyEditionInputEnvelope
-    connect?: TextEditionWhereUniqueInput | TextEditionWhereUniqueInput[]
-  }
-
-  export type TextEditionUpdateManyWithoutEditionNestedInput = {
-    create?: XOR<TextEditionCreateWithoutEditionInput, TextEditionUncheckedCreateWithoutEditionInput> | TextEditionCreateWithoutEditionInput[] | TextEditionUncheckedCreateWithoutEditionInput[]
-    connectOrCreate?: TextEditionCreateOrConnectWithoutEditionInput | TextEditionCreateOrConnectWithoutEditionInput[]
-    upsert?: TextEditionUpsertWithWhereUniqueWithoutEditionInput | TextEditionUpsertWithWhereUniqueWithoutEditionInput[]
-    createMany?: TextEditionCreateManyEditionInputEnvelope
-    set?: TextEditionWhereUniqueInput | TextEditionWhereUniqueInput[]
-    disconnect?: TextEditionWhereUniqueInput | TextEditionWhereUniqueInput[]
-    delete?: TextEditionWhereUniqueInput | TextEditionWhereUniqueInput[]
-    connect?: TextEditionWhereUniqueInput | TextEditionWhereUniqueInput[]
-    update?: TextEditionUpdateWithWhereUniqueWithoutEditionInput | TextEditionUpdateWithWhereUniqueWithoutEditionInput[]
-    updateMany?: TextEditionUpdateManyWithWhereWithoutEditionInput | TextEditionUpdateManyWithWhereWithoutEditionInput[]
-    deleteMany?: TextEditionScalarWhereInput | TextEditionScalarWhereInput[]
-  }
-
-  export type TextEditionUncheckedUpdateManyWithoutEditionNestedInput = {
-    create?: XOR<TextEditionCreateWithoutEditionInput, TextEditionUncheckedCreateWithoutEditionInput> | TextEditionCreateWithoutEditionInput[] | TextEditionUncheckedCreateWithoutEditionInput[]
-    connectOrCreate?: TextEditionCreateOrConnectWithoutEditionInput | TextEditionCreateOrConnectWithoutEditionInput[]
-    upsert?: TextEditionUpsertWithWhereUniqueWithoutEditionInput | TextEditionUpsertWithWhereUniqueWithoutEditionInput[]
-    createMany?: TextEditionCreateManyEditionInputEnvelope
-    set?: TextEditionWhereUniqueInput | TextEditionWhereUniqueInput[]
-    disconnect?: TextEditionWhereUniqueInput | TextEditionWhereUniqueInput[]
-    delete?: TextEditionWhereUniqueInput | TextEditionWhereUniqueInput[]
-    connect?: TextEditionWhereUniqueInput | TextEditionWhereUniqueInput[]
-    update?: TextEditionUpdateWithWhereUniqueWithoutEditionInput | TextEditionUpdateWithWhereUniqueWithoutEditionInput[]
-    updateMany?: TextEditionUpdateManyWithWhereWithoutEditionInput | TextEditionUpdateManyWithWhereWithoutEditionInput[]
-    deleteMany?: TextEditionScalarWhereInput | TextEditionScalarWhereInput[]
-  }
-
-  export type TextCreateNestedOneWithoutTextEditionsInput = {
-    create?: XOR<TextCreateWithoutTextEditionsInput, TextUncheckedCreateWithoutTextEditionsInput>
-    connectOrCreate?: TextCreateOrConnectWithoutTextEditionsInput
-    connect?: TextWhereUniqueInput
-  }
-
-  export type EditionCreateNestedOneWithoutTextEditionsInput = {
-    create?: XOR<EditionCreateWithoutTextEditionsInput, EditionUncheckedCreateWithoutTextEditionsInput>
-    connectOrCreate?: EditionCreateOrConnectWithoutTextEditionsInput
-    connect?: EditionWhereUniqueInput
-  }
-
-  export type TextUpdateOneRequiredWithoutTextEditionsNestedInput = {
-    create?: XOR<TextCreateWithoutTextEditionsInput, TextUncheckedCreateWithoutTextEditionsInput>
-    connectOrCreate?: TextCreateOrConnectWithoutTextEditionsInput
-    upsert?: TextUpsertWithoutTextEditionsInput
-    connect?: TextWhereUniqueInput
-    update?: XOR<XOR<TextUpdateToOneWithWhereWithoutTextEditionsInput, TextUpdateWithoutTextEditionsInput>, TextUncheckedUpdateWithoutTextEditionsInput>
-  }
-
-  export type EditionUpdateOneRequiredWithoutTextEditionsNestedInput = {
-    create?: XOR<EditionCreateWithoutTextEditionsInput, EditionUncheckedCreateWithoutTextEditionsInput>
-    connectOrCreate?: EditionCreateOrConnectWithoutTextEditionsInput
-    upsert?: EditionUpsertWithoutTextEditionsInput
-    connect?: EditionWhereUniqueInput
-    update?: XOR<XOR<EditionUpdateToOneWithWhereWithoutTextEditionsInput, EditionUpdateWithoutTextEditionsInput>, EditionUncheckedUpdateWithoutTextEditionsInput>
   }
 
   export type NullableDateTimeFieldUpdateOperationsInput = {
@@ -32152,6 +23968,14 @@ export namespace Prisma {
     connectOrCreate?: TimelineEventSourceCreateOrConnectWithoutEventInput | TimelineEventSourceCreateOrConnectWithoutEventInput[]
     createMany?: TimelineEventSourceCreateManyEventInputEnvelope
     connect?: TimelineEventSourceWhereUniqueInput | TimelineEventSourceWhereUniqueInput[]
+  }
+
+  export type NullableIntFieldUpdateOperationsInput = {
+    set?: number | null
+    increment?: number
+    decrement?: number
+    multiply?: number
+    divide?: number
   }
 
   export type TimelinePeriodUpdateOneRequiredWithoutEventsNestedInput = {
@@ -32288,102 +24112,102 @@ export namespace Prisma {
     update?: XOR<XOR<TimelineEventUpdateToOneWithWhereWithoutSourcesInput, TimelineEventUpdateWithoutSourcesInput>, TimelineEventUncheckedUpdateWithoutSourcesInput>
   }
 
-  export type KarchagSubCategoryCreateNestedManyWithoutMainCategoryInput = {
-    create?: XOR<KarchagSubCategoryCreateWithoutMainCategoryInput, KarchagSubCategoryUncheckedCreateWithoutMainCategoryInput> | KarchagSubCategoryCreateWithoutMainCategoryInput[] | KarchagSubCategoryUncheckedCreateWithoutMainCategoryInput[]
-    connectOrCreate?: KarchagSubCategoryCreateOrConnectWithoutMainCategoryInput | KarchagSubCategoryCreateOrConnectWithoutMainCategoryInput[]
-    createMany?: KarchagSubCategoryCreateManyMainCategoryInputEnvelope
+  export type KarchagSubCategoryCreateNestedManyWithoutMain_categoryInput = {
+    create?: XOR<KarchagSubCategoryCreateWithoutMain_categoryInput, KarchagSubCategoryUncheckedCreateWithoutMain_categoryInput> | KarchagSubCategoryCreateWithoutMain_categoryInput[] | KarchagSubCategoryUncheckedCreateWithoutMain_categoryInput[]
+    connectOrCreate?: KarchagSubCategoryCreateOrConnectWithoutMain_categoryInput | KarchagSubCategoryCreateOrConnectWithoutMain_categoryInput[]
+    createMany?: KarchagSubCategoryCreateManyMain_categoryInputEnvelope
     connect?: KarchagSubCategoryWhereUniqueInput | KarchagSubCategoryWhereUniqueInput[]
   }
 
-  export type KarchagSubCategoryUncheckedCreateNestedManyWithoutMainCategoryInput = {
-    create?: XOR<KarchagSubCategoryCreateWithoutMainCategoryInput, KarchagSubCategoryUncheckedCreateWithoutMainCategoryInput> | KarchagSubCategoryCreateWithoutMainCategoryInput[] | KarchagSubCategoryUncheckedCreateWithoutMainCategoryInput[]
-    connectOrCreate?: KarchagSubCategoryCreateOrConnectWithoutMainCategoryInput | KarchagSubCategoryCreateOrConnectWithoutMainCategoryInput[]
-    createMany?: KarchagSubCategoryCreateManyMainCategoryInputEnvelope
+  export type KarchagSubCategoryUncheckedCreateNestedManyWithoutMain_categoryInput = {
+    create?: XOR<KarchagSubCategoryCreateWithoutMain_categoryInput, KarchagSubCategoryUncheckedCreateWithoutMain_categoryInput> | KarchagSubCategoryCreateWithoutMain_categoryInput[] | KarchagSubCategoryUncheckedCreateWithoutMain_categoryInput[]
+    connectOrCreate?: KarchagSubCategoryCreateOrConnectWithoutMain_categoryInput | KarchagSubCategoryCreateOrConnectWithoutMain_categoryInput[]
+    createMany?: KarchagSubCategoryCreateManyMain_categoryInputEnvelope
     connect?: KarchagSubCategoryWhereUniqueInput | KarchagSubCategoryWhereUniqueInput[]
   }
 
-  export type KarchagSubCategoryUpdateManyWithoutMainCategoryNestedInput = {
-    create?: XOR<KarchagSubCategoryCreateWithoutMainCategoryInput, KarchagSubCategoryUncheckedCreateWithoutMainCategoryInput> | KarchagSubCategoryCreateWithoutMainCategoryInput[] | KarchagSubCategoryUncheckedCreateWithoutMainCategoryInput[]
-    connectOrCreate?: KarchagSubCategoryCreateOrConnectWithoutMainCategoryInput | KarchagSubCategoryCreateOrConnectWithoutMainCategoryInput[]
-    upsert?: KarchagSubCategoryUpsertWithWhereUniqueWithoutMainCategoryInput | KarchagSubCategoryUpsertWithWhereUniqueWithoutMainCategoryInput[]
-    createMany?: KarchagSubCategoryCreateManyMainCategoryInputEnvelope
+  export type KarchagSubCategoryUpdateManyWithoutMain_categoryNestedInput = {
+    create?: XOR<KarchagSubCategoryCreateWithoutMain_categoryInput, KarchagSubCategoryUncheckedCreateWithoutMain_categoryInput> | KarchagSubCategoryCreateWithoutMain_categoryInput[] | KarchagSubCategoryUncheckedCreateWithoutMain_categoryInput[]
+    connectOrCreate?: KarchagSubCategoryCreateOrConnectWithoutMain_categoryInput | KarchagSubCategoryCreateOrConnectWithoutMain_categoryInput[]
+    upsert?: KarchagSubCategoryUpsertWithWhereUniqueWithoutMain_categoryInput | KarchagSubCategoryUpsertWithWhereUniqueWithoutMain_categoryInput[]
+    createMany?: KarchagSubCategoryCreateManyMain_categoryInputEnvelope
     set?: KarchagSubCategoryWhereUniqueInput | KarchagSubCategoryWhereUniqueInput[]
     disconnect?: KarchagSubCategoryWhereUniqueInput | KarchagSubCategoryWhereUniqueInput[]
     delete?: KarchagSubCategoryWhereUniqueInput | KarchagSubCategoryWhereUniqueInput[]
     connect?: KarchagSubCategoryWhereUniqueInput | KarchagSubCategoryWhereUniqueInput[]
-    update?: KarchagSubCategoryUpdateWithWhereUniqueWithoutMainCategoryInput | KarchagSubCategoryUpdateWithWhereUniqueWithoutMainCategoryInput[]
-    updateMany?: KarchagSubCategoryUpdateManyWithWhereWithoutMainCategoryInput | KarchagSubCategoryUpdateManyWithWhereWithoutMainCategoryInput[]
+    update?: KarchagSubCategoryUpdateWithWhereUniqueWithoutMain_categoryInput | KarchagSubCategoryUpdateWithWhereUniqueWithoutMain_categoryInput[]
+    updateMany?: KarchagSubCategoryUpdateManyWithWhereWithoutMain_categoryInput | KarchagSubCategoryUpdateManyWithWhereWithoutMain_categoryInput[]
     deleteMany?: KarchagSubCategoryScalarWhereInput | KarchagSubCategoryScalarWhereInput[]
   }
 
-  export type KarchagSubCategoryUncheckedUpdateManyWithoutMainCategoryNestedInput = {
-    create?: XOR<KarchagSubCategoryCreateWithoutMainCategoryInput, KarchagSubCategoryUncheckedCreateWithoutMainCategoryInput> | KarchagSubCategoryCreateWithoutMainCategoryInput[] | KarchagSubCategoryUncheckedCreateWithoutMainCategoryInput[]
-    connectOrCreate?: KarchagSubCategoryCreateOrConnectWithoutMainCategoryInput | KarchagSubCategoryCreateOrConnectWithoutMainCategoryInput[]
-    upsert?: KarchagSubCategoryUpsertWithWhereUniqueWithoutMainCategoryInput | KarchagSubCategoryUpsertWithWhereUniqueWithoutMainCategoryInput[]
-    createMany?: KarchagSubCategoryCreateManyMainCategoryInputEnvelope
+  export type KarchagSubCategoryUncheckedUpdateManyWithoutMain_categoryNestedInput = {
+    create?: XOR<KarchagSubCategoryCreateWithoutMain_categoryInput, KarchagSubCategoryUncheckedCreateWithoutMain_categoryInput> | KarchagSubCategoryCreateWithoutMain_categoryInput[] | KarchagSubCategoryUncheckedCreateWithoutMain_categoryInput[]
+    connectOrCreate?: KarchagSubCategoryCreateOrConnectWithoutMain_categoryInput | KarchagSubCategoryCreateOrConnectWithoutMain_categoryInput[]
+    upsert?: KarchagSubCategoryUpsertWithWhereUniqueWithoutMain_categoryInput | KarchagSubCategoryUpsertWithWhereUniqueWithoutMain_categoryInput[]
+    createMany?: KarchagSubCategoryCreateManyMain_categoryInputEnvelope
     set?: KarchagSubCategoryWhereUniqueInput | KarchagSubCategoryWhereUniqueInput[]
     disconnect?: KarchagSubCategoryWhereUniqueInput | KarchagSubCategoryWhereUniqueInput[]
     delete?: KarchagSubCategoryWhereUniqueInput | KarchagSubCategoryWhereUniqueInput[]
     connect?: KarchagSubCategoryWhereUniqueInput | KarchagSubCategoryWhereUniqueInput[]
-    update?: KarchagSubCategoryUpdateWithWhereUniqueWithoutMainCategoryInput | KarchagSubCategoryUpdateWithWhereUniqueWithoutMainCategoryInput[]
-    updateMany?: KarchagSubCategoryUpdateManyWithWhereWithoutMainCategoryInput | KarchagSubCategoryUpdateManyWithWhereWithoutMainCategoryInput[]
+    update?: KarchagSubCategoryUpdateWithWhereUniqueWithoutMain_categoryInput | KarchagSubCategoryUpdateWithWhereUniqueWithoutMain_categoryInput[]
+    updateMany?: KarchagSubCategoryUpdateManyWithWhereWithoutMain_categoryInput | KarchagSubCategoryUpdateManyWithWhereWithoutMain_categoryInput[]
     deleteMany?: KarchagSubCategoryScalarWhereInput | KarchagSubCategoryScalarWhereInput[]
   }
 
-  export type KarchagMainCategoryCreateNestedOneWithoutSubCategoriesInput = {
-    create?: XOR<KarchagMainCategoryCreateWithoutSubCategoriesInput, KarchagMainCategoryUncheckedCreateWithoutSubCategoriesInput>
-    connectOrCreate?: KarchagMainCategoryCreateOrConnectWithoutSubCategoriesInput
+  export type KarchagMainCategoryCreateNestedOneWithoutSub_categoriesInput = {
+    create?: XOR<KarchagMainCategoryCreateWithoutSub_categoriesInput, KarchagMainCategoryUncheckedCreateWithoutSub_categoriesInput>
+    connectOrCreate?: KarchagMainCategoryCreateOrConnectWithoutSub_categoriesInput
     connect?: KarchagMainCategoryWhereUniqueInput
   }
 
-  export type KarchagTextCreateNestedManyWithoutSubCategoryInput = {
-    create?: XOR<KarchagTextCreateWithoutSubCategoryInput, KarchagTextUncheckedCreateWithoutSubCategoryInput> | KarchagTextCreateWithoutSubCategoryInput[] | KarchagTextUncheckedCreateWithoutSubCategoryInput[]
-    connectOrCreate?: KarchagTextCreateOrConnectWithoutSubCategoryInput | KarchagTextCreateOrConnectWithoutSubCategoryInput[]
-    createMany?: KarchagTextCreateManySubCategoryInputEnvelope
-    connect?: KarchagTextWhereUniqueInput | KarchagTextWhereUniqueInput[]
+  export type TextCreateNestedManyWithoutSub_categoryInput = {
+    create?: XOR<TextCreateWithoutSub_categoryInput, TextUncheckedCreateWithoutSub_categoryInput> | TextCreateWithoutSub_categoryInput[] | TextUncheckedCreateWithoutSub_categoryInput[]
+    connectOrCreate?: TextCreateOrConnectWithoutSub_categoryInput | TextCreateOrConnectWithoutSub_categoryInput[]
+    createMany?: TextCreateManySub_categoryInputEnvelope
+    connect?: TextWhereUniqueInput | TextWhereUniqueInput[]
   }
 
-  export type KarchagTextUncheckedCreateNestedManyWithoutSubCategoryInput = {
-    create?: XOR<KarchagTextCreateWithoutSubCategoryInput, KarchagTextUncheckedCreateWithoutSubCategoryInput> | KarchagTextCreateWithoutSubCategoryInput[] | KarchagTextUncheckedCreateWithoutSubCategoryInput[]
-    connectOrCreate?: KarchagTextCreateOrConnectWithoutSubCategoryInput | KarchagTextCreateOrConnectWithoutSubCategoryInput[]
-    createMany?: KarchagTextCreateManySubCategoryInputEnvelope
-    connect?: KarchagTextWhereUniqueInput | KarchagTextWhereUniqueInput[]
+  export type TextUncheckedCreateNestedManyWithoutSub_categoryInput = {
+    create?: XOR<TextCreateWithoutSub_categoryInput, TextUncheckedCreateWithoutSub_categoryInput> | TextCreateWithoutSub_categoryInput[] | TextUncheckedCreateWithoutSub_categoryInput[]
+    connectOrCreate?: TextCreateOrConnectWithoutSub_categoryInput | TextCreateOrConnectWithoutSub_categoryInput[]
+    createMany?: TextCreateManySub_categoryInputEnvelope
+    connect?: TextWhereUniqueInput | TextWhereUniqueInput[]
   }
 
-  export type KarchagMainCategoryUpdateOneRequiredWithoutSubCategoriesNestedInput = {
-    create?: XOR<KarchagMainCategoryCreateWithoutSubCategoriesInput, KarchagMainCategoryUncheckedCreateWithoutSubCategoriesInput>
-    connectOrCreate?: KarchagMainCategoryCreateOrConnectWithoutSubCategoriesInput
-    upsert?: KarchagMainCategoryUpsertWithoutSubCategoriesInput
+  export type KarchagMainCategoryUpdateOneRequiredWithoutSub_categoriesNestedInput = {
+    create?: XOR<KarchagMainCategoryCreateWithoutSub_categoriesInput, KarchagMainCategoryUncheckedCreateWithoutSub_categoriesInput>
+    connectOrCreate?: KarchagMainCategoryCreateOrConnectWithoutSub_categoriesInput
+    upsert?: KarchagMainCategoryUpsertWithoutSub_categoriesInput
     connect?: KarchagMainCategoryWhereUniqueInput
-    update?: XOR<XOR<KarchagMainCategoryUpdateToOneWithWhereWithoutSubCategoriesInput, KarchagMainCategoryUpdateWithoutSubCategoriesInput>, KarchagMainCategoryUncheckedUpdateWithoutSubCategoriesInput>
+    update?: XOR<XOR<KarchagMainCategoryUpdateToOneWithWhereWithoutSub_categoriesInput, KarchagMainCategoryUpdateWithoutSub_categoriesInput>, KarchagMainCategoryUncheckedUpdateWithoutSub_categoriesInput>
   }
 
-  export type KarchagTextUpdateManyWithoutSubCategoryNestedInput = {
-    create?: XOR<KarchagTextCreateWithoutSubCategoryInput, KarchagTextUncheckedCreateWithoutSubCategoryInput> | KarchagTextCreateWithoutSubCategoryInput[] | KarchagTextUncheckedCreateWithoutSubCategoryInput[]
-    connectOrCreate?: KarchagTextCreateOrConnectWithoutSubCategoryInput | KarchagTextCreateOrConnectWithoutSubCategoryInput[]
-    upsert?: KarchagTextUpsertWithWhereUniqueWithoutSubCategoryInput | KarchagTextUpsertWithWhereUniqueWithoutSubCategoryInput[]
-    createMany?: KarchagTextCreateManySubCategoryInputEnvelope
-    set?: KarchagTextWhereUniqueInput | KarchagTextWhereUniqueInput[]
-    disconnect?: KarchagTextWhereUniqueInput | KarchagTextWhereUniqueInput[]
-    delete?: KarchagTextWhereUniqueInput | KarchagTextWhereUniqueInput[]
-    connect?: KarchagTextWhereUniqueInput | KarchagTextWhereUniqueInput[]
-    update?: KarchagTextUpdateWithWhereUniqueWithoutSubCategoryInput | KarchagTextUpdateWithWhereUniqueWithoutSubCategoryInput[]
-    updateMany?: KarchagTextUpdateManyWithWhereWithoutSubCategoryInput | KarchagTextUpdateManyWithWhereWithoutSubCategoryInput[]
-    deleteMany?: KarchagTextScalarWhereInput | KarchagTextScalarWhereInput[]
+  export type TextUpdateManyWithoutSub_categoryNestedInput = {
+    create?: XOR<TextCreateWithoutSub_categoryInput, TextUncheckedCreateWithoutSub_categoryInput> | TextCreateWithoutSub_categoryInput[] | TextUncheckedCreateWithoutSub_categoryInput[]
+    connectOrCreate?: TextCreateOrConnectWithoutSub_categoryInput | TextCreateOrConnectWithoutSub_categoryInput[]
+    upsert?: TextUpsertWithWhereUniqueWithoutSub_categoryInput | TextUpsertWithWhereUniqueWithoutSub_categoryInput[]
+    createMany?: TextCreateManySub_categoryInputEnvelope
+    set?: TextWhereUniqueInput | TextWhereUniqueInput[]
+    disconnect?: TextWhereUniqueInput | TextWhereUniqueInput[]
+    delete?: TextWhereUniqueInput | TextWhereUniqueInput[]
+    connect?: TextWhereUniqueInput | TextWhereUniqueInput[]
+    update?: TextUpdateWithWhereUniqueWithoutSub_categoryInput | TextUpdateWithWhereUniqueWithoutSub_categoryInput[]
+    updateMany?: TextUpdateManyWithWhereWithoutSub_categoryInput | TextUpdateManyWithWhereWithoutSub_categoryInput[]
+    deleteMany?: TextScalarWhereInput | TextScalarWhereInput[]
   }
 
-  export type KarchagTextUncheckedUpdateManyWithoutSubCategoryNestedInput = {
-    create?: XOR<KarchagTextCreateWithoutSubCategoryInput, KarchagTextUncheckedCreateWithoutSubCategoryInput> | KarchagTextCreateWithoutSubCategoryInput[] | KarchagTextUncheckedCreateWithoutSubCategoryInput[]
-    connectOrCreate?: KarchagTextCreateOrConnectWithoutSubCategoryInput | KarchagTextCreateOrConnectWithoutSubCategoryInput[]
-    upsert?: KarchagTextUpsertWithWhereUniqueWithoutSubCategoryInput | KarchagTextUpsertWithWhereUniqueWithoutSubCategoryInput[]
-    createMany?: KarchagTextCreateManySubCategoryInputEnvelope
-    set?: KarchagTextWhereUniqueInput | KarchagTextWhereUniqueInput[]
-    disconnect?: KarchagTextWhereUniqueInput | KarchagTextWhereUniqueInput[]
-    delete?: KarchagTextWhereUniqueInput | KarchagTextWhereUniqueInput[]
-    connect?: KarchagTextWhereUniqueInput | KarchagTextWhereUniqueInput[]
-    update?: KarchagTextUpdateWithWhereUniqueWithoutSubCategoryInput | KarchagTextUpdateWithWhereUniqueWithoutSubCategoryInput[]
-    updateMany?: KarchagTextUpdateManyWithWhereWithoutSubCategoryInput | KarchagTextUpdateManyWithWhereWithoutSubCategoryInput[]
-    deleteMany?: KarchagTextScalarWhereInput | KarchagTextScalarWhereInput[]
+  export type TextUncheckedUpdateManyWithoutSub_categoryNestedInput = {
+    create?: XOR<TextCreateWithoutSub_categoryInput, TextUncheckedCreateWithoutSub_categoryInput> | TextCreateWithoutSub_categoryInput[] | TextUncheckedCreateWithoutSub_categoryInput[]
+    connectOrCreate?: TextCreateOrConnectWithoutSub_categoryInput | TextCreateOrConnectWithoutSub_categoryInput[]
+    upsert?: TextUpsertWithWhereUniqueWithoutSub_categoryInput | TextUpsertWithWhereUniqueWithoutSub_categoryInput[]
+    createMany?: TextCreateManySub_categoryInputEnvelope
+    set?: TextWhereUniqueInput | TextWhereUniqueInput[]
+    disconnect?: TextWhereUniqueInput | TextWhereUniqueInput[]
+    delete?: TextWhereUniqueInput | TextWhereUniqueInput[]
+    connect?: TextWhereUniqueInput | TextWhereUniqueInput[]
+    update?: TextUpdateWithWhereUniqueWithoutSub_categoryInput | TextUpdateWithWhereUniqueWithoutSub_categoryInput[]
+    updateMany?: TextUpdateManyWithWhereWithoutSub_categoryInput | TextUpdateManyWithWhereWithoutSub_categoryInput[]
+    deleteMany?: TextScalarWhereInput | TextScalarWhereInput[]
   }
 
   export type KarchagSubCategoryCreateNestedOneWithoutTextsInput = {
@@ -32392,12 +24216,114 @@ export namespace Prisma {
     connect?: KarchagSubCategoryWhereUniqueInput
   }
 
+  export type KarchagTextSummaryCreateNestedOneWithoutKarchag_textInput = {
+    create?: XOR<KarchagTextSummaryCreateWithoutKarchag_textInput, KarchagTextSummaryUncheckedCreateWithoutKarchag_textInput>
+    connectOrCreate?: KarchagTextSummaryCreateOrConnectWithoutKarchag_textInput
+    connect?: KarchagTextSummaryWhereUniqueInput
+  }
+
+  export type KarchagTextMetadataCreateNestedManyWithoutTextInput = {
+    create?: XOR<KarchagTextMetadataCreateWithoutTextInput, KarchagTextMetadataUncheckedCreateWithoutTextInput> | KarchagTextMetadataCreateWithoutTextInput[] | KarchagTextMetadataUncheckedCreateWithoutTextInput[]
+    connectOrCreate?: KarchagTextMetadataCreateOrConnectWithoutTextInput | KarchagTextMetadataCreateOrConnectWithoutTextInput[]
+    createMany?: KarchagTextMetadataCreateManyTextInputEnvelope
+    connect?: KarchagTextMetadataWhereUniqueInput | KarchagTextMetadataWhereUniqueInput[]
+  }
+
+  export type KarchagTextSummaryUncheckedCreateNestedOneWithoutKarchag_textInput = {
+    create?: XOR<KarchagTextSummaryCreateWithoutKarchag_textInput, KarchagTextSummaryUncheckedCreateWithoutKarchag_textInput>
+    connectOrCreate?: KarchagTextSummaryCreateOrConnectWithoutKarchag_textInput
+    connect?: KarchagTextSummaryWhereUniqueInput
+  }
+
+  export type KarchagTextMetadataUncheckedCreateNestedManyWithoutTextInput = {
+    create?: XOR<KarchagTextMetadataCreateWithoutTextInput, KarchagTextMetadataUncheckedCreateWithoutTextInput> | KarchagTextMetadataCreateWithoutTextInput[] | KarchagTextMetadataUncheckedCreateWithoutTextInput[]
+    connectOrCreate?: KarchagTextMetadataCreateOrConnectWithoutTextInput | KarchagTextMetadataCreateOrConnectWithoutTextInput[]
+    createMany?: KarchagTextMetadataCreateManyTextInputEnvelope
+    connect?: KarchagTextMetadataWhereUniqueInput | KarchagTextMetadataWhereUniqueInput[]
+  }
+
   export type KarchagSubCategoryUpdateOneRequiredWithoutTextsNestedInput = {
     create?: XOR<KarchagSubCategoryCreateWithoutTextsInput, KarchagSubCategoryUncheckedCreateWithoutTextsInput>
     connectOrCreate?: KarchagSubCategoryCreateOrConnectWithoutTextsInput
     upsert?: KarchagSubCategoryUpsertWithoutTextsInput
     connect?: KarchagSubCategoryWhereUniqueInput
     update?: XOR<XOR<KarchagSubCategoryUpdateToOneWithWhereWithoutTextsInput, KarchagSubCategoryUpdateWithoutTextsInput>, KarchagSubCategoryUncheckedUpdateWithoutTextsInput>
+  }
+
+  export type KarchagTextSummaryUpdateOneWithoutKarchag_textNestedInput = {
+    create?: XOR<KarchagTextSummaryCreateWithoutKarchag_textInput, KarchagTextSummaryUncheckedCreateWithoutKarchag_textInput>
+    connectOrCreate?: KarchagTextSummaryCreateOrConnectWithoutKarchag_textInput
+    upsert?: KarchagTextSummaryUpsertWithoutKarchag_textInput
+    disconnect?: KarchagTextSummaryWhereInput | boolean
+    delete?: KarchagTextSummaryWhereInput | boolean
+    connect?: KarchagTextSummaryWhereUniqueInput
+    update?: XOR<XOR<KarchagTextSummaryUpdateToOneWithWhereWithoutKarchag_textInput, KarchagTextSummaryUpdateWithoutKarchag_textInput>, KarchagTextSummaryUncheckedUpdateWithoutKarchag_textInput>
+  }
+
+  export type KarchagTextMetadataUpdateManyWithoutTextNestedInput = {
+    create?: XOR<KarchagTextMetadataCreateWithoutTextInput, KarchagTextMetadataUncheckedCreateWithoutTextInput> | KarchagTextMetadataCreateWithoutTextInput[] | KarchagTextMetadataUncheckedCreateWithoutTextInput[]
+    connectOrCreate?: KarchagTextMetadataCreateOrConnectWithoutTextInput | KarchagTextMetadataCreateOrConnectWithoutTextInput[]
+    upsert?: KarchagTextMetadataUpsertWithWhereUniqueWithoutTextInput | KarchagTextMetadataUpsertWithWhereUniqueWithoutTextInput[]
+    createMany?: KarchagTextMetadataCreateManyTextInputEnvelope
+    set?: KarchagTextMetadataWhereUniqueInput | KarchagTextMetadataWhereUniqueInput[]
+    disconnect?: KarchagTextMetadataWhereUniqueInput | KarchagTextMetadataWhereUniqueInput[]
+    delete?: KarchagTextMetadataWhereUniqueInput | KarchagTextMetadataWhereUniqueInput[]
+    connect?: KarchagTextMetadataWhereUniqueInput | KarchagTextMetadataWhereUniqueInput[]
+    update?: KarchagTextMetadataUpdateWithWhereUniqueWithoutTextInput | KarchagTextMetadataUpdateWithWhereUniqueWithoutTextInput[]
+    updateMany?: KarchagTextMetadataUpdateManyWithWhereWithoutTextInput | KarchagTextMetadataUpdateManyWithWhereWithoutTextInput[]
+    deleteMany?: KarchagTextMetadataScalarWhereInput | KarchagTextMetadataScalarWhereInput[]
+  }
+
+  export type KarchagTextSummaryUncheckedUpdateOneWithoutKarchag_textNestedInput = {
+    create?: XOR<KarchagTextSummaryCreateWithoutKarchag_textInput, KarchagTextSummaryUncheckedCreateWithoutKarchag_textInput>
+    connectOrCreate?: KarchagTextSummaryCreateOrConnectWithoutKarchag_textInput
+    upsert?: KarchagTextSummaryUpsertWithoutKarchag_textInput
+    disconnect?: KarchagTextSummaryWhereInput | boolean
+    delete?: KarchagTextSummaryWhereInput | boolean
+    connect?: KarchagTextSummaryWhereUniqueInput
+    update?: XOR<XOR<KarchagTextSummaryUpdateToOneWithWhereWithoutKarchag_textInput, KarchagTextSummaryUpdateWithoutKarchag_textInput>, KarchagTextSummaryUncheckedUpdateWithoutKarchag_textInput>
+  }
+
+  export type KarchagTextMetadataUncheckedUpdateManyWithoutTextNestedInput = {
+    create?: XOR<KarchagTextMetadataCreateWithoutTextInput, KarchagTextMetadataUncheckedCreateWithoutTextInput> | KarchagTextMetadataCreateWithoutTextInput[] | KarchagTextMetadataUncheckedCreateWithoutTextInput[]
+    connectOrCreate?: KarchagTextMetadataCreateOrConnectWithoutTextInput | KarchagTextMetadataCreateOrConnectWithoutTextInput[]
+    upsert?: KarchagTextMetadataUpsertWithWhereUniqueWithoutTextInput | KarchagTextMetadataUpsertWithWhereUniqueWithoutTextInput[]
+    createMany?: KarchagTextMetadataCreateManyTextInputEnvelope
+    set?: KarchagTextMetadataWhereUniqueInput | KarchagTextMetadataWhereUniqueInput[]
+    disconnect?: KarchagTextMetadataWhereUniqueInput | KarchagTextMetadataWhereUniqueInput[]
+    delete?: KarchagTextMetadataWhereUniqueInput | KarchagTextMetadataWhereUniqueInput[]
+    connect?: KarchagTextMetadataWhereUniqueInput | KarchagTextMetadataWhereUniqueInput[]
+    update?: KarchagTextMetadataUpdateWithWhereUniqueWithoutTextInput | KarchagTextMetadataUpdateWithWhereUniqueWithoutTextInput[]
+    updateMany?: KarchagTextMetadataUpdateManyWithWhereWithoutTextInput | KarchagTextMetadataUpdateManyWithWhereWithoutTextInput[]
+    deleteMany?: KarchagTextMetadataScalarWhereInput | KarchagTextMetadataScalarWhereInput[]
+  }
+
+  export type TextCreateNestedOneWithoutSummaryInput = {
+    create?: XOR<TextCreateWithoutSummaryInput, TextUncheckedCreateWithoutSummaryInput>
+    connectOrCreate?: TextCreateOrConnectWithoutSummaryInput
+    connect?: TextWhereUniqueInput
+  }
+
+  export type TextUpdateOneRequiredWithoutSummaryNestedInput = {
+    create?: XOR<TextCreateWithoutSummaryInput, TextUncheckedCreateWithoutSummaryInput>
+    connectOrCreate?: TextCreateOrConnectWithoutSummaryInput
+    upsert?: TextUpsertWithoutSummaryInput
+    connect?: TextWhereUniqueInput
+    update?: XOR<XOR<TextUpdateToOneWithWhereWithoutSummaryInput, TextUpdateWithoutSummaryInput>, TextUncheckedUpdateWithoutSummaryInput>
+  }
+
+  export type TextCreateNestedOneWithoutMetadataInput = {
+    create?: XOR<TextCreateWithoutMetadataInput, TextUncheckedCreateWithoutMetadataInput>
+    connectOrCreate?: TextCreateOrConnectWithoutMetadataInput
+    connect?: TextWhereUniqueInput
+  }
+
+  export type TextUpdateOneRequiredWithoutMetadataNestedInput = {
+    create?: XOR<TextCreateWithoutMetadataInput, TextUncheckedCreateWithoutMetadataInput>
+    connectOrCreate?: TextCreateOrConnectWithoutMetadataInput
+    upsert?: TextUpsertWithoutMetadataInput
+    connect?: TextWhereUniqueInput
+    update?: XOR<XOR<TextUpdateToOneWithWhereWithoutMetadataInput, TextUpdateWithoutMetadataInput>, TextUncheckedUpdateWithoutMetadataInput>
   }
 
   export type NestedStringFilter<$PrismaModel = never> = {
@@ -32549,6 +24475,31 @@ export namespace Prisma {
     not?: NestedFloatFilter<$PrismaModel> | number
   }
 
+  export type NestedDateTimeNullableFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeNullableFilter<$PrismaModel> | Date | string | null
+  }
+
+  export type NestedDateTimeNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeNullableWithAggregatesFilter<$PrismaModel> | Date | string | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedDateTimeNullableFilter<$PrismaModel>
+    _max?: NestedDateTimeNullableFilter<$PrismaModel>
+  }
+
   export type NestedIntNullableWithAggregatesFilter<$PrismaModel = never> = {
     equals?: number | IntFieldRefInput<$PrismaModel> | null
     in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
@@ -32576,31 +24527,6 @@ export namespace Prisma {
     not?: NestedFloatNullableFilter<$PrismaModel> | number | null
   }
 
-  export type NestedDateTimeNullableFilter<$PrismaModel = never> = {
-    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
-    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
-    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
-    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    not?: NestedDateTimeNullableFilter<$PrismaModel> | Date | string | null
-  }
-
-  export type NestedDateTimeNullableWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
-    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
-    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
-    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    not?: NestedDateTimeNullableWithAggregatesFilter<$PrismaModel> | Date | string | null
-    _count?: NestedIntNullableFilter<$PrismaModel>
-    _min?: NestedDateTimeNullableFilter<$PrismaModel>
-    _max?: NestedDateTimeNullableFilter<$PrismaModel>
-  }
-
   export type CatalogCategoryCreateWithoutChildrenInput = {
     id?: string
     id_slug: string
@@ -32613,7 +24539,6 @@ export namespace Prisma {
     created_at?: Date | string
     updated_at?: Date | string
     parent?: CatalogCategoryCreateNestedOneWithoutChildrenInput
-    texts?: TextCreateNestedManyWithoutCategoryInput
   }
 
   export type CatalogCategoryUncheckedCreateWithoutChildrenInput = {
@@ -32628,7 +24553,6 @@ export namespace Prisma {
     is_active?: boolean
     created_at?: Date | string
     updated_at?: Date | string
-    texts?: TextUncheckedCreateNestedManyWithoutCategoryInput
   }
 
   export type CatalogCategoryCreateOrConnectWithoutChildrenInput = {
@@ -32648,7 +24572,6 @@ export namespace Prisma {
     created_at?: Date | string
     updated_at?: Date | string
     children?: CatalogCategoryCreateNestedManyWithoutParentInput
-    texts?: TextCreateNestedManyWithoutCategoryInput
   }
 
   export type CatalogCategoryUncheckedCreateWithoutParentInput = {
@@ -32663,7 +24586,6 @@ export namespace Prisma {
     created_at?: Date | string
     updated_at?: Date | string
     children?: CatalogCategoryUncheckedCreateNestedManyWithoutParentInput
-    texts?: TextUncheckedCreateNestedManyWithoutCategoryInput
   }
 
   export type CatalogCategoryCreateOrConnectWithoutParentInput = {
@@ -32673,46 +24595,6 @@ export namespace Prisma {
 
   export type CatalogCategoryCreateManyParentInputEnvelope = {
     data: CatalogCategoryCreateManyParentInput | CatalogCategoryCreateManyParentInput[]
-    skipDuplicates?: boolean
-  }
-
-  export type TextCreateWithoutCategoryInput = {
-    id?: string
-    id_slug?: string | null
-    keywords?: TextCreatekeywordsInput | string[]
-    is_active?: boolean
-    order_index?: number
-    created_at?: Date | string
-    updated_at?: Date | string
-    sections?: TextSectionCreateNestedManyWithoutTextInput
-    collatedContent?: TextCollatedContentCreateNestedOneWithoutTextInput
-    metadata?: TextMetadataCreateNestedManyWithoutTextInput
-    textEditions?: TextEditionCreateNestedManyWithoutTextInput
-    summary?: TextSummaryCreateNestedOneWithoutTextInput
-  }
-
-  export type TextUncheckedCreateWithoutCategoryInput = {
-    id?: string
-    id_slug?: string | null
-    keywords?: TextCreatekeywordsInput | string[]
-    is_active?: boolean
-    order_index?: number
-    created_at?: Date | string
-    updated_at?: Date | string
-    sections?: TextSectionUncheckedCreateNestedManyWithoutTextInput
-    collatedContent?: TextCollatedContentUncheckedCreateNestedOneWithoutTextInput
-    metadata?: TextMetadataUncheckedCreateNestedManyWithoutTextInput
-    textEditions?: TextEditionUncheckedCreateNestedManyWithoutTextInput
-    summary?: TextSummaryUncheckedCreateNestedOneWithoutTextInput
-  }
-
-  export type TextCreateOrConnectWithoutCategoryInput = {
-    where: TextWhereUniqueInput
-    create: XOR<TextCreateWithoutCategoryInput, TextUncheckedCreateWithoutCategoryInput>
-  }
-
-  export type TextCreateManyCategoryInputEnvelope = {
-    data: TextCreateManyCategoryInput | TextCreateManyCategoryInput[]
     skipDuplicates?: boolean
   }
 
@@ -32739,7 +24621,6 @@ export namespace Prisma {
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     parent?: CatalogCategoryUpdateOneWithoutChildrenNestedInput
-    texts?: TextUpdateManyWithoutCategoryNestedInput
   }
 
   export type CatalogCategoryUncheckedUpdateWithoutChildrenInput = {
@@ -32754,7 +24635,6 @@ export namespace Prisma {
     is_active?: BoolFieldUpdateOperationsInput | boolean
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    texts?: TextUncheckedUpdateManyWithoutCategoryNestedInput
   }
 
   export type CatalogCategoryUpsertWithWhereUniqueWithoutParentInput = {
@@ -32788,998 +24668,6 @@ export namespace Prisma {
     is_active?: BoolFilter<"CatalogCategory"> | boolean
     created_at?: DateTimeFilter<"CatalogCategory"> | Date | string
     updated_at?: DateTimeFilter<"CatalogCategory"> | Date | string
-  }
-
-  export type TextUpsertWithWhereUniqueWithoutCategoryInput = {
-    where: TextWhereUniqueInput
-    update: XOR<TextUpdateWithoutCategoryInput, TextUncheckedUpdateWithoutCategoryInput>
-    create: XOR<TextCreateWithoutCategoryInput, TextUncheckedCreateWithoutCategoryInput>
-  }
-
-  export type TextUpdateWithWhereUniqueWithoutCategoryInput = {
-    where: TextWhereUniqueInput
-    data: XOR<TextUpdateWithoutCategoryInput, TextUncheckedUpdateWithoutCategoryInput>
-  }
-
-  export type TextUpdateManyWithWhereWithoutCategoryInput = {
-    where: TextScalarWhereInput
-    data: XOR<TextUpdateManyMutationInput, TextUncheckedUpdateManyWithoutCategoryInput>
-  }
-
-  export type TextScalarWhereInput = {
-    AND?: TextScalarWhereInput | TextScalarWhereInput[]
-    OR?: TextScalarWhereInput[]
-    NOT?: TextScalarWhereInput | TextScalarWhereInput[]
-    id?: StringFilter<"Text"> | string
-    id_slug?: StringNullableFilter<"Text"> | string | null
-    category_id?: StringNullableFilter<"Text"> | string | null
-    keywords?: StringNullableListFilter<"Text">
-    is_active?: BoolFilter<"Text"> | boolean
-    order_index?: IntFilter<"Text"> | number
-    created_at?: DateTimeFilter<"Text"> | Date | string
-    updated_at?: DateTimeFilter<"Text"> | Date | string
-  }
-
-  export type CatalogCategoryCreateWithoutTextsInput = {
-    id?: string
-    id_slug: string
-    title_tibetan?: string | null
-    title_english: string
-    description?: string | null
-    count?: number
-    order_index?: number
-    is_active?: boolean
-    created_at?: Date | string
-    updated_at?: Date | string
-    parent?: CatalogCategoryCreateNestedOneWithoutChildrenInput
-    children?: CatalogCategoryCreateNestedManyWithoutParentInput
-  }
-
-  export type CatalogCategoryUncheckedCreateWithoutTextsInput = {
-    id?: string
-    parent_id?: string | null
-    id_slug: string
-    title_tibetan?: string | null
-    title_english: string
-    description?: string | null
-    count?: number
-    order_index?: number
-    is_active?: boolean
-    created_at?: Date | string
-    updated_at?: Date | string
-    children?: CatalogCategoryUncheckedCreateNestedManyWithoutParentInput
-  }
-
-  export type CatalogCategoryCreateOrConnectWithoutTextsInput = {
-    where: CatalogCategoryWhereUniqueInput
-    create: XOR<CatalogCategoryCreateWithoutTextsInput, CatalogCategoryUncheckedCreateWithoutTextsInput>
-  }
-
-  export type TextSectionCreateWithoutTextInput = {
-    id?: string
-    section_type: string
-    title_tibetan?: string | null
-    title_english?: string | null
-    content_tibetan?: string | null
-    content_english?: string | null
-    order_index?: number
-    created_at?: Date | string
-    updated_at?: Date | string
-  }
-
-  export type TextSectionUncheckedCreateWithoutTextInput = {
-    id?: string
-    section_type: string
-    title_tibetan?: string | null
-    title_english?: string | null
-    content_tibetan?: string | null
-    content_english?: string | null
-    order_index?: number
-    created_at?: Date | string
-    updated_at?: Date | string
-  }
-
-  export type TextSectionCreateOrConnectWithoutTextInput = {
-    where: TextSectionWhereUniqueInput
-    create: XOR<TextSectionCreateWithoutTextInput, TextSectionUncheckedCreateWithoutTextInput>
-  }
-
-  export type TextSectionCreateManyTextInputEnvelope = {
-    data: TextSectionCreateManyTextInput | TextSectionCreateManyTextInput[]
-    skipDuplicates?: boolean
-  }
-
-  export type TextCollatedContentCreateWithoutTextInput = {
-    id?: string
-    collated_text?: string | null
-    english_translation?: string | null
-    created_at?: Date | string
-    updated_at?: Date | string
-  }
-
-  export type TextCollatedContentUncheckedCreateWithoutTextInput = {
-    id?: string
-    collated_text?: string | null
-    english_translation?: string | null
-    created_at?: Date | string
-    updated_at?: Date | string
-  }
-
-  export type TextCollatedContentCreateOrConnectWithoutTextInput = {
-    where: TextCollatedContentWhereUniqueInput
-    create: XOR<TextCollatedContentCreateWithoutTextInput, TextCollatedContentUncheckedCreateWithoutTextInput>
-  }
-
-  export type TextMetadataCreateWithoutTextInput = {
-    id?: string
-    metadata_key: string
-    metadata_value: string
-    metadata_group: string
-    label?: string | null
-    tibetan_title?: string | null
-    english_title?: string | null
-    sanskrit_title?: string | null
-    chinese_title?: string | null
-    derge_text_id?: string | null
-    yeshe_text_id?: string | null
-    derge_vol_number?: number | null
-    derge_start_page?: number | null
-    derge_end_page?: number | null
-    turning?: string | null
-    yana?: string | null
-    translation_period?: string | null
-    order_index?: number
-    created_at?: Date | string
-    updated_at?: Date | string
-  }
-
-  export type TextMetadataUncheckedCreateWithoutTextInput = {
-    id?: string
-    metadata_key: string
-    metadata_value: string
-    metadata_group: string
-    label?: string | null
-    tibetan_title?: string | null
-    english_title?: string | null
-    sanskrit_title?: string | null
-    chinese_title?: string | null
-    derge_text_id?: string | null
-    yeshe_text_id?: string | null
-    derge_vol_number?: number | null
-    derge_start_page?: number | null
-    derge_end_page?: number | null
-    turning?: string | null
-    yana?: string | null
-    translation_period?: string | null
-    order_index?: number
-    created_at?: Date | string
-    updated_at?: Date | string
-  }
-
-  export type TextMetadataCreateOrConnectWithoutTextInput = {
-    where: TextMetadataWhereUniqueInput
-    create: XOR<TextMetadataCreateWithoutTextInput, TextMetadataUncheckedCreateWithoutTextInput>
-  }
-
-  export type TextMetadataCreateManyTextInputEnvelope = {
-    data: TextMetadataCreateManyTextInput | TextMetadataCreateManyTextInput[]
-    skipDuplicates?: boolean
-  }
-
-  export type TextEditionCreateWithoutTextInput = {
-    id?: string
-    source_id?: string | null
-    volume_number?: number | null
-    start_page?: number | null
-    end_page?: number | null
-    availability?: string | null
-    link_url?: string | null
-    created_at?: Date | string
-    updated_at?: Date | string
-    edition: EditionCreateNestedOneWithoutTextEditionsInput
-  }
-
-  export type TextEditionUncheckedCreateWithoutTextInput = {
-    id?: string
-    edition_id: string
-    source_id?: string | null
-    volume_number?: number | null
-    start_page?: number | null
-    end_page?: number | null
-    availability?: string | null
-    link_url?: string | null
-    created_at?: Date | string
-    updated_at?: Date | string
-  }
-
-  export type TextEditionCreateOrConnectWithoutTextInput = {
-    where: TextEditionWhereUniqueInput
-    create: XOR<TextEditionCreateWithoutTextInput, TextEditionUncheckedCreateWithoutTextInput>
-  }
-
-  export type TextEditionCreateManyTextInputEnvelope = {
-    data: TextEditionCreateManyTextInput | TextEditionCreateManyTextInput[]
-    skipDuplicates?: boolean
-  }
-
-  export type TextSummaryCreateWithoutTextInput = {
-    id?: string
-    translation_homage_tibetan?: string | null
-    translation_homage_english?: string | null
-    purpose_tibetan?: string | null
-    purpose_english?: string | null
-    summary_text_tibetan?: string | null
-    summary_text_english?: string | null
-    word_meaning_tibetan?: string | null
-    word_meaning_english?: string | null
-    connection_tibetan?: string | null
-    connection_english?: string | null
-    question_answers_tibetan?: string | null
-    question_answers_english?: string | null
-    colophon_tibetan?: string | null
-    colophon_english?: string | null
-    created_at?: Date | string
-    updated_at?: Date | string
-  }
-
-  export type TextSummaryUncheckedCreateWithoutTextInput = {
-    id?: string
-    translation_homage_tibetan?: string | null
-    translation_homage_english?: string | null
-    purpose_tibetan?: string | null
-    purpose_english?: string | null
-    summary_text_tibetan?: string | null
-    summary_text_english?: string | null
-    word_meaning_tibetan?: string | null
-    word_meaning_english?: string | null
-    connection_tibetan?: string | null
-    connection_english?: string | null
-    question_answers_tibetan?: string | null
-    question_answers_english?: string | null
-    colophon_tibetan?: string | null
-    colophon_english?: string | null
-    created_at?: Date | string
-    updated_at?: Date | string
-  }
-
-  export type TextSummaryCreateOrConnectWithoutTextInput = {
-    where: TextSummaryWhereUniqueInput
-    create: XOR<TextSummaryCreateWithoutTextInput, TextSummaryUncheckedCreateWithoutTextInput>
-  }
-
-  export type CatalogCategoryUpsertWithoutTextsInput = {
-    update: XOR<CatalogCategoryUpdateWithoutTextsInput, CatalogCategoryUncheckedUpdateWithoutTextsInput>
-    create: XOR<CatalogCategoryCreateWithoutTextsInput, CatalogCategoryUncheckedCreateWithoutTextsInput>
-    where?: CatalogCategoryWhereInput
-  }
-
-  export type CatalogCategoryUpdateToOneWithWhereWithoutTextsInput = {
-    where?: CatalogCategoryWhereInput
-    data: XOR<CatalogCategoryUpdateWithoutTextsInput, CatalogCategoryUncheckedUpdateWithoutTextsInput>
-  }
-
-  export type CatalogCategoryUpdateWithoutTextsInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    id_slug?: StringFieldUpdateOperationsInput | string
-    title_tibetan?: NullableStringFieldUpdateOperationsInput | string | null
-    title_english?: StringFieldUpdateOperationsInput | string
-    description?: NullableStringFieldUpdateOperationsInput | string | null
-    count?: IntFieldUpdateOperationsInput | number
-    order_index?: IntFieldUpdateOperationsInput | number
-    is_active?: BoolFieldUpdateOperationsInput | boolean
-    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    parent?: CatalogCategoryUpdateOneWithoutChildrenNestedInput
-    children?: CatalogCategoryUpdateManyWithoutParentNestedInput
-  }
-
-  export type CatalogCategoryUncheckedUpdateWithoutTextsInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    parent_id?: NullableStringFieldUpdateOperationsInput | string | null
-    id_slug?: StringFieldUpdateOperationsInput | string
-    title_tibetan?: NullableStringFieldUpdateOperationsInput | string | null
-    title_english?: StringFieldUpdateOperationsInput | string
-    description?: NullableStringFieldUpdateOperationsInput | string | null
-    count?: IntFieldUpdateOperationsInput | number
-    order_index?: IntFieldUpdateOperationsInput | number
-    is_active?: BoolFieldUpdateOperationsInput | boolean
-    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    children?: CatalogCategoryUncheckedUpdateManyWithoutParentNestedInput
-  }
-
-  export type TextSectionUpsertWithWhereUniqueWithoutTextInput = {
-    where: TextSectionWhereUniqueInput
-    update: XOR<TextSectionUpdateWithoutTextInput, TextSectionUncheckedUpdateWithoutTextInput>
-    create: XOR<TextSectionCreateWithoutTextInput, TextSectionUncheckedCreateWithoutTextInput>
-  }
-
-  export type TextSectionUpdateWithWhereUniqueWithoutTextInput = {
-    where: TextSectionWhereUniqueInput
-    data: XOR<TextSectionUpdateWithoutTextInput, TextSectionUncheckedUpdateWithoutTextInput>
-  }
-
-  export type TextSectionUpdateManyWithWhereWithoutTextInput = {
-    where: TextSectionScalarWhereInput
-    data: XOR<TextSectionUpdateManyMutationInput, TextSectionUncheckedUpdateManyWithoutTextInput>
-  }
-
-  export type TextSectionScalarWhereInput = {
-    AND?: TextSectionScalarWhereInput | TextSectionScalarWhereInput[]
-    OR?: TextSectionScalarWhereInput[]
-    NOT?: TextSectionScalarWhereInput | TextSectionScalarWhereInput[]
-    id?: StringFilter<"TextSection"> | string
-    text_id?: StringFilter<"TextSection"> | string
-    section_type?: StringFilter<"TextSection"> | string
-    title_tibetan?: StringNullableFilter<"TextSection"> | string | null
-    title_english?: StringNullableFilter<"TextSection"> | string | null
-    content_tibetan?: StringNullableFilter<"TextSection"> | string | null
-    content_english?: StringNullableFilter<"TextSection"> | string | null
-    order_index?: IntFilter<"TextSection"> | number
-    created_at?: DateTimeFilter<"TextSection"> | Date | string
-    updated_at?: DateTimeFilter<"TextSection"> | Date | string
-  }
-
-  export type TextCollatedContentUpsertWithoutTextInput = {
-    update: XOR<TextCollatedContentUpdateWithoutTextInput, TextCollatedContentUncheckedUpdateWithoutTextInput>
-    create: XOR<TextCollatedContentCreateWithoutTextInput, TextCollatedContentUncheckedCreateWithoutTextInput>
-    where?: TextCollatedContentWhereInput
-  }
-
-  export type TextCollatedContentUpdateToOneWithWhereWithoutTextInput = {
-    where?: TextCollatedContentWhereInput
-    data: XOR<TextCollatedContentUpdateWithoutTextInput, TextCollatedContentUncheckedUpdateWithoutTextInput>
-  }
-
-  export type TextCollatedContentUpdateWithoutTextInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    collated_text?: NullableStringFieldUpdateOperationsInput | string | null
-    english_translation?: NullableStringFieldUpdateOperationsInput | string | null
-    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type TextCollatedContentUncheckedUpdateWithoutTextInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    collated_text?: NullableStringFieldUpdateOperationsInput | string | null
-    english_translation?: NullableStringFieldUpdateOperationsInput | string | null
-    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type TextMetadataUpsertWithWhereUniqueWithoutTextInput = {
-    where: TextMetadataWhereUniqueInput
-    update: XOR<TextMetadataUpdateWithoutTextInput, TextMetadataUncheckedUpdateWithoutTextInput>
-    create: XOR<TextMetadataCreateWithoutTextInput, TextMetadataUncheckedCreateWithoutTextInput>
-  }
-
-  export type TextMetadataUpdateWithWhereUniqueWithoutTextInput = {
-    where: TextMetadataWhereUniqueInput
-    data: XOR<TextMetadataUpdateWithoutTextInput, TextMetadataUncheckedUpdateWithoutTextInput>
-  }
-
-  export type TextMetadataUpdateManyWithWhereWithoutTextInput = {
-    where: TextMetadataScalarWhereInput
-    data: XOR<TextMetadataUpdateManyMutationInput, TextMetadataUncheckedUpdateManyWithoutTextInput>
-  }
-
-  export type TextMetadataScalarWhereInput = {
-    AND?: TextMetadataScalarWhereInput | TextMetadataScalarWhereInput[]
-    OR?: TextMetadataScalarWhereInput[]
-    NOT?: TextMetadataScalarWhereInput | TextMetadataScalarWhereInput[]
-    id?: StringFilter<"TextMetadata"> | string
-    text_id?: StringFilter<"TextMetadata"> | string
-    metadata_key?: StringFilter<"TextMetadata"> | string
-    metadata_value?: StringFilter<"TextMetadata"> | string
-    metadata_group?: StringFilter<"TextMetadata"> | string
-    label?: StringNullableFilter<"TextMetadata"> | string | null
-    tibetan_title?: StringNullableFilter<"TextMetadata"> | string | null
-    english_title?: StringNullableFilter<"TextMetadata"> | string | null
-    sanskrit_title?: StringNullableFilter<"TextMetadata"> | string | null
-    chinese_title?: StringNullableFilter<"TextMetadata"> | string | null
-    derge_text_id?: StringNullableFilter<"TextMetadata"> | string | null
-    yeshe_text_id?: StringNullableFilter<"TextMetadata"> | string | null
-    derge_vol_number?: IntNullableFilter<"TextMetadata"> | number | null
-    derge_start_page?: IntNullableFilter<"TextMetadata"> | number | null
-    derge_end_page?: IntNullableFilter<"TextMetadata"> | number | null
-    turning?: StringNullableFilter<"TextMetadata"> | string | null
-    yana?: StringNullableFilter<"TextMetadata"> | string | null
-    translation_period?: StringNullableFilter<"TextMetadata"> | string | null
-    order_index?: IntFilter<"TextMetadata"> | number
-    created_at?: DateTimeFilter<"TextMetadata"> | Date | string
-    updated_at?: DateTimeFilter<"TextMetadata"> | Date | string
-  }
-
-  export type TextEditionUpsertWithWhereUniqueWithoutTextInput = {
-    where: TextEditionWhereUniqueInput
-    update: XOR<TextEditionUpdateWithoutTextInput, TextEditionUncheckedUpdateWithoutTextInput>
-    create: XOR<TextEditionCreateWithoutTextInput, TextEditionUncheckedCreateWithoutTextInput>
-  }
-
-  export type TextEditionUpdateWithWhereUniqueWithoutTextInput = {
-    where: TextEditionWhereUniqueInput
-    data: XOR<TextEditionUpdateWithoutTextInput, TextEditionUncheckedUpdateWithoutTextInput>
-  }
-
-  export type TextEditionUpdateManyWithWhereWithoutTextInput = {
-    where: TextEditionScalarWhereInput
-    data: XOR<TextEditionUpdateManyMutationInput, TextEditionUncheckedUpdateManyWithoutTextInput>
-  }
-
-  export type TextEditionScalarWhereInput = {
-    AND?: TextEditionScalarWhereInput | TextEditionScalarWhereInput[]
-    OR?: TextEditionScalarWhereInput[]
-    NOT?: TextEditionScalarWhereInput | TextEditionScalarWhereInput[]
-    id?: StringFilter<"TextEdition"> | string
-    text_id?: StringFilter<"TextEdition"> | string
-    edition_id?: StringFilter<"TextEdition"> | string
-    source_id?: StringNullableFilter<"TextEdition"> | string | null
-    volume_number?: IntNullableFilter<"TextEdition"> | number | null
-    start_page?: IntNullableFilter<"TextEdition"> | number | null
-    end_page?: IntNullableFilter<"TextEdition"> | number | null
-    availability?: StringNullableFilter<"TextEdition"> | string | null
-    link_url?: StringNullableFilter<"TextEdition"> | string | null
-    created_at?: DateTimeFilter<"TextEdition"> | Date | string
-    updated_at?: DateTimeFilter<"TextEdition"> | Date | string
-  }
-
-  export type TextSummaryUpsertWithoutTextInput = {
-    update: XOR<TextSummaryUpdateWithoutTextInput, TextSummaryUncheckedUpdateWithoutTextInput>
-    create: XOR<TextSummaryCreateWithoutTextInput, TextSummaryUncheckedCreateWithoutTextInput>
-    where?: TextSummaryWhereInput
-  }
-
-  export type TextSummaryUpdateToOneWithWhereWithoutTextInput = {
-    where?: TextSummaryWhereInput
-    data: XOR<TextSummaryUpdateWithoutTextInput, TextSummaryUncheckedUpdateWithoutTextInput>
-  }
-
-  export type TextSummaryUpdateWithoutTextInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    translation_homage_tibetan?: NullableStringFieldUpdateOperationsInput | string | null
-    translation_homage_english?: NullableStringFieldUpdateOperationsInput | string | null
-    purpose_tibetan?: NullableStringFieldUpdateOperationsInput | string | null
-    purpose_english?: NullableStringFieldUpdateOperationsInput | string | null
-    summary_text_tibetan?: NullableStringFieldUpdateOperationsInput | string | null
-    summary_text_english?: NullableStringFieldUpdateOperationsInput | string | null
-    word_meaning_tibetan?: NullableStringFieldUpdateOperationsInput | string | null
-    word_meaning_english?: NullableStringFieldUpdateOperationsInput | string | null
-    connection_tibetan?: NullableStringFieldUpdateOperationsInput | string | null
-    connection_english?: NullableStringFieldUpdateOperationsInput | string | null
-    question_answers_tibetan?: NullableStringFieldUpdateOperationsInput | string | null
-    question_answers_english?: NullableStringFieldUpdateOperationsInput | string | null
-    colophon_tibetan?: NullableStringFieldUpdateOperationsInput | string | null
-    colophon_english?: NullableStringFieldUpdateOperationsInput | string | null
-    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type TextSummaryUncheckedUpdateWithoutTextInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    translation_homage_tibetan?: NullableStringFieldUpdateOperationsInput | string | null
-    translation_homage_english?: NullableStringFieldUpdateOperationsInput | string | null
-    purpose_tibetan?: NullableStringFieldUpdateOperationsInput | string | null
-    purpose_english?: NullableStringFieldUpdateOperationsInput | string | null
-    summary_text_tibetan?: NullableStringFieldUpdateOperationsInput | string | null
-    summary_text_english?: NullableStringFieldUpdateOperationsInput | string | null
-    word_meaning_tibetan?: NullableStringFieldUpdateOperationsInput | string | null
-    word_meaning_english?: NullableStringFieldUpdateOperationsInput | string | null
-    connection_tibetan?: NullableStringFieldUpdateOperationsInput | string | null
-    connection_english?: NullableStringFieldUpdateOperationsInput | string | null
-    question_answers_tibetan?: NullableStringFieldUpdateOperationsInput | string | null
-    question_answers_english?: NullableStringFieldUpdateOperationsInput | string | null
-    colophon_tibetan?: NullableStringFieldUpdateOperationsInput | string | null
-    colophon_english?: NullableStringFieldUpdateOperationsInput | string | null
-    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type TextCreateWithoutSectionsInput = {
-    id?: string
-    id_slug?: string | null
-    keywords?: TextCreatekeywordsInput | string[]
-    is_active?: boolean
-    order_index?: number
-    created_at?: Date | string
-    updated_at?: Date | string
-    category?: CatalogCategoryCreateNestedOneWithoutTextsInput
-    collatedContent?: TextCollatedContentCreateNestedOneWithoutTextInput
-    metadata?: TextMetadataCreateNestedManyWithoutTextInput
-    textEditions?: TextEditionCreateNestedManyWithoutTextInput
-    summary?: TextSummaryCreateNestedOneWithoutTextInput
-  }
-
-  export type TextUncheckedCreateWithoutSectionsInput = {
-    id?: string
-    id_slug?: string | null
-    category_id?: string | null
-    keywords?: TextCreatekeywordsInput | string[]
-    is_active?: boolean
-    order_index?: number
-    created_at?: Date | string
-    updated_at?: Date | string
-    collatedContent?: TextCollatedContentUncheckedCreateNestedOneWithoutTextInput
-    metadata?: TextMetadataUncheckedCreateNestedManyWithoutTextInput
-    textEditions?: TextEditionUncheckedCreateNestedManyWithoutTextInput
-    summary?: TextSummaryUncheckedCreateNestedOneWithoutTextInput
-  }
-
-  export type TextCreateOrConnectWithoutSectionsInput = {
-    where: TextWhereUniqueInput
-    create: XOR<TextCreateWithoutSectionsInput, TextUncheckedCreateWithoutSectionsInput>
-  }
-
-  export type TextUpsertWithoutSectionsInput = {
-    update: XOR<TextUpdateWithoutSectionsInput, TextUncheckedUpdateWithoutSectionsInput>
-    create: XOR<TextCreateWithoutSectionsInput, TextUncheckedCreateWithoutSectionsInput>
-    where?: TextWhereInput
-  }
-
-  export type TextUpdateToOneWithWhereWithoutSectionsInput = {
-    where?: TextWhereInput
-    data: XOR<TextUpdateWithoutSectionsInput, TextUncheckedUpdateWithoutSectionsInput>
-  }
-
-  export type TextUpdateWithoutSectionsInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    id_slug?: NullableStringFieldUpdateOperationsInput | string | null
-    keywords?: TextUpdatekeywordsInput | string[]
-    is_active?: BoolFieldUpdateOperationsInput | boolean
-    order_index?: IntFieldUpdateOperationsInput | number
-    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    category?: CatalogCategoryUpdateOneWithoutTextsNestedInput
-    collatedContent?: TextCollatedContentUpdateOneWithoutTextNestedInput
-    metadata?: TextMetadataUpdateManyWithoutTextNestedInput
-    textEditions?: TextEditionUpdateManyWithoutTextNestedInput
-    summary?: TextSummaryUpdateOneWithoutTextNestedInput
-  }
-
-  export type TextUncheckedUpdateWithoutSectionsInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    id_slug?: NullableStringFieldUpdateOperationsInput | string | null
-    category_id?: NullableStringFieldUpdateOperationsInput | string | null
-    keywords?: TextUpdatekeywordsInput | string[]
-    is_active?: BoolFieldUpdateOperationsInput | boolean
-    order_index?: IntFieldUpdateOperationsInput | number
-    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    collatedContent?: TextCollatedContentUncheckedUpdateOneWithoutTextNestedInput
-    metadata?: TextMetadataUncheckedUpdateManyWithoutTextNestedInput
-    textEditions?: TextEditionUncheckedUpdateManyWithoutTextNestedInput
-    summary?: TextSummaryUncheckedUpdateOneWithoutTextNestedInput
-  }
-
-  export type TextCreateWithoutSummaryInput = {
-    id?: string
-    id_slug?: string | null
-    keywords?: TextCreatekeywordsInput | string[]
-    is_active?: boolean
-    order_index?: number
-    created_at?: Date | string
-    updated_at?: Date | string
-    category?: CatalogCategoryCreateNestedOneWithoutTextsInput
-    sections?: TextSectionCreateNestedManyWithoutTextInput
-    collatedContent?: TextCollatedContentCreateNestedOneWithoutTextInput
-    metadata?: TextMetadataCreateNestedManyWithoutTextInput
-    textEditions?: TextEditionCreateNestedManyWithoutTextInput
-  }
-
-  export type TextUncheckedCreateWithoutSummaryInput = {
-    id?: string
-    id_slug?: string | null
-    category_id?: string | null
-    keywords?: TextCreatekeywordsInput | string[]
-    is_active?: boolean
-    order_index?: number
-    created_at?: Date | string
-    updated_at?: Date | string
-    sections?: TextSectionUncheckedCreateNestedManyWithoutTextInput
-    collatedContent?: TextCollatedContentUncheckedCreateNestedOneWithoutTextInput
-    metadata?: TextMetadataUncheckedCreateNestedManyWithoutTextInput
-    textEditions?: TextEditionUncheckedCreateNestedManyWithoutTextInput
-  }
-
-  export type TextCreateOrConnectWithoutSummaryInput = {
-    where: TextWhereUniqueInput
-    create: XOR<TextCreateWithoutSummaryInput, TextUncheckedCreateWithoutSummaryInput>
-  }
-
-  export type TextUpsertWithoutSummaryInput = {
-    update: XOR<TextUpdateWithoutSummaryInput, TextUncheckedUpdateWithoutSummaryInput>
-    create: XOR<TextCreateWithoutSummaryInput, TextUncheckedCreateWithoutSummaryInput>
-    where?: TextWhereInput
-  }
-
-  export type TextUpdateToOneWithWhereWithoutSummaryInput = {
-    where?: TextWhereInput
-    data: XOR<TextUpdateWithoutSummaryInput, TextUncheckedUpdateWithoutSummaryInput>
-  }
-
-  export type TextUpdateWithoutSummaryInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    id_slug?: NullableStringFieldUpdateOperationsInput | string | null
-    keywords?: TextUpdatekeywordsInput | string[]
-    is_active?: BoolFieldUpdateOperationsInput | boolean
-    order_index?: IntFieldUpdateOperationsInput | number
-    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    category?: CatalogCategoryUpdateOneWithoutTextsNestedInput
-    sections?: TextSectionUpdateManyWithoutTextNestedInput
-    collatedContent?: TextCollatedContentUpdateOneWithoutTextNestedInput
-    metadata?: TextMetadataUpdateManyWithoutTextNestedInput
-    textEditions?: TextEditionUpdateManyWithoutTextNestedInput
-  }
-
-  export type TextUncheckedUpdateWithoutSummaryInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    id_slug?: NullableStringFieldUpdateOperationsInput | string | null
-    category_id?: NullableStringFieldUpdateOperationsInput | string | null
-    keywords?: TextUpdatekeywordsInput | string[]
-    is_active?: BoolFieldUpdateOperationsInput | boolean
-    order_index?: IntFieldUpdateOperationsInput | number
-    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    sections?: TextSectionUncheckedUpdateManyWithoutTextNestedInput
-    collatedContent?: TextCollatedContentUncheckedUpdateOneWithoutTextNestedInput
-    metadata?: TextMetadataUncheckedUpdateManyWithoutTextNestedInput
-    textEditions?: TextEditionUncheckedUpdateManyWithoutTextNestedInput
-  }
-
-  export type TextCreateWithoutCollatedContentInput = {
-    id?: string
-    id_slug?: string | null
-    keywords?: TextCreatekeywordsInput | string[]
-    is_active?: boolean
-    order_index?: number
-    created_at?: Date | string
-    updated_at?: Date | string
-    category?: CatalogCategoryCreateNestedOneWithoutTextsInput
-    sections?: TextSectionCreateNestedManyWithoutTextInput
-    metadata?: TextMetadataCreateNestedManyWithoutTextInput
-    textEditions?: TextEditionCreateNestedManyWithoutTextInput
-    summary?: TextSummaryCreateNestedOneWithoutTextInput
-  }
-
-  export type TextUncheckedCreateWithoutCollatedContentInput = {
-    id?: string
-    id_slug?: string | null
-    category_id?: string | null
-    keywords?: TextCreatekeywordsInput | string[]
-    is_active?: boolean
-    order_index?: number
-    created_at?: Date | string
-    updated_at?: Date | string
-    sections?: TextSectionUncheckedCreateNestedManyWithoutTextInput
-    metadata?: TextMetadataUncheckedCreateNestedManyWithoutTextInput
-    textEditions?: TextEditionUncheckedCreateNestedManyWithoutTextInput
-    summary?: TextSummaryUncheckedCreateNestedOneWithoutTextInput
-  }
-
-  export type TextCreateOrConnectWithoutCollatedContentInput = {
-    where: TextWhereUniqueInput
-    create: XOR<TextCreateWithoutCollatedContentInput, TextUncheckedCreateWithoutCollatedContentInput>
-  }
-
-  export type TextUpsertWithoutCollatedContentInput = {
-    update: XOR<TextUpdateWithoutCollatedContentInput, TextUncheckedUpdateWithoutCollatedContentInput>
-    create: XOR<TextCreateWithoutCollatedContentInput, TextUncheckedCreateWithoutCollatedContentInput>
-    where?: TextWhereInput
-  }
-
-  export type TextUpdateToOneWithWhereWithoutCollatedContentInput = {
-    where?: TextWhereInput
-    data: XOR<TextUpdateWithoutCollatedContentInput, TextUncheckedUpdateWithoutCollatedContentInput>
-  }
-
-  export type TextUpdateWithoutCollatedContentInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    id_slug?: NullableStringFieldUpdateOperationsInput | string | null
-    keywords?: TextUpdatekeywordsInput | string[]
-    is_active?: BoolFieldUpdateOperationsInput | boolean
-    order_index?: IntFieldUpdateOperationsInput | number
-    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    category?: CatalogCategoryUpdateOneWithoutTextsNestedInput
-    sections?: TextSectionUpdateManyWithoutTextNestedInput
-    metadata?: TextMetadataUpdateManyWithoutTextNestedInput
-    textEditions?: TextEditionUpdateManyWithoutTextNestedInput
-    summary?: TextSummaryUpdateOneWithoutTextNestedInput
-  }
-
-  export type TextUncheckedUpdateWithoutCollatedContentInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    id_slug?: NullableStringFieldUpdateOperationsInput | string | null
-    category_id?: NullableStringFieldUpdateOperationsInput | string | null
-    keywords?: TextUpdatekeywordsInput | string[]
-    is_active?: BoolFieldUpdateOperationsInput | boolean
-    order_index?: IntFieldUpdateOperationsInput | number
-    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    sections?: TextSectionUncheckedUpdateManyWithoutTextNestedInput
-    metadata?: TextMetadataUncheckedUpdateManyWithoutTextNestedInput
-    textEditions?: TextEditionUncheckedUpdateManyWithoutTextNestedInput
-    summary?: TextSummaryUncheckedUpdateOneWithoutTextNestedInput
-  }
-
-  export type TextCreateWithoutMetadataInput = {
-    id?: string
-    id_slug?: string | null
-    keywords?: TextCreatekeywordsInput | string[]
-    is_active?: boolean
-    order_index?: number
-    created_at?: Date | string
-    updated_at?: Date | string
-    category?: CatalogCategoryCreateNestedOneWithoutTextsInput
-    sections?: TextSectionCreateNestedManyWithoutTextInput
-    collatedContent?: TextCollatedContentCreateNestedOneWithoutTextInput
-    textEditions?: TextEditionCreateNestedManyWithoutTextInput
-    summary?: TextSummaryCreateNestedOneWithoutTextInput
-  }
-
-  export type TextUncheckedCreateWithoutMetadataInput = {
-    id?: string
-    id_slug?: string | null
-    category_id?: string | null
-    keywords?: TextCreatekeywordsInput | string[]
-    is_active?: boolean
-    order_index?: number
-    created_at?: Date | string
-    updated_at?: Date | string
-    sections?: TextSectionUncheckedCreateNestedManyWithoutTextInput
-    collatedContent?: TextCollatedContentUncheckedCreateNestedOneWithoutTextInput
-    textEditions?: TextEditionUncheckedCreateNestedManyWithoutTextInput
-    summary?: TextSummaryUncheckedCreateNestedOneWithoutTextInput
-  }
-
-  export type TextCreateOrConnectWithoutMetadataInput = {
-    where: TextWhereUniqueInput
-    create: XOR<TextCreateWithoutMetadataInput, TextUncheckedCreateWithoutMetadataInput>
-  }
-
-  export type TextUpsertWithoutMetadataInput = {
-    update: XOR<TextUpdateWithoutMetadataInput, TextUncheckedUpdateWithoutMetadataInput>
-    create: XOR<TextCreateWithoutMetadataInput, TextUncheckedCreateWithoutMetadataInput>
-    where?: TextWhereInput
-  }
-
-  export type TextUpdateToOneWithWhereWithoutMetadataInput = {
-    where?: TextWhereInput
-    data: XOR<TextUpdateWithoutMetadataInput, TextUncheckedUpdateWithoutMetadataInput>
-  }
-
-  export type TextUpdateWithoutMetadataInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    id_slug?: NullableStringFieldUpdateOperationsInput | string | null
-    keywords?: TextUpdatekeywordsInput | string[]
-    is_active?: BoolFieldUpdateOperationsInput | boolean
-    order_index?: IntFieldUpdateOperationsInput | number
-    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    category?: CatalogCategoryUpdateOneWithoutTextsNestedInput
-    sections?: TextSectionUpdateManyWithoutTextNestedInput
-    collatedContent?: TextCollatedContentUpdateOneWithoutTextNestedInput
-    textEditions?: TextEditionUpdateManyWithoutTextNestedInput
-    summary?: TextSummaryUpdateOneWithoutTextNestedInput
-  }
-
-  export type TextUncheckedUpdateWithoutMetadataInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    id_slug?: NullableStringFieldUpdateOperationsInput | string | null
-    category_id?: NullableStringFieldUpdateOperationsInput | string | null
-    keywords?: TextUpdatekeywordsInput | string[]
-    is_active?: BoolFieldUpdateOperationsInput | boolean
-    order_index?: IntFieldUpdateOperationsInput | number
-    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    sections?: TextSectionUncheckedUpdateManyWithoutTextNestedInput
-    collatedContent?: TextCollatedContentUncheckedUpdateOneWithoutTextNestedInput
-    textEditions?: TextEditionUncheckedUpdateManyWithoutTextNestedInput
-    summary?: TextSummaryUncheckedUpdateOneWithoutTextNestedInput
-  }
-
-  export type TextEditionCreateWithoutEditionInput = {
-    id?: string
-    source_id?: string | null
-    volume_number?: number | null
-    start_page?: number | null
-    end_page?: number | null
-    availability?: string | null
-    link_url?: string | null
-    created_at?: Date | string
-    updated_at?: Date | string
-    text: TextCreateNestedOneWithoutTextEditionsInput
-  }
-
-  export type TextEditionUncheckedCreateWithoutEditionInput = {
-    id?: string
-    text_id: string
-    source_id?: string | null
-    volume_number?: number | null
-    start_page?: number | null
-    end_page?: number | null
-    availability?: string | null
-    link_url?: string | null
-    created_at?: Date | string
-    updated_at?: Date | string
-  }
-
-  export type TextEditionCreateOrConnectWithoutEditionInput = {
-    where: TextEditionWhereUniqueInput
-    create: XOR<TextEditionCreateWithoutEditionInput, TextEditionUncheckedCreateWithoutEditionInput>
-  }
-
-  export type TextEditionCreateManyEditionInputEnvelope = {
-    data: TextEditionCreateManyEditionInput | TextEditionCreateManyEditionInput[]
-    skipDuplicates?: boolean
-  }
-
-  export type TextEditionUpsertWithWhereUniqueWithoutEditionInput = {
-    where: TextEditionWhereUniqueInput
-    update: XOR<TextEditionUpdateWithoutEditionInput, TextEditionUncheckedUpdateWithoutEditionInput>
-    create: XOR<TextEditionCreateWithoutEditionInput, TextEditionUncheckedCreateWithoutEditionInput>
-  }
-
-  export type TextEditionUpdateWithWhereUniqueWithoutEditionInput = {
-    where: TextEditionWhereUniqueInput
-    data: XOR<TextEditionUpdateWithoutEditionInput, TextEditionUncheckedUpdateWithoutEditionInput>
-  }
-
-  export type TextEditionUpdateManyWithWhereWithoutEditionInput = {
-    where: TextEditionScalarWhereInput
-    data: XOR<TextEditionUpdateManyMutationInput, TextEditionUncheckedUpdateManyWithoutEditionInput>
-  }
-
-  export type TextCreateWithoutTextEditionsInput = {
-    id?: string
-    id_slug?: string | null
-    keywords?: TextCreatekeywordsInput | string[]
-    is_active?: boolean
-    order_index?: number
-    created_at?: Date | string
-    updated_at?: Date | string
-    category?: CatalogCategoryCreateNestedOneWithoutTextsInput
-    sections?: TextSectionCreateNestedManyWithoutTextInput
-    collatedContent?: TextCollatedContentCreateNestedOneWithoutTextInput
-    metadata?: TextMetadataCreateNestedManyWithoutTextInput
-    summary?: TextSummaryCreateNestedOneWithoutTextInput
-  }
-
-  export type TextUncheckedCreateWithoutTextEditionsInput = {
-    id?: string
-    id_slug?: string | null
-    category_id?: string | null
-    keywords?: TextCreatekeywordsInput | string[]
-    is_active?: boolean
-    order_index?: number
-    created_at?: Date | string
-    updated_at?: Date | string
-    sections?: TextSectionUncheckedCreateNestedManyWithoutTextInput
-    collatedContent?: TextCollatedContentUncheckedCreateNestedOneWithoutTextInput
-    metadata?: TextMetadataUncheckedCreateNestedManyWithoutTextInput
-    summary?: TextSummaryUncheckedCreateNestedOneWithoutTextInput
-  }
-
-  export type TextCreateOrConnectWithoutTextEditionsInput = {
-    where: TextWhereUniqueInput
-    create: XOR<TextCreateWithoutTextEditionsInput, TextUncheckedCreateWithoutTextEditionsInput>
-  }
-
-  export type EditionCreateWithoutTextEditionsInput = {
-    id?: string
-    name_english: string
-    name_tibetan?: string | null
-    description_english?: string | null
-    description_tibetan?: string | null
-    year?: string | null
-    location?: string | null
-    total_volumes?: number | null
-    total_texts?: number | null
-    is_active?: boolean
-    created_at?: Date | string
-    updated_at?: Date | string
-  }
-
-  export type EditionUncheckedCreateWithoutTextEditionsInput = {
-    id?: string
-    name_english: string
-    name_tibetan?: string | null
-    description_english?: string | null
-    description_tibetan?: string | null
-    year?: string | null
-    location?: string | null
-    total_volumes?: number | null
-    total_texts?: number | null
-    is_active?: boolean
-    created_at?: Date | string
-    updated_at?: Date | string
-  }
-
-  export type EditionCreateOrConnectWithoutTextEditionsInput = {
-    where: EditionWhereUniqueInput
-    create: XOR<EditionCreateWithoutTextEditionsInput, EditionUncheckedCreateWithoutTextEditionsInput>
-  }
-
-  export type TextUpsertWithoutTextEditionsInput = {
-    update: XOR<TextUpdateWithoutTextEditionsInput, TextUncheckedUpdateWithoutTextEditionsInput>
-    create: XOR<TextCreateWithoutTextEditionsInput, TextUncheckedCreateWithoutTextEditionsInput>
-    where?: TextWhereInput
-  }
-
-  export type TextUpdateToOneWithWhereWithoutTextEditionsInput = {
-    where?: TextWhereInput
-    data: XOR<TextUpdateWithoutTextEditionsInput, TextUncheckedUpdateWithoutTextEditionsInput>
-  }
-
-  export type TextUpdateWithoutTextEditionsInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    id_slug?: NullableStringFieldUpdateOperationsInput | string | null
-    keywords?: TextUpdatekeywordsInput | string[]
-    is_active?: BoolFieldUpdateOperationsInput | boolean
-    order_index?: IntFieldUpdateOperationsInput | number
-    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    category?: CatalogCategoryUpdateOneWithoutTextsNestedInput
-    sections?: TextSectionUpdateManyWithoutTextNestedInput
-    collatedContent?: TextCollatedContentUpdateOneWithoutTextNestedInput
-    metadata?: TextMetadataUpdateManyWithoutTextNestedInput
-    summary?: TextSummaryUpdateOneWithoutTextNestedInput
-  }
-
-  export type TextUncheckedUpdateWithoutTextEditionsInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    id_slug?: NullableStringFieldUpdateOperationsInput | string | null
-    category_id?: NullableStringFieldUpdateOperationsInput | string | null
-    keywords?: TextUpdatekeywordsInput | string[]
-    is_active?: BoolFieldUpdateOperationsInput | boolean
-    order_index?: IntFieldUpdateOperationsInput | number
-    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    sections?: TextSectionUncheckedUpdateManyWithoutTextNestedInput
-    collatedContent?: TextCollatedContentUncheckedUpdateOneWithoutTextNestedInput
-    metadata?: TextMetadataUncheckedUpdateManyWithoutTextNestedInput
-    summary?: TextSummaryUncheckedUpdateOneWithoutTextNestedInput
-  }
-
-  export type EditionUpsertWithoutTextEditionsInput = {
-    update: XOR<EditionUpdateWithoutTextEditionsInput, EditionUncheckedUpdateWithoutTextEditionsInput>
-    create: XOR<EditionCreateWithoutTextEditionsInput, EditionUncheckedCreateWithoutTextEditionsInput>
-    where?: EditionWhereInput
-  }
-
-  export type EditionUpdateToOneWithWhereWithoutTextEditionsInput = {
-    where?: EditionWhereInput
-    data: XOR<EditionUpdateWithoutTextEditionsInput, EditionUncheckedUpdateWithoutTextEditionsInput>
-  }
-
-  export type EditionUpdateWithoutTextEditionsInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    name_english?: StringFieldUpdateOperationsInput | string
-    name_tibetan?: NullableStringFieldUpdateOperationsInput | string | null
-    description_english?: NullableStringFieldUpdateOperationsInput | string | null
-    description_tibetan?: NullableStringFieldUpdateOperationsInput | string | null
-    year?: NullableStringFieldUpdateOperationsInput | string | null
-    location?: NullableStringFieldUpdateOperationsInput | string | null
-    total_volumes?: NullableIntFieldUpdateOperationsInput | number | null
-    total_texts?: NullableIntFieldUpdateOperationsInput | number | null
-    is_active?: BoolFieldUpdateOperationsInput | boolean
-    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type EditionUncheckedUpdateWithoutTextEditionsInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    name_english?: StringFieldUpdateOperationsInput | string
-    name_tibetan?: NullableStringFieldUpdateOperationsInput | string | null
-    description_english?: NullableStringFieldUpdateOperationsInput | string | null
-    description_tibetan?: NullableStringFieldUpdateOperationsInput | string | null
-    year?: NullableStringFieldUpdateOperationsInput | string | null
-    location?: NullableStringFieldUpdateOperationsInput | string | null
-    total_volumes?: NullableIntFieldUpdateOperationsInput | number | null
-    total_texts?: NullableIntFieldUpdateOperationsInput | number | null
-    is_active?: BoolFieldUpdateOperationsInput | boolean
-    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type TimelineEventCreateWithoutPeriodInput = {
@@ -34434,7 +25322,7 @@ export namespace Prisma {
     relations?: TimelineEventRelationUncheckedUpdateManyWithoutEventNestedInput
   }
 
-  export type KarchagSubCategoryCreateWithoutMainCategoryInput = {
+  export type KarchagSubCategoryCreateWithoutMain_categoryInput = {
     id?: string
     name_english: string
     name_tibetan?: string | null
@@ -34444,10 +25332,12 @@ export namespace Prisma {
     is_active?: boolean
     created_at?: Date | string
     updated_at?: Date | string
-    texts?: KarchagTextCreateNestedManyWithoutSubCategoryInput
+    only_content?: boolean
+    content?: string | null
+    texts?: TextCreateNestedManyWithoutSub_categoryInput
   }
 
-  export type KarchagSubCategoryUncheckedCreateWithoutMainCategoryInput = {
+  export type KarchagSubCategoryUncheckedCreateWithoutMain_categoryInput = {
     id?: string
     name_english: string
     name_tibetan?: string | null
@@ -34457,33 +25347,35 @@ export namespace Prisma {
     is_active?: boolean
     created_at?: Date | string
     updated_at?: Date | string
-    texts?: KarchagTextUncheckedCreateNestedManyWithoutSubCategoryInput
+    only_content?: boolean
+    content?: string | null
+    texts?: TextUncheckedCreateNestedManyWithoutSub_categoryInput
   }
 
-  export type KarchagSubCategoryCreateOrConnectWithoutMainCategoryInput = {
+  export type KarchagSubCategoryCreateOrConnectWithoutMain_categoryInput = {
     where: KarchagSubCategoryWhereUniqueInput
-    create: XOR<KarchagSubCategoryCreateWithoutMainCategoryInput, KarchagSubCategoryUncheckedCreateWithoutMainCategoryInput>
+    create: XOR<KarchagSubCategoryCreateWithoutMain_categoryInput, KarchagSubCategoryUncheckedCreateWithoutMain_categoryInput>
   }
 
-  export type KarchagSubCategoryCreateManyMainCategoryInputEnvelope = {
-    data: KarchagSubCategoryCreateManyMainCategoryInput | KarchagSubCategoryCreateManyMainCategoryInput[]
+  export type KarchagSubCategoryCreateManyMain_categoryInputEnvelope = {
+    data: KarchagSubCategoryCreateManyMain_categoryInput | KarchagSubCategoryCreateManyMain_categoryInput[]
     skipDuplicates?: boolean
   }
 
-  export type KarchagSubCategoryUpsertWithWhereUniqueWithoutMainCategoryInput = {
+  export type KarchagSubCategoryUpsertWithWhereUniqueWithoutMain_categoryInput = {
     where: KarchagSubCategoryWhereUniqueInput
-    update: XOR<KarchagSubCategoryUpdateWithoutMainCategoryInput, KarchagSubCategoryUncheckedUpdateWithoutMainCategoryInput>
-    create: XOR<KarchagSubCategoryCreateWithoutMainCategoryInput, KarchagSubCategoryUncheckedCreateWithoutMainCategoryInput>
+    update: XOR<KarchagSubCategoryUpdateWithoutMain_categoryInput, KarchagSubCategoryUncheckedUpdateWithoutMain_categoryInput>
+    create: XOR<KarchagSubCategoryCreateWithoutMain_categoryInput, KarchagSubCategoryUncheckedCreateWithoutMain_categoryInput>
   }
 
-  export type KarchagSubCategoryUpdateWithWhereUniqueWithoutMainCategoryInput = {
+  export type KarchagSubCategoryUpdateWithWhereUniqueWithoutMain_categoryInput = {
     where: KarchagSubCategoryWhereUniqueInput
-    data: XOR<KarchagSubCategoryUpdateWithoutMainCategoryInput, KarchagSubCategoryUncheckedUpdateWithoutMainCategoryInput>
+    data: XOR<KarchagSubCategoryUpdateWithoutMain_categoryInput, KarchagSubCategoryUncheckedUpdateWithoutMain_categoryInput>
   }
 
-  export type KarchagSubCategoryUpdateManyWithWhereWithoutMainCategoryInput = {
+  export type KarchagSubCategoryUpdateManyWithWhereWithoutMain_categoryInput = {
     where: KarchagSubCategoryScalarWhereInput
-    data: XOR<KarchagSubCategoryUpdateManyMutationInput, KarchagSubCategoryUncheckedUpdateManyWithoutMainCategoryInput>
+    data: XOR<KarchagSubCategoryUpdateManyMutationInput, KarchagSubCategoryUncheckedUpdateManyWithoutMain_categoryInput>
   }
 
   export type KarchagSubCategoryScalarWhereInput = {
@@ -34500,9 +25392,11 @@ export namespace Prisma {
     is_active?: BoolFilter<"KarchagSubCategory"> | boolean
     created_at?: DateTimeFilter<"KarchagSubCategory"> | Date | string
     updated_at?: DateTimeFilter<"KarchagSubCategory"> | Date | string
+    only_content?: BoolFilter<"KarchagSubCategory"> | boolean
+    content?: StringNullableFilter<"KarchagSubCategory"> | string | null
   }
 
-  export type KarchagMainCategoryCreateWithoutSubCategoriesInput = {
+  export type KarchagMainCategoryCreateWithoutSub_categoriesInput = {
     id?: string
     name_english: string
     name_tibetan?: string | null
@@ -34514,7 +25408,7 @@ export namespace Prisma {
     updated_at?: Date | string
   }
 
-  export type KarchagMainCategoryUncheckedCreateWithoutSubCategoriesInput = {
+  export type KarchagMainCategoryUncheckedCreateWithoutSub_categoriesInput = {
     id?: string
     name_english: string
     name_tibetan?: string | null
@@ -34526,67 +25420,79 @@ export namespace Prisma {
     updated_at?: Date | string
   }
 
-  export type KarchagMainCategoryCreateOrConnectWithoutSubCategoriesInput = {
+  export type KarchagMainCategoryCreateOrConnectWithoutSub_categoriesInput = {
     where: KarchagMainCategoryWhereUniqueInput
-    create: XOR<KarchagMainCategoryCreateWithoutSubCategoriesInput, KarchagMainCategoryUncheckedCreateWithoutSubCategoriesInput>
+    create: XOR<KarchagMainCategoryCreateWithoutSub_categoriesInput, KarchagMainCategoryUncheckedCreateWithoutSub_categoriesInput>
   }
 
-  export type KarchagTextCreateWithoutSubCategoryInput = {
+  export type TextCreateWithoutSub_categoryInput = {
     id?: string
-    derge_id?: string | null
-    yeshe_de_id?: string | null
     tibetan_title?: string | null
     chinese_title?: string | null
     sanskrit_title?: string | null
     english_title?: string | null
-    turning_id?: number | null
-    yana_id?: number | null
-    translation_period_id?: number | null
+    derge_id?: string | null
+    yeshe_de_id?: string | null
+    yeshe_de_volume_number?: string | null
+    yeshe_de_page_start?: string | null
+    yeshe_de_page_end?: string | null
+    turning?: string | null
+    yana?: string | null
+    translation_period?: string | null
+    pdf_url?: string | null
     order_index?: number
     is_active?: boolean
     created_at?: Date | string
     updated_at?: Date | string
+    summary?: KarchagTextSummaryCreateNestedOneWithoutKarchag_textInput
+    metadata?: KarchagTextMetadataCreateNestedManyWithoutTextInput
   }
 
-  export type KarchagTextUncheckedCreateWithoutSubCategoryInput = {
+  export type TextUncheckedCreateWithoutSub_categoryInput = {
     id?: string
-    derge_id?: string | null
-    yeshe_de_id?: string | null
     tibetan_title?: string | null
     chinese_title?: string | null
     sanskrit_title?: string | null
     english_title?: string | null
-    turning_id?: number | null
-    yana_id?: number | null
-    translation_period_id?: number | null
+    derge_id?: string | null
+    yeshe_de_id?: string | null
+    yeshe_de_volume_number?: string | null
+    yeshe_de_page_start?: string | null
+    yeshe_de_page_end?: string | null
+    turning?: string | null
+    yana?: string | null
+    translation_period?: string | null
+    pdf_url?: string | null
     order_index?: number
     is_active?: boolean
     created_at?: Date | string
     updated_at?: Date | string
+    summary?: KarchagTextSummaryUncheckedCreateNestedOneWithoutKarchag_textInput
+    metadata?: KarchagTextMetadataUncheckedCreateNestedManyWithoutTextInput
   }
 
-  export type KarchagTextCreateOrConnectWithoutSubCategoryInput = {
-    where: KarchagTextWhereUniqueInput
-    create: XOR<KarchagTextCreateWithoutSubCategoryInput, KarchagTextUncheckedCreateWithoutSubCategoryInput>
+  export type TextCreateOrConnectWithoutSub_categoryInput = {
+    where: TextWhereUniqueInput
+    create: XOR<TextCreateWithoutSub_categoryInput, TextUncheckedCreateWithoutSub_categoryInput>
   }
 
-  export type KarchagTextCreateManySubCategoryInputEnvelope = {
-    data: KarchagTextCreateManySubCategoryInput | KarchagTextCreateManySubCategoryInput[]
+  export type TextCreateManySub_categoryInputEnvelope = {
+    data: TextCreateManySub_categoryInput | TextCreateManySub_categoryInput[]
     skipDuplicates?: boolean
   }
 
-  export type KarchagMainCategoryUpsertWithoutSubCategoriesInput = {
-    update: XOR<KarchagMainCategoryUpdateWithoutSubCategoriesInput, KarchagMainCategoryUncheckedUpdateWithoutSubCategoriesInput>
-    create: XOR<KarchagMainCategoryCreateWithoutSubCategoriesInput, KarchagMainCategoryUncheckedCreateWithoutSubCategoriesInput>
+  export type KarchagMainCategoryUpsertWithoutSub_categoriesInput = {
+    update: XOR<KarchagMainCategoryUpdateWithoutSub_categoriesInput, KarchagMainCategoryUncheckedUpdateWithoutSub_categoriesInput>
+    create: XOR<KarchagMainCategoryCreateWithoutSub_categoriesInput, KarchagMainCategoryUncheckedCreateWithoutSub_categoriesInput>
     where?: KarchagMainCategoryWhereInput
   }
 
-  export type KarchagMainCategoryUpdateToOneWithWhereWithoutSubCategoriesInput = {
+  export type KarchagMainCategoryUpdateToOneWithWhereWithoutSub_categoriesInput = {
     where?: KarchagMainCategoryWhereInput
-    data: XOR<KarchagMainCategoryUpdateWithoutSubCategoriesInput, KarchagMainCategoryUncheckedUpdateWithoutSubCategoriesInput>
+    data: XOR<KarchagMainCategoryUpdateWithoutSub_categoriesInput, KarchagMainCategoryUncheckedUpdateWithoutSub_categoriesInput>
   }
 
-  export type KarchagMainCategoryUpdateWithoutSubCategoriesInput = {
+  export type KarchagMainCategoryUpdateWithoutSub_categoriesInput = {
     id?: StringFieldUpdateOperationsInput | string
     name_english?: StringFieldUpdateOperationsInput | string
     name_tibetan?: NullableStringFieldUpdateOperationsInput | string | null
@@ -34598,7 +25504,7 @@ export namespace Prisma {
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
-  export type KarchagMainCategoryUncheckedUpdateWithoutSubCategoriesInput = {
+  export type KarchagMainCategoryUncheckedUpdateWithoutSub_categoriesInput = {
     id?: StringFieldUpdateOperationsInput | string
     name_english?: StringFieldUpdateOperationsInput | string
     name_tibetan?: NullableStringFieldUpdateOperationsInput | string | null
@@ -34610,41 +25516,45 @@ export namespace Prisma {
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
-  export type KarchagTextUpsertWithWhereUniqueWithoutSubCategoryInput = {
-    where: KarchagTextWhereUniqueInput
-    update: XOR<KarchagTextUpdateWithoutSubCategoryInput, KarchagTextUncheckedUpdateWithoutSubCategoryInput>
-    create: XOR<KarchagTextCreateWithoutSubCategoryInput, KarchagTextUncheckedCreateWithoutSubCategoryInput>
+  export type TextUpsertWithWhereUniqueWithoutSub_categoryInput = {
+    where: TextWhereUniqueInput
+    update: XOR<TextUpdateWithoutSub_categoryInput, TextUncheckedUpdateWithoutSub_categoryInput>
+    create: XOR<TextCreateWithoutSub_categoryInput, TextUncheckedCreateWithoutSub_categoryInput>
   }
 
-  export type KarchagTextUpdateWithWhereUniqueWithoutSubCategoryInput = {
-    where: KarchagTextWhereUniqueInput
-    data: XOR<KarchagTextUpdateWithoutSubCategoryInput, KarchagTextUncheckedUpdateWithoutSubCategoryInput>
+  export type TextUpdateWithWhereUniqueWithoutSub_categoryInput = {
+    where: TextWhereUniqueInput
+    data: XOR<TextUpdateWithoutSub_categoryInput, TextUncheckedUpdateWithoutSub_categoryInput>
   }
 
-  export type KarchagTextUpdateManyWithWhereWithoutSubCategoryInput = {
-    where: KarchagTextScalarWhereInput
-    data: XOR<KarchagTextUpdateManyMutationInput, KarchagTextUncheckedUpdateManyWithoutSubCategoryInput>
+  export type TextUpdateManyWithWhereWithoutSub_categoryInput = {
+    where: TextScalarWhereInput
+    data: XOR<TextUpdateManyMutationInput, TextUncheckedUpdateManyWithoutSub_categoryInput>
   }
 
-  export type KarchagTextScalarWhereInput = {
-    AND?: KarchagTextScalarWhereInput | KarchagTextScalarWhereInput[]
-    OR?: KarchagTextScalarWhereInput[]
-    NOT?: KarchagTextScalarWhereInput | KarchagTextScalarWhereInput[]
-    id?: StringFilter<"KarchagText"> | string
-    sub_category_id?: StringFilter<"KarchagText"> | string
-    derge_id?: StringNullableFilter<"KarchagText"> | string | null
-    yeshe_de_id?: StringNullableFilter<"KarchagText"> | string | null
-    tibetan_title?: StringNullableFilter<"KarchagText"> | string | null
-    chinese_title?: StringNullableFilter<"KarchagText"> | string | null
-    sanskrit_title?: StringNullableFilter<"KarchagText"> | string | null
-    english_title?: StringNullableFilter<"KarchagText"> | string | null
-    turning_id?: IntNullableFilter<"KarchagText"> | number | null
-    yana_id?: IntNullableFilter<"KarchagText"> | number | null
-    translation_period_id?: IntNullableFilter<"KarchagText"> | number | null
-    order_index?: IntFilter<"KarchagText"> | number
-    is_active?: BoolFilter<"KarchagText"> | boolean
-    created_at?: DateTimeFilter<"KarchagText"> | Date | string
-    updated_at?: DateTimeFilter<"KarchagText"> | Date | string
+  export type TextScalarWhereInput = {
+    AND?: TextScalarWhereInput | TextScalarWhereInput[]
+    OR?: TextScalarWhereInput[]
+    NOT?: TextScalarWhereInput | TextScalarWhereInput[]
+    id?: StringFilter<"Text"> | string
+    sub_category_id?: StringFilter<"Text"> | string
+    tibetan_title?: StringNullableFilter<"Text"> | string | null
+    chinese_title?: StringNullableFilter<"Text"> | string | null
+    sanskrit_title?: StringNullableFilter<"Text"> | string | null
+    english_title?: StringNullableFilter<"Text"> | string | null
+    derge_id?: StringNullableFilter<"Text"> | string | null
+    yeshe_de_id?: StringNullableFilter<"Text"> | string | null
+    yeshe_de_volume_number?: StringNullableFilter<"Text"> | string | null
+    yeshe_de_page_start?: StringNullableFilter<"Text"> | string | null
+    yeshe_de_page_end?: StringNullableFilter<"Text"> | string | null
+    turning?: StringNullableFilter<"Text"> | string | null
+    yana?: StringNullableFilter<"Text"> | string | null
+    translation_period?: StringNullableFilter<"Text"> | string | null
+    pdf_url?: StringNullableFilter<"Text"> | string | null
+    order_index?: IntFilter<"Text"> | number
+    is_active?: BoolFilter<"Text"> | boolean
+    created_at?: DateTimeFilter<"Text"> | Date | string
+    updated_at?: DateTimeFilter<"Text"> | Date | string
   }
 
   export type KarchagSubCategoryCreateWithoutTextsInput = {
@@ -34657,7 +25567,9 @@ export namespace Prisma {
     is_active?: boolean
     created_at?: Date | string
     updated_at?: Date | string
-    mainCategory: KarchagMainCategoryCreateNestedOneWithoutSubCategoriesInput
+    only_content?: boolean
+    content?: string | null
+    main_category: KarchagMainCategoryCreateNestedOneWithoutSub_categoriesInput
   }
 
   export type KarchagSubCategoryUncheckedCreateWithoutTextsInput = {
@@ -34671,11 +25583,90 @@ export namespace Prisma {
     is_active?: boolean
     created_at?: Date | string
     updated_at?: Date | string
+    only_content?: boolean
+    content?: string | null
   }
 
   export type KarchagSubCategoryCreateOrConnectWithoutTextsInput = {
     where: KarchagSubCategoryWhereUniqueInput
     create: XOR<KarchagSubCategoryCreateWithoutTextsInput, KarchagSubCategoryUncheckedCreateWithoutTextsInput>
+  }
+
+  export type KarchagTextSummaryCreateWithoutKarchag_textInput = {
+    id?: string
+    translation_homage_tibetan?: string | null
+    translation_homage_english?: string | null
+    purpose_tibetan?: string | null
+    purpose_english?: string | null
+    summary_text_tibetan?: string | null
+    summary_text_english?: string | null
+    word_meaning_tibetan?: string | null
+    word_meaning_english?: string | null
+    connection_tibetan?: string | null
+    connection_english?: string | null
+    question_answers_tibetan?: string | null
+    question_answers_english?: string | null
+    colophon_tibetan?: string | null
+    colophon_english?: string | null
+    created_at?: Date | string
+    updated_at?: Date | string
+  }
+
+  export type KarchagTextSummaryUncheckedCreateWithoutKarchag_textInput = {
+    id?: string
+    translation_homage_tibetan?: string | null
+    translation_homage_english?: string | null
+    purpose_tibetan?: string | null
+    purpose_english?: string | null
+    summary_text_tibetan?: string | null
+    summary_text_english?: string | null
+    word_meaning_tibetan?: string | null
+    word_meaning_english?: string | null
+    connection_tibetan?: string | null
+    connection_english?: string | null
+    question_answers_tibetan?: string | null
+    question_answers_english?: string | null
+    colophon_tibetan?: string | null
+    colophon_english?: string | null
+    created_at?: Date | string
+    updated_at?: Date | string
+  }
+
+  export type KarchagTextSummaryCreateOrConnectWithoutKarchag_textInput = {
+    where: KarchagTextSummaryWhereUniqueInput
+    create: XOR<KarchagTextSummaryCreateWithoutKarchag_textInput, KarchagTextSummaryUncheckedCreateWithoutKarchag_textInput>
+  }
+
+  export type KarchagTextMetadataCreateWithoutTextInput = {
+    id?: string
+    metadata_key: string
+    metadata_value: string
+    metadata_group: string
+    label?: string | null
+    order_index?: number
+    created_at?: Date | string
+    updated_at?: Date | string
+  }
+
+  export type KarchagTextMetadataUncheckedCreateWithoutTextInput = {
+    id?: string
+    metadata_key: string
+    metadata_value: string
+    metadata_group: string
+    label?: string | null
+    order_index?: number
+    created_at?: Date | string
+    updated_at?: Date | string
+  }
+
+  export type KarchagTextMetadataCreateOrConnectWithoutTextInput = {
+    where: KarchagTextMetadataWhereUniqueInput
+    create: XOR<KarchagTextMetadataCreateWithoutTextInput, KarchagTextMetadataUncheckedCreateWithoutTextInput>
+  }
+
+  export type KarchagTextMetadataCreateManyTextInputEnvelope = {
+    data: KarchagTextMetadataCreateManyTextInput | KarchagTextMetadataCreateManyTextInput[]
+    skipDuplicates?: boolean
   }
 
   export type KarchagSubCategoryUpsertWithoutTextsInput = {
@@ -34699,7 +25690,9 @@ export namespace Prisma {
     is_active?: BoolFieldUpdateOperationsInput | boolean
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    mainCategory?: KarchagMainCategoryUpdateOneRequiredWithoutSubCategoriesNestedInput
+    only_content?: BoolFieldUpdateOperationsInput | boolean
+    content?: NullableStringFieldUpdateOperationsInput | string | null
+    main_category?: KarchagMainCategoryUpdateOneRequiredWithoutSub_categoriesNestedInput
   }
 
   export type KarchagSubCategoryUncheckedUpdateWithoutTextsInput = {
@@ -34713,6 +25706,306 @@ export namespace Prisma {
     is_active?: BoolFieldUpdateOperationsInput | boolean
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    only_content?: BoolFieldUpdateOperationsInput | boolean
+    content?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type KarchagTextSummaryUpsertWithoutKarchag_textInput = {
+    update: XOR<KarchagTextSummaryUpdateWithoutKarchag_textInput, KarchagTextSummaryUncheckedUpdateWithoutKarchag_textInput>
+    create: XOR<KarchagTextSummaryCreateWithoutKarchag_textInput, KarchagTextSummaryUncheckedCreateWithoutKarchag_textInput>
+    where?: KarchagTextSummaryWhereInput
+  }
+
+  export type KarchagTextSummaryUpdateToOneWithWhereWithoutKarchag_textInput = {
+    where?: KarchagTextSummaryWhereInput
+    data: XOR<KarchagTextSummaryUpdateWithoutKarchag_textInput, KarchagTextSummaryUncheckedUpdateWithoutKarchag_textInput>
+  }
+
+  export type KarchagTextSummaryUpdateWithoutKarchag_textInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    translation_homage_tibetan?: NullableStringFieldUpdateOperationsInput | string | null
+    translation_homage_english?: NullableStringFieldUpdateOperationsInput | string | null
+    purpose_tibetan?: NullableStringFieldUpdateOperationsInput | string | null
+    purpose_english?: NullableStringFieldUpdateOperationsInput | string | null
+    summary_text_tibetan?: NullableStringFieldUpdateOperationsInput | string | null
+    summary_text_english?: NullableStringFieldUpdateOperationsInput | string | null
+    word_meaning_tibetan?: NullableStringFieldUpdateOperationsInput | string | null
+    word_meaning_english?: NullableStringFieldUpdateOperationsInput | string | null
+    connection_tibetan?: NullableStringFieldUpdateOperationsInput | string | null
+    connection_english?: NullableStringFieldUpdateOperationsInput | string | null
+    question_answers_tibetan?: NullableStringFieldUpdateOperationsInput | string | null
+    question_answers_english?: NullableStringFieldUpdateOperationsInput | string | null
+    colophon_tibetan?: NullableStringFieldUpdateOperationsInput | string | null
+    colophon_english?: NullableStringFieldUpdateOperationsInput | string | null
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type KarchagTextSummaryUncheckedUpdateWithoutKarchag_textInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    translation_homage_tibetan?: NullableStringFieldUpdateOperationsInput | string | null
+    translation_homage_english?: NullableStringFieldUpdateOperationsInput | string | null
+    purpose_tibetan?: NullableStringFieldUpdateOperationsInput | string | null
+    purpose_english?: NullableStringFieldUpdateOperationsInput | string | null
+    summary_text_tibetan?: NullableStringFieldUpdateOperationsInput | string | null
+    summary_text_english?: NullableStringFieldUpdateOperationsInput | string | null
+    word_meaning_tibetan?: NullableStringFieldUpdateOperationsInput | string | null
+    word_meaning_english?: NullableStringFieldUpdateOperationsInput | string | null
+    connection_tibetan?: NullableStringFieldUpdateOperationsInput | string | null
+    connection_english?: NullableStringFieldUpdateOperationsInput | string | null
+    question_answers_tibetan?: NullableStringFieldUpdateOperationsInput | string | null
+    question_answers_english?: NullableStringFieldUpdateOperationsInput | string | null
+    colophon_tibetan?: NullableStringFieldUpdateOperationsInput | string | null
+    colophon_english?: NullableStringFieldUpdateOperationsInput | string | null
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type KarchagTextMetadataUpsertWithWhereUniqueWithoutTextInput = {
+    where: KarchagTextMetadataWhereUniqueInput
+    update: XOR<KarchagTextMetadataUpdateWithoutTextInput, KarchagTextMetadataUncheckedUpdateWithoutTextInput>
+    create: XOR<KarchagTextMetadataCreateWithoutTextInput, KarchagTextMetadataUncheckedCreateWithoutTextInput>
+  }
+
+  export type KarchagTextMetadataUpdateWithWhereUniqueWithoutTextInput = {
+    where: KarchagTextMetadataWhereUniqueInput
+    data: XOR<KarchagTextMetadataUpdateWithoutTextInput, KarchagTextMetadataUncheckedUpdateWithoutTextInput>
+  }
+
+  export type KarchagTextMetadataUpdateManyWithWhereWithoutTextInput = {
+    where: KarchagTextMetadataScalarWhereInput
+    data: XOR<KarchagTextMetadataUpdateManyMutationInput, KarchagTextMetadataUncheckedUpdateManyWithoutTextInput>
+  }
+
+  export type KarchagTextMetadataScalarWhereInput = {
+    AND?: KarchagTextMetadataScalarWhereInput | KarchagTextMetadataScalarWhereInput[]
+    OR?: KarchagTextMetadataScalarWhereInput[]
+    NOT?: KarchagTextMetadataScalarWhereInput | KarchagTextMetadataScalarWhereInput[]
+    id?: StringFilter<"KarchagTextMetadata"> | string
+    karchag_text_id?: StringFilter<"KarchagTextMetadata"> | string
+    metadata_key?: StringFilter<"KarchagTextMetadata"> | string
+    metadata_value?: StringFilter<"KarchagTextMetadata"> | string
+    metadata_group?: StringFilter<"KarchagTextMetadata"> | string
+    label?: StringNullableFilter<"KarchagTextMetadata"> | string | null
+    order_index?: IntFilter<"KarchagTextMetadata"> | number
+    created_at?: DateTimeFilter<"KarchagTextMetadata"> | Date | string
+    updated_at?: DateTimeFilter<"KarchagTextMetadata"> | Date | string
+  }
+
+  export type TextCreateWithoutSummaryInput = {
+    id?: string
+    tibetan_title?: string | null
+    chinese_title?: string | null
+    sanskrit_title?: string | null
+    english_title?: string | null
+    derge_id?: string | null
+    yeshe_de_id?: string | null
+    yeshe_de_volume_number?: string | null
+    yeshe_de_page_start?: string | null
+    yeshe_de_page_end?: string | null
+    turning?: string | null
+    yana?: string | null
+    translation_period?: string | null
+    pdf_url?: string | null
+    order_index?: number
+    is_active?: boolean
+    created_at?: Date | string
+    updated_at?: Date | string
+    sub_category: KarchagSubCategoryCreateNestedOneWithoutTextsInput
+    metadata?: KarchagTextMetadataCreateNestedManyWithoutTextInput
+  }
+
+  export type TextUncheckedCreateWithoutSummaryInput = {
+    id?: string
+    sub_category_id: string
+    tibetan_title?: string | null
+    chinese_title?: string | null
+    sanskrit_title?: string | null
+    english_title?: string | null
+    derge_id?: string | null
+    yeshe_de_id?: string | null
+    yeshe_de_volume_number?: string | null
+    yeshe_de_page_start?: string | null
+    yeshe_de_page_end?: string | null
+    turning?: string | null
+    yana?: string | null
+    translation_period?: string | null
+    pdf_url?: string | null
+    order_index?: number
+    is_active?: boolean
+    created_at?: Date | string
+    updated_at?: Date | string
+    metadata?: KarchagTextMetadataUncheckedCreateNestedManyWithoutTextInput
+  }
+
+  export type TextCreateOrConnectWithoutSummaryInput = {
+    where: TextWhereUniqueInput
+    create: XOR<TextCreateWithoutSummaryInput, TextUncheckedCreateWithoutSummaryInput>
+  }
+
+  export type TextUpsertWithoutSummaryInput = {
+    update: XOR<TextUpdateWithoutSummaryInput, TextUncheckedUpdateWithoutSummaryInput>
+    create: XOR<TextCreateWithoutSummaryInput, TextUncheckedCreateWithoutSummaryInput>
+    where?: TextWhereInput
+  }
+
+  export type TextUpdateToOneWithWhereWithoutSummaryInput = {
+    where?: TextWhereInput
+    data: XOR<TextUpdateWithoutSummaryInput, TextUncheckedUpdateWithoutSummaryInput>
+  }
+
+  export type TextUpdateWithoutSummaryInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    tibetan_title?: NullableStringFieldUpdateOperationsInput | string | null
+    chinese_title?: NullableStringFieldUpdateOperationsInput | string | null
+    sanskrit_title?: NullableStringFieldUpdateOperationsInput | string | null
+    english_title?: NullableStringFieldUpdateOperationsInput | string | null
+    derge_id?: NullableStringFieldUpdateOperationsInput | string | null
+    yeshe_de_id?: NullableStringFieldUpdateOperationsInput | string | null
+    yeshe_de_volume_number?: NullableStringFieldUpdateOperationsInput | string | null
+    yeshe_de_page_start?: NullableStringFieldUpdateOperationsInput | string | null
+    yeshe_de_page_end?: NullableStringFieldUpdateOperationsInput | string | null
+    turning?: NullableStringFieldUpdateOperationsInput | string | null
+    yana?: NullableStringFieldUpdateOperationsInput | string | null
+    translation_period?: NullableStringFieldUpdateOperationsInput | string | null
+    pdf_url?: NullableStringFieldUpdateOperationsInput | string | null
+    order_index?: IntFieldUpdateOperationsInput | number
+    is_active?: BoolFieldUpdateOperationsInput | boolean
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    sub_category?: KarchagSubCategoryUpdateOneRequiredWithoutTextsNestedInput
+    metadata?: KarchagTextMetadataUpdateManyWithoutTextNestedInput
+  }
+
+  export type TextUncheckedUpdateWithoutSummaryInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    sub_category_id?: StringFieldUpdateOperationsInput | string
+    tibetan_title?: NullableStringFieldUpdateOperationsInput | string | null
+    chinese_title?: NullableStringFieldUpdateOperationsInput | string | null
+    sanskrit_title?: NullableStringFieldUpdateOperationsInput | string | null
+    english_title?: NullableStringFieldUpdateOperationsInput | string | null
+    derge_id?: NullableStringFieldUpdateOperationsInput | string | null
+    yeshe_de_id?: NullableStringFieldUpdateOperationsInput | string | null
+    yeshe_de_volume_number?: NullableStringFieldUpdateOperationsInput | string | null
+    yeshe_de_page_start?: NullableStringFieldUpdateOperationsInput | string | null
+    yeshe_de_page_end?: NullableStringFieldUpdateOperationsInput | string | null
+    turning?: NullableStringFieldUpdateOperationsInput | string | null
+    yana?: NullableStringFieldUpdateOperationsInput | string | null
+    translation_period?: NullableStringFieldUpdateOperationsInput | string | null
+    pdf_url?: NullableStringFieldUpdateOperationsInput | string | null
+    order_index?: IntFieldUpdateOperationsInput | number
+    is_active?: BoolFieldUpdateOperationsInput | boolean
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    metadata?: KarchagTextMetadataUncheckedUpdateManyWithoutTextNestedInput
+  }
+
+  export type TextCreateWithoutMetadataInput = {
+    id?: string
+    tibetan_title?: string | null
+    chinese_title?: string | null
+    sanskrit_title?: string | null
+    english_title?: string | null
+    derge_id?: string | null
+    yeshe_de_id?: string | null
+    yeshe_de_volume_number?: string | null
+    yeshe_de_page_start?: string | null
+    yeshe_de_page_end?: string | null
+    turning?: string | null
+    yana?: string | null
+    translation_period?: string | null
+    pdf_url?: string | null
+    order_index?: number
+    is_active?: boolean
+    created_at?: Date | string
+    updated_at?: Date | string
+    sub_category: KarchagSubCategoryCreateNestedOneWithoutTextsInput
+    summary?: KarchagTextSummaryCreateNestedOneWithoutKarchag_textInput
+  }
+
+  export type TextUncheckedCreateWithoutMetadataInput = {
+    id?: string
+    sub_category_id: string
+    tibetan_title?: string | null
+    chinese_title?: string | null
+    sanskrit_title?: string | null
+    english_title?: string | null
+    derge_id?: string | null
+    yeshe_de_id?: string | null
+    yeshe_de_volume_number?: string | null
+    yeshe_de_page_start?: string | null
+    yeshe_de_page_end?: string | null
+    turning?: string | null
+    yana?: string | null
+    translation_period?: string | null
+    pdf_url?: string | null
+    order_index?: number
+    is_active?: boolean
+    created_at?: Date | string
+    updated_at?: Date | string
+    summary?: KarchagTextSummaryUncheckedCreateNestedOneWithoutKarchag_textInput
+  }
+
+  export type TextCreateOrConnectWithoutMetadataInput = {
+    where: TextWhereUniqueInput
+    create: XOR<TextCreateWithoutMetadataInput, TextUncheckedCreateWithoutMetadataInput>
+  }
+
+  export type TextUpsertWithoutMetadataInput = {
+    update: XOR<TextUpdateWithoutMetadataInput, TextUncheckedUpdateWithoutMetadataInput>
+    create: XOR<TextCreateWithoutMetadataInput, TextUncheckedCreateWithoutMetadataInput>
+    where?: TextWhereInput
+  }
+
+  export type TextUpdateToOneWithWhereWithoutMetadataInput = {
+    where?: TextWhereInput
+    data: XOR<TextUpdateWithoutMetadataInput, TextUncheckedUpdateWithoutMetadataInput>
+  }
+
+  export type TextUpdateWithoutMetadataInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    tibetan_title?: NullableStringFieldUpdateOperationsInput | string | null
+    chinese_title?: NullableStringFieldUpdateOperationsInput | string | null
+    sanskrit_title?: NullableStringFieldUpdateOperationsInput | string | null
+    english_title?: NullableStringFieldUpdateOperationsInput | string | null
+    derge_id?: NullableStringFieldUpdateOperationsInput | string | null
+    yeshe_de_id?: NullableStringFieldUpdateOperationsInput | string | null
+    yeshe_de_volume_number?: NullableStringFieldUpdateOperationsInput | string | null
+    yeshe_de_page_start?: NullableStringFieldUpdateOperationsInput | string | null
+    yeshe_de_page_end?: NullableStringFieldUpdateOperationsInput | string | null
+    turning?: NullableStringFieldUpdateOperationsInput | string | null
+    yana?: NullableStringFieldUpdateOperationsInput | string | null
+    translation_period?: NullableStringFieldUpdateOperationsInput | string | null
+    pdf_url?: NullableStringFieldUpdateOperationsInput | string | null
+    order_index?: IntFieldUpdateOperationsInput | number
+    is_active?: BoolFieldUpdateOperationsInput | boolean
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    sub_category?: KarchagSubCategoryUpdateOneRequiredWithoutTextsNestedInput
+    summary?: KarchagTextSummaryUpdateOneWithoutKarchag_textNestedInput
+  }
+
+  export type TextUncheckedUpdateWithoutMetadataInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    sub_category_id?: StringFieldUpdateOperationsInput | string
+    tibetan_title?: NullableStringFieldUpdateOperationsInput | string | null
+    chinese_title?: NullableStringFieldUpdateOperationsInput | string | null
+    sanskrit_title?: NullableStringFieldUpdateOperationsInput | string | null
+    english_title?: NullableStringFieldUpdateOperationsInput | string | null
+    derge_id?: NullableStringFieldUpdateOperationsInput | string | null
+    yeshe_de_id?: NullableStringFieldUpdateOperationsInput | string | null
+    yeshe_de_volume_number?: NullableStringFieldUpdateOperationsInput | string | null
+    yeshe_de_page_start?: NullableStringFieldUpdateOperationsInput | string | null
+    yeshe_de_page_end?: NullableStringFieldUpdateOperationsInput | string | null
+    turning?: NullableStringFieldUpdateOperationsInput | string | null
+    yana?: NullableStringFieldUpdateOperationsInput | string | null
+    translation_period?: NullableStringFieldUpdateOperationsInput | string | null
+    pdf_url?: NullableStringFieldUpdateOperationsInput | string | null
+    order_index?: IntFieldUpdateOperationsInput | number
+    is_active?: BoolFieldUpdateOperationsInput | boolean
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    summary?: KarchagTextSummaryUncheckedUpdateOneWithoutKarchag_textNestedInput
   }
 
   export type CatalogCategoryCreateManyParentInput = {
@@ -34724,16 +26017,6 @@ export namespace Prisma {
     count?: number
     order_index?: number
     is_active?: boolean
-    created_at?: Date | string
-    updated_at?: Date | string
-  }
-
-  export type TextCreateManyCategoryInput = {
-    id?: string
-    id_slug?: string | null
-    keywords?: TextCreatekeywordsInput | string[]
-    is_active?: boolean
-    order_index?: number
     created_at?: Date | string
     updated_at?: Date | string
   }
@@ -34750,7 +26033,6 @@ export namespace Prisma {
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     children?: CatalogCategoryUpdateManyWithoutParentNestedInput
-    texts?: TextUpdateManyWithoutCategoryNestedInput
   }
 
   export type CatalogCategoryUncheckedUpdateWithoutParentInput = {
@@ -34765,7 +26047,6 @@ export namespace Prisma {
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     children?: CatalogCategoryUncheckedUpdateManyWithoutParentNestedInput
-    texts?: TextUncheckedUpdateManyWithoutCategoryNestedInput
   }
 
   export type CatalogCategoryUncheckedUpdateManyWithoutParentInput = {
@@ -34777,290 +26058,6 @@ export namespace Prisma {
     count?: IntFieldUpdateOperationsInput | number
     order_index?: IntFieldUpdateOperationsInput | number
     is_active?: BoolFieldUpdateOperationsInput | boolean
-    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type TextUpdateWithoutCategoryInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    id_slug?: NullableStringFieldUpdateOperationsInput | string | null
-    keywords?: TextUpdatekeywordsInput | string[]
-    is_active?: BoolFieldUpdateOperationsInput | boolean
-    order_index?: IntFieldUpdateOperationsInput | number
-    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    sections?: TextSectionUpdateManyWithoutTextNestedInput
-    collatedContent?: TextCollatedContentUpdateOneWithoutTextNestedInput
-    metadata?: TextMetadataUpdateManyWithoutTextNestedInput
-    textEditions?: TextEditionUpdateManyWithoutTextNestedInput
-    summary?: TextSummaryUpdateOneWithoutTextNestedInput
-  }
-
-  export type TextUncheckedUpdateWithoutCategoryInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    id_slug?: NullableStringFieldUpdateOperationsInput | string | null
-    keywords?: TextUpdatekeywordsInput | string[]
-    is_active?: BoolFieldUpdateOperationsInput | boolean
-    order_index?: IntFieldUpdateOperationsInput | number
-    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    sections?: TextSectionUncheckedUpdateManyWithoutTextNestedInput
-    collatedContent?: TextCollatedContentUncheckedUpdateOneWithoutTextNestedInput
-    metadata?: TextMetadataUncheckedUpdateManyWithoutTextNestedInput
-    textEditions?: TextEditionUncheckedUpdateManyWithoutTextNestedInput
-    summary?: TextSummaryUncheckedUpdateOneWithoutTextNestedInput
-  }
-
-  export type TextUncheckedUpdateManyWithoutCategoryInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    id_slug?: NullableStringFieldUpdateOperationsInput | string | null
-    keywords?: TextUpdatekeywordsInput | string[]
-    is_active?: BoolFieldUpdateOperationsInput | boolean
-    order_index?: IntFieldUpdateOperationsInput | number
-    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type TextSectionCreateManyTextInput = {
-    id?: string
-    section_type: string
-    title_tibetan?: string | null
-    title_english?: string | null
-    content_tibetan?: string | null
-    content_english?: string | null
-    order_index?: number
-    created_at?: Date | string
-    updated_at?: Date | string
-  }
-
-  export type TextMetadataCreateManyTextInput = {
-    id?: string
-    metadata_key: string
-    metadata_value: string
-    metadata_group: string
-    label?: string | null
-    tibetan_title?: string | null
-    english_title?: string | null
-    sanskrit_title?: string | null
-    chinese_title?: string | null
-    derge_text_id?: string | null
-    yeshe_text_id?: string | null
-    derge_vol_number?: number | null
-    derge_start_page?: number | null
-    derge_end_page?: number | null
-    turning?: string | null
-    yana?: string | null
-    translation_period?: string | null
-    order_index?: number
-    created_at?: Date | string
-    updated_at?: Date | string
-  }
-
-  export type TextEditionCreateManyTextInput = {
-    id?: string
-    edition_id: string
-    source_id?: string | null
-    volume_number?: number | null
-    start_page?: number | null
-    end_page?: number | null
-    availability?: string | null
-    link_url?: string | null
-    created_at?: Date | string
-    updated_at?: Date | string
-  }
-
-  export type TextSectionUpdateWithoutTextInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    section_type?: StringFieldUpdateOperationsInput | string
-    title_tibetan?: NullableStringFieldUpdateOperationsInput | string | null
-    title_english?: NullableStringFieldUpdateOperationsInput | string | null
-    content_tibetan?: NullableStringFieldUpdateOperationsInput | string | null
-    content_english?: NullableStringFieldUpdateOperationsInput | string | null
-    order_index?: IntFieldUpdateOperationsInput | number
-    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type TextSectionUncheckedUpdateWithoutTextInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    section_type?: StringFieldUpdateOperationsInput | string
-    title_tibetan?: NullableStringFieldUpdateOperationsInput | string | null
-    title_english?: NullableStringFieldUpdateOperationsInput | string | null
-    content_tibetan?: NullableStringFieldUpdateOperationsInput | string | null
-    content_english?: NullableStringFieldUpdateOperationsInput | string | null
-    order_index?: IntFieldUpdateOperationsInput | number
-    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type TextSectionUncheckedUpdateManyWithoutTextInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    section_type?: StringFieldUpdateOperationsInput | string
-    title_tibetan?: NullableStringFieldUpdateOperationsInput | string | null
-    title_english?: NullableStringFieldUpdateOperationsInput | string | null
-    content_tibetan?: NullableStringFieldUpdateOperationsInput | string | null
-    content_english?: NullableStringFieldUpdateOperationsInput | string | null
-    order_index?: IntFieldUpdateOperationsInput | number
-    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type TextMetadataUpdateWithoutTextInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    metadata_key?: StringFieldUpdateOperationsInput | string
-    metadata_value?: StringFieldUpdateOperationsInput | string
-    metadata_group?: StringFieldUpdateOperationsInput | string
-    label?: NullableStringFieldUpdateOperationsInput | string | null
-    tibetan_title?: NullableStringFieldUpdateOperationsInput | string | null
-    english_title?: NullableStringFieldUpdateOperationsInput | string | null
-    sanskrit_title?: NullableStringFieldUpdateOperationsInput | string | null
-    chinese_title?: NullableStringFieldUpdateOperationsInput | string | null
-    derge_text_id?: NullableStringFieldUpdateOperationsInput | string | null
-    yeshe_text_id?: NullableStringFieldUpdateOperationsInput | string | null
-    derge_vol_number?: NullableIntFieldUpdateOperationsInput | number | null
-    derge_start_page?: NullableIntFieldUpdateOperationsInput | number | null
-    derge_end_page?: NullableIntFieldUpdateOperationsInput | number | null
-    turning?: NullableStringFieldUpdateOperationsInput | string | null
-    yana?: NullableStringFieldUpdateOperationsInput | string | null
-    translation_period?: NullableStringFieldUpdateOperationsInput | string | null
-    order_index?: IntFieldUpdateOperationsInput | number
-    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type TextMetadataUncheckedUpdateWithoutTextInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    metadata_key?: StringFieldUpdateOperationsInput | string
-    metadata_value?: StringFieldUpdateOperationsInput | string
-    metadata_group?: StringFieldUpdateOperationsInput | string
-    label?: NullableStringFieldUpdateOperationsInput | string | null
-    tibetan_title?: NullableStringFieldUpdateOperationsInput | string | null
-    english_title?: NullableStringFieldUpdateOperationsInput | string | null
-    sanskrit_title?: NullableStringFieldUpdateOperationsInput | string | null
-    chinese_title?: NullableStringFieldUpdateOperationsInput | string | null
-    derge_text_id?: NullableStringFieldUpdateOperationsInput | string | null
-    yeshe_text_id?: NullableStringFieldUpdateOperationsInput | string | null
-    derge_vol_number?: NullableIntFieldUpdateOperationsInput | number | null
-    derge_start_page?: NullableIntFieldUpdateOperationsInput | number | null
-    derge_end_page?: NullableIntFieldUpdateOperationsInput | number | null
-    turning?: NullableStringFieldUpdateOperationsInput | string | null
-    yana?: NullableStringFieldUpdateOperationsInput | string | null
-    translation_period?: NullableStringFieldUpdateOperationsInput | string | null
-    order_index?: IntFieldUpdateOperationsInput | number
-    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type TextMetadataUncheckedUpdateManyWithoutTextInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    metadata_key?: StringFieldUpdateOperationsInput | string
-    metadata_value?: StringFieldUpdateOperationsInput | string
-    metadata_group?: StringFieldUpdateOperationsInput | string
-    label?: NullableStringFieldUpdateOperationsInput | string | null
-    tibetan_title?: NullableStringFieldUpdateOperationsInput | string | null
-    english_title?: NullableStringFieldUpdateOperationsInput | string | null
-    sanskrit_title?: NullableStringFieldUpdateOperationsInput | string | null
-    chinese_title?: NullableStringFieldUpdateOperationsInput | string | null
-    derge_text_id?: NullableStringFieldUpdateOperationsInput | string | null
-    yeshe_text_id?: NullableStringFieldUpdateOperationsInput | string | null
-    derge_vol_number?: NullableIntFieldUpdateOperationsInput | number | null
-    derge_start_page?: NullableIntFieldUpdateOperationsInput | number | null
-    derge_end_page?: NullableIntFieldUpdateOperationsInput | number | null
-    turning?: NullableStringFieldUpdateOperationsInput | string | null
-    yana?: NullableStringFieldUpdateOperationsInput | string | null
-    translation_period?: NullableStringFieldUpdateOperationsInput | string | null
-    order_index?: IntFieldUpdateOperationsInput | number
-    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type TextEditionUpdateWithoutTextInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    source_id?: NullableStringFieldUpdateOperationsInput | string | null
-    volume_number?: NullableIntFieldUpdateOperationsInput | number | null
-    start_page?: NullableIntFieldUpdateOperationsInput | number | null
-    end_page?: NullableIntFieldUpdateOperationsInput | number | null
-    availability?: NullableStringFieldUpdateOperationsInput | string | null
-    link_url?: NullableStringFieldUpdateOperationsInput | string | null
-    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    edition?: EditionUpdateOneRequiredWithoutTextEditionsNestedInput
-  }
-
-  export type TextEditionUncheckedUpdateWithoutTextInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    edition_id?: StringFieldUpdateOperationsInput | string
-    source_id?: NullableStringFieldUpdateOperationsInput | string | null
-    volume_number?: NullableIntFieldUpdateOperationsInput | number | null
-    start_page?: NullableIntFieldUpdateOperationsInput | number | null
-    end_page?: NullableIntFieldUpdateOperationsInput | number | null
-    availability?: NullableStringFieldUpdateOperationsInput | string | null
-    link_url?: NullableStringFieldUpdateOperationsInput | string | null
-    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type TextEditionUncheckedUpdateManyWithoutTextInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    edition_id?: StringFieldUpdateOperationsInput | string
-    source_id?: NullableStringFieldUpdateOperationsInput | string | null
-    volume_number?: NullableIntFieldUpdateOperationsInput | number | null
-    start_page?: NullableIntFieldUpdateOperationsInput | number | null
-    end_page?: NullableIntFieldUpdateOperationsInput | number | null
-    availability?: NullableStringFieldUpdateOperationsInput | string | null
-    link_url?: NullableStringFieldUpdateOperationsInput | string | null
-    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type TextEditionCreateManyEditionInput = {
-    id?: string
-    text_id: string
-    source_id?: string | null
-    volume_number?: number | null
-    start_page?: number | null
-    end_page?: number | null
-    availability?: string | null
-    link_url?: string | null
-    created_at?: Date | string
-    updated_at?: Date | string
-  }
-
-  export type TextEditionUpdateWithoutEditionInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    source_id?: NullableStringFieldUpdateOperationsInput | string | null
-    volume_number?: NullableIntFieldUpdateOperationsInput | number | null
-    start_page?: NullableIntFieldUpdateOperationsInput | number | null
-    end_page?: NullableIntFieldUpdateOperationsInput | number | null
-    availability?: NullableStringFieldUpdateOperationsInput | string | null
-    link_url?: NullableStringFieldUpdateOperationsInput | string | null
-    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    text?: TextUpdateOneRequiredWithoutTextEditionsNestedInput
-  }
-
-  export type TextEditionUncheckedUpdateWithoutEditionInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    text_id?: StringFieldUpdateOperationsInput | string
-    source_id?: NullableStringFieldUpdateOperationsInput | string | null
-    volume_number?: NullableIntFieldUpdateOperationsInput | number | null
-    start_page?: NullableIntFieldUpdateOperationsInput | number | null
-    end_page?: NullableIntFieldUpdateOperationsInput | number | null
-    availability?: NullableStringFieldUpdateOperationsInput | string | null
-    link_url?: NullableStringFieldUpdateOperationsInput | string | null
-    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type TextEditionUncheckedUpdateManyWithoutEditionInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    text_id?: StringFieldUpdateOperationsInput | string
-    source_id?: NullableStringFieldUpdateOperationsInput | string | null
-    volume_number?: NullableIntFieldUpdateOperationsInput | number | null
-    start_page?: NullableIntFieldUpdateOperationsInput | number | null
-    end_page?: NullableIntFieldUpdateOperationsInput | number | null
-    availability?: NullableStringFieldUpdateOperationsInput | string | null
-    link_url?: NullableStringFieldUpdateOperationsInput | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -35255,7 +26252,7 @@ export namespace Prisma {
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
-  export type KarchagSubCategoryCreateManyMainCategoryInput = {
+  export type KarchagSubCategoryCreateManyMain_categoryInput = {
     id?: string
     name_english: string
     name_tibetan?: string | null
@@ -35265,9 +26262,11 @@ export namespace Prisma {
     is_active?: boolean
     created_at?: Date | string
     updated_at?: Date | string
+    only_content?: boolean
+    content?: string | null
   }
 
-  export type KarchagSubCategoryUpdateWithoutMainCategoryInput = {
+  export type KarchagSubCategoryUpdateWithoutMain_categoryInput = {
     id?: StringFieldUpdateOperationsInput | string
     name_english?: StringFieldUpdateOperationsInput | string
     name_tibetan?: NullableStringFieldUpdateOperationsInput | string | null
@@ -35277,10 +26276,12 @@ export namespace Prisma {
     is_active?: BoolFieldUpdateOperationsInput | boolean
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    texts?: KarchagTextUpdateManyWithoutSubCategoryNestedInput
+    only_content?: BoolFieldUpdateOperationsInput | boolean
+    content?: NullableStringFieldUpdateOperationsInput | string | null
+    texts?: TextUpdateManyWithoutSub_categoryNestedInput
   }
 
-  export type KarchagSubCategoryUncheckedUpdateWithoutMainCategoryInput = {
+  export type KarchagSubCategoryUncheckedUpdateWithoutMain_categoryInput = {
     id?: StringFieldUpdateOperationsInput | string
     name_english?: StringFieldUpdateOperationsInput | string
     name_tibetan?: NullableStringFieldUpdateOperationsInput | string | null
@@ -35290,10 +26291,12 @@ export namespace Prisma {
     is_active?: BoolFieldUpdateOperationsInput | boolean
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    texts?: KarchagTextUncheckedUpdateManyWithoutSubCategoryNestedInput
+    only_content?: BoolFieldUpdateOperationsInput | boolean
+    content?: NullableStringFieldUpdateOperationsInput | string | null
+    texts?: TextUncheckedUpdateManyWithoutSub_categoryNestedInput
   }
 
-  export type KarchagSubCategoryUncheckedUpdateManyWithoutMainCategoryInput = {
+  export type KarchagSubCategoryUncheckedUpdateManyWithoutMain_categoryInput = {
     id?: StringFieldUpdateOperationsInput | string
     name_english?: StringFieldUpdateOperationsInput | string
     name_tibetan?: NullableStringFieldUpdateOperationsInput | string | null
@@ -35303,72 +26306,138 @@ export namespace Prisma {
     is_active?: BoolFieldUpdateOperationsInput | boolean
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    only_content?: BoolFieldUpdateOperationsInput | boolean
+    content?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
-  export type KarchagTextCreateManySubCategoryInput = {
+  export type TextCreateManySub_categoryInput = {
     id?: string
-    derge_id?: string | null
-    yeshe_de_id?: string | null
     tibetan_title?: string | null
     chinese_title?: string | null
     sanskrit_title?: string | null
     english_title?: string | null
-    turning_id?: number | null
-    yana_id?: number | null
-    translation_period_id?: number | null
+    derge_id?: string | null
+    yeshe_de_id?: string | null
+    yeshe_de_volume_number?: string | null
+    yeshe_de_page_start?: string | null
+    yeshe_de_page_end?: string | null
+    turning?: string | null
+    yana?: string | null
+    translation_period?: string | null
+    pdf_url?: string | null
     order_index?: number
     is_active?: boolean
     created_at?: Date | string
     updated_at?: Date | string
   }
 
-  export type KarchagTextUpdateWithoutSubCategoryInput = {
+  export type TextUpdateWithoutSub_categoryInput = {
     id?: StringFieldUpdateOperationsInput | string
-    derge_id?: NullableStringFieldUpdateOperationsInput | string | null
-    yeshe_de_id?: NullableStringFieldUpdateOperationsInput | string | null
     tibetan_title?: NullableStringFieldUpdateOperationsInput | string | null
     chinese_title?: NullableStringFieldUpdateOperationsInput | string | null
     sanskrit_title?: NullableStringFieldUpdateOperationsInput | string | null
     english_title?: NullableStringFieldUpdateOperationsInput | string | null
-    turning_id?: NullableIntFieldUpdateOperationsInput | number | null
-    yana_id?: NullableIntFieldUpdateOperationsInput | number | null
-    translation_period_id?: NullableIntFieldUpdateOperationsInput | number | null
+    derge_id?: NullableStringFieldUpdateOperationsInput | string | null
+    yeshe_de_id?: NullableStringFieldUpdateOperationsInput | string | null
+    yeshe_de_volume_number?: NullableStringFieldUpdateOperationsInput | string | null
+    yeshe_de_page_start?: NullableStringFieldUpdateOperationsInput | string | null
+    yeshe_de_page_end?: NullableStringFieldUpdateOperationsInput | string | null
+    turning?: NullableStringFieldUpdateOperationsInput | string | null
+    yana?: NullableStringFieldUpdateOperationsInput | string | null
+    translation_period?: NullableStringFieldUpdateOperationsInput | string | null
+    pdf_url?: NullableStringFieldUpdateOperationsInput | string | null
+    order_index?: IntFieldUpdateOperationsInput | number
+    is_active?: BoolFieldUpdateOperationsInput | boolean
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    summary?: KarchagTextSummaryUpdateOneWithoutKarchag_textNestedInput
+    metadata?: KarchagTextMetadataUpdateManyWithoutTextNestedInput
+  }
+
+  export type TextUncheckedUpdateWithoutSub_categoryInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    tibetan_title?: NullableStringFieldUpdateOperationsInput | string | null
+    chinese_title?: NullableStringFieldUpdateOperationsInput | string | null
+    sanskrit_title?: NullableStringFieldUpdateOperationsInput | string | null
+    english_title?: NullableStringFieldUpdateOperationsInput | string | null
+    derge_id?: NullableStringFieldUpdateOperationsInput | string | null
+    yeshe_de_id?: NullableStringFieldUpdateOperationsInput | string | null
+    yeshe_de_volume_number?: NullableStringFieldUpdateOperationsInput | string | null
+    yeshe_de_page_start?: NullableStringFieldUpdateOperationsInput | string | null
+    yeshe_de_page_end?: NullableStringFieldUpdateOperationsInput | string | null
+    turning?: NullableStringFieldUpdateOperationsInput | string | null
+    yana?: NullableStringFieldUpdateOperationsInput | string | null
+    translation_period?: NullableStringFieldUpdateOperationsInput | string | null
+    pdf_url?: NullableStringFieldUpdateOperationsInput | string | null
+    order_index?: IntFieldUpdateOperationsInput | number
+    is_active?: BoolFieldUpdateOperationsInput | boolean
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    summary?: KarchagTextSummaryUncheckedUpdateOneWithoutKarchag_textNestedInput
+    metadata?: KarchagTextMetadataUncheckedUpdateManyWithoutTextNestedInput
+  }
+
+  export type TextUncheckedUpdateManyWithoutSub_categoryInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    tibetan_title?: NullableStringFieldUpdateOperationsInput | string | null
+    chinese_title?: NullableStringFieldUpdateOperationsInput | string | null
+    sanskrit_title?: NullableStringFieldUpdateOperationsInput | string | null
+    english_title?: NullableStringFieldUpdateOperationsInput | string | null
+    derge_id?: NullableStringFieldUpdateOperationsInput | string | null
+    yeshe_de_id?: NullableStringFieldUpdateOperationsInput | string | null
+    yeshe_de_volume_number?: NullableStringFieldUpdateOperationsInput | string | null
+    yeshe_de_page_start?: NullableStringFieldUpdateOperationsInput | string | null
+    yeshe_de_page_end?: NullableStringFieldUpdateOperationsInput | string | null
+    turning?: NullableStringFieldUpdateOperationsInput | string | null
+    yana?: NullableStringFieldUpdateOperationsInput | string | null
+    translation_period?: NullableStringFieldUpdateOperationsInput | string | null
+    pdf_url?: NullableStringFieldUpdateOperationsInput | string | null
     order_index?: IntFieldUpdateOperationsInput | number
     is_active?: BoolFieldUpdateOperationsInput | boolean
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
-  export type KarchagTextUncheckedUpdateWithoutSubCategoryInput = {
+  export type KarchagTextMetadataCreateManyTextInput = {
+    id?: string
+    metadata_key: string
+    metadata_value: string
+    metadata_group: string
+    label?: string | null
+    order_index?: number
+    created_at?: Date | string
+    updated_at?: Date | string
+  }
+
+  export type KarchagTextMetadataUpdateWithoutTextInput = {
     id?: StringFieldUpdateOperationsInput | string
-    derge_id?: NullableStringFieldUpdateOperationsInput | string | null
-    yeshe_de_id?: NullableStringFieldUpdateOperationsInput | string | null
-    tibetan_title?: NullableStringFieldUpdateOperationsInput | string | null
-    chinese_title?: NullableStringFieldUpdateOperationsInput | string | null
-    sanskrit_title?: NullableStringFieldUpdateOperationsInput | string | null
-    english_title?: NullableStringFieldUpdateOperationsInput | string | null
-    turning_id?: NullableIntFieldUpdateOperationsInput | number | null
-    yana_id?: NullableIntFieldUpdateOperationsInput | number | null
-    translation_period_id?: NullableIntFieldUpdateOperationsInput | number | null
+    metadata_key?: StringFieldUpdateOperationsInput | string
+    metadata_value?: StringFieldUpdateOperationsInput | string
+    metadata_group?: StringFieldUpdateOperationsInput | string
+    label?: NullableStringFieldUpdateOperationsInput | string | null
     order_index?: IntFieldUpdateOperationsInput | number
-    is_active?: BoolFieldUpdateOperationsInput | boolean
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
-  export type KarchagTextUncheckedUpdateManyWithoutSubCategoryInput = {
+  export type KarchagTextMetadataUncheckedUpdateWithoutTextInput = {
     id?: StringFieldUpdateOperationsInput | string
-    derge_id?: NullableStringFieldUpdateOperationsInput | string | null
-    yeshe_de_id?: NullableStringFieldUpdateOperationsInput | string | null
-    tibetan_title?: NullableStringFieldUpdateOperationsInput | string | null
-    chinese_title?: NullableStringFieldUpdateOperationsInput | string | null
-    sanskrit_title?: NullableStringFieldUpdateOperationsInput | string | null
-    english_title?: NullableStringFieldUpdateOperationsInput | string | null
-    turning_id?: NullableIntFieldUpdateOperationsInput | number | null
-    yana_id?: NullableIntFieldUpdateOperationsInput | number | null
-    translation_period_id?: NullableIntFieldUpdateOperationsInput | number | null
+    metadata_key?: StringFieldUpdateOperationsInput | string
+    metadata_value?: StringFieldUpdateOperationsInput | string
+    metadata_group?: StringFieldUpdateOperationsInput | string
+    label?: NullableStringFieldUpdateOperationsInput | string | null
     order_index?: IntFieldUpdateOperationsInput | number
-    is_active?: BoolFieldUpdateOperationsInput | boolean
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type KarchagTextMetadataUncheckedUpdateManyWithoutTextInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    metadata_key?: StringFieldUpdateOperationsInput | string
+    metadata_value?: StringFieldUpdateOperationsInput | string
+    metadata_group?: StringFieldUpdateOperationsInput | string
+    label?: NullableStringFieldUpdateOperationsInput | string | null
+    order_index?: IntFieldUpdateOperationsInput | number
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
   }

@@ -202,7 +202,7 @@ const Timeline = () => {
               year: event.is_approximate 
                 ? `${event.year} CE (approx)`
                 : `${event.year} CE`,
-              description: event.description?.english || event.title?.english || '',
+              description: event.description?.english || event.description?.tibetan || event.title?.english || event.title?.tibetan || '',
               position: event.year,
             })),
           };
@@ -213,7 +213,7 @@ const Timeline = () => {
         setTimelineData(transformedData);
       } catch (error) {
         console.error('Failed to fetch timeline data:', error);
-        // Fallback to empty array - will use fallbackTimelineData
+        // Fallback to empty array - will use fallbackTimelineData only if API fails
         setTimelineData([]);
       } finally {
         setLoading(false);
@@ -223,7 +223,7 @@ const Timeline = () => {
     fetchTimelineData();
   }, []);
 
-  // Use API data if available, otherwise fallback
+  // Use API data if available, otherwise fallback (fallback only used when API fails or returns no data)
   const dataToUse = timelineData.length > 0 ? timelineData : fallbackTimelineData;
 
   const { minYear, maxYear, yearRange, tickMarks } = useMemo(() => {

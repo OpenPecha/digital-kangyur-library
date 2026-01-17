@@ -1,7 +1,6 @@
 const express = require('express');
 const router = express.Router();
 const adminController = require('../controllers/adminController');
-const editionController = require('../controllers/editionController');
 const { authenticate, authorize } = require('../middleware/auth');
 
 /**
@@ -23,7 +22,7 @@ const { authenticate, authorize } = require('../middleware/auth');
  *                 statistics:
  *                   type: object
  *                   properties:
- *                     total_texts:
+ *                     total_karchag_texts:
  *                       type: integer
  *                     total_categories:
  *                       type: integer
@@ -33,7 +32,7 @@ const { authenticate, authorize } = require('../middleware/auth');
  *                       type: integer
  *                     total_audio_recordings:
  *                       type: integer
- *                     total_editions:
+ *                     total_videos:
  *                       type: integer
  *                     recent_activity:
  *                       type: array
@@ -268,108 +267,5 @@ router.put('/users/:id', authenticate, authorize('admin'), adminController.updat
  *               $ref: '#/components/schemas/Error'
  */
 router.delete('/users/:id', authenticate, authorize('admin'), adminController.deleteUser);
-
-/**
- * @swagger
- * /admin/editions:
- *   post:
- *     summary: Create a new edition (admin endpoint)
- *     tags: [Admin]
- *     security:
- *       - bearerAuth: []
- *     requestBody:
- *       required: true
- *       content:
- *         application/json:
- *           schema:
- *             type: object
- *             required:
- *               - name
- *             properties:
- *               name:
- *                 type: string
- *               description:
- *                 type: string
- *               publisher:
- *                 type: string
- *               year:
- *                 type: integer
- *               isbn:
- *                 type: string
- *     responses:
- *       201:
- *         description: Edition created successfully
- *         content:
- *           application/json:
- *             schema:
- *               type: object
- *               properties:
- *                 id:
- *                   type: integer
- *       400:
- *         description: Validation error
- *         content:
- *           application/json:
- *             schema:
- *               $ref: '#/components/schemas/Error'
- */
-router.post('/editions', authenticate, authorize('admin', 'editor'), editionController.createEdition);
-
-/**
- * @swagger
- * /admin/texts/{id}/editions:
- *   post:
- *     summary: Add an edition to a text
- *     tags: [Admin]
- *     security:
- *       - bearerAuth: []
- *     parameters:
- *       - in: path
- *         name: id
- *         required: true
- *         schema:
- *           type: integer
- *         description: Text ID
- *     requestBody:
- *       required: true
- *       content:
- *         application/json:
- *           schema:
- *             type: object
- *             required:
- *               - edition_id
- *             properties:
- *               edition_id:
- *                 type: integer
- *               volume_number:
- *                 type: integer
- *               page_start:
- *                 type: integer
- *               page_end:
- *                 type: integer
- *     responses:
- *       201:
- *         description: Edition added to text successfully
- *         content:
- *           application/json:
- *             schema:
- *               type: object
- *               properties:
- *                 id:
- *                   type: integer
- *       400:
- *         description: Validation error
- *         content:
- *           application/json:
- *             schema:
- *               $ref: '#/components/schemas/Error'
- *       404:
- *         description: Text or edition not found
- *         content:
- *           application/json:
- *             schema:
- *               $ref: '#/components/schemas/Error'
- */
-router.post('/texts/:id/editions', authenticate, authorize('admin', 'editor'), editionController.addTextEdition);
 
 module.exports = router;

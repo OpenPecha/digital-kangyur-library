@@ -1,66 +1,76 @@
 import React, { useState, useEffect } from 'react';
 import { useSearchParams } from 'react-router-dom';
+import { useQuery } from '@tanstack/react-query';
 import Footer from '@/components/ui/molecules/Footer';
 import CatalogSearch from '@/components/catalog/CatalogSearch';
-import MainKarchagFrames from '@/components/catalog/MainKarchagFrames';
-import DiscourseSubsections from '@/components/catalog/DiscourseSubsections';
-import CategoryHeader from '@/components/catalog/CategoryHeader';
 import KarchagTextCardList from '@/components/catalog/KarchagTextCardList';
 import CatalogBreadcrumb from '@/components/catalog/CatalogBreadcrumb';
 import CatalogTreeList from "@/components/catalog/CatalogTreeList";
 import CatalogEmptyState from "@/components/catalog/CatalogEmptyState";
-import { filterCatalogItems, findItemInTree } from '@/utils/catalogUtils';
+import MainKarchagFrames from '@/components/catalog/MainKarchagFrames';
 import { paginateItems } from '@/utils/paginationUtils';
-import TantraSubsections from "@/components/catalog/TantraSubsections";
 import useLanguage from '@/hooks/useLanguage';
 import api from '@/utils/api';
-
-const tantraSubsectionIds = [
-  "tantra-anuttarayoga",
-  "tantra-yoga",
-  "tantra-carya",
-  "tantra-kriya",
-  "nyi-tantra",
-  "kalacakra"
-];
-const tantraSubsectionTitles: Record<string, { tibetan: string; english: string }> = {
-  "tantra-anuttarayoga": { tibetan: "བླ་མེད་རྒྱུད།", english: "Anuttarayoga Tantra" },
-  "tantra-yoga":         { tibetan: "རྣལ་འབྱོར་རྒྱུད།", english: "Yoga Tantra" },
-  "tantra-carya":        { tibetan: "སྤྱོད་རྒྱུད།", english: "Carya Tantra" },
-  "tantra-kriya":        { tibetan: "བྱ་རྒྱུད།", english: "Kriya Tantra" },
-  "nyi-tantra":          { tibetan: "རྙིང་རྒྱུད།", english: "Nying Tantra" },
-  "kalacakra":           { tibetan: "དུས་འཁོར།", english: "Kalachakra" }
-};
 
 const Catalog = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedItem, setSelectedItem] = useState<string | null>(null);
   const [searchParams, setSearchParams] = useSearchParams();
   const [currentPage, setCurrentPage] = useState(1);
-  const [catalogData, setCatalogData] = useState<any[]>([]);
-  const [loading, setLoading] = useState(true);
-  const { t } = useLanguage();
+  const { t, isTibetan } = useLanguage();
 
   // Get URL parameters
   const category = searchParams.get('category');
 
-  // Fetch catalog data from API
-  useEffect(() => {
-    const fetchCatalog = async () => {
-      try {
-        setLoading(true);
-        const response = await api.getCatalog({ include_counts: 'true', active_only: 'true' });
-        setCatalogData(response.categories || []);
-      } catch (error) {
-        console.error('Failed to fetch catalog:', error);
-        setCatalogData([]);
-      } finally {
-        setLoading(false);
-      }
-    };
+  // Fetch karchag main category by ID when category exists in URL
+  const { data: selectedMainCategory, isLoading: loadingMainCategory } = useQuery({
+    queryKey: ['karchag', 'main-category', category],
+    queryFn: async () => {
+      if (!category) return null;
+      const response = await api.getKarchagMainCategoryById(category);
+      return response;
+    },
+    enabled: !!category && !selectedItem, // Only fetch when a main category is selected but no subcategory
+  });
 
-    fetchCatalog();
-  }, []);
+  // Fetch karchag subcategories for the selected main category
+  const { data: karchagSubCategoriesData = [], isLoading: loadingSubCategories } = useQuery({
+    queryKey: ['karchag', 'sub-categories', category],
+    queryFn: async () => {
+      if (!category) return [];
+      const response = await api.getKarchagSubCategories({ 
+        main_category_id: category,
+        is_active: 'true'
+      });
+      return response.categories || [];
+    },
+    enabled: !!category && !selectedItem, // Only fetch when a main category is selected but no subcategory
+  });
+
+  // Fetch selected subcategory details when a subcategory is selected
+  const { data: selectedSubCategory, isLoading: loadingSelectedSubCategory } = useQuery({
+    queryKey: ['karchag', 'sub-category', selectedItem],
+    queryFn: async () => {
+      if (!selectedItem) return null;
+      const response = await api.getKarchagSubCategoryById(selectedItem);
+      return response;
+    },
+    enabled: !!selectedItem,
+  });
+
+  // Fetch texts for the selected subcategory if it doesn't have content
+  const { data: subCategoryTextsData = [], isLoading: loadingTexts } = useQuery({
+    queryKey: ['karchag', 'texts', selectedItem],
+    queryFn: async () => {
+      if (!selectedItem) return [];
+      const response = await api.getKarchagTexts({ 
+        sub_category_id: selectedItem,
+        is_active: 'true'
+      });
+      return response.texts || [];
+    },
+    enabled: !!selectedItem && !!selectedSubCategory && !selectedSubCategory.content, // Only fetch texts if subcategory doesn't have content
+  });
 
   // Parse URL parameters on component mount
   useEffect(() => {
@@ -110,159 +120,51 @@ const Catalog = () => {
     });
   };
 
-  // Filter the catalog data based on search and category
-  const getFilteredCatalog = () => {
-    let filtered = catalogData;
-    if (category) {
-      filtered = filtered.filter(item => item.id === category);
-    }
-    if (searchQuery) {
-      filtered = filterCatalogItems(filtered, searchQuery);
-    }
-    return filtered;
-  };
-  const filteredCatalog = getFilteredCatalog();
+  // Get selected item details from fetched subcategory
+  const selectedItemDetails = selectedSubCategory ? {
+    id: selectedSubCategory.id,
+    title: {
+      tibetan: selectedSubCategory.name_tibetan || '',
+      english: selectedSubCategory.name_english || ''
+    },
+    content: selectedSubCategory.content,
+    only_content: selectedSubCategory.only_content
+  } : null;
 
-  // Get selected item details
-  let selectedItemDetails: any = null;
-  if (selectedItem) {
-    // Try tantra subsection mapping first, fallback to findItemInTree
-    if (tantraSubsectionIds.includes(selectedItem)) {
-      selectedItemDetails = {
-        id: selectedItem,
-        title: tantraSubsectionTitles[selectedItem] || { tibetan: '', english: '' }
+  // Transform texts from API to the format expected by TextCard
+  const transformTextsForDisplay = (texts: any[]) => {
+    return texts.map((text) => {
+      let pages: number | undefined;
+      if (text.yeshe_de_page_start && text.yeshe_de_page_end) {
+        const start = Number.parseInt(text.yeshe_de_page_start, 10);
+        const end = Number.parseInt(text.yeshe_de_page_end, 10);
+        if (!Number.isNaN(start) && !Number.isNaN(end) && end >= start) {
+          pages = end - start + 1;
+        }
+      }
+      
+      return {
+        id: text.id,
+        title: {
+          tibetan: text.tibetan_title || '',
+          english: text.english_title || '',
+          sanskrit: text.sanskrit_title || undefined,
+          chinese: text.chinese_title || undefined
+        },
+        category: selectedItemDetails?.title.english || '',
+        pages,
+        volume: text.yeshe_de_volume_number || undefined,
+        description: '', // Texts don't have description in the schema
+        keywords: []
       };
-    } else {
-      selectedItemDetails = findItemInTree(catalogData, selectedItem);
-    }
-  }
-
-  // Generate mock text entries for the selected item
-  const getTextEntriesForSelectedItem = () => {
-    if (!selectedItemDetails) return [];
-
-    // If selected item is 'vinaya', return dummy Vinaya texts
-    if (selectedItemDetails.id === "vinaya") {
-      const vinayaDummyTexts = [
-        {
-          id: "vinaya-1",
-          title: {
-            tibetan: "འདུལ་བ་གཞུང་ 1",
-            english: "Vinaya text 1",
-            sanskrit: "Vinaya Sūtra 1",
-          },
-          category: "འདུལ་བ། (Discipline)",
-          pages: 56,
-          volume: "I",
-          description:
-            "This is some dummy descriptive text for Vinaya text 1. Here you can describe the background, contents, or importance of the first Vinaya text in your collection. འདུལ་བའི་གཞུང་དང་པོའི་དོན་ངོ་སྤྲོད་གནང་བ་ཡིན།",
-          keywords: ["discipline", "vinaya", "monastic"],
-        },
-        {
-          id: "vinaya-2",
-          title: {
-            tibetan: "འདུལ་བ་གཞུང་ 2",
-            english: "Vinaya text 2",
-            sanskrit: "Vinaya Sūtra 2",
-          },
-          category: "འདུལ་བ། (Discipline)",
-          pages: 72,
-          volume: "II",
-          description:
-            "This is some dummy descriptive text for Vinaya text 2. Use this area to provide details, historical context, or notes about the second Vinaya text. འདུལ་བའི་གཞུང་གཉིས་པའི་བརྗོད་དོན་དེ་འདི་ལ་བཀོད།",
-          keywords: ["discipline", "vinaya", "bhikṣu"],
-        },
-      ];
-      return vinayaDummyTexts;
-    }
-
-    // ... existing generic logic for all other selected items ...
-    const count = selectedItemDetails.count || 10;
-    const mockTexts = Array.from({
-      length: count
-    }).map((_, index) => ({
-      id: `${selectedItem}-text-${index + 1}`,
-      title: {
-        tibetan: `${selectedItemDetails.title.tibetan} ${index + 1}`,
-        english: `${selectedItemDetails.title.english} Text ${index + 1}`,
-        sanskrit: index % 2 === 0 ? `Sanskrit Title ${index + 1}` : undefined
-      },
-      category: selectedItemDetails.title.english,
-      pages: Math.floor(Math.random() * 100) + 10,
-      volume: `${Math.floor(Math.random() * 10) + 1}`,
-      description: `This is a sample text from the ${selectedItemDetails.title.english} category. Text number ${index + 1}.`,
-      keywords: ["buddhism", selectedItemDetails.id, `keyword-${index}`]
-    }));
-    return mockTexts;
+    });
   };
 
   // Get paginated text entries for the selected item
   const getTextCardItems = () => {
-    const allTexts = getTextEntriesForSelectedItem();
-    return paginateItems(allTexts, currentPage, 10);
+    const transformedTexts = transformTextsForDisplay(subCategoryTextsData);
+    return paginateItems(transformedTexts, currentPage, 10);
   };
-
-  // Generate mock text entries for the discipline category
-  const getDisciplineTextEntries = () => {
-    const disciplineItem = catalogData.find(item => item.id === 'discipline');
-    if (!disciplineItem) return [];
-    const count = disciplineItem.count || 30;
-    const textIds = ['golden-sutra', 'vinaya-sutra', 'discipline-rules'];
-    const mockTexts = Array.from({
-      length: count
-    }).map((_, index) => ({
-      id: index < textIds.length ? textIds[index] : `discipline-text-${index + 1}`,
-      title: {
-        tibetan: `འདུལ་བ་གཞུང་ ${index + 1}`,
-        english: `Discipline Text ${index + 1}`,
-        sanskrit: index % 3 === 0 ? `Vinaya Text ${index + 1}` : undefined
-      },
-      category: "འདུལ་བ།",
-      pages: Math.floor(Math.random() * 100) + 30,
-      volume: `${Math.floor(Math.random() * 5) + 1}`,
-      description: `This is a text from the Discipline (Vinaya) category of the Kangyur. Text number ${index + 1}.`,
-      keywords: ["discipline", "vinaya", "monk", `section-${Math.floor(index / 5) + 1}`]
-    }));
-    return mockTexts;
-  };
-
-  // Get paginated text entries for the discipline category
-  const getDisciplineCardItems = () => {
-    const allTexts = getDisciplineTextEntries();
-    return paginateItems(allTexts, currentPage, 15);
-  };
-
-  // Generate dummy Vinaya texts for the discipline category
-  const getVinayaTextsForDisciplineCategory = () => [
-    {
-      id: "vinaya-1",
-      title: {
-        tibetan: "འདུལ་བ་གཞུང་ 1",
-        english: "Vinaya text 1",
-        sanskrit: "Vinaya Sūtra 1",
-      },
-      category: "འདུལ་བ། (Discipline)",
-      pages: 56,
-      volume: "I",
-      description:
-        "This is some dummy descriptive text for Vinaya text 1. Here you can describe the background, contents, or importance of the first Vinaya text in your collection. འདུལ་བའི་གཞུང་དང་པོའི་དོན་ངོ་སྤྲོད་གནང་བ་ཡིན།",
-      keywords: ["discipline", "vinaya", "monastic"],
-    },
-    {
-      id: "vinaya-2",
-      title: {
-        tibetan: "འདུལ་བ་གཞུང་ 2",
-        english: "Vinaya text 2",
-        sanskrit: "Vinaya Sūtra 2",
-      },
-      category: "འདུལ་བ། (Discipline)",
-      pages: 72,
-      volume: "II",
-      description:
-        "This is some dummy descriptive text for Vinaya text 2. Use this area to provide details, historical context, or notes about the second Vinaya text. འདུལ་བའི་གཞུང་གཉིས་པའི་བརྗོད་དོན་དེ་འདི་ལ་བཀོད།",
-      keywords: ["discipline", "vinaya", "bhikṣu"],
-    },
-  ];
 
   // Handler for selecting an item
   const handleItemSelect = (id: string) => {
@@ -270,33 +172,12 @@ const Catalog = () => {
     setCurrentPage(1);
   };
 
-  // Handler to reset selected item and search query when clicking main "Catalog" breadcrumb
+  // Handler to reset selected item and search query when clicking main "Categories" breadcrumb
   const handleBreadcrumbCatalogClick = () => {
     setSearchQuery('');
     setSelectedItem(null);
     setCurrentPage(1);
-  };
-
-  // Handler to reset selected item and search query when clicking "Discourses" breadcrumb
-  const handleBreadcrumbDiscoursesClick = () => {
-    setSearchQuery('');
-    setSelectedItem(null);
-    setCurrentPage(1);
-    // We might want to set the category in the URL to 'discourses' here if not already (optional)
-  };
-
-  // Handler to reset to tantra category when clicking Tantra breadcrumb
-  const handleBreadcrumbTantraClick = () => {
-    setSearchQuery('');
-    setSelectedItem(null);
-    setCurrentPage(1);
-
-    // Set URL params to show Tantra category only
-    const newParams = new URLSearchParams(searchParams);
-    newParams.set('category', 'tantra');
-    newParams.delete('item');
-    newParams.delete('q');
-    newParams.delete('page');
+    const newParams = new URLSearchParams();
     setSearchParams(newParams);
   };
 
@@ -313,15 +194,16 @@ const Catalog = () => {
         >
           <div className="flex justify-between items-center">
             <div>
-              <h3 className="text-xl tibetan mb-1">{item.title.tibetan}</h3>
-              <h4 className="font-medium text-gray-700">{item.title.english}</h4>
+              <h3 className={`text-xl mb-1 ${isTibetan ? 'tibetan' : 'font-medium text-gray-700'}`}>
+                {isTibetan ? item.title.tibetan : item.title.english}
+              </h3>
               {item.description && (
                 <p className="text-gray-600 text-sm mt-2">{item.description}</p>
               )}
             </div>
             {item.count !== undefined && (
               <span className="bg-indigo-100 text-indigo-800 px-3 py-1 rounded-full text-sm">
-                {item.count} {item.count === 1 ? 'text' : 'texts'}
+                {item.count} {item.count === 1 ? (t('text') || 'text') : (t('texts') || 'texts')}
               </span>
             )}
           </div>
@@ -340,26 +222,26 @@ const Catalog = () => {
   const {
     items: paginatedItems,
     pagination
-  } = selectedItem 
+  } = selectedItem && selectedSubCategory && !selectedSubCategory.content
     ? getTextCardItems() 
-    : category === 'discipline' && !searchQuery && !selectedItem 
-      ? getDisciplineCardItems() 
-      : {
-          items: [],
-          pagination: {
-            currentPage: 1,
-            totalPages: 1,
-            totalItems: 0,
-            itemsPerPage: 10,
-            hasNextPage: false,
-            hasPrevPage: false
-          }
-        };
+    : {
+        items: [],
+        pagination: {
+          currentPage: 1,
+          totalPages: 1,
+          totalItems: 0,
+          itemsPerPage: 10,
+          hasNextPage: false,
+          hasPrevPage: false
+        }
+      };
 
-  if (loading) {
+  const loading = loadingMainCategory || loadingSubCategories || loadingSelectedSubCategory || loadingTexts;
+
+  if (loading && category) {
     return (
       <div className="min-h-screen bg-white w-full flex items-center justify-center">
-        <p className="text-kangyur-dark/60">Loading catalog...</p>
+        <p className="text-kangyur-dark/60">{t('loading') || 'Loading categories...'}</p>
       </div>
     );
   }
@@ -373,67 +255,68 @@ const Catalog = () => {
         <MainKarchagFrames />
       )}
 
-      {/* Discourse Subsections - show when discourse category is selected but no specific item is selected */}
-      {category === 'discourses' && !searchQuery && !selectedItem && (
-        <DiscourseSubsections />
-      )}
-
-      {/* Tantra Subsections - show when tantra category is selected but no specific item is selected */}
-      {category === 'tantra' && !searchQuery && !selectedItem && (
-        <TantraSubsections />
+      {/* Subcategories - show when a main category is selected but no specific subcategory is selected */}
+      {category && !searchQuery && !selectedItem && selectedMainCategory && (
+        <div className="container mx-auto px-4 py-8">
+          <div className="mb-8">
+            <h2 className={`text-3xl font-bold text-center mb-2 ${isTibetan ? 'tibetan' : ''}`}>
+              {isTibetan ? selectedMainCategory.name_tibetan : selectedMainCategory.name_english}
+            </h2>
+            {((isTibetan && selectedMainCategory.description_tibetan) || (!isTibetan && selectedMainCategory.description_english)) && (
+              <p className="text-gray-600 text-center max-w-3xl mx-auto">
+                {isTibetan ? (selectedMainCategory.description_tibetan || selectedMainCategory.description_english) : (selectedMainCategory.description_english || selectedMainCategory.description_tibetan)}
+              </p>
+            )}
+          </div>
+          
+          {karchagSubCategoriesData && karchagSubCategoriesData.length > 0 ? (
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
+              {karchagSubCategoriesData.map((subcategory: any) => (
+                <div
+                  key={subcategory.id}
+                  className="p-6 border rounded-lg cursor-pointer transition-all hover:shadow-lg hover:border-indigo-300"
+                  onClick={() => {
+                    const newParams = new URLSearchParams(searchParams);
+                    newParams.set('item', subcategory.id);
+                    newParams.delete('q');
+                    setCurrentPage(1);
+                    setSearchParams(newParams);
+                  }}
+                >
+                  <h3 className={`text-xl mb-2 ${isTibetan ? 'tibetan' : 'font-medium text-gray-700'}`}>
+                    {isTibetan ? subcategory.name_tibetan : subcategory.name_english}
+                  </h3>
+                  {((isTibetan && subcategory.description_tibetan) || (!isTibetan && subcategory.description_english)) && (
+                    <p className="text-gray-600 text-sm mb-3">
+                      {isTibetan ? (subcategory.description_tibetan || subcategory.description_english) : (subcategory.description_english || subcategory.description_tibetan)}
+                    </p>
+                  )}
+                </div>
+              ))}
+            </div>
+          ) : (
+            <div className="text-center text-gray-600">
+              <p>{t('noSubcategories') || 'No subcategories available for this category.'}</p>
+            </div>
+          )}
+        </div>
       )}
       
-      {/* Category or Search Results */}
-      {(category && category !== 'discourses' && category !== 'tantra') || searchQuery || selectedItem ? (
+      {/* Selected Subcategory or Search Results */}
+      {selectedItem || searchQuery ? (
         <div className="container mx-auto px-4 py-8">
-          {/* Always render category header for category pages when not searching and nothing selected */}
-          {category && !searchQuery && !selectedItem && category !== 'discipline' && (
-            <CategoryHeader
-              category={category}
-              selectedItem={selectedItem}
-            />
-          )}
-
-          {/* --- Discipline Category Special rendering: show header & cards together --- */}
-          {category === 'discipline' && !searchQuery && !selectedItem && (
-            <>
-              {/* Category header with breadcrumb for Discipline */}
-              <CategoryHeader
-                category={category}
-                selectedItem={selectedItem}
-              />
-              {/* Vinaya (discipline) texts list, as standalone cards */}
-              <KarchagTextCardList
-                items={getVinayaTextsForDisciplineCategory()}
-                currentPage={1}
-                totalPages={1}
-                onPageChange={() => {}}
-              />
-            </>
-          )}
-
-          {/* Selected Item Header with Breadcrumb (show correct name for tantra subsections too) */}
+          {/* Selected Subcategory Header with Breadcrumb */}
           {selectedItem && selectedItemDetails && !searchQuery && (
             <div className="mb-8">
               <div className="relative mb-4">
                 <CatalogBreadcrumb
-                  category={
-                    tantraSubsectionIds.includes(selectedItem)
-                      ? "tantra"
-                      : category
-                  }
+                  category={category || undefined}
                   selectedItem={selectedItem}
-                  catalogData={catalogData}
+                  catalogData={[]}
                   onCatalogClick={handleBreadcrumbCatalogClick}
-                  onDiscoursesClick={handleBreadcrumbDiscoursesClick}
-                  onTantraClick={
-                    tantraSubsectionIds.includes(selectedItem)
-                      ? handleBreadcrumbTantraClick
-                      : undefined
-                  }
                 />
-                <h2 className="text-3xl font-bold tibetan text-center">
-                  {selectedItemDetails.title.tibetan}
+                <h2 className={`text-3xl font-bold text-center ${isTibetan ? 'tibetan' : ''}`}>
+                  {isTibetan ? selectedItemDetails.title.tibetan : selectedItemDetails.title.english}
                 </h2>
               </div>
             </div>
@@ -455,33 +338,60 @@ const Catalog = () => {
             </div>
           )}
 
-          {/* (Selected item or paginated item list) */}
-          {(selectedItem && paginatedItems.length > 0) ||
-            (category === 'discipline' && !searchQuery && !selectedItem && paginatedItems.length > 0)
-            ? (
-              // This block only for paginated item rendering OTHER THAN main vinaya list, so discipline base rendering is above
-              (category !== 'discipline' || !!selectedItem) && (
-                <KarchagTextCardList
-                  items={paginatedItems}
-                  currentPage={pagination.currentPage}
-                  totalPages={pagination.totalPages}
-                  onPageChange={handlePageChange}
-                />
-              )
-            )
-            : (category !== 'discipline') && (
-              <>
-                <CatalogTreeList 
-                  items={filteredCatalog}
-                  selectedItem={selectedItem}
-                  onItemSelect={handleItemSelect}
-                />
-                {filteredCatalog.length === 0 && (
+          {/* Selected subcategory content or text list or search results */}
+          {(() => {
+            // Render subcategory content or text list
+            if (selectedItem && selectedSubCategory) {
+              if (selectedSubCategory.content) {
+                // Display content if subcategory has content
+                return (
+                  <div className="max-w-4xl mx-auto">
+                    <div className="prose prose-lg max-w-none">
+                      <div className={`whitespace-pre-line ${isTibetan ? 'tibetan text-lg leading-relaxed' : 'text-gray-700'}`}>
+                        {selectedSubCategory.content}
+                      </div>
+                    </div>
+                  </div>
+                );
+              } else {
+                // Display text list if subcategory doesn't have content
+                if (loadingTexts) {
+                  return null;
+                }
+                if (paginatedItems.length > 0) {
+                  return (
+                    <KarchagTextCardList
+                      items={paginatedItems}
+                      currentPage={pagination.currentPage}
+                      totalPages={pagination.totalPages}
+                      onPageChange={handlePageChange}
+                    />
+                  );
+                }
+                return (
+                  <div className="text-center text-gray-600 py-12">
+                    <p>{t('noTexts') || 'No texts available in this subcategory.'}</p>
+                  </div>
+                );
+              }
+            }
+            
+            // Render search results
+            if (searchQuery) {
+              return (
+                <>
+                  <CatalogTreeList 
+                    items={[]}
+                    selectedItem={selectedItem}
+                    onItemSelect={handleItemSelect}
+                  />
                   <CatalogEmptyState />
-                )}
-              </>
-            )
-          }
+                </>
+              );
+            }
+            
+            return null;
+          })()}
         </div>
       ) : null}
       <Footer />

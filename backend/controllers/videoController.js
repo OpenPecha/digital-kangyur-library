@@ -16,7 +16,6 @@ const getVideos = async (req, res, next) => {
     const isActiveFilter = is_active === 'true';
 
     const videos = await videoService.findAll({
-      is_active: isActiveFilter,
       skip,
       take
     });

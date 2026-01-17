@@ -9,7 +9,8 @@
     "dev:js": "nodemon index.js",
     "build": "tsc",
     "type-check": "tsc --noEmit",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "seed:timeline": "node seeders/timelineSeeder.js"
   },
   "author": "",
   "license": "ISC",

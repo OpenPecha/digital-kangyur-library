@@ -1,8 +1,33 @@
-
 import React from 'react';
+import { useQuery } from '@tanstack/react-query';
 import KarchagFrame from './KarchagFrame';
+import api from '@/utils/api';
 
 const MainKarchagFrames: React.FC = () => {
+  // Fetch karchag main categories
+  const { data: categoriesData = [], isLoading } = useQuery({
+    queryKey: ['karchag', 'main-categories', { is_active: 'true' }],
+    queryFn: async () => {
+      const response = await api.getKarchagMainCategories({ is_active: 'true' });
+      return response.categories || [];
+    },
+  });
+
+  // Helper function to create slug from name_english
+  const createSlug = (name: string): string => {
+    return name.toLowerCase().replace(/\s+/g, '-');
+  };
+
+  if (isLoading) {
+    return (
+      <div className="container mx-auto px-4 py-12">
+        <div className="text-center">
+          <p className="text-gray-600">Loading categories...</p>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="container mx-auto px-4 py-12">
       <div className="text-center mb-12">
@@ -12,16 +37,17 @@ const MainKarchagFrames: React.FC = () => {
         </p>
       </div>
       <div className="flex flex-col md:flex-row justify-center gap-10 md:gap-24">
-        <KarchagFrame 
-          labelKey="discourses"
-          fontSize="xx-large"
-          link="/catalog?category=discourses" 
-        />
-        <KarchagFrame 
-          labelKey="tantra"
-          fontSize="xx-large"
-          link="/catalog?category=tantra" 
-        />
+        {categoriesData.map((category: any) => (
+          <KarchagFrame 
+            key={category.id}
+            label={{
+              tibetan: category.name_tibetan || '',
+              english: category.name_english || ''
+            }}
+            fontSize="xx-large"
+            link={`/catalog?category=${createSlug(category.id)}`} 
+          />
+        ))}
       </div>
     </div>
   );

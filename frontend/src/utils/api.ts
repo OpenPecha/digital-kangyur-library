@@ -30,7 +30,6 @@ async function fetchApi<T>(endpoint: string, options?: RequestInit): Promise<T> 
     ...options,
     headers,
   });
-
   if (!response.ok) {
     // Handle 401 Unauthorized - token might be expired
     if (response.status === 401) {
@@ -49,14 +48,14 @@ async function fetchApi<T>(endpoint: string, options?: RequestInit): Promise<T> 
 }
 
 export const api = {
-  // Catalog
-  getCatalog: (params?: { lang?: string; include_counts?: string; active_only?: string }) => {
+  // Categories
+  getCategories: (params?: { lang?: string; include_counts?: string; active_only?: string }) => {
     const queryParams = new URLSearchParams();
     if (params?.lang) queryParams.append('lang', params.lang);
     if (params?.include_counts) queryParams.append('include_counts', params.include_counts);
     if (params?.active_only) queryParams.append('active_only', params.active_only);
     const query = queryParams.toString();
-    return fetchApi<{ categories: any[] }>(`/catalog${query ? `?${query}` : ''}`);
+    return fetchApi<{ categories: any[] }>(`/categories${query ? `?${query}` : ''}`);
   },
 
   getCategoryBySlug: (slug: string, params?: { lang?: string; include_children?: string; include_texts?: string }) => {
@@ -65,7 +64,7 @@ export const api = {
     if (params?.include_children) queryParams.append('include_children', params.include_children);
     if (params?.include_texts) queryParams.append('include_texts', params.include_texts);
     const query = queryParams.toString();
-    return fetchApi<any>(`/catalog/${slug}${query ? `?${query}` : ''}`);
+    return fetchApi<any>(`/categories/${slug}${query ? `?${query}` : ''}`);
   },
 
   // News
@@ -125,22 +124,6 @@ export const api = {
     return fetchApi<{ events: any[] }>(`/timeline/events${query ? `?${query}` : ''}`);
   },
 
-  // Editions
-  getEditions: (params?: { is_active?: string; lang?: string }) => {
-    const queryParams = new URLSearchParams();
-    if (params?.is_active) queryParams.append('is_active', params.is_active);
-    if (params?.lang) queryParams.append('lang', params.lang);
-    const query = queryParams.toString();
-    return fetchApi<{ editions: any[] }>(`/editions${query ? `?${query}` : ''}`);
-  },
-
-  getEditionById: (id: string, params?: { lang?: string; include_texts?: string }) => {
-    const queryParams = new URLSearchParams();
-    if (params?.lang) queryParams.append('lang', params.lang);
-    if (params?.include_texts) queryParams.append('include_texts', params.include_texts);
-    const query = queryParams.toString();
-    return fetchApi<any>(`/editions/${id}${query ? `?${query}` : ''}`);
-  },
 
   // Karchag - Main Categories
   getKarchagMainCategories: (params?: { is_active?: string }) => {
@@ -240,6 +223,31 @@ export const api = {
     });
   },
 
+  // Karchag - Text Summary
+  getKarchagTextSummary: (textId: string) => {
+    return fetchApi<any>(`/karchag/texts/${textId}/summary`);
+  },
+
+  createOrUpdateKarchagTextSummary: (textId: string, data: any) => {
+    return fetchApi<any>(`/karchag/texts/${textId}/summary`, {
+      method: 'POST',
+      body: JSON.stringify(data),
+    });
+  },
+
+  updateKarchagTextSummary: (textId: string, data: any) => {
+    return fetchApi<any>(`/karchag/texts/${textId}/summary`, {
+      method: 'PUT',
+      body: JSON.stringify(data),
+    });
+  },
+
+  deleteKarchagTextSummary: (textId: string) => {
+    return fetchApi<void>(`/karchag/texts/${textId}/summary`, {
+      method: 'DELETE',
+    });
+  },
+
   // Videos
   getVideos: (params?: { page?: number; limit?: number; lang?: string; search?: string; is_active?: string }) => {
     const queryParams = new URLSearchParams();
@@ -279,44 +287,6 @@ export const api = {
     });
   },
 
-  // Texts
-  getTexts: (params?: { page?: number; limit?: number; category_id?: string; search?: string; lang?: string }) => {
-    const queryParams = new URLSearchParams();
-    if (params?.page) queryParams.append('page', params.page.toString());
-    if (params?.limit) queryParams.append('limit', params.limit.toString());
-    if (params?.category_id) queryParams.append('category_id', params.category_id);
-    if (params?.search) queryParams.append('search', params.search);
-    if (params?.lang) queryParams.append('lang', params.lang);
-    const query = queryParams.toString();
-    return fetchApi<{ texts: any[]; pagination: any }>(`/texts${query ? `?${query}` : ''}`);
-  },
-
-  getTextById: (id: string, params?: { lang?: string }) => {
-    const queryParams = new URLSearchParams();
-    if (params?.lang) queryParams.append('lang', params.lang);
-    const query = queryParams.toString();
-    return fetchApi<any>(`/texts/${id}${query ? `?${query}` : ''}`);
-  },
-
-  createText: (data: any) => {
-    return fetchApi<any>('/texts', {
-      method: 'POST',
-      body: JSON.stringify(data),
-    });
-  },
-
-  updateText: (id: string, data: any) => {
-    return fetchApi<any>(`/texts/${id}`, {
-      method: 'PUT',
-      body: JSON.stringify(data),
-    });
-  },
-
-  deleteText: (id: string) => {
-    return fetchApi<void>(`/texts/${id}`, {
-      method: 'DELETE',
-    });
-  },
 
   // Timeline Events
   getTimelineEventById: (id: string, params?: { lang?: string }) => {
@@ -385,23 +355,23 @@ export const api = {
     });
   },
 
-  // Catalog Categories
+  // Category Management
   createCategory: (data: any) => {
-    return fetchApi<any>('/catalog/categories', {
+    return fetchApi<any>('/categories/categories', {
       method: 'POST',
       body: JSON.stringify(data),
     });
   },
 
   updateCategory: (id: string, data: any) => {
-    return fetchApi<any>(`/catalog/categories/${id}`, {
+    return fetchApi<any>(`/categories/categories/${id}`, {
       method: 'PUT',
       body: JSON.stringify(data),
     });
   },
 
   deleteCategory: (id: string) => {
-    return fetchApi<void>(`/catalog/categories/${id}`, {
+    return fetchApi<void>(`/categories/categories/${id}`, {
       method: 'DELETE',
     });
   },
@@ -440,6 +410,16 @@ export const api = {
   // Admin - Dashboard
   getDashboard: () => {
     return fetchApi<any>('/admin/dashboard');
+  },
+
+  // Texts
+  getTextById: (id: string) => {
+    return fetchApi<any>(`/karchag/texts/${id}`);
+  },
+
+  // Text Summary
+  getTextSummary: (textId: string) => {
+    return fetchApi<any>(`/karchag/texts/${textId}/summary`);
   },
 };
 

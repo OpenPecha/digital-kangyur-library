@@ -18,12 +18,6 @@ const Dashboard = () => {
       description: "Manage video content with links"
     },
     {
-      title: "Texts",
-      icon: FileText,
-      path: "/admin/texts",
-      description: "Manage library texts"
-    },
-    {
       title: "Timeline",
       icon: Clock,
       path: "/admin/timeline",
@@ -36,22 +30,16 @@ const Dashboard = () => {
       description: "Manage audio recordings"
     },
     {
-      title: "Catalog",
+      title: "Categories",
       icon: FolderTree,
       path: "/admin/catalog",
-      description: "Manage catalog categories"
+      description: "Manage main categories and subcategories"
     },
     {
       title: "Karchag",
       icon: FileText,
       path: "/admin/karchag",
       description: "Manage Kangyur texts and content"
-    },
-    {
-      title: "Editions",
-      icon: BookOpen,
-      path: "/admin/editions",
-      description: "Manage Karchag content and editions"
     },
     {
       title: "Users",
