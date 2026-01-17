@@ -279,47 +279,225 @@ interface TextFormProps {
 }
 
 const TextForm = ({ isOpen, onClose, mode, data, subCategories, onSave }: TextFormProps) => {
-  const [formData, setFormData] = useState(data || {
-    // Basic Text Information
-    sub_category_id: '',
-    derge_id: '',
-    yeshe_de_id: '',
-    tibetan_title: '',
-    chinese_title: '',
-    sanskrit_title: '',
-    english_title: '',
-    turning_id: '',
-    yana_id: '',
-    translation_period_id: '',
-    order_index: 0,
-    is_active: true,
+  const [formData, setFormData] = useState(() => {
+    if (data) {
+      return {
+        // Basic Text Information
+        sub_category_id: data.sub_category_id || '',
+        derge_id: data.derge_id || '',
+        yeshe_de_id: data.yeshe_de_id || '',
+        tibetan_title: data.tibetan_title || '',
+        chinese_title: data.chinese_title || '',
+        sanskrit_title: data.sanskrit_title || '',
+        english_title: data.english_title || '',
+        turning_id: data.turning_id || '',
+        yana_id: data.yana_id || '',
+        translation_period_id: data.translation_period_id || '',
+        order_index: data.order_index || 0,
+        is_active: data.is_active !== undefined ? data.is_active : true,
 
-    // Text Summary
-    summary: {
-      translator_homage_english: '',
-      translator_homage_tibetan: '',
-      purpose_english: '',
-      purpose_tibetan: '',
-      text_summary_english: '',
-      text_summary_tibetan: '',
-      keyword_and_meaning_english: '',
-      keyword_and_meaning_tibetan: '',
-      relation_english: '',
-      relation_tibetan: '',
-      question_and_answer_english: '',
-      question_and_answer_tibetan: '',
-      translator_notes_english: '',
-      translator_notes_tibetan: '',
-    },
+        // Text Summary - ensure summary object exists
+        summary: data.summary ? {
+          translator_homage_english: data.summary.translator_homage_english || '',
+          translator_homage_tibetan: data.summary.translator_homage_tibetan || '',
+          purpose_english: data.summary.purpose_english || '',
+          purpose_tibetan: data.summary.purpose_tibetan || '',
+          text_summary_english: data.summary.text_summary_english || '',
+          text_summary_tibetan: data.summary.text_summary_tibetan || '',
+          keyword_and_meaning_english: data.summary.keyword_and_meaning_english || '',
+          keyword_and_meaning_tibetan: data.summary.keyword_and_meaning_tibetan || '',
+          relation_english: data.summary.relation_english || '',
+          relation_tibetan: data.summary.relation_tibetan || '',
+          question_and_answer_english: data.summary.question_and_answer_english || '',
+          question_and_answer_tibetan: data.summary.question_and_answer_tibetan || '',
+          translator_notes_english: data.summary.translator_notes_english || '',
+          translator_notes_tibetan: data.summary.translator_notes_tibetan || '',
+        } : {
+          translator_homage_english: '',
+          translator_homage_tibetan: '',
+          purpose_english: '',
+          purpose_tibetan: '',
+          text_summary_english: '',
+          text_summary_tibetan: '',
+          keyword_and_meaning_english: '',
+          keyword_and_meaning_tibetan: '',
+          relation_english: '',
+          relation_tibetan: '',
+          question_and_answer_english: '',
+          question_and_answer_tibetan: '',
+          translator_notes_english: '',
+          translator_notes_tibetan: '',
+        },
 
-    // Volume Information
-    volumes: [{
-      volume_number: '',
-      start_page: '',
-      end_page: '',
+        // Volume Information - ensure volumes array exists
+        volumes: data.volumes && Array.isArray(data.volumes) && data.volumes.length > 0
+          ? data.volumes.map((vol: any) => ({
+              volume_number: vol.volume_number || '',
+              start_page: vol.start_page || '',
+              end_page: vol.end_page || '',
+              order_index: vol.order_index || 0,
+            }))
+          : [{
+              volume_number: '',
+              start_page: '',
+              end_page: '',
+              order_index: 0,
+            }],
+      };
+    }
+    return {
+      // Basic Text Information
+      sub_category_id: '',
+      derge_id: '',
+      yeshe_de_id: '',
+      tibetan_title: '',
+      chinese_title: '',
+      sanskrit_title: '',
+      english_title: '',
+      turning_id: '',
+      yana_id: '',
+      translation_period_id: '',
       order_index: 0,
-    }],
+      is_active: true,
+
+      // Text Summary
+      summary: {
+        translator_homage_english: '',
+        translator_homage_tibetan: '',
+        purpose_english: '',
+        purpose_tibetan: '',
+        text_summary_english: '',
+        text_summary_tibetan: '',
+        keyword_and_meaning_english: '',
+        keyword_and_meaning_tibetan: '',
+        relation_english: '',
+        relation_tibetan: '',
+        question_and_answer_english: '',
+        question_and_answer_tibetan: '',
+        translator_notes_english: '',
+        translator_notes_tibetan: '',
+      },
+
+      // Volume Information
+      volumes: [{
+        volume_number: '',
+        start_page: '',
+        end_page: '',
+        order_index: 0,
+      }],
+    };
   });
+
+  // Update formData when data changes
+  useEffect(() => {
+    if (data) {
+      setFormData({
+        // Basic Text Information
+        sub_category_id: data.sub_category_id || '',
+        derge_id: data.derge_id || '',
+        yeshe_de_id: data.yeshe_de_id || '',
+        tibetan_title: data.tibetan_title || '',
+        chinese_title: data.chinese_title || '',
+        sanskrit_title: data.sanskrit_title || '',
+        english_title: data.english_title || '',
+        turning_id: data.turning_id || '',
+        yana_id: data.yana_id || '',
+        translation_period_id: data.translation_period_id || '',
+        order_index: data.order_index || 0,
+        is_active: data.is_active !== undefined ? data.is_active : true,
+
+        // Text Summary - ensure summary object exists
+        summary: data.summary ? {
+          translator_homage_english: data.summary.translator_homage_english || '',
+          translator_homage_tibetan: data.summary.translator_homage_tibetan || '',
+          purpose_english: data.summary.purpose_english || '',
+          purpose_tibetan: data.summary.purpose_tibetan || '',
+          text_summary_english: data.summary.text_summary_english || '',
+          text_summary_tibetan: data.summary.text_summary_tibetan || '',
+          keyword_and_meaning_english: data.summary.keyword_and_meaning_english || '',
+          keyword_and_meaning_tibetan: data.summary.keyword_and_meaning_tibetan || '',
+          relation_english: data.summary.relation_english || '',
+          relation_tibetan: data.summary.relation_tibetan || '',
+          question_and_answer_english: data.summary.question_and_answer_english || '',
+          question_and_answer_tibetan: data.summary.question_and_answer_tibetan || '',
+          translator_notes_english: data.summary.translator_notes_english || '',
+          translator_notes_tibetan: data.summary.translator_notes_tibetan || '',
+        } : {
+          translator_homage_english: '',
+          translator_homage_tibetan: '',
+          purpose_english: '',
+          purpose_tibetan: '',
+          text_summary_english: '',
+          text_summary_tibetan: '',
+          keyword_and_meaning_english: '',
+          keyword_and_meaning_tibetan: '',
+          relation_english: '',
+          relation_tibetan: '',
+          question_and_answer_english: '',
+          question_and_answer_tibetan: '',
+          translator_notes_english: '',
+          translator_notes_tibetan: '',
+        },
+
+        // Volume Information - ensure volumes array exists
+        volumes: data.volumes && Array.isArray(data.volumes) && data.volumes.length > 0
+          ? data.volumes.map((vol: any) => ({
+              volume_number: vol.volume_number || '',
+              start_page: vol.start_page || '',
+              end_page: vol.end_page || '',
+              order_index: vol.order_index || 0,
+            }))
+          : [{
+              volume_number: '',
+              start_page: '',
+              end_page: '',
+              order_index: 0,
+            }],
+      });
+    } else {
+      setFormData({
+        // Basic Text Information
+        sub_category_id: '',
+        derge_id: '',
+        yeshe_de_id: '',
+        tibetan_title: '',
+        chinese_title: '',
+        sanskrit_title: '',
+        english_title: '',
+        turning_id: '',
+        yana_id: '',
+        translation_period_id: '',
+        order_index: 0,
+        is_active: true,
+
+        // Text Summary
+        summary: {
+          translator_homage_english: '',
+          translator_homage_tibetan: '',
+          purpose_english: '',
+          purpose_tibetan: '',
+          text_summary_english: '',
+          text_summary_tibetan: '',
+          keyword_and_meaning_english: '',
+          keyword_and_meaning_tibetan: '',
+          relation_english: '',
+          relation_tibetan: '',
+          question_and_answer_english: '',
+          question_and_answer_tibetan: '',
+          translator_notes_english: '',
+          translator_notes_tibetan: '',
+        },
+
+        // Volume Information
+        volumes: [{
+          volume_number: '',
+          start_page: '',
+          end_page: '',
+          order_index: 0,
+        }],
+      });
+    }
+  }, [data]);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();

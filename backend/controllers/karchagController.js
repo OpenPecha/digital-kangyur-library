@@ -1,18 +1,12 @@
-const { db, findById, create, update, remove } = require('../models/mockDatabase');
+const { karchagMainCategoryService, karchagSubCategoryService, karchagTextService } = require('../prisma/database');
 const { AppError } = require('../utils/errors');
 
 // Main Categories
-const getMainCategories = (req, res, next) => {
+const getMainCategories = async (req, res, next) => {
   try {
     const { is_active } = req.query;
-    let categories = [...db.karchagMainCategories];
-
-    if (is_active === 'true') {
-      categories = categories.filter(cat => cat.is_active);
-    }
-
-    // Sort by order_index
-    categories.sort((a, b) => a.order_index - b.order_index);
+    const isActiveFilter = is_active === 'true';
+    const categories = await karchagMainCategoryService.findAll({ is_active: isActiveFilter });
 
     res.json({ categories });
   } catch (error) {
@@ -20,10 +14,10 @@ const getMainCategories = (req, res, next) => {
   }
 };
 
-const getMainCategoryById = (req, res, next) => {
+const getMainCategoryById = async (req, res, next) => {
   try {
     const { id } = req.params;
-    const category = findById(db.karchagMainCategories, id);
+    const category = await karchagMainCategoryService.findById(id);
 
     if (!category) {
       throw new AppError('RESOURCE_NOT_FOUND', 'Main category not found', 404);
@@ -35,7 +29,7 @@ const getMainCategoryById = (req, res, next) => {
   }
 };
 
-const createMainCategory = (req, res, next) => {
+const createMainCategory = async (req, res, next) => {
   try {
     const {
       name_english,
@@ -50,7 +44,7 @@ const createMainCategory = (req, res, next) => {
       throw new AppError('VALIDATION_ERROR', 'name_english and name_tibetan are required', 400);
     }
 
-    const category = create(db.karchagMainCategories, {
+    const category = await karchagMainCategoryService.create({
       name_english,
       name_tibetan,
       description_english: description_english || '',
@@ -65,7 +59,7 @@ const createMainCategory = (req, res, next) => {
   }
 };
 
-const updateMainCategory = (req, res, next) => {
+const updateMainCategory = async (req, res, next) => {
   try {
     const { id } = req.params;
     const {
@@ -77,7 +71,7 @@ const updateMainCategory = (req, res, next) => {
       is_active,
     } = req.body;
 
-    const category = update(db.karchagMainCategories, id, {
+    const category = await karchagMainCategoryService.update(id, {
       name_english,
       name_tibetan,
       description_english,
@@ -96,23 +90,21 @@ const updateMainCategory = (req, res, next) => {
   }
 };
 
-const deleteMainCategory = (req, res, next) => {
+const deleteMainCategory = async (req, res, next) => {
   try {
     const { id } = req.params;
 
-    // Check if category has subcategories
-    const hasSubCategories = db.karchagSubCategories.some(
-      sub => sub.main_category_id === id
-    );
+    const category = await karchagMainCategoryService.findById(id);
+    if (!category) {
+      throw new AppError('RESOURCE_NOT_FOUND', 'Main category not found', 404);
+    }
 
-    if (hasSubCategories) {
+    // Check if category has subcategories
+    if (category.subCategories && category.subCategories.length > 0) {
       throw new AppError('VALIDATION_ERROR', 'Cannot delete category with subcategories', 400);
     }
 
-    const deleted = remove(db.karchagMainCategories, id);
-    if (!deleted) {
-      throw new AppError('RESOURCE_NOT_FOUND', 'Main category not found', 404);
-    }
+    await karchagMainCategoryService.delete(id);
 
     res.status(204).send();
   } catch (error) {
@@ -121,21 +113,14 @@ const deleteMainCategory = (req, res, next) => {
 };
 
 // Sub Categories
-const getSubCategories = (req, res, next) => {
+const getSubCategories = async (req, res, next) => {
   try {
     const { main_category_id, is_active } = req.query;
-    let categories = [...db.karchagSubCategories];
-
-    if (main_category_id) {
-      categories = categories.filter(cat => cat.main_category_id === main_category_id);
-    }
-
-    if (is_active === 'true') {
-      categories = categories.filter(cat => cat.is_active);
-    }
-
-    // Sort by order_index
-    categories.sort((a, b) => a.order_index - b.order_index);
+    const isActiveFilter = is_active === 'true';
+    const categories = await karchagSubCategoryService.findAll({ 
+      is_active: isActiveFilter,
+      main_category_id 
+    });
 
     res.json({ categories });
   } catch (error) {
@@ -143,10 +128,10 @@ const getSubCategories = (req, res, next) => {
   }
 };
 
-const getSubCategoryById = (req, res, next) => {
+const getSubCategoryById = async (req, res, next) => {
   try {
     const { id } = req.params;
-    const category = findById(db.karchagSubCategories, id);
+    const category = await karchagSubCategoryService.findById(id);
 
     if (!category) {
       throw new AppError('RESOURCE_NOT_FOUND', 'Sub category not found', 404);
@@ -158,7 +143,7 @@ const getSubCategoryById = (req, res, next) => {
   }
 };
 
-const createSubCategory = (req, res, next) => {
+const createSubCategory = async (req, res, next) => {
   try {
     const {
       main_category_id,
@@ -175,12 +160,12 @@ const createSubCategory = (req, res, next) => {
     }
 
     // Verify main category exists
-    const mainCategory = findById(db.karchagMainCategories, main_category_id);
+    const mainCategory = await karchagMainCategoryService.findById(main_category_id);
     if (!mainCategory) {
       throw new AppError('VALIDATION_ERROR', 'Main category not found', 400);
     }
 
-    const category = create(db.karchagSubCategories, {
+    const category = await karchagSubCategoryService.create({
       main_category_id,
       name_english,
       name_tibetan,
@@ -196,7 +181,7 @@ const createSubCategory = (req, res, next) => {
   }
 };
 
-const updateSubCategory = (req, res, next) => {
+const updateSubCategory = async (req, res, next) => {
   try {
     const { id } = req.params;
     const {
@@ -210,13 +195,13 @@ const updateSubCategory = (req, res, next) => {
     } = req.body;
 
     if (main_category_id) {
-      const mainCategory = findById(db.karchagMainCategories, main_category_id);
+      const mainCategory = await karchagMainCategoryService.findById(main_category_id);
       if (!mainCategory) {
         throw new AppError('VALIDATION_ERROR', 'Main category not found', 400);
       }
     }
 
-    const category = update(db.karchagSubCategories, id, {
+    const category = await karchagSubCategoryService.update(id, {
       main_category_id,
       name_english,
       name_tibetan,
@@ -236,21 +221,21 @@ const updateSubCategory = (req, res, next) => {
   }
 };
 
-const deleteSubCategory = (req, res, next) => {
+const deleteSubCategory = async (req, res, next) => {
   try {
     const { id } = req.params;
 
-    // Check if category has texts
-    const hasTexts = db.karchagTexts.some(text => text.sub_category_id === id);
+    const category = await karchagSubCategoryService.findById(id);
+    if (!category) {
+      throw new AppError('RESOURCE_NOT_FOUND', 'Sub category not found', 404);
+    }
 
-    if (hasTexts) {
+    // Check if category has texts
+    if (category.texts && category.texts.length > 0) {
       throw new AppError('VALIDATION_ERROR', 'Cannot delete category with texts', 400);
     }
 
-    const deleted = remove(db.karchagSubCategories, id);
-    if (!deleted) {
-      throw new AppError('RESOURCE_NOT_FOUND', 'Sub category not found', 404);
-    }
+    await karchagSubCategoryService.delete(id);
 
     res.status(204).send();
   } catch (error) {
@@ -259,21 +244,14 @@ const deleteSubCategory = (req, res, next) => {
 };
 
 // Texts
-const getTexts = (req, res, next) => {
+const getTexts = async (req, res, next) => {
   try {
     const { sub_category_id, is_active } = req.query;
-    let texts = [...db.karchagTexts];
-
-    if (sub_category_id) {
-      texts = texts.filter(text => text.sub_category_id === sub_category_id);
-    }
-
-    if (is_active === 'true') {
-      texts = texts.filter(text => text.is_active);
-    }
-
-    // Sort by order_index
-    texts.sort((a, b) => a.order_index - b.order_index);
+    const isActiveFilter = is_active === 'true';
+    const texts = await karchagTextService.findAll({ 
+      is_active: isActiveFilter,
+      sub_category_id 
+    });
 
     res.json({ texts });
   } catch (error) {
@@ -281,10 +259,10 @@ const getTexts = (req, res, next) => {
   }
 };
 
-const getTextById = (req, res, next) => {
+const getTextById = async (req, res, next) => {
   try {
     const { id } = req.params;
-    const text = findById(db.karchagTexts, id);
+    const text = await karchagTextService.findById(id);
 
     if (!text) {
       throw new AppError('RESOURCE_NOT_FOUND', 'Text not found', 404);
@@ -296,7 +274,7 @@ const getTextById = (req, res, next) => {
   }
 };
 
-const createText = (req, res, next) => {
+const createText = async (req, res, next) => {
   try {
     const {
       sub_category_id,
@@ -318,18 +296,18 @@ const createText = (req, res, next) => {
     }
 
     // Verify sub category exists
-    const subCategory = findById(db.karchagSubCategories, sub_category_id);
+    const subCategory = await karchagSubCategoryService.findById(sub_category_id);
     if (!subCategory) {
       throw new AppError('VALIDATION_ERROR', 'Sub category not found', 400);
     }
 
-    const text = create(db.karchagTexts, {
+    const text = await karchagTextService.create({
       sub_category_id,
       derge_id,
-      yeshe_de_id: yeshe_de_id || '',
+      yeshe_de_id: yeshe_de_id || null,
       tibetan_title,
-      chinese_title: chinese_title || '',
-      sanskrit_title: sanskrit_title || '',
+      chinese_title: chinese_title || null,
+      sanskrit_title: sanskrit_title || null,
       english_title,
       turning_id: turning_id || null,
       yana_id: yana_id || null,
@@ -344,7 +322,7 @@ const createText = (req, res, next) => {
   }
 };
 
-const updateText = (req, res, next) => {
+const updateText = async (req, res, next) => {
   try {
     const { id } = req.params;
     const {
@@ -363,13 +341,13 @@ const updateText = (req, res, next) => {
     } = req.body;
 
     if (sub_category_id) {
-      const subCategory = findById(db.karchagSubCategories, sub_category_id);
+      const subCategory = await karchagSubCategoryService.findById(sub_category_id);
       if (!subCategory) {
         throw new AppError('VALIDATION_ERROR', 'Sub category not found', 400);
       }
     }
 
-    const text = update(db.karchagTexts, id, {
+    const text = await karchagTextService.update(id, {
       sub_category_id,
       derge_id,
       yeshe_de_id,
@@ -394,14 +372,16 @@ const updateText = (req, res, next) => {
   }
 };
 
-const deleteText = (req, res, next) => {
+const deleteText = async (req, res, next) => {
   try {
     const { id } = req.params;
 
-    const deleted = remove(db.karchagTexts, id);
-    if (!deleted) {
+    const text = await karchagTextService.findById(id);
+    if (!text) {
       throw new AppError('RESOURCE_NOT_FOUND', 'Text not found', 404);
     }
+
+    await karchagTextService.delete(id);
 
     res.status(204).send();
   } catch (error) {

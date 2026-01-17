@@ -1,15 +1,12 @@
-const { db, findById, create, update } = require('../models/mockDatabase');
+const { editionService, textService, textEditionService } = require('../prisma/database');
 const { AppError } = require('../utils/errors');
 
-const getEditions = (req, res, next) => {
+const getEditions = async (req, res, next) => {
   try {
     const { is_active = 'true', lang = 'en' } = req.query;
 
-    let editions = [...db.editions];
-
-    if (is_active === 'true') {
-      editions = editions.filter(e => e.is_active);
-    }
+    const isActiveFilter = is_active === 'true';
+    const editions = await editionService.findAll({ is_active: isActiveFilter });
 
     const formattedEditions = editions.map(edition => ({
       id: edition.id,
@@ -36,12 +33,12 @@ const getEditions = (req, res, next) => {
   }
 };
 
-const getEditionById = (req, res, next) => {
+const getEditionById = async (req, res, next) => {
   try {
     const { id } = req.params;
     const { lang = 'en', include_texts = 'false' } = req.query;
 
-    const edition = findById(db.editions, id);
+    const edition = await editionService.findById(id);
     if (!edition) {
       throw new AppError('RESOURCE_NOT_FOUND', 'Edition not found', 404);
     }
@@ -65,22 +62,21 @@ const getEditionById = (req, res, next) => {
     };
 
     if (include_texts === 'true') {
-      result.texts = db.textEditions
-        .filter(te => te.edition_id === id)
-        .map(te => {
-          const text = findById(db.texts, te.text_id);
-          return {
-            text_id: te.text_id,
-            title: text ? {
-              tibetan: text.tibetan_title,
-              english: text.english_title,
-            } : null,
-            source_id: te.source_id,
-            volume_number: te.volume_number,
-            start_page: te.start_page,
-            end_page: te.end_page,
-          };
-        });
+      const textEditions = await textEditionService.findByTextId(id);
+      result.texts = await Promise.all(textEditions.map(async (te) => {
+        const text = await textService.findById(te.text_id);
+        return {
+          text_id: te.text_id,
+          title: text ? {
+            tibetan: text.id_slug, // Note: schema doesn't have tibetan_title directly
+            english: text.id_slug,
+          } : null,
+          source_id: te.source_id,
+          volume_number: te.volume_number,
+          start_page: te.start_page,
+          end_page: te.end_page,
+        };
+      }));
     }
 
     res.json(result);
@@ -89,34 +85,33 @@ const getEditionById = (req, res, next) => {
   }
 };
 
-const getTextEditions = (req, res, next) => {
+const getTextEditions = async (req, res, next) => {
   try {
     const { id } = req.params;
 
-    const text = findById(db.texts, id);
+    const text = await textService.findById(id);
     if (!text) {
       throw new AppError('RESOURCE_NOT_FOUND', 'Text not found', 404);
     }
 
-    const editions = db.textEditions
-      .filter(te => te.text_id === id)
-      .map(te => {
-        const edition = findById(db.editions, te.edition_id);
-        return {
-          id: te.id,
-          edition_id: te.edition_id,
-          edition_name: edition ? {
-            english: edition.name_english,
-            tibetan: edition.name_tibetan,
-          } : null,
-          source_id: te.source_id,
-          volume_number: te.volume_number,
-          start_page: te.start_page,
-          end_page: te.end_page,
-          availability: te.availability,
-          link_url: te.link_url,
-        };
-      });
+    const textEditions = await textEditionService.findByTextId(id);
+    const editions = await Promise.all(textEditions.map(async (te) => {
+      const edition = await editionService.findById(te.edition_id);
+      return {
+        id: te.id,
+        edition_id: te.edition_id,
+        edition_name: edition ? {
+          english: edition.name_english,
+          tibetan: edition.name_tibetan,
+        } : null,
+        source_id: te.source_id,
+        volume_number: te.volume_number,
+        start_page: te.start_page,
+        end_page: te.end_page,
+        availability: te.availability,
+        link_url: te.link_url,
+      };
+    }));
 
     res.json({
       editions,
@@ -126,7 +121,7 @@ const getTextEditions = (req, res, next) => {
   }
 };
 
-const createEdition = (req, res, next) => {
+const createEdition = async (req, res, next) => {
   try {
     const {
       name_english,
@@ -144,7 +139,7 @@ const createEdition = (req, res, next) => {
       throw new AppError('VALIDATION_ERROR', 'name_english and name_tibetan are required', 400);
     }
 
-    const edition = create(db.editions, {
+    const edition = await editionService.create({
       name_english,
       name_tibetan,
       description_english,
@@ -165,7 +160,7 @@ const createEdition = (req, res, next) => {
   }
 };
 
-const addTextEdition = (req, res, next) => {
+const addTextEdition = async (req, res, next) => {
   try {
     const { id } = req.params;
     const {
@@ -182,25 +177,24 @@ const addTextEdition = (req, res, next) => {
       throw new AppError('VALIDATION_ERROR', 'edition_id is required', 400);
     }
 
-    const text = findById(db.texts, id);
+    const text = await textService.findById(id);
     if (!text) {
       throw new AppError('RESOURCE_NOT_FOUND', 'Text not found', 404);
     }
 
-    const edition = findById(db.editions, edition_id);
+    const edition = await editionService.findById(edition_id);
     if (!edition) {
       throw new AppError('RESOURCE_NOT_FOUND', 'Edition not found', 404);
     }
 
     // Check if already exists
-    const existing = db.textEditions.find(
-      te => te.text_id === id && te.edition_id === edition_id
-    );
-    if (existing) {
+    const existing = await textEditionService.findByTextId(id);
+    const alreadyExists = existing.some(te => te.edition_id === edition_id);
+    if (alreadyExists) {
       throw new AppError('DUPLICATE_RESOURCE', 'Text edition already exists', 409);
     }
 
-    const textEdition = create(db.textEditions, {
+    const textEdition = await textEditionService.create({
       text_id: id,
       edition_id,
       source_id,

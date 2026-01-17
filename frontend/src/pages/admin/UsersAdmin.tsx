@@ -4,14 +4,201 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/atoms/
 import { Button } from '@/components/ui/atoms/button';
 import { Input } from '@/components/ui/atoms/input';
 import { Badge } from '@/components/ui/atoms/badge';
+import { Label } from '@/components/ui/atoms/label';
 import { Edit, Trash2, Search, Plus } from 'lucide-react';
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/atoms/select";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogFooter,
+} from "@/components/ui/atoms/dialog";
+import { Switch } from "@/components/ui/atoms/switch";
 import api from '@/utils/api';
 import { toast } from 'sonner';
+
+interface UserFormProps {
+  isOpen: boolean;
+  onClose: () => void;
+  mode: 'create' | 'edit';
+  data?: any;
+  onSave: (data: any) => void;
+}
+
+const UserForm = ({ isOpen, onClose, mode, data, onSave }: UserFormProps) => {
+  const [formData, setFormData] = useState(() => {
+    if (data) {
+      return {
+        username: data.username || '',
+        email: data.email || '',
+        password: '',
+        role: data.role || 'viewer',
+        is_active: data.is_active === undefined ? true : data.is_active,
+      };
+    }
+    return {
+      username: '',
+      email: '',
+      password: '',
+      role: 'viewer', // Default role is viewer, not admin
+      is_active: true,
+    };
+  });
+
+  // Update formData when data changes
+  useEffect(() => {
+    if (data) {
+      setFormData({
+        username: data.username || '',
+        email: data.email || '',
+        password: '',
+        role: data.role || 'viewer',
+        is_active: data.is_active === undefined ? true : data.is_active,
+      });
+    } else {
+      setFormData({
+        username: '',
+        email: '',
+        password: '',
+        role: 'viewer',
+        is_active: true,
+      });
+    }
+  }, [data]);
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    
+    // Validation
+    if (!formData.username || !formData.email) {
+      toast.error('Username and email are required');
+      return;
+    }
+    
+    if (mode === 'create' && !formData.password) {
+      toast.error('Password is required for new users');
+      return;
+    }
+
+    // Email validation
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(formData.email)) {
+      toast.error('Please enter a valid email address');
+      return;
+    }
+
+    // Password validation for new users
+    if (mode === 'create' && formData.password.length < 6) {
+      toast.error('Password must be at least 6 characters long');
+      return;
+    }
+
+    onSave(formData);
+  };
+
+  return (
+    <Dialog open={isOpen} onOpenChange={onClose}>
+      <DialogContent className="max-w-md">
+        <DialogHeader>
+          <DialogTitle>{mode === 'create' ? 'Create New User' : 'Edit User'}</DialogTitle>
+        </DialogHeader>
+        <form onSubmit={handleSubmit} className="space-y-4">
+          <div className="space-y-2">
+            <Label htmlFor="username">Username</Label>
+            <Input
+              id="username"
+              value={formData.username}
+              onChange={(e) => setFormData({ ...formData, username: e.target.value })}
+              placeholder="Enter username"
+              required
+              disabled={mode === 'edit'} // Username cannot be changed after creation
+            />
+          </div>
+
+          <div className="space-y-2">
+            <Label htmlFor="email">Email</Label>
+            <Input
+              id="email"
+              type="email"
+              value={formData.email}
+              onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+              placeholder="Enter email address"
+              required
+            />
+          </div>
+
+          {mode === 'create' && (
+            <div className="space-y-2">
+              <Label htmlFor="password">Password</Label>
+              <Input
+                id="password"
+                type="password"
+                value={formData.password}
+                onChange={(e) => setFormData({ ...formData, password: e.target.value })}
+                placeholder="Enter password (min. 6 characters)"
+                required
+                minLength={6}
+              />
+            </div>
+          )}
+
+          <div className="space-y-2">
+            <Label htmlFor="role">Role</Label>
+            <Select
+              value={formData.role}
+              onValueChange={(value) => setFormData({ ...formData, role: value })}
+            >
+              <SelectTrigger>
+                <SelectValue placeholder="Select role" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="viewer">Viewer</SelectItem>
+                <SelectItem value="editor">Editor</SelectItem>
+                <SelectItem value="admin">Admin</SelectItem>
+              </SelectContent>
+            </Select>
+            <p className="text-xs text-gray-500">
+              Viewer: Read-only access • Editor: Can edit content • Admin: Full access
+            </p>
+          </div>
+
+          <div className="flex items-center space-x-2">
+            <Switch
+              id="is_active"
+              checked={formData.is_active}
+              onCheckedChange={(checked) => setFormData({ ...formData, is_active: checked })}
+            />
+            <Label htmlFor="is_active">Active User</Label>
+          </div>
+
+          <DialogFooter>
+            <Button type="button" variant="outline" onClick={onClose}>
+              Cancel
+            </Button>
+            <Button type="submit">
+              {mode === 'create' ? 'Create User' : 'Save Changes'}
+            </Button>
+          </DialogFooter>
+        </form>
+      </DialogContent>
+    </Dialog>
+  );
+};
 
 const UsersAdmin = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const [users, setUsers] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
+  const [editingUser, setEditingUser] = useState<any>(null);
+  const [isFormOpen, setIsFormOpen] = useState(false);
+  const [formMode, setFormMode] = useState<'create' | 'edit'>('create');
 
   useEffect(() => {
     fetchUsers();
@@ -35,6 +222,41 @@ const UsersAdmin = () => {
     user.username?.toLowerCase().includes(searchQuery.toLowerCase()) ||
     user.email?.toLowerCase().includes(searchQuery.toLowerCase())
   );
+
+  const handleCreate = () => {
+    setFormMode('create');
+    setEditingUser(null);
+    setIsFormOpen(true);
+  };
+
+  const handleEdit = (user: any) => {
+    setFormMode('edit');
+    setEditingUser(user);
+    setIsFormOpen(true);
+  };
+
+  const handleSave = async (userData: any) => {
+    try {
+      if (formMode === 'create') {
+        await api.createUser(userData);
+        toast.success('User created successfully');
+      } else {
+        const updateData: any = {
+          email: userData.email,
+          role: userData.role,
+          is_active: userData.is_active,
+        };
+        await api.updateUser(editingUser.id, updateData);
+        toast.success('User updated successfully');
+      }
+      
+      setIsFormOpen(false);
+      setEditingUser(null);
+      await fetchUsers();
+    } catch (error: any) {
+      toast.error(error.message || `Error ${formMode === 'create' ? 'creating' : 'updating'} user`);
+    }
+  };
 
   const handleDelete = async (id: string) => {
     if (!confirm('Are you sure you want to delete this user?')) return;
@@ -68,7 +290,7 @@ const UsersAdmin = () => {
             <h1 className="text-3xl font-bold text-gray-800 py-[10px]">Manage Users</h1>
             <p className="text-gray-600 mt-1">View and manage system users</p>
           </div>
-          <Button>
+          <Button onClick={handleCreate}>
             <Plus className="mr-2 h-4 w-4" />
             Create User
           </Button>
@@ -104,7 +326,7 @@ const UsersAdmin = () => {
                 </CardHeader>
                 <CardContent>
                   <div className="flex gap-2">
-                    <Button variant="outline" size="sm" className="flex-1">
+                    <Button variant="outline" size="sm" className="flex-1" onClick={() => handleEdit(user)}>
                       <Edit className="h-4 w-4 mr-2" />
                       Edit
                     </Button>
@@ -118,6 +340,15 @@ const UsersAdmin = () => {
             ))}
           </div>
         )}
+
+        {/* User Form */}
+        <UserForm
+          isOpen={isFormOpen}
+          onClose={() => setIsFormOpen(false)}
+          mode={formMode}
+          data={editingUser}
+          onSave={handleSave}
+        />
       </div>
     </AdminLayout>
   );

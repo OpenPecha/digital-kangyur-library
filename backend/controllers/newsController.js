@@ -1,8 +1,9 @@
-const { db, findById, create, update, remove } = require('../models/mockDatabase');
+const { newsService } = require('../prisma/database');
 const { AppError } = require('../utils/errors');
 const { paginate, parsePaginationParams } = require('../utils/pagination');
+const { normalizeDateTime } = require('../utils/dateTime');
 
-const getNews = (req, res, next) => {
+const getNews = async (req, res, next) => {
   try {
     const { page, limit } = parsePaginationParams(req);
     const {
@@ -11,20 +12,34 @@ const getNews = (req, res, next) => {
       order = 'desc',
     } = req.query;
 
-    let news = db.news.filter(n => n.is_published);
+    const skip = (page - 1) * limit;
+    const take = Math.min(limit, 50);
+    
+    const orderBy = {};
+    if (sort === 'published_at') {
+      orderBy.published_at = order;
+    } else if (sort === 'created_at') {
+      orderBy.created_at = order;
+    }
 
-    // Sort
-    news.sort((a, b) => {
-      const aVal = a[sort] || new Date(0);
-      const bVal = b[sort] || new Date(0);
-      return order === 'desc'
-        ? new Date(bVal) - new Date(aVal)
-        : new Date(aVal) - new Date(bVal);
+    const news = await newsService.findAll({
+      is_published: true,
+      skip,
+      take,
+      orderBy
     });
 
-    const { items, pagination } = paginate(news, page, Math.min(limit, 50));
+    const total = await newsService.count({ is_published: true });
+    const pagination = {
+      page,
+      limit: take,
+      total,
+      total_pages: Math.ceil(total / take),
+      has_next: page * take < total,
+      has_prev: page > 1
+    };
 
-    const formattedNews = items.map(item => ({
+    const formattedNews = news.map(item => ({
       id: item.id,
       title: {
         tibetan: item.tibetan_title,
@@ -48,12 +63,12 @@ const getNews = (req, res, next) => {
   }
 };
 
-const getNewsById = (req, res, next) => {
+const getNewsById = async (req, res, next) => {
   try {
     const { id } = req.params;
     const { lang = 'en' } = req.query;
 
-    const newsItem = findById(db.news, id);
+    const newsItem = await newsService.findById(id);
     if (!newsItem || !newsItem.is_published) {
       throw new AppError('RESOURCE_NOT_FOUND', 'News not found or not published', 404);
     }
@@ -78,7 +93,7 @@ const getNewsById = (req, res, next) => {
   }
 };
 
-const createNews = (req, res, next) => {
+const createNews = async (req, res, next) => {
   try {
     const {
       tibetan_title,
@@ -94,14 +109,20 @@ const createNews = (req, res, next) => {
       throw new AppError('VALIDATION_ERROR', 'All title and description fields are required', 400);
     }
 
-    const newsItem = create(db.news, {
+    // Normalize published_at DateTime
+    let normalizedPublishedAt = null;
+    if (is_published) {
+      normalizedPublishedAt = normalizeDateTime(published_at) || new Date();
+    }
+
+    const newsItem = await newsService.create({
       tibetan_title,
       english_title,
       tibetan_description,
       english_description,
       thumbnail_url,
       is_published,
-      published_at: is_published ? (published_at || new Date().toISOString()) : null,
+      published_at: normalizedPublishedAt,
     });
 
     res.status(201).json({
@@ -113,10 +134,10 @@ const createNews = (req, res, next) => {
   }
 };
 
-const updateNews = (req, res, next) => {
+const updateNews = async (req, res, next) => {
   try {
     const { id } = req.params;
-    const newsItem = findById(db.news, id);
+    const newsItem = await newsService.findById(id);
 
     if (!newsItem) {
       throw new AppError('RESOURCE_NOT_FOUND', 'News not found', 404);
@@ -141,12 +162,15 @@ const updateNews = (req, res, next) => {
     if (is_published !== undefined) {
       updateData.is_published = is_published;
       if (is_published && !newsItem.published_at) {
-        updateData.published_at = published_at || new Date().toISOString();
+        updateData.published_at = normalizeDateTime(published_at) || new Date();
       }
     }
-    if (published_at !== undefined) updateData.published_at = published_at;
+    if (published_at !== undefined) {
+      // Normalize DateTime: empty strings become null, valid strings become Date objects
+      updateData.published_at = normalizeDateTime(published_at);
+    }
 
-    const updated = update(db.news, id, updateData);
+    const updated = await newsService.update(id, updateData);
 
     res.json({
       id: updated.id,
@@ -157,16 +181,16 @@ const updateNews = (req, res, next) => {
   }
 };
 
-const deleteNews = (req, res, next) => {
+const deleteNews = async (req, res, next) => {
   try {
     const { id } = req.params;
-    const newsItem = findById(db.news, id);
+    const newsItem = await newsService.findById(id);
 
     if (!newsItem) {
       throw new AppError('RESOURCE_NOT_FOUND', 'News not found', 404);
     }
 
-    remove(db.news, id);
+    await newsService.delete(id);
 
     res.json({
       message: 'News deleted successfully',

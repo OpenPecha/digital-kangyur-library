@@ -1,5 +1,5 @@
 const bcrypt = require('bcryptjs');
-const { db, findById } = require('../models/mockDatabase');
+const { userService } = require('../prisma/database');
 const { generateToken, generateRefreshToken, verifyToken } = require('../utils/jwt');
 const { AppError } = require('../utils/errors');
 
@@ -14,9 +14,7 @@ const login = async (req, res, next) => {
     }
 
     // Find user by username or email
-    const user = db.users.find(u => 
-      (u.username === loginIdentifier || u.email === loginIdentifier) && u.is_active
-    );
+    const user = await userService.findByUsernameOrEmail(loginIdentifier);
     if (!user) {
       throw new AppError('AUTHENTICATION_REQUIRED', 'Invalid credentials', 401);
     }
@@ -71,7 +69,7 @@ const refresh = async (req, res, next) => {
       throw new AppError('AUTHENTICATION_REQUIRED', 'Invalid refresh token', 401);
     }
 
-    const user = findById(db.users, decoded.sub);
+    const user = await userService.findById(decoded.sub);
     if (!user || !user.is_active) {
       throw new AppError('AUTHENTICATION_REQUIRED', 'User not found or inactive', 401);
     }
@@ -88,8 +86,71 @@ const refresh = async (req, res, next) => {
   }
 };
 
+const register = async (req, res, next) => {
+  try {
+    const { username, email, password } = req.body;
+
+    if (!username || !email || !password) {
+      throw new AppError('VALIDATION_ERROR', 'Username, email, and password are required', 400);
+    }
+
+    // Password validation
+    if (password.length < 6) {
+      throw new AppError('VALIDATION_ERROR', 'Password must be at least 6 characters long', 400);
+    }
+
+    // Email validation
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+      throw new AppError('VALIDATION_ERROR', 'Invalid email format', 400);
+    }
+
+    // Check if username or email already exists
+    const existingUser = await userService.findByUsernameOrEmail(username);
+    if (existingUser) {
+      throw new AppError('DUPLICATE_RESOURCE', 'Username already exists', 409);
+    }
+
+    const existingEmail = await userService.findByEmail(email);
+    if (existingEmail) {
+      throw new AppError('DUPLICATE_RESOURCE', 'Email already exists', 409);
+    }
+
+    const password_hash = await bcrypt.hash(password, 10);
+
+    // Default role is 'viewer' (not admin) for public registration
+    const user = await userService.create({
+      username,
+      email,
+      password_hash,
+      role: 'viewer',
+      is_active: true,
+    });
+
+    // Automatically log in the newly registered user
+    const access_token = generateToken(user);
+    const refresh_token = generateRefreshToken(user);
+
+    res.status(201).json({
+      access_token,
+      refresh_token,
+      token_type: 'Bearer',
+      expires_in: 3600,
+      user: {
+        id: user.id,
+        username: user.username,
+        email: user.email,
+        role: user.role,
+      },
+    });
+  } catch (error) {
+    next(error);
+  }
+};
+
 module.exports = {
   login,
   logout,
   refresh,
+  register,
 };

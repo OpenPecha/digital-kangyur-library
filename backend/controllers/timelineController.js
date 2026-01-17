@@ -1,11 +1,13 @@
-const { db, findById, create, update, remove } = require('../models/mockDatabase');
+const { timelinePeriodService, timelineEventService, prisma } = require('../prisma/database');
 const { AppError } = require('../utils/errors');
 
-const getTimelinePeriods = (req, res, next) => {
+const getTimelinePeriods = async (req, res, next) => {
   try {
     const { lang = 'en', include_events = 'false' } = req.query;
 
-    const periods = db.timelinePeriods.map(period => {
+    const periods = await timelinePeriodService.findAll();
+
+    const formattedPeriods = periods.map(period => {
       const result = {
         id: period.id,
         id_slug: period.id_slug,
@@ -18,33 +20,31 @@ const getTimelinePeriods = (req, res, next) => {
         end_year: period.end_year,
       };
 
-      if (include_events === 'true') {
-        result.events = db.timelineEvents
-          .filter(event => event.period_id === period.id)
-          .map(event => ({
-            id: event.id,
-            title: {
-              tibetan: event.title_tibetan,
-              english: event.title_english,
-              sanskrit: event.title_sanskrit,
-            },
-            year: event.year,
-            category: event.category,
-          }));
+      if (include_events === 'true' && period.events) {
+        result.events = period.events.map(event => ({
+          id: event.id,
+          title: {
+            tibetan: event.title_tibetan,
+            english: event.title_english,
+            sanskrit: event.title_sanskrit,
+          },
+          year: event.year,
+          category: event.category,
+        }));
       }
 
       return result;
     });
 
     res.json({
-      periods,
+      periods: formattedPeriods,
     });
   } catch (error) {
     next(error);
   }
 };
 
-const getTimelineEvents = (req, res, next) => {
+const getTimelineEvents = async (req, res, next) => {
   try {
     const {
       period_id,
@@ -60,30 +60,25 @@ const getTimelineEvents = (req, res, next) => {
       order = 'asc',
     } = req.query;
 
-    let events = [...db.timelineEvents];
+    const events = await timelineEventService.findAll({ period_id });
 
-    if (period_id) {
-      events = events.filter(e => e.period_id === period_id);
-    }
-
+    // Apply filters
+    let filteredEvents = events;
     if (category) {
-      events = events.filter(e => e.category === category);
+      filteredEvents = filteredEvents.filter(e => e.category === category);
     }
-
     if (significance) {
-      events = events.filter(e => e.significance === significance);
+      filteredEvents = filteredEvents.filter(e => e.significance === significance);
     }
-
     if (year_from) {
-      events = events.filter(e => e.year >= parseInt(year_from, 10));
+      filteredEvents = filteredEvents.filter(e => e.year >= parseInt(year_from, 10));
     }
-
     if (year_to) {
-      events = events.filter(e => e.year <= parseInt(year_to, 10));
+      filteredEvents = filteredEvents.filter(e => e.year <= parseInt(year_to, 10));
     }
 
     // Sort
-    events.sort((a, b) => {
+    filteredEvents.sort((a, b) => {
       let aVal = a[sort] || 0;
       let bVal = b[sort] || 0;
 
@@ -96,7 +91,7 @@ const getTimelineEvents = (req, res, next) => {
       return order === 'desc' ? bVal - aVal : aVal - bVal;
     });
 
-    const formattedEvents = events.map(event => {
+    const formattedEvents = await Promise.all(filteredEvents.map(async (event) => {
       const result = {
         id: event.id,
         period_id: event.period_id,
@@ -125,43 +120,43 @@ const getTimelineEvents = (req, res, next) => {
       };
 
       if (include_figures === 'true') {
-        result.figures = db.timelineEventFigures
-          .filter(f => f.event_id === event.id)
-          .sort((a, b) => a.order_index - b.order_index)
-          .map(f => ({
+        const eventWithRelations = await timelineEventService.findById(event.id);
+        if (eventWithRelations && eventWithRelations.figures) {
+          result.figures = eventWithRelations.figures.map(f => ({
             id: f.id,
             name: {
               tibetan: f.name_tibetan,
               english: f.name_english,
             },
             role: f.role,
-            order_index: f.order_index,
           }));
+        }
       }
 
       if (include_sources === 'true') {
-        result.sources = db.timelineEventSources
-          .filter(s => s.event_id === event.id)
-          .sort((a, b) => a.order_index - b.order_index)
-          .map(s => ({
+        const eventWithRelations = await timelineEventService.findById(event.id);
+        if (eventWithRelations && eventWithRelations.sources) {
+          result.sources = eventWithRelations.sources.map(s => ({
             id: s.id,
-            source_text: s.source_text,
+            source_title: s.source_title,
             source_url: s.source_url,
-            order_index: s.order_index,
+            citation: s.citation,
           }));
+        }
       }
 
       if (include_relations === 'true') {
-        result.related_events = db.timelineEventRelations
-          .filter(r => r.event_id === event.id)
-          .map(r => ({
+        const eventWithRelations = await timelineEventService.findById(event.id);
+        if (eventWithRelations && eventWithRelations.relations) {
+          result.related_events = eventWithRelations.relations.map(r => ({
             event_id: r.related_event_id,
             relation_type: r.relation_type,
           }));
+        }
       }
 
       return result;
-    });
+    }));
 
     res.json({
       events: formattedEvents,
@@ -171,7 +166,7 @@ const getTimelineEvents = (req, res, next) => {
   }
 };
 
-const getTimelineEventById = (req, res, next) => {
+const getTimelineEventById = async (req, res, next) => {
   try {
     const { id } = req.params;
     const {
@@ -181,7 +176,7 @@ const getTimelineEventById = (req, res, next) => {
       include_relations = 'true',
     } = req.query;
 
-    const event = findById(db.timelineEvents, id);
+    const event = await timelineEventService.findById(id);
     if (!event) {
       throw new AppError('RESOURCE_NOT_FOUND', 'Event not found', 404);
     }
@@ -208,46 +203,25 @@ const getTimelineEventById = (req, res, next) => {
         english: event.location_english,
       },
       significance: event.significance,
-      figures: [],
-      sources: [],
-      related_events: [],
+      figures: include_figures === 'true' && event.figures ? event.figures.map(f => ({
+        id: f.id,
+        name: {
+          tibetan: f.name_tibetan,
+          english: f.name_english,
+        },
+        role: f.role,
+      })) : [],
+      sources: include_sources === 'true' && event.sources ? event.sources.map(s => ({
+        id: s.id,
+        source_title: s.source_title,
+        source_url: s.source_url,
+        citation: s.citation,
+      })) : [],
+      related_events: include_relations === 'true' && event.relations ? event.relations.map(r => ({
+        event_id: r.related_event_id,
+        relation_type: r.relation_type,
+      })) : [],
     };
-
-    if (include_figures === 'true') {
-      result.figures = db.timelineEventFigures
-        .filter(f => f.event_id === id)
-        .sort((a, b) => a.order_index - b.order_index)
-        .map(f => ({
-          id: f.id,
-          name: {
-            tibetan: f.name_tibetan,
-            english: f.name_english,
-          },
-          role: f.role,
-          order_index: f.order_index,
-        }));
-    }
-
-    if (include_sources === 'true') {
-      result.sources = db.timelineEventSources
-        .filter(s => s.event_id === id)
-        .sort((a, b) => a.order_index - b.order_index)
-        .map(s => ({
-          id: s.id,
-          source_text: s.source_text,
-          source_url: s.source_url,
-          order_index: s.order_index,
-        }));
-    }
-
-    if (include_relations === 'true') {
-      result.related_events = db.timelineEventRelations
-        .filter(r => r.event_id === id)
-        .map(r => ({
-          event_id: r.related_event_id,
-          relation_type: r.relation_type,
-        }));
-    }
 
     res.json(result);
   } catch (error) {
@@ -255,7 +229,7 @@ const getTimelineEventById = (req, res, next) => {
   }
 };
 
-const createTimelineEvent = (req, res, next) => {
+const createTimelineEvent = async (req, res, next) => {
   try {
     const {
       period_id,
@@ -277,15 +251,18 @@ const createTimelineEvent = (req, res, next) => {
       sources = [],
     } = req.body;
 
-    if (!title_tibetan || !title_english || !description_english || !category || !year || !significance) {
+    if (!title_english || !description_english || !category || !year || !significance) {
       throw new AppError('VALIDATION_ERROR', 'Required fields missing', 400);
     }
 
-    if (period_id && !findById(db.timelinePeriods, period_id)) {
-      throw new AppError('RESOURCE_NOT_FOUND', 'Period not found', 404);
+    if (period_id) {
+      const period = await timelinePeriodService.findById(period_id);
+      if (!period) {
+        throw new AppError('RESOURCE_NOT_FOUND', 'Period not found', 404);
+      }
     }
 
-    const event = create(db.timelineEvents, {
+    const event = await timelineEventService.create({
       period_id: period_id || null,
       title_tibetan,
       title_english,
@@ -295,7 +272,7 @@ const createTimelineEvent = (req, res, next) => {
       category,
       year,
       century,
-      era,
+      era: era || 'CE',
       is_approximate,
       location_tibetan,
       location_english,
@@ -304,25 +281,28 @@ const createTimelineEvent = (req, res, next) => {
     });
 
     // Create figures
-    figures.forEach((figure, idx) => {
-      create(db.timelineEventFigures, {
-        event_id: event.id,
-        name_tibetan: figure.name_tibetan,
-        name_english: figure.name_english,
-        role: figure.role,
-        order_index: figure.order_index !== undefined ? figure.order_index : idx,
+    for (const figure of figures) {
+      await prisma.timelineEventFigure.create({
+        data: {
+          event_id: event.id,
+          name_tibetan: figure.name_tibetan,
+          name_english: figure.name_english,
+          role: figure.role,
+        }
       });
-    });
+    }
 
     // Create sources
-    sources.forEach((source, idx) => {
-      create(db.timelineEventSources, {
-        event_id: event.id,
-        source_text: source.source_text,
-        source_url: source.source_url,
-        order_index: source.order_index !== undefined ? source.order_index : idx,
+    for (const source of sources) {
+      await prisma.timelineEventSource.create({
+        data: {
+          event_id: event.id,
+          source_title: source.source_title,
+          source_url: source.source_url,
+          citation: source.citation,
+        }
       });
-    });
+    }
 
     res.status(201).json({
       id: event.id,
@@ -333,10 +313,10 @@ const createTimelineEvent = (req, res, next) => {
   }
 };
 
-const updateTimelineEvent = (req, res, next) => {
+const updateTimelineEvent = async (req, res, next) => {
   try {
     const { id } = req.params;
-    const event = findById(db.timelineEvents, id);
+    const event = await timelineEventService.findById(id);
 
     if (!event) {
       throw new AppError('RESOURCE_NOT_FOUND', 'Event not found', 404);
@@ -356,7 +336,7 @@ const updateTimelineEvent = (req, res, next) => {
       }
     });
 
-    const updated = update(db.timelineEvents, id, updateData);
+    const updated = await timelineEventService.update(id, updateData);
 
     res.json({
       id: updated.id,
@@ -367,23 +347,17 @@ const updateTimelineEvent = (req, res, next) => {
   }
 };
 
-const deleteTimelineEvent = (req, res, next) => {
+const deleteTimelineEvent = async (req, res, next) => {
   try {
     const { id } = req.params;
-    const event = findById(db.timelineEvents, id);
+    const event = await timelineEventService.findById(id);
 
     if (!event) {
       throw new AppError('RESOURCE_NOT_FOUND', 'Event not found', 404);
     }
 
-    // Delete related data
-    db.timelineEventFigures = db.timelineEventFigures.filter(f => f.event_id !== id);
-    db.timelineEventSources = db.timelineEventSources.filter(s => s.event_id !== id);
-    db.timelineEventRelations = db.timelineEventRelations.filter(
-      r => r.event_id !== id || r.related_event_id !== id
-    );
-
-    remove(db.timelineEvents, id);
+    // Prisma will handle cascade deletes
+    await timelineEventService.delete(id);
 
     res.json({
       message: 'Event deleted successfully',

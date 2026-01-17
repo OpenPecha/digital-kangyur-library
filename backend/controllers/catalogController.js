@@ -1,4 +1,4 @@
-const { db, findById, findBySlug, create, update, remove, filter } = require('../models/mockDatabase');
+const { catalogCategoryService, textService } = require('../prisma/database');
 const { AppError } = require('../utils/errors');
 
 const buildCategoryTree = (categories, parentId = null) => {
@@ -19,15 +19,12 @@ const buildCategoryTree = (categories, parentId = null) => {
     }));
 };
 
-const getCatalog = (req, res, next) => {
+const getCatalog = async (req, res, next) => {
   try {
     const { lang = 'en', include_counts = 'true', active_only = 'true' } = req.query;
     
-    let categories = [...db.catalogCategories];
-    
-    if (active_only === 'true') {
-      categories = categories.filter(cat => cat.is_active);
-    }
+    const isActiveFilter = active_only === 'true';
+    const categories = await catalogCategoryService.findAll({ is_active: isActiveFilter });
 
     const categoryTree = buildCategoryTree(categories);
     
@@ -39,12 +36,12 @@ const getCatalog = (req, res, next) => {
   }
 };
 
-const getCategoryBySlug = (req, res, next) => {
+const getCategoryBySlug = async (req, res, next) => {
   try {
     const { id_slug } = req.params;
     const { lang = 'en', include_children = 'true', include_texts = 'false' } = req.query;
 
-    const category = findBySlug(db.catalogCategories, id_slug);
+    const category = await catalogCategoryService.findBySlug(id_slug);
     if (!category || (!category.is_active && req.query.active_only !== 'false')) {
       throw new AppError('RESOURCE_NOT_FOUND', 'Category not found', 404);
     }
@@ -65,21 +62,19 @@ const getCategoryBySlug = (req, res, next) => {
     };
 
     if (include_children === 'true') {
-      result.children = buildCategoryTree(db.catalogCategories, category.id);
+      const allCategories = await catalogCategoryService.findAll({ is_active: undefined });
+      result.children = buildCategoryTree(allCategories, category.id);
     }
 
     if (include_texts === 'true') {
-      result.texts = db.texts
-        .filter(text => text.category_id === category.id)
-        .map(text => ({
-          id: text.id,
-          title: {
-            tibetan: text.tibetan_title,
-            english: text.english_title,
-            sanskrit: text.sanskrit_title,
-            chinese: text.chinese_title,
-          },
-        }));
+      const texts = await textService.findAll({ category_id: category.id });
+      result.texts = texts.items.map(text => ({
+        id: text.id,
+        title: {
+          tibetan: text.id_slug, // Note: schema uses id_slug
+          english: text.id_slug,
+        },
+      }));
     }
 
     res.json(result);
@@ -88,7 +83,7 @@ const getCategoryBySlug = (req, res, next) => {
   }
 };
 
-const createCategory = (req, res, next) => {
+const createCategory = async (req, res, next) => {
   try {
     const {
       parent_id,
@@ -105,16 +100,20 @@ const createCategory = (req, res, next) => {
     }
 
     // Check if slug already exists
-    if (findBySlug(db.catalogCategories, id_slug)) {
+    const existing = await catalogCategoryService.findBySlug(id_slug);
+    if (existing) {
       throw new AppError('DUPLICATE_RESOURCE', 'Category slug already exists', 409);
     }
 
     // Validate parent exists if provided
-    if (parent_id && !findById(db.catalogCategories, parent_id)) {
-      throw new AppError('INVALID_CATEGORY', 'Parent category not found', 400);
+    if (parent_id) {
+      const parent = await catalogCategoryService.findById(parent_id);
+      if (!parent) {
+        throw new AppError('INVALID_CATEGORY', 'Parent category not found', 400);
+      }
     }
 
-    const category = create(db.catalogCategories, {
+    const category = await catalogCategoryService.create({
       parent_id: parent_id || null,
       id_slug,
       title_tibetan,
@@ -141,10 +140,10 @@ const createCategory = (req, res, next) => {
   }
 };
 
-const updateCategory = (req, res, next) => {
+const updateCategory = async (req, res, next) => {
   try {
     const { id } = req.params;
-    const category = findById(db.catalogCategories, id);
+    const category = await catalogCategoryService.findById(id);
 
     if (!category) {
       throw new AppError('RESOURCE_NOT_FOUND', 'Category not found', 404);
@@ -165,7 +164,7 @@ const updateCategory = (req, res, next) => {
     if (order_index !== undefined) updateData.order_index = order_index;
     if (is_active !== undefined) updateData.is_active = is_active;
 
-    const updated = update(db.catalogCategories, id, updateData);
+    const updated = await catalogCategoryService.update(id, updateData);
 
     res.json({
       id: updated.id,
@@ -176,28 +175,28 @@ const updateCategory = (req, res, next) => {
   }
 };
 
-const deleteCategory = (req, res, next) => {
+const deleteCategory = async (req, res, next) => {
   try {
     const { id } = req.params;
-    const category = findById(db.catalogCategories, id);
+    const category = await catalogCategoryService.findById(id);
 
     if (!category) {
       throw new AppError('RESOURCE_NOT_FOUND', 'Category not found', 404);
     }
 
     // Check if category has children
-    const hasChildren = db.catalogCategories.some(cat => cat.parent_id === id);
+    const hasChildren = await catalogCategoryService.hasChildren(id);
     if (hasChildren) {
       throw new AppError('DUPLICATE_RESOURCE', 'Category has children', 409);
     }
 
     // Check if category has texts
-    const hasTexts = db.texts.some(text => text.category_id === id);
+    const hasTexts = await catalogCategoryService.hasTexts(id);
     if (hasTexts) {
       throw new AppError('DUPLICATE_RESOURCE', 'Category has texts', 409);
     }
 
-    remove(db.catalogCategories, id);
+    await catalogCategoryService.delete(id);
 
     res.json({
       message: 'Category deleted successfully',

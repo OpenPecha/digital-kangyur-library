@@ -1,55 +1,59 @@
-const { db, findById, create, update, remove } = require('../models/mockDatabase');
+const { audioRecordingService } = require('../prisma/database');
 const { AppError } = require('../utils/errors');
 const { paginate, parsePaginationParams } = require('../utils/pagination');
 
-const getAudio = (req, res, next) => {
+const getAudio = async (req, res, next) => {
   try {
     const { page, limit } = parsePaginationParams(req);
     const {
-      text_id,
-      category_id,
       search,
       lang = 'en',
       is_active = 'true',
     } = req.query;
 
-    let recordings = [...db.audioRecordings];
+    const skip = (page - 1) * limit;
+    const take = limit;
+    const isActiveFilter = is_active === 'true';
 
-    if (is_active === 'true') {
-      recordings = recordings.filter(r => r.is_active);
-    }
+    const recordings = await audioRecordingService.findAll({
+      is_active: isActiveFilter,
+      skip,
+      take
+    });
 
-    if (text_id) {
-      recordings = recordings.filter(r => r.text_id === text_id);
-    }
+    const total = await audioRecordingService.count({ is_active: isActiveFilter });
+    const pagination = {
+      page,
+      limit,
+      total,
+      total_pages: Math.ceil(total / limit),
+      has_next: page * limit < total,
+      has_prev: page > 1
+    };
 
-    if (category_id) {
-      recordings = recordings.filter(r => r.parent_category_id === category_id);
-    }
-
+    // Filter by search if provided
+    let filteredRecordings = recordings;
     if (search) {
       const searchLower = search.toLowerCase();
-      recordings = recordings.filter(r =>
+      filteredRecordings = recordings.filter(r =>
         r.tibetan_title?.toLowerCase().includes(searchLower) ||
         r.english_title?.toLowerCase().includes(searchLower)
       );
     }
 
-    const { items, pagination } = paginate(recordings, page, limit);
-
-    const formattedRecordings = items.map(recording => ({
+    const formattedRecordings = filteredRecordings.map(recording => ({
       id: recording.id,
-      text_id: recording.text_id,
       title: {
         tibetan: recording.tibetan_title,
         english: recording.english_title,
-        indian: recording.indian_title,
-        chinese: recording.chinese_title,
+      },
+      description: {
+        tibetan: recording.tibetan_description,
+        english: recording.english_description,
       },
       audio_url: recording.audio_url,
-      duration_seconds: recording.duration_seconds,
-      file_size_bytes: recording.file_size_bytes,
-      mime_type: recording.mime_type,
+      thumbnail_url: recording.thumbnail_url,
+      duration: recording.duration,
       is_active: recording.is_active,
       created_at: recording.created_at,
     }));
@@ -63,31 +67,29 @@ const getAudio = (req, res, next) => {
   }
 };
 
-const getAudioById = (req, res, next) => {
+const getAudioById = async (req, res, next) => {
   try {
     const { id } = req.params;
     const { lang = 'en' } = req.query;
 
-    const recording = findById(db.audioRecordings, id);
+    const recording = await audioRecordingService.findById(id);
     if (!recording) {
       throw new AppError('RESOURCE_NOT_FOUND', 'Audio recording not found', 404);
     }
 
     res.json({
       id: recording.id,
-      text_id: recording.text_id,
       title: {
         tibetan: recording.tibetan_title,
         english: recording.english_title,
-        indian: recording.indian_title,
-        chinese: recording.chinese_title,
       },
-      text_category: recording.text_category,
-      parent_category_id: recording.parent_category_id,
+      description: {
+        tibetan: recording.tibetan_description,
+        english: recording.english_description,
+      },
       audio_url: recording.audio_url,
-      duration_seconds: recording.duration_seconds,
-      file_size_bytes: recording.file_size_bytes,
-      mime_type: recording.mime_type,
+      thumbnail_url: recording.thumbnail_url,
+      duration: recording.duration,
       is_active: recording.is_active,
       created_at: recording.created_at,
       updated_at: recording.updated_at,
@@ -97,20 +99,16 @@ const getAudioById = (req, res, next) => {
   }
 };
 
-const createAudio = (req, res, next) => {
+const createAudio = async (req, res, next) => {
   try {
     const {
-      text_id,
-      indian_title,
-      chinese_title,
       tibetan_title,
       english_title,
-      text_category,
-      parent_category_id,
+      tibetan_description,
+      english_description,
       audio_url,
-      duration_seconds,
-      file_size_bytes,
-      mime_type,
+      thumbnail_url,
+      duration,
       is_active = true,
     } = req.body;
 
@@ -118,26 +116,14 @@ const createAudio = (req, res, next) => {
       throw new AppError('VALIDATION_ERROR', 'tibetan_title, english_title, and audio_url are required', 400);
     }
 
-    if (text_id && !findById(db.texts, text_id)) {
-      throw new AppError('RESOURCE_NOT_FOUND', 'Text not found', 404);
-    }
-
-    if (parent_category_id && !findById(db.catalogCategories, parent_category_id)) {
-      throw new AppError('RESOURCE_NOT_FOUND', 'Category not found', 404);
-    }
-
-    const recording = create(db.audioRecordings, {
-      text_id: text_id || null,
-      indian_title,
-      chinese_title,
+    const recording = await audioRecordingService.create({
       tibetan_title,
       english_title,
-      text_category,
-      parent_category_id: parent_category_id || null,
+      tibetan_description: tibetan_description || null,
+      english_description: english_description || null,
       audio_url,
-      duration_seconds,
-      file_size_bytes,
-      mime_type,
+      thumbnail_url: thumbnail_url || null,
+      duration: duration || null,
       is_active,
     });
 
@@ -150,10 +136,10 @@ const createAudio = (req, res, next) => {
   }
 };
 
-const updateAudio = (req, res, next) => {
+const updateAudio = async (req, res, next) => {
   try {
     const { id } = req.params;
-    const recording = findById(db.audioRecordings, id);
+    const recording = await audioRecordingService.findById(id);
 
     if (!recording) {
       throw new AppError('RESOURCE_NOT_FOUND', 'Audio recording not found', 404);
@@ -161,9 +147,8 @@ const updateAudio = (req, res, next) => {
 
     const updateData = {};
     const fields = [
-      'text_id', 'indian_title', 'chinese_title', 'tibetan_title', 'english_title',
-      'text_category', 'parent_category_id', 'audio_url', 'duration_seconds',
-      'file_size_bytes', 'mime_type', 'is_active',
+      'tibetan_title', 'english_title', 'tibetan_description', 'english_description',
+      'audio_url', 'thumbnail_url', 'duration', 'is_active',
     ];
 
     fields.forEach(field => {
@@ -172,7 +157,7 @@ const updateAudio = (req, res, next) => {
       }
     });
 
-    const updated = update(db.audioRecordings, id, updateData);
+    const updated = await audioRecordingService.update(id, updateData);
 
     res.json({
       id: updated.id,
@@ -183,16 +168,16 @@ const updateAudio = (req, res, next) => {
   }
 };
 
-const deleteAudio = (req, res, next) => {
+const deleteAudio = async (req, res, next) => {
   try {
     const { id } = req.params;
-    const recording = findById(db.audioRecordings, id);
+    const recording = await audioRecordingService.findById(id);
 
     if (!recording) {
       throw new AppError('RESOURCE_NOT_FOUND', 'Audio recording not found', 404);
     }
 
-    remove(db.audioRecordings, id);
+    await audioRecordingService.delete(id);
 
     res.json({
       message: 'Audio recording deleted successfully',

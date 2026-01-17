@@ -3,7 +3,7 @@ const cors = require('cors');
 const swaggerUi = require('swagger-ui-express');
 const swaggerSpec = require('./config/swagger');
 const config = require('./config');
-const { initializeDatabase } = require('./models/mockDatabase');
+// Database initialization is handled by Prisma
 const { errorHandler, notFoundHandler } = require('./utils/errors');
 
 // Import routes
@@ -65,12 +65,9 @@ app.get('/', (req, res) => {
 app.use(notFoundHandler);
 app.use(errorHandler);
 
-// Initialize database and start server
+// Start server
 const startServer = async () => {
   try {
-    await initializeDatabase();
-    console.log('Mock database initialized');
-
     app.listen(config.port, () => {
       console.log(`Server is running on port ${config.port}`);
       console.log(`API Documentation: http://localhost:${config.port}/api-docs`);

@@ -1,8 +1,8 @@
-const { db, findById, create, update, remove } = require('../models/mockDatabase');
+const { videoService } = require('../prisma/database');
 const { AppError } = require('../utils/errors');
 const { paginate, parsePaginationParams } = require('../utils/pagination');
 
-const getVideos = (req, res, next) => {
+const getVideos = async (req, res, next) => {
   try {
     const { page, limit } = parsePaginationParams(req);
     const {
@@ -11,15 +11,31 @@ const getVideos = (req, res, next) => {
       is_active = 'true',
     } = req.query;
 
-    let videos = [...db.videos];
+    const skip = (page - 1) * limit;
+    const take = limit;
+    const isActiveFilter = is_active === 'true';
 
-    if (is_active === 'true') {
-      videos = videos.filter(v => v.is_active);
-    }
+    const videos = await videoService.findAll({
+      is_active: isActiveFilter,
+      skip,
+      take
+    });
 
+    const total = await videoService.count({ is_active: isActiveFilter });
+    const pagination = {
+      page,
+      limit,
+      total,
+      total_pages: Math.ceil(total / limit),
+      has_next: page * limit < total,
+      has_prev: page > 1
+    };
+
+    // Filter by search if provided
+    let filteredVideos = videos;
     if (search) {
       const searchLower = search.toLowerCase();
-      videos = videos.filter(v =>
+      filteredVideos = videos.filter(v =>
         v.tibetan_title?.toLowerCase().includes(searchLower) ||
         v.english_title?.toLowerCase().includes(searchLower) ||
         v.tibetan_description?.toLowerCase().includes(searchLower) ||
@@ -27,9 +43,7 @@ const getVideos = (req, res, next) => {
       );
     }
 
-    const { items, pagination } = paginate(videos, page, limit);
-
-    const formattedVideos = items.map(video => ({
+    const formattedVideos = filteredVideos.map(video => ({
       id: video.id,
       title: {
         tibetan: video.tibetan_title,
@@ -54,12 +68,12 @@ const getVideos = (req, res, next) => {
   }
 };
 
-const getVideoById = (req, res, next) => {
+const getVideoById = async (req, res, next) => {
   try {
     const { id } = req.params;
     const { lang = 'en' } = req.query;
 
-    const video = findById(db.videos, id);
+    const video = await videoService.findById(id);
     if (!video) {
       throw new AppError('RESOURCE_NOT_FOUND', 'Video not found', 404);
     }
@@ -85,7 +99,7 @@ const getVideoById = (req, res, next) => {
   }
 };
 
-const createVideo = (req, res, next) => {
+const createVideo = async (req, res, next) => {
   try {
     const {
       tibetan_title,
@@ -101,7 +115,7 @@ const createVideo = (req, res, next) => {
       throw new AppError('VALIDATION_ERROR', 'tibetan_title, english_title, and video_link are required', 400);
     }
 
-    const video = create(db.videos, {
+    const video = await videoService.create({
       tibetan_title,
       english_title,
       tibetan_description: tibetan_description || '',
@@ -120,10 +134,10 @@ const createVideo = (req, res, next) => {
   }
 };
 
-const updateVideo = (req, res, next) => {
+const updateVideo = async (req, res, next) => {
   try {
     const { id } = req.params;
-    const video = findById(db.videos, id);
+    const video = await videoService.findById(id);
 
     if (!video) {
       throw new AppError('RESOURCE_NOT_FOUND', 'Video not found', 404);
@@ -141,7 +155,7 @@ const updateVideo = (req, res, next) => {
       }
     });
 
-    const updated = update(db.videos, id, updateData);
+    const updated = await videoService.update(id, updateData);
 
     res.json({
       id: updated.id,
@@ -152,16 +166,16 @@ const updateVideo = (req, res, next) => {
   }
 };
 
-const deleteVideo = (req, res, next) => {
+const deleteVideo = async (req, res, next) => {
   try {
     const { id } = req.params;
-    const video = findById(db.videos, id);
+    const video = await videoService.findById(id);
 
     if (!video) {
       throw new AppError('RESOURCE_NOT_FOUND', 'Video not found', 404);
     }
 
-    remove(db.videos, id);
+    await videoService.delete(id);
 
     res.json({
       message: 'Video deleted successfully',

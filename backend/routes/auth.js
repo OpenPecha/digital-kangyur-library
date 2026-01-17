@@ -70,6 +70,76 @@ router.post('/login', authController.login);
 
 /**
  * @swagger
+ * /auth/register:
+ *   post:
+ *     summary: Register a new user
+ *     tags: [Authentication]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             required:
+ *               - username
+ *               - email
+ *               - password
+ *             properties:
+ *               username:
+ *                 type: string
+ *               email:
+ *                 type: string
+ *               password:
+ *                 type: string
+ *                 format: password
+ *                 minLength: 6
+ *     responses:
+ *       201:
+ *         description: User registered successfully and logged in
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 access_token:
+ *                   type: string
+ *                 refresh_token:
+ *                   type: string
+ *                 token_type:
+ *                   type: string
+ *                   example: Bearer
+ *                 expires_in:
+ *                   type: integer
+ *                   example: 3600
+ *                 user:
+ *                   type: object
+ *                   properties:
+ *                     id:
+ *                       type: string
+ *                     username:
+ *                       type: string
+ *                     email:
+ *                       type: string
+ *                     role:
+ *                       type: string
+ *                       example: viewer
+ *       400:
+ *         description: Validation error
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/Error'
+ *       409:
+ *         description: Username or email already exists
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/Error'
+ */
+router.post('/register', authController.register);
+
+/**
+ * @swagger
  * /auth/logout:
  *   post:
  *     summary: Logout (invalidate token)

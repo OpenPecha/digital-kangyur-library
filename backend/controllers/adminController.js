@@ -1,17 +1,35 @@
 const bcrypt = require('bcryptjs');
-const { db, findById, create, update, remove } = require('../models/mockDatabase');
+const { 
+  userService, 
+  textService, 
+  catalogCategoryService, 
+  newsService, 
+  timelineEventService, 
+  audioRecordingService, 
+  editionService,
+  prisma
+} = require('../prisma/database');
 const { AppError } = require('../utils/errors');
 const { paginate, parsePaginationParams } = require('../utils/pagination');
 
-const getDashboard = (req, res, next) => {
+const getDashboard = async (req, res, next) => {
   try {
+    const [totalTexts, totalCategories, totalNews, totalTimelineEvents, totalAudioRecordings, totalEditions] = await Promise.all([
+      prisma.text.count(),
+      prisma.catalogCategory.count(),
+      prisma.news.count(),
+      prisma.timelineEvent.count(),
+      prisma.audioRecording.count(),
+      prisma.edition.count()
+    ]);
+
     const statistics = {
-      total_texts: db.texts.length,
-      total_categories: db.catalogCategories.length,
-      total_news: db.news.length,
-      total_timeline_events: db.timelineEvents.length,
-      total_audio_recordings: db.audioRecordings.length,
-      total_editions: db.editions.length,
+      total_texts: totalTexts,
+      total_categories: totalCategories,
+      total_news: totalNews,
+      total_timeline_events: totalTimelineEvents,
+      total_audio_recordings: totalAudioRecordings,
+      total_editions: totalEditions,
       recent_activity: [],
     };
 
@@ -19,17 +37,25 @@ const getDashboard = (req, res, next) => {
     const activities = [];
     
     // Recent texts
-    db.texts.slice(-5).forEach(text => {
+    const recentTexts = await prisma.text.findMany({
+      take: 5,
+      orderBy: { created_at: 'desc' }
+    });
+    recentTexts.forEach(text => {
       activities.push({
         type: 'text_created',
         id: text.id,
-        title: text.english_title,
+        title: text.id_slug || 'Untitled',
         created_at: text.created_at,
       });
     });
 
     // Recent news
-    db.news.slice(-3).forEach(news => {
+    const recentNews = await prisma.news.findMany({
+      take: 3,
+      orderBy: { created_at: 'desc' }
+    });
+    recentNews.forEach(news => {
       activities.push({
         type: 'news_created',
         id: news.id,
@@ -50,22 +76,20 @@ const getDashboard = (req, res, next) => {
   }
 };
 
-const getUsers = (req, res, next) => {
+const getUsers = async (req, res, next) => {
   try {
     const { page, limit } = parsePaginationParams(req);
     const { role, is_active } = req.query;
 
-    let users = [...db.users];
-
+    const options = {};
     if (role) {
-      users = users.filter(u => u.role === role);
+      options.role = role;
     }
-
     if (is_active !== undefined) {
-      const active = is_active === 'true';
-      users = users.filter(u => u.is_active === active);
+      options.is_active = is_active === 'true';
     }
 
+    const users = await userService.findAll(options);
     const { items, pagination } = paginate(users, page, limit);
 
     const formattedUsers = items.map(user => ({
@@ -99,17 +123,19 @@ const createUser = async (req, res, next) => {
     }
 
     // Check if username or email already exists
-    if (db.users.some(u => u.username === username)) {
+    const existingUser = await userService.findByUsernameOrEmail(username);
+    if (existingUser) {
       throw new AppError('DUPLICATE_RESOURCE', 'Username already exists', 409);
     }
 
-    if (db.users.some(u => u.email === email)) {
+    const existingEmail = await userService.findByEmail(email);
+    if (existingEmail) {
       throw new AppError('DUPLICATE_RESOURCE', 'Email already exists', 409);
     }
 
     const password_hash = await bcrypt.hash(password, 10);
 
-    const user = create(db.users, {
+    const user = await userService.create({
       username,
       email,
       password_hash,
@@ -129,10 +155,10 @@ const createUser = async (req, res, next) => {
   }
 };
 
-const updateUser = (req, res, next) => {
+const updateUser = async (req, res, next) => {
   try {
     const { id } = req.params;
-    const user = findById(db.users, id);
+    const user = await userService.findById(id);
 
     if (!user) {
       throw new AppError('RESOURCE_NOT_FOUND', 'User not found', 404);
@@ -143,7 +169,8 @@ const updateUser = (req, res, next) => {
 
     if (email !== undefined) {
       // Check if email already exists for another user
-      if (db.users.some(u => u.email === email && u.id !== id)) {
+      const existingEmail = await userService.findByEmail(email);
+      if (existingEmail && existingEmail.id !== id) {
         throw new AppError('DUPLICATE_RESOURCE', 'Email already exists', 409);
       }
       updateData.email = email;
@@ -160,7 +187,7 @@ const updateUser = (req, res, next) => {
       updateData.is_active = is_active;
     }
 
-    const updated = update(db.users, id, updateData);
+    const updated = await userService.update(id, updateData);
 
     res.json({
       id: updated.id,
@@ -171,10 +198,10 @@ const updateUser = (req, res, next) => {
   }
 };
 
-const deleteUser = (req, res, next) => {
+const deleteUser = async (req, res, next) => {
   try {
     const { id } = req.params;
-    const user = findById(db.users, id);
+    const user = await userService.findById(id);
 
     if (!user) {
       throw new AppError('RESOURCE_NOT_FOUND', 'User not found', 404);
@@ -185,7 +212,7 @@ const deleteUser = (req, res, next) => {
       throw new AppError('VALIDATION_ERROR', 'Cannot delete your own account', 400);
     }
 
-    remove(db.users, id);
+    await userService.delete(id);
 
     res.json({
       message: 'User deleted successfully',

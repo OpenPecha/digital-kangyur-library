@@ -1,13 +1,20 @@
-const { db, findById, findBySlug, create, update, remove, filter } = require('../models/mockDatabase');
+const { 
+  textService, 
+  textSectionService, 
+  textMetadataService, 
+  textCollatedContentService, 
+  textEditionService,
+  editionService,
+  catalogCategoryService
+} = require('../prisma/database');
 const { AppError } = require('../utils/errors');
 const { paginate, parsePaginationParams } = require('../utils/pagination');
 
-const getTexts = (req, res, next) => {
+const getTexts = async (req, res, next) => {
   try {
     const { page, limit } = parsePaginationParams(req);
     const {
       category_id,
-      parent_category_id,
       search,
       lang = 'en',
       is_active = 'true',
@@ -15,70 +22,50 @@ const getTexts = (req, res, next) => {
       order = 'asc',
     } = req.query;
 
-    let texts = [...db.texts];
+    const skip = (page - 1) * limit;
+    const take = limit;
+    const isActiveFilter = is_active === 'true';
 
-    // Filter by active status
-    if (is_active === 'true') {
-      texts = texts.filter(text => text.is_active);
-    }
-
-    // Filter by category
-    if (category_id) {
-      texts = texts.filter(text => text.category_id === category_id);
-    }
-
-    // Filter by parent category
-    if (parent_category_id) {
-      texts = texts.filter(text => text.parent_category_id === parent_category_id);
-    }
-
-    // Search
-    if (search) {
-      const searchLower = search.toLowerCase();
-      texts = texts.filter(text =>
-        text.tibetan_title?.toLowerCase().includes(searchLower) ||
-        text.english_title?.toLowerCase().includes(searchLower) ||
-        text.sanskrit_title?.toLowerCase().includes(searchLower)
-      );
-    }
-
-    // Sort
-    texts.sort((a, b) => {
-      let aVal = a[sort] || 0;
-      let bVal = b[sort] || 0;
-
-      if (sort === 'title') {
-        aVal = lang === 'bod' ? a.tibetan_title : a.english_title;
-        bVal = lang === 'bod' ? b.tibetan_title : b.english_title;
-      }
-
-      if (typeof aVal === 'string') {
-        return order === 'desc'
-          ? bVal.localeCompare(aVal)
-          : aVal.localeCompare(bVal);
-      }
-
-      return order === 'desc' ? bVal - aVal : aVal - bVal;
+    const { items, total } = await textService.findAll({
+      category_id,
+      is_active: isActiveFilter,
+      search,
+      sort,
+      order,
+      skip,
+      take
     });
 
-    const { items, pagination } = paginate(texts, page, limit);
+    const pagination = {
+      page,
+      limit,
+      total,
+      total_pages: Math.ceil(total / limit),
+      has_next: page * limit < total,
+      has_prev: page > 1
+    };
 
-    const formattedTexts = items.map(text => ({
-      id: text.id,
-      category_id: text.category_id,
-      title: {
-        tibetan: text.tibetan_title,
-        english: text.english_title,
-        sanskrit: text.sanskrit_title,
-        chinese: text.chinese_title,
-      },
-      derge_text_id: text.derge_text_id,
-      yeshe_text_id: text.yeshe_text_id,
-      turning: text.turning,
-      vehicle: text.vehicle,
-      summary: text.summary,
-      is_active: text.is_active,
-      created_at: text.created_at,
+    // Get metadata for titles
+    const formattedTexts = await Promise.all(items.map(async (text) => {
+      const metadata = await textMetadataService.findByTextId(text.id);
+      const tibetanTitle = metadata.find(m => m.metadata_key === 'tibetan-title')?.metadata_value;
+      const englishTitle = metadata.find(m => m.metadata_key === 'english-title')?.metadata_value;
+      const sanskritTitle = metadata.find(m => m.metadata_key === 'sanskrit-title')?.metadata_value;
+      const chineseTitle = metadata.find(m => m.metadata_key === 'chinese-title')?.metadata_value;
+
+      return {
+        id: text.id,
+        category_id: text.category_id,
+        title: {
+          tibetan: tibetanTitle || text.id_slug,
+          english: englishTitle || text.id_slug,
+          sanskrit: sanskritTitle,
+          chinese: chineseTitle,
+        },
+        id_slug: text.id_slug,
+        is_active: text.is_active,
+        created_at: text.created_at,
+      };
     }));
 
     res.json({
@@ -90,7 +77,7 @@ const getTexts = (req, res, next) => {
   }
 };
 
-const getTextById = (req, res, next) => {
+const getTextById = async (req, res, next) => {
   try {
     const { id } = req.params;
     const {
@@ -102,104 +89,82 @@ const getTextById = (req, res, next) => {
     } = req.query;
 
     // Try to find by ID first, then by slug
-    let text = findById(db.texts, id);
+    let text = await textService.findById(id, {
+      include_sections: include_sections === 'true',
+      include_collated: include_collated === 'true',
+      include_metadata: include_metadata === 'true',
+      include_editions: include_editions === 'true'
+    });
+    
     if (!text) {
-      text = findBySlug(db.texts, id);
+      text = await textService.findBySlug(id, {
+        include_sections: include_sections === 'true',
+        include_collated: include_collated === 'true',
+        include_metadata: include_metadata === 'true',
+        include_editions: include_editions === 'true'
+      });
     }
+    
     if (!text) {
       throw new AppError('RESOURCE_NOT_FOUND', 'Text not found', 404);
     }
 
+    // Get metadata for titles
+    const metadata = include_metadata === 'true' ? text.metadata || [] : [];
+    const tibetanTitle = metadata.find(m => m.metadata_key === 'tibetan-title')?.metadata_value;
+    const englishTitle = metadata.find(m => m.metadata_key === 'english-title')?.metadata_value;
+    const sanskritTitle = metadata.find(m => m.metadata_key === 'sanskrit-title')?.metadata_value;
+    const chineseTitle = metadata.find(m => m.metadata_key === 'chinese-title')?.metadata_value;
+
     const result = {
       id: text.id,
       category_id: text.category_id,
+      id_slug: text.id_slug,
       title: {
-        tibetan: text.tibetan_title,
-        english: text.english_title,
-        sanskrit: text.sanskrit_title,
-        chinese: text.chinese_title,
+        tibetan: tibetanTitle || text.id_slug,
+        english: englishTitle || text.id_slug,
+        sanskrit: sanskritTitle,
+        chinese: chineseTitle,
       },
-      catalog_identifiers: {
-        derge_text_id: text.derge_text_id,
-        yeshe_text_id: text.yeshe_text_id,
-        derge_vol_number: text.derge_vol_number,
-        derge_start_page: text.derge_start_page,
-        derge_end_page: text.derge_end_page,
-      },
-      content_classification: {
-        turning: text.turning,
-        vehicle: text.vehicle,
-        translation_type: text.translation_type,
-      },
-      sections: [],
-      collated_content: null,
-      metadata: [],
-      editions: [],
+      sections: include_sections === 'true' ? (text.sections || []).map(section => ({
+        id: section.id,
+        section_type: section.section_type,
+        title: {
+          tibetan: section.title_tibetan,
+          english: section.title_english,
+        },
+        content: {
+          tibetan: section.content_tibetan,
+          english: section.content_english,
+        },
+        order_index: section.order_index,
+      })) : [],
+      collated_content: include_collated === 'true' && text.collatedContent ? {
+        collated_text: text.collatedContent.collated_text,
+        english_translation: text.collatedContent.english_translation,
+      } : null,
+      metadata: include_metadata === 'true' ? (metadata || []).map(meta => ({
+        key: meta.metadata_key,
+        value: meta.metadata_value,
+        group: meta.metadata_group,
+        label: meta.label,
+      })) : [],
+      editions: include_editions === 'true' ? (text.textEditions || []).map(te => ({
+        edition_id: te.edition_id,
+        edition_name: te.edition ? {
+          english: te.edition.name_english,
+          tibetan: te.edition.name_tibetan,
+        } : null,
+        source_id: te.source_id,
+        volume_number: te.volume_number,
+        start_page: te.start_page,
+        end_page: te.end_page,
+        availability: te.availability,
+        link_url: te.link_url,
+      })) : [],
       created_at: text.created_at,
       updated_at: text.updated_at,
     };
-
-    if (include_sections === 'true') {
-      result.sections = db.textSections
-        .filter(section => section.text_id === id)
-        .sort((a, b) => a.order_index - b.order_index)
-        .map(section => ({
-          id: section.id,
-          section_type: section.section_type,
-          title: {
-            tibetan: section.title_tibetan,
-            english: section.title_english,
-          },
-          content: {
-            tibetan: section.content_tibetan,
-            english: section.content_english,
-          },
-          order_index: section.order_index,
-        }));
-    }
-
-    if (include_collated === 'true') {
-      const collated = db.textCollatedContent.find(c => c.text_id === id);
-      if (collated) {
-        result.collated_content = {
-          collated_text: collated.collated_text,
-          english_translation: collated.english_translation,
-        };
-      }
-    }
-
-    if (include_metadata === 'true') {
-      result.metadata = db.textMetadata
-        .filter(meta => meta.text_id === id)
-        .sort((a, b) => a.order_index - b.order_index)
-        .map(meta => ({
-          key: meta.metadata_key,
-          value: meta.metadata_value,
-          group: meta.metadata_group,
-          label: meta.label,
-        }));
-    }
-
-    if (include_editions === 'true') {
-      result.editions = db.textEditions
-        .filter(te => te.text_id === id)
-        .map(te => {
-          const edition = findById(db.editions, te.edition_id);
-          return {
-            edition_id: te.edition_id,
-            edition_name: edition ? {
-              english: edition.name_english,
-              tibetan: edition.name_tibetan,
-            } : null,
-            source_id: te.source_id,
-            volume_number: te.volume_number,
-            start_page: te.start_page,
-            end_page: te.end_page,
-            availability: te.availability,
-            link_url: te.link_url,
-          };
-        });
-    }
 
     res.json(result);
   } catch (error) {
@@ -207,49 +172,79 @@ const getTextById = (req, res, next) => {
   }
 };
 
-const createText = (req, res, next) => {
+const createText = async (req, res, next) => {
   try {
     const {
       category_id,
-      parent_category_id,
+      id_slug,
       title,
-      catalog_identifiers,
-      content_classification,
-      summary,
       keywords,
       is_active = true,
       order_index = 0,
     } = req.body;
 
-    if (!category_id || !title?.tibetan || !title?.english) {
-      throw new AppError('VALIDATION_ERROR', 'category_id, title.tibetan, and title.english are required', 400);
+    if (!category_id || !id_slug) {
+      throw new AppError('VALIDATION_ERROR', 'category_id and id_slug are required', 400);
     }
 
     // Validate category exists
-    if (!findById(db.catalogCategories, category_id)) {
+    const category = await catalogCategoryService.findById(category_id);
+    if (!category) {
       throw new AppError('INVALID_CATEGORY', 'Category not found', 400);
     }
 
-    const text = create(db.texts, {
+    const text = await textService.create({
       category_id,
-      parent_category_id: parent_category_id || null,
-      tibetan_title: title.tibetan,
-      english_title: title.english,
-      sanskrit_title: title.sanskrit,
-      chinese_title: title.chinese,
-      derge_text_id: catalog_identifiers?.derge_text_id,
-      yeshe_text_id: catalog_identifiers?.yeshe_text_id,
-      derge_vol_number: catalog_identifiers?.derge_vol_number,
-      derge_start_page: catalog_identifiers?.derge_start_page,
-      derge_end_page: catalog_identifiers?.derge_end_page,
-      turning: content_classification?.turning,
-      vehicle: content_classification?.vehicle,
-      translation_type: content_classification?.translation_type,
-      summary,
+      id_slug,
       keywords: keywords || [],
       is_active,
       order_index,
     });
+
+    // Create metadata entries for titles if provided
+    if (title) {
+      const metadataEntries = [];
+      if (title.tibetan) {
+        await textMetadataService.create({
+          text_id: text.id,
+          metadata_key: 'tibetan-title',
+          metadata_value: title.tibetan,
+          metadata_group: 'titles',
+          label: 'Tibetan Title',
+          order_index: 0
+        });
+      }
+      if (title.english) {
+        await textMetadataService.create({
+          text_id: text.id,
+          metadata_key: 'english-title',
+          metadata_value: title.english,
+          metadata_group: 'titles',
+          label: 'English Title',
+          order_index: 1
+        });
+      }
+      if (title.sanskrit) {
+        await textMetadataService.create({
+          text_id: text.id,
+          metadata_key: 'sanskrit-title',
+          metadata_value: title.sanskrit,
+          metadata_group: 'titles',
+          label: 'Sanskrit Title',
+          order_index: 2
+        });
+      }
+      if (title.chinese) {
+        await textMetadataService.create({
+          text_id: text.id,
+          metadata_key: 'chinese-title',
+          metadata_value: title.chinese,
+          metadata_group: 'titles',
+          label: 'Chinese Title',
+          order_index: 3
+        });
+      }
+    }
 
     res.status(201).json({
       id: text.id,
