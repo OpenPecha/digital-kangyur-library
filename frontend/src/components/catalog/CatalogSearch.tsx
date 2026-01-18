@@ -14,7 +14,7 @@ const CatalogSearch = ({
   const { t } = useLanguage();
 
   return (
-    <div className="text-white py-9 pt-28 relative overflow-hidden" style={{ backgroundColor: '#e3821b' }}>      
+    <div className="text-white py-9 relative overflow-hidden" style={{ backgroundColor: '#e3821b' }}>      
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="max-w-md mx-auto">
           <div className="relative">

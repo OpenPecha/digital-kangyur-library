@@ -7,6 +7,7 @@ import { VideoForm } from '@/components/admin/videos/VideoForm';
 import { Edit, Trash2, Search, Plus, ExternalLink } from 'lucide-react';
 import api from '@/utils/api';
 import { toast } from 'sonner';
+import useLanguage from '@/hooks/useLanguage';
 
 interface Video {
   id: string;
@@ -20,6 +21,25 @@ interface Video {
   createdAt: string;
 }
 
+// Helper function to extract YouTube ID from URL
+const extractYouTubeId = (url: string): string | null => {
+  if (!url) return null;
+  
+  const patterns = [
+    /(?:youtube\.com\/watch\?v=|youtu\.be\/|youtube\.com\/embed\/)([^&\n?#]+)/,
+    /youtube\.com\/.*[?&]v=([^&\n?#]+)/,
+  ];
+  
+  for (const pattern of patterns) {
+    const match = pattern.exec(url);
+    if (match?.[1]) {
+      return match[1];
+    }
+  }
+  
+  return null;
+};
+
 const VideoCard = ({
   video,
   onEdit,
@@ -29,27 +49,54 @@ const VideoCard = ({
   onEdit: (video: Video) => void;
   onDelete: (id: string) => void;
 }) => {
+  const youtubeId = extractYouTubeId(video.videoLink);
+  const hasThumbnail = video.thumbnailUrl && video.thumbnailUrl.trim() !== '';
+  const { isTibetan,t } = useLanguage();
+  const renderThumbnail = () => {
+    if (hasThumbnail) {
+      return (
+        <img 
+          src={video.thumbnailUrl} 
+          alt={video.englishTitle} 
+          className="w-full h-full object-cover transition-transform duration-500 hover:scale-105" 
+        />
+      );
+    }
+    
+    if (youtubeId) {
+      return (
+        <div className="relative w-full h-full">
+          <iframe
+            className="w-full h-full"
+            src={`https://www.youtube.com/embed/${youtubeId}`}
+            title={video.englishTitle}
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            allowFullScreen
+          />
+        </div>
+      );
+    }
+    
+    return (
+      <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-gray-200 to-gray-300">
+        <ExternalLink className="h-12 w-12 text-gray-400" />
+      </div>
+    );
+  };
+
   return (
     <Card className="flex flex-col h-full overflow-hidden hover:shadow-md transition-shadow">
       <div className="overflow-hidden h-48 bg-gray-100 relative">
-        {video.thumbnailUrl ? (
-          <img 
-            src={video.thumbnailUrl} 
-            alt={video.englishTitle} 
-            className="w-full h-full object-cover transition-transform duration-500 hover:scale-105" 
-          />
-        ) : (
-          <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-gray-200 to-gray-300">
-            <ExternalLink className="h-12 w-12 text-gray-400" />
-          </div>
-        )}
+        {renderThumbnail()}
       </div>
       <CardHeader className="pb-2">
-        <CardTitle className="text-lg">{video.englishTitle}</CardTitle>
-        {video.tibetanTitle && <p className="text-sm font-medium text-kangyur-maroon tibetan">{video.tibetanTitle}</p>}
+        {isTibetan && video.tibetanTitle ? (
+          <p className="text-sm font-medium text-kangyur-maroon tibetan mb-1">{video.tibetanTitle}</p>
+        ) : (
+          <CardTitle className="text-lg">{video.englishTitle}</CardTitle>
+        )}
       </CardHeader>
       <CardContent className="pb-2 flex-grow">
-        <p className="text-muted-foreground text-sm mb-3 line-clamp-2">{video.englishDescription || 'No description'}</p>
         <a 
           href={video.videoLink} 
           target="_blank" 
@@ -103,8 +150,8 @@ const VideosAdmin = () => {
         tibetanDescription: item.description?.tibetan || '',
         englishDescription: item.description?.english || '',
         videoLink: item.video_link || '',
-        thumbnailUrl: item.thumbnail_url || '',
-        isActive: item.is_active !== undefined ? item.is_active : true,
+        thumbnailUrl: item.thumbnail_url?.trim() ? item.thumbnail_url : undefined,
+        isActive: item.is_active ?? true,
         createdAt: item.created_at,
       }));
       setVideos(transformedVideos);
@@ -120,7 +167,7 @@ const VideosAdmin = () => {
   const filteredVideos = videos.filter(video =>
     video.englishTitle.toLowerCase().includes(searchQuery.toLowerCase()) ||
     video.englishDescription.toLowerCase().includes(searchQuery.toLowerCase()) ||
-    (video.tibetanTitle && video.tibetanTitle.toLowerCase().includes(searchQuery.toLowerCase()))
+    video.tibetanTitle?.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
   const handleEdit = (video: Video) => {
@@ -130,27 +177,21 @@ const VideosAdmin = () => {
 
   const handleSave = async (data: any) => {
     try {
+      const videoData = {
+        tibetan_title: data.tibetan_title,
+        english_title: data.english_title,
+        tibetan_description: data.tibetan_description,
+        english_description: data.english_description,
+        video_link: data.video_link,
+        thumbnail_url: data.thumbnail_url && data.thumbnail_url.trim() !== '' ? data.thumbnail_url : null,
+        is_active: data.is_active,
+      };
+
       if (editingVideo) {
-        await api.updateVideo(editingVideo.id, {
-          tibetan_title: data.tibetan_title,
-          english_title: data.english_title,
-          tibetan_description: data.tibetan_description,
-          english_description: data.english_description,
-          video_link: data.video_link,
-          thumbnail_url: data.thumbnail_url,
-          is_active: data.is_active,
-        });
+        await api.updateVideo(editingVideo.id, videoData);
         toast.success('Video updated successfully');
       } else {
-        await api.createVideo({
-          tibetan_title: data.tibetan_title,
-          english_title: data.english_title,
-          tibetan_description: data.tibetan_description,
-          english_description: data.english_description,
-          video_link: data.video_link,
-          thumbnail_url: data.thumbnail_url,
-          is_active: data.is_active,
-        });
+        await api.createVideo(videoData);
         toast.success('Video created successfully');
       }
 

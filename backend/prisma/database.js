@@ -408,13 +408,21 @@ const karchagSubCategoryService = {
   },
   
   findAll: async (options = {}) => {
-    const { is_active, main_category_id } = options;
+    const { is_active, main_category_id, search } = options;
     const where = {};
     if (is_active !== undefined) {
       where.is_active = is_active;
     }
     if (main_category_id) {
       where.main_category_id = main_category_id;
+    }
+    if (search) {
+      where.OR = [
+        { name_english: { contains: search, mode: 'insensitive' } },
+        { name_tibetan: { contains: search, mode: 'insensitive' } },
+        { description_english: { contains: search, mode: 'insensitive' } },
+        { description_tibetan: { contains: search, mode: 'insensitive' } }
+      ];
     }
     return await prisma.karchagSubCategory.findMany({
       where,

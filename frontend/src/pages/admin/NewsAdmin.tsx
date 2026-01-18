@@ -7,6 +7,7 @@ import { NewsForm } from '@/components/admin/news/CreateNewsForm';
 import { NewsEntry } from '@/types/news';
 import { Edit, Trash2, Calendar, Search, Plus } from 'lucide-react';
 import api from '@/utils/api';
+import useLanguage from '@/hooks/useLanguage';
 
 const NewsCard = ({
   news,
@@ -17,16 +18,24 @@ const NewsCard = ({
   onEdit: (news: NewsEntry) => void;
   onDelete: (id: string) => void;
 }) => {
+  const { isTibetan,t } = useLanguage();
   return <Card className="flex flex-col h-full overflow-hidden hover:shadow-md transition-shadow">
       <div className="overflow-hidden h-48">
         <img src={news.thumbnailUrl || "https://images.unsplash.com/photo-1598499255807-87188c4eda38?q=80&w=2574&auto=format&fit=crop"} alt={news.englishTitle} className="w-full h-full object-cover transition-transform duration-500 hover:scale-105" />
       </div>
       <CardHeader className="pb-2">
-        <CardTitle className="text-lg">{news.englishTitle}</CardTitle>
-        {news.tibetanTitle && <p className="text-sm font-medium text-kangyur-maroon tibetan">{news.tibetanTitle}</p>}
+        {isTibetan && news.tibetanTitle ? (
+          <p className="text-sm font-medium text-kangyur-maroon tibetan mb-1">{news.tibetanTitle}</p>
+        ) : (
+          <CardTitle className="text-lg">{news.englishTitle}</CardTitle>
+        )}
       </CardHeader>
       <CardContent className="pb-2 flex-grow">
-        <p className="text-muted-foreground text-sm mb-3">{news.englishDescription}</p>
+        {isTibetan && news.tibetanDescription ? (
+          <p className="text-muted-foreground text-sm mb-3">{news.tibetanDescription?.slice(0, 100)}...</p>
+        ) : (
+          <p className="text-muted-foreground text-sm mb-3">{news.englishDescription?.slice(0, 100)}...</p>
+        )}
         <div className="flex items-center text-xs text-kangyur-dark/60">
           <Calendar className="h-3.5 w-3.5 mr-1.5" />
           {new Date(news.createdAt).toLocaleDateString('en-US', {

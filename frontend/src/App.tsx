@@ -25,6 +25,7 @@ import NewsDetail from "./pages/NewsDetail";
 import Videos from "./pages/Videos";
 import TantraText from "./pages/TantraText";
 import TextDetail from "./pages/TextDetail";
+import Search from "./pages/Search";
 import Navbar from "./components/ui/molecules/Navbar";
 
 const queryClient = new QueryClient();
@@ -39,6 +40,7 @@ const App = () => (
             <Routes>
               <Route path="/" element={<Index />} />
               <Route path="/catalog" element={<Catalog />} />
+              <Route path="/search" element={<Search />} />
               <Route path="/news" element={<News />} />
               <Route path="/news/:id" element={<NewsDetail />} />
               <Route path="/videos" element={<Videos />} />

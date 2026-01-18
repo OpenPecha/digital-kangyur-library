@@ -24,18 +24,22 @@ const KarchagFrame: React.FC<KarchagFrameProps> = ({ labelKey, label, link, font
   const textClass = isTailwindClass
     ? `${isTibetan ? 'tibetan' : ''} text-${fontSize}`
     : isTibetan ? 'tibetan' : '';
-  const textStyle = !isTailwindClass ? { fontSize, maxWidth: isTibetan&& '140px', textAlign: 'center', wordWrap:isTibetan&& 'break-word'} : {};
+  const textStyle = !isTailwindClass ? { fontSize, maxWidth: isTibetan&& '150px', textAlign: 'center', wordWrap:isTibetan&& 'break-word'} : {};
   const labelText = labelKey ? t(labelKey) : (isTibetan ? (label?.tibetan || '') : (label?.english || ''));
   
   return (
     <Link to={link} className="block">
       <div className="relative w-full h-full flex flex-col items-center justify-center transform transition-transform hover:scale-105">
-        <div className="relative w-64 h-[360px] flex items-center justify-center hover:bg-orange-100  transition-colors duration-300 rounded-lg">
+        <div className="relative w-64 h-[360px] flex items-center justify-center hover:bg-orange-100 transition-colors duration-300 rounded-lg">
           <img src="/frame.png" alt="Decorative frame" className="w-full h-full" />
-          
-          {/* Localized text inside the frame */}
+          {/* Always wrap the label in a matching frame */}
           <div className="absolute inset-0 flex items-center justify-center">
-            <span className={textClass} style={textStyle as any}>{labelText}</span>
+            <span className={textClass} style={textStyle as any} >
+              {/* Repeat the label to visually wrap it inside the frame */}
+              <span className="inline-block relative z-10">
+                {labelText}
+              </span>
+            </span>
           </div>
         </div>
       </div>

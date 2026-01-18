@@ -118,13 +118,16 @@ const deleteMainCategory = async (req, res, next) => {
 // Sub Categories
 const getSubCategories = async (req, res, next) => {
   try {
-    const { main_category_id, is_active } = req.query;
+    const { main_category_id, is_active, search } = req.query;
     const options = {};
     if (is_active !== undefined) {
       options.is_active = is_active === 'true';
     }
     if (main_category_id) {
       options.main_category_id = main_category_id;
+    }
+    if (search) {
+      options.search = search;
     }
     const categories = await karchagSubCategoryService.findAll(options);
 

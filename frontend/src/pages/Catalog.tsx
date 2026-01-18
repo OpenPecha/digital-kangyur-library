@@ -247,8 +247,11 @@ const Catalog = () => {
   }
 
   return (
-    <div className="min-h-screen bg-white w-full">
-      <CatalogSearch searchQuery={searchQuery} setSearchQuery={setSearchQuery} />
+    <div className=" bg-white w-full">
+      {/* Only show CatalogSearch when MainKarchagFrames is not displayed */}
+      {(searchQuery || selectedItem || category) && (
+        <CatalogSearch searchQuery={searchQuery} setSearchQuery={setSearchQuery} />
+      )}
 
       {/* Main Karchag Frames - show only when no search, selected item, or category */}
       {!searchQuery && !selectedItem && !category && (
@@ -257,16 +260,12 @@ const Catalog = () => {
 
       {/* Subcategories - show when a main category is selected but no specific subcategory is selected */}
       {category && !searchQuery && !selectedItem && selectedMainCategory && (
-        <div className="container mx-auto px-4 py-8">
+        <div className="container mx-auto px-4 py-24">
           <div className="mb-8">
             <h2 className={`text-3xl font-bold text-center mb-2 ${isTibetan ? 'tibetan' : ''}`}>
               {isTibetan ? selectedMainCategory.name_tibetan : selectedMainCategory.name_english}
             </h2>
-            {((isTibetan && selectedMainCategory.description_tibetan) || (!isTibetan && selectedMainCategory.description_english)) && (
-              <p className="text-gray-600 text-center max-w-3xl mx-auto">
-                {isTibetan ? (selectedMainCategory.description_tibetan || selectedMainCategory.description_english) : (selectedMainCategory.description_english || selectedMainCategory.description_tibetan)}
-              </p>
-            )}
+          
           </div>
           
           {karchagSubCategoriesData && karchagSubCategoriesData.length > 0 ? (

@@ -158,10 +158,11 @@ export const api = {
   },
 
   // Karchag - Sub Categories
-  getKarchagSubCategories: (params?: { main_category_id?: string; is_active?: string }) => {
+  getKarchagSubCategories: (params?: { main_category_id?: string; is_active?: string; search?: string }) => {
     const queryParams = new URLSearchParams();
     if (params?.main_category_id) queryParams.append('main_category_id', params.main_category_id);
     if (params?.is_active) queryParams.append('is_active', params.is_active);
+    if (params?.search) queryParams.append('search', params.search);
     const query = queryParams.toString();
     return fetchApi<{ categories: any[] }>(`/karchag/sub-categories${query ? `?${query}` : ''}`);
   },

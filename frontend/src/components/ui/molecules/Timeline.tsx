@@ -1,10 +1,12 @@
-import React, { useState, useMemo, useEffect } from 'react';
+import React, { useState, useMemo, useEffect, useRef } from 'react';
 import { Card, CardContent } from '@/components/ui/atoms/card';
 import { Badge } from '@/components/ui/atoms/badge';
 import { Calendar, X } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import useLanguage from '@/hooks/useLanguage';
 import api from '@/utils/api';
+import { Timeline as VisTimeline, DataSet } from 'vis-timeline/standalone';
+import 'vis-timeline/styles/vis-timeline-graph2d.min.css';
 
 type TimelineEvent = {
   id: string;
@@ -176,9 +178,14 @@ const fallbackTimelineData: TimelineEvent[] = [{
 
 const Timeline = () => {
   const [selectedPeriod, setSelectedPeriod] = useState<TimelineEvent | null>(null);
+  const [selectedEvent, setSelectedEvent] = useState<any | null>(null);
   const [timelineData, setTimelineData] = useState<TimelineEvent[]>([]);
   const [loading, setLoading] = useState(true);
   const { t, isTibetan } = useLanguage();
+  const timelineRef = useRef<HTMLDivElement>(null);
+  const timelineInstanceRef = useRef<VisTimeline | null>(null);
+  const itemsRef = useRef<DataSet<any>>(new DataSet());
+  const groupsRef = useRef<DataSet<any>>(new DataSet());
 
   useEffect(() => {
     const fetchTimelineData = async () => {
@@ -199,11 +206,13 @@ const Timeline = () => {
             startYear: period.start_year,
             endYear: period.end_year,
             events: periodEvents.map((event: any) => ({
+              id: event.id,
               year: event.is_approximate 
                 ? `${event.year} CE (approx)`
                 : `${event.year} CE`,
               description: event.description?.english || event.description?.tibetan || event.title?.english || event.title?.tibetan || '',
               position: event.year,
+              rawEvent: event, // Store full event data
             })),
           };
         });
@@ -226,77 +235,186 @@ const Timeline = () => {
   // Use API data if available, otherwise fallback (fallback only used when API fails or returns no data)
   const dataToUse = timelineData.length > 0 ? timelineData : fallbackTimelineData;
 
-  const { minYear, maxYear, yearRange, tickMarks } = useMemo(() => {
+  // Transform data to vis-timeline format
+  const { visGroups, visItems, minYear, maxYear, timelineHeight } = useMemo(() => {
     if (dataToUse.length === 0) {
-      return {
-        minYear: 0,
-        maxYear: 0,
-        yearRange: 0,
-        tickMarks: []
-      };
+      return { visGroups: [], visItems: [], minYear: 0, maxYear: 0, timelineHeight: 500 };
     }
-    
+
     const allYears = dataToUse.flatMap(period => [period.startYear, period.endYear]);
     const min = Math.min(...allYears);
     const max = Math.max(...allYears);
-    const range = max - min;
+
+    // Create groups for periods (ranges)
+    // Sort groups by start year to ensure proper ordering
+    const groups = dataToUse
+      .sort((a, b) => a.startYear - b.startYear)
+      .map((period, index) => ({
+        id: period.id,
+        content: t(period.period),
+        className: 'timeline-period-group',
+        order: index, // Ensure proper ordering
+      }));
+
+    // Create items for events (points) and periods (ranges)
+    const items: any[] = [];
     
-    const tickInterval = range > 500 ? 50 : 25;
-    const startTick = Math.floor(min / tickInterval) * tickInterval;
-    const endTick = Math.ceil(max / tickInterval) * tickInterval;
+    dataToUse.forEach((period, periodIndex) => {
+      // Check if this period overlaps with others
+      const overlappingPeriods = dataToUse.filter((p, idx) => 
+        idx !== periodIndex && 
+        ((p.startYear >= period.startYear && p.startYear <= period.endYear) ||
+         (p.endYear >= period.startYear && p.endYear <= period.endYear) ||
+         (p.startYear <= period.startYear && p.endYear >= period.endYear))
+      );
+      
+      // Add period as a range item
+      items.push({
+        id: `period-${period.id}`,
+        group: period.id,
+        start: new Date(period.startYear, 0, 1),
+        end: new Date(period.endYear, 11, 31),
+        type: 'range',
+        content: `${period.startYear} - ${period.endYear}`,
+        className: `timeline-period-range ${overlappingPeriods.length > 0 ? 'has-overlap' : ''}`,
+        title: t(period.period),
+        // Add subgroup to help with stacking when overlapping
+        subgroup: overlappingPeriods.length > 0 ? periodIndex : undefined,
+      });
+
+      // Add events as point items
+      period.events.forEach((event: any) => {
+        // Extract year from event.year string (e.g., "783 CE" -> 783)
+        let eventYear = event.position;
+        if (!eventYear && event.year) {
+          const yearMatch = event.year.match(/\d+/);
+          eventYear = yearMatch ? Number.parseInt(yearMatch[0], 10) : period.startYear;
+        }
+        if (!eventYear) {
+          eventYear = period.startYear;
+        }
+        
+        items.push({
+          id: `event-${event.id || Math.random()}`,
+          group: period.id,
+          start: new Date(eventYear, 0, 1),
+          type: 'point',
+          content: event.year,
+          className: 'timeline-event-point',
+          title: event.description,
+          eventData: event, // Store event data for click handler
+        });
+      });
+    });
+
+    // Calculate dynamic height based on number of groups
+    // Each group needs ~80px height, plus 100px for time axis
+    // Cap at 800px to allow scrolling
+    const calculatedHeight = Math.min(800, Math.max(600, groups.length * 80 + 150));
     
-    const ticks = [];
-    for (let year = startTick; year <= endTick; year += tickInterval) {
-      ticks.push(year);
+    return { visGroups: groups, visItems: items, minYear: min, maxYear: max, timelineHeight: calculatedHeight };
+  }, [dataToUse, t]);
+
+  // Initialize vis-timeline
+  useEffect(() => {
+    if (!timelineRef.current || loading || visItems.length === 0 || visGroups.length === 0) return;
+
+    // Clear existing timeline if any
+    if (timelineInstanceRef.current) {
+      timelineInstanceRef.current.destroy();
     }
-    
-    return {
-      minYear: min,
-      maxYear: max,
-      yearRange: range,
-      tickMarks: ticks
+
+    // Update groups and items
+    groupsRef.current.clear();
+    groupsRef.current.add(visGroups);
+    itemsRef.current.clear();
+    itemsRef.current.add(visItems);
+
+    // Create timeline options
+    const options = {
+      width: '100%',
+      height: `${timelineHeight}px`,
+      stack: true, // Enable stacking so overlapping periods are visible
+      showCurrentTime: false,
+      zoomMin: 1000 * 60 * 60 * 24 * 365 * 10, // 10 years in milliseconds
+      zoomMax: 1000 * 60 * 60 * 24 * 365 * 500, // 500 years in milliseconds
+      min: new Date(minYear - 50, 0, 1),
+      max: new Date(maxYear + 50, 11, 31),
+      orientation: 'top',
+      format: {
+        minorLabels: {
+          year: 'YYYY',
+        },
+        majorLabels: {
+          year: 'YYYY',
+        },
+      },
+      template: (item: any) => {
+        return item.content || '';
+      },
+      // Ensure overlapping items are visible
+      stackSubgroups: true,
+      // Allow items to overlap and stack vertically
+      editable: false,
+      selectable: true,
+      // Order groups by their order property
+      groupOrder: (a: any, b: any) => {
+        const orderA = a.order ?? 0;
+        const orderB = b.order ?? 0;
+        return orderA - orderB;
+      },
+      // Ensure overlapping items are visible
+      margin: {
+        item: {
+          horizontal: 5,
+          vertical: 10, // More vertical space for stacked items
+        },
+        axis: 5,
+      },
     };
-  }, [dataToUse]);
 
-  const getPositionPercent = (year: number) => {
-    return ((year - minYear) / yearRange) * 100;
-  };
+    // Create timeline instance
+    const timeline = new VisTimeline(timelineRef.current, itemsRef.current, groupsRef.current, options);
 
-  const getWidthPercent = (startYear: number, endYear: number) => {
-    return ((endYear - startYear) / yearRange) * 100;
-  };
+    // Handle item click
+    timeline.on('select', (properties: any) => {
+      if (properties.items?.length > 0) {
+        const itemId = properties.items[0];
+        const item = itemsRef.current.get(itemId);
+        if (item?.eventData) {
+          // Find the period for this event
+          const period = dataToUse.find(p => p.id === item.group);
+          if (period) {
+            setSelectedPeriod(period);
+            setSelectedEvent(item.eventData);
+          }
+        } else if (item?.id?.startsWith('period-')) {
+          // Period range clicked
+          const periodId = item.id.replace('period-', '');
+          const period = dataToUse.find(p => p.id === periodId);
+          if (period) {
+            setSelectedPeriod(period);
+            setSelectedEvent(null);
+          }
+        }
+      }
+    });
+
+    timelineInstanceRef.current = timeline;
+
+    // Cleanup
+    return () => {
+      if (timelineInstanceRef.current) {
+        timelineInstanceRef.current.destroy();
+        timelineInstanceRef.current = null;
+      }
+    };
+  }, [visItems, visGroups, loading, minYear, maxYear, timelineHeight, dataToUse]);
 
   return (
     <div className={cn("w-full")}>
       {/* Timeline Container */}
-      <div className="relative bg-white border border-kangyur-orange/20 rounded-lg p-6 overflow-x-auto min-h-[480px]"> {/* Increased from min-h-[320px] to min-h-[480px] */}
-        {/* Year markers at top */}
-        <div className="relative mb-8 h-8">
-          {tickMarks.map((year) => (
-            <div
-              key={year}
-              className="absolute top-0 text-xs text-kangyur-dark/60 font-medium"
-              style={{ left: `${getPositionPercent(year)}%` }}
-            >
-              <div className="relative -translate-x-1/2">
-                {year}
-              </div>
-            </div>
-          ))}
-        </div>
-
-        {/* Main timeline line */}
-        <div className="relative h-2 bg-kangyur-orange/20 rounded-full mb-8"> {/* Reduced from mb-16 to mb-8 */}
-          {/* Tick marks */}
-          {tickMarks.map((year) => (
-            <div
-              key={year}
-              className="absolute top-0 h-full w-0.5 bg-kangyur-orange/40"
-              style={{ left: `${getPositionPercent(year)}%` }}
-            />
-          ))}
-        </div>
-
+      <div className="relative bg-white border border-kangyur-orange/20 rounded-lg p-6 overflow-auto" style={{ maxHeight: '800px' }}>
         {/* Loading state */}
         {loading && (
           <div className="flex items-center justify-center h-64">
@@ -304,77 +422,52 @@ const Timeline = () => {
           </div>
         )}
 
-        {/* Period boxes positioned along timeline */}
+        {/* Vis-timeline container */}
         {!loading && (
-          <div className="relative">
-            {dataToUse.map((period, index) => {
-            const leftPosition = getPositionPercent(period.startYear);
-            const width = getWidthPercent(period.startYear, period.endYear);
-            const minWidth = 12;
-            const actualWidth = Math.max(width, minWidth);
-            
-            const row = index % 3;
-            const topOffset = row * 70 + 10;
-
-            return (
-              <div
-                key={period.id}
-                className="absolute cursor-pointer group"
-                style={{
-                  left: `${leftPosition}%`,
-                  top: `${topOffset}px`,
-                  width: `${actualWidth}%`,
-                  minWidth: '150px'
-                }}
-                onClick={() => setSelectedPeriod(period)}
-              >
-                <Card className="hover:shadow-lg transition-all duration-200 hover:scale-105 border-kangyur-orange/30 bg-gradient-to-br from-kangyur-cream to-white">
-                  <CardContent className="p-2.5">
-                    <div className="text-center">
-                      <Badge variant="outline" className="text-xs mb-1.5 bg-kangyur-orange/10">
-                        {period.startYear} - {period.endYear}
-                      </Badge>
-                      <h4 className={cn(
-                        "font-semibold text-xs leading-tight mb-1",
-                        isTibetan ? 'tibetan text-kangyur-maroon' : 'text-kangyur-maroon'
-                      )}>
-                        {t(period.period)}
-                      </h4>
-                      <div className="text-xs text-kangyur-dark/50 mt-1">
-                        {period.events.length} events
-                      </div>
-                    </div>
-                  </CardContent>
-                </Card>
-              </div>
-            );
-          })}
-          </div>
+          <div ref={timelineRef} className="vis-timeline-container" />
         )}
       </div>
 
-      {/* Dialog for selected period */}
-      {selectedPeriod && (
+      {/* Dialog for selected period or event */}
+      {(selectedPeriod || selectedEvent) && (
         <div className="fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4">
           <Card className="max-w-3xl w-full max-h-[80vh] overflow-y-auto">
             <CardContent className="p-6">
               {/* Header */}
               <div className="flex items-start justify-between mb-6">
                 <div className="flex-1">
-                  <div className="flex items-center gap-3 mb-2">
-                    <Badge variant="secondary" className="bg-kangyur-cream text-kangyur-maroon">
-                      {selectedPeriod.startYear} - {selectedPeriod.endYear}
-                    </Badge>
-                    <span className="text-sm text-kangyur-dark/60">
-                      ({selectedPeriod.endYear - selectedPeriod.startYear} years)
-                    </span>
-                  </div>
-                  <h3 className={cn("text-2xl font-bold text-kangyur-maroon mb-2",isTibetan ? 'tibetan' : 'english')}>
-                    {t(selectedPeriod.period)}
-                  </h3>
+                  {selectedEvent ? (
+                    <>
+                      <div className="flex items-center gap-3 mb-2">
+                        <Badge variant="secondary" className="bg-kangyur-cream text-kangyur-maroon">
+                          {selectedEvent.year}
+                        </Badge>
+                      </div>
+                      <h3 className={cn("text-2xl font-bold text-kangyur-maroon mb-2", isTibetan ? 'tibetan' : 'english')}>
+                        {selectedEvent.description}
+                      </h3>
+                    </>
+                  ) : selectedPeriod ? (
+                    <>
+                      <div className="flex items-center gap-3 mb-2">
+                        <Badge variant="secondary" className="bg-kangyur-cream text-kangyur-maroon">
+                          {selectedPeriod.startYear} - {selectedPeriod.endYear}
+                        </Badge>
+                        <span className="text-sm text-kangyur-dark/60">
+                          ({selectedPeriod.endYear - selectedPeriod.startYear} years)
+                        </span>
+                      </div>
+                      <h3 className={cn("text-2xl font-bold text-kangyur-maroon mb-2", isTibetan ? 'tibetan' : 'english')}>
+                        {t(selectedPeriod.period)}
+                      </h3>
+                    </>
+                  ) : null}
                 </div>
                 <button 
-                  onClick={() => setSelectedPeriod(null)}
+                  onClick={() => {
+                    setSelectedPeriod(null);
+                    setSelectedEvent(null);
+                  }}
                   className="text-kangyur-dark/60 hover:text-kangyur-dark p-1 rounded-md hover:bg-kangyur-cream/50 transition-colors"
                 >
                   <X className="h-5 w-5" />
@@ -382,29 +475,34 @@ const Timeline = () => {
               </div>
 
               {/* Description */}
-              <div className="mb-6">
-                <h4 className="font-semibold text-kangyur-maroon mb-3">Key Developments</h4>
-                <div className="space-y-4">
-                  {selectedPeriod.events.map((event, index) => (
-                    <div key={index} className="border-l-4 border-kangyur-orange/30 pl-4 py-2">
-                      <div className="flex items-center gap-2 mb-2">
-                        <Calendar className="h-4 w-4 text-kangyur-orange" />
-                        <Badge variant="outline" className="text-xs">
-                          {event.year}
-                        </Badge>
+              {selectedPeriod && !selectedEvent && (
+                <div className="mb-6">
+                  <h4 className="font-semibold text-kangyur-maroon mb-3">Key Developments</h4>
+                  <div className="space-y-4">
+                    {selectedPeriod.events.map((event) => (
+                      <div key={event.id || `event-${event.year}`} className="border-l-4 border-kangyur-orange/30 pl-4 py-2">
+                        <div className="flex items-center gap-2 mb-2">
+                          <Calendar className="h-4 w-4 text-kangyur-orange" />
+                          <Badge variant="outline" className="text-xs">
+                            {event.year}
+                          </Badge>
+                        </div>
+                        <p className="text-kangyur-dark leading-relaxed">
+                          {event.description}
+                        </p>
                       </div>
-                      <p className="text-kangyur-dark leading-relaxed">
-                        {event.description}
-                      </p>
-                    </div>
-                  ))}
+                    ))}
+                  </div>
                 </div>
-              </div>
+              )}
 
               {/* Footer */}
               <div className="flex justify-end pt-4 border-t border-kangyur-orange/20">
                 <button 
-                  onClick={() => setSelectedPeriod(null)}
+                  onClick={() => {
+                    setSelectedPeriod(null);
+                    setSelectedEvent(null);
+                  }}
                   className="px-4 py-2 bg-kangyur-orange text-white rounded-md hover:bg-kangyur-orange/90 transition-colors"
                 >
                   Close

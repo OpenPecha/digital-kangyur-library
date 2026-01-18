@@ -139,4 +139,103 @@
   ::-webkit-scrollbar-thumb {
     @apply bg-kangyur-maroon/20 rounded-full hover:bg-kangyur-maroon/30 transition-colors;
   }
+
+  /* Vis-timeline custom styling */
+  .vis-timeline {
+    border: none;
+    font-family: inherit;
+  }
+
+  .vis-timeline .vis-item {
+    border-color: rgb(251 146 60 / 0.5);
+    background-color: rgb(254 243 199);
+    color: rgb(120 53 15);
+    border-radius: 4px;
+    cursor: pointer;
+  }
+
+  .vis-timeline .vis-item.timeline-period-range {
+    background-color: rgb(254 243 199);
+    border-color: rgb(251 146 60);
+    border-width: 2px;
+    opacity: 0.9; /* Make overlapping periods semi-transparent so overlaps are visible */
+  }
+
+  .vis-timeline .vis-item.timeline-period-range.has-overlap {
+    opacity: 0.75; /* More transparent when overlapping */
+    border-style: dashed; /* Dashed border to indicate overlap */
+  }
+
+  .vis-timeline .vis-item.timeline-period-range:hover {
+    opacity: 1 !important;
+    z-index: 10;
+    border-style: solid !important;
+  }
+
+  /* Ensure stacked items are visible */
+  .vis-timeline .vis-item.vis-range {
+    height: 30px; /* Fixed height for better visibility */
+  }
+
+  .vis-timeline .vis-item.timeline-event-point {
+    background-color: rgb(251 146 60);
+    border-color: rgb(194 65 12);
+    border-width: 2px;
+    border-radius: 50%;
+    width: 12px;
+    height: 12px;
+  }
+
+  .vis-timeline .vis-item.vis-selected {
+    background-color: rgb(251 146 60);
+    border-color: rgb(194 65 12);
+    box-shadow: 0 0 8px rgba(251, 146, 60, 0.5);
+  }
+
+  .vis-timeline .vis-item.vis-selected.timeline-event-point {
+    background-color: rgb(194 65 12);
+    border-color: rgb(120 53 15);
+    transform: scale(1.3);
+  }
+
+  .vis-timeline .vis-item.vis-selected.timeline-period-range {
+    background-color: rgb(251 146 60);
+    border-color: rgb(194 65 12);
+  }
+
+  .vis-timeline .vis-item:hover {
+    box-shadow: 0 2px 8px rgba(251, 146, 60, 0.3);
+  }
+
+  .vis-timeline .vis-labelset .vis-label {
+    background-color: transparent;
+    border-color: rgb(251 146 60 / 0.2);
+    color: rgb(120 53 15);
+    font-weight: 600;
+    padding: 8px;
+    min-width: 200px; /* Ensure labels are wide enough */
+  }
+
+  /* Ensure groups are properly spaced when stacked */
+  .vis-timeline .vis-labelset .vis-label.vis-group-level-0 {
+    height: auto;
+    min-height: 60px; /* Increase height for better visibility */
+  }
+
+  .vis-timeline .vis-time-axis .vis-text {
+    color: rgb(120 53 15 / 0.6);
+    font-size: 12px;
+  }
+
+  .vis-timeline .vis-grid.vis-vertical {
+    border-color: rgb(251 146 60 / 0.2);
+  }
+
+  .vis-timeline .vis-grid.vis-minor {
+    border-color: rgb(251 146 60 / 0.1);
+  }
+
+  .vis-timeline .vis-current-time {
+    background-color: rgb(194 65 12);
+  }
 }

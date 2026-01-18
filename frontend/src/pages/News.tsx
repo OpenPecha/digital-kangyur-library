@@ -13,7 +13,8 @@ interface NewsItem {
   id: string;
   title: string;
   titleTibetan?: string;
-  description: string;
+  tibetanDescription?: string;
+  englishDescription?: string;
   date: string;
   imageUrl: string;
   link?: string;
@@ -38,7 +39,11 @@ const NewsCard = ({ news, isTibetan, t }: { news: NewsItem, isTibetan: boolean, 
         )}
       </CardHeader>
       <CardContent className="pb-2 flex-grow">
-        <p className="text-muted-foreground text-sm mb-3">{news.description}</p>
+        {isTibetan && news.tibetanDescription ? (
+          <p className="text-muted-foreground text-sm mb-3">{news.tibetanDescription?.slice(0, 100)}...</p>
+        ) : (
+          <p className="text-muted-foreground text-sm mb-3">{news.englishDescription?.slice(0, 100)}...</p>
+        )}
         <div className="flex items-center text-xs text-kangyur-dark/60">
           <Calendar className="h-3.5 w-3.5 mr-1.5" />
           {new Date(news.date).toLocaleDateString('en-US', {

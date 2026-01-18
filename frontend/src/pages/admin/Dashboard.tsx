@@ -17,24 +17,7 @@ const Dashboard = () => {
       path: "/admin/videos",
       description: "Manage video content with links"
     },
-    {
-      title: "Timeline",
-      icon: Clock,
-      path: "/admin/timeline",
-      description: "Manage timeline events"
-    },
-    {
-      title: "Audio",
-      icon: Music,
-      path: "/admin/audio",
-      description: "Manage audio recordings"
-    },
-    {
-      title: "Categories",
-      icon: FolderTree,
-      path: "/admin/catalog",
-      description: "Manage main categories and subcategories"
-    },
+
     {
       title: "Karchag",
       icon: FileText,
