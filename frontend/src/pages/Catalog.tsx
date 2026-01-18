@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
 import Footer from '@/components/ui/molecules/Footer';
 import CatalogSearch from '@/components/catalog/CatalogSearch';
 import KarchagTextCardList from '@/components/catalog/KarchagTextCardList';
-import CatalogBreadcrumb from '@/components/catalog/CatalogBreadcrumb';
+import Breadcrumb from '@/components/ui/atoms/Breadcrumb';
 import CatalogTreeList from "@/components/catalog/CatalogTreeList";
 import CatalogEmptyState from "@/components/catalog/CatalogEmptyState";
 import MainKarchagFrames from '@/components/catalog/MainKarchagFrames';
@@ -19,6 +19,8 @@ const Catalog = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const [currentPage, setCurrentPage] = useState(1);
   const { t, isTibetan } = useLanguage();
+  const isUpdatingFromUrl = useRef(false);
+  const previousParamsString = useRef(searchParams.toString());
 
   // Get URL parameters
   const category = searchParams.get('category');
@@ -75,42 +77,77 @@ const Catalog = () => {
 
   // Parse URL parameters on component mount
   useEffect(() => {
+    const currentParamsString = searchParams.toString();
+    
+    // Only update state if URL params actually changed
+    if (currentParamsString === previousParamsString.current) {
+      return;
+    }
+    
+    previousParamsString.current = currentParamsString;
+    
     const queryParam = searchParams.get('q');
     const itemParam = searchParams.get('item');
     const pageParam = searchParams.get('page');
-    if (queryParam) {
-      setSearchQuery(queryParam);
-    }
-    if (itemParam) {
-      setSelectedItem(itemParam);
-    }
-    if (pageParam) {
-      setCurrentPage(parseInt(pageParam, 10));
-    } else {
-      setCurrentPage(1);
-    }
+    
+    // Reset or set search query
+    const newQuery = queryParam || '';
+    const newItem = itemParam || null;
+    const newPage = pageParam ? parseInt(pageParam, 10) : 1;
+    
+    // Mark that we're updating from URL to prevent the other useEffect from running
+    isUpdatingFromUrl.current = true;
+    
+    // Update state
+    setSearchQuery(newQuery);
+    setSelectedItem(newItem);
+    setCurrentPage(newPage);
+    
+    // Reset the flag after state updates complete
+    // Use setTimeout to ensure it happens after React's state updates are processed
+    setTimeout(() => {
+      isUpdatingFromUrl.current = false;
+    }, 0);
   }, [searchParams]);
 
-  // Update URL when search, selection, or page changes
+  // Update URL when search, selection, or page changes (but not when updating from URL)
   useEffect(() => {
-    const newParams = new URLSearchParams(searchParams);
+    // Skip if we're currently updating from URL to prevent infinite loops
+    if (isUpdatingFromUrl.current) {
+      return;
+    }
+    
+    const newParams = new URLSearchParams();
+    
+    // Preserve category parameter if it exists
+    const categoryParam = searchParams.get('category');
+    if (categoryParam) {
+      newParams.set('category', categoryParam);
+    }
+    
+    // Set search query
     if (searchQuery) {
       newParams.set('q', searchQuery);
-    } else {
-      newParams.delete('q');
     }
+    
+    // Set selected item
     if (selectedItem) {
       newParams.set('item', selectedItem);
-    } else {
-      newParams.delete('item');
     }
+    
+    // Set current page
     if (currentPage > 1) {
       newParams.set('page', currentPage.toString());
-    } else {
-      newParams.delete('page');
     }
-    setSearchParams(newParams);
-  }, [searchQuery, selectedItem, currentPage]);
+    
+    // Only update if the params string is different to prevent infinite loops
+    const newParamsString = newParams.toString();
+    
+    if (newParamsString !== previousParamsString.current) {
+      previousParamsString.current = newParamsString;
+      setSearchParams(newParams);
+    }
+  }, [searchQuery, selectedItem, currentPage, searchParams, setSearchParams]);
 
   // Handle page change
   const handlePageChange = (page: number) => {
@@ -170,15 +207,6 @@ const Catalog = () => {
   const handleItemSelect = (id: string) => {
     setSelectedItem(id === selectedItem ? null : id);
     setCurrentPage(1);
-  };
-
-  // Handler to reset selected item and search query when clicking main "Categories" breadcrumb
-  const handleBreadcrumbCatalogClick = () => {
-    setSearchQuery('');
-    setSelectedItem(null);
-    setCurrentPage(1);
-    const newParams = new URLSearchParams();
-    setSearchParams(newParams);
   };
 
   // Renders a catalog item with its children
@@ -248,8 +276,8 @@ const Catalog = () => {
 
   return (
     <div className=" bg-white w-full">
-      {/* Only show CatalogSearch when MainKarchagFrames is not displayed */}
-      {(searchQuery || selectedItem || category) && (
+      {/* Show CatalogSearch on main category and subcategory sections (only if no active search query) */}
+      {category && !searchQuery && (
         <CatalogSearch searchQuery={searchQuery} setSearchQuery={setSearchQuery} />
       )}
 
@@ -260,8 +288,22 @@ const Catalog = () => {
 
       {/* Subcategories - show when a main category is selected but no specific subcategory is selected */}
       {category && !searchQuery && !selectedItem && selectedMainCategory && (
-        <div className="container mx-auto px-4 py-24">
+        <div className="container mx-auto px-4 pt-8 pb-12 min-h-[60vh]">
           <div className="mb-8">
+            <div className="mb-4">
+              <Breadcrumb 
+                items={[
+                  { label: t('catalog') || 'Catalog', href: '/catalog' },
+                  {
+                    label: isTibetan 
+                      ? (selectedMainCategory.name_tibetan || selectedMainCategory.name_english) 
+                      : (selectedMainCategory.name_english || selectedMainCategory.name_tibetan || '')
+                    // No href for current page
+                  }
+                ]}
+                showHome={false}
+              />
+            </div>
             <h2 className={`text-3xl font-bold text-center mb-2 ${isTibetan ? 'tibetan' : ''}`}>
               {isTibetan ? selectedMainCategory.name_tibetan : selectedMainCategory.name_english}
             </h2>
@@ -292,21 +334,33 @@ const Catalog = () => {
       
       {/* Selected Subcategory or Search Results */}
       {selectedItem || searchQuery ? (
-        <div className="container mx-auto px-4 py-8">
+        <div className="container mx-auto px-4 pt-8 pb-12 min-h-[90vh]">
           {/* Selected Subcategory Header with Breadcrumb */}
           {selectedItem && selectedItemDetails && !searchQuery && (
             <div className="mb-8">
-              <div className="relative mb-4">
-                <CatalogBreadcrumb
-                  category={category || undefined}
-                  selectedItem={selectedItem}
-                  catalogData={[]}
-                  onCatalogClick={handleBreadcrumbCatalogClick}
+              <div className="mb-4">
+                <Breadcrumb 
+                  items={[
+                    { label: t('catalog') || 'Catalog', href: '/catalog' },
+                    ...(selectedMainCategory ? [{
+                      label: isTibetan 
+                        ? (selectedMainCategory.name_tibetan || selectedMainCategory.name_english) 
+                        : (selectedMainCategory.name_english || selectedMainCategory.name_tibetan || ''),
+                      href: `/catalog?category=${selectedMainCategory.id}`
+                    }] : []),
+                    ...(selectedSubCategory ? [{
+                      label: isTibetan 
+                        ? (selectedSubCategory.name_tibetan || selectedSubCategory.name_english) 
+                        : (selectedSubCategory.name_english || selectedSubCategory.name_tibetan || '')
+                      // No href for current page
+                    }] : [])
+                  ]}
+                  showHome={false}
                 />
-                <h2 className={`text-3xl font-bold text-center ${isTibetan ? 'tibetan' : ''}`}>
-                  {isTibetan ? selectedItemDetails.title.tibetan : selectedItemDetails.title.english}
-                </h2>
               </div>
+              <h2 className={`text-3xl font-bold text-center ${isTibetan ? 'tibetan' : ''}`}>
+                {isTibetan ? selectedItemDetails.title.tibetan : selectedItemDetails.title.english}
+              </h2>
             </div>
           )}
           
@@ -333,8 +387,8 @@ const Catalog = () => {
               if (selectedSubCategory.content) {
                 // Display content if subcategory has content
                 return (
-                  <div className="max-w-4xl mx-auto">
-                    <div className="prose prose-lg max-w-none">
+                  <div className="max-w-4xl mx-auto min-h-[60vh] mt-12">
+                    <div className="prose prose-lg max-w-none font-['CustomTibetan']">
                       <div className={`whitespace-pre-line ${isTibetan ? 'tibetan text-lg leading-relaxed' : 'text-gray-700'}`}>
                         {selectedSubCategory.content}
                       </div>

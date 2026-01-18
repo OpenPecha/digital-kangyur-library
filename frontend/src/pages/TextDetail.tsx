@@ -76,6 +76,7 @@ const TextDetail = () => {
       
       const transformedData = {
         id: response.id,
+        sub_category_id: response.sub_category_id,
         title: {
           tibetan: response.tibetan_title?.trim() || '',
           english: response.english_title?.trim() || ''
@@ -88,6 +89,26 @@ const TextDetail = () => {
     },
     enabled: !!id,
     retry: 1,
+  });
+
+  // Fetch subcategory data when text data is loaded
+  const { data: subCategoryData } = useQuery({
+    queryKey: ['subcategory', textData?.sub_category_id],
+    queryFn: async () => {
+      if (!textData?.sub_category_id) return null;
+      return await api.getKarchagSubCategoryById(textData.sub_category_id);
+    },
+    enabled: !!textData?.sub_category_id,
+  });
+
+  // Fetch main category data when subcategory data is loaded
+  const { data: mainCategoryData } = useQuery({
+    queryKey: ['maincategory', subCategoryData?.main_category_id],
+    queryFn: async () => {
+      if (!subCategoryData?.main_category_id) return null;
+      return await api.getKarchagMainCategoryById(subCategoryData.main_category_id);
+    },
+    enabled: !!subCategoryData?.main_category_id,
   });
 
   // Fetch summary data when summary tab is active
@@ -201,13 +222,26 @@ const TextDetail = () => {
     );
   }
 
-  // Breadcrumb: Catalog > Discourses > Prajnaparamita > Golden Sutra
-  // For demonstration, use static entries for now (in a full version, this would be dynamically resolved)
+  // Build breadcrumb dynamically from category hierarchy
   const breadcrumbItems = [
-    { label: 'Catalog', href: '/catalog' },
-    { label: 'Discourses', href: '/catalog?category=discourses' },
-    { label: 'Prajnaparamita', href: '/catalog?item=prajnaparamita' },
-    { label: textData?.title?.english || textData?.title?.tibetan || '' }
+    { label: t('catalog') || 'Catalog', href: '/catalog' },
+    ...(mainCategoryData ? [{
+      label: isTibetan 
+        ? (mainCategoryData.name_tibetan || mainCategoryData.name_english) 
+        : (mainCategoryData.name_english || mainCategoryData.name_tibetan || ''),
+      href: `/catalog?category=${mainCategoryData.id}`
+    }] : []),
+    ...(subCategoryData ? [{
+      label: isTibetan 
+        ? (subCategoryData.name_tibetan || subCategoryData.name_english) 
+        : (subCategoryData.name_english || subCategoryData.name_tibetan || ''),
+      href: `/catalog?category=${mainCategoryData?.id}&item=${subCategoryData.id}`
+    }] : []),
+    { 
+      label: isTibetan 
+        ? (textData?.title?.tibetan || textData?.title?.english || '') 
+        : (textData?.title?.english || textData?.title?.tibetan || '') 
+    }
   ];
 
   return (
@@ -318,7 +352,7 @@ const TextDetail = () => {
                                   </h3>
                                   <div className={cn(
                                     "text-base sm:text-lg leading-relaxed text-foreground whitespace-pre-line break-words",
-                                    isTibetan && "tibetan"
+                                    isTibetan && "tibetan font-['CustomTibetan']"
                                   )}>
                                     {section.content}
                                   </div>

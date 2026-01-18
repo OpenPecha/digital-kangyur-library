@@ -32,7 +32,7 @@ const MainKarchagFrames: React.FC = () => {
   return (
     <>
       <KarchagSearch />
-      <div className="container mx-auto px-4 py-24">
+      <div className="container mx-auto px-4 pt-8 pb-12 min-h-[60vh]">
         <div className="text-center mb-12">
           <h2 className="text-3xl font-bold tibetan mb-4">དཀར་ཆག</h2>
           <p className="text-gray-600 max-w-2xl mx-auto">

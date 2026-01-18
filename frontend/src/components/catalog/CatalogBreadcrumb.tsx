@@ -1,90 +1,78 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { findItemInTree } from '@/utils/catalogUtils';
 import useLanguage from '@/hooks/useLanguage';
 
 interface CatalogBreadcrumbProps {
   category?: string | null;
   selectedItem?: string | null;
-  catalogData?: any[];
+  mainCategory?: {
+    id: string;
+    name_english: string;
+    name_tibetan?: string;
+  } | null;
+  subCategory?: {
+    id: string;
+    name_english: string;
+    name_tibetan?: string;
+  } | null;
   onCatalogClick?: () => void;
 }
 
 const CatalogBreadcrumb: React.FC<CatalogBreadcrumbProps> = ({
   category,
   selectedItem,
-  catalogData = [],
+  mainCategory,
+  subCategory,
   onCatalogClick,
 }) => {
   const { isTibetan, t } = useLanguage();
 
-  const selectedItemDetails = selectedItem
-    ? findItemInTree(catalogData, selectedItem)
-    : null;
-
   const renderBreadcrumb = () => {
-    const parts = [];
-    
-    // Always start with Categories (main page)
-    parts.push(
+    const parts = [
+      // Always start with Catalog (main page)
       <Link
-        key="categories"
+        key="catalog"
         to="/catalog"
         className="hover:text-indigo-600 transition"
         onClick={onCatalogClick}
       >
         {t('catalog')}
       </Link>
-    );
+    ];
 
     // If a main category is selected, show it
-    if (category && !selectedItem) {
-      const categoryItem = catalogData.find(item => item.id_slug === category);
-      if (categoryItem) {
-        parts.push(<span key="sep-category" className="mx-2">/</span>);
-        parts.push(
-          <span key={category} className="text-indigo-600 font-medium">
-            {isTibetan ? categoryItem.title.tibetan : categoryItem.title.english}
-          </span>
-        );
-      }
+    if (mainCategory && !selectedItem) {
+      const mainCategoryName = isTibetan 
+        ? (mainCategory.name_tibetan || mainCategory.name_english) 
+        : (mainCategory.name_english || mainCategory.name_tibetan || '');
+      parts.push(
+        <span key="sep-category" className="mx-2">/</span>,
+        <span key={mainCategory.id} className="text-indigo-600 font-medium">
+          {mainCategoryName}
+        </span>
+      );
     }
 
     // If a subcategory is selected, show main category -> subcategory
-    if (selectedItem && selectedItemDetails) {
-      // Find the main category that contains this subcategory
-      const findMainCategory = (items: any[], targetId: string): any | null => {
-        for (const item of items) {
-          if (item.children) {
-            const found = item.children.find((child: any) => child.id === targetId || child.id_slug === targetId);
-            if (found) return item;
-            const nested = findMainCategory(item.children, targetId);
-            if (nested) return nested;
-          }
-        }
-        return null;
-      };
-
-      const mainCategory = findMainCategory(catalogData, selectedItem);
-      
-      if (mainCategory) {
-        parts.push(<span key="sep-main" className="mx-2">/</span>);
-        parts.push(
-          <Link
-            key={mainCategory.id}
-            to={`/catalog?category=${mainCategory.id_slug}`}
-            className="hover:text-indigo-600 transition"
-          >
-            {isTibetan ? mainCategory.title.tibetan : mainCategory.title.english}
-          </Link>
-        );
-      }
-
-      // Add the selected subcategory
-      parts.push(<span key="sep-selected" className="mx-2">/</span>);
+    if (selectedItem && mainCategory && subCategory) {
+      const mainCategoryName = isTibetan 
+        ? (mainCategory.name_tibetan || mainCategory.name_english) 
+        : (mainCategory.name_english || mainCategory.name_tibetan || '');
+      const subCategoryName = isTibetan 
+        ? (subCategory.name_tibetan || subCategory.name_english) 
+        : (subCategory.name_english || subCategory.name_tibetan || '');
       parts.push(
+        <span key="sep-main" className="mx-2">/</span>,
+        <Link
+          key={mainCategory.id}
+          to={`/catalog?category=${mainCategory.id}`}
+          className="hover:text-indigo-600 transition"
+        >
+          {mainCategoryName}
+        </Link>,
+        <span key="sep-selected" className="mx-2">/</span>,
         <span key="selected" className="text-indigo-600 font-medium">
-          {isTibetan ? selectedItemDetails.title.tibetan : selectedItemDetails.title.english}
+          {subCategoryName}
         </span>
       );
     }
