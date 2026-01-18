@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Button } from '@/components/ui/atoms/button';
 import { Input } from '@/components/ui/atoms/input';
 import { Label } from "@/components/ui/atoms/label";
@@ -19,6 +19,7 @@ import {
 } from "@/components/ui/atoms/select";
 import { useLanguage } from '@/hooks/useLanguage';
 import { toast } from 'sonner';
+import { api } from '@/utils/api';
 
 interface TextFormProps {
   isOpen: boolean;
@@ -33,6 +34,8 @@ interface TextFormProps {
 
 export const TextForm = ({ isOpen, onClose, mode, data, subCategories, mainCategories, defaultSubCategoryId, onSave }: TextFormProps) => {
   const { t } = useLanguage();
+  const fileInputRef = useRef<HTMLInputElement>(null);
+  const [uploading, setUploading] = useState(false);
 
   const [formData, setFormData] = useState(() => {
     if (data) {
@@ -130,6 +133,40 @@ export const TextForm = ({ isOpen, onClose, mode, data, subCategories, mainCateg
     onSave(formData);
   };
 
+  const handleFileUpload = async (event: React.ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0];
+    if (!file) return;
+
+    // Validate file type
+    if (file.type !== 'application/pdf') {
+      toast.error('Please select a PDF file');
+      return;
+    }
+
+    // Validate file size (100MB limit)
+    const maxSize = 100 * 1024 * 1024; // 100MB
+    if (file.size > maxSize) {
+      toast.error('File size must be less than 100MB');
+      return;
+    }
+
+    setUploading(true);
+    try {
+      const result = await api.uploadFile(file);
+      setFormData({ ...formData, pdf_url: result.url });
+      toast.success('PDF uploaded successfully');
+      // Reset file input
+      if (fileInputRef.current) {
+        fileInputRef.current.value = '';
+      }
+    } catch (error: any) {
+      console.error('Upload error:', error);
+      toast.error(error.message || 'Failed to upload PDF');
+    } finally {
+      setUploading(false);
+    }
+  };
+
   const handleClose = () => {
     // Reset form when closing
     if (data && mode === 'edit') {
@@ -170,6 +207,10 @@ export const TextForm = ({ isOpen, onClose, mode, data, subCategories, mainCateg
         order_index: 0,
         is_active: true,
       });
+    }
+    // Reset file input
+    if (fileInputRef.current) {
+      fileInputRef.current.value = '';
     }
     onClose();
   };
@@ -288,11 +329,36 @@ export const TextForm = ({ isOpen, onClose, mode, data, subCategories, mainCateg
               </div>
               <div className="space-y-2">
                 <Label htmlFor="pdf_url">{t('pdfUrl')} ({t('optional')})</Label>
-                <Input
-                  id="pdf_url"
-                  value={formData.pdf_url}
-                  onChange={(e) => setFormData({ ...formData, pdf_url: e.target.value })}
-                />
+                <div className="flex gap-2">
+                  <Input
+                    id="pdf_url"
+                    value={formData.pdf_url}
+                    onChange={(e) => setFormData({ ...formData, pdf_url: e.target.value })}
+                    placeholder="Enter PDF URL or upload a file"
+                    className="flex-1"
+                  />
+                  <input
+                    ref={fileInputRef}
+                    type="file"
+                    accept=".pdf,application/pdf"
+                    onChange={handleFileUpload}
+                    className="hidden"
+                    id="pdf_file_upload"
+                  />
+                  <Button
+                    type="button"
+                    variant="outline"
+                    onClick={() => fileInputRef.current?.click()}
+                    disabled={uploading}
+                  >
+                    {uploading ? 'Uploading...' : 'Upload PDF'}
+                  </Button>
+                </div>
+                {formData.pdf_url && (
+                  <p className="text-xs text-muted-foreground">
+                    PDF URL: <a href={formData.pdf_url} target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline break-all">{formData.pdf_url}</a>
+                  </p>
+                )}
               </div>
             </div>
 

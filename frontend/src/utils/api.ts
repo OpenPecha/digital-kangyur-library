@@ -421,6 +421,44 @@ export const api = {
   getTextSummary: (textId: string) => {
     return fetchApi<any>(`/karchag/texts/${textId}/summary`);
   },
+
+  // File Upload
+  uploadFile: async (file: File): Promise<{ url: string; filename: string; size: number; mime_type: string; key: string }> => {
+    const url = `${API_BASE_URL}/upload`;
+    const token = getAuthToken();
+    
+    const formData = new FormData();
+    formData.append('file', file);
+    
+    const headers: HeadersInit = {};
+    
+    // Add authorization header if token exists
+    if (token) {
+      headers['Authorization'] = `Bearer ${token}`;
+    }
+    
+    const response = await fetch(url, {
+      method: 'POST',
+      headers,
+      body: formData,
+    });
+    
+    if (!response.ok) {
+      // Handle 401 Unauthorized - token might be expired
+      if (response.status === 401) {
+        localStorage.removeItem('auth_token');
+        localStorage.removeItem('auth_user');
+        if (window.location.pathname.startsWith('/admin')) {
+          window.location.href = '/admin/login';
+        }
+      }
+      const error = await response.json().catch(() => ({ message: 'An error occurred' }));
+      throw new ApiError(response.status, error.message || `HTTP error! status: ${response.status}`);
+    }
+    
+    const result = await response.json();
+    return result.data;
+  },
 };
 
 export { ApiError };

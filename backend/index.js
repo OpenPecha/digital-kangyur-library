@@ -16,6 +16,7 @@ const videoRoutes = require('./routes/videos');
 const searchRoutes = require('./routes/search');
 const adminRoutes = require('./routes/admin');
 const karchagRoutes = require('./routes/karchag');
+const uploadRoutes = require('./routes/uploadfile');
 
 const app = express();
 
@@ -47,6 +48,7 @@ app.use(`${apiBase}/videos`, videoRoutes);
 app.use(`${apiBase}/search`, searchRoutes);
 app.use(`${apiBase}/admin`, adminRoutes);
 app.use(`${apiBase}/karchag`, karchagRoutes);
+app.use(`${apiBase}/upload`, uploadRoutes);
 
 // Root endpoint
 app.get('/', (req, res) => {
