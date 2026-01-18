@@ -1,0 +1,263 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+  output   = "./generated"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model User {
+  id            String   @id @default(uuid())
+  username      String   @unique
+  email         String   @unique
+  password_hash String
+  role          String
+  is_active     Boolean  @default(true)
+  created_at    DateTime @default(now())
+  updated_at    DateTime @updatedAt
+}
+
+model CatalogCategory {
+  id            String   @id @default(uuid())
+  parent_id     String?
+  id_slug       String   @unique
+  title_tibetan String?
+  title_english String
+  description   String?
+  count         Int      @default(0)
+  order_index   Int      @default(0)
+  is_active     Boolean  @default(true)
+  created_at    DateTime @default(now())
+  updated_at    DateTime @updatedAt
+
+  // Self-referential relationship
+  parent   CatalogCategory?  @relation("CategoryParent", fields: [parent_id], references: [id])
+  children CatalogCategory[] @relation("CategoryParent")
+}
+
+model News {
+  id                  String    @id @default(uuid())
+  tibetan_title       String?
+  english_title       String
+  tibetan_description String?
+  english_description String
+  thumbnail_url       String?
+  is_published        Boolean   @default(false)
+  published_at        DateTime?
+  created_at          DateTime  @default(now())
+  updated_at          DateTime  @updatedAt
+}
+
+model TimelinePeriod {
+  id           String   @id @default(uuid())
+  id_slug      String   @unique
+  name_tibetan String?
+  name_english String
+  description  String?
+  start_year   Int
+  end_year     Int
+  created_at   DateTime @default(now())
+  updated_at   DateTime @updatedAt
+
+  // Relations
+  events TimelineEvent[]
+}
+
+model TimelineEvent {
+  id                  String   @id @default(uuid())
+  period_id           String
+  title_english       String
+  title_tibetan       String?
+  title_sanskrit      String?
+  description_english String?
+  description_tibetan String?
+  category            String?
+  year                Int
+  century             Int?
+  era                 String?  @default("CE")
+  is_approximate      Boolean  @default(false)
+  location_english    String?
+  location_tibetan    String?
+  significance        String?
+  order_index         Int      @default(0)
+  created_at          DateTime @default(now())
+  updated_at          DateTime @updatedAt
+
+  // Relations
+  period    TimelinePeriod          @relation(fields: [period_id], references: [id], onDelete: Cascade)
+  figures   TimelineEventFigure[]
+  relations TimelineEventRelation[]
+  sources   TimelineEventSource[]
+}
+
+model TimelineEventFigure {
+  id           String   @id @default(uuid())
+  event_id     String
+  name_english String?
+  name_tibetan String?
+  role         String?
+  created_at   DateTime @default(now())
+  updated_at   DateTime @updatedAt
+
+  // Relations
+  event TimelineEvent @relation(fields: [event_id], references: [id], onDelete: Cascade)
+}
+
+model TimelineEventRelation {
+  id               String   @id @default(uuid())
+  event_id         String
+  related_event_id String?
+  relation_type    String?
+  created_at       DateTime @default(now())
+  updated_at       DateTime @updatedAt
+
+  // Relations
+  event TimelineEvent @relation(fields: [event_id], references: [id], onDelete: Cascade)
+}
+
+model TimelineEventSource {
+  id           String   @id @default(uuid())
+  event_id     String
+  source_title String?
+  source_url   String?
+  citation     String?
+  created_at   DateTime @default(now())
+  updated_at   DateTime @updatedAt
+
+  // Relations
+  event TimelineEvent @relation(fields: [event_id], references: [id], onDelete: Cascade)
+}
+
+model AudioRecording {
+  id                  String   @id @default(uuid())
+  tibetan_title       String?
+  english_title       String?
+  tibetan_description String?
+  english_description String?
+  audio_url           String?
+  thumbnail_url       String?
+  duration            Int? // Duration in seconds
+  is_active           Boolean  @default(true)
+  created_at          DateTime @default(now())
+  updated_at          DateTime @updatedAt
+}
+
+model Video {
+  id                  String   @id @default(uuid())
+  tibetan_title       String?
+  english_title       String?
+  tibetan_description String?
+  english_description String?
+  video_link          String?
+  thumbnail_url       String?
+  is_active           Boolean  @default(true)
+  created_at          DateTime @default(now())
+  updated_at          DateTime @updatedAt
+}
+
+model KarchagMainCategory {
+  id                  String   @id @default(uuid())
+  name_english        String
+  name_tibetan        String?
+  description_english String?
+  description_tibetan String?
+  order_index         Int      @default(0)
+  is_active           Boolean  @default(true)
+  created_at          DateTime @default(now())
+  updated_at          DateTime @updatedAt
+
+  // Relations
+  sub_categories KarchagSubCategory[]
+}
+
+model KarchagSubCategory {
+  id                  String              @id @default(uuid())
+  main_category_id    String
+  name_english        String
+  name_tibetan        String?
+  description_english String?
+  description_tibetan String?
+  order_index         Int                 @default(0)
+  is_active           Boolean             @default(true)
+  created_at          DateTime            @default(now())
+  updated_at          DateTime            @updatedAt
+  only_content        Boolean             @default(false)
+  content             String?
+  // Relations
+  main_category       KarchagMainCategory @relation(fields: [main_category_id], references: [id], onDelete: Cascade)
+  texts               Text[]
+}
+
+model Text {
+  id              String @id @default(uuid())
+  sub_category_id String
+
+  tibetan_title  String?
+  chinese_title  String?
+  sanskrit_title String?
+  english_title  String?
+
+  derge_id               String?
+  yeshe_de_id            String?
+  yeshe_de_volume_number String?
+  yeshe_de_volume_length String?
+  sermon                 String?
+  yana                   String?
+  translation_period     String?
+
+  pdf_url     String?
+  order_index Int      @default(0)
+  is_active   Boolean  @default(true)
+  created_at  DateTime @default(now())
+  updated_at  DateTime @updatedAt
+
+  sub_category KarchagSubCategory    @relation(fields: [sub_category_id], references: [id], onDelete: Cascade)
+  summary      KarchagTextSummary?
+  metadata     KarchagTextMetadata[]
+}
+
+model KarchagTextSummary {
+  id                         String   @id @default(uuid())
+  karchag_text_id            String   @unique
+  translation_homage_tibetan String?
+  translation_homage_english String?
+  purpose_tibetan            String?
+  purpose_english            String?
+  summary_text_tibetan       String?
+  summary_text_english       String?
+  word_meaning_tibetan       String?
+  word_meaning_english       String?
+  connection_tibetan         String?
+  connection_english         String?
+  question_answers_tibetan   String?
+  question_answers_english   String?
+  colophon_tibetan           String?
+  colophon_english           String?
+  created_at                 DateTime @default(now())
+  updated_at                 DateTime @updatedAt
+
+  // Relations
+  karchag_text Text @relation(fields: [karchag_text_id], references: [id], onDelete: Cascade)
+}
+
+model KarchagTextMetadata {
+  id              String   @id @default(uuid())
+  karchag_text_id String
+  metadata_key    String
+  metadata_value  String
+  metadata_group  String
+  label           String?
+  order_index     Int      @default(0)
+  created_at      DateTime @default(now())
+  updated_at      DateTime @updatedAt
+
+  // Relations
+  text Text @relation(fields: [karchag_text_id], references: [id], onDelete: Cascade)
+}

@@ -1,0 +1,9 @@
+{
+  "watch": ["**/*.ts", "**/*.js"],
+  "ext": "ts,js,json",
+  "ignore": ["node_modules", "dist", "prisma/generated"],
+  "exec": "tsx index.js",
+  "env": {
+    "NODE_ENV": "development"
+  }
+}
