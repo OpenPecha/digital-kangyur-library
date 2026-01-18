@@ -321,9 +321,7 @@ router.get('/texts/:id', karchagController.getTextById);
  *                 type: string
  *               yeshe_de_volume_number:
  *                 type: string
- *               yeshe_de_page_start:
- *                 type: string
- *               yeshe_de_page_end:
+ *               yeshe_de_volume_length:
  *                 type: string
  *               tibetan_title:
  *                 type: string
@@ -333,7 +331,7 @@ router.get('/texts/:id', karchagController.getTextById);
  *                 type: string
  *               english_title:
  *                 type: string
- *               turning:
+ *               sermon:
  *                 type: string
  *               yana:
  *                 type: string

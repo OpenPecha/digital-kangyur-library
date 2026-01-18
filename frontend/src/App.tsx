@@ -56,6 +56,8 @@ const App = () => (
               <Route path="/admin/catalog" element={<ProtectedRoute><CatalogAdmin /></ProtectedRoute>} />
               <Route path="/admin/users" element={<ProtectedRoute><UsersAdmin /></ProtectedRoute>} />
               <Route path="/admin/karchag" element={<ProtectedRoute><KarchagAdmin /></ProtectedRoute>} />
+              <Route path="/admin/karchag/:mainId" element={<ProtectedRoute><KarchagAdmin /></ProtectedRoute>} />
+              <Route path="/admin/karchag/:mainId/:subId" element={<ProtectedRoute><KarchagAdmin /></ProtectedRoute>} />
               <Route path="*" element={<NotFound />} />
             </Routes>
           </BrowserRouter>

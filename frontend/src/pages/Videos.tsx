@@ -72,23 +72,6 @@ const VideoCard = ({ video, onPlay, t, isTibetan }: { video: VideoItem; onPlay: 
           <span>{video.duration}</span>
         </div>
       </CardContent>
-      <CardFooter>
-        {video.youtubeId ? (
-          <button 
-            onClick={() => onPlay(video)}
-            className="inline-flex items-center text-kangyur-orange text-sm font-medium hover:text-kangyur-orange/80 transition-colors"
-          >
-           {t("watchTeachings")}
-          </button>
-        ) : (
-          <Link 
-            to={video.link || '#'}
-            className="group inline-flex items-center text-kangyur-orange text-sm font-medium hover:text-kangyur-orange/80 transition-colors"
-          >
-            {t("watchTeachings")}
-          </Link>
-        )}
-      </CardFooter>
     </Card>
   );
 };
@@ -264,22 +247,7 @@ const Videos = () => {
             </div>
           )}
           
-          {activeVideo && !activeVideo.youtubeId && activeVideo.link ? (
-            <div className="p-4">
-              <p className="mb-4 text-center">{activeVideo.title}</p>
-              <div className="text-center">
-                <a
-                  href={activeVideo.link}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center px-4 py-2 bg-kangyur-orange text-white rounded-md hover:bg-kangyur-orange/90 transition-colors"
-                >
-                  {t("watchTeachings")}
-                  <Play className="ml-2 h-4 w-4" />
-                </a>
-              </div>
-            </div>
-          ) : null}
+      
         </DialogContent>
       </Dialog>
     </div>

@@ -210,9 +210,8 @@ model Text {
   derge_id            String?  
   yeshe_de_id         String?  
   yeshe_de_volume_number String? 
-  yeshe_de_page_start String? 
-  yeshe_de_page_end   String? 
-  turning             String?  
+  yeshe_de_volume_length String? 
+  sermon             String?  
   yana                String?  
   translation_period  String? 
   

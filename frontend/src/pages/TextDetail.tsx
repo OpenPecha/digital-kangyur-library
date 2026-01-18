@@ -11,12 +11,12 @@ import api from '@/utils/api';
 
 // Mapping section IDs to translation keys
 const sectionTitleMap = {
-  'translation-homage': 'translationHomage' as const,
+  'translation-homage': 'translation homage' as const,
   'purpose': 'purpose' as const,
   'summary': 'summary' as const,
-  'word-meaning': 'wordMeaning' as const,
+  'word-meaning': 'word meaning' as const,
   'connection': 'connection' as const,
-  'questions-answers': 'questionsAnswers' as const,
+  'questions-answers': 'questions and answers' as const,
   'colophon': 'colophon' as const,
 };
 
@@ -67,11 +67,9 @@ const TextDetail = () => {
         { key: 'derge-id', label: 'Derge ID', value: response.derge_id?.trim() || '', group: 'catalog' },
         { key: 'yeshe-de-id', label: 'Yeshe De ID', value: response.yeshe_de_id?.trim() || '', group: 'catalog' },
         { key: 'yeshe-de-volume', label: 'Yeshe De Volume', value: response.yeshe_de_volume_number?.trim() || '', group: 'catalog' },
-        { key: 'yeshe-de-pages', label: 'Yeshe De Pages', value: response.yeshe_de_page_start?.trim() && response.yeshe_de_page_end?.trim() 
-          ? `${response.yeshe_de_page_start.trim()} - ${response.yeshe_de_page_end.trim()}` 
-          : '', group: 'catalog' },
+        { key: 'yeshe-de-volume-length', label: 'Yeshe De Volume Length', value: response.yeshe_de_volume_length?.trim() || '', group: 'catalog' },
         // Content information
-        { key: 'turning', label: 'Turning', value: response.turning?.trim() || '', group: 'content' },
+        { key: 'sermon', label: 'Sermon', value: response.sermon?.trim() || '', group: 'content' },
         { key: 'yana', label: 'Yana', value: response.yana?.trim() || '', group: 'content' },
         { key: 'translation-period', label: 'Translation Period', value: response.translation_period?.trim() || '', group: 'content' },
       ].filter(item => item.value); // Only include items with values
@@ -289,7 +287,7 @@ const TextDetail = () => {
                                   key={section.id}
                                   onClick={() => setActiveSection(section.id)}
                                   className={cn(
-                                    "w-full text-left px-3 py-2 rounded-lg transition-colors text-xs sm:text-sm font-semibold",
+                                    "w-full text-left px-3 py-2 rounded-lg transition-colors text-xs sm:text-sm font-semibold capitalize",
                                     isTibetan && "tibetan",
                                     activeSection === section.id
                                       ? "bg-primary text-primary-foreground"
@@ -312,7 +310,7 @@ const TextDetail = () => {
                                 <div key={section.id} className="space-y-4">
                                   <h3
                                     className={cn(
-                                      "text-lg sm:text-xl font-semibold text-kangyur-maroon mb-3 sm:mb-4",
+                                      "text-lg sm:text-xl font-semibold text-kangyur-maroon mb-3 sm:mb-4 capitalize",
                                       isTibetan && "tibetan"
                                     )}
                                   >

@@ -8,7 +8,7 @@ export interface KarchagEntry {
   category: string;
   parentCategoryId: string;
   yesheTextId: string;
-  turning: string;
+  sermon: string;
   vehicle: string;
   translationType: string;
   dergeTextId: string;

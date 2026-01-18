@@ -15976,9 +15976,8 @@ export namespace Prisma {
     derge_id: string | null
     yeshe_de_id: string | null
     yeshe_de_volume_number: string | null
-    yeshe_de_page_start: string | null
-    yeshe_de_page_end: string | null
-    turning: string | null
+    yeshe_de_volume_length: string | null
+    sermon: string | null
     yana: string | null
     translation_period: string | null
     pdf_url: string | null
@@ -15998,9 +15997,8 @@ export namespace Prisma {
     derge_id: string | null
     yeshe_de_id: string | null
     yeshe_de_volume_number: string | null
-    yeshe_de_page_start: string | null
-    yeshe_de_page_end: string | null
-    turning: string | null
+    yeshe_de_volume_length: string | null
+    sermon: string | null
     yana: string | null
     translation_period: string | null
     pdf_url: string | null
@@ -16020,9 +16018,8 @@ export namespace Prisma {
     derge_id: number
     yeshe_de_id: number
     yeshe_de_volume_number: number
-    yeshe_de_page_start: number
-    yeshe_de_page_end: number
-    turning: number
+    yeshe_de_volume_length: number
+    sermon: number
     yana: number
     translation_period: number
     pdf_url: number
@@ -16052,9 +16049,8 @@ export namespace Prisma {
     derge_id?: true
     yeshe_de_id?: true
     yeshe_de_volume_number?: true
-    yeshe_de_page_start?: true
-    yeshe_de_page_end?: true
-    turning?: true
+    yeshe_de_volume_length?: true
+    sermon?: true
     yana?: true
     translation_period?: true
     pdf_url?: true
@@ -16074,9 +16070,8 @@ export namespace Prisma {
     derge_id?: true
     yeshe_de_id?: true
     yeshe_de_volume_number?: true
-    yeshe_de_page_start?: true
-    yeshe_de_page_end?: true
-    turning?: true
+    yeshe_de_volume_length?: true
+    sermon?: true
     yana?: true
     translation_period?: true
     pdf_url?: true
@@ -16096,9 +16091,8 @@ export namespace Prisma {
     derge_id?: true
     yeshe_de_id?: true
     yeshe_de_volume_number?: true
-    yeshe_de_page_start?: true
-    yeshe_de_page_end?: true
-    turning?: true
+    yeshe_de_volume_length?: true
+    sermon?: true
     yana?: true
     translation_period?: true
     pdf_url?: true
@@ -16205,9 +16199,8 @@ export namespace Prisma {
     derge_id: string | null
     yeshe_de_id: string | null
     yeshe_de_volume_number: string | null
-    yeshe_de_page_start: string | null
-    yeshe_de_page_end: string | null
-    turning: string | null
+    yeshe_de_volume_length: string | null
+    sermon: string | null
     yana: string | null
     translation_period: string | null
     pdf_url: string | null
@@ -16246,9 +16239,8 @@ export namespace Prisma {
     derge_id?: boolean
     yeshe_de_id?: boolean
     yeshe_de_volume_number?: boolean
-    yeshe_de_page_start?: boolean
-    yeshe_de_page_end?: boolean
-    turning?: boolean
+    yeshe_de_volume_length?: boolean
+    sermon?: boolean
     yana?: boolean
     translation_period?: boolean
     pdf_url?: boolean
@@ -16272,9 +16264,8 @@ export namespace Prisma {
     derge_id?: boolean
     yeshe_de_id?: boolean
     yeshe_de_volume_number?: boolean
-    yeshe_de_page_start?: boolean
-    yeshe_de_page_end?: boolean
-    turning?: boolean
+    yeshe_de_volume_length?: boolean
+    sermon?: boolean
     yana?: boolean
     translation_period?: boolean
     pdf_url?: boolean
@@ -16295,9 +16286,8 @@ export namespace Prisma {
     derge_id?: boolean
     yeshe_de_id?: boolean
     yeshe_de_volume_number?: boolean
-    yeshe_de_page_start?: boolean
-    yeshe_de_page_end?: boolean
-    turning?: boolean
+    yeshe_de_volume_length?: boolean
+    sermon?: boolean
     yana?: boolean
     translation_period?: boolean
     pdf_url?: boolean
@@ -16318,9 +16308,8 @@ export namespace Prisma {
     derge_id?: boolean
     yeshe_de_id?: boolean
     yeshe_de_volume_number?: boolean
-    yeshe_de_page_start?: boolean
-    yeshe_de_page_end?: boolean
-    turning?: boolean
+    yeshe_de_volume_length?: boolean
+    sermon?: boolean
     yana?: boolean
     translation_period?: boolean
     pdf_url?: boolean
@@ -16330,7 +16319,7 @@ export namespace Prisma {
     updated_at?: boolean
   }
 
-  export type TextOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "sub_category_id" | "tibetan_title" | "chinese_title" | "sanskrit_title" | "english_title" | "derge_id" | "yeshe_de_id" | "yeshe_de_volume_number" | "yeshe_de_page_start" | "yeshe_de_page_end" | "turning" | "yana" | "translation_period" | "pdf_url" | "order_index" | "is_active" | "created_at" | "updated_at", ExtArgs["result"]["text"]>
+  export type TextOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "sub_category_id" | "tibetan_title" | "chinese_title" | "sanskrit_title" | "english_title" | "derge_id" | "yeshe_de_id" | "yeshe_de_volume_number" | "yeshe_de_volume_length" | "sermon" | "yana" | "translation_period" | "pdf_url" | "order_index" | "is_active" | "created_at" | "updated_at", ExtArgs["result"]["text"]>
   export type TextInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     sub_category?: boolean | KarchagSubCategoryDefaultArgs<ExtArgs>
     summary?: boolean | Text$summaryArgs<ExtArgs>
@@ -16361,9 +16350,8 @@ export namespace Prisma {
       derge_id: string | null
       yeshe_de_id: string | null
       yeshe_de_volume_number: string | null
-      yeshe_de_page_start: string | null
-      yeshe_de_page_end: string | null
-      turning: string | null
+      yeshe_de_volume_length: string | null
+      sermon: string | null
       yana: string | null
       translation_period: string | null
       pdf_url: string | null
@@ -16806,9 +16794,8 @@ export namespace Prisma {
     readonly derge_id: FieldRef<"Text", 'String'>
     readonly yeshe_de_id: FieldRef<"Text", 'String'>
     readonly yeshe_de_volume_number: FieldRef<"Text", 'String'>
-    readonly yeshe_de_page_start: FieldRef<"Text", 'String'>
-    readonly yeshe_de_page_end: FieldRef<"Text", 'String'>
-    readonly turning: FieldRef<"Text", 'String'>
+    readonly yeshe_de_volume_length: FieldRef<"Text", 'String'>
+    readonly sermon: FieldRef<"Text", 'String'>
     readonly yana: FieldRef<"Text", 'String'>
     readonly translation_period: FieldRef<"Text", 'String'>
     readonly pdf_url: FieldRef<"Text", 'String'>
@@ -19858,9 +19845,8 @@ export namespace Prisma {
     derge_id: 'derge_id',
     yeshe_de_id: 'yeshe_de_id',
     yeshe_de_volume_number: 'yeshe_de_volume_number',
-    yeshe_de_page_start: 'yeshe_de_page_start',
-    yeshe_de_page_end: 'yeshe_de_page_end',
-    turning: 'turning',
+    yeshe_de_volume_length: 'yeshe_de_volume_length',
+    sermon: 'sermon',
     yana: 'yana',
     translation_period: 'translation_period',
     pdf_url: 'pdf_url',
@@ -20985,9 +20971,8 @@ export namespace Prisma {
     derge_id?: StringNullableFilter<"Text"> | string | null
     yeshe_de_id?: StringNullableFilter<"Text"> | string | null
     yeshe_de_volume_number?: StringNullableFilter<"Text"> | string | null
-    yeshe_de_page_start?: StringNullableFilter<"Text"> | string | null
-    yeshe_de_page_end?: StringNullableFilter<"Text"> | string | null
-    turning?: StringNullableFilter<"Text"> | string | null
+    yeshe_de_volume_length?: StringNullableFilter<"Text"> | string | null
+    sermon?: StringNullableFilter<"Text"> | string | null
     yana?: StringNullableFilter<"Text"> | string | null
     translation_period?: StringNullableFilter<"Text"> | string | null
     pdf_url?: StringNullableFilter<"Text"> | string | null
@@ -21010,9 +20995,8 @@ export namespace Prisma {
     derge_id?: SortOrderInput | SortOrder
     yeshe_de_id?: SortOrderInput | SortOrder
     yeshe_de_volume_number?: SortOrderInput | SortOrder
-    yeshe_de_page_start?: SortOrderInput | SortOrder
-    yeshe_de_page_end?: SortOrderInput | SortOrder
-    turning?: SortOrderInput | SortOrder
+    yeshe_de_volume_length?: SortOrderInput | SortOrder
+    sermon?: SortOrderInput | SortOrder
     yana?: SortOrderInput | SortOrder
     translation_period?: SortOrderInput | SortOrder
     pdf_url?: SortOrderInput | SortOrder
@@ -21038,9 +21022,8 @@ export namespace Prisma {
     derge_id?: StringNullableFilter<"Text"> | string | null
     yeshe_de_id?: StringNullableFilter<"Text"> | string | null
     yeshe_de_volume_number?: StringNullableFilter<"Text"> | string | null
-    yeshe_de_page_start?: StringNullableFilter<"Text"> | string | null
-    yeshe_de_page_end?: StringNullableFilter<"Text"> | string | null
-    turning?: StringNullableFilter<"Text"> | string | null
+    yeshe_de_volume_length?: StringNullableFilter<"Text"> | string | null
+    sermon?: StringNullableFilter<"Text"> | string | null
     yana?: StringNullableFilter<"Text"> | string | null
     translation_period?: StringNullableFilter<"Text"> | string | null
     pdf_url?: StringNullableFilter<"Text"> | string | null
@@ -21063,9 +21046,8 @@ export namespace Prisma {
     derge_id?: SortOrderInput | SortOrder
     yeshe_de_id?: SortOrderInput | SortOrder
     yeshe_de_volume_number?: SortOrderInput | SortOrder
-    yeshe_de_page_start?: SortOrderInput | SortOrder
-    yeshe_de_page_end?: SortOrderInput | SortOrder
-    turning?: SortOrderInput | SortOrder
+    yeshe_de_volume_length?: SortOrderInput | SortOrder
+    sermon?: SortOrderInput | SortOrder
     yana?: SortOrderInput | SortOrder
     translation_period?: SortOrderInput | SortOrder
     pdf_url?: SortOrderInput | SortOrder
@@ -21093,9 +21075,8 @@ export namespace Prisma {
     derge_id?: StringNullableWithAggregatesFilter<"Text"> | string | null
     yeshe_de_id?: StringNullableWithAggregatesFilter<"Text"> | string | null
     yeshe_de_volume_number?: StringNullableWithAggregatesFilter<"Text"> | string | null
-    yeshe_de_page_start?: StringNullableWithAggregatesFilter<"Text"> | string | null
-    yeshe_de_page_end?: StringNullableWithAggregatesFilter<"Text"> | string | null
-    turning?: StringNullableWithAggregatesFilter<"Text"> | string | null
+    yeshe_de_volume_length?: StringNullableWithAggregatesFilter<"Text"> | string | null
+    sermon?: StringNullableWithAggregatesFilter<"Text"> | string | null
     yana?: StringNullableWithAggregatesFilter<"Text"> | string | null
     translation_period?: StringNullableWithAggregatesFilter<"Text"> | string | null
     pdf_url?: StringNullableWithAggregatesFilter<"Text"> | string | null
@@ -22411,9 +22392,8 @@ export namespace Prisma {
     derge_id?: string | null
     yeshe_de_id?: string | null
     yeshe_de_volume_number?: string | null
-    yeshe_de_page_start?: string | null
-    yeshe_de_page_end?: string | null
-    turning?: string | null
+    yeshe_de_volume_length?: string | null
+    sermon?: string | null
     yana?: string | null
     translation_period?: string | null
     pdf_url?: string | null
@@ -22436,9 +22416,8 @@ export namespace Prisma {
     derge_id?: string | null
     yeshe_de_id?: string | null
     yeshe_de_volume_number?: string | null
-    yeshe_de_page_start?: string | null
-    yeshe_de_page_end?: string | null
-    turning?: string | null
+    yeshe_de_volume_length?: string | null
+    sermon?: string | null
     yana?: string | null
     translation_period?: string | null
     pdf_url?: string | null
@@ -22459,9 +22438,8 @@ export namespace Prisma {
     derge_id?: NullableStringFieldUpdateOperationsInput | string | null
     yeshe_de_id?: NullableStringFieldUpdateOperationsInput | string | null
     yeshe_de_volume_number?: NullableStringFieldUpdateOperationsInput | string | null
-    yeshe_de_page_start?: NullableStringFieldUpdateOperationsInput | string | null
-    yeshe_de_page_end?: NullableStringFieldUpdateOperationsInput | string | null
-    turning?: NullableStringFieldUpdateOperationsInput | string | null
+    yeshe_de_volume_length?: NullableStringFieldUpdateOperationsInput | string | null
+    sermon?: NullableStringFieldUpdateOperationsInput | string | null
     yana?: NullableStringFieldUpdateOperationsInput | string | null
     translation_period?: NullableStringFieldUpdateOperationsInput | string | null
     pdf_url?: NullableStringFieldUpdateOperationsInput | string | null
@@ -22484,9 +22462,8 @@ export namespace Prisma {
     derge_id?: NullableStringFieldUpdateOperationsInput | string | null
     yeshe_de_id?: NullableStringFieldUpdateOperationsInput | string | null
     yeshe_de_volume_number?: NullableStringFieldUpdateOperationsInput | string | null
-    yeshe_de_page_start?: NullableStringFieldUpdateOperationsInput | string | null
-    yeshe_de_page_end?: NullableStringFieldUpdateOperationsInput | string | null
-    turning?: NullableStringFieldUpdateOperationsInput | string | null
+    yeshe_de_volume_length?: NullableStringFieldUpdateOperationsInput | string | null
+    sermon?: NullableStringFieldUpdateOperationsInput | string | null
     yana?: NullableStringFieldUpdateOperationsInput | string | null
     translation_period?: NullableStringFieldUpdateOperationsInput | string | null
     pdf_url?: NullableStringFieldUpdateOperationsInput | string | null
@@ -22508,9 +22485,8 @@ export namespace Prisma {
     derge_id?: string | null
     yeshe_de_id?: string | null
     yeshe_de_volume_number?: string | null
-    yeshe_de_page_start?: string | null
-    yeshe_de_page_end?: string | null
-    turning?: string | null
+    yeshe_de_volume_length?: string | null
+    sermon?: string | null
     yana?: string | null
     translation_period?: string | null
     pdf_url?: string | null
@@ -22529,9 +22505,8 @@ export namespace Prisma {
     derge_id?: NullableStringFieldUpdateOperationsInput | string | null
     yeshe_de_id?: NullableStringFieldUpdateOperationsInput | string | null
     yeshe_de_volume_number?: NullableStringFieldUpdateOperationsInput | string | null
-    yeshe_de_page_start?: NullableStringFieldUpdateOperationsInput | string | null
-    yeshe_de_page_end?: NullableStringFieldUpdateOperationsInput | string | null
-    turning?: NullableStringFieldUpdateOperationsInput | string | null
+    yeshe_de_volume_length?: NullableStringFieldUpdateOperationsInput | string | null
+    sermon?: NullableStringFieldUpdateOperationsInput | string | null
     yana?: NullableStringFieldUpdateOperationsInput | string | null
     translation_period?: NullableStringFieldUpdateOperationsInput | string | null
     pdf_url?: NullableStringFieldUpdateOperationsInput | string | null
@@ -22551,9 +22526,8 @@ export namespace Prisma {
     derge_id?: NullableStringFieldUpdateOperationsInput | string | null
     yeshe_de_id?: NullableStringFieldUpdateOperationsInput | string | null
     yeshe_de_volume_number?: NullableStringFieldUpdateOperationsInput | string | null
-    yeshe_de_page_start?: NullableStringFieldUpdateOperationsInput | string | null
-    yeshe_de_page_end?: NullableStringFieldUpdateOperationsInput | string | null
-    turning?: NullableStringFieldUpdateOperationsInput | string | null
+    yeshe_de_volume_length?: NullableStringFieldUpdateOperationsInput | string | null
+    sermon?: NullableStringFieldUpdateOperationsInput | string | null
     yana?: NullableStringFieldUpdateOperationsInput | string | null
     translation_period?: NullableStringFieldUpdateOperationsInput | string | null
     pdf_url?: NullableStringFieldUpdateOperationsInput | string | null
@@ -23618,9 +23592,8 @@ export namespace Prisma {
     derge_id?: SortOrder
     yeshe_de_id?: SortOrder
     yeshe_de_volume_number?: SortOrder
-    yeshe_de_page_start?: SortOrder
-    yeshe_de_page_end?: SortOrder
-    turning?: SortOrder
+    yeshe_de_volume_length?: SortOrder
+    sermon?: SortOrder
     yana?: SortOrder
     translation_period?: SortOrder
     pdf_url?: SortOrder
@@ -23644,9 +23617,8 @@ export namespace Prisma {
     derge_id?: SortOrder
     yeshe_de_id?: SortOrder
     yeshe_de_volume_number?: SortOrder
-    yeshe_de_page_start?: SortOrder
-    yeshe_de_page_end?: SortOrder
-    turning?: SortOrder
+    yeshe_de_volume_length?: SortOrder
+    sermon?: SortOrder
     yana?: SortOrder
     translation_period?: SortOrder
     pdf_url?: SortOrder
@@ -23666,9 +23638,8 @@ export namespace Prisma {
     derge_id?: SortOrder
     yeshe_de_id?: SortOrder
     yeshe_de_volume_number?: SortOrder
-    yeshe_de_page_start?: SortOrder
-    yeshe_de_page_end?: SortOrder
-    turning?: SortOrder
+    yeshe_de_volume_length?: SortOrder
+    sermon?: SortOrder
     yana?: SortOrder
     translation_period?: SortOrder
     pdf_url?: SortOrder
@@ -25434,9 +25405,8 @@ export namespace Prisma {
     derge_id?: string | null
     yeshe_de_id?: string | null
     yeshe_de_volume_number?: string | null
-    yeshe_de_page_start?: string | null
-    yeshe_de_page_end?: string | null
-    turning?: string | null
+    yeshe_de_volume_length?: string | null
+    sermon?: string | null
     yana?: string | null
     translation_period?: string | null
     pdf_url?: string | null
@@ -25457,9 +25427,8 @@ export namespace Prisma {
     derge_id?: string | null
     yeshe_de_id?: string | null
     yeshe_de_volume_number?: string | null
-    yeshe_de_page_start?: string | null
-    yeshe_de_page_end?: string | null
-    turning?: string | null
+    yeshe_de_volume_length?: string | null
+    sermon?: string | null
     yana?: string | null
     translation_period?: string | null
     pdf_url?: string | null
@@ -25545,9 +25514,8 @@ export namespace Prisma {
     derge_id?: StringNullableFilter<"Text"> | string | null
     yeshe_de_id?: StringNullableFilter<"Text"> | string | null
     yeshe_de_volume_number?: StringNullableFilter<"Text"> | string | null
-    yeshe_de_page_start?: StringNullableFilter<"Text"> | string | null
-    yeshe_de_page_end?: StringNullableFilter<"Text"> | string | null
-    turning?: StringNullableFilter<"Text"> | string | null
+    yeshe_de_volume_length?: StringNullableFilter<"Text"> | string | null
+    sermon?: StringNullableFilter<"Text"> | string | null
     yana?: StringNullableFilter<"Text"> | string | null
     translation_period?: StringNullableFilter<"Text"> | string | null
     pdf_url?: StringNullableFilter<"Text"> | string | null
@@ -25801,9 +25769,8 @@ export namespace Prisma {
     derge_id?: string | null
     yeshe_de_id?: string | null
     yeshe_de_volume_number?: string | null
-    yeshe_de_page_start?: string | null
-    yeshe_de_page_end?: string | null
-    turning?: string | null
+    yeshe_de_volume_length?: string | null
+    sermon?: string | null
     yana?: string | null
     translation_period?: string | null
     pdf_url?: string | null
@@ -25825,9 +25792,8 @@ export namespace Prisma {
     derge_id?: string | null
     yeshe_de_id?: string | null
     yeshe_de_volume_number?: string | null
-    yeshe_de_page_start?: string | null
-    yeshe_de_page_end?: string | null
-    turning?: string | null
+    yeshe_de_volume_length?: string | null
+    sermon?: string | null
     yana?: string | null
     translation_period?: string | null
     pdf_url?: string | null
@@ -25863,9 +25829,8 @@ export namespace Prisma {
     derge_id?: NullableStringFieldUpdateOperationsInput | string | null
     yeshe_de_id?: NullableStringFieldUpdateOperationsInput | string | null
     yeshe_de_volume_number?: NullableStringFieldUpdateOperationsInput | string | null
-    yeshe_de_page_start?: NullableStringFieldUpdateOperationsInput | string | null
-    yeshe_de_page_end?: NullableStringFieldUpdateOperationsInput | string | null
-    turning?: NullableStringFieldUpdateOperationsInput | string | null
+    yeshe_de_volume_length?: NullableStringFieldUpdateOperationsInput | string | null
+    sermon?: NullableStringFieldUpdateOperationsInput | string | null
     yana?: NullableStringFieldUpdateOperationsInput | string | null
     translation_period?: NullableStringFieldUpdateOperationsInput | string | null
     pdf_url?: NullableStringFieldUpdateOperationsInput | string | null
@@ -25887,9 +25852,8 @@ export namespace Prisma {
     derge_id?: NullableStringFieldUpdateOperationsInput | string | null
     yeshe_de_id?: NullableStringFieldUpdateOperationsInput | string | null
     yeshe_de_volume_number?: NullableStringFieldUpdateOperationsInput | string | null
-    yeshe_de_page_start?: NullableStringFieldUpdateOperationsInput | string | null
-    yeshe_de_page_end?: NullableStringFieldUpdateOperationsInput | string | null
-    turning?: NullableStringFieldUpdateOperationsInput | string | null
+    yeshe_de_volume_length?: NullableStringFieldUpdateOperationsInput | string | null
+    sermon?: NullableStringFieldUpdateOperationsInput | string | null
     yana?: NullableStringFieldUpdateOperationsInput | string | null
     translation_period?: NullableStringFieldUpdateOperationsInput | string | null
     pdf_url?: NullableStringFieldUpdateOperationsInput | string | null
@@ -25909,9 +25873,8 @@ export namespace Prisma {
     derge_id?: string | null
     yeshe_de_id?: string | null
     yeshe_de_volume_number?: string | null
-    yeshe_de_page_start?: string | null
-    yeshe_de_page_end?: string | null
-    turning?: string | null
+    yeshe_de_volume_length?: string | null
+    sermon?: string | null
     yana?: string | null
     translation_period?: string | null
     pdf_url?: string | null
@@ -25933,9 +25896,8 @@ export namespace Prisma {
     derge_id?: string | null
     yeshe_de_id?: string | null
     yeshe_de_volume_number?: string | null
-    yeshe_de_page_start?: string | null
-    yeshe_de_page_end?: string | null
-    turning?: string | null
+    yeshe_de_volume_length?: string | null
+    sermon?: string | null
     yana?: string | null
     translation_period?: string | null
     pdf_url?: string | null
@@ -25971,9 +25933,8 @@ export namespace Prisma {
     derge_id?: NullableStringFieldUpdateOperationsInput | string | null
     yeshe_de_id?: NullableStringFieldUpdateOperationsInput | string | null
     yeshe_de_volume_number?: NullableStringFieldUpdateOperationsInput | string | null
-    yeshe_de_page_start?: NullableStringFieldUpdateOperationsInput | string | null
-    yeshe_de_page_end?: NullableStringFieldUpdateOperationsInput | string | null
-    turning?: NullableStringFieldUpdateOperationsInput | string | null
+    yeshe_de_volume_length?: NullableStringFieldUpdateOperationsInput | string | null
+    sermon?: NullableStringFieldUpdateOperationsInput | string | null
     yana?: NullableStringFieldUpdateOperationsInput | string | null
     translation_period?: NullableStringFieldUpdateOperationsInput | string | null
     pdf_url?: NullableStringFieldUpdateOperationsInput | string | null
@@ -25995,9 +25956,8 @@ export namespace Prisma {
     derge_id?: NullableStringFieldUpdateOperationsInput | string | null
     yeshe_de_id?: NullableStringFieldUpdateOperationsInput | string | null
     yeshe_de_volume_number?: NullableStringFieldUpdateOperationsInput | string | null
-    yeshe_de_page_start?: NullableStringFieldUpdateOperationsInput | string | null
-    yeshe_de_page_end?: NullableStringFieldUpdateOperationsInput | string | null
-    turning?: NullableStringFieldUpdateOperationsInput | string | null
+    yeshe_de_volume_length?: NullableStringFieldUpdateOperationsInput | string | null
+    sermon?: NullableStringFieldUpdateOperationsInput | string | null
     yana?: NullableStringFieldUpdateOperationsInput | string | null
     translation_period?: NullableStringFieldUpdateOperationsInput | string | null
     pdf_url?: NullableStringFieldUpdateOperationsInput | string | null
@@ -26319,9 +26279,8 @@ export namespace Prisma {
     derge_id?: string | null
     yeshe_de_id?: string | null
     yeshe_de_volume_number?: string | null
-    yeshe_de_page_start?: string | null
-    yeshe_de_page_end?: string | null
-    turning?: string | null
+    yeshe_de_volume_length?: string | null
+    sermon?: string | null
     yana?: string | null
     translation_period?: string | null
     pdf_url?: string | null
@@ -26340,9 +26299,8 @@ export namespace Prisma {
     derge_id?: NullableStringFieldUpdateOperationsInput | string | null
     yeshe_de_id?: NullableStringFieldUpdateOperationsInput | string | null
     yeshe_de_volume_number?: NullableStringFieldUpdateOperationsInput | string | null
-    yeshe_de_page_start?: NullableStringFieldUpdateOperationsInput | string | null
-    yeshe_de_page_end?: NullableStringFieldUpdateOperationsInput | string | null
-    turning?: NullableStringFieldUpdateOperationsInput | string | null
+    yeshe_de_volume_length?: NullableStringFieldUpdateOperationsInput | string | null
+    sermon?: NullableStringFieldUpdateOperationsInput | string | null
     yana?: NullableStringFieldUpdateOperationsInput | string | null
     translation_period?: NullableStringFieldUpdateOperationsInput | string | null
     pdf_url?: NullableStringFieldUpdateOperationsInput | string | null
@@ -26363,9 +26321,8 @@ export namespace Prisma {
     derge_id?: NullableStringFieldUpdateOperationsInput | string | null
     yeshe_de_id?: NullableStringFieldUpdateOperationsInput | string | null
     yeshe_de_volume_number?: NullableStringFieldUpdateOperationsInput | string | null
-    yeshe_de_page_start?: NullableStringFieldUpdateOperationsInput | string | null
-    yeshe_de_page_end?: NullableStringFieldUpdateOperationsInput | string | null
-    turning?: NullableStringFieldUpdateOperationsInput | string | null
+    yeshe_de_volume_length?: NullableStringFieldUpdateOperationsInput | string | null
+    sermon?: NullableStringFieldUpdateOperationsInput | string | null
     yana?: NullableStringFieldUpdateOperationsInput | string | null
     translation_period?: NullableStringFieldUpdateOperationsInput | string | null
     pdf_url?: NullableStringFieldUpdateOperationsInput | string | null
@@ -26386,9 +26343,8 @@ export namespace Prisma {
     derge_id?: NullableStringFieldUpdateOperationsInput | string | null
     yeshe_de_id?: NullableStringFieldUpdateOperationsInput | string | null
     yeshe_de_volume_number?: NullableStringFieldUpdateOperationsInput | string | null
-    yeshe_de_page_start?: NullableStringFieldUpdateOperationsInput | string | null
-    yeshe_de_page_end?: NullableStringFieldUpdateOperationsInput | string | null
-    turning?: NullableStringFieldUpdateOperationsInput | string | null
+    yeshe_de_volume_length?: NullableStringFieldUpdateOperationsInput | string | null
+    sermon?: NullableStringFieldUpdateOperationsInput | string | null
     yana?: NullableStringFieldUpdateOperationsInput | string | null
     translation_period?: NullableStringFieldUpdateOperationsInput | string | null
     pdf_url?: NullableStringFieldUpdateOperationsInput | string | null

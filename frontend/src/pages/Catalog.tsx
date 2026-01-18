@@ -8,6 +8,7 @@ import CatalogBreadcrumb from '@/components/catalog/CatalogBreadcrumb';
 import CatalogTreeList from "@/components/catalog/CatalogTreeList";
 import CatalogEmptyState from "@/components/catalog/CatalogEmptyState";
 import MainKarchagFrames from '@/components/catalog/MainKarchagFrames';
+import KarchagFrame from '@/components/catalog/KarchagFrame';
 import { paginateItems } from '@/utils/paginationUtils';
 import useLanguage from '@/hooks/useLanguage';
 import api from '@/utils/api';
@@ -135,11 +136,10 @@ const Catalog = () => {
   const transformTextsForDisplay = (texts: any[]) => {
     return texts.map((text) => {
       let pages: number | undefined;
-      if (text.yeshe_de_page_start && text.yeshe_de_page_end) {
-        const start = Number.parseInt(text.yeshe_de_page_start, 10);
-        const end = Number.parseInt(text.yeshe_de_page_end, 10);
-        if (!Number.isNaN(start) && !Number.isNaN(end) && end >= start) {
-          pages = end - start + 1;
+      if (text.yeshe_de_volume_length) {
+        const length = Number.parseInt(text.yeshe_de_volume_length, 10);
+        if (!Number.isNaN(length) && length > 0) {
+          pages = length;
         }
       }
       
@@ -270,28 +270,17 @@ const Catalog = () => {
           </div>
           
           {karchagSubCategoriesData && karchagSubCategoriesData.length > 0 ? (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
+            <div className="flex flex-col md:flex-row justify-center gap-10 md:gap-24">
               {karchagSubCategoriesData.map((subcategory: any) => (
-                <div
+                <KarchagFrame
                   key={subcategory.id}
-                  className="p-6 border rounded-lg cursor-pointer transition-all hover:shadow-lg hover:border-indigo-300"
-                  onClick={() => {
-                    const newParams = new URLSearchParams(searchParams);
-                    newParams.set('item', subcategory.id);
-                    newParams.delete('q');
-                    setCurrentPage(1);
-                    setSearchParams(newParams);
+                  label={{
+                    tibetan: subcategory.name_tibetan || '',
+                    english: subcategory.name_english || ''
                   }}
-                >
-                  <h3 className={`text-xl mb-2 ${isTibetan ? 'tibetan' : 'font-medium text-gray-700'}`}>
-                    {isTibetan ? subcategory.name_tibetan : subcategory.name_english}
-                  </h3>
-                  {((isTibetan && subcategory.description_tibetan) || (!isTibetan && subcategory.description_english)) && (
-                    <p className="text-gray-600 text-sm mb-3">
-                      {isTibetan ? (subcategory.description_tibetan || subcategory.description_english) : (subcategory.description_english || subcategory.description_tibetan)}
-                    </p>
-                  )}
-                </div>
+                  fontSize="xx-large"
+                  link={`/catalog?category=${category}&item=${subcategory.id}`}
+                />
               ))}
             </div>
           ) : (
