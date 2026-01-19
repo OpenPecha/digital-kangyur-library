@@ -144,10 +144,9 @@ export const CategoryForm = ({ isOpen, onClose, mode, data, mainCategories, defa
             </div>
           )}
 
-          {/* Main Category Selection (only for sub categories) */}
           {formData.category_type === 'sub' && (
             <div className="space-y-2">
-              <Label htmlFor="main_category_id">{t('mainCategory')} *</Label>
+              <Label htmlFor="main_category_id">{t('mainCategory')} <span className="text-red-600">*</span> </Label>
               <Select
                 value={formData.main_category_id?.toString() || ''}
                 onValueChange={(value) => {
@@ -167,14 +166,14 @@ export const CategoryForm = ({ isOpen, onClose, mode, data, mainCategories, defa
                 <SelectContent>
                   {mainCategories.map(category => (
                     <SelectItem key={category.id} value={category.id}>
-                      {category.name_english}
+                     {category.name_tibetan}   {"("+category.name_english+")"}
                     </SelectItem>
                   ))}
                 </SelectContent>
               </Select>
               {defaultMainCategoryId && (
                 <p className="text-sm text-gray-500 mt-1">
-                  Creating subcategory under: {mainCategories.find(mc => mc.id === defaultMainCategoryId)?.name_english}
+                  {t('creatingSubcategoryUnder')} {mainCategories.find(mc => mc.id === defaultMainCategoryId)?.name_english}
                 </p>
               )}
             </div>
@@ -183,7 +182,7 @@ export const CategoryForm = ({ isOpen, onClose, mode, data, mainCategories, defa
           {/* Names */}
           <div className="grid grid-cols-2 gap-4">
             <div className="space-y-2">
-              <Label htmlFor="name_english">{t('englishName')} *</Label>
+              <Label htmlFor="name_english">{t('englishName')} <span className="text-red-600">*</span></Label>
               <Input
                 id="name_english"
                 value={formData.name_english}
@@ -192,7 +191,7 @@ export const CategoryForm = ({ isOpen, onClose, mode, data, mainCategories, defa
               />
             </div>
             <div className="space-y-2">
-              <Label htmlFor="name_tibetan">{t('tibetanName')} ({t('optional') || 'optional'})</Label>
+              <Label htmlFor="name_tibetan">{t('tibetanName')} </Label>
               <Input
                 id="name_tibetan"
                 value={formData.name_tibetan}
@@ -205,7 +204,7 @@ export const CategoryForm = ({ isOpen, onClose, mode, data, mainCategories, defa
           {/* Descriptions */}
           <div className="grid grid-cols-2 gap-4">
             <div className="space-y-2">
-              <Label htmlFor="description_english">{t('englishDescription')} ({t('optional') || 'optional'})</Label>
+              <Label htmlFor="description_english">{t('englishDescription')} </Label>
               <Textarea
                 id="description_english"
                 value={formData.description_english}
@@ -213,7 +212,7 @@ export const CategoryForm = ({ isOpen, onClose, mode, data, mainCategories, defa
               />
             </div>
             <div className="space-y-2">
-              <Label htmlFor="description_tibetan">{t('tibetanDescription')} ({t('optional') || 'optional'})</Label>
+              <Label htmlFor="description_tibetan">{t('tibetanDescription')} </Label>
               <Textarea
                 id="description_tibetan"
                 value={formData.description_tibetan}
@@ -226,7 +225,7 @@ export const CategoryForm = ({ isOpen, onClose, mode, data, mainCategories, defa
           {/* Order and Status */}
           <div className="grid grid-cols-2 gap-4">
             <div className="space-y-2">
-              <Label htmlFor="order_index">{t('orderIndex')} ({t('optional') || 'optional'})</Label>
+              <Label htmlFor="order_index">{t('orderIndex')} </Label>
               <Input
                 id="order_index"
                 type="number"
