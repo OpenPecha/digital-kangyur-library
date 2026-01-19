@@ -106,8 +106,7 @@ const uploadFileToS3 = async (file) => {
     }
 
     // Generate unique filename
-    const fileExtension = path.extname(file.originalname);
-    const fileName = `${uuidv4()}${fileExtension}`;
+    const fileName = `${uuidv4()}_${file.originalname}`;
     const key = `${config.s3UploadPrefix || 'uploads'}/${fileName}`;
 
     // Upload to S3

@@ -3,6 +3,7 @@ import { Button } from '@/components/ui/atoms/button';
 import { Input } from '@/components/ui/atoms/input';
 import { Label } from "@/components/ui/atoms/label";
 import { Switch } from "@/components/ui/atoms/switch";
+import { X } from 'lucide-react';
 import {
   Dialog,
   DialogContent,
@@ -126,7 +127,7 @@ export const TextForm = ({ isOpen, onClose, mode, data, subCategories, mainCateg
     
     // Validate required fields
     if (!formData.sub_category_id) {
-      toast.error('Please select a category');
+      toast.error(t('pleaseSelectCategory'));
       return;
     }
     
@@ -139,14 +140,14 @@ export const TextForm = ({ isOpen, onClose, mode, data, subCategories, mainCateg
 
     // Validate file type
     if (file.type !== 'application/pdf') {
-      toast.error('Please select a PDF file');
+      toast.error(t('pleaseSelectPdfFile'));
       return;
     }
 
     // Validate file size (100MB limit)
     const maxSize = 100 * 1024 * 1024; // 100MB
     if (file.size > maxSize) {
-      toast.error('File size must be less than 100MB');
+      toast.error(t('fileSizeMustBeLessThan100MB'));
       return;
     }
 
@@ -154,16 +155,23 @@ export const TextForm = ({ isOpen, onClose, mode, data, subCategories, mainCateg
     try {
       const result = await api.uploadFile(file);
       setFormData({ ...formData, pdf_url: result.url });
-      toast.success('PDF uploaded successfully');
+      toast.success(t('pdfUploadedSuccessfully'));
       // Reset file input
       if (fileInputRef.current) {
         fileInputRef.current.value = '';
       }
     } catch (error: any) {
       console.error('Upload error:', error);
-      toast.error(error.message || 'Failed to upload PDF');
+      toast.error(error.message || t('failedToUploadPdf'));
     } finally {
       setUploading(false);
+    }
+  };
+
+  const handleResetPdfUrl = () => {
+    setFormData({ ...formData, pdf_url: '' });
+    if (fileInputRef.current) {
+      fileInputRef.current.value = '';
     }
   };
 
@@ -214,7 +222,14 @@ export const TextForm = ({ isOpen, onClose, mode, data, subCategories, mainCateg
     }
     onClose();
   };
-
+  // Example: "487abda9-c6c8-4296-afb0-f3c58ef7c78c_intro.pdf" => "intro.pdf"
+  const pdf_name = formData.pdf_url
+    ? (() => {
+        const filename = formData.pdf_url.split('/').pop() || '';
+        const parts = filename.split('_');
+        return parts.length > 1 ? parts.slice(1).join('_') : filename;
+      })()
+    : '';
   return (
     <Dialog open={isOpen} onOpenChange={handleClose} key={data?.id || 'create'}>
       <DialogContent className="max-w-4xl max-h-[90vh] overflow-y-auto">
@@ -225,7 +240,7 @@ export const TextForm = ({ isOpen, onClose, mode, data, subCategories, mainCateg
           <div className="space-y-4">
             <div className="grid grid-cols-2 gap-4">
               <div className="space-y-2">
-                <Label htmlFor="sub_category_id">{t('subCategory')} *</Label>
+                <Label htmlFor="sub_category_id">{t('subCategory')} <span className="text-red-600">*</span></Label>
                 <Select
                   value={formData.sub_category_id ? String(formData.sub_category_id) : ''}
                   onValueChange={(value) => setFormData({ ...formData, sub_category_id: value })}
@@ -245,12 +260,12 @@ export const TextForm = ({ isOpen, onClose, mode, data, subCategories, mainCateg
                 </Select>
                 {defaultSubCategoryId && (
                   <p className="text-sm text-gray-500 mt-1">
-                    Creating text under: {subCategories.find(sc => sc.id === defaultSubCategoryId)?.name_english}
+                    {t('creatingTextUnder')} {subCategories.find(sc => sc.id === defaultSubCategoryId)?.name_english}
                   </p>
                 )}
               </div>
               <div className="space-y-2">
-                <Label htmlFor="order_index">{t('orderIndex')} ({t('optional')})</Label>
+                <Label htmlFor="order_index">{t('orderIndex')} </Label>
                 <Input
                   id="order_index"
                   type="number"
@@ -262,7 +277,7 @@ export const TextForm = ({ isOpen, onClose, mode, data, subCategories, mainCateg
 
             <div className="grid grid-cols-2 gap-4">
               <div className="space-y-2">
-                <Label htmlFor="derge_id">{t('dergeId')} ({t('optional')})</Label>
+                <Label htmlFor="derge_id">{t('dergeId')} </Label>
                 <Input
                   id="derge_id"
                   value={formData.derge_id}
@@ -270,7 +285,7 @@ export const TextForm = ({ isOpen, onClose, mode, data, subCategories, mainCateg
                 />
               </div>
               <div className="space-y-2">
-                <Label htmlFor="yeshe_de_id">{t('yesheDeId')} ({t('optional')})</Label>
+                <Label htmlFor="yeshe_de_id">{t('yesheDeId')} </Label>
                 <Input
                   id="yeshe_de_id"
                   value={formData.yeshe_de_id}
@@ -281,7 +296,7 @@ export const TextForm = ({ isOpen, onClose, mode, data, subCategories, mainCateg
 
             <div className="grid grid-cols-2 gap-4">
               <div className="space-y-2">
-                <Label htmlFor="english_title">{t('englishTitle')} ({t('optional')})</Label>
+                <Label htmlFor="english_title">{t('englishTitle')} </Label>
                 <Input
                   id="english_title"
                   value={formData.english_title}
@@ -289,7 +304,7 @@ export const TextForm = ({ isOpen, onClose, mode, data, subCategories, mainCateg
                 />
               </div>
               <div className="space-y-2">
-                <Label htmlFor="tibetan_title">{t('tibetanTitle')} ({t('optional')})</Label>
+                <Label htmlFor="tibetan_title">{t('tibetanTitle')} </Label>
                 <Input
                   id="tibetan_title"
                   value={formData.tibetan_title}
@@ -301,7 +316,7 @@ export const TextForm = ({ isOpen, onClose, mode, data, subCategories, mainCateg
 
             <div className="grid grid-cols-2 gap-4">
               <div className="space-y-2">
-                <Label htmlFor="sanskrit_title">{t('sanskritTitle')} ({t('optional')})</Label>
+                <Label htmlFor="sanskrit_title">{t('sanskritTitle')} </Label>
                 <Input
                   id="sanskrit_title"
                   value={formData.sanskrit_title}
@@ -309,7 +324,7 @@ export const TextForm = ({ isOpen, onClose, mode, data, subCategories, mainCateg
                 />
               </div>
               <div className="space-y-2">
-                <Label htmlFor="chinese_title">{t('chineseTitle')} ({t('optional')})</Label>
+                <Label htmlFor="chinese_title">{t('chineseTitle')} </Label>
                 <Input
                   id="chinese_title"
                   value={formData.chinese_title}
@@ -320,7 +335,7 @@ export const TextForm = ({ isOpen, onClose, mode, data, subCategories, mainCateg
 
             <div className="grid grid-cols-2 gap-4">
               <div className="space-y-2">
-                <Label htmlFor="yeshe_de_volume_number">{t('yesheDeVolumeNumber')} ({t('optional')})</Label>
+                <Label htmlFor="yeshe_de_volume_number">{t('yesheDeVolumeNumber')} </Label>
                 <Input
                   id="yeshe_de_volume_number"
                   value={formData.yeshe_de_volume_number}
@@ -328,13 +343,13 @@ export const TextForm = ({ isOpen, onClose, mode, data, subCategories, mainCateg
                 />
               </div>
               <div className="space-y-2">
-                <Label htmlFor="pdf_url">{t('pdfUrl')} ({t('optional')})</Label>
-                <div className="flex gap-2">
+                <Label htmlFor="pdf_url">{t('yesheDeSourceText')} </Label>
+                <div className={`${!formData.pdf_url ? 'flex' : 'hidden'} gap-2`} >
                   <Input
                     id="pdf_url"
                     value={formData.pdf_url}
                     onChange={(e) => setFormData({ ...formData, pdf_url: e.target.value })}
-                    placeholder="Enter PDF URL or upload a file"
+                    placeholder={t('enterPdfUrlOrUploadFile')}
                     className="flex-1"
                   />
                   <input
@@ -351,38 +366,39 @@ export const TextForm = ({ isOpen, onClose, mode, data, subCategories, mainCateg
                     onClick={() => fileInputRef.current?.click()}
                     disabled={uploading}
                   >
-                    {uploading ? 'Uploading...' : 'Upload PDF'}
+                    {uploading ? t('uploading') : t('uploadPdf')}
                   </Button>
                 </div>
                 {formData.pdf_url && (
-                  <p className="text-xs text-muted-foreground">
-                    PDF URL: <a href={formData.pdf_url} target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline break-all">{formData.pdf_url}</a>
-                  </p>
+                  <div className="flex items-center gap-2 mt-2">
+                    <p className="text-muted-foreground flex-1">
+                   <a href={formData.pdf_url} target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline break-all">{pdf_name}</a>
+                    </p>
+                    <Button
+                      type="button"
+                      variant="ghost"
+                      size="sm"
+                      onClick={handleResetPdfUrl}
+                      className="h-6 w-6 p-0"
+                      title={t('resetPdfUrl')}
+                    >
+                      <X className="h-4 w-4" />
+                    </Button>
+                  </div>
                 )}
               </div>
             </div>
 
-            <div className="grid grid-cols-2 gap-4">
-              <div className="space-y-2">
-                <Label htmlFor="yeshe_de_volume_length">{t('yesheDeVolumeLength')} ({t('optional')})</Label>
-                <Input
-                  id="yeshe_de_volume_length"
-                  type="number"
-                  value={formData.yeshe_de_volume_length}
-                  onChange={(e) => setFormData({ ...formData, yeshe_de_volume_length: e.target.value })}
-                />
-              </div>
-            </div>
 
             <div className="grid grid-cols-3 gap-4">
               <div className="space-y-2">
-                <Label htmlFor="sermon">{t('sermon')} ({t('optional')})</Label>
+                <Label htmlFor="sermon">{t('sermon')} </Label>
                 <Select
                   value={formData.sermon || undefined}
                   onValueChange={(value) => setFormData({ ...formData, sermon: value || '' })}
                 >
                   <SelectTrigger id="sermon">
-                    <SelectValue placeholder={`Select ${t('sermon')}`} />
+                    <SelectValue placeholder={t('selectSermon')} />
                   </SelectTrigger>
                   <SelectContent>
                     <SelectItem value="First Sermon">{t('sermonFirst')}</SelectItem>
@@ -392,13 +408,13 @@ export const TextForm = ({ isOpen, onClose, mode, data, subCategories, mainCateg
                 </Select>
               </div>
               <div className="space-y-2">
-                <Label htmlFor="yana">{t('yana')} ({t('optional')})</Label>
+                <Label htmlFor="yana">{t('yana')} </Label>
                 <Select
                   value={formData.yana || undefined}
                   onValueChange={(value) => setFormData({ ...formData, yana: value || '' })}
                 >
                   <SelectTrigger id="yana">
-                    <SelectValue placeholder={`Select ${t('yana')}`} />
+                    <SelectValue placeholder={t('selectYana')} />
                   </SelectTrigger>
                   <SelectContent>
                     <SelectItem value="Hinayana">{t('yanaHinayana')}</SelectItem>
@@ -408,13 +424,13 @@ export const TextForm = ({ isOpen, onClose, mode, data, subCategories, mainCateg
                 </Select>
               </div>
               <div className="space-y-2">
-                <Label htmlFor="translation_period">{t('translationPeriod')} ({t('optional')})</Label>
+                <Label htmlFor="translation_period">{t('translationPeriod')} </Label>
                 <Select
                   value={formData.translation_period || undefined}
                   onValueChange={(value) => setFormData({ ...formData, translation_period: value || '' })}
                 >
                   <SelectTrigger id="translation_period">
-                    <SelectValue placeholder={`Select ${t('translationPeriod')}`} />
+                    <SelectValue placeholder={t('selectTranslationPeriod')} />
                   </SelectTrigger>
                   <SelectContent>
                     <SelectItem value="Early Translation">{t('translationPeriodEarly')}</SelectItem>

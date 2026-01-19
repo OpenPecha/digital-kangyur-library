@@ -11,29 +11,98 @@ import api from '@/utils/api';
 
 // Mapping section IDs to translation keys
 const sectionTitleMap = {
-  'translation-homage': 'translation homage' as const,
+  'translation-homage': 'translationHomage' as const,
   'purpose': 'purpose' as const,
   'summary': 'summary' as const,
-  'word-meaning': 'word meaning' as const,
+  'word-meaning': 'wordMeaning' as const,
   'connection': 'connection' as const,
-  'questions-answers': 'questions and answers' as const,
+  'questions-answers': 'objectionAndReply' as const,
   'colophon': 'colophon' as const,
 };
 
+// Mapping metadata keys to translation keys
+const metadataLabelMap: Record<string, string> = {
+  'tibetan-title': 'tibetanTitle',
+  'sanskrit-title': 'sanskritTitle',
+  'chinese-title': 'chineseTitle',
+  'english-title': 'englishTitle',
+  'derge-id': 'dergeId',
+  'yeshe-de-id': 'yesheDeId',
+  'yeshe-de-volume': 'yesheDeVolume',
+  'yeshe-de-volume-length': 'yesheDeVolumeLength',
+  'sermon': 'sermon',
+  'yana': 'yana',
+  'translation-period': 'translationPeriod',
+};
+
+// Mapping of backend values to translation keys
+const valueTranslationMap: Record<string, Record<string, string>> = {
+  'sermon': {
+    'First Sermon': 'sermonFirst',
+    'first sermon': 'sermonFirst',
+    'Second Sermon': 'sermonSecond',
+    'second sermon': 'sermonSecond',
+    'Third Sermon': 'sermonThird',
+    'third sermon': 'sermonThird',
+  },
+  'yana': {
+    'Hinayana': 'yanaHinayana',
+    'hinayana': 'yanaHinayana',
+    'Mahayana': 'yanaMahayana',
+    'mahayana': 'yanaMahayana',
+    'Vajrayana': 'yanaVajrayana',
+    'vajrayana': 'yanaVajrayana',
+  },
+  'translation-period': {
+    'Early Translation': 'translationPeriodEarly',
+    'early translation': 'translationPeriodEarly',
+    'New Translation': 'translationPeriodNew',
+    'new translation': 'translationPeriodNew',
+  },
+};
+
+// Function to map backend values to translation keys
+const getValueTranslationKey = (key: string, value: string): string | null => {
+  const trimmedValue = value.trim();
+  const lowerValue = trimmedValue.toLowerCase();
+  const keyMap = valueTranslationMap[key];
+  
+  if (!keyMap) return null;
+  
+  // Try exact match first
+  if (keyMap[trimmedValue]) return keyMap[trimmedValue];
+  
+  // Try case-insensitive match
+  if (keyMap[lowerValue]) return keyMap[lowerValue];
+  
+  // For translation period, check if value contains keywords
+  if (key === 'translation-period') {
+    if (lowerValue.includes('early')) return 'translationPeriodEarly';
+    if (lowerValue.includes('new')) return 'translationPeriodNew';
+  }
+  
+  return null;
+};
+
 // MetadataSection component
-const MetadataSection = ({ title, group, metadata }: { title: string; group: string; metadata: any[] }) => (
+const MetadataSection = ({ title, group, metadata, t }: { title: string; group: string; metadata: any[]; t: (key: string) => string }) => (
   <div className="w-full space-y-5">
     <h3 className="text-xl font-semibold text-kangyur-maroon mb-4">{title}</h3>
     <table className="w-full border-collapse">
       <tbody>
-        {metadata.filter((item: any) => item.group === group).map((item: any) => (
-          <tr key={item.key} className="border-b border-gray-200">
-            <td className="py-3 pr-4 font-medium text-gray-700 align-top w-1/3">{item.label}:</td>
-            <td className={`py-3 text-gray-600 ${group === 'titles' && (item.key === 'tibetan-title' || item.key === 'sanskrit-title') ? 'tibetan text-lg' : ''}`}>
-              {item.value}
-            </td>
-          </tr>
-        ))}
+        {metadata.filter((item: any) => item.group === group).map((item: any) => {
+          const translationKey = getValueTranslationKey(item.key, item.value);
+          const displayValue = translationKey ? t(translationKey) : item.value;
+          
+          return (
+            <tr key={item.key} className="border-b border-gray-200">
+              <td className="py-3 pr-4 font-medium text-gray-700 align-top w-1/3">{t(metadataLabelMap[item.key] || item.key)}:</td>
+              <td className={`py-3 text-gray-600 ${group === 'titles' && (item.key === 'tibetan-title' || item.key === 'sanskrit-title') ? 'tibetan text-lg' : ''}`}>
+                {displayValue}
+              </td>
+            </tr>
+          );
+        })}
       </tbody>
     </table>
   </div>
@@ -59,19 +128,19 @@ const TextDetail = () => {
       // Build metadata from text fields
       const metadata = [
         // Titles section
-        { key: 'tibetan-title', label: 'Tibetan Title', value: response.tibetan_title?.trim() || '', group: 'titles' },
-        { key: 'sanskrit-title', label: 'Sanskrit Title', value: response.sanskrit_title?.trim() || '', group: 'titles' },
-        { key: 'chinese-title', label: 'Chinese Title', value: response.chinese_title?.trim() || '', group: 'titles' },
-        { key: 'english-title', label: 'English Title', value: response.english_title?.trim() || '', group: 'titles' },
+        { key: 'tibetan-title', value: response.tibetan_title?.trim() || '', group: 'titles' },
+        { key: 'sanskrit-title', value: response.sanskrit_title?.trim() || '', group: 'titles' },
+        { key: 'chinese-title', value: response.chinese_title?.trim() || '', group: 'titles' },
+        { key: 'english-title', value: response.english_title?.trim() || '', group: 'titles' },
         // Catalog information
-        { key: 'derge-id', label: 'Derge ID', value: response.derge_id?.trim() || '', group: 'catalog' },
-        { key: 'yeshe-de-id', label: 'Yeshe De ID', value: response.yeshe_de_id?.trim() || '', group: 'catalog' },
-        { key: 'yeshe-de-volume', label: 'Yeshe De Volume', value: response.yeshe_de_volume_number?.trim() || '', group: 'catalog' },
-        { key: 'yeshe-de-volume-length', label: 'Yeshe De Volume Length', value: response.yeshe_de_volume_length?.trim() || '', group: 'catalog' },
+        { key: 'derge-id', value: response.derge_id?.trim() || '', group: 'catalog' },
+        { key: 'yeshe-de-id', value: response.yeshe_de_id?.trim() || '', group: 'catalog' },
+        { key: 'yeshe-de-volume', value: response.yeshe_de_volume_number?.trim() || '', group: 'catalog' },
+        { key: 'yeshe-de-volume-length', value: response.yeshe_de_volume_length?.trim() || '', group: 'catalog' },
         // Content information
-        { key: 'sermon', label: 'Sermon', value: response.sermon?.trim() || '', group: 'content' },
-        { key: 'yana', label: 'Yana', value: response.yana?.trim() || '', group: 'content' },
-        { key: 'translation-period', label: 'Translation Period', value: response.translation_period?.trim() || '', group: 'content' },
+        { key: 'sermon', value: response.sermon?.trim() || '', group: 'content' },
+        { key: 'yana', value: response.yana?.trim() || '', group: 'content' },
+        { key: 'translation-period', value: response.translation_period?.trim() || '', group: 'content' },
       ].filter(item => item.value); // Only include items with values
       
       const transformedData = {
@@ -198,7 +267,7 @@ const TextDetail = () => {
         <main className="flex-1 pt-24 pb-16">
           <div className="container mx-auto px-4 sm:px-6 lg:px-8">
             <div className="flex justify-center items-center py-12">
-              <div className="text-lg">Loading...</div>
+              <div className="text-lg">{t('loading')}</div>
             </div>
           </div>
         </main>
@@ -213,7 +282,7 @@ const TextDetail = () => {
         <main className="flex-1 pt-24 pb-16">
           <div className="container mx-auto px-4 sm:px-6 lg:px-8">
             <div className="flex justify-center items-center py-12">
-              <div className="text-lg text-red-600">{error || 'Text not found'}</div>
+              <div className="text-lg text-red-600">{error || t('textNotFound')}</div>
             </div>
           </div>
         </main>
@@ -270,41 +339,41 @@ const TextDetail = () => {
                 <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
                   <TabsList className="w-full grid grid-cols-3 border-b text-xs sm:text-sm">
                     <TabsTrigger value="metadata" className="rounded-none">
-                      Metadata
+                      {t('metadata')}
                     </TabsTrigger>
                     <TabsTrigger value="summary" className="rounded-none">
-                      Summary
+                      {t('summary')}
                     </TabsTrigger>
                     <TabsTrigger value="pdf" className="rounded-none">
-                      PDF
+                      {t('yesheDeSourceText')}
                     </TabsTrigger>
                   </TabsList>
                   {/* Tab 1: Metadata */}
                   <TabsContent value="metadata" className="p-6">
                     <div className="flex flex-col gap-8">
                       {/* Titles section */}
-                      <MetadataSection title="Titles in Multiple Languages" group="titles" metadata={textData?.metadata || []} />
+                      <MetadataSection title={t('titlesInMultipleLanguages')} group="titles" metadata={textData?.metadata || []} t={t} />
                       
                       {/* Catalog information section */}
-                      <MetadataSection title="Catalog Information" group="catalog" metadata={textData?.metadata || []} />
+                      <MetadataSection title={t('catalogInformation')} group="catalog" metadata={textData?.metadata || []} t={t} />
                       
                       {/* Content information section */}
-                      <MetadataSection title="Content Information" group="content" metadata={textData?.metadata || []} />
+                      <MetadataSection title={t('contentInformation')} group="content" metadata={textData?.metadata || []} t={t} />
                       
                       {/* General metadata section */}
-                      <MetadataSection title="General Information" group="general" metadata={textData?.metadata || []} />
+                      {/* <MetadataSection title={t('generalInformation')} group="general" metadata={textData?.metadata || []} t={t} /> */}
                     </div>
                   </TabsContent>
                   {/* Tab 2: Summary - New layout with vertical nav and text reader */}
                   <TabsContent value="summary" className="p-0">
                     {loadingSummary && (
                       <div className="flex justify-center items-center py-12">
-                        <div className="text-lg">Loading summary...</div>
+                        <div className="text-lg">{t('loadingSummary')}</div>
                       </div>
                     )}
                     {!loadingSummary && (!summaryData?.sections || summaryData.sections.length === 0) && (
                       <div className="flex justify-center items-center py-12">
-                        <div className="text-lg text-gray-500">No summary available</div>
+                        <div className="text-lg text-gray-500">{t('noSummaryAvailable')}</div>
                       </div>
                     )}
                     {!loadingSummary && summaryData?.sections && summaryData.sections.length > 0 && (
@@ -313,7 +382,7 @@ const TextDetail = () => {
                         <div className="md:w-1/4 lg:w-1/5 border-b md:border-b-0 md:border-r border-border bg-muted/30 max-h-56 md:max-h-none md:h-full overflow-y-auto">
                           <div className="p-3 sm:p-4">
                             <h3 className="text-sm sm:text-base font-semibold text-foreground mb-3 sm:mb-4">
-                              Summary Sections
+                              {t('summarySections')}
                             </h3>
                             <nav className="space-y-2">
                               {summaryData.sections.map((section: any) => (
@@ -368,7 +437,7 @@ const TextDetail = () => {
                     {textData?.pdf_url ? (
                       <div className="h-[60vh] sm:h-[70vh]">
                         <iframe
-                          title="Text PDF"
+                          title={t('pdf')}
                           src={textData.pdf_url}
                           className="w-full h-full border-0"
                           allow="autoplay"
@@ -376,7 +445,7 @@ const TextDetail = () => {
                       </div>
                     ) : (
                       <div className="flex justify-center items-center py-12">
-                        <div className="text-lg text-gray-500">No PDF available</div>
+                        <div className="text-lg text-gray-500">{t('noPdfAvailable')}</div>
                       </div>
                     )}
                   </TabsContent>
