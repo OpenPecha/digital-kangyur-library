@@ -18,7 +18,7 @@ const NewsCard = ({
   onEdit: (news: NewsEntry) => void;
   onDelete: (id: string) => void;
 }) => {
-  const { isTibetan,t } = useLanguage();
+  const { isTibetan, t } = useLanguage();
   return <Card className="flex flex-col h-full overflow-hidden hover:shadow-md transition-shadow">
       <div className="overflow-hidden h-48">
         <img src={news.thumbnailUrl || "https://images.unsplash.com/photo-1598499255807-87188c4eda38?q=80&w=2574&auto=format&fit=crop"} alt={news.englishTitle} className="w-full h-full object-cover transition-transform duration-500 hover:scale-105" />
@@ -49,7 +49,7 @@ const NewsCard = ({
         <div className="flex items-center gap-2 w-full">
           <Button variant="outline" size="sm" className="flex-1" onClick={() => onEdit(news)}>
             <Edit className="h-4 w-4 mr-2" />
-            Edit
+            {t('edit')}
           </Button>
           <Button 
             variant="outline" 
@@ -58,7 +58,7 @@ const NewsCard = ({
             onClick={() => onDelete(news.id)}
           >
             <Trash2 className="h-4 w-4 mr-2" />
-            Delete
+            {t('delete')}
           </Button>
         </div>
       </CardFooter>
@@ -66,6 +66,7 @@ const NewsCard = ({
 };
 
 const NewsAdmin = () => {
+  const { t } = useLanguage();
   const [searchQuery, setSearchQuery] = useState('');
   const [isFormOpen, setIsFormOpen] = useState(false);
   const [editingNews, setEditingNews] = useState<NewsEntry | null>(null);
@@ -152,12 +153,12 @@ const NewsAdmin = () => {
       setEditingNews(null);
     } catch (error) {
       console.error('Error saving news:', error);
-      alert('Error saving news. Please try again.');
+      alert(t('errorSavingNews'));
     }
   };
 
   const handleDelete = async (id: string) => {
-    if (!confirm('Are you sure you want to delete this news article?')) {
+    if (!confirm(t('areYouSureDeleteNews'))) {
       return;
     }
 
@@ -178,7 +179,7 @@ const NewsAdmin = () => {
       setNewsEntries(transformedNews);
     } catch (error) {
       console.error('Error deleting news:', error);
-      alert('Error deleting news. Please try again.');
+      alert(t('errorDeletingNews'));
     }
   };
 
@@ -193,12 +194,12 @@ const NewsAdmin = () => {
         {/* Header with Search and Create Button */}
         <div className="flex items-center justify-between gap-4">
           <div className="flex-1">
-            <h1 className="text-3xl font-bold text-gray-800 py-[10px]">Manage News Content</h1>
-            <p className="text-gray-600 mt-1">Create, edit, and manage news articles</p>
+            <h1 className="text-3xl font-bold text-gray-800 py-[10px]">{t('manageNewsContent')}</h1>
+            <p className="text-gray-600 mt-1">{t('createEditManageNews')}</p>
           </div>
           <Button onClick={() => setIsFormOpen(true)}>
             <Plus className="mr-2 h-4 w-4" />
-            Create News
+            {t('createNews')}
           </Button>
         </div>
 
@@ -206,7 +207,7 @@ const NewsAdmin = () => {
         <div className="relative max-w-md">
           <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-4 w-4" />
           <Input
-            placeholder="Search news articles..."
+            placeholder={t('searchNewsArticles')}
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             className="pl-10"
@@ -216,7 +217,7 @@ const NewsAdmin = () => {
         {/* News Cards Grid */}
         {loading ? (
           <div className="text-center py-8">
-            <p className="text-gray-500">Loading news...</p>
+            <p className="text-gray-500">{t('loadingNews')}</p>
           </div>
         ) : (
           <>
@@ -228,13 +229,13 @@ const NewsAdmin = () => {
 
             {filteredEntries.length === 0 && searchQuery && (
               <div className="text-center py-8">
-                <p className="text-gray-500">No news articles found matching your search.</p>
+                <p className="text-gray-500">{t('noNewsArticlesFound')}</p>
               </div>
             )}
 
             {filteredEntries.length === 0 && !searchQuery && (
               <div className="text-center py-8">
-                <p className="text-gray-500">No news articles available.</p>
+                <p className="text-gray-500">{t('noNewsArticlesAvailable')}</p>
               </div>
             )}
           </>
@@ -246,7 +247,7 @@ const NewsAdmin = () => {
           onClose={handleClose}
           mode={editingNews ? 'edit' : 'create'}
           data={editingNews ? {
-            id: parseInt(editingNews.id),
+            id: Number.parseInt(editingNews.id),
             tibetan_title: editingNews.tibetanTitle,
             english_title: editingNews.englishTitle,
             tibetan_content: editingNews.tibetanDescription,

@@ -11,6 +11,30 @@ import {
 } from "@/components/ui/atoms/dialog";
 import api from '@/utils/api';
 import { toast } from 'sonner';
+import { cn } from '@/lib/utils';
+import useLanguage from '@/hooks/useLanguage';
+
+// Mapping section IDs to translation keys
+const sectionTitleMap = {
+  'translation-homage': 'translationHomage' as const,
+  'purpose': 'purpose' as const,
+  'summary': 'summary' as const,
+  'word-meaning': 'wordMeaning' as const,
+  'connection': 'connection' as const,
+  'questions-answers': 'objectionAndReply' as const,
+  'colophon': 'colophon' as const,
+};
+
+// Define all sections (always show all in admin form)
+const allSections = [
+  'translation-homage',
+  'purpose',
+  'summary',
+  'word-meaning',
+  'connection',
+  'questions-answers',
+  'colophon',
+] as const;
 
 interface TextSummaryFormProps {
   isOpen: boolean;
@@ -22,6 +46,8 @@ interface TextSummaryFormProps {
 
 export const TextSummaryForm = ({ isOpen, onClose, textId, textTitle, onSave }: TextSummaryFormProps) => {
   const [loading, setLoading] = useState(false);
+  const [activeSection, setActiveSection] = useState<string>('translation-homage');
+  const { isTibetan, t } = useLanguage();
   const [formData, setFormData] = useState({
     translation_homage_tibetan: '',
     translation_homage_english: '',
@@ -42,6 +68,7 @@ export const TextSummaryForm = ({ isOpen, onClose, textId, textTitle, onSave }: 
   useEffect(() => {
     if (isOpen && textId) {
       fetchSummary();
+      setActiveSection('translation-homage');
     }
   }, [isOpen, textId]);
 
@@ -169,204 +196,146 @@ export const TextSummaryForm = ({ isOpen, onClose, textId, textTitle, onSave }: 
       colophon_tibetan: '',
       colophon_english: '',
     });
+    setActiveSection('translation-homage');
     onClose();
+  };
+
+  // Helper function to get form fields for a section
+  const getSectionFields = (sectionId: string) => {
+    const sectionMap: Record<string, { english: keyof typeof formData; tibetan: keyof typeof formData; rows: number }> = {
+      'translation-homage': {
+        english: 'translation_homage_english',
+        tibetan: 'translation_homage_tibetan',
+        rows: 4,
+      },
+      'purpose': {
+        english: 'purpose_english',
+        tibetan: 'purpose_tibetan',
+        rows: 4,
+      },
+      'summary': {
+        english: 'summary_text_english',
+        tibetan: 'summary_text_tibetan',
+        rows: 6,
+      },
+      'word-meaning': {
+        english: 'word_meaning_english',
+        tibetan: 'word_meaning_tibetan',
+        rows: 4,
+      },
+      'connection': {
+        english: 'connection_english',
+        tibetan: 'connection_tibetan',
+        rows: 4,
+      },
+      'questions-answers': {
+        english: 'question_answers_english',
+        tibetan: 'question_answers_tibetan',
+        rows: 4,
+      },
+      'colophon': {
+        english: 'colophon_english',
+        tibetan: 'colophon_tibetan',
+        rows: 4,
+      },
+    };
+    return sectionMap[sectionId];
   };
 
   if (!isOpen) return null;
 
+  const currentSectionFields = getSectionFields(activeSection);
+
   return (
     <Dialog open={isOpen} onOpenChange={handleClose}>
-      <DialogContent className="max-w-4xl max-h-[90vh] overflow-y-auto">
-        <DialogHeader>
+      <DialogContent className="max-w-6xl max-h-[90vh] p-0 overflow-hidden flex flex-col">
+        <DialogHeader className="px-6 pt-6 pb-4 border-b">
           <DialogTitle>
-            {textTitle ? `Text Summary: ${textTitle}` : 'Text Summary'}
+            {textTitle ? `Text: ${textTitle}` : t('summary')}
           </DialogTitle>
         </DialogHeader>
-        
         {loading && !formData.translation_homage_english ? (
-          <div className="py-8 text-center">
-            <p className="text-gray-500">Loading summary...</p>
+          <div className="flex justify-center items-center py-12 px-6">
+            <p className="text-gray-500">{t('loadingSummary')}</p>
           </div>
         ) : (
-          <form onSubmit={handleSubmit} className="space-y-6">
-            <div className="space-y-4">
-              <h3 className="text-lg font-semibold">Translation Homage</h3>
-              <div className="grid grid-cols-2 gap-4">
-                <div className="space-y-2">
-                  <Label htmlFor="translation_homage_english">English</Label>
-                  <Textarea
-                    id="translation_homage_english"
-                    value={formData.translation_homage_english}
-                    onChange={(e) => setFormData({ ...formData, translation_homage_english: e.target.value })}
-                    rows={4}
-                  />
+          <form onSubmit={handleSubmit} className="flex flex-col flex-1 overflow-hidden">
+            <div className="flex flex-col md:flex-row flex-1 overflow-hidden">
+              {/* Left Navigation Bar */}
+              <div className="md:w-1/4 lg:w-1/5 border-b md:border-b-0 md:border-r border-border bg-muted/30 max-h-56 md:max-h-none md:h-full overflow-y-auto">
+                <div className="p-3 sm:p-4">
+                  <h3 className="text-sm sm:text-base font-semibold text-foreground mb-3 sm:mb-4">
+                    {t('summarySections')}
+                  </h3>
+                  <nav className="space-y-2">
+                    {allSections.map((sectionId) => (
+                      <button
+                        key={sectionId}
+                        type="button"
+                        onClick={() => setActiveSection(sectionId)}
+                        className={cn(
+                          "w-full text-left px-3 py-2 rounded-lg transition-colors text-xs sm:text-sm font-semibold capitalize",
+                          isTibetan && "tibetan",
+                          activeSection === sectionId
+                            ? "bg-primary text-primary-foreground"
+                            : "hover:bg-muted text-muted-foreground hover:text-foreground"
+                        )}
+                      >
+                        {t(sectionTitleMap[sectionId])}
+                      </button>
+                    ))}
+                  </nav>
                 </div>
-                <div className="space-y-2">
-                  <Label htmlFor="translation_homage_tibetan">Tibetan</Label>
-                  <Textarea
-                    id="translation_homage_tibetan"
-                    value={formData.translation_homage_tibetan}
-                    onChange={(e) => setFormData({ ...formData, translation_homage_tibetan: e.target.value })}
-                    className="font-tibetan"
-                    rows={4}
-                  />
+              </div>
+
+              {/* Right Form Area */}
+              <div className="flex-1 flex flex-col overflow-hidden">
+                <div className="flex-1 overflow-y-auto p-4 sm:p-6">
+                  {currentSectionFields && (
+                    <div className="space-y-4">
+                      <h3
+                        className={cn(
+                          "text-lg sm:text-xl font-semibold text-kangyur-maroon mb-3 sm:mb-4 capitalize",
+                          isTibetan && "tibetan"
+                        )}
+                      >
+                        {t(sectionTitleMap[activeSection as keyof typeof sectionTitleMap] || activeSection)}
+                      </h3>
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div className="space-y-2">
+                          <Label htmlFor={`${currentSectionFields.english}`}>
+                            {t('englishContent')}
+                          </Label>
+                          <Textarea
+                            id={currentSectionFields.english}
+                            value={formData[currentSectionFields.english] ?? ''}
+                            onChange={(e) => setFormData({ ...formData, [currentSectionFields.english]: e.target.value })}
+                            rows={currentSectionFields.rows}
+                            className="resize-none"
+                          />
+                        </div>
+                        <div className="space-y-2">
+                          <Label htmlFor={`${currentSectionFields.tibetan}`}>
+                            {t('tibetanContent')}
+                          </Label>
+                          <Textarea
+                            id={currentSectionFields.tibetan}
+                            value={formData[currentSectionFields.tibetan] ?? ''}
+                            onChange={(e) => setFormData({ ...formData, [currentSectionFields.tibetan]: e.target.value })}
+                            className={cn("font-tibetan resize-none", isTibetan && "tibetan font-['CustomTibetan']")}
+                            rows={currentSectionFields.rows}
+                          />
+                        </div>
+                      </div>
+                    </div>
+                  )}
                 </div>
               </div>
             </div>
 
-            <div className="space-y-4">
-              <h3 className="text-lg font-semibold">Purpose</h3>
-              <div className="grid grid-cols-2 gap-4">
-                <div className="space-y-2">
-                  <Label htmlFor="purpose_english">English</Label>
-                  <Textarea
-                    id="purpose_english"
-                    value={formData.purpose_english}
-                    onChange={(e) => setFormData({ ...formData, purpose_english: e.target.value })}
-                    rows={4}
-                  />
-                </div>
-                <div className="space-y-2">
-                  <Label htmlFor="purpose_tibetan">Tibetan</Label>
-                  <Textarea
-                    id="purpose_tibetan"
-                    value={formData.purpose_tibetan}
-                    onChange={(e) => setFormData({ ...formData, purpose_tibetan: e.target.value })}
-                    className="font-tibetan"
-                    rows={4}
-                  />
-                </div>
-              </div>
-            </div>
-
-            <div className="space-y-4">
-              <h3 className="text-lg font-semibold">Text Summary</h3>
-              <div className="grid grid-cols-2 gap-4">
-                <div className="space-y-2">
-                  <Label htmlFor="summary_text_english">English</Label>
-                  <Textarea
-                    id="summary_text_english"
-                    value={formData.summary_text_english}
-                    onChange={(e) => setFormData({ ...formData, summary_text_english: e.target.value })}
-                    rows={6}
-                  />
-                </div>
-                <div className="space-y-2">
-                  <Label htmlFor="summary_text_tibetan">Tibetan</Label>
-                  <Textarea
-                    id="summary_text_tibetan"
-                    value={formData.summary_text_tibetan}
-                    onChange={(e) => setFormData({ ...formData, summary_text_tibetan: e.target.value })}
-                    className="font-tibetan"
-                    rows={6}
-                  />
-                </div>
-              </div>
-            </div>
-
-            <div className="space-y-4">
-              <h3 className="text-lg font-semibold">Word Meaning</h3>
-              <div className="grid grid-cols-2 gap-4">
-                <div className="space-y-2">
-                  <Label htmlFor="word_meaning_english">English</Label>
-                  <Textarea
-                    id="word_meaning_english"
-                    value={formData.word_meaning_english}
-                    onChange={(e) => setFormData({ ...formData, word_meaning_english: e.target.value })}
-                    rows={4}
-                  />
-                </div>
-                <div className="space-y-2">
-                  <Label htmlFor="word_meaning_tibetan">Tibetan</Label>
-                  <Textarea
-                    id="word_meaning_tibetan"
-                    value={formData.word_meaning_tibetan}
-                    onChange={(e) => setFormData({ ...formData, word_meaning_tibetan: e.target.value })}
-                    className="font-tibetan"
-                    rows={4}
-                  />
-                </div>
-              </div>
-            </div>
-
-            <div className="space-y-4">
-              <h3 className="text-lg font-semibold">Connection/Relation</h3>
-              <div className="grid grid-cols-2 gap-4">
-                <div className="space-y-2">
-                  <Label htmlFor="connection_english">English</Label>
-                  <Textarea
-                    id="connection_english"
-                    value={formData.connection_english}
-                    onChange={(e) => setFormData({ ...formData, connection_english: e.target.value })}
-                    rows={4}
-                  />
-                </div>
-                <div className="space-y-2">
-                  <Label htmlFor="connection_tibetan">Tibetan</Label>
-                  <Textarea
-                    id="connection_tibetan"
-                    value={formData.connection_tibetan}
-                    onChange={(e) => setFormData({ ...formData, connection_tibetan: e.target.value })}
-                    className="font-tibetan"
-                    rows={4}
-                  />
-                </div>
-              </div>
-            </div>
-
-            <div className="space-y-4">
-              <h3 className="text-lg font-semibold">Question and Answers</h3>
-              <div className="grid grid-cols-2 gap-4">
-                <div className="space-y-2">
-                  <Label htmlFor="question_answers_english">English</Label>
-                  <Textarea
-                    id="question_answers_english"
-                    value={formData.question_answers_english}
-                    onChange={(e) => setFormData({ ...formData, question_answers_english: e.target.value })}
-                    rows={4}
-                  />
-                </div>
-                <div className="space-y-2">
-                  <Label htmlFor="question_answers_tibetan">Tibetan</Label>
-                  <Textarea
-                    id="question_answers_tibetan"
-                    value={formData.question_answers_tibetan}
-                    onChange={(e) => setFormData({ ...formData, question_answers_tibetan: e.target.value })}
-                    className="font-tibetan"
-                    rows={4}
-                  />
-                </div>
-              </div>
-            </div>
-
-            <div className="space-y-4">
-              <h3 className="text-lg font-semibold">Colophon/Translator Notes</h3>
-              <div className="grid grid-cols-2 gap-4">
-                <div className="space-y-2">
-                  <Label htmlFor="colophon_english">English</Label>
-                  <Textarea
-                    id="colophon_english"
-                    value={formData.colophon_english}
-                    onChange={(e) => setFormData({ ...formData, colophon_english: e.target.value })}
-                    rows={4}
-                  />
-                </div>
-                <div className="space-y-2">
-                  <Label htmlFor="colophon_tibetan">Tibetan</Label>
-                  <Textarea
-                    id="colophon_tibetan"
-                    value={formData.colophon_tibetan}
-                    onChange={(e) => setFormData({ ...formData, colophon_tibetan: e.target.value })}
-                    className="font-tibetan"
-                    rows={4}
-                  />
-                </div>
-              </div>
-            </div>
-
-            <DialogFooter>
+            <DialogFooter className="px-6 py-4 border-t">
               <Button type="button" variant="outline" onClick={handleClose} disabled={loading}>
-                Cancel
+                {t('cancel')}
               </Button>
               <Button 
                 type="button" 
@@ -374,10 +343,10 @@ export const TextSummaryForm = ({ isOpen, onClose, textId, textTitle, onSave }: 
                 onClick={handleDelete} 
                 disabled={loading}
               >
-                Delete Summary
+                {t('delete')} {t('summary')}
               </Button>
               <Button type="submit" disabled={loading}>
-                {loading ? 'Saving...' : 'Save Summary'}
+                {loading ? t('uploading') : t('saveChanges')}
               </Button>
             </DialogFooter>
           </form>

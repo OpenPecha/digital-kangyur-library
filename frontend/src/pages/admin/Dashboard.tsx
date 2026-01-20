@@ -1,34 +1,36 @@
 import React from 'react';
 import AdminLayout from '@/components/admin/AdminLayout';
 import { Link } from 'react-router-dom';
-import { BookOpen, NewspaperIcon, FileText, Video, Clock, Music, FolderTree, Users } from 'lucide-react';
+import { NewspaperIcon, FileText, Video, Users } from 'lucide-react';
+import useLanguage from '@/hooks/useLanguage';
 
 const Dashboard = () => {
+  const { t } = useLanguage();
+  
   const managementCards = [
     {
-      title: "News",
+      titleKey: "news",
       icon: NewspaperIcon,
       path: "/admin/news",
-      description: "Manage news articles with thumbnails"
+      descriptionKey: "manageNewsArticles"
     },
     {
-      title: "Videos",
+      titleKey: "videos",
       icon: Video,
       path: "/admin/videos",
-      description: "Manage video content with links"
+      descriptionKey: "manageVideoContent"
     },
-
     {
-      title: "Karchag",
+      titleKey: "karchag",
       icon: FileText,
       path: "/admin/karchag",
-      description: "Manage Kangyur texts and content"
+      descriptionKey: "manageKangyurTexts"
     },
     {
-      title: "Users",
+      titleKey: "users",
       icon: Users,
       path: "/admin/users",
-      description: "Manage system users"
+      descriptionKey: "manageSystemUsers"
     }
   ];
 
@@ -36,14 +38,14 @@ const Dashboard = () => {
     <AdminLayout>
       <div className="space-y-8">
         <div className="text-center">
-          <h1 className="text-3xl font-bold text-gray-800 mb-2 pt-10">Content Management Board</h1>
-          <p className="text-gray-600">Manage your content across different categories</p>
+          <h1 className="text-3xl font-bold text-gray-800 mb-2 pt-10">{t('contentManagementBoard')}</h1>
+          <p className="text-gray-600">{t('manageContentAcrossCategories')}</p>
         </div>
         
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {managementCards.map((card) => (
             <Link
-              key={card.title}
+              key={card.titleKey}
               to={card.path}
               className="group"
             >
@@ -55,16 +57,16 @@ const Dashboard = () => {
                   
                   <div>
                     <h3 className="text-lg font-semibold text-gray-800 mb-2">
-                      {card.title}
+                      {t(card.titleKey)}
                     </h3>
                     <p className="text-sm text-gray-500">
-                      {card.description}
+                      {t(card.descriptionKey)}
                     </p>
                   </div>
                   
                   <div className="text-center">
                     <span className="text-xs text-kangyur-orange font-medium group-hover:text-kangyur-maroon transition-colors">
-                      Manage →
+                      {t('manage')} →
                     </span>
                   </div>
                 </div>

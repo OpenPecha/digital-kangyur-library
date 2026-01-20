@@ -1,7 +1,7 @@
 import React from 'react';
 import { Card } from '@/components/ui/atoms/card';
 import { Button } from '@/components/ui/atoms/button';
-import { Edit, Trash2, BookOpen, FileText as SummaryIcon } from 'lucide-react';
+import { Edit, Trash2, BookOpen } from 'lucide-react';
 import { useLanguage } from '@/hooks/useLanguage';
 
 interface TextCardProps {
@@ -10,10 +10,9 @@ interface TextCardProps {
   subCategories: any[];
   onEdit: (item: any) => void;
   onDelete: (item: any) => void;
-  onManageSummary: (textId: string, textTitle: string) => void;
 }
 
-export const TextCard: React.FC<TextCardProps> = ({ text, mainCategories, subCategories, onEdit, onDelete, onManageSummary }) => {
+export const TextCard: React.FC<TextCardProps> = ({ text, mainCategories, subCategories, onEdit, onDelete }) => {
   const { t } = useLanguage();
   const subCategory = subCategories.find(sc => sc.id === text.sub_category_id);
   const mainCategory = mainCategories.find(c => c.id === subCategory?.main_category_id);
@@ -49,15 +48,8 @@ export const TextCard: React.FC<TextCardProps> = ({ text, mainCategories, subCat
           </div>
           <div className="flex items-center gap-2">
             <Button variant="outline" size="sm" onClick={() => onEdit(text)}>
-              <Edit className="h-4 w-4" />
-            </Button>
-            <Button 
-              variant="outline" 
-              size="sm" 
-              onClick={() => onManageSummary(text.id, text.english_title || text.tibetan_title || 'Untitled')}
-              title="Manage Summary"
-            >
-              <SummaryIcon className="h-4 w-4" />
+              <Edit className="h-4 w-4 mr-2" />
+              {t('edit')}
             </Button>
             <Button variant="outline" size="sm" className="text-red-600 hover:text-red-700" onClick={() => onDelete(text)}>
               <Trash2 className="h-4 w-4" />
