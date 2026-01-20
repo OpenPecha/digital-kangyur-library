@@ -3,6 +3,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { ChevronRight, Home } from 'lucide-react';
 import { cn } from '@/lib/utils';
+import useLanguage from '@/hooks/useLanguage';
 
 export interface BreadcrumbItem {
   label: string;
@@ -13,21 +14,26 @@ export interface BreadcrumbItem {
 interface BreadcrumbProps {
   items: BreadcrumbItem[];
   className?: string;
-  showHome?: boolean; // <-- Add this prop
+  showHome?: boolean;
+  homeHref?: string;
+  homeLabel?: string;
 }
 
-const Breadcrumb = ({ items, className, showHome = true }: BreadcrumbProps) => {
+const Breadcrumb = ({ items, className, showHome = true, homeHref = "/", homeLabel }: BreadcrumbProps) => {
+  const {isTibetan, t} = useLanguage();
+  const displayHomeLabel = homeLabel || t('home');
   return (
-    <nav className={cn("flex", className)} aria-label="Breadcrumb">
+    <nav className={cn("flex", className)} aria-label="Breadcrumb"
+    style={{fontFamily: isTibetan ? 'CustomTibetan' : ''}}>
       <ol className="inline-flex items-center space-x-1 md:space-x-2">
         {showHome && (
           <li className="inline-flex items-center">
             <Link 
-              to="/" 
+              to={homeHref} 
               className="inline-flex items-center text-sm text-gray-500 hover:text-kangyur-maroon"
             >
               <Home className="w-4 h-4 mr-1.5" />
-              <span className="sr-only sm:not-sr-only">Home</span>
+              <span className={homeLabel ? "" : "sr-only sm:not-sr-only"}>{displayHomeLabel}</span>
             </Link>
           </li>
         )}

@@ -7,7 +7,7 @@ import { Card } from '@/components/ui/atoms/card';
 import { Search, Plus, ChevronRight, FolderTree, Edit, Trash2 } from 'lucide-react';
 import api from '@/utils/api';
 import { toast } from 'sonner';
-import { Breadcrumb } from './Breadcrumb';
+import Breadcrumb from '@/components/ui/atoms/Breadcrumb';
 import { CategoryForm } from './CategoryForm';
 import { useLanguage } from '@/hooks/useLanguage';
 
@@ -170,7 +170,11 @@ export const MainCategoryView: React.FC = () => {
   return (
     <div className="space-y-6">
       {/* Breadcrumb */}
-      <Breadcrumb items={[{ label: mainCategory.name_english, path: `/admin/karchag/${mainId}` }]} />
+      <Breadcrumb 
+        items={[{ label: mainCategory.name_english, href: `/admin/karchag/${mainId}` }]}
+        homeHref="/admin/karchag"
+        homeLabel={t('allCategories')}
+      />
 
       {/* Header */}
       <div className="flex items-center justify-between gap-4">

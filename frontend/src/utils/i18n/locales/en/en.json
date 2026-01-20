@@ -6,6 +6,7 @@
     "history": "History",
     "catalog": "Karchag",
     "news": "News",
+    "text": "Text",
     "videos": "Videos",
     "aboutUs": "About Us",
     "subtitle": "Begin Your Journey Through Buddhist Wisdom",
@@ -76,7 +77,6 @@
     "searchResultsFor": "Showing search results for:",
     "clearSearch": "Clear Search",
     "noItemsFound": "No items found",
-    "discipline": "Discipline",
     "prajnaparamita": "Prajñāpāramitā",
     "avatamsaka": "Avataṃsaka",
     "ratnakuta": "Ratnakūṭa",
@@ -219,7 +219,6 @@
     "optionalVideoThumbnailUrl": "Optional: URL for video thumbnail image",
     "manageVideos": "Manage Videos",
     "createEditManageVideos": "Create, edit, and manage video content",
-    "searchVideos": "Search videos...",
     "loadingVideos": "Loading videos...",
     "noVideosFound": "No videos found matching your search.",
     "noVideosAvailable": "No videos available. Create your first video!",
@@ -231,8 +230,6 @@
     "videoUpdatedSuccessfully": "Video updated successfully",
     "videoDeletedSuccessfully": "Video deleted successfully",
     "failedToLoadVideos": "Failed to load videos",
-    "englishDescription": "English Description",
-    "tibetanDescription": "Tibetan Description",
     "enterEnglishDescription": "Enter English description",
     "enterTibetanDescription": "བོད་ཡིག་གི་ནང་དོན།",
     "contentManagementBoard": "Content Management Board",
@@ -246,5 +243,6 @@
     "manage": "Manage",
     "settings": "Settings",
     "logOut": "Log out",
-    "loggedOutSuccessfully": "Logged out successfully"
+    "loggedOutSuccessfully": "Logged out successfully",
+    "allCategories": "All Categories"
 }

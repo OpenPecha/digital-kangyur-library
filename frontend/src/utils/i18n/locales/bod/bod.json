@@ -6,6 +6,7 @@
     "history": "ལོ་རྒྱུས།",
     "catalog": "དཀར་ཆག",
     "news": "གསར་འགྱུར།",
+    "text": "པད་ཆ་",
     "videos": "བརྙན།",
     "aboutUs": "ང་ཚོའི་སྐོར།",
     "subtitle": "ནང་པའི་ཤེས་རབ་བརྒྱུད་དེ་ཁྱེད་ཀྱི་འགྲུལ་བཞུད་འགོ་རྩོམ།",
@@ -59,7 +60,6 @@
     "visitMainWebsite": "ང་ཚོའི་གཙོ་བོའི་དྲ་ཚིགས་ལ་གཟིགས།",
     "followUs": "རྗེས་འབྲང་བྱོས།",
     "joinUsText": "སངས་རྒྱས་ཀྱི་བསྟན་པའི་ཤེས་རབ་མི་རབས་ནས་མི་རབས་བར་ཉར་ཚགས་དང་བགོ་བཤའ་བྱེད་པའི་ལོ་རྒྱུས་ཅན་གྱི་འབད་བརྩོན་འདིར་ང་ཚོ་དང་མཉམ་དུ་ཞུགས་ཤོག",
-    "searchVideos": "བརྙེན་འཚོལ།",
     "kangyurVideos": "བཀའ་འགྱུར་བརྙེན།",
     "videosSubtitle": "བཀའ་འགྱུར་དང་འབྲེལ་བའི་གྲོས་མོལ། སློབ་ཁྲིད། བརྗོད་བྱ་སོགས།",
     "watchTeachings": "སློབ་ཁྲིད་ལ་ལྟ།",
@@ -76,7 +76,6 @@
     "searchResultsFor": "འཚོལ་ཞིབ་ཀྱི་གྲུབ་འབྲས།",
     "clearSearch": "འཚོལ་ཞིབ་བསལ།",
     "noItemsFound": "རྣམ་གྲངས་མ་རྙེད།",
-    "discipline": "འདུལ་བ།",
     "prajnaparamita": "ཤེར་ཕྱིན།",
     "avatamsaka": "ཕལ་ཆེན།",
     "ratnakuta": "དཀོན་བརྩེགས།",
@@ -231,8 +230,6 @@
     "videoUpdatedSuccessfully": "བརྙན་བཟོ་བཅོས་བྱས་ཟིན།",
     "videoDeletedSuccessfully": "བརྙན་བསུབ་ཟིན།",
     "failedToLoadVideos": "བརྙན་འཇུག་མ་ཐུབ།",
-    "englishDescription": "དབྱིན་ཡིག་འགྲེལ་བཤད།",
-    "tibetanDescription": "བོད་ཡིག་འགྲེལ་བཤད།",
     "enterEnglishDescription": "དབྱིན་ཡིག་འགྲེལ་བཤད་འཇུག",
     "enterTibetanDescription": "བོད་ཡིག་གི་ནང་དོན།",
     "contentManagementBoard": "ནང་དོན་དོ་དམ་ལྷན་ཚོགས།",
@@ -246,5 +243,6 @@
     "manage": "དོ་དམ།",
     "settings": "སྒྲིག་འཇུག",
     "logOut": "ཕྱིར་ཐོན།",
-    "loggedOutSuccessfully": "ཕྱིར་ཐོན་བྱས་ཟིན།"
+    "loggedOutSuccessfully": "ཕྱིར་ཐོན་བྱས་ཟིན།",
+    "allCategories": "སྡེ་ཚན་ཡོངས།"
 }

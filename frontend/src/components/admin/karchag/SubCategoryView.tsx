@@ -1,22 +1,21 @@
 import React, { useState } from 'react';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
-import { useParams, useNavigate } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { Button } from '@/components/ui/atoms/button';
 import { Input } from '@/components/ui/atoms/input';
 import { Card } from '@/components/ui/atoms/card';
 import { Edit, Search, Plus } from 'lucide-react';
 import api from '@/utils/api';
 import { toast } from 'sonner';
-import { Breadcrumb } from './Breadcrumb';
+import Breadcrumb from '@/components/ui/atoms/Breadcrumb';
 import { CategoryForm } from './CategoryForm';
 import { TextCard } from './TextCard';
 import { TextForm } from './TextForm';
-import { TextSummaryForm } from '@/components/admin/texts/TextSummaryForm';
+import { TextEditModal } from './TextEditModal';
 import { useLanguage } from '@/hooks/useLanguage';
 
 export const SubCategoryView: React.FC = () => {
   const { mainId, subId } = useParams<{ mainId?: string; subId?: string }>();
-  const navigate = useNavigate();
   const queryClient = useQueryClient();
   const { t } = useLanguage();
   const [searchQuery, setSearchQuery] = useState('');
@@ -24,8 +23,7 @@ export const SubCategoryView: React.FC = () => {
   const [editingText, setEditingText] = useState<any>(null);
   const [isCategoryFormOpen, setIsCategoryFormOpen] = useState(false);
   const [isTextFormOpen, setIsTextFormOpen] = useState(false);
-  const [isSummaryFormOpen, setIsSummaryFormOpen] = useState(false);
-  const [selectedTextForSummary, setSelectedTextForSummary] = useState<{ id: string; title: string } | null>(null);
+  const [isTextEditModalOpen, setIsTextEditModalOpen] = useState(false);
   const [formMode, setFormMode] = useState<'create' | 'edit'>('create');
 
   const { data: mainCategoryData } = useQuery({
@@ -151,9 +149,8 @@ export const SubCategoryView: React.FC = () => {
   };
 
   const handleEditText = (item: any) => {
-    setFormMode('edit');
     setEditingText(item);
-    setIsTextFormOpen(true);
+    setIsTextEditModalOpen(true);
   };
 
   const handleDeleteText = async (item: any) => {
@@ -236,17 +233,20 @@ export const SubCategoryView: React.FC = () => {
   return (
     <div className="space-y-6">
       {/* Breadcrumb */}
-      <Breadcrumb items={[
-        { label: mainCategory.name_english, path: `/admin/karchag/${mainId}` },
-        { label: subCategory.name_english, path: `/admin/karchag/${mainId}/${subId}` }
-      ]} />
+      <Breadcrumb 
+        items={[
+          { label: mainCategory.name_english, href: `/admin/karchag/${mainId}` },
+          { label: subCategory.name_english, href: `/admin/karchag/${mainId}/${subId}` }
+        ]}
+        homeHref="/admin/karchag"
+        homeLabel={t('allCategories')}
+      />
 
       {/* Header */}
       <div className="flex items-center justify-between gap-4">
         <div className="flex-1">
           <h1 className="text-3xl font-bold text-gray-800 py-[10px]">{subCategory.name_english}</h1>
           <p className="text-sm font-medium text-kangyur-maroon tibetan mt-1">{subCategory.name_tibetan}</p>
-          <p className="text-gray-600 mt-1">{subCategory.description_english}</p>
         </div>
         <div className="flex items-center gap-2">
           <Button variant="outline" size="sm" onClick={() => handleEditCategory(subCategory)}>
@@ -297,10 +297,6 @@ export const SubCategoryView: React.FC = () => {
               subCategories={subCategories}
               onEdit={handleEditText}
               onDelete={handleDeleteText}
-              onManageSummary={(textId, textTitle) => {
-                setSelectedTextForSummary({ id: textId, title: textTitle });
-                setIsSummaryFormOpen(true);
-              }}
             />
           ))}
           {filteredTexts.length === 0 && (
@@ -334,17 +330,42 @@ export const SubCategoryView: React.FC = () => {
         onSave={handleSaveText}
       />
 
-      {/* Text Summary Form */}
-      {selectedTextForSummary && (
-        <TextSummaryForm
-          isOpen={isSummaryFormOpen}
+      {/* Text Edit Modal */}
+      {editingText && (
+        <TextEditModal
+          isOpen={isTextEditModalOpen}
           onClose={() => {
-            setIsSummaryFormOpen(false);
-            setSelectedTextForSummary(null);
+            setIsTextEditModalOpen(false);
+            setEditingText(null);
           }}
-          textId={selectedTextForSummary.id}
-          textTitle={selectedTextForSummary.title}
-          onSave={() => {
+          text={editingText}
+          subCategories={subCategories}
+          mainCategories={mainCategories}
+          onSave={(data) => {
+            updateTextMutation.mutate({
+              id: editingText.id,
+              data: {
+                sub_category_id: subId,
+                derge_id: data.derge_id,
+                yeshe_de_id: data.yeshe_de_id,
+                tibetan_title: data.tibetan_title,
+                chinese_title: data.chinese_title,
+                sanskrit_title: data.sanskrit_title,
+                english_title: data.english_title,
+                sermon: data.sermon,
+                yana: data.yana,
+                translation_period: data.translation_period,
+                yeshe_de_volume_number: data.yeshe_de_volume_number,
+                yeshe_de_volume_length: data.yeshe_de_volume_length,
+                pdf_url: data.pdf_url,
+                order_index: data.order_index,
+                is_active: data.is_active,
+              },
+            });
+            setIsTextEditModalOpen(false);
+            setEditingText(null);
+          }}
+          onSummarySave={() => {
             queryClient.invalidateQueries({ queryKey: ['karchag', 'texts'] });
           }}
         />
