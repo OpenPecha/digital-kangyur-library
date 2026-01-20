@@ -342,7 +342,7 @@ const TextDetail = () => {
                       {t('metadata')}
                     </TabsTrigger>
                     <TabsTrigger value="summary" className="rounded-none">
-                      {t('summary')}
+                      {t('text')}
                     </TabsTrigger>
                     <TabsTrigger value="pdf" className="rounded-none">
                       {t('yesheDeSourceText')}
@@ -381,9 +381,7 @@ const TextDetail = () => {
                         {/* Left Navigation Bar */}
                         <div className="md:w-1/4 lg:w-1/5 border-b md:border-b-0 md:border-r border-border bg-muted/30 max-h-56 md:max-h-none md:h-full overflow-y-auto">
                           <div className="p-3 sm:p-4">
-                            <h3 className="text-sm sm:text-base font-semibold text-foreground mb-3 sm:mb-4">
-                              {t('summarySections')}
-                            </h3>
+                            
                             <nav className="space-y-2">
                               {summaryData.sections.map((section: any) => (
                                 <button

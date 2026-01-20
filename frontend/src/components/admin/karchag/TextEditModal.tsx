@@ -130,9 +130,9 @@ export const TextEditModal = ({
     };
   });
 
-  // Fetch summary data when summary tab is active
+  // Fetch summary data when text tab is active
   useEffect(() => {
-    if (isOpen && text && activeTab === 'summary') {
+    if (isOpen && text && activeTab === 'text') {
       fetchSummary();
     }
   }, [isOpen, text, activeTab]);
@@ -157,12 +157,31 @@ export const TextEditModal = ({
         order_index: text.order_index || 0,
         is_active: text.is_active ?? true,
       });
+      // Reset summary form data when text changes
+      setSummaryFormData({
+        translation_homage_tibetan: '',
+        translation_homage_english: '',
+        purpose_tibetan: '',
+        purpose_english: '',
+        summary_text_tibetan: '',
+        summary_text_english: '',
+        word_meaning_tibetan: '',
+        word_meaning_english: '',
+        connection_tibetan: '',
+        connection_english: '',
+        question_answers_tibetan: '',
+        question_answers_english: '',
+        colophon_tibetan: '',
+        colophon_english: '',
+      });
       setActiveTab('metadata');
       setActiveSummarySection('translation-homage');
     }
   }, [isOpen, text]);
 
   const fetchSummary = async () => {
+    if (!text?.id) return;
+    
     try {
       setSummaryLoading(true);
       const summary = await api.getKarchagTextSummary(text.id);
@@ -183,11 +202,48 @@ export const TextEditModal = ({
           colophon_tibetan: summary.colophon_tibetan || '',
           colophon_english: summary.colophon_english || '',
         });
+      } else {
+        // Reset form if no summary exists
+        setSummaryFormData({
+          translation_homage_tibetan: '',
+          translation_homage_english: '',
+          purpose_tibetan: '',
+          purpose_english: '',
+          summary_text_tibetan: '',
+          summary_text_english: '',
+          word_meaning_tibetan: '',
+          word_meaning_english: '',
+          connection_tibetan: '',
+          connection_english: '',
+          question_answers_tibetan: '',
+          question_answers_english: '',
+          colophon_tibetan: '',
+          colophon_english: '',
+        });
       }
     } catch (error: any) {
+      // If summary doesn't exist, that's okay - we'll create it
       if (error.status !== 404) {
         console.error('Failed to fetch summary:', error);
         toast.error('Failed to load summary');
+      } else {
+        // Reset form if summary doesn't exist
+        setSummaryFormData({
+          translation_homage_tibetan: '',
+          translation_homage_english: '',
+          purpose_tibetan: '',
+          purpose_english: '',
+          summary_text_tibetan: '',
+          summary_text_english: '',
+          word_meaning_tibetan: '',
+          word_meaning_english: '',
+          connection_tibetan: '',
+          connection_english: '',
+          question_answers_tibetan: '',
+          question_answers_english: '',
+          colophon_tibetan: '',
+          colophon_english: '',
+        });
       }
     } finally {
       setSummaryLoading(false);
