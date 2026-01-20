@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { Globe, User, LogOut, Settings, ChevronDown } from 'lucide-react';
+import { User, LogOut, Settings } from 'lucide-react';
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -23,7 +23,7 @@ const AdminLayout = ({ children }: { children: React.ReactNode }) => {
 
   const handleLogout = () => {
     logout();
-    toast.success('Logged out successfully');
+    toast.success(t('loggedOutSuccessfully'));
     navigate('/admin/login');
   };
 
@@ -71,11 +71,11 @@ const AdminLayout = ({ children }: { children: React.ReactNode }) => {
                     <DropdownMenuSeparator />
                     <DropdownMenuItem>
                       <Settings className="mr-2 h-4 w-4" />
-                      <span>Settings</span>
+                      <span>{t('settings')}</span>
                     </DropdownMenuItem>
                     <DropdownMenuItem onClick={handleLogout}>
                       <LogOut className="mr-2 h-4 w-4" />
-                      <span>Log out</span>
+                      <span>{t('logOut')}</span>
                     </DropdownMenuItem>
                   </DropdownMenuContent>
                 </DropdownMenu>

@@ -49,9 +49,9 @@ const VideoCard = ({
   onEdit: (video: Video) => void;
   onDelete: (id: string) => void;
 }) => {
+  const { isTibetan, t } = useLanguage();
   const youtubeId = extractYouTubeId(video.videoLink);
   const hasThumbnail = video.thumbnailUrl && video.thumbnailUrl.trim() !== '';
-  const { isTibetan,t } = useLanguage();
   const renderThumbnail = () => {
     if (hasThumbnail) {
       return (
@@ -104,14 +104,14 @@ const VideoCard = ({
           className="text-xs text-kangyur-orange hover:underline flex items-center gap-1"
         >
           <ExternalLink className="h-3 w-3" />
-          View Video
+          {t('viewVideo')}
         </a>
       </CardContent>
       <CardFooter className="pt-0">
         <div className="flex items-center gap-2 w-full">
           <Button variant="outline" size="sm" className="flex-1" onClick={() => onEdit(video)}>
             <Edit className="h-4 w-4 mr-2" />
-            Edit
+            {t('edit')}
           </Button>
           <Button 
             variant="outline" 
@@ -120,7 +120,7 @@ const VideoCard = ({
             onClick={() => onDelete(video.id)}
           >
             <Trash2 className="h-4 w-4 mr-2" />
-            Delete
+            {t('delete')}
           </Button>
         </div>
       </CardFooter>
@@ -129,6 +129,7 @@ const VideoCard = ({
 };
 
 const VideosAdmin = () => {
+  const { t } = useLanguage();
   const [searchQuery, setSearchQuery] = useState('');
   const [isFormOpen, setIsFormOpen] = useState(false);
   const [editingVideo, setEditingVideo] = useState<Video | null>(null);
@@ -157,7 +158,7 @@ const VideosAdmin = () => {
       setVideos(transformedVideos);
     } catch (error) {
       console.error('Failed to fetch videos:', error);
-      toast.error('Failed to load videos');
+      toast.error(t('failedToLoadVideos'));
       setVideos([]);
     } finally {
       setLoading(false);
@@ -189,10 +190,10 @@ const VideosAdmin = () => {
 
       if (editingVideo) {
         await api.updateVideo(editingVideo.id, videoData);
-        toast.success('Video updated successfully');
+        toast.success(t('videoUpdatedSuccessfully'));
       } else {
         await api.createVideo(videoData);
-        toast.success('Video created successfully');
+        toast.success(t('videoCreatedSuccessfully'));
       }
 
       await fetchVideos();
@@ -200,22 +201,22 @@ const VideosAdmin = () => {
       setEditingVideo(null);
     } catch (error: any) {
       console.error('Error saving video:', error);
-      toast.error(error.message || 'Error saving video. Please try again.');
+      toast.error(error.message || t('errorSavingVideo'));
     }
   };
 
   const handleDelete = async (id: string) => {
-    if (!confirm('Are you sure you want to delete this video?')) {
+    if (!confirm(t('areYouSureDeleteVideo'))) {
       return;
     }
 
     try {
       await api.deleteVideo(id);
-      toast.success('Video deleted successfully');
+      toast.success(t('videoDeletedSuccessfully'));
       await fetchVideos();
     } catch (error: any) {
       console.error('Error deleting video:', error);
-      toast.error(error.message || 'Error deleting video. Please try again.');
+      toast.error(error.message || t('errorDeletingVideo'));
     }
   };
 
@@ -230,12 +231,12 @@ const VideosAdmin = () => {
         {/* Header with Search and Create Button */}
         <div className="flex items-center justify-between gap-4">
           <div className="flex-1">
-            <h1 className="text-3xl font-bold text-gray-800 py-[10px]">Manage Videos</h1>
-            <p className="text-gray-600 mt-1">Create, edit, and manage video content</p>
+            <h1 className="text-3xl font-bold text-gray-800 py-[10px]">{t('manageVideos')}</h1>
+            <p className="text-gray-600 mt-1">{t('createEditManageVideos')}</p>
           </div>
           <Button onClick={() => setIsFormOpen(true)}>
             <Plus className="mr-2 h-4 w-4" />
-            Create Video
+            {t('createVideo')}
           </Button>
         </div>
 
@@ -243,7 +244,7 @@ const VideosAdmin = () => {
         <div className="relative max-w-md">
           <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-4 w-4" />
           <Input
-            placeholder="Search videos..."
+            placeholder={t('searchVideos')}
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             className="pl-10"
@@ -253,7 +254,7 @@ const VideosAdmin = () => {
         {/* Videos Cards Grid */}
         {loading ? (
           <div className="text-center py-8">
-            <p className="text-gray-500">Loading videos...</p>
+            <p className="text-gray-500">{t('loadingVideos')}</p>
           </div>
         ) : (
           <>
@@ -265,13 +266,13 @@ const VideosAdmin = () => {
 
             {filteredVideos.length === 0 && searchQuery && (
               <div className="text-center py-8">
-                <p className="text-gray-500">No videos found matching your search.</p>
+                <p className="text-gray-500">{t('noVideosFound')}</p>
               </div>
             )}
 
             {filteredVideos.length === 0 && !searchQuery && (
               <div className="text-center py-8">
-                <p className="text-gray-500">No videos available. Create your first video!</p>
+                <p className="text-gray-500">{t('noVideosAvailable')}</p>
               </div>
             )}
           </>

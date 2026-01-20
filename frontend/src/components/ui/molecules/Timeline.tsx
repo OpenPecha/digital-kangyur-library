@@ -6,6 +6,14 @@ import { cn } from '@/lib/utils';
 import useLanguage from '@/hooks/useLanguage';
 import { useQuery } from '@tanstack/react-query';
 import api from '@/utils/api';
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/atoms/select';
+import { Label } from '@/components/ui/atoms/label';
 
 type TimelineEvent = {
   id: string;
@@ -35,6 +43,7 @@ const periodSlugToKey: Record<string, string> = {
 
 const Timeline = () => {
   const [selectedPeriod, setSelectedPeriod] = useState<TimelineEvent | null>(null);
+  const [tickInterval, setTickInterval] = useState<number | null>(null);
   const { t, isTibetan } = useLanguage();
 
   // Fetch timeline data using React Query
@@ -71,9 +80,9 @@ const Timeline = () => {
     },
   });
 
-  const { minYear, yearRange, tickMarks } = useMemo(() => {
+  const { minYear, maxYear, yearRange, tickMarks, defaultInterval } = useMemo(() => {
     if (timelineData.length === 0) {
-      return { minYear: 0, yearRange: 0, tickMarks: [] };
+      return { minYear: 0, maxYear: 0, yearRange: 0, tickMarks: [], defaultInterval: 25 };
     }
 
     const allYears = timelineData.flatMap(period => [period.startYear, period.endYear]);
@@ -81,55 +90,72 @@ const Timeline = () => {
     const max = Math.max(...allYears);
     const range = max - min;
     
-    const tickInterval = range > 500 ? 50 : 25;
-    const startTick = Math.floor(min / tickInterval) * tickInterval;
-    const endTick = Math.ceil(max / tickInterval) * tickInterval;
+    // Calculate default interval based on range if not set by user
+    const calculatedDefaultInterval = range > 500 ? 50 : 25;
+    const interval = tickInterval ?? calculatedDefaultInterval;
+    
+    const startTick = Math.floor(min / interval) * interval;
+    const endTick = Math.ceil(max / interval) * interval;
     
     const ticks = [];
-    for (let year = startTick; year <= endTick; year += tickInterval) {
+    for (let year = startTick; year <= endTick; year += interval) {
       ticks.push(year);
     }
     
     return {
       minYear: min,
+      maxYear: max,
       yearRange: range,
-      tickMarks: ticks
+      tickMarks: ticks,
+      defaultInterval: calculatedDefaultInterval
     };
-  }, [timelineData]);
+  }, [timelineData, tickInterval]);
 
   const getPositionPercent = (year: number) => {
     if (yearRange === 0) return 0;
     return ((year - minYear) / yearRange) * 100;
   };
 
-  const getWidthPercent = (startYear: number, endYear: number) => {
-    if (yearRange === 0) return 0;
-    return ((endYear - startYear) / yearRange) * 100;
-  };
+  // Calculate minimum container width based on year range and ensure proper spacing
+  const containerWidth = useMemo(() => {
+    if (yearRange === 0) return 1000;
+    // Base width calculation: ensure adequate spacing between periods
+    // Use a scale factor that provides at least 2px per year for better readability
+    const scaleFactor = Math.max(2, Math.ceil(yearRange / 500)); // Scale factor increases for larger ranges
+    const baseWidth = Math.max(1200, yearRange * scaleFactor);
+    // Add padding for period boxes and ensure minimum spacing
+    // Each period needs at least 150px width, plus gaps between them
+    const minPeriodWidth = 150;
+    const totalPeriodSpace = timelineData.length * minPeriodWidth;
+    const gapSpace = Math.max(50, timelineData.length * 10); // Minimum gaps between periods
+    return Math.max(baseWidth, totalPeriodSpace + gapSpace + 200); // +200 for padding
+  }, [yearRange, timelineData.length]);
 
   return (
     <div className={cn("w-full")}>
+    
+
       {/* Timeline Container */}
-      <div className="bg-white border border-kangyur-orange/20 rounded-lg p-6 overflow-x-auto min-h-[480px]">
+      <div className="bg-white border border-kangyur-orange/20 rounded-lg p-6 overflow-x-auto min-h-[480px] w-full">
         {/* Loading state */}
         {isLoading && (
-          <div className="flex items-center justify-center h-64 min-w-[1000px]">
+          <div className="flex items-center justify-center h-64 w-full min-w-[1000px]">
             <p className="text-kangyur-dark/60">Loading timeline...</p>
           </div>
         )}
 
         {/* Empty state */}
         {!isLoading && timelineData.length === 0 && (
-          <div className="flex items-center justify-center h-64 min-w-[1000px]">
+          <div className="flex items-center justify-center h-64 w-full min-w-[1000px]">
             <p className="text-kangyur-dark/60">No timeline data available</p>
           </div>
         )}
 
         {/* Timeline content */}
         {!isLoading && timelineData.length > 0 && (
-          <div className="relative min-w-[1000px]">
+          <div className="relative" style={{ width: `${containerWidth}px`, minWidth: `${containerWidth}px` }}>
             {/* Year markers at top */}
-            <div className="relative mb-8 h-8">
+            <div className="relative mb-8 h-8" style={{ width: '100%' }}>
               {tickMarks.map((year) => (
                 <div
                   key={year}
@@ -144,27 +170,50 @@ const Timeline = () => {
             </div>
 
             {/* Main timeline line */}
-            <div className="relative h-2 bg-kangyur-orange/20 rounded-full mb-8">
-              {/* Tick marks */}
-              {tickMarks.map((year) => (
-                <div
-                  key={year}
-                  className="absolute top-0 h-full w-0.5 bg-kangyur-orange/40"
-                  style={{ left: `${getPositionPercent(year)}%` }}
-                />
-              ))}
+            <div className="relative h-2 mb-8" style={{ width: '100%' }}>
+              <div 
+                className="absolute h-full bg-kangyur-orange/20 rounded-full"
+                style={{ 
+                  left: `${getPositionPercent(minYear)}%`,
+                  width: `${getPositionPercent(maxYear) - getPositionPercent(minYear)}%`
+                }}
+              >
+                {/* Tick marks */}
+                {tickMarks.map((year) => {
+                  const tickPosition = getPositionPercent(year);
+                  const minPos = getPositionPercent(minYear);
+                  const maxPos = getPositionPercent(maxYear);
+                  // Only show tick marks that fall within the actual data range
+                  if (tickPosition >= minPos && tickPosition <= maxPos) {
+                    const relativePosition = maxPos > minPos 
+                      ? ((tickPosition - minPos) / (maxPos - minPos)) * 100 
+                      : 0;
+                    return (
+                      <div
+                        key={year}
+                        className="absolute top-0 h-full w-0.5 bg-kangyur-orange/40"
+                        style={{ left: `${relativePosition}%` }}
+                      />
+                    );
+                  }
+                  return null;
+                })}
+              </div>
             </div>
 
             {/* Period boxes positioned along timeline */}
-            <div className="relative">
+            <div className="relative" style={{ width: '100%', minHeight: '240px' }}>
               {timelineData.map((period, index) => {
                 const leftPosition = getPositionPercent(period.startYear);
-                const width = getWidthPercent(period.startYear, period.endYear);
-                const minWidth = 12;
-                const actualWidth = Math.max(width, minWidth);
+                const rightPosition = getPositionPercent(period.endYear);
+                // Use exact calculated width to ensure proper alignment with timeline bar
+                const calculatedWidth = rightPosition - leftPosition;
                 
-                const row = index % 3;
-                const topOffset = row * 70 + 10;
+                // Calculate row based on overlap detection to prevent stacking too many on same row
+                // Simple approach: distribute across rows with consistent spacing
+                const rowsPerPeriod = 3;
+                const row = index % rowsPerPeriod;
+                const topOffset = row * 80 + 10; // Increased spacing between rows
 
                 return (
                   <button
@@ -174,8 +223,8 @@ const Timeline = () => {
                     style={{
                       left: `${leftPosition}%`,
                       top: `${topOffset}px`,
-                      width: `${actualWidth}%`,
-                      minWidth: '150px'
+                      width: `${calculatedWidth}%`,
+                      minWidth: '120px' // Ensure minimum width for readability
                     }}
                     onClick={() => setSelectedPeriod(period)}
                   >
