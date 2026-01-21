@@ -45,7 +45,7 @@ const TantraText = () => {
   if (loading) {
     return (
       <div className="min-h-screen flex flex-col">
-        <main className="flex-1 pt-24 pb-16">
+        <main className="flex-1 pt-10 pb-16">
           <div className="container mx-auto px-4 sm:px-6 lg:px-8">
             <div className="flex justify-center items-center py-12">
               <div className="text-lg">Loading...</div>
@@ -60,7 +60,7 @@ const TantraText = () => {
   if (error || !text) {
     return (
       <div className="min-h-screen flex flex-col">
-        <main className="flex-1 pt-24 pb-16">
+        <main className="flex-1 pt-10 pb-16">
           <div className="container mx-auto px-4 sm:px-6 lg:px-8">
             <div className="flex justify-center items-center py-12">
               <div className="text-lg text-red-600">{error || 'Text not found'}</div>
@@ -85,7 +85,7 @@ const TantraText = () => {
 
   return (
     <div className="min-h-screen flex flex-col">
-      <main className="flex-1 pt-24 pb-16">
+      <main className="flex-1 pt-10 pb-16">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="mb-4">
             <Breadcrumb items={breadcrumbItems} showHome={false} />
