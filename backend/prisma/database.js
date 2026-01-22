@@ -466,7 +466,15 @@ const karchagTextService = {
     
     return await prisma.text.findMany({
       where,
-      orderBy: { order_index: 'asc' }
+      orderBy: { order_index: 'asc' },
+      include:{
+        summary:{
+          select:{
+            summary_text_english: true,
+            summary_text_tibetan: true
+          }
+        }
+      }
     });
   },
   

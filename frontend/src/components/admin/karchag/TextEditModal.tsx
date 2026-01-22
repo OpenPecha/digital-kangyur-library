@@ -460,7 +460,7 @@ export const TextEditModal = ({
                 </TabsList>
 
                 {/* Tab 1: Metadata */}
-                <TabsContent value="metadata" className="flex-1 min-h-[80vh] overflow-y-auto p-6 m-0">
+                <TabsContent value="metadata" className="flex-1  overflow-y-auto p-6 m-0">
                   <form onSubmit={handleSubmit} className="space-y-6">
                     <div className="space-y-4">
                       <div className="grid grid-cols-2 gap-4">
@@ -690,13 +690,13 @@ export const TextEditModal = ({
                 </TabsContent>
 
                 {/* Tab 2: Summary */}
-                <TabsContent value="text" className="flex-1  overflow-hidden p-0 m-0">
+                <TabsContent value="text" className="flex-1 overflow-y-auto p-0 m-0">
                   {summaryLoading && !summaryFormData.translation_homage_english ? (
                     <div className="flex justify-center items-center py-12 px-6">
                       <p className="text-gray-500">{t('loadingSummary')}</p>
                     </div>
                   ) : (
-                    <form onSubmit={handleSummarySubmit} className="flex flex-col flex-1 min-h-[80vh] overflow-hidden">
+                    <form onSubmit={handleSummarySubmit} className="flex flex-col flex-1 overflow-hidden">
                       <div className="flex flex-col md:flex-row flex-1 overflow-hidden">
                         {/* Left Navigation Bar */}
                         <div className="md:w-1/4 h-full lg:w-1/5 border-b md:border-b-0 md:border-r border-border bg-muted/30 overflow-y-auto">

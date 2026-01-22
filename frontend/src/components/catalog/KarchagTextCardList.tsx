@@ -101,16 +101,7 @@ const KarchagTextCardList: React.FC<KarchagTextCardListProps> = ({
             <TextCard
               key={item.id || `text-${index}`}
               id={item.id || `text-${index}`}
-              title={{
-                tibetan: item.title?.tibetan || "བོད་ཡིག",
-                sanskrit: item.title?.sanskrit,
-                english: item.title?.english || "Text Title"
-              }}
-              category={item.category || "General"}
-              pages={item.pages || 10}
-              volume={item.volume || "1"}
-              summary={item.description || "No summary available for this text."}
-              keywords={item.keywords || ["buddhism", "text"]}
+              item={item}
               imageUrl="/text_card_thumbnail.png"
               variant="default"
             />
@@ -122,16 +113,7 @@ const KarchagTextCardList: React.FC<KarchagTextCardListProps> = ({
             <TextCard
               key={item.id || `text-${index}`}
               id={item.id || `text-${index}`}
-              title={{
-                tibetan: item.title?.tibetan || "བོད་ཡིག",
-                sanskrit: item.title?.sanskrit,
-                english: item.title?.english || "Text Title"
-              }}
-              category={item.category || "General"}
-              pages={item.pages || 10}
-              volume={item.volume || "1"}
-              summary={item.description || "No summary available for this text."}
-              keywords={item.keywords || ["buddhism", "text"]}
+              item={item}
               imageUrl="/text_card_thumbnail.png"
               variant="default"
               className="w-full"

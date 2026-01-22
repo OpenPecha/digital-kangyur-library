@@ -179,7 +179,7 @@ const Catalog = () => {
           pages = length;
         }
       }
-      
+      console.log(text)
       return {
         id: text.id,
         title: {
@@ -189,10 +189,14 @@ const Catalog = () => {
           chinese: text.chinese_title || undefined
         },
         category: selectedItemDetails?.title.english || '',
-        pages,
+        derge_id:text.derge_id ||undefined,
         volume: text.yeshe_de_volume_number || undefined,
-        description: '', // Texts don't have description in the schema
-        keywords: []
+        yana:text.yana||undefined,
+        summary:{
+          tibetan:text.summary.summary_text_tibetan,
+          english:text.summary.summary_text_english
+        }
+
       };
     });
   };
