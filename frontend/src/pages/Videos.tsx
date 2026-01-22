@@ -209,7 +209,7 @@ const Videos = () => {
   return (
     <div className={cn("min-h-screen bg-kangyur-light",isTibetan ? 'tibetan' : 'english')}>
 
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-16">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 pb-16 pt-4">
         <div className="mb-6 text-center pt-8">
           <h1 className="text-4xl font-bold text-kangyur-dark mb-3">
             {t("kangyurVideos")}
@@ -251,7 +251,7 @@ const Videos = () => {
           </div>
         )}
 
-        {!loading && filtered.length > 0 && (
+        {totalPages>1 &&!loading && filtered.length > 0 && (
           <Pagination className="mt-8">
             <PaginationContent>
               <PaginationItem>
@@ -294,8 +294,7 @@ const Videos = () => {
         )}
       </div>
 
-      <Footer />
-
+<Footer/>
       <Dialog open={!!activeVideo} onOpenChange={(open) => !open && setActiveVideo(null)}>
         <DialogContent className="max-w-4xl p-0 overflow-hidden">
           {renderVideoDialogContent()}

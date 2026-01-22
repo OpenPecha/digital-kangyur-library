@@ -1,9 +1,8 @@
 import React from 'react';
-import { useSearchParams } from 'react-router-dom';
+import { useSearchParams, Link } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
 import Footer from '@/components/ui/molecules/Footer';
 import KarchagSearch from '@/components/catalog/KarchagSearch';
-import KarchagFrame from '@/components/catalog/KarchagFrame';
 import useLanguage from '@/hooks/useLanguage';
 import api from '@/utils/api';
 
@@ -12,39 +11,28 @@ const Search: React.FC = () => {
   const query = searchParams.get('q') || '';
   const { t, isTibetan } = useLanguage();
 
-  // First, fetch all main categories to find Tantra
-  const { data: mainCategoriesData = [] } = useQuery({
-    queryKey: ['karchag', 'main-categories', { is_active: 'true' }],
+  // Fetch search results using the new search endpoint
+  const { data: searchResults, isLoading } = useQuery({
+    queryKey: ['search', query],
     queryFn: async () => {
-      const response = await api.getKarchagMainCategories({ is_active: 'true' });
-      return response.categories || [];
+      if (!query) {
+        return {
+          results: {
+            texts: { items: [], total: 0 },
+            subCategories: { items: [], total: 0 },
+          },
+          query: '',
+        };
+      }
+      const response = await api.search({ q: query, type: 'all' });
+      return response;
     },
+    enabled: !!query,
   });
 
-  // Find Tantra main category
-  const tantraMainCategory = mainCategoriesData.find(
-    (cat: any) => cat.name_english?.toLowerCase() === 'tantra'
-  );
-
-  // Fetch all subcategories and filter for Tantra subcategories that match the search
-  const { data: searchResults = [], isLoading } = useQuery({
-    queryKey: ['karchag', 'sub-categories', 'search', query, tantraMainCategory?.id],
-    queryFn: async () => {
-      if (!query || !tantraMainCategory) return [];
-      
-      // Search all subcategories with the query
-      const response = await api.getKarchagSubCategories({ 
-        search: query,
-        is_active: 'true'
-      });
-      
-      // Filter to only include Tantra subcategories
-      return (response.categories || []).filter(
-        (subcat: any) => subcat.main_category_id === tantraMainCategory.id
-      );
-    },
-    enabled: !!query && !!tantraMainCategory,
-  });
+  const subCategories = searchResults?.results?.subCategories?.items || [];
+  const texts = searchResults?.results?.texts?.items || [];
+  const totalResults = (subCategories.length || 0) + (texts.length || 0);
 
   // Helper function to create slug from main category ID
   const createSlug = (id: string): string => {
@@ -77,32 +65,101 @@ const Search: React.FC = () => {
           
           return (
             <>
-              <div className="mb-8 text-center">
-                <h2 className={`text-3xl font-bold mb-2 ${isTibetan ? 'tibetan' : ''}`}>
-                  {t('searchResults') || 'Search Results'}
-                </h2>
-                <p className="text-gray-600">
-                  {t('searchResultsFor') || 'Search results for'}{' '}
-                  <span className="font-bold">"{query}"</span>
-                </p>
-                <p className="text-gray-500 mt-2">
-                  {searchResults.length} {searchResults.length === 1 ? (t('result') || 'result') : (t('results') || 'results')} {t('found') || 'found'}
-                </p>
-              </div>
+              
+           
+            
 
-              {searchResults.length > 0 ? (
-                <div className="flex flex-col md:flex-row justify-center gap-10 md:gap-24 flex-wrap">
-                  {searchResults.map((subcategory: any) => (
-                    <KarchagFrame
-                      key={subcategory.id}
-                      label={{
-                        tibetan: subcategory.name_tibetan || '',
-                        english: subcategory.name_english || ''
-                      }}
-                      fontSize="xx-large"
-                      link={`/catalog?category=${createSlug(tantraMainCategory.id)}&item=${subcategory.id}`}
-                    />
-                  ))}
+              {totalResults > 0 ? (
+                <div className="max-w-4xl mx-auto space-y-8">
+                  {/* Subcategories Section */}
+                  {subCategories.length > 0 && (
+                    <div>
+                      <h3 className={`text-2xl font-semibold mb-4 ${isTibetan ? 'tibetan' : ''}`}>
+                        {t('subCategory') || 'Subcategories'} ({subCategories.length})
+                      </h3>
+                      <div className="space-y-2">
+                        {subCategories.map((subcategory: any) => {
+                          const mainCategoryId = subcategory.main_category?.id || '';
+                          return (
+                            <Link
+                              key={subcategory.id}
+                              to={`/catalog?category=${createSlug(mainCategoryId)}&item=${subcategory.id}`}
+                              className="block p-4 border rounded-lg hover:bg-gray-50 transition-colors"
+                            >
+                              <div className="flex justify-between items-start">
+                                <div className="flex-1">
+                                  <h4 className={`text-lg font-medium mb-1 ${isTibetan ? 'tibetan' : 'text-gray-800'}`}>
+                                    {isTibetan ? subcategory.name_tibetan : subcategory.name_english}
+                                  </h4>
+                                  {!isTibetan && subcategory.name_tibetan && (
+                                    <p className="text-sm text-gray-600 tibetan mb-2">
+                                      {subcategory.name_tibetan}
+                                    </p>
+                                  )}
+                                  {subcategory.description_english && (
+                                    <p className="text-sm text-gray-600 mt-2">
+                                      {isTibetan ? subcategory.description_tibetan : subcategory.description_english}
+                                    </p>
+                                  )}
+                                  {subcategory.main_category && (
+                                    <p className="text-xs text-gray-500 mt-2">
+                                      {t('category') || 'Category'}: {isTibetan ? subcategory.main_category.name_tibetan : subcategory.main_category.name_english}
+                                    </p>
+                                  )}
+                                </div>
+                              </div>
+                            </Link>
+                          );
+                        })}
+                      </div>
+                    </div>
+                  )}
+
+                  {/* Texts Section */}
+                  {texts.length > 0 && (
+                    <div>
+                      <h3 className={`text-2xl font-semibold mb-4 ${isTibetan ? 'tibetan' : ''}`}>
+                        {t('text') || 'Texts'} ({texts.length})
+                      </h3>
+                      <div className="space-y-2">
+                        {texts.map((text: any) => (
+                          <Link
+                            key={text.id}
+                            to={`/texts/${text.id}`}
+                            className="block p-4 border rounded-lg hover:bg-gray-50 transition-colors"
+                          >
+                            <div className="flex justify-between items-start">
+                              <div className="flex-1">
+                                <h4 className={`text-lg font-medium mb-1 ${isTibetan ? 'tibetan' : 'text-gray-800'}`}>
+                                  {isTibetan ? text.title?.tibetan : text.title?.english}
+                                </h4>
+                                {!isTibetan && text.title?.tibetan && (
+                                  <p className="text-sm text-gray-600 tibetan mb-2">
+                                    {text.title.tibetan}
+                                  </p>
+                                )}
+                                {text.title?.sanskrit && (
+                                  <p className="text-sm text-gray-600 italic mb-1">
+                                    {text.title.sanskrit}
+                                  </p>
+                                )}
+                                {text.sub_category && (
+                                  <p className="text-xs text-gray-500 mt-2">
+                                    {t('subCategory') || 'Subcategory'}: {isTibetan ? text.sub_category.name_tibetan : text.sub_category.name_english}
+                                  </p>
+                                )}
+                                {text.derge_id && (
+                                  <p className="text-xs text-gray-500 mt-1">
+                                    {t('dergeId') || 'Derge ID'}: {text.derge_id}
+                                  </p>
+                                )}
+                              </div>
+                            </div>
+                          </Link>
+                        ))}
+                      </div>
+                    </div>
+                  )}
                 </div>
               ) : (
                 <div className="text-center py-12">
@@ -119,7 +176,6 @@ const Search: React.FC = () => {
         })()}
       </div>
       
-      <Footer />
     </div>
   );
 };

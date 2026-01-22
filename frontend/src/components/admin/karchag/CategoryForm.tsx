@@ -181,6 +181,15 @@ export const CategoryForm = ({ isOpen, onClose, mode, data, mainCategories, defa
 
           {/* Names */}
           <div className="grid grid-cols-2 gap-4">
+          <div className="space-y-2">
+              <Label htmlFor="name_tibetan">{t('tibetanName')} </Label>
+              <Input
+                id="name_tibetan"
+                value={formData.name_tibetan}
+                onChange={(e) => setFormData({ ...formData, name_tibetan: e.target.value })}
+                className="font-tibetan"
+              />
+            </div>
             <div className="space-y-2">
               <Label htmlFor="name_english">{t('englishName')} <span className="text-red-600">*</span></Label>
               <Input
@@ -190,28 +199,12 @@ export const CategoryForm = ({ isOpen, onClose, mode, data, mainCategories, defa
                 required
               />
             </div>
-            <div className="space-y-2">
-              <Label htmlFor="name_tibetan">{t('tibetanName')} </Label>
-              <Input
-                id="name_tibetan"
-                value={formData.name_tibetan}
-                onChange={(e) => setFormData({ ...formData, name_tibetan: e.target.value })}
-                className="font-tibetan"
-              />
-            </div>
+        
           </div>
 
           {/* Descriptions */}
           <div className="grid grid-cols-2 gap-4">
-            <div className="space-y-2">
-              <Label htmlFor="description_english">{t('englishDescription')} </Label>
-              <Textarea
-                id="description_english"
-                value={formData.description_english}
-                onChange={(e) => setFormData({ ...formData, description_english: e.target.value })}
-              />
-            </div>
-            <div className="space-y-2">
+          <div className="space-y-2">
               <Label htmlFor="description_tibetan">{t('tibetanDescription')} </Label>
               <Textarea
                 id="description_tibetan"
@@ -220,6 +213,15 @@ export const CategoryForm = ({ isOpen, onClose, mode, data, mainCategories, defa
                 className="font-tibetan"
               />
             </div>
+            <div className="space-y-2">
+              <Label htmlFor="description_english">{t('englishDescription')} </Label>
+              <Textarea
+                id="description_english"
+                value={formData.description_english}
+                onChange={(e) => setFormData({ ...formData, description_english: e.target.value })}
+              />
+            </div>
+           
           </div>
 
           {/* Order and Status */}

@@ -10,6 +10,7 @@ const search = async (req, res, next) => {
         query: q || '',
         results: {
           texts: { items: [], total: 0 },
+          subCategories: { items: [], total: 0 },
           news: { items: [], total: 0 },
           timeline: { items: [], total: 0 },
           audio: { items: [], total: 0 },
@@ -29,6 +30,7 @@ const search = async (req, res, next) => {
 
     const results = {
       texts: { items: [], total: 0 },
+      subCategories: { items: [], total: 0 },
       news: { items: [], total: 0 },
       timeline: { items: [], total: 0 },
       audio: { items: [], total: 0 },
@@ -50,8 +52,31 @@ const search = async (req, res, next) => {
           },
           derge_id: text.derge_id,
           yeshe_de_id: text.yeshe_de_id,
+          sub_category: text.sub_category ? {
+            id: text.sub_category.id,
+            name_english: text.sub_category.name_english,
+            name_tibetan: text.sub_category.name_tibetan,
+          } : null,
         })),
         total: searchResults.texts.length,
+      };
+    }
+
+    if (type === 'all' || type === 'subcategories') {
+      results.subCategories = {
+        items: searchResults.subCategories.slice(0, 10).map(subcat => ({
+          id: subcat.id,
+          name_english: subcat.name_english,
+          name_tibetan: subcat.name_tibetan,
+          description_english: subcat.description_english,
+          description_tibetan: subcat.description_tibetan,
+          main_category: subcat.main_category ? {
+            id: subcat.main_category.id,
+            name_english: subcat.main_category.name_english,
+            name_tibetan: subcat.main_category.name_tibetan,
+          } : null,
+        })),
+        total: searchResults.subCategories.length,
       };
     }
 

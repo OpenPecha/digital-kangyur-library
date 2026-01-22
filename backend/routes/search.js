@@ -6,7 +6,7 @@ const searchController = require('../controllers/searchController');
  * @swagger
  * /search:
  *   get:
- *     summary: Search across texts, news, timeline, and audio
+ *     summary: Search across texts, subcategories, news, timeline, and audio
  *     tags: [Search]
  *     parameters:
  *       - in: query
@@ -18,7 +18,7 @@ const searchController = require('../controllers/searchController');
  *         name: type
  *         schema:
  *           type: string
- *           enum: [all, texts, news, timeline, audio]
+ *           enum: [all, texts, subcategories, news, timeline, audio]
  *           default: all
  *         description: Type of content to search
  *       - in: query
@@ -74,6 +74,13 @@ const searchController = require('../controllers/searchController');
  *                         total:
  *                           type: integer
  *                     audio:
+ *                       type: object
+ *                       properties:
+ *                         items:
+ *                           type: array
+ *                         total:
+ *                           type: integer
+ *                     subCategories:
  *                       type: object
  *                       properties:
  *                         items:

@@ -593,7 +593,7 @@ const searchService = {
     const { skip, take } = options;
     const searchTerm = query.toLowerCase();
     
-    const [karchagTexts, categories, news, timelineEvents] = await Promise.all([
+    const [karchagTexts, categories, news, timelineEvents, karchagSubCategories] = await Promise.all([
       prisma.text.findMany({
         where: {
           OR: [
@@ -643,6 +643,20 @@ const searchService = {
         include: { period: true },
         skip,
         take
+      }),
+      prisma.karchagSubCategory.findMany({
+        where: {
+          OR: [
+            { name_english: { contains: searchTerm, mode: 'insensitive' } },
+            { name_tibetan: { contains: searchTerm, mode: 'insensitive' } },
+            { description_english: { contains: searchTerm, mode: 'insensitive' } },
+            { description_tibetan: { contains: searchTerm, mode: 'insensitive' } }
+          ],
+          is_active: true
+        },
+        include: { main_category: true },
+        skip,
+        take
       })
     ]);
     
@@ -650,7 +664,8 @@ const searchService = {
       texts: karchagTexts,
       categories,
       news,
-      timelineEvents
+      timelineEvents,
+      subCategories: karchagSubCategories
     };
   }
 };

@@ -413,6 +413,28 @@ export const api = {
     return fetchApi<any>('/admin/dashboard');
   },
 
+  // Search
+  search: (params?: { q?: string; type?: string; lang?: string; page?: number; limit?: number }) => {
+    const queryParams = new URLSearchParams();
+    if (params?.q) queryParams.append('q', params.q);
+    if (params?.type) queryParams.append('type', params.type);
+    if (params?.lang) queryParams.append('lang', params.lang);
+    if (params?.page) queryParams.append('page', params.page.toString());
+    if (params?.limit) queryParams.append('limit', params.limit.toString());
+    const query = queryParams.toString();
+    return fetchApi<{ 
+      query: string; 
+      results: { 
+        texts: { items: any[]; total: number };
+        subCategories: { items: any[]; total: number };
+        news: { items: any[]; total: number };
+        timeline: { items: any[]; total: number };
+        audio: { items: any[]; total: number };
+      };
+      pagination: any;
+    }>(`/search${query ? `?${query}` : ''}`);
+  },
+
   // Texts
   getTextById: (id: string) => {
     return fetchApi<any>(`/karchag/texts/${id}`);

@@ -7,7 +7,7 @@ import useLanguage from '@/hooks/useLanguage';
 const Hero = () => {
   const { t,isTibetan } = useLanguage();
   return (
-    <div className="relative min-h-[70vh] sm:min-h-screen flex items-center pt-20 sm:pt-24 overflow-hidden">
+    <div className="relative min-h-[70vh] sm:min-h-screen flex items-center overflow-hidden">
       <div className="absolute inset-0 bg-gradient-to-b from-kangyur-cream to-white z-0" />
       <div className="pointer-events-none absolute inset-0 flex items-center justify-center opacity-10 sm:opacity-5">
         <img

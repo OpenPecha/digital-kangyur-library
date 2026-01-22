@@ -514,15 +514,7 @@ export const TextEditModal = ({
                       </div>
 
                       <div className="grid grid-cols-2 gap-4">
-                        <div className="space-y-2">
-                          <Label htmlFor="english_title">{t('englishTitle')} </Label>
-                          <Input
-                            id="english_title"
-                            value={formData.english_title}
-                            onChange={(e) => setFormData({ ...formData, english_title: e.target.value })}
-                          />
-                        </div>
-                        <div className="space-y-2">
+                      <div className="space-y-2">
                           <Label htmlFor="tibetan_title">{t('tibetanTitle')} </Label>
                           <Input
                             id="tibetan_title"
@@ -531,6 +523,15 @@ export const TextEditModal = ({
                             className="font-tibetan"
                           />
                         </div>
+                        <div className="space-y-2">
+                          <Label htmlFor="english_title">{t('englishTitle')} </Label>
+                          <Input
+                            id="english_title"
+                            value={formData.english_title}
+                            onChange={(e) => setFormData({ ...formData, english_title: e.target.value })}
+                          />
+                        </div>
+                       
                       </div>
 
                       <div className="grid grid-cols-2 gap-4">
@@ -741,6 +742,18 @@ export const TextEditModal = ({
                                     {t(sectionTitleMap[activeSummarySection as keyof typeof sectionTitleMap] || activeSummarySection)}
                                   </h3>
                                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                  <div className="space-y-2">
+                                      <Label htmlFor={`${currentSectionFields.tibetan}`}>
+                                        {t('tibetanContent')}
+                                      </Label>
+                                      <Textarea
+                                        id={currentSectionFields.tibetan}
+                                        value={summaryFormData[currentSectionFields.tibetan] ?? ''}
+                                        onChange={(e) => setSummaryFormData({ ...summaryFormData, [currentSectionFields.tibetan]: e.target.value })}
+                                        className={cn("font-tibetan resize-none", isTibetan && "tibetan font-['CustomTibetan']")}
+                                        rows={currentSectionFields.rows}
+                                      />
+                                    </div>
                                     <div className="space-y-2">
                                       <Label htmlFor={`${currentSectionFields.english}`}>
                                         {t('englishContent')}
@@ -753,18 +766,7 @@ export const TextEditModal = ({
                                         className="resize-none"
                                       />
                                     </div>
-                                    <div className="space-y-2">
-                                      <Label htmlFor={`${currentSectionFields.tibetan}`}>
-                                        {t('tibetanContent')}
-                                      </Label>
-                                      <Textarea
-                                        id={currentSectionFields.tibetan}
-                                        value={summaryFormData[currentSectionFields.tibetan] ?? ''}
-                                        onChange={(e) => setSummaryFormData({ ...summaryFormData, [currentSectionFields.tibetan]: e.target.value })}
-                                        className={cn("font-tibetan resize-none", isTibetan && "tibetan font-['CustomTibetan']")}
-                                        rows={currentSectionFields.rows}
-                                      />
-                                    </div>
+                                
                                   </div>
                                 </div>
                               );

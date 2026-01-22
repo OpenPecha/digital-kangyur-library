@@ -116,7 +116,7 @@ const News = () => {
   return (
     <div className="min-h-screen bg-kangyur-light">
       
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-16">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 pb-16 pt-8">
         <div className="mb-10 text-center pt-8">
           <h1 className={cn("text-4xl font-bold text-kangyur-dark mb-3",isTibetan ? 'tibetan' : 'english')}>
             {t('kangyurNews')}
@@ -142,42 +142,43 @@ const News = () => {
           </div>
         )}
         
-        <Pagination className="mt-8">
-          <PaginationContent>
-            <PaginationItem>
-              <PaginationPrevious 
-                onClick={() => currentPage > 1 && handlePageChange(currentPage - 1)}
-                className={cn(currentPage === 1 ? "pointer-events-none opacity-50" : "cursor-pointer",isTibetan ? 'tibetan' : 'english')}
-              >
-                {t('previous')}
-              </PaginationPrevious>
-            </PaginationItem>
-            
-            {Array.from({ length: totalPages }).map((_, idx) => (
-              <PaginationItem key={idx}>
-                <PaginationLink
-                  isActive={currentPage === idx + 1}
-                  onClick={() => handlePageChange(idx + 1)}
-                  className="cursor-pointer"
+        {totalPages > 1 && (
+          <Pagination className="mt-8">
+            <PaginationContent>
+              <PaginationItem>
+                <PaginationPrevious 
+                  onClick={() => currentPage > 1 && handlePageChange(currentPage - 1)}
+                  className={cn(currentPage === 1 ? "pointer-events-none opacity-50" : "cursor-pointer",isTibetan ? 'tibetan' : 'english')}
                 >
-                  {idx + 1}
-                </PaginationLink>
+                  {t('previous')}
+                </PaginationPrevious>
               </PaginationItem>
-            ))}
-            
-            <PaginationItem>
-              <PaginationNext 
-                onClick={() => currentPage < totalPages && handlePageChange(currentPage + 1)}
-                className={cn(currentPage === totalPages ? "pointer-events-none opacity-50" : "cursor-pointer",isTibetan ? 'tibetan' : 'english')}
-              >
-                {t('next')}
-              </PaginationNext>
-            </PaginationItem>
-          </PaginationContent>
-        </Pagination>
+              
+              {Array.from({ length: totalPages }).map((_, idx) => (
+                <PaginationItem key={idx}>
+                  <PaginationLink
+                    isActive={currentPage === idx + 1}
+                    onClick={() => handlePageChange(idx + 1)}
+                    className="cursor-pointer"
+                  >
+                    {idx + 1}
+                  </PaginationLink>
+                </PaginationItem>
+              ))}
+              
+              <PaginationItem>
+                <PaginationNext 
+                  onClick={() => currentPage < totalPages && handlePageChange(currentPage + 1)}
+                  className={cn(currentPage === totalPages ? "pointer-events-none opacity-50" : "cursor-pointer",isTibetan ? 'tibetan' : 'english')}
+                >
+                  {t('next')}
+                </PaginationNext>
+              </PaginationItem>
+            </PaginationContent>
+          </Pagination>
+        )}
       </div>
-      
-      <Footer />
+      <Footer/>
     </div>
   );
 };

@@ -12,6 +12,7 @@ import KarchagFrame from '@/components/catalog/KarchagFrame';
 import { paginateItems } from '@/utils/paginationUtils';
 import useLanguage from '@/hooks/useLanguage';
 import api from '@/utils/api';
+import KarchagSearch from '@/components/catalog/KarchagSearch';
 
 const Catalog = () => {
   const [searchQuery, setSearchQuery] = useState('');
@@ -282,7 +283,7 @@ const Catalog = () => {
     <div className=" bg-white w-full">
       {/* Show CatalogSearch on main category and subcategory sections (only if no active search query) */}
       {category && !searchQuery && (
-        <CatalogSearch searchQuery={searchQuery} setSearchQuery={setSearchQuery} />
+        <KarchagSearch />
       )}
 
       {/* Main Karchag Frames - show only when no search, selected item, or category */}
@@ -368,26 +369,12 @@ const Catalog = () => {
             </div>
           )}
           
-          {/* Search Results Header */}
-          {searchQuery && (
-            <div className="mb-8 text-center">
-              <p className="text-gray-600">
-                {t('searchResultsFor')}{' '}
-                <span className="font-bold">{searchQuery}</span>
-              </p>
-              <button 
-                onClick={() => setSearchQuery('')} 
-                className="mt-4 px-4 py-2 bg-indigo-600 text-white rounded hover:bg-indigo-700 transition"
-              >
-                {t('clearSearch')}
-              </button>
-            </div>
-          )}
+          
 
           {/* Selected subcategory content or text list or search results */}
           {(() => {
             // Render subcategory content or text list
-            if (selectedItem && selectedSubCategory) {
+            if (!searchQuery && selectedItem && selectedSubCategory) {
               if (selectedSubCategory.content) {
                 // Display content if subcategory has content
                 return (
@@ -422,19 +409,7 @@ const Catalog = () => {
               }
             }
             
-            // Render search results
-            if (searchQuery) {
-              return (
-                <>
-                  <CatalogTreeList 
-                    items={[]}
-                    selectedItem={selectedItem}
-                    onItemSelect={handleItemSelect}
-                  />
-                  <CatalogEmptyState />
-                </>
-              );
-            }
+           
             
             return null;
           })()}
