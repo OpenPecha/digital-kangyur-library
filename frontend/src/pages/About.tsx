@@ -72,7 +72,7 @@ const About = () => {
                 {t('team')}
               </a>
               <a href="#advisors" className="px-4 py-2 rounded-md hover:bg-kangyur-orange/10 text-kangyur-dark transition-colors">
-                Advisors
+                {t('advisors')}
               </a>
               <a href="#contact" className="px-4 py-2 rounded-md hover:bg-kangyur-orange/10 text-kangyur-dark transition-colors">
                 {t('contact')}
@@ -425,7 +425,7 @@ const About = () => {
               <div className="flex items-center mb-8 border-b border-kangyur-orange/10 pb-4">
                 <GraduationCap className="text-kangyur-orange mr-3" size={28} />
                 <h3 className="text-xl font-semibold text-kangyur-dark">
-                  Advisors
+                {t('advisors')}
                 </h3>
               </div>
             
@@ -587,9 +587,6 @@ const About = () => {
                   <h3 className="text-xl font-semibold text-kangyur-dark mb-4">
                     {t('connectWithUs')}
                   </h3>
-                  <p className="mb-6 text-kangyur-dark/80">
-                    Visit our website and follow us on social media for updates on the Kangyur Digital Project.
-                  </p>
                   
                   <div className="mb-6">
                     <p className="font-medium text-kangyur-dark mb-2">
