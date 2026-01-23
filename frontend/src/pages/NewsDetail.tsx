@@ -98,7 +98,7 @@ const NewsDetail = () => {
     <div className="min-h-screen bg-kangyur-light">
       
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 pb-16">
-        <div className="mb-6 pt-24">
+        <div className="mb-6 pt-8">
           <Link to="/news">
             <Button variant="outline" className="mb-4 mt-[15px]">
               <ArrowLeft className="mr-2 h-4 w-4" />
