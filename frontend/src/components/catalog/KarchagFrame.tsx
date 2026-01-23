@@ -36,7 +36,7 @@ const KarchagFrame: React.FC<KarchagFrameProps> = ({ labelKey, label, link, font
           <div className="absolute inset-0 flex items-center justify-center">
             <span className={textClass} style={textStyle as any} >
               {/* Repeat the label to visually wrap it inside the frame */}
-              <span className="inline-block relative z-10">
+              <span className="inline-block relative z-10 text-2xl">
                 {labelText}
               </span>
             </span>
