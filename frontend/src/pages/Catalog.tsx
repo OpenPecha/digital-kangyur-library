@@ -22,6 +22,7 @@ const Catalog = () => {
   const { t, isTibetan } = useLanguage();
   const isUpdatingFromUrl = useRef(false);
   const previousParamsString = useRef(searchParams.toString());
+  const previousItemRef = useRef<string | null>(null);
 
   // Get URL parameters
   const category = searchParams.get('category');
@@ -74,6 +75,8 @@ const Catalog = () => {
       return response.texts || [];
     },
     enabled: !!selectedItem && !!selectedSubCategory && !selectedSubCategory.content, // Only fetch texts if subcategory doesn't have content
+    staleTime: 0, // Always refetch when subcategory changes
+    gcTime: 0, // Don't cache texts between different subcategories
   });
 
   // Parse URL parameters on component mount
@@ -94,7 +97,13 @@ const Catalog = () => {
     // Reset or set search query
     const newQuery = queryParam || '';
     const newItem = itemParam || null;
-    const newPage = pageParam ? parseInt(pageParam, 10) : 1;
+    
+    // If the item changed, reset to page 1, otherwise use the page from URL
+    const itemChanged = newItem !== previousItemRef.current;
+    const newPage = itemChanged ? 1 : (pageParam ? Number.parseInt(pageParam, 10) : 1);
+    
+    // Update the ref for next comparison
+    previousItemRef.current = newItem;
     
     // Mark that we're updating from URL to prevent the other useEffect from running
     isUpdatingFromUrl.current = true;
@@ -110,6 +119,13 @@ const Catalog = () => {
       isUpdatingFromUrl.current = false;
     }, 0);
   }, [searchParams]);
+
+  // Update ref when selectedItem changes (for tracking item changes)
+  useEffect(() => {
+    if (!isUpdatingFromUrl.current) {
+      previousItemRef.current = selectedItem;
+    }
+  }, [selectedItem]);
 
   // Update URL when search, selection, or page changes (but not when updating from URL)
   useEffect(() => {

@@ -121,14 +121,9 @@ const NewsDetail = () => {
           <CardContent className="p-8">
             <div className="mb-6">
               {isTibetan && article.title.tibetan ? (
-                <>
                   <h1 className={cn("text-3xl md:text-4xl font-bold text-kangyur-dark mb-2 tibetan")}>
                     {article.title.tibetan}
                   </h1>
-                  <h2 className={cn("text-xl md:text-2xl text-kangyur-dark/80", isTibetan ? 'tibetan' : 'english')}>
-                    {article.title.english}
-                  </h2>
-                </>
               ) : (
                 <h1 className={cn("text-3xl md:text-4xl font-bold text-kangyur-dark mb-2", isTibetan ? 'tibetan' : 'english')}>
                   {article.title.english}

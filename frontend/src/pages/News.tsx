@@ -23,7 +23,11 @@ interface NewsItem {
 const NewsCard = ({ news, isTibetan, t }: { news: NewsItem, isTibetan: boolean, t: any }) => {
   
   return (
+    <Link 
+    to={news.link || '#'} 
+  >
     <Card className="flex flex-col h-full overflow-hidden hover:shadow-md transition-shadow">
+     
       <div className="overflow-hidden h-48">
         <img 
           src={news.imageUrl} 
@@ -39,11 +43,10 @@ const NewsCard = ({ news, isTibetan, t }: { news: NewsItem, isTibetan: boolean, 
         )}
       </CardHeader>
       <CardContent className="pb-2 flex-grow">
-        {isTibetan && news.tibetanDescription ? (
-          <p className="text-muted-foreground text-sm mb-3">{news.tibetanDescription?.slice(0, 100)}...</p>
-        ) : (
-          <p className="text-muted-foreground text-sm mb-3">{news.englishDescription?.slice(0, 100)}...</p>
-        )}
+
+      <p className="text-muted-foreground text-sm mb-3">
+        {isTibetan && news.tibetanDescription ? news.tibetanDescription?.slice(0, 100) + '...' : news.englishDescription ? news.englishDescription?.slice(0, 100) + '...' : null}
+        </p>
         <div className="flex items-center text-xs text-kangyur-dark/60">
           <Calendar className="h-3.5 w-3.5 mr-1.5" />
           {new Date(news.date).toLocaleDateString('en-US', {
@@ -54,15 +57,10 @@ const NewsCard = ({ news, isTibetan, t }: { news: NewsItem, isTibetan: boolean, 
         </div>
       </CardContent>
       <CardFooter>
-        <Link 
-          to={news.link || '#'} 
-          className={cn("group inline-flex items-center text-kangyur-orange text-sm font-medium hover:text-kangyur-orange/80 transition-colors",isTibetan ? 'tibetan' : 'english')}
-        >
-          {t('readMore')}
-          <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
-        </Link>
+        
       </CardFooter>
     </Card>
+        </Link>
   );
 };
 

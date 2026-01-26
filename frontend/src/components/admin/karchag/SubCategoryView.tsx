@@ -84,6 +84,7 @@ export const SubCategoryView: React.FC = () => {
     mutationFn: ({ id, data }: { id: string; data: any }) => api.updateKarchagSubCategory(id, data),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['karchag', 'sub-categories'] });
+      queryClient.invalidateQueries({ queryKey: ['karchag', 'sub-category', subId] });
       setIsCategoryFormOpen(false);
       setEditingCategory(null);
       toast.success('Subcategory updated successfully');
