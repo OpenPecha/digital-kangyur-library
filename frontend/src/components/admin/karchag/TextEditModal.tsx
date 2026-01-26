@@ -347,7 +347,6 @@ export const TextEditModal = ({
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    
     // Validate required fields
     if (!formData.sub_category_id) {
       toast.error(t('pleaseSelectCategory'));
@@ -437,7 +436,9 @@ export const TextEditModal = ({
     : '';
 
   if (!isOpen || !text) return null;
-
+  const handleSubCategoryChange = (value:string) =>{ 
+    setFormData({ ...formData, sub_category_id: value })
+  }
   return (
     <Dialog open={isOpen} onOpenChange={handleClose}>
         <DialogContent className="max-w-full px-10 max-h-[90vh] p-0 overflow-scroll flex flex-col">
@@ -468,7 +469,7 @@ export const TextEditModal = ({
                           <Label htmlFor="sub_category_id">{t('subCategory')} <span className="text-red-600">*</span></Label>
                           <Select
                             value={formData.sub_category_id ? String(formData.sub_category_id) : ''}
-                            onValueChange={(value) => setFormData({ ...formData, sub_category_id: value })}
+                            onValueChange={handleSubCategoryChange}
                             required
                           >
                             <SelectTrigger>

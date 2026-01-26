@@ -462,7 +462,14 @@ const karchagTextService = {
   },
   
   findAll: async (options = {}) => {
+    const { sub_category_id, is_active } = options;
     const where = {};
+    if (is_active !== undefined) {
+      where.is_active = is_active;
+    }
+    if (sub_category_id) {
+      where.sub_category_id = sub_category_id;
+    }
     
     return await prisma.text.findMany({
       where,

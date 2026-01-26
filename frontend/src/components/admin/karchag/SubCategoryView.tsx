@@ -346,7 +346,7 @@ export const SubCategoryView: React.FC = () => {
             updateTextMutation.mutate({
               id: editingText.id,
               data: {
-                sub_category_id: subId,
+                sub_category_id: data.sub_category_id,
                 derge_id: data.derge_id,
                 yeshe_de_id: data.yeshe_de_id,
                 tibetan_title: data.tibetan_title,

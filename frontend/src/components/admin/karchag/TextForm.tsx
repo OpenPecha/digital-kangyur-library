@@ -230,6 +230,10 @@ export const TextForm = ({ isOpen, onClose, mode, data, subCategories, mainCateg
         return parts.length > 1 ? parts.slice(1).join('_') : filename;
       })()
     : '';
+  const handleSubCategoryChange = (value: string) => 
+    {
+      setFormData({ ...formData, sub_category_id: value });
+    }
   return (
     <Dialog open={isOpen} onOpenChange={handleClose} key={data?.id || 'create'}>
       <DialogContent className="max-w-4xl max-h-[90vh] overflow-scroll">
@@ -243,7 +247,7 @@ export const TextForm = ({ isOpen, onClose, mode, data, subCategories, mainCateg
                 <Label htmlFor="sub_category_id">{t('subCategory')} <span className="text-red-600">*</span></Label>
                 <Select
                   value={formData.sub_category_id ? String(formData.sub_category_id) : ''}
-                  onValueChange={(value) => setFormData({ ...formData, sub_category_id: value })}
+                  onValueChange={handleSubCategoryChange}
                   required
                   disabled={!!defaultSubCategoryId}
                 >
