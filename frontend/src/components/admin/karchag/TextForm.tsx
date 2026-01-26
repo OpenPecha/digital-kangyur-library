@@ -232,7 +232,7 @@ export const TextForm = ({ isOpen, onClose, mode, data, subCategories, mainCateg
     : '';
   return (
     <Dialog open={isOpen} onOpenChange={handleClose} key={data?.id || 'create'}>
-      <DialogContent className="max-w-4xl max-h-[90vh] overflow-y-auto">
+      <DialogContent className="max-w-4xl max-h-[90vh] overflow-scroll">
           <DialogHeader>
           <DialogTitle>{mode === 'create' ? t('createNewText') : t('editText')}</DialogTitle>
         </DialogHeader>
@@ -264,7 +264,7 @@ export const TextForm = ({ isOpen, onClose, mode, data, subCategories, mainCateg
                   </p>
                 )}
               </div>
-              <div className="space-y-2">
+              {/* <div className="space-y-2">
                 <Label htmlFor="order_index">{t('orderIndex')} </Label>
                 <Input
                   id="order_index"
@@ -272,7 +272,7 @@ export const TextForm = ({ isOpen, onClose, mode, data, subCategories, mainCateg
                   value={formData.order_index}
                   onChange={(e) => setFormData({ ...formData, order_index: Number.parseInt(e.target.value, 10) || 0 })}
                 />
-              </div>
+              </div> */}
             </div>
 
             <div className="grid grid-cols-2 gap-4">
@@ -440,14 +440,14 @@ export const TextForm = ({ isOpen, onClose, mode, data, subCategories, mainCateg
               </div>
             </div>
 
-            <div className="flex items-center space-x-2">
+            {/* <div className="flex items-center space-x-2">
               <Switch
                 id="is_active"
                 checked={formData.is_active}
                 onCheckedChange={(checked) => setFormData({ ...formData, is_active: checked })}
               />
               <Label htmlFor="is_active">{t('active')}</Label>
-            </div>
+            </div> */}
           </div>
 
           <DialogFooter>

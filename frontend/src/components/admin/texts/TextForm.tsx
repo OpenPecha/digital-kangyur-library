@@ -157,7 +157,7 @@ export const TextForm = ({ isOpen, onClose, mode, textId, onSave }: TextFormProp
   if (!textId && mode === 'edit') {
     return (
       <Dialog open={isOpen} onOpenChange={handleClose}>
-        <DialogContent className="max-w-3xl max-h-[90vh] overflow-y-auto">
+        <DialogContent className="max-w-3xl max-h-[90vh] overflow-scroll">
           <DialogHeader>
             <DialogTitle>Create New Text</DialogTitle>
           </DialogHeader>
@@ -283,7 +283,7 @@ export const TextForm = ({ isOpen, onClose, mode, textId, onSave }: TextFormProp
 
   return (
     <Dialog open={isOpen} onOpenChange={handleClose}>
-      <DialogContent className="max-w-5xl max-h-[90vh] overflow-y-auto">
+      <DialogContent className="max-w-5xl max-h-[90vh] overflow-scroll">
         <DialogHeader>
           <DialogTitle>
             {(() => {

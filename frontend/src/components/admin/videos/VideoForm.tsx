@@ -130,7 +130,7 @@ export const VideoForm = ({ isOpen, onClose, mode, data, onSave }: VideoFormProp
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
-      <DialogContent className="max-w-3xl max-h-[90vh] overflow-y-auto">
+      <DialogContent className="max-w-3xl max-h-[90vh] overflow-scroll">
         <DialogHeader>
           <DialogTitle>{mode === 'create' ? t('createVideo') : t('editVideo')}</DialogTitle>
         </DialogHeader>
@@ -260,14 +260,14 @@ export const VideoForm = ({ isOpen, onClose, mode, data, onSave }: VideoFormProp
           </div>
 
           {/* Active Status */}
-          <div className="flex items-center space-x-2">
+          {/* <div className="flex items-center space-x-2">
             <Switch
               id="is_active"
               checked={formData.is_active}
               onCheckedChange={(checked) => setFormData({ ...formData, is_active: checked })}
             />
             <Label htmlFor="is_active">{t('active')}</Label>
-          </div>
+          </div> */}
 
           <DialogFooter>
             <Button type="button" variant="outline" onClick={onClose}>

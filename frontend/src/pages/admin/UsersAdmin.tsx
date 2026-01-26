@@ -105,7 +105,7 @@ const UserForm = ({ isOpen, onClose, mode, data, onSave }: UserFormProps) => {
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
-      <DialogContent className="max-w-md">
+      <DialogContent className="max-w-md max-h-[90vh] overflow-scroll">
         <DialogHeader>
           <DialogTitle>{mode === 'create' ? 'Create New User' : 'Edit User'}</DialogTitle>
         </DialogHeader>

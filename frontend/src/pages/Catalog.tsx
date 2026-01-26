@@ -282,7 +282,7 @@ const Catalog = () => {
   return (
     <div className=" bg-white w-full">
       {/* Show CatalogSearch on main category and subcategory sections (only if no active search query) */}
-      {category && !searchQuery && (
+      {category && !searchQuery && !selectedItem && (
         <KarchagSearch />
       )}
 
@@ -339,10 +339,10 @@ const Catalog = () => {
       
       {/* Selected Subcategory or Search Results */}
       {selectedItem || searchQuery ? (
-        <div className="container mx-auto px-4 pt-8 pb-12 min-h-[90vh]">
+        <div className="container mx-auto px-4 pt-8 pb-12 min-h-[90vh] relative">
           {/* Selected Subcategory Header with Breadcrumb */}
           {selectedItem && selectedItemDetails && !searchQuery && (
-            <div className="mb-8">
+            <>
               <div className="mb-4">
                 <Breadcrumb 
                   items={[
@@ -363,10 +363,12 @@ const Catalog = () => {
                   showHome={false}
                 />
               </div>
-              <h2 className={`text-3xl font-bold text-center ${isTibetan ? 'tibetan' : ''}`}>
-                {isTibetan ? selectedItemDetails.title.tibetan : selectedItemDetails.title.english}
-              </h2>
-            </div>
+              <div className="sticky top-16 z-10 bg-white py-4 mb-8 border-b border-gray-200">
+                <h2 className={`text-3xl font-bold text-center ${isTibetan ? 'tibetan' : ''}`}>
+                  {isTibetan ? selectedItemDetails.title.tibetan : selectedItemDetails.title.english}
+                </h2>
+              </div>
+            </>
           )}
           
           

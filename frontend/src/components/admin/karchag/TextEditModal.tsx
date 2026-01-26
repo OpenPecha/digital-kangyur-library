@@ -440,14 +440,14 @@ export const TextEditModal = ({
 
   return (
     <Dialog open={isOpen} onOpenChange={handleClose}>
-        <DialogContent className="max-w-full px-10 max-h-[90vh] p-0 overflow-hidden flex flex-col">
+        <DialogContent className="max-w-full px-10 max-h-[90vh] p-0 overflow-scroll flex flex-col">
           <DialogHeader className="px-6 pt-6 pb-4 border-b">
             <DialogTitle>
               {text.english_title || text.tibetan_title || t('editText')}
             </DialogTitle>
           </DialogHeader>
           
-          <Card className="border-0 shadow-none rounded-none flex-1 overflow-hidden flex flex-col">
+          <Card className="border-0 shadow-none rounded-none flex-1  flex flex-col">
             <CardContent className="p-0 flex-1 overflow-hidden flex flex-col">
               <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full flex-1 flex flex-col overflow-hidden">
                 <TabsList className="w-full grid grid-cols-2 border-b text-xs sm:text-sm rounded-none">
@@ -483,7 +483,7 @@ export const TextEditModal = ({
                             </SelectContent>
                           </Select>
                         </div>
-                        <div className="space-y-2">
+                        {/* <div className="space-y-2">
                           <Label htmlFor="order_index">{t('orderIndex')} </Label>
                           <Input
                             id="order_index"
@@ -491,7 +491,7 @@ export const TextEditModal = ({
                             value={formData.order_index}
                             onChange={(e) => setFormData({ ...formData, order_index: Number.parseInt(e.target.value, 10) || 0 })}
                           />
-                        </div>
+                        </div> */}
                       </div>
 
                       <div className="grid grid-cols-2 gap-4">
@@ -669,14 +669,14 @@ export const TextEditModal = ({
                         </div>
                       </div>
 
-                      <div className="flex items-center space-x-2">
+                      {/* <div className="flex items-center space-x-2">
                         <Switch
                           id="is_active"
                           checked={formData.is_active}
                           onCheckedChange={(checked) => setFormData({ ...formData, is_active: checked })}
                         />
                         <Label htmlFor="is_active">{t('active')}</Label>
-                      </div>
+                      </div> */}
                     </div>
 
                     <DialogFooter className="px-0">

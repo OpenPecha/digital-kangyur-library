@@ -132,7 +132,7 @@ export const NewsForm = ({ isOpen, onClose, mode, data, onSave }: NewsFormProps)
   : '';
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
-      <DialogContent className="max-w-3xl">
+      <DialogContent className="max-w-3xl max-h-[90vh] overflow-scroll">
         <DialogHeader>
           <DialogTitle>{mode === 'create' ? t('createNewsArticle') : t('editNewsArticle')}</DialogTitle>
         </DialogHeader>
@@ -262,14 +262,7 @@ export const NewsForm = ({ isOpen, onClose, mode, data, onSave }: NewsFormProps)
                 required
               />
             </div>
-            <div className="flex items-center space-x-2">
-              <Switch
-                id="is_active"
-                checked={formData.is_active}
-                onCheckedChange={(checked) => setFormData({ ...formData, is_active: checked })}
-              />
-              <Label htmlFor="is_active">{t('active')}</Label>
-            </div>
+       
           </div>
 
           <DialogFooter>

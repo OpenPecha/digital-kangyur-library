@@ -248,7 +248,7 @@ export const TextSummaryForm = ({ isOpen, onClose, textId, textTitle, onSave }: 
 
   return (
     <Dialog open={isOpen} onOpenChange={handleClose}>
-      <DialogContent className="max-w-6xl max-h-[70dvh] p-0 overflow-hidden flex flex-col">
+      <DialogContent className="max-w-6xl max-h-[70dvh] p-0 overflow-scroll flex flex-col">
         <DialogHeader className="px-6 pt-6 pb-4 border-b">
           <DialogTitle>
             {textTitle ? `Text: ${textTitle}` : t('summary')}

@@ -177,7 +177,7 @@ export const TimelineEventForm = ({ isOpen, onClose, mode, data, onSave }: Timel
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
-      <DialogContent className="max-w-4xl max-h-[90vh] overflow-y-auto">
+      <DialogContent className="max-w-4xl max-h-[90vh] overflow-scroll">
         <DialogHeader>
           <DialogTitle>{mode === 'create' ? 'Create Timeline Event' : 'Edit Timeline Event'}</DialogTitle>
         </DialogHeader>

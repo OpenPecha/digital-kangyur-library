@@ -118,7 +118,7 @@ export const CategoryForm = ({ isOpen, onClose, mode, data, mainCategories, defa
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
-      <DialogContent className="max-w-2xl">
+      <DialogContent className="max-w-2xl max-h-[90vh] overflow-scroll">
         <DialogHeader>
           <DialogTitle>{mode === 'create' ? t('createNewCategory') : t('editCategory')}</DialogTitle>
         </DialogHeader>
@@ -226,7 +226,7 @@ export const CategoryForm = ({ isOpen, onClose, mode, data, mainCategories, defa
 
           {/* Order and Status */}
           <div className="grid grid-cols-2 gap-4">
-            <div className="space-y-2">
+            {/* <div className="space-y-2">
               <Label htmlFor="order_index">{t('orderIndex')} </Label>
               <Input
                 id="order_index"
@@ -234,15 +234,15 @@ export const CategoryForm = ({ isOpen, onClose, mode, data, mainCategories, defa
                 value={formData.order_index}
                 onChange={(e) => setFormData({ ...formData, order_index: Number.parseInt(e.target.value, 10) || 0 })}
               />
-            </div>
-            <div className="flex items-center space-x-2">
+            </div> */}
+            {/* <div className="flex items-center space-x-2">
               <Switch
                 id="is_active"
                 checked={formData.is_active}
                 onCheckedChange={(checked) => setFormData({ ...formData, is_active: checked })}
               />
               <Label htmlFor="is_active">{t('active')}</Label>
-            </div>
+            </div> */}
           </div>
 
           {/* Content Field (only for sub categories, automatically shown for Tantra) */}
