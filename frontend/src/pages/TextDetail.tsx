@@ -377,7 +377,7 @@ const TextDetail = () => {
                       </div>
                     )}
                     {!loadingSummary && summaryData?.sections && summaryData.sections.length > 0 && (
-                      <div className="flex flex-col md:flex-row h-auto md:h-[70vh] overflow-hidden">
+                      <div className="flex flex-col md:flex-row h-auto md:h-[70vh] overflow-scroll">
                         {/* Left Navigation Bar */}
                         <div className="md:w-1/4 lg:w-1/5 border-b md:border-b-0 md:border-r border-border bg-muted/30 max-h-56 md:max-h-none md:h-full overflow-y-auto">
                           <div className="p-3 sm:p-4">

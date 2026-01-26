@@ -562,14 +562,14 @@ export const TextEditModal = ({
                             onChange={(e) => setFormData({ ...formData, yeshe_de_volume_number: e.target.value })}
                           />
                         </div>
-                        <div className="space-y-2">
+                        {/* <div className="space-y-2">
                           <Label htmlFor="yeshe_de_volume_length">{t('yesheDeVolumeLength')} </Label>
                           <Input
                             id="yeshe_de_volume_length"
                             value={formData.yeshe_de_volume_length}
                             onChange={(e) => setFormData({ ...formData, yeshe_de_volume_length: e.target.value })}
                           />
-                        </div>
+                        </div> */}
                       </div>
 
                       <div className="space-y-2">
@@ -776,14 +776,14 @@ export const TextEditModal = ({
                       </div>
 
                       <DialogFooter className="px-6 py-4 border-t">
-                        <Button 
+                        {/* <Button 
                           type="button" 
                           variant="destructive" 
                           onClick={handleSummaryDelete} 
                           disabled={summaryLoading}
                         >
                           {t('delete')} {t('summary')}
-                        </Button>
+                        </Button> */}
                         <Button type="submit" disabled={summaryLoading}>
                           {summaryLoading ? t('uploading') : t('saveChanges')}
                         </Button>

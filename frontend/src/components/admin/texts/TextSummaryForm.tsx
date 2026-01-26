@@ -337,14 +337,14 @@ export const TextSummaryForm = ({ isOpen, onClose, textId, textTitle, onSave }: 
               <Button type="button" variant="outline" onClick={handleClose} disabled={loading}>
                 {t('cancel')}
               </Button>
-              <Button 
+              {/* <Button 
                 type="button" 
                 variant="destructive" 
                 onClick={handleDelete} 
                 disabled={loading}
               >
                 {t('delete')} {t('summary')}
-              </Button>
+              </Button> */}
               <Button type="submit" disabled={loading}>
                 {loading ? t('uploading') : t('saveChanges')}
               </Button>

@@ -180,8 +180,9 @@ const TextCard = ({
           {summary && !isCompact && (
             <p
               className={cn(
-                'w-full max-w-full break-words text-kangyur-dark/80 line-clamp-4 mb-4',
-                isFeatured ? 'text-base' : 'text-sm'
+                'w-full max-w-full break-words text-kangyur-dark/80 line-clamp-3 mb-4 text-xl' ,
+                'text-lg',
+                isTibetan ? 'font-["CustomTibetan"]' : ''
               )}
               style={isRowLayout ? { overflow: 'hidden', textOverflow: 'ellipsis' } : undefined}
             >
