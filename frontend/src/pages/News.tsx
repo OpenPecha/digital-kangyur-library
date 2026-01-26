@@ -36,11 +36,10 @@ const NewsCard = ({ news, isTibetan, t }: { news: NewsItem, isTibetan: boolean, 
         />
       </div>
       <CardHeader className="pb-2">
-        {isTibetan && news.titleTibetan ? (
-          <p className="text-sm font-medium text-kangyur-maroon tibetan mb-1">{news.titleTibetan}</p>
-        ) : (
-          <CardTitle className="text-lg">{news.title}</CardTitle>
-        )}
+      <CardTitle className={cn("text-xl",isTibetan ? 'font-["CustomTibetan"]' : 'english')}>
+        {isTibetan && news.titleTibetan ?news.titleTibetan: news.title
+        }
+        </CardTitle>
       </CardHeader>
       <CardContent className="pb-2 flex-grow">
 
