@@ -17,7 +17,7 @@ import { useLanguage } from '@/hooks/useLanguage';
 export const SubCategoryView: React.FC = () => {
   const { mainId, subId } = useParams<{ mainId?: string; subId?: string }>();
   const queryClient = useQueryClient();
-  const { t } = useLanguage();
+  const { t, isTibetan } = useLanguage();
   const [searchQuery, setSearchQuery] = useState('');
   const [editingCategory, setEditingCategory] = useState<any>(null);
   const [editingText, setEditingText] = useState<any>(null);
@@ -236,8 +236,18 @@ export const SubCategoryView: React.FC = () => {
       {/* Breadcrumb */}
       <Breadcrumb 
         items={[
-          { label: mainCategory.name_english, href: `/admin/karchag/${mainId}` },
-          { label: subCategory.name_english, href: `/admin/karchag/${mainId}/${subId}` }
+          { 
+            label: isTibetan 
+              ? (mainCategory.name_tibetan || mainCategory.name_english) 
+              : (mainCategory.name_english || mainCategory.name_tibetan || ''), 
+            href: `/admin/karchag/${mainId}` 
+          },
+          { 
+            label: isTibetan 
+              ? (subCategory.name_tibetan || subCategory.name_english) 
+              : (subCategory.name_english || subCategory.name_tibetan || ''), 
+            href: `/admin/karchag/${mainId}/${subId}` 
+          }
         ]}
         homeHref="/admin/karchag"
         homeLabel={t('allCategories')}
@@ -283,8 +293,7 @@ export const SubCategoryView: React.FC = () => {
         // For Tantra: Show content only
         subCategory.only_content && subCategory.content && (
           <Card className="p-6 bg-gray-50">
-            <h3 className="font-semibold mb-2">{t('content')}</h3>
-            <p className="text-gray-700 whitespace-pre-wrap">{subCategory.content}</p>
+            <p className="text-gray-700 whitespace-pre-wrap font-['CustomTibetan']">{subCategory.content}</p>
           </Card>
         )
       ) : (

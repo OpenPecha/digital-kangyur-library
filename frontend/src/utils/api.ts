@@ -40,11 +40,23 @@ async function fetchApi<T>(endpoint: string, options?: RequestInit): Promise<T> 
         window.location.href = '/admin/login';
       }
     }
-    const error = await response.json().catch(() => ({ message: 'An error occurred' }));
-    throw new ApiError(response.status, error.message || `HTTP error! status: ${response.status}`);
+    try{
+      const error = await response.json()
+      if(error?.error?.message) {
+        throw new ApiError(response.status, error?.error?.message);
+      }
+    } catch (error) {
+      throw new ApiError(response.status, `HTTP error! status: ${response.status}`);
+    }
   }
+  
+try{
 
-  return response.json();
+  const data = await response.json();
+  return data;
+} catch (error) {
+  return ;
+}
 }
 
 export const api = {

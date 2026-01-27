@@ -15,7 +15,7 @@ export const MainCategoryView: React.FC = () => {
   const { mainId } = useParams<{ mainId: string }>();
   const navigate = useNavigate();
   const queryClient = useQueryClient();
-  const { t,currentLanguage } = useLanguage();
+  const { t, currentLanguage, isTibetan } = useLanguage();
   const [searchQuery, setSearchQuery] = useState('');
   const [editingItem, setEditingItem] = useState<any>(null);
   const [isFormOpen, setIsFormOpen] = useState(false);
@@ -90,7 +90,7 @@ export const MainCategoryView: React.FC = () => {
       toast.success('Subcategory deleted successfully');
     },
     onError: (error: any) => {
-      console.error('Error deleting sub category:', error);
+      console.log(error);
       toast.error(error?.message || 'Error deleting category. Please try again.');
     },
   });
@@ -171,7 +171,12 @@ export const MainCategoryView: React.FC = () => {
     <div className="space-y-6">
       {/* Breadcrumb */}
       <Breadcrumb 
-        items={[{ label: mainCategory.name_english, href: `/admin/karchag/${mainId}` }]}
+        items={[{ 
+          label: isTibetan 
+            ? (mainCategory.name_tibetan || mainCategory.name_english) 
+            : (mainCategory.name_english || mainCategory.name_tibetan || ''), 
+          href: `/admin/karchag/${mainId}` 
+        }]}
         homeHref="/admin/karchag"
         homeLabel={t('allCategories')}
       />
@@ -218,16 +223,16 @@ export const MainCategoryView: React.FC = () => {
                       <h3 className="text-lg font-semibold">{subCat.name_english}</h3>
                       <ChevronRight className="h-4 w-4" />
                     </button>
-                    <span className={`px-2 py-1 text-xs font-medium rounded ${
+                    {/* <span className={`px-2 py-1 text-xs font-medium rounded ${
                       subCat.is_active 
                         ? 'bg-green-100 text-green-800' 
                         : 'bg-red-100 text-red-800'
                     }`}>
                       {subCat.is_active ? t('active') : t('inactive')}
-                    </span>
-                    <span className="px-2 py-1 text-xs font-medium rounded bg-purple-100 text-purple-800">
+                    </span> */}
+                    {/* <span className="px-2 py-1 text-xs font-medium rounded bg-purple-100 text-purple-800">
                       {t('subCategory')}
-                    </span>
+                    </span> */}
                   </div>
                   <p className="text-sm font-medium text-kangyur-maroon tibetan mt-1">
                     {subCat.name_tibetan}

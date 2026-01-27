@@ -195,16 +195,8 @@ export const MainCategoriesList: React.FC<MainCategoriesListProps> = ({
                           <ChevronRight className="h-4 w-4" />
                         )}
                       </button>
-                      <span className={`px-2 py-1 text-xs font-medium rounded ${
-                        category.is_active 
-                          ? 'bg-green-100 text-green-800' 
-                          : 'bg-red-100 text-red-800'
-                      }`}>
-                        {category.is_active ? t('active') : t('inactive')}
-                      </span>
-                      <span className="px-2 py-1 text-xs font-medium rounded bg-blue-100 text-blue-800">
-                        {t('mainCategory')}
-                      </span>
+                   
+                    
                       {categorySubCategories.length > 0 && (
                         <span className="text-xs text-gray-500">
                           ({categorySubCategories.length} {t('subcategories')})
