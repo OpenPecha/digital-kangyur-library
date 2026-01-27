@@ -190,21 +190,16 @@ export const MainCategoriesList: React.FC<MainCategoriesListProps> = ({
                         onClick={() => navigate(`/admin/karchag/${category.id}`)}
                         className="flex items-center gap-2 hover:text-kangyur-orange transition-colors"
                       >
-                        <h3 className="text-lg font-semibold">{category.name_english}</h3>
+                        <h3 className="text-lg font-semibold tibetan font-['CustomTibetan']">{category.name_tibetan}</h3>
                         {categorySubCategories.length > 0 && (
                           <ChevronRight className="h-4 w-4" />
                         )}
                       </button>
                    
                     
-                      {categorySubCategories.length > 0 && (
-                        <span className="text-xs text-gray-500">
-                          ({categorySubCategories.length} {t('subcategories')})
-                        </span>
-                      )}
                     </div>
                     <p className="text-sm font-medium text-kangyur-maroon tibetan mt-1">
-                      {category.name_tibetan}
+                    {category.name_english}
                     </p>
                     <p className="text-sm text-gray-600 mt-2">{category.description_english}</p>
                   </div>

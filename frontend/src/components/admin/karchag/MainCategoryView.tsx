@@ -220,7 +220,7 @@ export const MainCategoryView: React.FC = () => {
                       onClick={() => navigate(`/admin/karchag/${mainId}/${subCat.id}`)}
                       className="flex items-center gap-2 hover:text-kangyur-orange transition-colors"
                     >
-                      <h3 className="text-lg font-semibold">{subCat.name_english}</h3>
+                      <h3 className="text-lg font-semibold tibetan font-['CustomTibetan']"> {subCat.name_tibetan}</h3>
                       <ChevronRight className="h-4 w-4" />
                     </button>
                     {/* <span className={`px-2 py-1 text-xs font-medium rounded ${
@@ -235,11 +235,10 @@ export const MainCategoryView: React.FC = () => {
                     </span> */}
                   </div>
                   <p className="text-sm font-medium text-kangyur-maroon tibetan mt-1">
-                    {subCat.name_tibetan}
+                  {subCat.name_english}
                   </p>
-                  <p className="text-sm text-gray-600 mt-2">{subCat.description_english}</p>
                   {subCat.only_content && subCat.content && (
-                    <p className="text-sm text-gray-500 mt-2 line-clamp-2">{subCat.content}</p>
+                    <p className="text-sm text-gray-500 mt-2 line-clamp-2 font-['CustomTibetan']">{subCat.content}</p>
                   )}
                 </div>
                 <div className="flex items-center gap-2" onClick={(e) => e.stopPropagation()}>
