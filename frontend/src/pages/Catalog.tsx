@@ -422,14 +422,14 @@ const Catalog = () => {
                   showHome={false}
                 />
               </div>
-              <div className="sticky flex top-16 z-10 bg-white py-4 mb-8 border-b border-gray-200">
+              <div className="sticky flex items-center flex-col md:flex-row justify-between top-16 z-10 bg-white py-4 mb-8 border-b border-gray-200">
                 <h2 className={`text-3xl font-bold text-center mb-4 ${isTibetan ? 'tibetan' : ''}`}>
                   {isTibetan ? selectedItemDetails.title.tibetan : selectedItemDetails.title.english}
                 </h2>
                 
                 {/* Search Input for filtering texts */}
                 {selectedSubCategory && !selectedSubCategory.content && (
-                  <div className="max-w-md mx-auto mt-4">
+                  <div className="">
                     <div className="relative">
                       <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-4 w-4" />
                       <Input

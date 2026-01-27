@@ -82,7 +82,7 @@ const TextCard = ({
         {imageUrl && (isCompact || variant === 'default') && (
           <div
             className={cn(
-              isRowLayout ? 'basis-1/5 flex-shrink-0 pt-2 px-2 min-w-0 max-w-xs' : ''
+              isRowLayout ? 'basis-1/5 hidden md:block flex-shrink-0 pt-2 px-2 min-w-0 max-w-xs' : ''
             )}
             style={isRowLayout ? { minWidth: 0, maxWidth: '240px' } : undefined}
           >
@@ -122,7 +122,7 @@ const TextCard = ({
         {/* Content */}
         <div
           className={cn(
-            'flex flex-1 flex-col',
+            'flex flex-1 flex-col justify-center',
             isCompact
               ? 'p-4 flex-grow'
               : isFeatured
@@ -148,7 +148,7 @@ const TextCard = ({
             <h2
               className={cn(
                 'font-semibold text-kangyur-dark group-hover:text-kangyur-green transition-colors truncate',
-                isCompact ? 'text-base' : isFeatured ? 'text-xl' : 'text-lg',
+                isCompact ? 'text-base' : isFeatured ? 'text-3xl' : 'text-2xl',
                 isTibetan ? 'tibetan' : ''
               )}
               // Adding truncate for long titles in row layout, and containment for long unbroken texts
