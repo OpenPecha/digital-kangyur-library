@@ -69,10 +69,7 @@ const AdminLayout = ({ children }: { children: React.ReactNode }) => {
                       </div>
                     </DropdownMenuLabel>
                     <DropdownMenuSeparator />
-                    <DropdownMenuItem>
-                      <Settings className="mr-2 h-4 w-4" />
-                      <span>{t('settings')}</span>
-                    </DropdownMenuItem>
+                  
                     <DropdownMenuItem onClick={handleLogout}>
                       <LogOut className="mr-2 h-4 w-4" />
                       <span>{t('logOut')}</span>
