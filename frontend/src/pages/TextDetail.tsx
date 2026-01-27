@@ -314,7 +314,7 @@ const TextDetail = () => {
   ];
 
   return (
-    <div className="min-h-screen flex flex-col">
+    <div className="min-h-screen flex flex-col" style={{fontFamily: isTibetan ? 'CustomTibetan' : ''}}>
       <main className="flex-1 pt-10 pb-16">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           {/* --- Breadcrumb navigation --- */}
