@@ -184,7 +184,7 @@ export const MainCategoryView: React.FC = () => {
       {/* Header */}
       <div className="flex items-center justify-between gap-4">
         <div className="flex-1">
-          <h1 className="text-3xl font-bold text-gray-800 py-[10px]">{currentLanguage === 'en' ? mainCategory.name_english : mainCategory.name_tibetan}</h1>
+          <h1 className="text-3xl font-bold text-gray-800 py-[10px] tibetan font-['CustomTibetan']">{currentLanguage === 'en' ? mainCategory.name_english : mainCategory.name_tibetan}</h1>
         </div>
         <Button onClick={handleCreate}>
           <Plus className="mr-2 h-4 w-4" />

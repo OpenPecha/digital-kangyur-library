@@ -1,18 +1,17 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
+import { Search, X } from 'lucide-react';
 import Footer from '@/components/ui/molecules/Footer';
-import CatalogSearch from '@/components/catalog/CatalogSearch';
 import KarchagTextCardList from '@/components/catalog/KarchagTextCardList';
 import Breadcrumb from '@/components/ui/atoms/Breadcrumb';
-import CatalogTreeList from "@/components/catalog/CatalogTreeList";
-import CatalogEmptyState from "@/components/catalog/CatalogEmptyState";
 import MainKarchagFrames from '@/components/catalog/MainKarchagFrames';
 import KarchagFrame from '@/components/catalog/KarchagFrame';
 import { paginateItems } from '@/utils/paginationUtils';
 import useLanguage from '@/hooks/useLanguage';
 import api from '@/utils/api';
 import KarchagSearch from '@/components/catalog/KarchagSearch';
+import { Input } from '@/components/ui/atoms/input';
 
 const Catalog = () => {
   const [searchQuery, setSearchQuery] = useState('');
@@ -142,8 +141,8 @@ const Catalog = () => {
       newParams.set('category', categoryParam);
     }
     
-    // Set search query
-    if (searchQuery) {
+    // Set search query (only if we're on catalog page with selected item, not global search)
+    if (searchQuery && selectedItem) {
       newParams.set('q', searchQuery);
     }
     
@@ -196,7 +195,6 @@ const Catalog = () => {
           pages = length;
         }
       }
-      console.log(text)
       return {
         id: text.id,
         title: {
@@ -218,10 +216,55 @@ const Catalog = () => {
     });
   };
 
-  // Get paginated text entries for the selected item
+  // Filter texts based on search query
+  const filterTexts = (texts: any[], query: string) => {
+    if (!query.trim()) return texts;
+    
+    const searchTerm = query.toLowerCase().trim();
+    return texts.filter((text) => {
+      const titleEnglish = text.title?.english?.toLowerCase() || '';
+      const titleTibetan = text.title?.tibetan?.toLowerCase() || '';
+      const titleSanskrit = text.title?.sanskrit?.toLowerCase() || '';
+      const titleChinese = text.title?.chinese?.toLowerCase() || '';
+      const dergeId = text.derge_id?.toLowerCase() || '';
+      const volume = text.volume?.toString() || '';
+      const yana = text.yana?.toLowerCase() || '';
+      const summaryEnglish = text.summary?.english?.toLowerCase() || '';
+      const summaryTibetan = text.summary?.tibetan?.toLowerCase() || '';
+      
+      return (
+        titleEnglish.includes(searchTerm) ||
+        titleTibetan.includes(searchTerm) ||
+        titleSanskrit.includes(searchTerm) ||
+        titleChinese.includes(searchTerm) ||
+        dergeId.includes(searchTerm) ||
+        volume.includes(searchTerm) ||
+        yana.includes(searchTerm) ||
+        summaryEnglish.includes(searchTerm) ||
+        summaryTibetan.includes(searchTerm)
+      );
+    });
+  };
+
+  const ITEMS_PER_PAGE = 10;
+  
+  // Get filtered and paginated text entries for the selected item
   const getTextCardItems = () => {
     const transformedTexts = transformTextsForDisplay(subCategoryTextsData);
-    return paginateItems(transformedTexts, currentPage, 10);
+    const filteredTexts = filterTexts(transformedTexts, searchQuery);
+    return paginateItems(filteredTexts, currentPage, ITEMS_PER_PAGE);
+  };
+
+  // Handle search query change
+  const handleSearchChange = (value: string) => {
+    setSearchQuery(value);
+    setCurrentPage(1); // Reset to first page when search changes
+  };
+
+  // Handle clear search
+  const handleClearSearch = () => {
+    setSearchQuery('');
+    setCurrentPage(1);
   };
 
   // Handler for selecting an item
@@ -357,7 +400,7 @@ const Catalog = () => {
       {selectedItem || searchQuery ? (
         <div className="container mx-auto px-4 pt-8 pb-12 min-h-[90vh] relative">
           {/* Selected Subcategory Header with Breadcrumb */}
-          {selectedItem && selectedItemDetails && !searchQuery && (
+          {selectedItem && selectedItemDetails && (
             <>
               <div className="mb-4">
                 <Breadcrumb 
@@ -379,10 +422,36 @@ const Catalog = () => {
                   showHome={false}
                 />
               </div>
-              <div className="sticky top-16 z-10 bg-white py-4 mb-8 border-b border-gray-200">
-                <h2 className={`text-3xl font-bold text-center ${isTibetan ? 'tibetan' : ''}`}>
+              <div className="sticky flex top-16 z-10 bg-white py-4 mb-8 border-b border-gray-200">
+                <h2 className={`text-3xl font-bold text-center mb-4 ${isTibetan ? 'tibetan' : ''}`}>
                   {isTibetan ? selectedItemDetails.title.tibetan : selectedItemDetails.title.english}
                 </h2>
+                
+                {/* Search Input for filtering texts */}
+                {selectedSubCategory && !selectedSubCategory.content && (
+                  <div className="max-w-md mx-auto mt-4">
+                    <div className="relative">
+                      <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-4 w-4" />
+                      <Input
+                        type="search"
+                        placeholder={t('searchTexts') || 'Search texts...'}
+                        value={searchQuery}
+                        onChange={(e) => handleSearchChange(e.target.value)}
+                        className="pl-10 pr-10"
+                      />
+                      {searchQuery && (
+                        <button
+                          onClick={handleClearSearch}
+                          className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-600 transition-colors"
+                          type="button"
+                          aria-label="Clear search"
+                        >
+                          <X className="h-4 w-4" />
+                        </button>
+                      )}
+                    </div>
+                  </div>
+                )}
               </div>
             </>
           )}
@@ -392,7 +461,7 @@ const Catalog = () => {
           {/* Selected subcategory content or text list or search results */}
           {(() => {
             // Render subcategory content or text list
-            if (!searchQuery && selectedItem && selectedSubCategory) {
+            if (selectedItem && selectedSubCategory) {
               if (selectedSubCategory.content) {
                 // Display content if subcategory has content
                 return (
@@ -411,23 +480,43 @@ const Catalog = () => {
                 }
                 if (paginatedItems.length > 0) {
                   return (
-                    <KarchagTextCardList
-                      items={paginatedItems}
-                      currentPage={pagination.currentPage}
-                      totalPages={pagination.totalPages}
-                      onPageChange={handlePageChange}
-                    />
+                    <>
+                      {searchQuery && (
+                        <div className="mb-4 text-center text-sm text-gray-600">
+                          {pagination.totalItems} {pagination.totalItems === 1 ? 'text' : 'texts'} found
+                        </div>
+                      )}
+                      <KarchagTextCardList
+                        items={paginatedItems}
+                        currentPage={pagination.currentPage}
+                        totalPages={pagination.totalPages}
+                        totalItems={pagination.totalItems}
+                        itemsPerPage={pagination.itemsPerPage}
+                        onPageChange={handlePageChange}
+                      />
+                    </>
                   );
                 }
                 return (
                   <div className="text-center text-gray-600 py-12">
-                    <p>{t('noTexts') || 'No texts available in this subcategory.'}</p>
+                    <p>
+                      {searchQuery 
+                        ? (t('noTextsFound') || `No texts found matching "${searchQuery}"`)
+                        : (t('noTexts') || 'No texts available in this subcategory.')
+                      }
+                    </p>
+                    {searchQuery && (
+                      <button
+                        onClick={handleClearSearch}
+                        className="mt-4 text-indigo-600 hover:text-indigo-800 underline"
+                      >
+                        {t('clearSearch') || 'Clear search'}
+                      </button>
+                    )}
                   </div>
                 );
               }
             }
-            
-           
             
             return null;
           })()}

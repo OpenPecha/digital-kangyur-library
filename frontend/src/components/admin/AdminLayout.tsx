@@ -59,7 +59,7 @@ const AdminLayout = ({ children }: { children: React.ReactNode }) => {
                       </div>
                     </Button>
                   </DropdownMenuTrigger>
-                  <DropdownMenuContent className="w-56" align="end" forceMount>
+                  <DropdownMenuContent className="w-56 tibetan" align="end" forceMount>
                     <DropdownMenuLabel className="font-normal">
                       <div className="flex flex-col space-y-1">
                         <p className="text-sm font-medium leading-none">{user?.username || 'Admin User'}</p>
