@@ -27,13 +27,7 @@ export const TextCard: React.FC<TextCardProps> = ({ text, mainCategories, subCat
           <div className="flex-1">
             <div className="flex items-center gap-4">
               <h3 className="text-lg font-semibold">{text.english_title}</h3>
-              <span className={`px-2 py-1 text-xs font-medium rounded ${
-                text.is_active 
-                  ? 'bg-green-100 text-green-800' 
-                  : 'bg-red-100 text-red-800'
-              }`}>
-                {text.is_active ? t('active') : t('inactive')}
-              </span>
+            
             </div>
             <p className="text-sm font-medium text-kangyur-maroon tibetan mt-1">
               {text.tibetan_title}
