@@ -210,8 +210,8 @@ const Catalog = () => {
         volume: text.yeshe_de_volume_number || undefined,
         yana:text.yana||undefined,
         summary:{
-          tibetan:text.summary.summary_text_tibetan,
-          english:text.summary.summary_text_english
+          tibetan:text?.summary?.summary_text_tibetan,
+          english:text?.summary?.summary_text_english
         }
 
       };
