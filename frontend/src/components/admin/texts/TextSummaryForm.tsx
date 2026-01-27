@@ -322,7 +322,7 @@ export const TextSummaryForm = ({ isOpen, onClose, textId, textTitle, onSave }: 
                             id={currentSectionFields.tibetan}
                             value={formData[currentSectionFields.tibetan] ?? ''}
                             onChange={(e) => setFormData({ ...formData, [currentSectionFields.tibetan]: e.target.value })}
-                            className={cn("font-tibetan resize-none", isTibetan && "tibetan font-['CustomTibetan']")}
+                            className={cn("font-tibetan resize-none", isTibetan && "tibetan")}
                             rows={currentSectionFields.rows}
                           />
                         </div>

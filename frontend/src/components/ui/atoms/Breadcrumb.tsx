@@ -24,7 +24,7 @@ const Breadcrumb = ({ items, className, showHome = true, homeHref = "/", homeLab
   const displayHomeLabel = homeLabel || t('home');
   return (
     <nav className={cn("flex", className)} aria-label="Breadcrumb"
-    style={{fontFamily: isTibetan ? 'CustomTibetan' : ''}}>
+    style={{fontFamily: isTibetan ? 'tibetan' : ''}}>
       <ol className="inline-flex items-center space-x-1 md:space-x-2">
         {showHome && (
           <li className="inline-flex items-center">

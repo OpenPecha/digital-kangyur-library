@@ -150,8 +150,8 @@ export const MainCategoriesList: React.FC<MainCategoriesListProps> = ({
       {/* Header with Search and Create Button */}
       <div className="flex items-center justify-between gap-4">
         <div className="flex-1">
-          <h1 className="text-3xl font-bold text-gray-800 py-[10px] tibetan font-['CustomTibetan']">{t('manageKarchagContent')}</h1>
-          <p className="text-gray-600 mt-1 tibetan font-['CustomTibetan']">{t('createEditManage')}</p>
+          <h1 className="text-3xl font-bold text-gray-800 py-[10px] tibetan ">{t('manageKarchagContent')}</h1>
+          <p className="text-gray-600 mt-1 tibetan ">{t('createEditManage')}</p>
         </div>
         <Button onClick={handleCreate}>
           <Plus className="mr-2 h-4 w-4" />
@@ -190,7 +190,7 @@ export const MainCategoriesList: React.FC<MainCategoriesListProps> = ({
                         onClick={() => navigate(`/admin/karchag/${category.id}`)}
                         className="flex items-center gap-2 hover:text-kangyur-orange transition-colors"
                       >
-                        <h3 className="text-lg font-semibold tibetan font-['CustomTibetan']">{category.name_tibetan}</h3>
+                        <h3 className="text-lg font-semibold tibetan ">{category.name_tibetan}</h3>
                         {categorySubCategories.length > 0 && (
                           <ChevronRight className="h-4 w-4" />
                         )}

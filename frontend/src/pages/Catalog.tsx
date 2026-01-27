@@ -466,7 +466,7 @@ const Catalog = () => {
                 // Display content if subcategory has content
                 return (
                   <div className="max-w-4xl mx-auto min-h-[60vh] mt-12">
-                    <div className="prose prose-lg max-w-none font-['CustomTibetan']">
+                    <div className="prose prose-lg max-w-none ">
                       <div className={`whitespace-pre-line ${isTibetan ? 'tibetan text-lg leading-relaxed' : 'text-gray-700'}`}>
                         {selectedSubCategory.content}
                       </div>

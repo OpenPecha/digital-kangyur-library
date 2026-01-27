@@ -16,7 +16,7 @@ const History = () => {
             <h1 className="text-4xl font-bold text-kangyur-maroon mb-4">
               <span className={cn(isTibetan ? 'tibetan' : 'english')}>{t('historyTitle')}</span>
             </h1>
-            <p className="text-lg text-kangyur-dark/80 max-w-4xl" style={{fontFamily: isTibetan ? 'customTibetan' : 'english'}}>
+            <p className="text-lg text-kangyur-dark/80 max-w-4xl" style={{fontFamily: isTibetan ? 'tibetan' : 'english'}}>
               {historyDescription}
             </p>
           </div>

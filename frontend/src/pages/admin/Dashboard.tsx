@@ -38,8 +38,8 @@ const Dashboard = () => {
     <AdminLayout>
       <div className="space-y-8">
         <div className="text-center">
-          <h1 className="text-3xl font-bold text-gray-800 mb-2 pt-10 tibetan font-['CustomTibetan']">{t('contentManagementBoard')}</h1>
-          <p className="text-gray-600 tibetan font-['CustomTibetan']">{t('manageContentAcrossCategories')}</p>
+          <h1 className="text-3xl font-bold text-gray-800 mb-2 pt-10 tibetan">{t('contentManagementBoard')}</h1>
+          <p className="text-gray-600 tibetan">{t('manageContentAcrossCategories')}</p>
         </div>
         
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 tibetan">

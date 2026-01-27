@@ -419,7 +419,7 @@ const TextDetail = () => {
                                   </h3>
                                   <div className={cn(
                                     "text-base sm:text-lg leading-relaxed text-foreground whitespace-pre-line break-words",
-                                    isTibetan && "tibetan font-['CustomTibetan']"
+                                    isTibetan && "tibetan"
                                   )}>
                                     {section.content}
                                   </div>

@@ -182,7 +182,7 @@ const TextCard = ({
               className={cn(
                 'w-full max-w-full break-words text-kangyur-dark/80 line-clamp-3 mb-4 text-xl' ,
                 'text-lg',
-                isTibetan ? 'font-["CustomTibetan"]' : ''
+                isTibetan ? 'tibetan' : ''
               )}
               style={isRowLayout ? { overflow: 'hidden', textOverflow: 'ellipsis' } : undefined}
             >

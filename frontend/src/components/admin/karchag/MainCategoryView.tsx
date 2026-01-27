@@ -184,7 +184,7 @@ export const MainCategoryView: React.FC = () => {
       {/* Header */}
       <div className="flex items-center justify-between gap-4">
         <div className="flex-1">
-          <h1 className="text-3xl font-bold text-gray-800 py-[10px] tibetan font-['CustomTibetan']">{currentLanguage === 'en' ? mainCategory.name_english : mainCategory.name_tibetan}</h1>
+          <h1 className="text-3xl font-bold text-gray-800 py-[10px] tibetan ">{currentLanguage === 'en' ? mainCategory.name_english : mainCategory.name_tibetan}</h1>
         </div>
         <Button onClick={handleCreate}>
           <Plus className="mr-2 h-4 w-4" />
@@ -220,7 +220,7 @@ export const MainCategoryView: React.FC = () => {
                       onClick={() => navigate(`/admin/karchag/${mainId}/${subCat.id}`)}
                       className="flex items-center gap-2 hover:text-kangyur-orange transition-colors"
                     >
-                      <h3 className="text-lg font-semibold tibetan font-['CustomTibetan']"> {subCat.name_tibetan}</h3>
+                      <h3 className="text-lg font-semibold tibetan "> {subCat.name_tibetan}</h3>
                       <ChevronRight className="h-4 w-4" />
                     </button>
                     {/* <span className={`px-2 py-1 text-xs font-medium rounded ${
@@ -238,7 +238,7 @@ export const MainCategoryView: React.FC = () => {
                   {subCat.name_english}
                   </p>
                   {subCat.only_content && subCat.content && (
-                    <p className="text-sm text-gray-500 mt-2 line-clamp-2 font-['CustomTibetan']">{subCat.content}</p>
+                    <p className="text-sm text-gray-500 mt-2 line-clamp-2 tibetan">{subCat.content}</p>
                   )}
                 </div>
                 <div className="flex items-center gap-2" onClick={(e) => e.stopPropagation()}>

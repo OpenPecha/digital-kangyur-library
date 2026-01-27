@@ -293,7 +293,7 @@ export const SubCategoryView: React.FC = () => {
         // For Tantra: Show content only
         subCategory.only_content && subCategory.content && (
           <Card className="p-6 bg-gray-50">
-            <p className="text-gray-700 whitespace-pre-wrap font-['CustomTibetan']">{subCategory.content}</p>
+            <p className="text-gray-700 whitespace-pre-wrap tibetan">{subCategory.content}</p>
           </Card>
         )
       ) : (

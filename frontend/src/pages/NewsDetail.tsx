@@ -140,7 +140,7 @@ const NewsDetail = () => {
               </div>
             </div>
 
-            <div className="prose prose-lg max-w-none font-['CustomTibetan']">
+            <div className="prose prose-lg max-w-none tibetan">
               <div className={cn("text-kangyur-dark leading-relaxed whitespace-pre-line", isTibetan ? 'tibetan' : 'english')}>
                 {isTibetan && article.description.tibetan 
                   ? article.description.tibetan 

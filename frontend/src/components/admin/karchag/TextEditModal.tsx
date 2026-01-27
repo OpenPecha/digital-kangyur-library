@@ -751,7 +751,7 @@ export const TextEditModal = ({
                                         id={currentSectionFields.tibetan}
                                         value={summaryFormData[currentSectionFields.tibetan] ?? ''}
                                         onChange={(e) => setSummaryFormData({ ...summaryFormData, [currentSectionFields.tibetan]: e.target.value })}
-                                        className={cn("font-tibetan resize-none", isTibetan && "tibetan font-['CustomTibetan']")}
+                                        className={cn("font-tibetan resize-none", isTibetan && "tibetan")}
                                         rows={currentSectionFields.rows}
                                       />
                                     </div>
