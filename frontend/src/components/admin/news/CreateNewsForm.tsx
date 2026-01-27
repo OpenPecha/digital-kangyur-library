@@ -35,7 +35,7 @@ interface NewsFormProps {
 }
 
 export const NewsForm = ({ isOpen, onClose, mode, data, onSave }: NewsFormProps) => {
-  const { t } = useLanguage();
+  const { t ,isTibetan} = useLanguage();
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [uploading, setUploading] = useState(false);
   const [formData, setFormData] = useState(data || {
@@ -136,7 +136,7 @@ export const NewsForm = ({ isOpen, onClose, mode, data, onSave }: NewsFormProps)
         <DialogHeader>
           <DialogTitle>{mode === 'create' ? t('createNewsArticle') : t('editNewsArticle')}</DialogTitle>
         </DialogHeader>
-        <form onSubmit={handleSubmit} className="space-y-6">
+        <form onSubmit={handleSubmit} className="space-y-6" style={{fontFamily: isTibetan ? 'CustomTibetan' : ''}}>
           {/* Titles */}
           <div className="grid grid-cols-2 gap-4">
             <div className="space-y-2">
@@ -280,18 +280,17 @@ export const NewsForm = ({ isOpen, onClose, mode, data, onSave }: NewsFormProps)
 };
 
 export const CreateNewsForm = () => {
-  const { t } = useLanguage();
+  const { t ,isTibetan} = useLanguage();
   const [isOpen, setIsOpen] = useState(false);
 
   const handleSave = (data: any) => {
     // Here you would typically make an API call to save the data
-    console.log('Saving news:', data);
     setIsOpen(false);
   };
 
   return (
     <>
-      <Button onClick={() => setIsOpen(true)}>
+      <Button onClick={() => setIsOpen(true)} style={{fontFamily: isTibetan ? 'CustomTibetan' : ''}}>
         <Plus className="mr-2 h-4 w-4" />
         {t('createNews')}
       </Button>

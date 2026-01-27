@@ -129,7 +129,7 @@ const VideoCard = ({
 };
 
 const VideosAdmin = () => {
-  const { t } = useLanguage();
+  const { t ,isTibetan} = useLanguage();
   const [searchQuery, setSearchQuery] = useState('');
   const [isFormOpen, setIsFormOpen] = useState(false);
   const [editingVideo, setEditingVideo] = useState<Video | null>(null);
@@ -227,7 +227,7 @@ const VideosAdmin = () => {
 
   return (
     <AdminLayout>
-      <div className="space-y-6">
+      <div className="space-y-6" style={{fontFamily: isTibetan ? 'CustomTibetan' : ''}}>
         {/* Header with Search and Create Button */}
         <div className="flex items-center justify-between gap-4">
           <div className="flex-1">

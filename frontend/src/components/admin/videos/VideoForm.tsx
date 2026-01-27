@@ -34,7 +34,7 @@ interface VideoFormProps {
 }
 
 export const VideoForm = ({ isOpen, onClose, mode, data, onSave }: VideoFormProps) => {
-  const { t } = useLanguage();
+  const { t ,isTibetan} = useLanguage();
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [uploading, setUploading] = useState(false);
   const [formData, setFormData] = useState({
@@ -134,7 +134,7 @@ export const VideoForm = ({ isOpen, onClose, mode, data, onSave }: VideoFormProp
         <DialogHeader>
           <DialogTitle>{mode === 'create' ? t('createVideo') : t('editVideo')}</DialogTitle>
         </DialogHeader>
-        <form onSubmit={handleSubmit} className="space-y-6">
+        <form onSubmit={handleSubmit} className="space-y-6" style={{fontFamily: isTibetan ? 'CustomTibetan' : ''}}>
           {/* Titles */}
           <div className="grid grid-cols-2 gap-4">
             <div className="space-y-2">

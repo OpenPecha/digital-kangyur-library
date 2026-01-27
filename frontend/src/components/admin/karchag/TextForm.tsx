@@ -34,7 +34,7 @@ interface TextFormProps {
 }
 
 export const TextForm = ({ isOpen, onClose, mode, data, subCategories, mainCategories, defaultSubCategoryId, onSave }: TextFormProps) => {
-  const { t } = useLanguage();
+  const { t,isTibetan } = useLanguage();
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [uploading, setUploading] = useState(false);
 
@@ -240,7 +240,7 @@ export const TextForm = ({ isOpen, onClose, mode, data, subCategories, mainCateg
           <DialogHeader>
           <DialogTitle>{mode === 'create' ? t('createNewText') : t('editText')}</DialogTitle>
         </DialogHeader>
-        <form onSubmit={handleSubmit} className="space-y-6">
+        <form onSubmit={handleSubmit} className="space-y-6" style={{fontFamily: isTibetan ? 'CustomTibetan' : ''}}>
           <div className="space-y-4">
             <div className="grid grid-cols-2 gap-4">
               <div className="space-y-2">

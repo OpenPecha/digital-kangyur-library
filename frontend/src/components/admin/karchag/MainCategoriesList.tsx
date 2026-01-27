@@ -21,7 +21,7 @@ export const MainCategoriesList: React.FC<MainCategoriesListProps> = ({
 }) => {
   const navigate = useNavigate();
   const queryClient = useQueryClient();
-  const { t } = useLanguage();
+  const { t ,isTibetan} = useLanguage();
   const [searchQuery, setSearchQuery] = useState('');
   const [editingItem, setEditingItem] = useState<any>(null);
   const [isFormOpen, setIsFormOpen] = useState(false);
@@ -146,7 +146,7 @@ export const MainCategoriesList: React.FC<MainCategoriesListProps> = ({
   }
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-6" style={{fontFamily: isTibetan ? 'CustomTibetan' : ''}}>
       {/* Header with Search and Create Button */}
       <div className="flex items-center justify-between gap-4">
         <div className="flex-1">

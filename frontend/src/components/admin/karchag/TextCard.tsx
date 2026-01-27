@@ -13,7 +13,7 @@ interface TextCardProps {
 }
 
 export const TextCard: React.FC<TextCardProps> = ({ text, mainCategories, subCategories, onEdit, onDelete }) => {
-  const { t } = useLanguage();
+  const { t ,isTibetan} = useLanguage();
   const subCategory = subCategories.find(sc => sc.id === text.sub_category_id);
   const mainCategory = mainCategories.find(c => c.id === subCategory?.main_category_id);
 
@@ -38,7 +38,9 @@ export const TextCard: React.FC<TextCardProps> = ({ text, mainCategories, subCat
               {text.yeshe_de_id && <span>{t('yesheDeId')}: {text.yeshe_de_id}</span>}
             </div>
           </div>
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-2"
+          style={{fontFamily: isTibetan ? 'CustomTibetan' : ''}}
+          >
             <Button variant="outline" size="sm" onClick={() => onEdit(text)}>
               <Edit className="h-4 w-4 mr-2" />
               {t('edit')}

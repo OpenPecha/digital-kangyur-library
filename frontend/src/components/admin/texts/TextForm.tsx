@@ -20,6 +20,7 @@ import {
 } from "@/components/ui/atoms/select";
 import api from '@/utils/api';
 import { toast } from 'sonner';
+import useLanguage from '@/hooks/useLanguage';
 
 interface TextFormProps {
   isOpen: boolean;
@@ -32,6 +33,7 @@ interface TextFormProps {
 export const TextForm = ({ isOpen, onClose, mode, textId, onSave }: TextFormProps) => {
   const [loading, setLoading] = useState(false);
   const [textData, setTextData] = useState<any>(null);
+  const { isTibetan } = useLanguage();
   const [collatedContent, setCollatedContent] = useState<{
     collated_text?: string;
     english_translation?: string;
@@ -161,7 +163,7 @@ export const TextForm = ({ isOpen, onClose, mode, textId, onSave }: TextFormProp
           <DialogHeader>
             <DialogTitle>Create New Text</DialogTitle>
           </DialogHeader>
-          <form onSubmit={handleCreateSubmit} className="space-y-4">
+          <form onSubmit={handleCreateSubmit} className="space-y-4" style={{fontFamily: isTibetan ? 'CustomTibetan' : ''}}>
             <div className="grid grid-cols-2 gap-4">
               <div className="space-y-2">
                 <Label htmlFor="category_id">Category *</Label>

@@ -32,7 +32,7 @@ interface CategoryFormProps {
 }
 
 export const CategoryForm = ({ isOpen, onClose, mode, data, mainCategories, defaultMainCategoryId, onSave }: CategoryFormProps) => {
-  const { t } = useLanguage();
+  const { t ,isTibetan} = useLanguage();
   
   // Helper function to determine if main category is Tantra
   const isTantraCategory = (mainCategoryId: string | null): boolean => {
@@ -117,8 +117,8 @@ export const CategoryForm = ({ isOpen, onClose, mode, data, mainCategories, defa
   };
 
   return (
-    <Dialog open={isOpen} onOpenChange={onClose}>
-      <DialogContent className="max-w-2xl max-h-[90vh] overflow-scroll">
+    <Dialog open={isOpen} onOpenChange={onClose} >
+      <DialogContent className="max-w-2xl max-h-[90vh] overflow-scroll" style={{fontFamily: isTibetan ? 'CustomTibetan' : ''}}>
         <DialogHeader>
           <DialogTitle>{mode === 'create' ? t('createNewCategory') : t('editCategory')}</DialogTitle>
         </DialogHeader>

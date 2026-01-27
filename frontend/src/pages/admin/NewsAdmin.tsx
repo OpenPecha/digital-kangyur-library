@@ -66,7 +66,7 @@ const NewsCard = ({
 };
 
 const NewsAdmin = () => {
-  const { t } = useLanguage();
+  const { t ,isTibetan} = useLanguage();
   const [searchQuery, setSearchQuery] = useState('');
   const [isFormOpen, setIsFormOpen] = useState(false);
   const [editingNews, setEditingNews] = useState<NewsEntry | null>(null);
@@ -197,7 +197,7 @@ const NewsAdmin = () => {
             <h1 className="text-3xl font-bold text-gray-800 py-[10px]">{t('manageNewsContent')}</h1>
             <p className="text-gray-600 mt-1">{t('createEditManageNews')}</p>
           </div>
-          <Button onClick={() => setIsFormOpen(true)}>
+          <Button onClick={() => setIsFormOpen(true)} style={{fontFamily: isTibetan ? 'CustomTibetan' : ''}}>
             <Plus className="mr-2 h-4 w-4" />
             {t('createNews')}
           </Button>

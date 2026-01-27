@@ -461,7 +461,7 @@ export const TextEditModal = ({
                 </TabsList>
 
                 {/* Tab 1: Metadata */}
-                <TabsContent value="metadata" className="flex-1  overflow-y-auto p-6 m-0">
+                <TabsContent value="metadata" className="flex-1  overflow-y-auto p-6 m-0" style={{fontFamily: isTibetan ? 'CustomTibetan' : ''}}>
                   <form onSubmit={handleSubmit} className="space-y-6">
                     <div className="space-y-4">
                       <div className="grid grid-cols-2 gap-4">

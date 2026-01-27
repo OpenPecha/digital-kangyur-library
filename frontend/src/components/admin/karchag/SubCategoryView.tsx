@@ -259,7 +259,9 @@ export const SubCategoryView: React.FC = () => {
           <h1 className="text-3xl font-bold text-gray-800 py-[10px]">{subCategory.name_tibetan}</h1>
           <p className="text-sm font-medium text-kangyur-maroon tibetan mt-1">{subCategory.name_english}</p>
         </div>
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-2  "
+        style={{fontFamily: isTibetan ? 'CustomTibetan' : ''}}
+        >
           <Button variant="outline" size="sm" onClick={() => handleEditCategory(subCategory)}>
             <Edit className="h-4 w-4 mr-2" />
             {t('editSubcategory')}
