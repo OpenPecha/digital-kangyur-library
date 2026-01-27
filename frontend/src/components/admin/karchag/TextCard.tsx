@@ -26,16 +26,14 @@ export const TextCard: React.FC<TextCardProps> = ({ text, mainCategories, subCat
           </div>
           <div className="flex-1">
             <div className="flex items-center gap-4">
-              <h3 className="text-lg font-semibold">{text.english_title}</h3>
+              <h3 className="text-lg font-semibold tibetan">{text.tibetan_title}</h3>
             
             </div>
-            <p className="text-sm font-medium text-kangyur-maroon tibetan mt-1">
-              {text.tibetan_title}
+            <p className="text-sm font-medium text-kangyur-maroon  mt-1">
+             {text.english_title} 
             </p>
             <div className="flex items-center gap-4 text-sm text-gray-600 mt-2">
-              <span className="flex items-center gap-1">
-                {mainCategory?.name_english} {subCategory && `> ${subCategory.name_english}`}
-              </span>
+           
               {text.derge_id && <span>{t('dergeId')}: {text.derge_id}</span>}
               {text.yeshe_de_id && <span>{t('yesheDeId')}: {text.yeshe_de_id}</span>}
             </div>
