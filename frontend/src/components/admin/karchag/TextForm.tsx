@@ -464,6 +464,7 @@ export const TextForm = ({ isOpen, onClose, mode, data, subCategories, mainCateg
                   value={formData.pecing_link}
                   onChange={(e) => setFormData({ ...formData, pecing_link: e.target.value })}
                   placeholder={t('enterPecingLinkUrl')}
+                  type="url"
                 />
               </div>
               <div className="space-y-2">
@@ -473,6 +474,7 @@ export const TextForm = ({ isOpen, onClose, mode, data, subCategories, mainCateg
                   value={formData.narthang_link}
                   onChange={(e) => setFormData({ ...formData, narthang_link: e.target.value })}
                   placeholder={t('enterNarthangLinkUrl')}
+                  type="url"
                 />
               </div>
             </div>
