@@ -270,5 +270,12 @@
     "pleaseFillAllFields": "ཁྱེད་རང་གིས་ཚང་མའི་ཁྱབ་ཁོངས་བཀོད་རོགས།",
     "accountCreatedSuccessfully": "ཐོ་ཁུངས་བཟོ་སྐྲུན་བྱས་ཟིན། ད་ལྟ་ཁྱེད་རང་ནང་འཛུལ་བྱས་ཟིན།",
     "loginFailed": "ནང་འཛུལ་བྱེད་མ་ཐུབ།",
-    "registrationFailed": "ཐོ་ཁུངས་བཟོ་སྐྲུན་བྱེད་མ་ཐུབ།"
+    "registrationFailed": "ཐོ་ཁུངས་བཟོ་སྐྲུན་བྱེད་མ་ཐུབ།",
+    "pecingEdition": "པེ་ཅིང་པར་མ།",
+    "narthangEdition": "སྣར་ཐང་པར་མ།",
+    "pecingLink": "པེ་ཅིང་པར་མའི་ཁ་བྱང་།",
+    "narthangLink": "སྣར་ཐང་པར་མའི་ཁ་བྱང་།",
+    "enterPecingLinkUrl": "པེ་ཅིང་པར་མའི་ཁ་བྱང་འཇུག",
+    "enterNarthangLinkUrl": "སྣར་ཐང་པར་མའི་ཁ་བྱང་འཇུག",
+    "link": "ཁ་བྱང་།"
 }

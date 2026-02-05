@@ -39,8 +39,8 @@ const metadataLabelMap: Record<string, string> = {
   'yeshe-de-id': 'yesheDeId',
   'yeshe-de-volume': 'yesheDeVolume',
   'yeshe-de-volume-length': 'yesheDeVolumeLength',
-  'pecing-link': 'pecing Link',
-  'narthang-link': 'narthang Link',
+  'pecing-link': 'pecingLink',
+  'narthang-link': 'narthangLink',
   'sermon': 'sermon',
   'yana': 'yana',
   'translation-period': 'translationPeriod',
@@ -109,9 +109,9 @@ const MetadataSection = ({ title, group, metadata, t }: { title: string; group: 
             <tr key={item.key} className="border-b border-gray-200">
               <td className="py-3 pr-4 font-medium text-gray-700 align-top w-1/3 capitalize">{t(metadataLabelMap[item.key] || item.key)}:</td>
               <td className={`py-3 text-gray-600 ${group === 'titles' && (item.key === 'tibetan-title' || item.key === 'sanskrit-title') ? 'tibetan text-lg' : ''}`}>
-                {metadataLabelMap[item.key] === 'pecing Link' || metadataLabelMap[item.key] === 'narthang Link' ?(
+                {metadataLabelMap[item.key] === 'pecingLink' || metadataLabelMap[item.key] === 'narthangLink' ?(
                   <a href={link_prefix(item.value)} target="_blank" rel="noopener noreferrer" className="text-blue-500 underline">
-                    Link
+                    {t('link')}
                   </a>
                 ):displayValue}
               </td>

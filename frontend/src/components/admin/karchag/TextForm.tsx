@@ -458,21 +458,21 @@ export const TextForm = ({ isOpen, onClose, mode, data, subCategories, mainCateg
 
             <div className="grid grid-cols-2 gap-4">
               <div className="space-y-2">
-                <Label htmlFor="pecing_link">Pecing Link </Label>
+                <Label htmlFor="pecing_link">{t('pecingLink')}</Label>
                 <Input
                   id="pecing_link"
                   value={formData.pecing_link}
                   onChange={(e) => setFormData({ ...formData, pecing_link: e.target.value })}
-                  placeholder="Enter Pecing link URL"
+                  placeholder={t('enterPecingLinkUrl')}
                 />
               </div>
               <div className="space-y-2">
-                <Label htmlFor="narthang_link">Narthang Link </Label>
+                <Label htmlFor="narthang_link">{t('narthangLink')}</Label>
                 <Input
                   id="narthang_link"
                   value={formData.narthang_link}
                   onChange={(e) => setFormData({ ...formData, narthang_link: e.target.value })}
-                  placeholder="Enter Narthang link URL"
+                  placeholder={t('enterNarthangLinkUrl')}
                 />
               </div>
             </div>

@@ -270,5 +270,12 @@
     "pleaseFillAllFields": "Please fill in all fields",
     "accountCreatedSuccessfully": "Account created successfully! You are now logged in.",
     "loginFailed": "Login failed",
-    "registrationFailed": "Registration failed"
+    "registrationFailed": "Registration failed",
+    "pecingEdition": "Pecing Edition",
+    "narthangEdition": "Narthang Edition",
+    "pecingLink": "Pecing Link",
+    "narthangLink": "Narthang Link",
+    "enterPecingLinkUrl": "Enter Pecing link URL",
+    "enterNarthangLinkUrl": "Enter Narthang link URL",
+    "link": "Link"
 }
