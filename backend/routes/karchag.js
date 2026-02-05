@@ -337,6 +337,10 @@ router.get('/texts/:id', karchagController.getTextById);
  *                 type: string
  *               translation_period:
  *                 type: string
+ *               pecing_link:
+ *                 type: string
+ *               narthang_link:
+ *                 type: string
  *               pdf_url:
  *                 type: string
  *               order_index:
@@ -363,6 +367,47 @@ router.post('/texts', authenticate, authorize(['admin', 'editor']), karchagContr
  *         required: true
  *         schema:
  *           type: string
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               sub_category_id:
+ *                 type: string
+ *               derge_id:
+ *                 type: string
+ *               yeshe_de_id:
+ *                 type: string
+ *               yeshe_de_volume_number:
+ *                 type: string
+ *               yeshe_de_volume_length:
+ *                 type: string
+ *               tibetan_title:
+ *                 type: string
+ *               chinese_title:
+ *                 type: string
+ *               sanskrit_title:
+ *                 type: string
+ *               english_title:
+ *                 type: string
+ *               sermon:
+ *                 type: string
+ *               yana:
+ *                 type: string
+ *               translation_period:
+ *                 type: string
+ *               pecing_link:
+ *                 type: string
+ *               narthang_link:
+ *                 type: string
+ *               pdf_url:
+ *                 type: string
+ *               order_index:
+ *                 type: integer
+ *               is_active:
+ *                 type: boolean
  *     responses:
  *       200:
  *         description: Text updated successfully

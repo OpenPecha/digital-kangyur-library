@@ -9,6 +9,15 @@ import Breadcrumb from '@/components/ui/atoms/Breadcrumb';
 import useLanguage from '@/hooks/useLanguage';
 import api from '@/utils/api';
 
+
+
+function link_prefix(link: string) {
+  if (link.startsWith('https://') || link.startsWith('http://')) {
+    return link;
+  }
+  return 'https://' + link;
+}
+
 // Mapping section IDs to translation keys
 const sectionTitleMap = {
   'translation-homage': 'translationHomage' as const,
@@ -30,9 +39,12 @@ const metadataLabelMap: Record<string, string> = {
   'yeshe-de-id': 'yesheDeId',
   'yeshe-de-volume': 'yesheDeVolume',
   'yeshe-de-volume-length': 'yesheDeVolumeLength',
+  'pecing-link': 'pecing Link',
+  'narthang-link': 'narthang Link',
   'sermon': 'sermon',
   'yana': 'yana',
   'translation-period': 'translationPeriod',
+  
 };
 
 // Mapping of backend values to translation keys
@@ -93,12 +105,15 @@ const MetadataSection = ({ title, group, metadata, t }: { title: string; group: 
         {metadata.filter((item: any) => item.group === group).map((item: any) => {
           const translationKey = getValueTranslationKey(item.key, item.value);
           const displayValue = translationKey ? t(translationKey) : item.value;
-          
           return (
             <tr key={item.key} className="border-b border-gray-200">
-              <td className="py-3 pr-4 font-medium text-gray-700 align-top w-1/3">{t(metadataLabelMap[item.key] || item.key)}:</td>
+              <td className="py-3 pr-4 font-medium text-gray-700 align-top w-1/3 capitalize">{t(metadataLabelMap[item.key] || item.key)}:</td>
               <td className={`py-3 text-gray-600 ${group === 'titles' && (item.key === 'tibetan-title' || item.key === 'sanskrit-title') ? 'tibetan text-lg' : ''}`}>
-                {displayValue}
+                {metadataLabelMap[item.key] === 'pecing Link' || metadataLabelMap[item.key] === 'narthang Link' ?(
+                  <a href={link_prefix(item.value)} target="_blank" rel="noopener noreferrer" className="text-blue-500 underline">
+                    Link
+                  </a>
+                ):displayValue}
               </td>
             </tr>
           );
@@ -137,6 +152,8 @@ const TextDetail = () => {
         { key: 'yeshe-de-id', value: response.yeshe_de_id?.trim() || '', group: 'catalog' },
         { key: 'yeshe-de-volume', value: response.yeshe_de_volume_number?.trim() || '', group: 'catalog' },
         { key: 'yeshe-de-volume-length', value: response.yeshe_de_volume_length?.trim() || '', group: 'catalog' },
+        { key: 'pecing-link', value: response.pecing_link?.trim() || '', group: 'catalog' },
+        { key: 'narthang-link', value: response.narthang_link?.trim() || '', group: 'catalog' },
         // Content information
         { key: 'sermon', value: response.sermon?.trim() || '', group: 'content' },
         { key: 'yana', value: response.yana?.trim() || '', group: 'content' },

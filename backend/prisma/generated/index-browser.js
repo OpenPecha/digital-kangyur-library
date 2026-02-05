@@ -288,6 +288,8 @@ exports.Prisma.TextScalarFieldEnum = {
   sermon: 'sermon',
   yana: 'yana',
   translation_period: 'translation_period',
+  pecing_link: 'pecing_link',
+  narthang_link: 'narthang_link',
   pdf_url: 'pdf_url',
   order_index: 'order_index',
   is_active: 'is_active',

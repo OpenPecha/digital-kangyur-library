@@ -315,6 +315,8 @@ const createText = async (req, res, next) => {
       sermon,
       yana,
       translation_period,
+      pecing_link,
+      narthang_link,
       pdf_url,
       order_index = 0,
       is_active = true,
@@ -343,6 +345,8 @@ const createText = async (req, res, next) => {
       sermon: sermon || null,
       yana: yana || null,
       translation_period: translation_period || null,
+      pecing_link: pecing_link || null,
+      narthang_link: narthang_link || null,
       pdf_url: pdf_url || null,
       order_index,
       is_active,
@@ -370,6 +374,8 @@ const updateText = async (req, res, next) => {
       sermon,
       yana,
       translation_period,
+      pecing_link,
+      narthang_link,
       pdf_url,
       order_index,
       is_active,
@@ -382,7 +388,7 @@ const updateText = async (req, res, next) => {
       }
     }
 
-    const text = await karchagTextService.update(id, {
+    const updateData = {
       sub_category_id,
       derge_id,
       yeshe_de_id,
@@ -398,7 +404,17 @@ const updateText = async (req, res, next) => {
       pdf_url,
       order_index,
       is_active,
-    });
+    };
+
+    // Only include pecing_link and narthang_link if they are provided
+    if (pecing_link !== undefined) {
+      updateData.pecing_link = pecing_link || null;
+    }
+    if (narthang_link !== undefined) {
+      updateData.narthang_link = narthang_link || null;
+    }
+
+    const text = await karchagTextService.update(id, updateData);
 
     if (!text) {
       throw new AppError('RESOURCE_NOT_FOUND', 'Text not found', 404);

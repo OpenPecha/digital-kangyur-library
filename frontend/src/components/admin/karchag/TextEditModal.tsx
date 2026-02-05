@@ -106,6 +106,8 @@ export const TextEditModal = ({
         translation_period: text.translation_period || '',
         yeshe_de_volume_number: text.yeshe_de_volume_number || '',
         yeshe_de_volume_length: text.yeshe_de_volume_length || '',
+        pecing_link: text.pecing_link || '',
+        narthang_link: text.narthang_link || '',
         pdf_url: text.pdf_url || '',
         order_index: text.order_index || 0,
         is_active: text.is_active ?? true,
@@ -124,6 +126,8 @@ export const TextEditModal = ({
       sermon: '',
       yana: '',
       translation_period: '',
+      pecing_link: '',
+      narthang_link: '',
       pdf_url: '',
       order_index: 0,
       is_active: true,
@@ -413,6 +417,8 @@ export const TextEditModal = ({
         translation_period: text.translation_period || '',
         yeshe_de_volume_number: text.yeshe_de_volume_number || '',
         yeshe_de_volume_length: text.yeshe_de_volume_length || '',
+        pecing_link: text.pecing_link || '',
+        narthang_link: text.narthang_link || '',
         pdf_url: text.pdf_url || '',
         order_index: text.order_index || 0,
         is_active: text.is_active ?? true,
@@ -667,6 +673,27 @@ export const TextEditModal = ({
                               <SelectItem value="New Translation">{t('translationPeriodNew')}</SelectItem>
                             </SelectContent>
                           </Select>
+                        </div>
+                      </div>
+
+                      <div className="grid grid-cols-2 gap-4">
+                        <div className="space-y-2">
+                          <Label htmlFor="pecing_link">Pecing Link </Label>
+                          <Input
+                            id="pecing_link"
+                            value={formData.pecing_link}
+                            onChange={(e) => setFormData({ ...formData, pecing_link: e.target.value })}
+                            placeholder="Enter Pecing link URL"
+                          />
+                        </div>
+                        <div className="space-y-2">
+                          <Label htmlFor="narthang_link">Narthang Link </Label>
+                          <Input
+                            id="narthang_link"
+                            value={formData.narthang_link}
+                            onChange={(e) => setFormData({ ...formData, narthang_link: e.target.value })}
+                            placeholder="Enter Narthang link URL"
+                          />
                         </div>
                       </div>
 

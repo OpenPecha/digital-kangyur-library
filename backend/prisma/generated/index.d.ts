@@ -15980,6 +15980,8 @@ export namespace Prisma {
     sermon: string | null
     yana: string | null
     translation_period: string | null
+    pecing_link: string | null
+    narthang_link: string | null
     pdf_url: string | null
     order_index: number | null
     is_active: boolean | null
@@ -16001,6 +16003,8 @@ export namespace Prisma {
     sermon: string | null
     yana: string | null
     translation_period: string | null
+    pecing_link: string | null
+    narthang_link: string | null
     pdf_url: string | null
     order_index: number | null
     is_active: boolean | null
@@ -16022,6 +16026,8 @@ export namespace Prisma {
     sermon: number
     yana: number
     translation_period: number
+    pecing_link: number
+    narthang_link: number
     pdf_url: number
     order_index: number
     is_active: number
@@ -16053,6 +16059,8 @@ export namespace Prisma {
     sermon?: true
     yana?: true
     translation_period?: true
+    pecing_link?: true
+    narthang_link?: true
     pdf_url?: true
     order_index?: true
     is_active?: true
@@ -16074,6 +16082,8 @@ export namespace Prisma {
     sermon?: true
     yana?: true
     translation_period?: true
+    pecing_link?: true
+    narthang_link?: true
     pdf_url?: true
     order_index?: true
     is_active?: true
@@ -16095,6 +16105,8 @@ export namespace Prisma {
     sermon?: true
     yana?: true
     translation_period?: true
+    pecing_link?: true
+    narthang_link?: true
     pdf_url?: true
     order_index?: true
     is_active?: true
@@ -16203,6 +16215,8 @@ export namespace Prisma {
     sermon: string | null
     yana: string | null
     translation_period: string | null
+    pecing_link: string | null
+    narthang_link: string | null
     pdf_url: string | null
     order_index: number
     is_active: boolean
@@ -16243,6 +16257,8 @@ export namespace Prisma {
     sermon?: boolean
     yana?: boolean
     translation_period?: boolean
+    pecing_link?: boolean
+    narthang_link?: boolean
     pdf_url?: boolean
     order_index?: boolean
     is_active?: boolean
@@ -16268,6 +16284,8 @@ export namespace Prisma {
     sermon?: boolean
     yana?: boolean
     translation_period?: boolean
+    pecing_link?: boolean
+    narthang_link?: boolean
     pdf_url?: boolean
     order_index?: boolean
     is_active?: boolean
@@ -16290,6 +16308,8 @@ export namespace Prisma {
     sermon?: boolean
     yana?: boolean
     translation_period?: boolean
+    pecing_link?: boolean
+    narthang_link?: boolean
     pdf_url?: boolean
     order_index?: boolean
     is_active?: boolean
@@ -16312,6 +16332,8 @@ export namespace Prisma {
     sermon?: boolean
     yana?: boolean
     translation_period?: boolean
+    pecing_link?: boolean
+    narthang_link?: boolean
     pdf_url?: boolean
     order_index?: boolean
     is_active?: boolean
@@ -16319,7 +16341,7 @@ export namespace Prisma {
     updated_at?: boolean
   }
 
-  export type TextOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "sub_category_id" | "tibetan_title" | "chinese_title" | "sanskrit_title" | "english_title" | "derge_id" | "yeshe_de_id" | "yeshe_de_volume_number" | "yeshe_de_volume_length" | "sermon" | "yana" | "translation_period" | "pdf_url" | "order_index" | "is_active" | "created_at" | "updated_at", ExtArgs["result"]["text"]>
+  export type TextOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "sub_category_id" | "tibetan_title" | "chinese_title" | "sanskrit_title" | "english_title" | "derge_id" | "yeshe_de_id" | "yeshe_de_volume_number" | "yeshe_de_volume_length" | "sermon" | "yana" | "translation_period" | "pecing_link" | "narthang_link" | "pdf_url" | "order_index" | "is_active" | "created_at" | "updated_at", ExtArgs["result"]["text"]>
   export type TextInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     sub_category?: boolean | KarchagSubCategoryDefaultArgs<ExtArgs>
     summary?: boolean | Text$summaryArgs<ExtArgs>
@@ -16354,6 +16376,8 @@ export namespace Prisma {
       sermon: string | null
       yana: string | null
       translation_period: string | null
+      pecing_link: string | null
+      narthang_link: string | null
       pdf_url: string | null
       order_index: number
       is_active: boolean
@@ -16798,6 +16822,8 @@ export namespace Prisma {
     readonly sermon: FieldRef<"Text", 'String'>
     readonly yana: FieldRef<"Text", 'String'>
     readonly translation_period: FieldRef<"Text", 'String'>
+    readonly pecing_link: FieldRef<"Text", 'String'>
+    readonly narthang_link: FieldRef<"Text", 'String'>
     readonly pdf_url: FieldRef<"Text", 'String'>
     readonly order_index: FieldRef<"Text", 'Int'>
     readonly is_active: FieldRef<"Text", 'Boolean'>
@@ -19849,6 +19875,8 @@ export namespace Prisma {
     sermon: 'sermon',
     yana: 'yana',
     translation_period: 'translation_period',
+    pecing_link: 'pecing_link',
+    narthang_link: 'narthang_link',
     pdf_url: 'pdf_url',
     order_index: 'order_index',
     is_active: 'is_active',
@@ -20975,6 +21003,8 @@ export namespace Prisma {
     sermon?: StringNullableFilter<"Text"> | string | null
     yana?: StringNullableFilter<"Text"> | string | null
     translation_period?: StringNullableFilter<"Text"> | string | null
+    pecing_link?: StringNullableFilter<"Text"> | string | null
+    narthang_link?: StringNullableFilter<"Text"> | string | null
     pdf_url?: StringNullableFilter<"Text"> | string | null
     order_index?: IntFilter<"Text"> | number
     is_active?: BoolFilter<"Text"> | boolean
@@ -20999,6 +21029,8 @@ export namespace Prisma {
     sermon?: SortOrderInput | SortOrder
     yana?: SortOrderInput | SortOrder
     translation_period?: SortOrderInput | SortOrder
+    pecing_link?: SortOrderInput | SortOrder
+    narthang_link?: SortOrderInput | SortOrder
     pdf_url?: SortOrderInput | SortOrder
     order_index?: SortOrder
     is_active?: SortOrder
@@ -21026,6 +21058,8 @@ export namespace Prisma {
     sermon?: StringNullableFilter<"Text"> | string | null
     yana?: StringNullableFilter<"Text"> | string | null
     translation_period?: StringNullableFilter<"Text"> | string | null
+    pecing_link?: StringNullableFilter<"Text"> | string | null
+    narthang_link?: StringNullableFilter<"Text"> | string | null
     pdf_url?: StringNullableFilter<"Text"> | string | null
     order_index?: IntFilter<"Text"> | number
     is_active?: BoolFilter<"Text"> | boolean
@@ -21050,6 +21084,8 @@ export namespace Prisma {
     sermon?: SortOrderInput | SortOrder
     yana?: SortOrderInput | SortOrder
     translation_period?: SortOrderInput | SortOrder
+    pecing_link?: SortOrderInput | SortOrder
+    narthang_link?: SortOrderInput | SortOrder
     pdf_url?: SortOrderInput | SortOrder
     order_index?: SortOrder
     is_active?: SortOrder
@@ -21079,6 +21115,8 @@ export namespace Prisma {
     sermon?: StringNullableWithAggregatesFilter<"Text"> | string | null
     yana?: StringNullableWithAggregatesFilter<"Text"> | string | null
     translation_period?: StringNullableWithAggregatesFilter<"Text"> | string | null
+    pecing_link?: StringNullableWithAggregatesFilter<"Text"> | string | null
+    narthang_link?: StringNullableWithAggregatesFilter<"Text"> | string | null
     pdf_url?: StringNullableWithAggregatesFilter<"Text"> | string | null
     order_index?: IntWithAggregatesFilter<"Text"> | number
     is_active?: BoolWithAggregatesFilter<"Text"> | boolean
@@ -22396,6 +22434,8 @@ export namespace Prisma {
     sermon?: string | null
     yana?: string | null
     translation_period?: string | null
+    pecing_link?: string | null
+    narthang_link?: string | null
     pdf_url?: string | null
     order_index?: number
     is_active?: boolean
@@ -22420,6 +22460,8 @@ export namespace Prisma {
     sermon?: string | null
     yana?: string | null
     translation_period?: string | null
+    pecing_link?: string | null
+    narthang_link?: string | null
     pdf_url?: string | null
     order_index?: number
     is_active?: boolean
@@ -22442,6 +22484,8 @@ export namespace Prisma {
     sermon?: NullableStringFieldUpdateOperationsInput | string | null
     yana?: NullableStringFieldUpdateOperationsInput | string | null
     translation_period?: NullableStringFieldUpdateOperationsInput | string | null
+    pecing_link?: NullableStringFieldUpdateOperationsInput | string | null
+    narthang_link?: NullableStringFieldUpdateOperationsInput | string | null
     pdf_url?: NullableStringFieldUpdateOperationsInput | string | null
     order_index?: IntFieldUpdateOperationsInput | number
     is_active?: BoolFieldUpdateOperationsInput | boolean
@@ -22466,6 +22510,8 @@ export namespace Prisma {
     sermon?: NullableStringFieldUpdateOperationsInput | string | null
     yana?: NullableStringFieldUpdateOperationsInput | string | null
     translation_period?: NullableStringFieldUpdateOperationsInput | string | null
+    pecing_link?: NullableStringFieldUpdateOperationsInput | string | null
+    narthang_link?: NullableStringFieldUpdateOperationsInput | string | null
     pdf_url?: NullableStringFieldUpdateOperationsInput | string | null
     order_index?: IntFieldUpdateOperationsInput | number
     is_active?: BoolFieldUpdateOperationsInput | boolean
@@ -22489,6 +22535,8 @@ export namespace Prisma {
     sermon?: string | null
     yana?: string | null
     translation_period?: string | null
+    pecing_link?: string | null
+    narthang_link?: string | null
     pdf_url?: string | null
     order_index?: number
     is_active?: boolean
@@ -22509,6 +22557,8 @@ export namespace Prisma {
     sermon?: NullableStringFieldUpdateOperationsInput | string | null
     yana?: NullableStringFieldUpdateOperationsInput | string | null
     translation_period?: NullableStringFieldUpdateOperationsInput | string | null
+    pecing_link?: NullableStringFieldUpdateOperationsInput | string | null
+    narthang_link?: NullableStringFieldUpdateOperationsInput | string | null
     pdf_url?: NullableStringFieldUpdateOperationsInput | string | null
     order_index?: IntFieldUpdateOperationsInput | number
     is_active?: BoolFieldUpdateOperationsInput | boolean
@@ -22530,6 +22580,8 @@ export namespace Prisma {
     sermon?: NullableStringFieldUpdateOperationsInput | string | null
     yana?: NullableStringFieldUpdateOperationsInput | string | null
     translation_period?: NullableStringFieldUpdateOperationsInput | string | null
+    pecing_link?: NullableStringFieldUpdateOperationsInput | string | null
+    narthang_link?: NullableStringFieldUpdateOperationsInput | string | null
     pdf_url?: NullableStringFieldUpdateOperationsInput | string | null
     order_index?: IntFieldUpdateOperationsInput | number
     is_active?: BoolFieldUpdateOperationsInput | boolean
@@ -23596,6 +23648,8 @@ export namespace Prisma {
     sermon?: SortOrder
     yana?: SortOrder
     translation_period?: SortOrder
+    pecing_link?: SortOrder
+    narthang_link?: SortOrder
     pdf_url?: SortOrder
     order_index?: SortOrder
     is_active?: SortOrder
@@ -23621,6 +23675,8 @@ export namespace Prisma {
     sermon?: SortOrder
     yana?: SortOrder
     translation_period?: SortOrder
+    pecing_link?: SortOrder
+    narthang_link?: SortOrder
     pdf_url?: SortOrder
     order_index?: SortOrder
     is_active?: SortOrder
@@ -23642,6 +23698,8 @@ export namespace Prisma {
     sermon?: SortOrder
     yana?: SortOrder
     translation_period?: SortOrder
+    pecing_link?: SortOrder
+    narthang_link?: SortOrder
     pdf_url?: SortOrder
     order_index?: SortOrder
     is_active?: SortOrder
@@ -25409,6 +25467,8 @@ export namespace Prisma {
     sermon?: string | null
     yana?: string | null
     translation_period?: string | null
+    pecing_link?: string | null
+    narthang_link?: string | null
     pdf_url?: string | null
     order_index?: number
     is_active?: boolean
@@ -25431,6 +25491,8 @@ export namespace Prisma {
     sermon?: string | null
     yana?: string | null
     translation_period?: string | null
+    pecing_link?: string | null
+    narthang_link?: string | null
     pdf_url?: string | null
     order_index?: number
     is_active?: boolean
@@ -25518,6 +25580,8 @@ export namespace Prisma {
     sermon?: StringNullableFilter<"Text"> | string | null
     yana?: StringNullableFilter<"Text"> | string | null
     translation_period?: StringNullableFilter<"Text"> | string | null
+    pecing_link?: StringNullableFilter<"Text"> | string | null
+    narthang_link?: StringNullableFilter<"Text"> | string | null
     pdf_url?: StringNullableFilter<"Text"> | string | null
     order_index?: IntFilter<"Text"> | number
     is_active?: BoolFilter<"Text"> | boolean
@@ -25773,6 +25837,8 @@ export namespace Prisma {
     sermon?: string | null
     yana?: string | null
     translation_period?: string | null
+    pecing_link?: string | null
+    narthang_link?: string | null
     pdf_url?: string | null
     order_index?: number
     is_active?: boolean
@@ -25796,6 +25862,8 @@ export namespace Prisma {
     sermon?: string | null
     yana?: string | null
     translation_period?: string | null
+    pecing_link?: string | null
+    narthang_link?: string | null
     pdf_url?: string | null
     order_index?: number
     is_active?: boolean
@@ -25833,6 +25901,8 @@ export namespace Prisma {
     sermon?: NullableStringFieldUpdateOperationsInput | string | null
     yana?: NullableStringFieldUpdateOperationsInput | string | null
     translation_period?: NullableStringFieldUpdateOperationsInput | string | null
+    pecing_link?: NullableStringFieldUpdateOperationsInput | string | null
+    narthang_link?: NullableStringFieldUpdateOperationsInput | string | null
     pdf_url?: NullableStringFieldUpdateOperationsInput | string | null
     order_index?: IntFieldUpdateOperationsInput | number
     is_active?: BoolFieldUpdateOperationsInput | boolean
@@ -25856,6 +25926,8 @@ export namespace Prisma {
     sermon?: NullableStringFieldUpdateOperationsInput | string | null
     yana?: NullableStringFieldUpdateOperationsInput | string | null
     translation_period?: NullableStringFieldUpdateOperationsInput | string | null
+    pecing_link?: NullableStringFieldUpdateOperationsInput | string | null
+    narthang_link?: NullableStringFieldUpdateOperationsInput | string | null
     pdf_url?: NullableStringFieldUpdateOperationsInput | string | null
     order_index?: IntFieldUpdateOperationsInput | number
     is_active?: BoolFieldUpdateOperationsInput | boolean
@@ -25877,6 +25949,8 @@ export namespace Prisma {
     sermon?: string | null
     yana?: string | null
     translation_period?: string | null
+    pecing_link?: string | null
+    narthang_link?: string | null
     pdf_url?: string | null
     order_index?: number
     is_active?: boolean
@@ -25900,6 +25974,8 @@ export namespace Prisma {
     sermon?: string | null
     yana?: string | null
     translation_period?: string | null
+    pecing_link?: string | null
+    narthang_link?: string | null
     pdf_url?: string | null
     order_index?: number
     is_active?: boolean
@@ -25937,6 +26013,8 @@ export namespace Prisma {
     sermon?: NullableStringFieldUpdateOperationsInput | string | null
     yana?: NullableStringFieldUpdateOperationsInput | string | null
     translation_period?: NullableStringFieldUpdateOperationsInput | string | null
+    pecing_link?: NullableStringFieldUpdateOperationsInput | string | null
+    narthang_link?: NullableStringFieldUpdateOperationsInput | string | null
     pdf_url?: NullableStringFieldUpdateOperationsInput | string | null
     order_index?: IntFieldUpdateOperationsInput | number
     is_active?: BoolFieldUpdateOperationsInput | boolean
@@ -25960,6 +26038,8 @@ export namespace Prisma {
     sermon?: NullableStringFieldUpdateOperationsInput | string | null
     yana?: NullableStringFieldUpdateOperationsInput | string | null
     translation_period?: NullableStringFieldUpdateOperationsInput | string | null
+    pecing_link?: NullableStringFieldUpdateOperationsInput | string | null
+    narthang_link?: NullableStringFieldUpdateOperationsInput | string | null
     pdf_url?: NullableStringFieldUpdateOperationsInput | string | null
     order_index?: IntFieldUpdateOperationsInput | number
     is_active?: BoolFieldUpdateOperationsInput | boolean
@@ -26283,6 +26363,8 @@ export namespace Prisma {
     sermon?: string | null
     yana?: string | null
     translation_period?: string | null
+    pecing_link?: string | null
+    narthang_link?: string | null
     pdf_url?: string | null
     order_index?: number
     is_active?: boolean
@@ -26303,6 +26385,8 @@ export namespace Prisma {
     sermon?: NullableStringFieldUpdateOperationsInput | string | null
     yana?: NullableStringFieldUpdateOperationsInput | string | null
     translation_period?: NullableStringFieldUpdateOperationsInput | string | null
+    pecing_link?: NullableStringFieldUpdateOperationsInput | string | null
+    narthang_link?: NullableStringFieldUpdateOperationsInput | string | null
     pdf_url?: NullableStringFieldUpdateOperationsInput | string | null
     order_index?: IntFieldUpdateOperationsInput | number
     is_active?: BoolFieldUpdateOperationsInput | boolean
@@ -26325,6 +26409,8 @@ export namespace Prisma {
     sermon?: NullableStringFieldUpdateOperationsInput | string | null
     yana?: NullableStringFieldUpdateOperationsInput | string | null
     translation_period?: NullableStringFieldUpdateOperationsInput | string | null
+    pecing_link?: NullableStringFieldUpdateOperationsInput | string | null
+    narthang_link?: NullableStringFieldUpdateOperationsInput | string | null
     pdf_url?: NullableStringFieldUpdateOperationsInput | string | null
     order_index?: IntFieldUpdateOperationsInput | number
     is_active?: BoolFieldUpdateOperationsInput | boolean
@@ -26347,6 +26433,8 @@ export namespace Prisma {
     sermon?: NullableStringFieldUpdateOperationsInput | string | null
     yana?: NullableStringFieldUpdateOperationsInput | string | null
     translation_period?: NullableStringFieldUpdateOperationsInput | string | null
+    pecing_link?: NullableStringFieldUpdateOperationsInput | string | null
+    narthang_link?: NullableStringFieldUpdateOperationsInput | string | null
     pdf_url?: NullableStringFieldUpdateOperationsInput | string | null
     order_index?: IntFieldUpdateOperationsInput | number
     is_active?: BoolFieldUpdateOperationsInput | boolean

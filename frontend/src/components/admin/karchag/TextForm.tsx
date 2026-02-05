@@ -53,6 +53,8 @@ export const TextForm = ({ isOpen, onClose, mode, data, subCategories, mainCateg
         translation_period: data.translation_period || '',
         yeshe_de_volume_number: data.yeshe_de_volume_number || '',
         yeshe_de_volume_length: data.yeshe_de_volume_length || '',
+        pecing_link: data.pecing_link || '',
+        narthang_link: data.narthang_link || '',
         pdf_url: data.pdf_url || '',
         order_index: data.order_index || 0,
         is_active: data.is_active ?? true,
@@ -71,6 +73,8 @@ export const TextForm = ({ isOpen, onClose, mode, data, subCategories, mainCateg
       sermon: '',
       yana: '',
       translation_period: '',
+      pecing_link: '',
+      narthang_link: '',
       pdf_url: '',
       order_index: 0,
       is_active: true,
@@ -95,6 +99,8 @@ export const TextForm = ({ isOpen, onClose, mode, data, subCategories, mainCateg
           translation_period: data.translation_period || '',
           yeshe_de_volume_number: data.yeshe_de_volume_number || '',
           yeshe_de_volume_length: data.yeshe_de_volume_length || '',
+          pecing_link: data.pecing_link || '',
+          narthang_link: data.narthang_link || '',
           pdf_url: data.pdf_url || '',
           order_index: data.order_index || 0,
           is_active: data.is_active ?? true,
@@ -114,6 +120,8 @@ export const TextForm = ({ isOpen, onClose, mode, data, subCategories, mainCateg
           sermon: '',
           yana: '',
           translation_period: '',
+          pecing_link: '',
+          narthang_link: '',
           pdf_url: '',
           order_index: 0,
           is_active: true,
@@ -192,6 +200,8 @@ export const TextForm = ({ isOpen, onClose, mode, data, subCategories, mainCateg
         translation_period: data.translation_period || '',
         yeshe_de_volume_number: data.yeshe_de_volume_number || '',
         yeshe_de_volume_length: data.yeshe_de_volume_length || '',
+        pecing_link: data.pecing_link || '',
+        narthang_link: data.narthang_link || '',
         pdf_url: data.pdf_url || '',
         order_index: data.order_index || 0,
         is_active: data.is_active ?? true,
@@ -211,6 +221,8 @@ export const TextForm = ({ isOpen, onClose, mode, data, subCategories, mainCateg
         sermon: '',
         yana: '',
         translation_period: '',
+        pecing_link: '',
+        narthang_link: '',
         pdf_url: '',
         order_index: 0,
         is_active: true,
@@ -441,6 +453,27 @@ export const TextForm = ({ isOpen, onClose, mode, data, subCategories, mainCateg
                     <SelectItem value="New Translation">{t('translationPeriodNew')}</SelectItem>
                   </SelectContent>
                 </Select>
+              </div>
+            </div>
+
+            <div className="grid grid-cols-2 gap-4">
+              <div className="space-y-2">
+                <Label htmlFor="pecing_link">Pecing Link </Label>
+                <Input
+                  id="pecing_link"
+                  value={formData.pecing_link}
+                  onChange={(e) => setFormData({ ...formData, pecing_link: e.target.value })}
+                  placeholder="Enter Pecing link URL"
+                />
+              </div>
+              <div className="space-y-2">
+                <Label htmlFor="narthang_link">Narthang Link </Label>
+                <Input
+                  id="narthang_link"
+                  value={formData.narthang_link}
+                  onChange={(e) => setFormData({ ...formData, narthang_link: e.target.value })}
+                  placeholder="Enter Narthang link URL"
+                />
               </div>
             </div>
 
