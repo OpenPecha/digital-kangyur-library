@@ -38,7 +38,7 @@ export const CategoryForm = ({ isOpen, onClose, mode, data, mainCategories, defa
   const isTantraCategory = (mainCategoryId: string | null): boolean => {
     if (!mainCategoryId) return false;
     const mainCategory = mainCategories.find(mc => mc.id === mainCategoryId);
-    return mainCategory?.name_english?.toLowerCase() === 'tantra';
+    return mainCategory?.name_english?.toLowerCase() !== 'discource';
   };
 
   const [formData, setFormData] = useState(() => {

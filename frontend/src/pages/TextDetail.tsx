@@ -337,14 +337,14 @@ const TextDetail = () => {
             <Card className="border border-kangyur-orange/10 rounded-xl shadow-sm">
               <CardContent className="p-0">
                 <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
-                  <TabsList className="w-full grid grid-cols-3 border-b text-xs sm:text-sm">
-                    <TabsTrigger value="metadata" className="rounded-none">
+                  <TabsList className="w-full grid grid-cols-3 border-b ">
+                    <TabsTrigger value="metadata" className="rounded-none text-lg">
                       {t('metadata')}
                     </TabsTrigger>
-                    <TabsTrigger value="summary" className="rounded-none">
+                    <TabsTrigger value="summary" className="rounded-none text-lg">
                       {t('text')}
                     </TabsTrigger>
-                    <TabsTrigger value="pdf" className="rounded-none">
+                    <TabsTrigger value="pdf" className="rounded-none text-lg">
                       {t('yesheDeSourceText')}
                     </TabsTrigger>
                   </TabsList>

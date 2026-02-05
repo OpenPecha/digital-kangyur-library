@@ -78,7 +78,7 @@ export const SubCategoryView: React.FC = () => {
   const subCategories = subCategoriesData || [];
   const isLoading = isLoadingSub || isLoadingTexts;
 
-  const isTantra = mainCategory?.name_english?.toLowerCase() === 'tantra';
+  const isTantra = mainCategory?.name_english?.toLowerCase() !== 'discource';
 
   const updateSubCategoryMutation = useMutation({
     mutationFn: ({ id, data }: { id: string; data: any }) => api.updateKarchagSubCategory(id, data),
