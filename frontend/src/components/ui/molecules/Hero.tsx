@@ -11,8 +11,8 @@ const Hero = () => {
       <div className="absolute inset-0 bg-gradient-to-b from-kangyur-cream to-white z-0" />
 
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 z-10">
-        <div className="mt-10 flex w-full flex-1 h-min md:h-[75vh]">
-          <div className="flex flex-col justify-between w-full space-y-6 sm:space-y-8 text-center">
+        <div className="mt-10 md:mt-0 flex w-full flex-1 h-min md:min-h-[80vh]">
+          <div className="flex flex-col justify-between md:justify-normal gap-6 w-full  text-center">
             <div className="pointer-events-none  flex items-center justify-center opacity-20 ">
               <img
                 src="/logo.svg"
@@ -25,7 +25,7 @@ const Hero = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.4, ease: "easeOut" }}
-              className="flex justify-center w-[90vw] md:w-[40vw] mx-auto"
+              className="flex justify-center w-[90vw] md:w-[50vw] mx-auto"
             >
               <Link
                 to="/catalog"
