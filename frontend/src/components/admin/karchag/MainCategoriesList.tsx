@@ -148,7 +148,7 @@ export const MainCategoriesList: React.FC<MainCategoriesListProps> = ({
   return (
     <div className="space-y-6" style={{fontFamily: isTibetan ? 'CustomTibetan' : ''}}>
       {/* Header with Search and Create Button */}
-      <div className="flex items-center justify-between gap-4">
+      <div className="flex items-center flex-col md:flex-row justify-between gap-4">
         <div className="flex-1">
           <h1 className="text-3xl font-bold text-gray-800 py-[10px] tibetan ">{t('manageKarchagContent')}</h1>
           <p className="text-gray-600 mt-1 tibetan ">{t('createEditManage')}</p>
@@ -180,8 +180,8 @@ export const MainCategoriesList: React.FC<MainCategoriesListProps> = ({
           return (
             <Card key={category.id} className="flex flex-row items-center hover:shadow-md transition-shadow">
               <div className="flex-1 p-6">
-                <div className="flex items-center gap-4">
-                  <div className="flex-shrink-0">
+                <div className="flex flex-col md:flex-row md:items-center gap-4">
+                  <div className="hidden md:block flex-shrink-0">
                     <FolderTree className="h-8 w-8 text-kangyur-orange" />
                   </div>
                   <div className="flex-1">
@@ -190,7 +190,7 @@ export const MainCategoriesList: React.FC<MainCategoriesListProps> = ({
                         onClick={() => navigate(`/admin/karchag/${category.id}`)}
                         className="flex items-center gap-2 hover:text-kangyur-orange transition-colors"
                       >
-                        <h3 className="text-lg font-semibold tibetan ">{category.name_tibetan}</h3>
+                        <h3 className="text-lg font-semibold tibetan text-left">{category.name_tibetan}</h3>
                         {categorySubCategories.length > 0 && (
                           <ChevronRight className="h-4 w-4" />
                         )}
@@ -206,6 +206,7 @@ export const MainCategoriesList: React.FC<MainCategoriesListProps> = ({
                   <div className="flex items-center gap-2">
                     <Button variant="outline" size="sm" onClick={() => handleEdit(category)}>
                       <Edit className="h-4 w-4" />
+                  {t('edit')}
                     </Button>
                     <Button variant="outline" size="sm" className="text-red-600 hover:text-red-700" onClick={() => handleDelete(category)}>
                       <Trash2 className="h-4 w-4" />

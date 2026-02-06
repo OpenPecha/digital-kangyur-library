@@ -23,14 +23,14 @@ const Breadcrumb = ({ items, className, showHome = true, homeHref = "/", homeLab
   const {isTibetan, t} = useLanguage();
   const displayHomeLabel = homeLabel || t('home');
   return (
-    <nav className={cn("flex", className)} aria-label="Breadcrumb"
+    <nav className={cn("flex mb-8 md:mb-12", className)} aria-label="Breadcrumb"
     style={{fontFamily: isTibetan ? 'CustomTibetan' : ''}}>
-      <ol className="inline-flex items-center space-x-1 md:space-x-2">
+      <ol className="flex flex-wrap items-center space-x-1 md:space-x-2">
         {showHome && (
           <li className="inline-flex items-center">
             <Link 
               to={homeHref} 
-              className="inline-flex items-center text-sm text-gray-500 hover:text-kangyur-maroon"
+              className="inline-flex items-center text-sm text-gray-500 hover:text-kangyur-maroon whitespace-nowrap"
             >
               <Home className="w-4 h-4 mr-1.5" />
               <span className={homeLabel ? "" : "sr-only sm:not-sr-only"}>{displayHomeLabel}</span>
@@ -46,13 +46,13 @@ const Breadcrumb = ({ items, className, showHome = true, homeHref = "/", homeLab
             {item.href ? (
               <Link 
                 to={item.href} 
-                className="ml-1 md:ml-2 text-sm text-gray-500 hover:text-kangyur-maroon flex items-center"
+                className="ml-1 md:ml-2 text-sm text-gray-500 hover:text-kangyur-maroon flex items-center whitespace-nowrap"
               >
                 {item.icon && <span className="mr-1.5">{item.icon}</span>}
                 {item.label}
               </Link>
             ) : (
-              <span className="ml-1 md:ml-2 text-sm text-kangyur-maroon font-medium flex items-center">
+              <span className="ml-1 md:ml-2 text-sm text-kangyur-maroon font-medium flex items-center whitespace-nowrap">
                 {item.icon && <span className="mr-1.5">{item.icon}</span>}
                 {item.label}
               </span>

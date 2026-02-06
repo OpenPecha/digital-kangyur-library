@@ -4,38 +4,41 @@ import { TooltipProvider } from "@/components/ui/molecules/tooltip";
 import { Toaster as Sonner } from "@/components/ui/atoms/sonner";
 import { AuthProvider } from "@/contexts/AuthContext";
 import ProtectedRoute from "@/components/admin/ProtectedRoute";
+import React, { Suspense, lazy } from "react";
 
-import Index from "./pages/Index";
-import Catalog from "./pages/Catalog";
-import NotFound from "./pages/NotFound";
-import News from "./pages/News";
-import History from "./pages/History";
-import HistoryDevelopment from "./pages/HistoryDevelopment";
-import About from "./pages/About";
-import Dashboard from "./pages/admin/Dashboard";
-import KarchagAdmin from "./pages/admin/KarchagAdmin";
-import NewsAdmin from "./pages/admin/NewsAdmin";
-import VideosAdmin from "./pages/admin/VideosAdmin";
-import TimelineAdmin from "./pages/admin/TimelineAdmin";
-import AudioAdmin from "./pages/admin/AudioAdmin";
-import CatalogAdmin from "./pages/admin/CatalogAdmin";
-import UsersAdmin from "./pages/admin/UsersAdmin";
-import Login from "./pages/admin/Login";
-import NewsDetail from "./pages/NewsDetail";
-import Videos from "./pages/Videos";
-import TantraText from "./pages/TantraText";
-import TextDetail from "./pages/TextDetail";
-import Search from "./pages/Search";
-import Navbar from "./components/ui/molecules/Navbar";
+// Lazy load pages and components
+const Index = lazy(() => import("./pages/Index"));
+const Catalog = lazy(() => import("./pages/Catalog"));
+const NotFound = lazy(() => import("./pages/NotFound"));
+const News = lazy(() => import("./pages/News"));
+const History = lazy(() => import("./pages/History"));
+const HistoryDevelopment = lazy(() => import("./pages/HistoryDevelopment"));
+const About = lazy(() => import("./pages/About"));
+const Dashboard = lazy(() => import("./pages/admin/Dashboard"));
+const KarchagAdmin = lazy(() => import("./pages/admin/KarchagAdmin"));
+const NewsAdmin = lazy(() => import("./pages/admin/NewsAdmin"));
+const VideosAdmin = lazy(() => import("./pages/admin/VideosAdmin"));
+const TimelineAdmin = lazy(() => import("./pages/admin/TimelineAdmin"));
+const AudioAdmin = lazy(() => import("./pages/admin/AudioAdmin"));
+const CatalogAdmin = lazy(() => import("./pages/admin/CatalogAdmin"));
+const UsersAdmin = lazy(() => import("./pages/admin/UsersAdmin"));
+const Login = lazy(() => import("./pages/admin/Login"));
+const NewsDetail = lazy(() => import("./pages/NewsDetail"));
+const Videos = lazy(() => import("./pages/Videos"));
+const TantraText = lazy(() => import("./pages/TantraText"));
+const TextDetail = lazy(() => import("./pages/TextDetail"));
+const Search = lazy(() => import("./pages/Search"));
+const Navbar = lazy(() => import("./components/ui/molecules/Navbar"));
 
 const queryClient = new QueryClient();
 
 const App = () => (
   <QueryClientProvider client={queryClient}>
-      <AuthProvider>
-        <TooltipProvider>
-          <Sonner />
-          <BrowserRouter>
+    <AuthProvider>
+      <TooltipProvider>
+        <Sonner />
+        <BrowserRouter>
+          <Suspense fallback={<div>Loading...</div>}>
             <Navbar />
             <Routes>
               <Route path="/" element={<Index />} />
@@ -50,21 +53,92 @@ const App = () => (
               <Route path="/history/development" element={<HistoryDevelopment />} />
               <Route path="/about" element={<About />} />
               <Route path="/admin/login" element={<Login />} />
-              <Route path="/admin" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
-              <Route path="/admin/news" element={<ProtectedRoute><NewsAdmin /></ProtectedRoute>} />
-              <Route path="/admin/videos" element={<ProtectedRoute><VideosAdmin /></ProtectedRoute>} />
-              <Route path="/admin/timeline" element={<ProtectedRoute><TimelineAdmin /></ProtectedRoute>} />
-              <Route path="/admin/audio" element={<ProtectedRoute><AudioAdmin /></ProtectedRoute>} />
-              <Route path="/admin/catalog" element={<ProtectedRoute><CatalogAdmin /></ProtectedRoute>} />
-              <Route path="/admin/users" element={<ProtectedRoute><UsersAdmin /></ProtectedRoute>} />
-              <Route path="/admin/karchag" element={<ProtectedRoute><KarchagAdmin /></ProtectedRoute>} />
-              <Route path="/admin/karchag/:mainId" element={<ProtectedRoute><KarchagAdmin /></ProtectedRoute>} />
-              <Route path="/admin/karchag/:mainId/:subId" element={<ProtectedRoute><KarchagAdmin /></ProtectedRoute>} />
+              <Route
+                path="/admin"
+                element={
+                  <ProtectedRoute>
+                    <Dashboard />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="/admin/news"
+                element={
+                  <ProtectedRoute>
+                    <NewsAdmin />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="/admin/videos"
+                element={
+                  <ProtectedRoute>
+                    <VideosAdmin />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="/admin/timeline"
+                element={
+                  <ProtectedRoute>
+                    <TimelineAdmin />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="/admin/audio"
+                element={
+                  <ProtectedRoute>
+                    <AudioAdmin />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="/admin/catalog"
+                element={
+                  <ProtectedRoute>
+                    <CatalogAdmin />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="/admin/users"
+                element={
+                  <ProtectedRoute>
+                    <UsersAdmin />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="/admin/karchag"
+                element={
+                  <ProtectedRoute>
+                    <KarchagAdmin />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="/admin/karchag/:mainId"
+                element={
+                  <ProtectedRoute>
+                    <KarchagAdmin />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="/admin/karchag/:mainId/:subId"
+                element={
+                  <ProtectedRoute>
+                    <KarchagAdmin />
+                  </ProtectedRoute>
+                }
+              />
               <Route path="*" element={<NotFound />} />
             </Routes>
-          </BrowserRouter>
-        </TooltipProvider>
-      </AuthProvider>
+          </Suspense>
+        </BrowserRouter>
+      </TooltipProvider>
+    </AuthProvider>
   </QueryClientProvider>
 );
 

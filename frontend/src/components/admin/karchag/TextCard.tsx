@@ -20,14 +20,13 @@ export const TextCard: React.FC<TextCardProps> = ({ text, mainCategories, subCat
   return (
     <Card className="flex flex-row items-center hover:shadow-md transition-shadow">
       <div className="flex-1 p-6">
-        <div className="flex items-center gap-4">
-          <div className="flex-shrink-0">
+        <div className="flex md:items-center gap-4 flex-col md:flex-row">
+          <div className="hidden md:block flex-shrink-0">
             <BookOpen className="h-8 w-8 text-kangyur-orange" />
           </div>
           <div className="flex-1">
             <div className="flex items-center gap-4">
               <h3 className="text-lg font-semibold tibetan">{text.tibetan_title}</h3>
-            
             </div>
             <p className="text-sm font-medium text-kangyur-maroon  mt-1">
              {text.english_title} 

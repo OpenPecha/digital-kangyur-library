@@ -258,7 +258,7 @@ export const SubCategoryView: React.FC = () => {
       {/* Header */}
       <div className="flex items-center justify-between gap-4">
         <div className="flex-1">
-          <h1 className="text-3xl font-bold text-gray-800 py-[10px]">{subCategory.name_tibetan}</h1>
+          <h1 className="text-3xl font-bold text-gray-800 py-[10px] tibetan text-left">{subCategory.name_tibetan}</h1>
           <p className="text-sm font-medium text-kangyur-maroon tibetan mt-1">{subCategory.name_english}</p>
         </div>
         <div className="flex items-center gap-2  "
@@ -266,12 +266,12 @@ export const SubCategoryView: React.FC = () => {
         >
           <Button variant="outline" size="sm" onClick={() => handleEditCategory(subCategory)}>
             <Edit className="h-4 w-4 mr-2" />
-            {t('editSubcategory')}
+            <span className="hidden md:block">{t('editSubcategory')}</span>
           </Button>
           {!isTantra && (
             <Button onClick={handleCreateText}>
               <Plus className="mr-2 h-4 w-4" />
-              {t('createNewText')}
+              <span className="hidden md:block">{t('createNewText')}</span>
             </Button>
           )}
         </div>

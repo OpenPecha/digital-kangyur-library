@@ -182,7 +182,7 @@ export const MainCategoryView: React.FC = () => {
       />
 
       {/* Header */}
-      <div className="flex items-center justify-between gap-4">
+      <div className="flex flex-col md:flex-row items-center justify-between gap-4">
         <div className="flex-1">
           <h1 className="text-3xl font-bold text-gray-800 py-[10px] tibetan ">{currentLanguage === 'en' ? mainCategory.name_english : mainCategory.name_tibetan}</h1>
         </div>
@@ -209,9 +209,9 @@ export const MainCategoryView: React.FC = () => {
       <div className="space-y-4">
         {filteredSubCategories.map(subCat => (
           <Card key={subCat.id} className="flex flex-row items-center hover:shadow-md transition-shadow">
-            <div className="flex-1 p-6">
-              <div className="flex items-center gap-4">
-                <div className="flex-shrink-0">
+            <div className="flex-1 px-6 py-4">
+              <div className="flex flex-col md:flex-row md:items-center gap-4">
+                <div className="hidden md:block flex-shrink-0">
                   <FolderTree className="h-8 w-8 text-kangyur-orange" />
                 </div>
                 <div className="flex-1">
@@ -220,7 +220,7 @@ export const MainCategoryView: React.FC = () => {
                       onClick={() => navigate(`/admin/karchag/${mainId}/${subCat.id}`)}
                       className="flex items-center gap-2 hover:text-kangyur-orange transition-colors"
                     >
-                      <h3 className="text-lg font-semibold tibetan "> {subCat.name_tibetan}</h3>
+                      <h3 className="text-lg font-semibold tibetan text-left"> {subCat.name_tibetan}</h3>
                       <ChevronRight className="h-4 w-4" />
                     </button>
                     {/* <span className={`px-2 py-1 text-xs font-medium rounded ${
@@ -237,13 +237,12 @@ export const MainCategoryView: React.FC = () => {
                   <p className="text-sm font-medium text-kangyur-maroon tibetan mt-1">
                   {subCat.name_english}
                   </p>
-                  {subCat.only_content && subCat.content && (
-                    <p className="text-sm text-gray-500 mt-2 line-clamp-2 tibetan">{subCat.content}</p>
-                  )}
+               
                 </div>
                 <div className="flex items-center gap-2" onClick={(e) => e.stopPropagation()}>
                   <Button variant="outline" size="sm" onClick={() => handleEdit(subCat)}>
                     <Edit className="h-4 w-4" />
+                    {t('edit')}
                   </Button>
                   <Button variant="outline" size="sm" className="text-red-600 hover:text-red-700" onClick={() => handleDelete(subCat)}>
                     <Trash2 className="h-4 w-4" />
