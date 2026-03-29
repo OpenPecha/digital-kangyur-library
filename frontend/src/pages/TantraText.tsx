@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import Footer from '@/components/ui/molecules/Footer';
+import { StickyFooterShell } from '@/components/ui/molecules/Footer';
 import Breadcrumb from '@/components/ui/atoms/Breadcrumb';
 import { Card, CardContent } from "@/components/ui/atoms/card";
 import { ScrollArea } from "@/components/ui/molecules/scroll-area";
@@ -42,7 +42,7 @@ const TantraText = () => {
 
   if (loading) {
     return (
-      <div className="min-h-screen flex flex-col">
+      <StickyFooterShell>
         <main className="flex-1 pt-10 pb-16">
           <div className="container mx-auto px-4 sm:px-6 lg:px-8">
             <div className="flex justify-center items-center py-12">
@@ -50,14 +50,13 @@ const TantraText = () => {
             </div>
           </div>
         </main>
-        <Footer />
-      </div>
+      </StickyFooterShell>
     );
   }
 
   if (error || !text) {
     return (
-      <div className="min-h-screen flex flex-col">
+      <StickyFooterShell>
         <main className="flex-1 pt-10 pb-16">
           <div className="container mx-auto px-4 sm:px-6 lg:px-8">
             <div className="flex justify-center items-center py-12">
@@ -65,8 +64,7 @@ const TantraText = () => {
             </div>
           </div>
         </main>
-        <Footer />
-      </div>
+      </StickyFooterShell>
     );
   }
 
@@ -84,7 +82,7 @@ const TantraText = () => {
   ];
 
   return (
-    <div className="min-h-screen flex flex-col">
+    <StickyFooterShell>
       <main className="flex-1 pt-10 pb-16">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="mb-4">
@@ -118,8 +116,7 @@ const TantraText = () => {
           </Card>
         </div>
       </main>
-      <Footer />
-    </div>
+    </StickyFooterShell>
   );
 };
 

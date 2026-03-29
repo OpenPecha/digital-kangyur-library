@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
-import Footer from '@/components/ui/molecules/Footer';
+import { StickyFooterShell } from '@/components/ui/molecules/Footer';
 import { Card, CardContent } from "@/components/ui/atoms/card";
 import { Calendar, ArrowLeft } from 'lucide-react';
 import { Button } from '@/components/ui/atoms/button';
@@ -58,26 +58,25 @@ const NewsDetail = () => {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-kangyur-light">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-16">
-          <div className="text-center pt-24 px-4">
+      <StickyFooterShell className="bg-kangyur-light">
+        <div className="container mx-auto flex flex-1 flex-col px-4 py-16 sm:px-6 lg:px-8">
+          <div className="flex flex-1 items-center justify-center px-4 pt-24 text-center">
             <p className="text-kangyur-dark/60">Loading article...</p>
           </div>
         </div>
-        <Footer />
-      </div>
+      </StickyFooterShell>
     );
   }
 
   if (error || !article) {
     return (
-      <div className="min-h-screen bg-kangyur-light">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-16">
-          <div className="text-center pt-24 px-4">
-            <h1 className={cn("text-4xl font-bold text-kangyur-dark mb-4", isTibetan ? 'tibetan' : 'english')}>
+      <StickyFooterShell className="bg-kangyur-light">
+        <div className="container mx-auto flex flex-1 flex-col px-4 py-16 sm:px-6 lg:px-8">
+          <div className="flex flex-1 flex-col items-center justify-center px-4 pt-24 text-center">
+            <h1 className={cn('text-4xl font-bold text-kangyur-dark mb-4', isTibetan ? 'tibetan' : 'english')}>
               {t('articleNotFound') || 'Article Not Found'}
             </h1>
-            <p className={cn("text-kangyur-dark/70 mb-6", isTibetan ? 'tibetan' : 'english')}>
+            <p className={cn('text-kangyur-dark/70 mb-6', isTibetan ? 'tibetan' : 'english')}>
               {error || 'The requested news article could not be found.'}
             </p>
             <Link to="/news">
@@ -88,8 +87,7 @@ const NewsDetail = () => {
             </Link>
           </div>
         </div>
-        <Footer />
-      </div>
+      </StickyFooterShell>
     );
   }
 
@@ -102,9 +100,8 @@ const NewsDetail = () => {
   const bodyText = pickBilingualText(isTibetan, article.description?.tibetan, article.description?.english);
 
   return (
-    <div className="min-h-screen bg-kangyur-light">
-      
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 pb-16">
+    <StickyFooterShell className="bg-kangyur-light">
+      <div className="container mx-auto px-4 pb-16 sm:px-6 lg:px-8">
         <div className="mb-6 pt-8">
           <Link to="/news">
             <Button variant="outline" className="mb-4 mt-[15px]">
@@ -159,9 +156,7 @@ const NewsDetail = () => {
           </CardContent>
         </Card>
       </div>
-      
-      <Footer />
-    </div>
+    </StickyFooterShell>
   );
 };
 

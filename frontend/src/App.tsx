@@ -38,104 +38,114 @@ const App = () => (
       <TooltipProvider>
         <Sonner />
         <BrowserRouter>
-          <Suspense fallback={<div>Loading...</div>}>
-            <Navbar />
-            <Routes>
-              <Route path="/" element={<Index />} />
-              <Route path="/catalog" element={<Catalog />} />
-              <Route path="/search" element={<Search />} />
-              <Route path="/news" element={<News />} />
-              <Route path="/news/:id" element={<NewsDetail />} />
-              <Route path="/videos" element={<Videos />} />
-              <Route path="/tantra/:id" element={<TantraText />} />
-              <Route path="/texts/:id" element={<TextDetail />} />
-              <Route path="/history" element={<History />} />
-              <Route path="/history/development" element={<HistoryDevelopment />} />
-              <Route path="/about" element={<About />} />
-              <Route path="/admin/login" element={<Login />} />
-              <Route
-                path="/admin"
-                element={
-                  <ProtectedRoute>
-                    <Dashboard />
-                  </ProtectedRoute>
-                }
-              />
-              <Route
-                path="/admin/news"
-                element={
-                  <ProtectedRoute>
-                    <NewsAdmin />
-                  </ProtectedRoute>
-                }
-              />
-              <Route
-                path="/admin/videos"
-                element={
-                  <ProtectedRoute>
-                    <VideosAdmin />
-                  </ProtectedRoute>
-                }
-              />
-              <Route
-                path="/admin/timeline"
-                element={
-                  <ProtectedRoute>
-                    <TimelineAdmin />
-                  </ProtectedRoute>
-                }
-              />
-              <Route
-                path="/admin/audio"
-                element={
-                  <ProtectedRoute>
-                    <AudioAdmin />
-                  </ProtectedRoute>
-                }
-              />
-              <Route
-                path="/admin/catalog"
-                element={
-                  <ProtectedRoute>
-                    <CatalogAdmin />
-                  </ProtectedRoute>
-                }
-              />
-              <Route
-                path="/admin/users"
-                element={
-                  <ProtectedRoute>
-                    <UsersAdmin />
-                  </ProtectedRoute>
-                }
-              />
-              <Route
-                path="/admin/karchag"
-                element={
-                  <ProtectedRoute>
-                    <KarchagAdmin />
-                  </ProtectedRoute>
-                }
-              />
-              <Route
-                path="/admin/karchag/:mainId"
-                element={
-                  <ProtectedRoute>
-                    <KarchagAdmin />
-                  </ProtectedRoute>
-                }
-              />
-              <Route
-                path="/admin/karchag/:mainId/:subId"
-                element={
-                  <ProtectedRoute>
-                    <KarchagAdmin />
-                  </ProtectedRoute>
-                }
-              />
-              <Route path="*" element={<NotFound />} />
-            </Routes>
-          </Suspense>
+          <div className="flex min-h-dvh flex-col">
+            <Suspense
+              fallback={
+                <div className="flex flex-1 items-center justify-center py-16 text-kangyur-dark/60">
+                  Loading...
+                </div>
+              }
+            >
+              <Navbar />
+              <div className="flex min-h-0 flex-1 flex-col">
+                <Routes>
+                  <Route path="/" element={<Index />} />
+                  <Route path="/catalog" element={<Catalog />} />
+                  <Route path="/search" element={<Search />} />
+                  <Route path="/news" element={<News />} />
+                  <Route path="/news/:id" element={<NewsDetail />} />
+                  <Route path="/videos" element={<Videos />} />
+                  <Route path="/tantra/:id" element={<TantraText />} />
+                  <Route path="/texts/:id" element={<TextDetail />} />
+                  <Route path="/history" element={<History />} />
+                  <Route path="/history/development" element={<HistoryDevelopment />} />
+                  <Route path="/about" element={<About />} />
+                  <Route path="/admin/login" element={<Login />} />
+                  <Route
+                    path="/admin"
+                    element={
+                      <ProtectedRoute>
+                        <Dashboard />
+                      </ProtectedRoute>
+                    }
+                  />
+                  <Route
+                    path="/admin/news"
+                    element={
+                      <ProtectedRoute>
+                        <NewsAdmin />
+                      </ProtectedRoute>
+                    }
+                  />
+                  <Route
+                    path="/admin/videos"
+                    element={
+                      <ProtectedRoute>
+                        <VideosAdmin />
+                      </ProtectedRoute>
+                    }
+                  />
+                  <Route
+                    path="/admin/timeline"
+                    element={
+                      <ProtectedRoute>
+                        <TimelineAdmin />
+                      </ProtectedRoute>
+                    }
+                  />
+                  <Route
+                    path="/admin/audio"
+                    element={
+                      <ProtectedRoute>
+                        <AudioAdmin />
+                      </ProtectedRoute>
+                    }
+                  />
+                  <Route
+                    path="/admin/catalog"
+                    element={
+                      <ProtectedRoute>
+                        <CatalogAdmin />
+                      </ProtectedRoute>
+                    }
+                  />
+                  <Route
+                    path="/admin/users"
+                    element={
+                      <ProtectedRoute>
+                        <UsersAdmin />
+                      </ProtectedRoute>
+                    }
+                  />
+                  <Route
+                    path="/admin/karchag"
+                    element={
+                      <ProtectedRoute>
+                        <KarchagAdmin />
+                      </ProtectedRoute>
+                    }
+                  />
+                  <Route
+                    path="/admin/karchag/:mainId"
+                    element={
+                      <ProtectedRoute>
+                        <KarchagAdmin />
+                      </ProtectedRoute>
+                    }
+                  />
+                  <Route
+                    path="/admin/karchag/:mainId/:subId"
+                    element={
+                      <ProtectedRoute>
+                        <KarchagAdmin />
+                      </ProtectedRoute>
+                    }
+                  />
+                  <Route path="*" element={<NotFound />} />
+                </Routes>
+              </div>
+            </Suspense>
+          </div>
         </BrowserRouter>
       </TooltipProvider>
     </AuthProvider>

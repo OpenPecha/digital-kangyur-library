@@ -14,11 +14,6 @@ const MainKarchagFrames: React.FC = () => {
     },
   });
 
-  // Helper function to create slug from name_english
-  const createSlug = (name: string): string => {
-    return name.toLowerCase().replace(/\s+/g, '-');
-  };
-
   if (isLoading) {
     return (
       <div className="container mx-auto px-4 py-12">
@@ -45,7 +40,7 @@ const MainKarchagFrames: React.FC = () => {
                 english: category.name_english || ''
               }}
               fontSize="xx-large"
-              link={`/catalog?category=${createSlug(category.id)}`} 
+              link={`/catalog?category=${encodeURIComponent(category.id)}`}
             />
           ))}
         </div>

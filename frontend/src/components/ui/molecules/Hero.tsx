@@ -7,11 +7,11 @@ import useLanguage from '@/hooks/useLanguage';
 const Hero = () => {
   const { t, isTibetan } = useLanguage();
   return (
-    <div className="relative min-h-[50vh] md:min-h-[70vh] sm:min-h-screen flex  overflow-hidden">
+    <div className="relative flex flex-1  overflow-hidden">
       <div className="absolute inset-0 bg-gradient-to-b from-kangyur-cream to-white z-0" />
 
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 z-10">
-        <div className="mt-10 md:mt-0 flex w-full flex-1 h-min md:min-h-[80vh]">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 z-10 flex justify-center items-center">
+        <div className="mt-10 md:mt-0 flex w-full flex-1 h-min">
           <div className="flex flex-col justify-between md:justify-normal gap-6 w-full  text-center">
             <div className="pointer-events-none  flex items-center justify-center opacity-20 ">
               <img

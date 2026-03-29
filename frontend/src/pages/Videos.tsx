@@ -1,5 +1,5 @@
 import React, { useMemo, useState, useEffect } from 'react';
-import Footer from '@/components/ui/molecules/Footer';
+import { StickyFooterShell } from '@/components/ui/molecules/Footer';
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/atoms/card";
 import { Pagination, PaginationContent, PaginationItem, PaginationLink, PaginationNext, PaginationPrevious } from "@/components/ui/atoms/pagination";
 import { Clock, Play, ExternalLink } from 'lucide-react';
@@ -212,8 +212,7 @@ const Videos = () => {
   };
 
   return (
-    <div className={cn("min-h-screen bg-kangyur-light",isTibetan ? 'tibetan' : 'english')}>
-
+    <StickyFooterShell className={cn('bg-kangyur-light', isTibetan ? 'tibetan' : 'english')}>
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 pb-16 pt-4">
         <div className="mb-6 text-center pt-8">
           <h1 className="text-4xl font-bold text-kangyur-dark mb-3">
@@ -299,13 +298,12 @@ const Videos = () => {
         )}
       </div>
 
-<Footer/>
       <Dialog open={!!activeVideo} onOpenChange={(open) => !open && setActiveVideo(null)}>
         <DialogContent className="max-w-4xl p-0 overflow-scroll">
           {renderVideoDialogContent()}
         </DialogContent>
       </Dialog>
-    </div>
+    </StickyFooterShell>
   );
 };
 

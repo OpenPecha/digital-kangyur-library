@@ -1,6 +1,6 @@
 
 import React from 'react';
-import Footer from '@/components/ui/molecules/Footer';
+import { StickyFooterShell } from '@/components/ui/molecules/Footer';
 import { 
   BarChart, 
   Bar, 
@@ -85,8 +85,8 @@ const CustomTooltip = ({ active, payload }: any) => {
 
 const HistoryDevelopment = () => {
   return (
-    <div className="min-h-screen flex flex-col">
-      <main className="flex-grow pt-24 pb-16">
+    <StickyFooterShell>
+      <main className="flex-1 pt-24 pb-16">
         <div className="container mx-auto px-4">
           <h1 className="text-3xl font-bold text-center mb-8">Historical Eras Gantt Chart</h1>
           
@@ -157,8 +157,7 @@ const HistoryDevelopment = () => {
           </div>
         </div>
       </main>
-      <Footer />
-    </div>
+    </StickyFooterShell>
   );
 };
 

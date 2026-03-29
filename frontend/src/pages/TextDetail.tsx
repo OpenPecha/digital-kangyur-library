@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useQuery } from '@tanstack/react-query';
-import Footer from '@/components/ui/molecules/Footer';
+import { StickyFooterShell } from '@/components/ui/molecules/Footer';
 import { useParams } from 'react-router-dom';
 import { cn } from '@/lib/utils';
 import { Card, CardContent } from "@/components/ui/atoms/card";
@@ -251,7 +251,7 @@ const TextDetail = () => {
 
   if (loading) {
     return (
-      <div className="min-h-screen flex flex-col">
+      <StickyFooterShell>
         <main className="flex-1 pt-10 pb-16">
           <div className="container mx-auto px-4 sm:px-6 lg:px-8">
             <div className="flex justify-center items-center py-12">
@@ -259,14 +259,13 @@ const TextDetail = () => {
             </div>
           </div>
         </main>
-        <Footer />
-      </div>
+      </StickyFooterShell>
     );
   }
 
   if (error || !textData) {
     return (
-      <div className="min-h-screen flex flex-col">
+      <StickyFooterShell>
         <main className="flex-1 pt-10 pb-16">
           <div className="container mx-auto px-4 sm:px-6 lg:px-8">
             <div className="flex justify-center items-center py-12">
@@ -274,8 +273,7 @@ const TextDetail = () => {
             </div>
           </div>
         </main>
-        <Footer />
-      </div>
+      </StickyFooterShell>
     );
   }
 
@@ -296,7 +294,7 @@ const TextDetail = () => {
   ];
 
   return (
-    <div className="min-h-screen flex flex-col" style={{fontFamily: isTibetan ? 'CustomTibetan' : ''}}>
+    <StickyFooterShell style={{ fontFamily: isTibetan ? 'CustomTibetan' : '' }}>
       <main className="flex-1 pt-10 pb-16">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           {/* --- Breadcrumb navigation --- */}
@@ -439,8 +437,7 @@ const TextDetail = () => {
           </div>
         </div>
       </main>
-      <Footer />
-    </div>
+    </StickyFooterShell>
   );
 };
 

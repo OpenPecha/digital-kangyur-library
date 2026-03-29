@@ -1,6 +1,6 @@
 
 import React, { useState, useEffect } from 'react';
-import Footer from '@/components/ui/molecules/Footer';
+import { StickyFooterShell } from '@/components/ui/molecules/Footer';
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/atoms/card";
 import { Pagination, PaginationContent, PaginationItem, PaginationLink, PaginationNext, PaginationPrevious } from "@/components/ui/atoms/pagination";
 import { ArrowRight, Calendar } from 'lucide-react';
@@ -121,8 +121,7 @@ const News = () => {
   };
 
   return (
-    <div className="min-h-screen bg-kangyur-light">
-      
+    <StickyFooterShell className="bg-kangyur-light">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 pb-16 pt-8">
         <div className="mb-10 text-center pt-8">
           <h1 className={cn("text-4xl font-bold text-kangyur-dark mb-3",isTibetan ? 'tibetan' : 'english')}>
@@ -185,8 +184,7 @@ const News = () => {
           </Pagination>
         )}
       </div>
-      <Footer/>
-    </div>
+    </StickyFooterShell>
   );
 };
 

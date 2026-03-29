@@ -18,6 +18,8 @@ interface KarchagTextCardListProps {
   itemsPerPage: number;
   onPageChange: (page: number) => void;
   viewType?: 'grid' | 'list';
+  /** When set (e.g. from search), that card is emphasized and scrolled into view */
+  highlightTextId?: string | null;
 }
 
 const KarchagTextCardList: React.FC<KarchagTextCardListProps> = ({ 
@@ -27,7 +29,8 @@ const KarchagTextCardList: React.FC<KarchagTextCardListProps> = ({
   totalItems,
   itemsPerPage,
   onPageChange,
-  viewType = 'list' // Default to list view
+  viewType = 'list', // Default to list view
+  highlightTextId = null,
 }) => {
   // Calculate pagination info
   const startItem = totalItems > 0 ? (currentPage - 1) * itemsPerPage + 1 : 0;
@@ -129,6 +132,7 @@ const KarchagTextCardList: React.FC<KarchagTextCardListProps> = ({
               item={item}
               imageUrl="/text_card_thumbnail.png"
               variant="default"
+              highlighted={!!highlightTextId && item.id === highlightTextId}
             />
           ))}
         </div>
@@ -142,6 +146,7 @@ const KarchagTextCardList: React.FC<KarchagTextCardListProps> = ({
               imageUrl="/text_card_thumbnail.png"
               variant="default"
               className="w-full"
+              highlighted={!!highlightTextId && item.id === highlightTextId}
             />
           ))}
         </div>

@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { useLocation } from 'react-router-dom';
-import Footer from '@/components/ui/molecules/Footer';
+import { StickyFooterShell } from '@/components/ui/molecules/Footer';
 import { Users, Sparkles, Mail, Heart, BookOpen, Globe, Facebook, Youtube, ChevronDown, ChevronUp, GraduationCap } from 'lucide-react';
 import { Card, CardContent } from '@/components/ui/atoms/card';
 import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/atoms/avatar';
@@ -47,8 +47,9 @@ const About = () => {
       }
     }
   }, [location]);
-  return <div className={cn("min-h-screen flex flex-col",isTibetan ? 'tibetan' : 'english')}>
-      <main className="flex-grow pt-24 pb-16">
+  return (
+    <StickyFooterShell className={cn(isTibetan ? 'tibetan' : 'english')}>
+      <main className="flex-1 pt-24 pb-16">
         <div className="container mx-auto px-4">
           <div className="mb-12 text-center">
             <h1 className="text-4xl font-bold text-kangyur-maroon mb-4">
@@ -622,7 +623,7 @@ const About = () => {
           </div>
         </div>
       </main>
-      <Footer />
-    </div>;
+    </StickyFooterShell>
+  );
 };
 export default About;

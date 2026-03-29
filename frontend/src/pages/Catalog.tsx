@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
 import { Search, X } from 'lucide-react';
-import Footer from '@/components/ui/molecules/Footer';
+import { StickyFooterShell } from '@/components/ui/molecules/Footer';
 import KarchagTextCardList from '@/components/catalog/KarchagTextCardList';
 import Breadcrumb from '@/components/ui/atoms/Breadcrumb';
 import MainKarchagFrames from '@/components/catalog/MainKarchagFrames';
@@ -15,14 +15,18 @@ import KarchagSearch from '@/components/catalog/KarchagSearch';
 import { Input } from '@/components/ui/atoms/input';
 
 const Catalog = () => {
-  const [searchQuery, setSearchQuery] = useState('');
-  const [selectedItem, setSelectedItem] = useState<string | null>(null);
   const [searchParams, setSearchParams] = useSearchParams();
-  const [currentPage, setCurrentPage] = useState(1);
+  const [searchQuery, setSearchQuery] = useState(() => searchParams.get('q') ?? '');
+  const [selectedItem, setSelectedItem] = useState<string | null>(() => searchParams.get('item'));
+  const [currentPage, setCurrentPage] = useState(() => {
+    const p = searchParams.get('page');
+    const n = p ? Number.parseInt(p, 10) : 1;
+    return Number.isFinite(n) && n > 0 ? n : 1;
+  });
   const { t, isTibetan } = useLanguage();
   const isUpdatingFromUrl = useRef(false);
   const previousParamsString = useRef(searchParams.toString());
-  const previousItemRef = useRef<string | null>(null);
+  const previousItemRef = useRef<string | null>(searchParams.get('item'));
 
   // Get URL parameters
   const category = searchParams.get('category');
@@ -90,7 +94,7 @@ const Catalog = () => {
     
     previousParamsString.current = currentParamsString;
     
-    const queryParam = searchParams.get('q');
+    const queryParam = searchParams.get('q') ?? '';
     const itemParam = searchParams.get('item');
     const pageParam = searchParams.get('page');
     
@@ -150,6 +154,11 @@ const Catalog = () => {
     // Set selected item
     if (selectedItem) {
       newParams.set('item', selectedItem);
+    }
+
+    const highlightParam = searchParams.get('highlightText');
+    if (highlightParam) {
+      newParams.set('highlightText', highlightParam);
     }
     
     // Set current page
@@ -335,18 +344,57 @@ const Catalog = () => {
         }
       };
 
+  const highlightTextId = searchParams.get('highlightText');
+
+  useEffect(() => {
+    if (!highlightTextId || !selectedItem || !selectedSubCategory || selectedSubCategory.content) return;
+    if (loadingTexts) return;
+    const transformedTexts = transformTextsForDisplay(subCategoryTextsData);
+    const filteredTexts = filterTexts(transformedTexts, searchQuery);
+    const idx = filteredTexts.findIndex((text) => text.id === highlightTextId);
+    if (idx < 0) return;
+    const targetPage = Math.floor(idx / ITEMS_PER_PAGE) + 1;
+    setCurrentPage((prev) => (prev !== targetPage ? targetPage : prev));
+  }, [
+    highlightTextId,
+    selectedItem,
+    selectedSubCategory,
+    subCategoryTextsData,
+    searchQuery,
+    loadingTexts,
+  ]);
+
+  const hasHighlightOnPage =
+    !!highlightTextId && paginatedItems.some((text: { id: string }) => text.id === highlightTextId);
+
+  useEffect(() => {
+    if (!highlightTextId || !hasHighlightOnPage) return;
+    const frame = globalThis.requestAnimationFrame(() => {
+      document.getElementById(`karchag-text-${highlightTextId}`)?.scrollIntoView({
+        behavior: 'smooth',
+        block: 'center',
+      });
+    });
+    return () => globalThis.cancelAnimationFrame(frame);
+  }, [highlightTextId, hasHighlightOnPage, currentPage]);
+
   const loading = loadingMainCategory || loadingSubCategories || loadingSelectedSubCategory || loadingTexts;
+
+  const mainCategoryForBreadcrumb =
+    selectedMainCategory ?? selectedSubCategory?.main_category ?? null;
 
   if (loading && category) {
     return (
-      <div className="min-h-screen bg-white w-full flex items-center justify-center">
-        <p className="text-kangyur-dark/60">{t('loading') || 'Loading categories...'}</p>
-      </div>
+      <StickyFooterShell className="w-full bg-white">
+        <div className="flex flex-1 items-center justify-center">
+          <p className="text-kangyur-dark/60">{t('loading') || 'Loading categories...'}</p>
+        </div>
+      </StickyFooterShell>
     );
   }
 
   return (
-    <div className=" bg-white w-full">
+    <StickyFooterShell className="w-full bg-white">
       {/* Show CatalogSearch on main category and subcategory sections (only if no active search query) */}
       {category && !searchQuery && !selectedItem && (
         <KarchagSearch />
@@ -401,7 +449,7 @@ const Catalog = () => {
             </div>
           ) : (
             <div className="text-center text-gray-600">
-              <p>{t('noSubcategories') || 'No subcategories available for this category.'}</p>
+              <p>{t('noCatalogSections') || 'No catalog sections are available for this collection yet.'}</p>
             </div>
           )}
         </div>
@@ -417,9 +465,9 @@ const Catalog = () => {
                 <Breadcrumb 
                   items={[
                     { label: t('catalog') || 'Catalog', href: '/catalog' },
-                    ...(selectedMainCategory ? [{
-                      label: pickBilingualText(isTibetan, selectedMainCategory.name_tibetan, selectedMainCategory.name_english),
-                      href: `/catalog?category=${selectedMainCategory.id}`
+                    ...(mainCategoryForBreadcrumb ? [{
+                      label: pickBilingualText(isTibetan, mainCategoryForBreadcrumb.name_tibetan, mainCategoryForBreadcrumb.name_english),
+                      href: `/catalog?category=${mainCategoryForBreadcrumb.id}`
                     }] : []),
                     ...(selectedSubCategory ? [{
                       label: pickBilingualText(isTibetan, selectedSubCategory.name_tibetan, selectedSubCategory.name_english)
@@ -506,6 +554,7 @@ const Catalog = () => {
                         totalItems={pagination.totalItems}
                         itemsPerPage={pagination.itemsPerPage}
                         onPageChange={handlePageChange}
+                        highlightTextId={highlightTextId}
                       />
                     </>
                   );
@@ -515,7 +564,7 @@ const Catalog = () => {
                     <p>
                       {searchQuery 
                         ? (t('noTextsFound') || `No texts found matching "${searchQuery}"`)
-                        : (t('noTexts') || 'No texts available in this subcategory.')
+                        : (t('noTextsInSection') || 'No texts are listed in this catalog section yet.')
                       }
                     </p>
                     {searchQuery && (
@@ -535,8 +584,7 @@ const Catalog = () => {
           })()}
         </div>
       ) : null}
-      <Footer />
-    </div>
+    </StickyFooterShell>
   );
 };
 

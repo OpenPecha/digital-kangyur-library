@@ -54,6 +54,7 @@ const search = async (req, res, next) => {
           yeshe_de_id: text.yeshe_de_id,
           sub_category: text.sub_category ? {
             id: text.sub_category.id,
+            main_category_id: text.sub_category.main_category_id,
             name_english: text.sub_category.name_english,
             name_tibetan: text.sub_category.name_tibetan,
           } : null,

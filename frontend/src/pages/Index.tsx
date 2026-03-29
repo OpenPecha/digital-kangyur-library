@@ -1,13 +1,11 @@
 import Hero from '@/components/ui/molecules/Hero';
-import Footer from '@/components/ui/molecules/Footer';
-
+import { StickyFooterShell } from '@/components/ui/molecules/Footer';
 
 const Index = () => {
   return (
-    <div className="min-h-screen bg-white">
+    <StickyFooterShell className="bg-white">
       <Hero />
-      <Footer />
-    </div>
+    </StickyFooterShell>
   );
 };
 

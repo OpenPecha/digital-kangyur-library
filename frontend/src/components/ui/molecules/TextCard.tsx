@@ -28,6 +28,7 @@ interface TextCardProps {
   imageUrl?: string;
   className?: string;
   variant?: 'default' | 'compact' | 'featured';
+  highlighted?: boolean;
 }
 const TextCard = ({
   id,
@@ -35,6 +36,7 @@ const TextCard = ({
   imageUrl,
   className,
   variant = 'default',
+  highlighted = false,
 }: TextCardProps) => {
   const { isTibetan } = useLanguage();
   const derge_id = item.derge_id || undefined;
@@ -57,6 +59,7 @@ const TextCard = ({
   // Added max-w-full to both flex container and content for row layout to prevent overflow
   return (
     <Link
+      id={`karchag-text-${id}`}
       to={`/texts/${id}`}
       className={cn(
         'group block overflow-hidden transition-all duration-300',
@@ -64,6 +67,8 @@ const TextCard = ({
         isFeatured
           ? 'bg-gradient-to-br from-kangyur-cream to-white border border-kangyur-orange/20 rounded-xl shadow-sm hover:shadow-md'
           : 'bg-white border border-kangyur-orange/10 rounded-xl shadow-sm hover:shadow-md',
+        highlighted &&
+          'ring-2 ring-kangyur-orange ring-offset-2 ring-offset-white shadow-md z-[1] relative',
         className
       )}
     >
