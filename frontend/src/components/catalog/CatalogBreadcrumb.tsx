@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import useLanguage from '@/hooks/useLanguage';
+import { pickBilingualText } from '@/utils/localizedContent';
 
 interface CatalogBreadcrumbProps {
   category?: string | null;
@@ -42,9 +43,7 @@ const CatalogBreadcrumb: React.FC<CatalogBreadcrumbProps> = ({
 
     // If a main category is selected, show it
     if (mainCategory && !selectedItem) {
-      const mainCategoryName = isTibetan 
-        ? (mainCategory.name_tibetan || mainCategory.name_english) 
-        : (mainCategory.name_english || mainCategory.name_tibetan || '');
+      const mainCategoryName = pickBilingualText(isTibetan, mainCategory.name_tibetan, mainCategory.name_english);
       parts.push(
         <span key="sep-category" className="mx-2">/</span>,
         <span key={mainCategory.id} className="text-indigo-600 font-medium">
@@ -55,12 +54,8 @@ const CatalogBreadcrumb: React.FC<CatalogBreadcrumbProps> = ({
 
     // If a subcategory is selected, show main category -> subcategory
     if (selectedItem && mainCategory && subCategory) {
-      const mainCategoryName = isTibetan 
-        ? (mainCategory.name_tibetan || mainCategory.name_english) 
-        : (mainCategory.name_english || mainCategory.name_tibetan || '');
-      const subCategoryName = isTibetan 
-        ? (subCategory.name_tibetan || subCategory.name_english) 
-        : (subCategory.name_english || subCategory.name_tibetan || '');
+      const mainCategoryName = pickBilingualText(isTibetan, mainCategory.name_tibetan, mainCategory.name_english);
+      const subCategoryName = pickBilingualText(isTibetan, subCategory.name_tibetan, subCategory.name_english);
       parts.push(
         <span key="sep-main" className="mx-2">/</span>,
         <Link

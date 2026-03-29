@@ -8,6 +8,7 @@ import { Link } from 'react-router-dom';
 import useLanguage from '@/hooks/useLanguage';
 import { cn } from '@/lib/utils';
 import api from '@/utils/api';
+import { pickBilingualDisplay, pickBilingualText } from '@/utils/localizedContent';
 
 interface NewsItem {
   id: string;
@@ -21,7 +22,11 @@ interface NewsItem {
 }
 
 const NewsCard = ({ news, isTibetan, t }: { news: NewsItem, isTibetan: boolean, t: any }) => {
-  
+  const titleDisp = pickBilingualDisplay(isTibetan, news.titleTibetan, news.title);
+  const descText = pickBilingualText(isTibetan, news.tibetanDescription, news.englishDescription);
+  const descPreview =
+    descText.length > 100 ? `${descText.slice(0, 100)}...` : descText || null;
+
   return (
     <Link 
     to={news.link || '#'} 
@@ -31,20 +36,24 @@ const NewsCard = ({ news, isTibetan, t }: { news: NewsItem, isTibetan: boolean, 
       <div className="overflow-hidden h-48">
         <img 
           src={news.imageUrl} 
-          alt={news.title}
+          alt={titleDisp.text}
           className="w-full h-full object-cover transition-transform duration-500 hover:scale-105"
         />
       </div>
       <CardHeader className="pb-2">
-      <p className={cn("text-xl",isTibetan ? 'tibetan' : 'english')}>
-        {isTibetan && news.titleTibetan ?news.titleTibetan: news.title
-        }
+      <p className={cn('text-xl', titleDisp.scriptIsTibetan ? 'tibetan' : 'english')}>
+        {titleDisp.text}
         </p>
       </CardHeader>
       <CardContent className="pb-2 flex-grow">
 
-      <p className="text-muted-foreground text-sm mb-3">
-        {isTibetan && news.tibetanDescription ? news.tibetanDescription?.slice(0, 100) + '...' : news.englishDescription ? news.englishDescription?.slice(0, 100) + '...' : null}
+      <p
+        className={cn(
+          'text-muted-foreground text-sm mb-3',
+          pickBilingualDisplay(isTibetan, news.tibetanDescription, news.englishDescription).scriptIsTibetan && 'tibetan'
+        )}
+      >
+        {descPreview}
         </p>
         <div className="flex items-center text-xs text-kangyur-dark/60">
           <Calendar className="h-3.5 w-3.5 mr-1.5" />
@@ -86,7 +95,8 @@ const News = () => {
           id: item.id,
           title: item.title?.english || '',
           titleTibetan: item.title?.tibetan,
-          description: item.description?.english || '',
+          englishDescription: item.description?.english || '',
+          tibetanDescription: item.description?.tibetan,
           date: item.published_at || item.created_at,
           imageUrl: item.thumbnail_url || '',
           link: `/news/${item.id}`,

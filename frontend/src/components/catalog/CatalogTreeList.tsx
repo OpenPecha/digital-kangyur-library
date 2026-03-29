@@ -2,6 +2,8 @@
 import React from "react";
 import { catalogData } from "@/data/catalogData";
 import { filterCatalogItems } from "@/utils/catalogUtils";
+import useLanguage from '@/hooks/useLanguage';
+import { pickBilingualDisplay, pickBilingualText } from '@/utils/localizedContent';
 
 interface CatalogTreeListProps {
   items: any[];
@@ -12,6 +14,7 @@ interface CatalogTreeListProps {
 const CatalogTreeList: React.FC<CatalogTreeListProps> = ({
   items, selectedItem, onItemSelect,
 }) => {
+  const { isTibetan } = useLanguage();
   const renderCatalogItem = (item: any) => {
     const isSelected = item.id === selectedItem;
     return (
@@ -24,8 +27,13 @@ const CatalogTreeList: React.FC<CatalogTreeListProps> = ({
         >
           <div className="flex justify-between items-center">
             <div>
-              <h3 className="text-xl tibetan mb-1">{item.title.tibetan}</h3>
-              <h4 className="font-medium text-gray-700">{item.title.english}</h4>
+              <h3
+                className={`text-xl mb-1 ${
+                  pickBilingualDisplay(isTibetan, item.title.tibetan, item.title.english).scriptIsTibetan ? 'tibetan' : 'font-medium text-gray-700'
+                }`}
+              >
+                {pickBilingualText(isTibetan, item.title.tibetan, item.title.english)}
+              </h3>
               {item.description && (
                 <p className="text-gray-600 text-sm mt-2">{item.description}</p>
               )}

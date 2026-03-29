@@ -3,6 +3,8 @@ import React from 'react';
 import { ChevronRight, ChevronDown } from 'lucide-react';
 import { CatalogItem } from '@/types/catalog';
 import { cn } from '@/lib/utils';
+import useLanguage from '@/hooks/useLanguage';
+import { pickBilingualText } from '@/utils/localizedContent';
 
 interface CatalogTreeProps {
   items: CatalogItem[];
@@ -21,7 +23,8 @@ const CatalogTree = ({
   onToggleExpand, 
   onSelectItem,
 }: CatalogTreeProps) => {
-  
+  const { isTibetan } = useLanguage();
+
   // Recursive function to render catalog items with proper nesting
   const renderCatalogItems = (itemsToRender: CatalogItem[], level: number = 0) => {
     return itemsToRender.map((category) => (
@@ -62,11 +65,13 @@ const CatalogTree = ({
             </span>
             
             <div>
-              <div className={cn("text-sm", selectedItem === category.id ? "font-medium" : "")}>
-                {category.title.english}
-              </div>
-              <div className="tibetan text-xs text-gray-500">
-                {category.title.tibetan}
+              <div
+                className={cn(
+                  'text-sm',
+                  selectedItem === category.id ? 'font-medium' : ''
+                )}
+              >
+                {pickBilingualText(isTibetan, category.title.tibetan, category.title.english)}
               </div>
             </div>
           </div>

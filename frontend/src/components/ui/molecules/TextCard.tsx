@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { Book, FileText } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import useLanguage from '@/hooks/useLanguage';
+import { pickBilingualDisplay, pickBilingualText } from '@/utils/localizedContent';
 
 interface Item {
   id: string;
@@ -37,14 +38,13 @@ const TextCard = ({
 }: TextCardProps) => {
   const { isTibetan } = useLanguage();
   const derge_id = item.derge_id || undefined;
-  const summary = isTibetan
-    ? item?.summary?.tibetan
-    : item?.summary?.english;
+  const summary = pickBilingualText(isTibetan, item?.summary?.tibetan, item?.summary?.english);
   const volume = item.volume || undefined;
   const title =
-    isTibetan
-      ? item.title?.tibetan || 'བོད་ཡིག'
-      : item.title?.english || 'Text Title';
+    pickBilingualText(isTibetan, item.title?.tibetan, item.title?.english) ||
+    (isTibetan ? 'བོད་ཡིག' : 'Text Title');
+  const titleScript = pickBilingualDisplay(isTibetan, item.title?.tibetan, item.title?.english).scriptIsTibetan;
+  const summaryScript = pickBilingualDisplay(isTibetan, item?.summary?.tibetan, item?.summary?.english).scriptIsTibetan;
 
   const isCompact = variant === 'compact';
   const isFeatured = variant === 'featured';
@@ -149,7 +149,7 @@ const TextCard = ({
               className={cn(
                 'font-semibold text-kangyur-dark group-hover:text-kangyur-green transition-colors truncate',
                 isCompact ? 'text-base' : isFeatured ? 'text-3xl' : 'text-2xl',
-                isTibetan ? 'tibetan' : ''
+                titleScript && 'tibetan'
               )}
               // Adding truncate for long titles in row layout, and containment for long unbroken texts
               style={isRowLayout ? { whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis', width: '100%' } : undefined}
@@ -182,7 +182,7 @@ const TextCard = ({
               className={cn(
                 'w-full max-w-full break-words text-kangyur-dark/80 line-clamp-3 mb-4 text-xl' ,
                 'text-lg',
-                isTibetan ? 'tibetan' : ''
+                summaryScript && 'tibetan'
               )}
               style={isRowLayout ? { overflow: 'hidden', textOverflow: 'ellipsis' } : undefined}
             >

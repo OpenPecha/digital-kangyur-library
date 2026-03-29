@@ -5,6 +5,8 @@ import Footer from '@/components/ui/molecules/Footer';
 import KarchagSearch from '@/components/catalog/KarchagSearch';
 import useLanguage from '@/hooks/useLanguage';
 import api from '@/utils/api';
+import { cn } from '@/lib/utils';
+import { pickBilingualDisplay, pickBilingualText } from '@/utils/localizedContent';
 
 const Search: React.FC = () => {
   const [searchParams] = useSearchParams();
@@ -80,6 +82,11 @@ const Search: React.FC = () => {
                       <div className="space-y-2">
                         {subCategories.map((subcategory: any) => {
                           const mainCategoryId = subcategory.main_category?.id || '';
+                          const subName = pickBilingualDisplay(isTibetan, subcategory.name_tibetan, subcategory.name_english);
+                          const subDesc = pickBilingualText(isTibetan, subcategory.description_tibetan, subcategory.description_english);
+                          const mainName = subcategory.main_category
+                            ? pickBilingualText(isTibetan, subcategory.main_category.name_tibetan, subcategory.main_category.name_english)
+                            : '';
                           return (
                             <Link
                               key={subcategory.id}
@@ -88,22 +95,27 @@ const Search: React.FC = () => {
                             >
                               <div className="flex justify-between items-start">
                                 <div className="flex-1">
-                                  <h4 className={`text-lg font-medium mb-1 ${isTibetan ? 'tibetan' : 'text-gray-800'}`}>
-                                    {isTibetan ? subcategory.name_tibetan : subcategory.name_english}
+                                  <h4
+                                    className={cn(
+                                      'text-lg font-medium mb-1',
+                                      subName.scriptIsTibetan ? 'tibetan' : 'text-gray-800'
+                                    )}
+                                  >
+                                    {subName.text}
                                   </h4>
-                                  {!isTibetan && subcategory.name_tibetan && (
-                                    <p className="text-sm text-gray-600 tibetan mb-2">
-                                      {subcategory.name_tibetan}
-                                    </p>
-                                  )}
-                                  {subcategory.description_english && (
-                                    <p className="text-sm text-gray-600 mt-2">
-                                      {isTibetan ? subcategory.description_tibetan : subcategory.description_english}
+                                  {subDesc && (
+                                    <p
+                                      className={cn(
+                                        'text-sm text-gray-600 mt-2',
+                                        pickBilingualDisplay(isTibetan, subcategory.description_tibetan, subcategory.description_english).scriptIsTibetan && 'tibetan'
+                                      )}
+                                    >
+                                      {subDesc}
                                     </p>
                                   )}
                                   {subcategory.main_category && (
                                     <p className="text-xs text-gray-500 mt-2">
-                                      {t('category') || 'Category'}: {isTibetan ? subcategory.main_category.name_tibetan : subcategory.main_category.name_english}
+                                      {t('category') || 'Category'}: {mainName}
                                     </p>
                                   )}
                                 </div>
@@ -122,7 +134,12 @@ const Search: React.FC = () => {
                         {t('text') || 'Texts'} ({texts.length})
                       </h3>
                       <div className="space-y-2">
-                        {texts.map((text: any) => (
+                        {texts.map((text: any) => {
+                          const textTitle = pickBilingualDisplay(isTibetan, text.title?.tibetan, text.title?.english);
+                          const subCatName = text.sub_category
+                            ? pickBilingualText(isTibetan, text.sub_category.name_tibetan, text.sub_category.name_english)
+                            : '';
+                          return (
                           <Link
                             key={text.id}
                             to={`/texts/${text.id}`}
@@ -130,14 +147,14 @@ const Search: React.FC = () => {
                           >
                             <div className="flex justify-between items-start">
                               <div className="flex-1">
-                                <h4 className={`text-lg font-medium mb-1 ${isTibetan ? 'tibetan' : 'text-gray-800'}`}>
-                                  {isTibetan ? text.title?.tibetan : text.title?.english}
+                                <h4
+                                  className={cn(
+                                    'text-lg font-medium mb-1',
+                                    textTitle.scriptIsTibetan ? 'tibetan' : 'text-gray-800'
+                                  )}
+                                >
+                                  {textTitle.text}
                                 </h4>
-                                {!isTibetan && text.title?.tibetan && (
-                                  <p className="text-sm text-gray-600 tibetan mb-2">
-                                    {text.title.tibetan}
-                                  </p>
-                                )}
                                 {text.title?.sanskrit && (
                                   <p className="text-sm text-gray-600 italic mb-1">
                                     {text.title.sanskrit}
@@ -145,7 +162,7 @@ const Search: React.FC = () => {
                                 )}
                                 {text.sub_category && (
                                   <p className="text-xs text-gray-500 mt-2">
-                                    {t('subCategory') || 'Subcategory'}: {isTibetan ? text.sub_category.name_tibetan : text.sub_category.name_english}
+                                    {t('subCategory') || 'Subcategory'}: {subCatName}
                                   </p>
                                 )}
                                 {text.derge_id && (
@@ -156,7 +173,8 @@ const Search: React.FC = () => {
                               </div>
                             </div>
                           </Link>
-                        ))}
+                        );
+                        })}
                       </div>
                     </div>
                   )}

@@ -182,21 +182,22 @@ export const CategoryForm = ({ isOpen, onClose, mode, data, mainCategories, defa
           {/* Names */}
           <div className="grid grid-cols-2 gap-4">
           <div className="space-y-2">
-              <Label htmlFor="name_tibetan">{t('tibetanName')} </Label>
+              <Label htmlFor="name_tibetan">{t('tibetanName')} <span className="text-red-600">*</span> </Label>
               <Input
                 id="name_tibetan"
                 value={formData.name_tibetan}
                 onChange={(e) => setFormData({ ...formData, name_tibetan: e.target.value })}
                 className="font-tibetan"
+                required
+
               />
             </div>
             <div className="space-y-2">
-              <Label htmlFor="name_english">{t('englishName')} <span className="text-red-600">*</span></Label>
+              <Label htmlFor="name_english">{t('englishName')} </Label>
               <Input
                 id="name_english"
                 value={formData.name_english}
                 onChange={(e) => setFormData({ ...formData, name_english: e.target.value })}
-                required
               />
             </div>
         

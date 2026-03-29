@@ -166,7 +166,7 @@ const createSubCategory = async (req, res, next) => {
       content,
     } = req.body;
 
-    if (!main_category_id || !name_english || !name_tibetan) {
+    if (!main_category_id || !name_tibetan) {
       throw new AppError('VALIDATION_ERROR', 'main_category_id, name_english and name_tibetan are required', 400);
     }
 

@@ -14943,7 +14943,7 @@ export namespace Prisma {
   export type KarchagSubCategoryGroupByOutputType = {
     id: string
     main_category_id: string
-    name_english: string
+    name_english: string | null
     name_tibetan: string | null
     description_english: string | null
     description_tibetan: string | null
@@ -15061,7 +15061,7 @@ export namespace Prisma {
     scalars: $Extensions.GetPayloadResult<{
       id: string
       main_category_id: string
-      name_english: string
+      name_english: string | null
       name_tibetan: string | null
       description_english: string | null
       description_tibetan: string | null
@@ -20897,7 +20897,7 @@ export namespace Prisma {
     NOT?: KarchagSubCategoryWhereInput | KarchagSubCategoryWhereInput[]
     id?: StringFilter<"KarchagSubCategory"> | string
     main_category_id?: StringFilter<"KarchagSubCategory"> | string
-    name_english?: StringFilter<"KarchagSubCategory"> | string
+    name_english?: StringNullableFilter<"KarchagSubCategory"> | string | null
     name_tibetan?: StringNullableFilter<"KarchagSubCategory"> | string | null
     description_english?: StringNullableFilter<"KarchagSubCategory"> | string | null
     description_tibetan?: StringNullableFilter<"KarchagSubCategory"> | string | null
@@ -20914,7 +20914,7 @@ export namespace Prisma {
   export type KarchagSubCategoryOrderByWithRelationInput = {
     id?: SortOrder
     main_category_id?: SortOrder
-    name_english?: SortOrder
+    name_english?: SortOrderInput | SortOrder
     name_tibetan?: SortOrderInput | SortOrder
     description_english?: SortOrderInput | SortOrder
     description_tibetan?: SortOrderInput | SortOrder
@@ -20934,7 +20934,7 @@ export namespace Prisma {
     OR?: KarchagSubCategoryWhereInput[]
     NOT?: KarchagSubCategoryWhereInput | KarchagSubCategoryWhereInput[]
     main_category_id?: StringFilter<"KarchagSubCategory"> | string
-    name_english?: StringFilter<"KarchagSubCategory"> | string
+    name_english?: StringNullableFilter<"KarchagSubCategory"> | string | null
     name_tibetan?: StringNullableFilter<"KarchagSubCategory"> | string | null
     description_english?: StringNullableFilter<"KarchagSubCategory"> | string | null
     description_tibetan?: StringNullableFilter<"KarchagSubCategory"> | string | null
@@ -20951,7 +20951,7 @@ export namespace Prisma {
   export type KarchagSubCategoryOrderByWithAggregationInput = {
     id?: SortOrder
     main_category_id?: SortOrder
-    name_english?: SortOrder
+    name_english?: SortOrderInput | SortOrder
     name_tibetan?: SortOrderInput | SortOrder
     description_english?: SortOrderInput | SortOrder
     description_tibetan?: SortOrderInput | SortOrder
@@ -20974,7 +20974,7 @@ export namespace Prisma {
     NOT?: KarchagSubCategoryScalarWhereWithAggregatesInput | KarchagSubCategoryScalarWhereWithAggregatesInput[]
     id?: StringWithAggregatesFilter<"KarchagSubCategory"> | string
     main_category_id?: StringWithAggregatesFilter<"KarchagSubCategory"> | string
-    name_english?: StringWithAggregatesFilter<"KarchagSubCategory"> | string
+    name_english?: StringNullableWithAggregatesFilter<"KarchagSubCategory"> | string | null
     name_tibetan?: StringNullableWithAggregatesFilter<"KarchagSubCategory"> | string | null
     description_english?: StringNullableWithAggregatesFilter<"KarchagSubCategory"> | string | null
     description_tibetan?: StringNullableWithAggregatesFilter<"KarchagSubCategory"> | string | null
@@ -22315,7 +22315,7 @@ export namespace Prisma {
 
   export type KarchagSubCategoryCreateInput = {
     id?: string
-    name_english: string
+    name_english?: string | null
     name_tibetan?: string | null
     description_english?: string | null
     description_tibetan?: string | null
@@ -22332,7 +22332,7 @@ export namespace Prisma {
   export type KarchagSubCategoryUncheckedCreateInput = {
     id?: string
     main_category_id: string
-    name_english: string
+    name_english?: string | null
     name_tibetan?: string | null
     description_english?: string | null
     description_tibetan?: string | null
@@ -22347,7 +22347,7 @@ export namespace Prisma {
 
   export type KarchagSubCategoryUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
-    name_english?: StringFieldUpdateOperationsInput | string
+    name_english?: NullableStringFieldUpdateOperationsInput | string | null
     name_tibetan?: NullableStringFieldUpdateOperationsInput | string | null
     description_english?: NullableStringFieldUpdateOperationsInput | string | null
     description_tibetan?: NullableStringFieldUpdateOperationsInput | string | null
@@ -22364,7 +22364,7 @@ export namespace Prisma {
   export type KarchagSubCategoryUncheckedUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     main_category_id?: StringFieldUpdateOperationsInput | string
-    name_english?: StringFieldUpdateOperationsInput | string
+    name_english?: NullableStringFieldUpdateOperationsInput | string | null
     name_tibetan?: NullableStringFieldUpdateOperationsInput | string | null
     description_english?: NullableStringFieldUpdateOperationsInput | string | null
     description_tibetan?: NullableStringFieldUpdateOperationsInput | string | null
@@ -22380,7 +22380,7 @@ export namespace Prisma {
   export type KarchagSubCategoryCreateManyInput = {
     id?: string
     main_category_id: string
-    name_english: string
+    name_english?: string | null
     name_tibetan?: string | null
     description_english?: string | null
     description_tibetan?: string | null
@@ -22394,7 +22394,7 @@ export namespace Prisma {
 
   export type KarchagSubCategoryUpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
-    name_english?: StringFieldUpdateOperationsInput | string
+    name_english?: NullableStringFieldUpdateOperationsInput | string | null
     name_tibetan?: NullableStringFieldUpdateOperationsInput | string | null
     description_english?: NullableStringFieldUpdateOperationsInput | string | null
     description_tibetan?: NullableStringFieldUpdateOperationsInput | string | null
@@ -22409,7 +22409,7 @@ export namespace Prisma {
   export type KarchagSubCategoryUncheckedUpdateManyInput = {
     id?: StringFieldUpdateOperationsInput | string
     main_category_id?: StringFieldUpdateOperationsInput | string
-    name_english?: StringFieldUpdateOperationsInput | string
+    name_english?: NullableStringFieldUpdateOperationsInput | string | null
     name_tibetan?: NullableStringFieldUpdateOperationsInput | string | null
     description_english?: NullableStringFieldUpdateOperationsInput | string | null
     description_tibetan?: NullableStringFieldUpdateOperationsInput | string | null
@@ -25353,7 +25353,7 @@ export namespace Prisma {
 
   export type KarchagSubCategoryCreateWithoutMain_categoryInput = {
     id?: string
-    name_english: string
+    name_english?: string | null
     name_tibetan?: string | null
     description_english?: string | null
     description_tibetan?: string | null
@@ -25368,7 +25368,7 @@ export namespace Prisma {
 
   export type KarchagSubCategoryUncheckedCreateWithoutMain_categoryInput = {
     id?: string
-    name_english: string
+    name_english?: string | null
     name_tibetan?: string | null
     description_english?: string | null
     description_tibetan?: string | null
@@ -25413,7 +25413,7 @@ export namespace Prisma {
     NOT?: KarchagSubCategoryScalarWhereInput | KarchagSubCategoryScalarWhereInput[]
     id?: StringFilter<"KarchagSubCategory"> | string
     main_category_id?: StringFilter<"KarchagSubCategory"> | string
-    name_english?: StringFilter<"KarchagSubCategory"> | string
+    name_english?: StringNullableFilter<"KarchagSubCategory"> | string | null
     name_tibetan?: StringNullableFilter<"KarchagSubCategory"> | string | null
     description_english?: StringNullableFilter<"KarchagSubCategory"> | string | null
     description_tibetan?: StringNullableFilter<"KarchagSubCategory"> | string | null
@@ -25591,7 +25591,7 @@ export namespace Prisma {
 
   export type KarchagSubCategoryCreateWithoutTextsInput = {
     id?: string
-    name_english: string
+    name_english?: string | null
     name_tibetan?: string | null
     description_english?: string | null
     description_tibetan?: string | null
@@ -25607,7 +25607,7 @@ export namespace Prisma {
   export type KarchagSubCategoryUncheckedCreateWithoutTextsInput = {
     id?: string
     main_category_id: string
-    name_english: string
+    name_english?: string | null
     name_tibetan?: string | null
     description_english?: string | null
     description_tibetan?: string | null
@@ -25714,7 +25714,7 @@ export namespace Prisma {
 
   export type KarchagSubCategoryUpdateWithoutTextsInput = {
     id?: StringFieldUpdateOperationsInput | string
-    name_english?: StringFieldUpdateOperationsInput | string
+    name_english?: NullableStringFieldUpdateOperationsInput | string | null
     name_tibetan?: NullableStringFieldUpdateOperationsInput | string | null
     description_english?: NullableStringFieldUpdateOperationsInput | string | null
     description_tibetan?: NullableStringFieldUpdateOperationsInput | string | null
@@ -25730,7 +25730,7 @@ export namespace Prisma {
   export type KarchagSubCategoryUncheckedUpdateWithoutTextsInput = {
     id?: StringFieldUpdateOperationsInput | string
     main_category_id?: StringFieldUpdateOperationsInput | string
-    name_english?: StringFieldUpdateOperationsInput | string
+    name_english?: NullableStringFieldUpdateOperationsInput | string | null
     name_tibetan?: NullableStringFieldUpdateOperationsInput | string | null
     description_english?: NullableStringFieldUpdateOperationsInput | string | null
     description_tibetan?: NullableStringFieldUpdateOperationsInput | string | null
@@ -26294,7 +26294,7 @@ export namespace Prisma {
 
   export type KarchagSubCategoryCreateManyMain_categoryInput = {
     id?: string
-    name_english: string
+    name_english?: string | null
     name_tibetan?: string | null
     description_english?: string | null
     description_tibetan?: string | null
@@ -26308,7 +26308,7 @@ export namespace Prisma {
 
   export type KarchagSubCategoryUpdateWithoutMain_categoryInput = {
     id?: StringFieldUpdateOperationsInput | string
-    name_english?: StringFieldUpdateOperationsInput | string
+    name_english?: NullableStringFieldUpdateOperationsInput | string | null
     name_tibetan?: NullableStringFieldUpdateOperationsInput | string | null
     description_english?: NullableStringFieldUpdateOperationsInput | string | null
     description_tibetan?: NullableStringFieldUpdateOperationsInput | string | null
@@ -26323,7 +26323,7 @@ export namespace Prisma {
 
   export type KarchagSubCategoryUncheckedUpdateWithoutMain_categoryInput = {
     id?: StringFieldUpdateOperationsInput | string
-    name_english?: StringFieldUpdateOperationsInput | string
+    name_english?: NullableStringFieldUpdateOperationsInput | string | null
     name_tibetan?: NullableStringFieldUpdateOperationsInput | string | null
     description_english?: NullableStringFieldUpdateOperationsInput | string | null
     description_tibetan?: NullableStringFieldUpdateOperationsInput | string | null
@@ -26338,7 +26338,7 @@ export namespace Prisma {
 
   export type KarchagSubCategoryUncheckedUpdateManyWithoutMain_categoryInput = {
     id?: StringFieldUpdateOperationsInput | string
-    name_english?: StringFieldUpdateOperationsInput | string
+    name_english?: NullableStringFieldUpdateOperationsInput | string | null
     name_tibetan?: NullableStringFieldUpdateOperationsInput | string | null
     description_english?: NullableStringFieldUpdateOperationsInput | string | null
     description_tibetan?: NullableStringFieldUpdateOperationsInput | string | null

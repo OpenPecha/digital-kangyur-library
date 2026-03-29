@@ -7,6 +7,7 @@ import { Dialog, DialogContent } from '@/components/ui/atoms/dialog';
 import useLanguage from '@/hooks/useLanguage';
 import { cn } from '@/lib/utils';
 import api from '@/utils/api';
+import { pickBilingualDisplay, pickBilingualText } from '@/utils/localizedContent';
 
 interface VideoItem {
   id: string;
@@ -54,11 +55,8 @@ const getThumbnailUrl = (thumbnailUrl: string | null | undefined, youtubeId: str
 };
 
 const VideoCard = ({ video, onPlay, t, isTibetan }: { video: VideoItem; onPlay: (video: VideoItem) => void; t: any; isTibetan: boolean }) => {
-  const title = isTibetan && video.titleTibetan ? (
-    <p className="text-sm font-medium text-kangyur-maroon tibetan mb-1">{video.titleTibetan}</p>
-  ) : (
-    <CardTitle className="text-lg">{video.title}</CardTitle>
-  );
+  const titleDisp = pickBilingualDisplay(isTibetan, video.titleTibetan, video.title);
+  const displayTitle = titleDisp.text;
 
   const thumbnailSrc = getThumbnailUrl(video.thumbnailUrl, video.youtubeId);
 
@@ -67,7 +65,7 @@ const VideoCard = ({ video, onPlay, t, isTibetan }: { video: VideoItem; onPlay: 
       <div className="relative overflow-hidden h-48">
         <img 
           src={thumbnailSrc}
-          alt={video.title}
+          alt={displayTitle}
           className="w-full h-full object-cover transition-transform duration-500 hover:scale-105"
           onError={(e) => {
             // Fallback if YouTube thumbnail fails, try hqdefault, then default
@@ -97,7 +95,13 @@ const VideoCard = ({ video, onPlay, t, isTibetan }: { video: VideoItem; onPlay: 
           </button>
         )}
       </div>
-      <CardHeader className="pb-2">{title}</CardHeader>
+      <CardHeader className="pb-2">
+        {titleDisp.scriptIsTibetan ? (
+          <p className="text-sm font-medium text-kangyur-maroon tibetan mb-1">{displayTitle}</p>
+        ) : (
+          <CardTitle className="text-lg">{displayTitle}</CardTitle>
+        )}
+      </CardHeader>
      
     </Card>
   );
@@ -156,9 +160,9 @@ const Videos = () => {
     return videoItems.filter(v => {
       const en = v.title.toLowerCase();
       const tib = (v.titleTibetan || '').toLowerCase();
-      return isTibetan ? tib.includes(q) : en.includes(q);
+      return en.includes(q) || tib.includes(q);
     });
-  }, [query, isTibetan, videoItems]);
+  }, [query, videoItems]);
 
   const handlePageChange = (page: number) => {
     setCurrentPage(page);
@@ -173,12 +177,13 @@ const Videos = () => {
     if (!activeVideo) return null;
     
     if (activeVideo.youtubeId) {
+      const dialogTitle = pickBilingualText(isTibetan, activeVideo.titleTibetan, activeVideo.title);
       return (
         <div className="relative w-full" style={{ paddingTop: '56.25%' }}>
           <iframe
             className="absolute top-0 left-0 w-full h-full"
             src={`https://www.youtube.com/embed/${activeVideo.youtubeId}?autoplay=1`}
-            title={activeVideo.title}
+            title={dialogTitle}
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
             allowFullScreen
           />
@@ -189,7 +194,7 @@ const Videos = () => {
     if (activeVideo.link) {
       return (
         <div className="p-6 text-center">
-          <p className="mb-4 text-kangyur-dark">{activeVideo.title}</p>
+          <p className="mb-4 text-kangyur-dark">{pickBilingualText(isTibetan, activeVideo.titleTibetan, activeVideo.title)}</p>
           <a
             href={activeVideo.link}
             target="_blank"

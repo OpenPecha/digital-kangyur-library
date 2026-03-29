@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import useLanguage from '@/hooks/useLanguage';
+import { pickBilingualText } from '@/utils/localizedContent';
 
 interface KarchagFrameProps {
   labelKey?: string;
@@ -25,7 +26,12 @@ const KarchagFrame: React.FC<KarchagFrameProps> = ({ labelKey, label, link, font
     ? `${isTibetan ? 'tibetan' : ''} text-${fontSize}`
     : isTibetan ? 'tibetan' : '';
   const textStyle = !isTailwindClass ? { fontSize, maxWidth: isTibetan&& '150px', textAlign: 'center', wordWrap:isTibetan&& 'break-word'} : {};
-  const labelText = labelKey ? t(labelKey) : (isTibetan ? (label?.tibetan || '') : (label?.english || ''));
+  const translated = labelKey ? String(t(labelKey)) : '';
+  const bilingual = pickBilingualText(isTibetan, label?.tibetan, label?.english);
+  const labelText =
+    labelKey && translated.trim() && translated !== labelKey
+      ? translated
+      : bilingual || translated;
   
   return (
     <Link to={link} className="block">

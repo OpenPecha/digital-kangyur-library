@@ -7,6 +7,7 @@ import { ScrollArea } from "@/components/ui/molecules/scroll-area";
 import { cn } from '@/lib/utils';
 import useLanguage from '@/hooks/useLanguage';
 import api from '@/utils/api';
+import { pickBilingualDisplay, pickBilingualText } from '@/utils/localizedContent';
 
 const TantraText = () => {
   const { id } = useParams<{ id: string }>();
@@ -26,10 +27,7 @@ const TantraText = () => {
       try {
         setLoading(true);
         setError(null);
-        const response = await api.getTextById(id, {
-          lang: isTibetan ? 'bod' : 'en',
-          include_sections: 'true'
-        });
+        const response = await api.getTextById(id);
         setText(response);
       } catch (err: any) {
         console.error('Failed to fetch tantra text:', err);
@@ -40,7 +38,7 @@ const TantraText = () => {
     };
 
     fetchText();
-  }, [id, isTibetan]);
+  }, [id]);
 
   if (loading) {
     return (
@@ -72,15 +70,17 @@ const TantraText = () => {
     );
   }
 
-  // Get content from first section if available
-  const content = text.sections && text.sections.length > 0 
-    ? text.sections[0].content.tibetan || text.sections[0].content.english || ''
-    : '';
+  const firstSection = text.sections?.[0];
+  const contentRaw = firstSection?.content;
+  const contentDisp = pickBilingualDisplay(isTibetan, contentRaw?.tibetan, contentRaw?.english);
+  const content = contentDisp.text;
+
+  const titleText = pickBilingualText(isTibetan, text.title?.tibetan, text.title?.english);
 
   const breadcrumbItems = [
     { label: t('catalog'), href: '/catalog' },
     { label: t('tantra'), href: '/catalog?category=tantra' },
-    { label: isTibetan ? text.title.tibetan : text.title.english }
+    { label: titleText }
   ];
 
   return (
@@ -92,18 +92,25 @@ const TantraText = () => {
           </div>
 
           <div className="mb-6">
-            <h1 className={cn(
-              "text-4xl font-bold text-primary",
-              isTibetan ? "tibetan" : ""
-            )}>
-              {isTibetan ? text.title.tibetan : text.title.english}
+            <h1
+              className={cn(
+                'text-4xl font-bold text-primary',
+                pickBilingualDisplay(isTibetan, text.title?.tibetan, text.title?.english).scriptIsTibetan && 'tibetan'
+              )}
+            >
+              {titleText}
             </h1>
           </div>
 
           <Card className="border border-kangyur-orange/10 rounded-xl shadow-sm">
             <CardContent className="p-6">
               <ScrollArea className="h-[70vh]">
-                <div className="tibetan text-lg leading-relaxed whitespace-pre-line pr-2">
+                <div
+                  className={cn(
+                    'text-lg leading-relaxed whitespace-pre-line pr-2',
+                    contentDisp.scriptIsTibetan && 'tibetan'
+                  )}
+                >
                   {content}
                 </div>
               </ScrollArea>

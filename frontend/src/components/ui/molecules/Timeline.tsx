@@ -6,6 +6,7 @@ import { cn } from '@/lib/utils';
 import useLanguage from '@/hooks/useLanguage';
 import { useQuery } from '@tanstack/react-query';
 import api from '@/utils/api';
+import { pickBilingualDisplay, pickBilingualText } from '@/utils/localizedContent';
 import {
   Select,
   SelectContent,
@@ -24,7 +25,8 @@ type TimelineEvent = {
   events: {
     id?: string;
     year: string;
-    description: string;
+    descriptionEnglish: string;
+    descriptionTibetan: string;
     position?: number;
   }[];
 };
@@ -63,14 +65,21 @@ const Timeline = () => {
           tibetanPeriod: period.name?.tibetan,
           startYear: period.start_year,
           endYear: period.end_year,
-          events: periodEvents.map((event: any) => ({
-            id: event.id,
-            year: event.is_approximate 
-              ? `${event.year} CE (approx)`
-              : `${event.year} CE`,
-            description: event.description?.english || event.description?.tibetan || event.title?.english || event.title?.tibetan || '',
-            position: event.year,
-          })),
+          events: periodEvents.map((event: any) => {
+            const descriptionEnglish =
+              (event.description?.english || '').trim() || (event.title?.english || '').trim() || '';
+            const descriptionTibetan =
+              (event.description?.tibetan || '').trim() || (event.title?.tibetan || '').trim() || '';
+            return {
+              id: event.id,
+              year: event.is_approximate
+                ? `${event.year} CE (approx)`
+                : `${event.year} CE`,
+              descriptionEnglish,
+              descriptionTibetan,
+              position: event.year,
+            };
+          }),
         };
       });
 
@@ -286,7 +295,14 @@ const Timeline = () => {
               <div className="mb-6">
                 <h4 className="font-semibold text-kangyur-maroon mb-3">Key Developments</h4>
                 <div className="space-y-4">
-                  {selectedPeriod.events.map((event, index) => (
+                  {selectedPeriod.events.map((event, index) => {
+                    const evDisp = pickBilingualDisplay(
+                      isTibetan,
+                      event.descriptionTibetan,
+                      event.descriptionEnglish
+                    );
+                    const evText = pickBilingualText(isTibetan, event.descriptionTibetan, event.descriptionEnglish);
+                    return (
                     <div key={event.id || `event-${event.year}-${index}`} className="border-l-4 border-kangyur-orange/30 pl-4 py-2">
                       <div className="flex items-center gap-2 mb-2">
                         <Calendar className="h-4 w-4 text-kangyur-orange" />
@@ -294,11 +310,17 @@ const Timeline = () => {
                           {event.year}
                         </Badge>
                       </div>
-                      <p className="text-kangyur-dark leading-relaxed">
-                        {event.description}
+                      <p
+                        className={cn(
+                          'text-kangyur-dark leading-relaxed',
+                          evDisp.scriptIsTibetan && 'tibetan'
+                        )}
+                      >
+                        {evText}
                       </p>
                     </div>
-                  ))}
+                    );
+                  })}
                 </div>
               </div>
 

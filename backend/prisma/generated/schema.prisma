@@ -174,7 +174,7 @@ model KarchagMainCategory {
 model KarchagSubCategory {
   id                  String              @id @default(uuid())
   main_category_id    String
-  name_english        String
+  name_english        String?
   name_tibetan        String?
   description_english String?
   description_tibetan String?

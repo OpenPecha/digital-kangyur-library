@@ -7,6 +7,7 @@ import { Button } from '@/components/ui/atoms/button';
 import useLanguage from '@/hooks/useLanguage';
 import api from '@/utils/api';
 import { cn } from '@/lib/utils';
+import { pickBilingualDisplay, pickBilingualText } from '@/utils/localizedContent';
 
 interface NewsArticle {
   id: string;
@@ -42,9 +43,7 @@ const NewsDetail = () => {
       try {
         setLoading(true);
         setError(null);
-        const response = await api.getNewsById(id, {
-          lang: isTibetan ? 'bod' : 'en'
-        });
+        const response = await api.getNewsById(id);
         setArticle(response);
       } catch (err: any) {
         console.error('Failed to fetch news article:', err);
@@ -55,7 +54,7 @@ const NewsDetail = () => {
     };
 
     fetchNews();
-  }, [id, isTibetan]);
+  }, [id]);
 
   if (loading) {
     return (
@@ -94,6 +93,14 @@ const NewsDetail = () => {
     );
   }
 
+  const titleDisp = pickBilingualDisplay(isTibetan, article.title?.tibetan, article.title?.english);
+  const bodyDisp = pickBilingualDisplay(
+    isTibetan,
+    article.description?.tibetan,
+    article.description?.english
+  );
+  const bodyText = pickBilingualText(isTibetan, article.description?.tibetan, article.description?.english);
+
   return (
     <div className="min-h-screen bg-kangyur-light">
       
@@ -112,7 +119,7 @@ const NewsDetail = () => {
             <div className="overflow-hidden h-64 md:h-80">
               <img 
                 src={article.thumbnail_url} 
-                alt={isTibetan && article.title.tibetan ? article.title.tibetan : article.title.english}
+                alt={titleDisp.text}
                 className="w-full h-full object-cover"
               />
             </div>
@@ -120,15 +127,14 @@ const NewsDetail = () => {
           
           <CardContent className="p-8">
             <div className="mb-6">
-              {isTibetan && article.title.tibetan ? (
-                  <h1 className={cn("text-3xl md:text-4xl font-bold text-kangyur-dark mb-2 tibetan")}>
-                    {article.title.tibetan}
-                  </h1>
-              ) : (
-                <h1 className={cn("text-3xl md:text-4xl font-bold text-kangyur-dark mb-2", isTibetan ? 'tibetan' : 'english')}>
-                  {article.title.english}
-                </h1>
-              )}
+              <h1
+                className={cn(
+                  'text-3xl md:text-4xl font-bold text-kangyur-dark mb-2',
+                  titleDisp.scriptIsTibetan ? 'tibetan' : 'english'
+                )}
+              >
+                {titleDisp.text}
+              </h1>
               
               <div className={cn("flex items-center text-kangyur-dark/60 mt-4", isTibetan ? 'tibetan' : 'english')}>
                 <Calendar className="h-4 w-4 mr-2" />
@@ -141,10 +147,13 @@ const NewsDetail = () => {
             </div>
 
             <div className="prose prose-lg max-w-none tibetan">
-              <div className={cn("text-kangyur-dark leading-relaxed whitespace-pre-line", isTibetan ? 'tibetan' : 'english')}>
-                {isTibetan && article.description.tibetan 
-                  ? article.description.tibetan 
-                  : article.description.english}
+              <div
+                className={cn(
+                  'text-kangyur-dark leading-relaxed whitespace-pre-line',
+                  bodyDisp.scriptIsTibetan ? 'tibetan' : 'english'
+                )}
+              >
+                {bodyText}
               </div>
             </div>
           </CardContent>

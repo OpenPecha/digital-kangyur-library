@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import { CatalogItem } from '@/types/catalog';
 import { cn } from '@/lib/utils';
 import useLanguage from '@/hooks/useLanguage';
+import { pickBilingualDisplay, pickBilingualText } from '@/utils/localizedContent';
 
 interface CatalogItemDetailsProps {
   selectedItem: CatalogItem | null;
@@ -11,7 +12,7 @@ interface CatalogItemDetailsProps {
 }
 
 const CatalogItemDetails = ({ selectedItem, showDetails }: CatalogItemDetailsProps) => {
-    const { isEnglish,t } = useLanguage();
+    const { isEnglish, isTibetan, t } = useLanguage();
   
   return (
     <div 
@@ -23,8 +24,13 @@ const CatalogItemDetails = ({ selectedItem, showDetails }: CatalogItemDetailsPro
     >
       {selectedItem ? (
         <div className="text-center max-w-md">
-          <h2 className="text-xl font-bold text-gray-800 mb-2">
-            {isEnglish ? selectedItem.title.english : selectedItem.title.tibetan}
+          <h2
+            className={cn(
+              'text-xl font-bold text-gray-800 mb-2',
+              pickBilingualDisplay(isTibetan, selectedItem.title.tibetan, selectedItem.title.english).scriptIsTibetan && 'tibetan'
+            )}
+          >
+            {pickBilingualText(isTibetan, selectedItem.title.tibetan, selectedItem.title.english)}
           </h2>
           
           {selectedItem.description && (

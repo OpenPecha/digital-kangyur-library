@@ -8,6 +8,7 @@ import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/atoms/
 import Breadcrumb from '@/components/ui/atoms/Breadcrumb';
 import useLanguage from '@/hooks/useLanguage';
 import api from '@/utils/api';
+import { pickBilingualDisplay, pickBilingualText } from '@/utils/localizedContent';
 
 
 
@@ -211,51 +212,21 @@ const TextDetail = () => {
         return null;
       }
 
-      // Transform summary response to sections format
-      const sections = [
-        {
-          id: 'translation-homage',
-          content: isTibetan 
-            ? (response.translation_homage_tibetan || '') 
-            : (response.translation_homage_english || '')
-        },
-        {
-          id: 'purpose',
-          content: isTibetan 
-            ? (response.purpose_tibetan || '') 
-            : (response.purpose_english || '')
-        },
-        {
-          id: 'summary',
-          content: isTibetan 
-            ? (response.summary_text_tibetan || '') 
-            : (response.summary_text_english || '')
-        },
-        {
-          id: 'word-meaning',
-          content: isTibetan 
-            ? (response.word_meaning_tibetan || '') 
-            : (response.word_meaning_english || '')
-        },
-        {
-          id: 'connection',
-          content: isTibetan 
-            ? (response.connection_tibetan || '') 
-            : (response.connection_english || '')
-        },
-        {
-          id: 'questions-answers',
-          content: isTibetan 
-            ? (response.question_answers_tibetan || '') 
-            : (response.question_answers_english || '')
-        },
-        {
-          id: 'colophon',
-          content: isTibetan 
-            ? (response.colophon_tibetan || '') 
-            : (response.colophon_english || '')
-        }
-      ].filter(section => section.content); // Only include sections with content
+      const sectionDefs = [
+        { id: 'translation-homage' as const, tib: response.translation_homage_tibetan, en: response.translation_homage_english },
+        { id: 'purpose' as const, tib: response.purpose_tibetan, en: response.purpose_english },
+        { id: 'summary' as const, tib: response.summary_text_tibetan, en: response.summary_text_english },
+        { id: 'word-meaning' as const, tib: response.word_meaning_tibetan, en: response.word_meaning_english },
+        { id: 'connection' as const, tib: response.connection_tibetan, en: response.connection_english },
+        { id: 'questions-answers' as const, tib: response.question_answers_tibetan, en: response.question_answers_english },
+        { id: 'colophon' as const, tib: response.colophon_tibetan, en: response.colophon_english },
+      ];
+      const sections = sectionDefs
+        .map(({ id, tib, en }) => {
+          const { text, scriptIsTibetan } = pickBilingualDisplay(isTibetan, tib, en);
+          return { id, content: text, scriptIsTibetan };
+        })
+        .filter((section) => section.content);
       
       return { sections };
     },
@@ -312,21 +283,15 @@ const TextDetail = () => {
   const breadcrumbItems = [
     { label: t('catalog') || 'Catalog', href: '/catalog' },
     ...(mainCategoryData ? [{
-      label: isTibetan 
-        ? (mainCategoryData.name_tibetan || mainCategoryData.name_english) 
-        : (mainCategoryData.name_english || mainCategoryData.name_tibetan || ''),
+      label: pickBilingualText(isTibetan, mainCategoryData.name_tibetan, mainCategoryData.name_english),
       href: `/catalog?category=${mainCategoryData.id}`
     }] : []),
     ...(subCategoryData ? [{
-      label: isTibetan 
-        ? (subCategoryData.name_tibetan || subCategoryData.name_english) 
-        : (subCategoryData.name_english || subCategoryData.name_tibetan || ''),
+      label: pickBilingualText(isTibetan, subCategoryData.name_tibetan, subCategoryData.name_english),
       href: `/catalog?category=${mainCategoryData?.id}&item=${subCategoryData.id}`
     }] : []),
-    { 
-      label: isTibetan 
-        ? (textData?.title?.tibetan || textData?.title?.english || '') 
-        : (textData?.title?.english || textData?.title?.tibetan || '') 
+    {
+      label: pickBilingualText(isTibetan, textData?.title?.tibetan, textData?.title?.english),
     }
   ];
 
@@ -342,11 +307,13 @@ const TextDetail = () => {
           
           {/* Text Title */}
           <div className="mb-6">
-            <h1 className={cn(
-              "text-4xl font-bold text-primary",
-              isTibetan ? "tibetan" : ""
-            )}>
-              {isTibetan ? textData?.title?.tibetan : textData?.title?.english || textData?.title || ''}
+            <h1
+              className={cn(
+                'text-4xl font-bold text-primary',
+                pickBilingualDisplay(isTibetan, textData?.title?.tibetan, textData?.title?.english).scriptIsTibetan && 'tibetan'
+              )}
+            >
+              {pickBilingualText(isTibetan, textData?.title?.tibetan, textData?.title?.english)}
             </h1>
           </div>
           
@@ -434,10 +401,12 @@ const TextDetail = () => {
                                   >
                                     {t(sectionTitleMap[section.id as keyof typeof sectionTitleMap])}
                                   </h3>
-                                  <div className={cn(
-                                    "text-base sm:text-lg leading-relaxed text-foreground whitespace-pre-line break-words",
-                                    isTibetan && "tibetan"
-                                  )}>
+                                  <div
+                                    className={cn(
+                                      'text-base sm:text-lg leading-relaxed text-foreground whitespace-pre-line break-words',
+                                      section.scriptIsTibetan && 'tibetan'
+                                    )}
+                                  >
                                     {section.content}
                                   </div>
                                 </div>

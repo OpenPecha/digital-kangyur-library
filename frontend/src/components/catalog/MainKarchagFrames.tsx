@@ -36,7 +36,7 @@ const MainKarchagFrames: React.FC = () => {
         <div className="text-center mb-12">
           <h2 className="text-3xl font-bold tibetan mb-4">དཀར་ཆག</h2>
         </div>
-        <div className="flex flex-col md:flex-row justify-center gap-10 md:gap-24">
+        <div className="flex flex-col md:flex-row justify-center gap-10 md:gap-24 flex-wrap">
           {categoriesData.map((category: any) => (
             <KarchagFrame 
               key={category.id}

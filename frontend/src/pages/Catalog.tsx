@@ -10,6 +10,7 @@ import KarchagFrame from '@/components/catalog/KarchagFrame';
 import { paginateItems } from '@/utils/paginationUtils';
 import useLanguage from '@/hooks/useLanguage';
 import api from '@/utils/api';
+import { pickBilingualDisplay, pickBilingualText } from '@/utils/localizedContent';
 import KarchagSearch from '@/components/catalog/KarchagSearch';
 import { Input } from '@/components/ui/atoms/input';
 
@@ -286,8 +287,14 @@ const Catalog = () => {
         >
           <div className="flex justify-between items-center">
             <div>
-              <h3 className={`text-xl mb-1 ${isTibetan ? 'tibetan' : 'font-medium text-gray-700'}`}>
-                {isTibetan ? item.title.tibetan : item.title.english}
+              <h3
+                className={`text-xl mb-1 ${
+                  pickBilingualDisplay(isTibetan, item.title.tibetan, item.title.english).scriptIsTibetan
+                    ? 'tibetan'
+                    : 'font-medium text-gray-700'
+                }`}
+              >
+                {pickBilingualText(isTibetan, item.title.tibetan, item.title.english)}
               </h3>
               {item.description && (
                 <p className="text-gray-600 text-sm mt-2">{item.description}</p>
@@ -359,23 +366,27 @@ const Catalog = () => {
                 items={[
                   { label: t('catalog') || 'Catalog', href: '/catalog' },
                   {
-                    label: isTibetan 
-                      ? (selectedMainCategory.name_tibetan || selectedMainCategory.name_english) 
-                      : (selectedMainCategory.name_english || selectedMainCategory.name_tibetan || '')
+                    label: pickBilingualText(isTibetan, selectedMainCategory.name_tibetan, selectedMainCategory.name_english),
                     // No href for current page
                   }
                 ]}
                 showHome={false}
               />
             </div>
-            <h2 className={`text-3xl font-bold text-center mb-2 ${isTibetan ? 'tibetan' : ''}`}>
-              {isTibetan ? selectedMainCategory.name_tibetan : selectedMainCategory.name_english}
+            <h2
+              className={`text-3xl font-bold text-center mb-2 ${
+                pickBilingualDisplay(isTibetan, selectedMainCategory.name_tibetan, selectedMainCategory.name_english).scriptIsTibetan
+                  ? 'tibetan'
+                  : ''
+              }`}
+            >
+              {pickBilingualText(isTibetan, selectedMainCategory.name_tibetan, selectedMainCategory.name_english)}
             </h2>
           
           </div>
           
           {karchagSubCategoriesData && karchagSubCategoriesData.length > 0 ? (
-            <div className="flex flex-col md:flex-row justify-center gap-10 md:gap-24">
+            <div className="flex flex-col md:flex-row justify-center gap-10 md:gap-24 flex-wrap">
               {karchagSubCategoriesData.map((subcategory: any) => (
                 <KarchagFrame
                   key={subcategory.id}
@@ -407,15 +418,11 @@ const Catalog = () => {
                   items={[
                     { label: t('catalog') || 'Catalog', href: '/catalog' },
                     ...(selectedMainCategory ? [{
-                      label: isTibetan 
-                        ? (selectedMainCategory.name_tibetan || selectedMainCategory.name_english) 
-                        : (selectedMainCategory.name_english || selectedMainCategory.name_tibetan || ''),
+                      label: pickBilingualText(isTibetan, selectedMainCategory.name_tibetan, selectedMainCategory.name_english),
                       href: `/catalog?category=${selectedMainCategory.id}`
                     }] : []),
                     ...(selectedSubCategory ? [{
-                      label: isTibetan 
-                        ? (selectedSubCategory.name_tibetan || selectedSubCategory.name_english) 
-                        : (selectedSubCategory.name_english || selectedSubCategory.name_tibetan || '')
+                      label: pickBilingualText(isTibetan, selectedSubCategory.name_tibetan, selectedSubCategory.name_english)
                       // No href for current page
                     }] : [])
                   ]}
@@ -423,8 +430,14 @@ const Catalog = () => {
                 />
               </div>
               <div className="sticky flex items-center flex-col md:flex-row justify-between top-16 z-10 bg-white py-4 mb-8 border-b border-gray-200">
-                <h2 className={`text-3xl font-bold text-center mb-4 ${isTibetan ? 'tibetan' : ''}`}>
-                  {isTibetan ? selectedItemDetails.title.tibetan : selectedItemDetails.title.english}
+                <h2
+                  className={`text-3xl font-bold text-center mb-4 ${
+                    pickBilingualDisplay(isTibetan, selectedItemDetails.title.tibetan, selectedItemDetails.title.english).scriptIsTibetan
+                      ? 'tibetan'
+                      : ''
+                  }`}
+                >
+                  {pickBilingualText(isTibetan, selectedItemDetails.title.tibetan, selectedItemDetails.title.english)}
                 </h2>
                 
                 {/* Search Input for filtering texts */}
