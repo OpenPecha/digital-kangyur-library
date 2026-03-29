@@ -10,9 +10,52 @@ import { toast } from 'sonner';
 import Breadcrumb from '@/components/ui/atoms/Breadcrumb';
 import { CategoryForm } from './CategoryForm';
 import { TextCard } from './TextCard';
-import { TextForm } from './TextForm';
 import { TextEditModal } from './TextEditModal';
 import { useLanguage } from '@/hooks/useLanguage';
+
+function newTextDraft(subCategoryId: string) {
+  return {
+    sub_category_id: subCategoryId,
+    derge_id: '',
+    yeshe_de_id: '',
+    tibetan_title: '',
+    chinese_title: '',
+    sanskrit_title: '',
+    english_title: '',
+    sermon: '',
+    yana: '',
+    translation_period: '',
+    yeshe_de_volume_number: '',
+    yeshe_de_volume_length: '',
+    pecing_link: '',
+    narthang_link: '',
+    pdf_url: '',
+    order_index: 0,
+    is_active: true,
+  };
+}
+
+function toKarchagTextApiPayload(fd: any, subCategoryId: string) {
+  return {
+    sub_category_id: subCategoryId,
+    derge_id: fd.derge_id,
+    yeshe_de_id: fd.yeshe_de_id,
+    tibetan_title: fd.tibetan_title,
+    chinese_title: fd.chinese_title,
+    sanskrit_title: fd.sanskrit_title,
+    english_title: fd.english_title,
+    sermon: fd.sermon,
+    yana: fd.yana,
+    translation_period: fd.translation_period,
+    yeshe_de_volume_number: fd.yeshe_de_volume_number,
+    yeshe_de_volume_length: fd.yeshe_de_volume_length,
+    pecing_link: fd.pecing_link,
+    narthang_link: fd.narthang_link,
+    pdf_url: fd.pdf_url,
+    order_index: fd.order_index,
+    is_active: fd.is_active,
+  };
+}
 
 export const SubCategoryView: React.FC = () => {
   const { mainId, subId } = useParams<{ mainId?: string; subId?: string }>();
@@ -22,9 +65,8 @@ export const SubCategoryView: React.FC = () => {
   const [editingCategory, setEditingCategory] = useState<any>(null);
   const [editingText, setEditingText] = useState<any>(null);
   const [isCategoryFormOpen, setIsCategoryFormOpen] = useState(false);
-  const [isTextFormOpen, setIsTextFormOpen] = useState(false);
   const [isTextEditModalOpen, setIsTextEditModalOpen] = useState(false);
-  const [formMode, setFormMode] = useState<'create' | 'edit'>('create');
+  const [formMode, setFormMode] = useState<'create' | 'edit'>('edit');
 
   const { data: mainCategoryData } = useQuery({
     queryKey: ['karchag', 'main-category', mainId],
@@ -96,26 +138,10 @@ export const SubCategoryView: React.FC = () => {
   });
 
 
-  const createTextMutation = useMutation({
-    mutationFn: (data: any) => api.createKarchagText(data),
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['karchag', 'texts'] });
-      setIsTextFormOpen(false);
-      setEditingText(null);
-      toast.success('Text created successfully');
-    },
-    onError: (error: any) => {
-      console.error('Error creating text:', error);
-      toast.error(error?.message || 'Error creating text. Please try again.');
-    },
-  });
-
   const updateTextMutation = useMutation({
     mutationFn: ({ id, data }: { id: string; data: any }) => api.updateKarchagText(id, data),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['karchag', 'texts'] });
-      setIsTextFormOpen(false);
-      setEditingText(null);
       toast.success('Text updated successfully');
     },
     onError: (error: any) => {
@@ -144,9 +170,9 @@ export const SubCategoryView: React.FC = () => {
 
 
   const handleCreateText = () => {
-    setFormMode('create');
-    setEditingText(null);
-    setIsTextFormOpen(true);
+    if (!subId) return;
+    setEditingText(newTextDraft(subId));
+    setIsTextEditModalOpen(true);
   };
 
   const handleEditText = (item: any) => {
@@ -177,37 +203,6 @@ export const SubCategoryView: React.FC = () => {
         content: updatedData.only_content ? updatedData.content : null,
       },
     });
-  };
-
-  const handleSaveText = async (updatedData: any) => {
-    const textData = {
-      sub_category_id: subId,
-      derge_id: updatedData.derge_id,
-      yeshe_de_id: updatedData.yeshe_de_id,
-      tibetan_title: updatedData.tibetan_title,
-      chinese_title: updatedData.chinese_title,
-      sanskrit_title: updatedData.sanskrit_title,
-      english_title: updatedData.english_title,
-      sermon: updatedData.sermon,
-      yana: updatedData.yana,
-      translation_period: updatedData.translation_period,
-      yeshe_de_volume_number: updatedData.yeshe_de_volume_number,
-      yeshe_de_volume_length: updatedData.yeshe_de_volume_length,
-      pecing_link: updatedData.pecing_link,
-      narthang_link: updatedData.narthang_link,
-      pdf_url: updatedData.pdf_url,
-      order_index: updatedData.order_index,
-      is_active: updatedData.is_active,
-    };
-
-    if (formMode === 'create') {
-      createTextMutation.mutate(textData);
-    } else {
-      updateTextMutation.mutate({
-        id: editingText.id,
-        data: textData,
-      });
-    }
   };
 
   const filteredTexts = texts.filter((text: any) =>
@@ -332,20 +327,8 @@ export const SubCategoryView: React.FC = () => {
         onSave={handleSaveCategory}
       />
 
-      {/* Text Form */}
-      <TextForm
-        isOpen={isTextFormOpen}
-        onClose={() => setIsTextFormOpen(false)}
-        mode={formMode}
-        data={editingText}
-        subCategories={subCategories}
-        mainCategories={mainCategories}
-        defaultSubCategoryId={subId}
-        onSave={handleSaveText}
-      />
-
-      {/* Text Edit Modal */}
-      {editingText && (
+      {/* Create / edit text: same modal as edit (metadata + translation / summary tabs) */}
+      {isTextEditModalOpen && editingText && subId && (
         <TextEditModal
           isOpen={isTextEditModalOpen}
           onClose={() => {
@@ -355,11 +338,23 @@ export const SubCategoryView: React.FC = () => {
           text={editingText}
           subCategories={subCategories}
           mainCategories={mainCategories}
+          hideSubCategorySelect
+          onCreateText={
+            editingText.id
+              ? undefined
+              : async (fd) =>
+                  api.createKarchagText(toKarchagTextApiPayload(fd, subId))
+          }
+          onTextCreated={(created) => {
+            queryClient.invalidateQueries({ queryKey: ['karchag', 'texts'] });
+            setEditingText(created);
+          }}
           onSave={(data) => {
+            if (!editingText?.id) return;
             updateTextMutation.mutate({
               id: editingText.id,
               data: {
-                sub_category_id: data.sub_category_id,
+                sub_category_id: data.sub_category_id || subId,
                 derge_id: data.derge_id,
                 yeshe_de_id: data.yeshe_de_id,
                 tibetan_title: data.tibetan_title,

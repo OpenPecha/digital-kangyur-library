@@ -34,6 +34,14 @@ interface TextEditModalProps {
   mainCategories: any[];
   onSave: (data: any) => void;
   onSummarySave?: () => void;
+  /** Renders only inner content (no Dialog). Parent provides layout and close. */
+  variant?: 'dialog' | 'embedded';
+  /** When set without `text.id`, metadata save calls this instead of `onSave`. */
+  onCreateText?: (data: any) => Promise<any>;
+  /** Called after a successful create so parent can store `text.id` for summary tab. */
+  onTextCreated?: (created: any) => void;
+  /** Hide subcategory picker; use `text.sub_category_id` only (inline subcategory flow). */
+  hideSubCategorySelect?: boolean;
 }
 
 export const TextEditModal = ({ 
@@ -43,7 +51,11 @@ export const TextEditModal = ({
   subCategories, 
   mainCategories,
   onSave,
-  onSummarySave 
+  onSummarySave,
+  variant = 'dialog',
+  onCreateText,
+  onTextCreated,
+  hideSubCategorySelect = false,
 }: TextEditModalProps) => {
   const { t, isTibetan } = useLanguage();
   const fileInputRef = React.useRef<HTMLInputElement>(null);
@@ -134,36 +146,48 @@ export const TextEditModal = ({
     };
   });
 
-  // Fetch summary data when text tab is active
+  // Fetch summary data when text tab is active (requires persisted text)
   useEffect(() => {
-    if (isOpen && text && activeTab === 'text') {
+    if (isOpen && text?.id && activeTab === 'text') {
       fetchSummary();
     }
-  }, [isOpen, text, activeTab]);
+  }, [isOpen, text?.id, activeTab]);
 
-  // Update formData when text changes or when dialog opens
+  const prevPersistedTextIdRef = React.useRef<string | undefined | '__init__'>('__init__');
+
+  // Sync metadata form when `text` changes; reset summary when switching to a different persisted text
   useEffect(() => {
-    if (isOpen && text) {
-      setFormData({
-        sub_category_id: text.sub_category_id ? String(text.sub_category_id) : '',
-        derge_id: text.derge_id || '',
-        yeshe_de_id: text.yeshe_de_id || '',
-        tibetan_title: text.tibetan_title || '',
-        chinese_title: text.chinese_title || '',
-        sanskrit_title: text.sanskrit_title || '',
-        english_title: text.english_title || '',
-        sermon: text.sermon || '',
-        yana: text.yana || '',
-        translation_period: text.translation_period || '',
-        yeshe_de_volume_number: text.yeshe_de_volume_number || '',
-        yeshe_de_volume_length: text.yeshe_de_volume_length || '',
-        pecing_link: text.pecing_link || '',
-        narthang_link: text.narthang_link || '',
-        pdf_url: text.pdf_url || '',
-        order_index: text.order_index || 0,
-        is_active: text.is_active ?? true,
-      });
-      // Reset summary form data when text changes
+    if (!isOpen || !text) return;
+
+    setFormData({
+      sub_category_id: text.sub_category_id ? String(text.sub_category_id) : '',
+      derge_id: text.derge_id || '',
+      yeshe_de_id: text.yeshe_de_id || '',
+      tibetan_title: text.tibetan_title || '',
+      chinese_title: text.chinese_title || '',
+      sanskrit_title: text.sanskrit_title || '',
+      english_title: text.english_title || '',
+      sermon: text.sermon || '',
+      yana: text.yana || '',
+      translation_period: text.translation_period || '',
+      yeshe_de_volume_number: text.yeshe_de_volume_number || '',
+      yeshe_de_volume_length: text.yeshe_de_volume_length || '',
+      pecing_link: text.pecing_link || '',
+      narthang_link: text.narthang_link || '',
+      pdf_url: text.pdf_url || '',
+      order_index: text.order_index || 0,
+      is_active: text.is_active ?? true,
+    });
+
+    const newId = text.id as string | undefined;
+    const prev = prevPersistedTextIdRef.current;
+
+    if (prev === '__init__') {
+      prevPersistedTextIdRef.current = newId;
+      return;
+    }
+
+    if (newId !== prev) {
       setSummaryFormData({
         translation_homage_tibetan: '',
         translation_homage_english: '',
@@ -180,8 +204,12 @@ export const TextEditModal = ({
         colophon_tibetan: '',
         colophon_english: '',
       });
-      setActiveTab('metadata');
       setActiveSummarySection('translation-homage');
+      // After inline create, `id` goes from undefined → defined; stay on current tab (summary)
+      if (!(prev === undefined && newId !== undefined)) {
+        setActiveTab('metadata');
+      }
+      prevPersistedTextIdRef.current = newId;
     }
   }, [isOpen, text]);
 
@@ -315,7 +343,7 @@ export const TextEditModal = ({
       'translation-homage': {
         english: 'translation_homage_english',
         tibetan: 'translation_homage_tibetan',
-        rows: 30,
+        rows: 20,
       },
       'purpose': {
         english: 'purpose_english',
@@ -351,15 +379,36 @@ export const TextEditModal = ({
     return sectionMap[sectionId];
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const [metadataSaving, setMetadataSaving] = useState(false);
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // Validate required fields
-    if (!formData.sub_category_id) {
+    const subId = hideSubCategorySelect
+      ? (text?.sub_category_id ? String(text.sub_category_id) : '')
+      : formData.sub_category_id;
+    if (!subId) {
       toast.error(t('pleaseSelectCategory'));
       return;
     }
-    
-    onSave(formData);
+    const payload = { ...formData, sub_category_id: subId };
+
+    if (!text?.id && onCreateText) {
+      try {
+        setMetadataSaving(true);
+        const created = await onCreateText(payload);
+        onTextCreated?.(created);
+        toast.success('Text created successfully');
+        setActiveTab('text');
+      } catch (error: any) {
+        console.error('Error creating text:', error);
+        toast.error(error?.message || 'Error creating text. Please try again.');
+      } finally {
+        setMetadataSaving(false);
+      }
+      return;
+    }
+
+    onSave(payload);
   };
 
   const handleFileUpload = async (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -432,6 +481,7 @@ export const TextEditModal = ({
     }
     setActiveTab('metadata');
     setActiveSummarySection('translation-homage');
+    prevPersistedTextIdRef.current = '__init__';
     onClose();
   };
 
@@ -443,27 +493,24 @@ export const TextEditModal = ({
       })()
     : '';
 
+  const handleSubCategoryChange = (value: string) => {
+    setFormData({ ...formData, sub_category_id: value });
+  };
+
   if (!isOpen || !text) return null;
-  const handleSubCategoryChange = (value:string) =>{ 
-    setFormData({ ...formData, sub_category_id: value })
-  }
-  return (
-    <Dialog open={isOpen} onOpenChange={handleClose}>
-        <DialogContent className="max-w-full px-10 max-h-[90vh] p-0 overflow-scroll flex flex-col">
-          <DialogHeader className="px-6 pt-6 pb-4 border-b">
-            <DialogTitle>
-              {text.english_title || text.tibetan_title || t('editText')}
-            </DialogTitle>
-          </DialogHeader>
-          
-          <Card className="border-0 shadow-none rounded-none flex-1  flex flex-col">
+
+  const modalInner = (
+          <Card className={cn(
+            'border-0 shadow-none rounded-none flex flex-col',
+            variant === 'embedded' ? 'max-h-[min(70vh,36rem)]' : 'flex-1'
+          )}>
             <CardContent className="p-0 flex-1 overflow-hidden flex flex-col">
               <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full flex-1 flex flex-col overflow-hidden">
                 <TabsList className="w-full grid grid-cols-2 border-b text-xs sm:text-sm rounded-none">
                   <TabsTrigger value="metadata" className="rounded-none">
                     {t('metadata')}
                   </TabsTrigger>
-                  <TabsTrigger value="text" className="rounded-none">
+                  <TabsTrigger value="text" className="rounded-none" disabled={!text?.id}>
                     {t('text')}
                   </TabsTrigger>
                 </TabsList>
@@ -473,6 +520,7 @@ export const TextEditModal = ({
                   <form onSubmit={handleSubmit} className="space-y-6">
                     <div className="space-y-4">
                       <div className="grid grid-cols-2 gap-4">
+                        {!hideSubCategorySelect && (
                         <div className="space-y-2">
                           <Label htmlFor="sub_category_id">{t('subCategory')} <span className="text-red-600">*</span></Label>
                           <Select
@@ -492,6 +540,7 @@ export const TextEditModal = ({
                             </SelectContent>
                           </Select>
                         </div>
+                        )}
                         {/* <div className="space-y-2">
                           <Label htmlFor="order_index">{t('orderIndex')} </Label>
                           <Input
@@ -713,8 +762,12 @@ export const TextEditModal = ({
                       <Button type="button" variant="outline" onClick={handleClose}>
                         {t('cancel')}
                       </Button>
-                      <Button type="submit">
-                        {t('saveChanges')}
+                      <Button type="submit" disabled={metadataSaving}>
+                        {metadataSaving
+                          ? t('uploading')
+                          : !text?.id && onCreateText
+                            ? t('createNewText')
+                            : t('saveChanges')}
                       </Button>
                     </DialogFooter>
                   </form>
@@ -824,6 +877,25 @@ export const TextEditModal = ({
               </Tabs>
             </CardContent>
           </Card>
+  );
+
+  if (variant === 'embedded') {
+    return (
+      <div className="flex flex-col min-h-0" style={{ fontFamily: isTibetan ? 'CustomTibetan' : '' }}>
+        {modalInner}
+      </div>
+    );
+  }
+
+  return (
+    <Dialog open={isOpen} onOpenChange={handleClose}>
+        <DialogContent className="max-w-full px-10 max-h-[90vh] p-0 overflow-scroll flex flex-col">
+          <DialogHeader className="px-6 pt-6 pb-4 border-b">
+            <DialogTitle>
+              {text.english_title || text.tibetan_title || t('editText')}
+            </DialogTitle>
+          </DialogHeader>
+          {modalInner}
         </DialogContent>
       </Dialog>
   );

@@ -223,16 +223,6 @@ export const MainCategoryView: React.FC = () => {
                       <h3 className="text-lg font-semibold tibetan text-left"> {subCat.name_tibetan}</h3>
                       <ChevronRight className="h-4 w-4" />
                     </button>
-                    {/* <span className={`px-2 py-1 text-xs font-medium rounded ${
-                      subCat.is_active 
-                        ? 'bg-green-100 text-green-800' 
-                        : 'bg-red-100 text-red-800'
-                    }`}>
-                      {subCat.is_active ? t('active') : t('inactive')}
-                    </span> */}
-                    {/* <span className="px-2 py-1 text-xs font-medium rounded bg-purple-100 text-purple-800">
-                      {t('subCategory')}
-                    </span> */}
                   </div>
                   <p className="text-sm font-medium text-kangyur-maroon tibetan mt-1">
                   {subCat.name_english}
@@ -260,7 +250,6 @@ export const MainCategoryView: React.FC = () => {
         </div>
       )}
 
-      {/* Category Form */}
       <CategoryForm
         isOpen={isFormOpen}
         onClose={() => setIsFormOpen(false)}
