@@ -9,10 +9,10 @@ const Dashboard = () => {
   
   const managementCards = [
     {
-      titleKey: "news",
-      icon: NewspaperIcon,
-      path: "/admin/news",
-      descriptionKey: "manageNewsArticles"
+      titleKey: "karchag",
+      icon: FileText,
+      path: "/admin/karchag",
+      descriptionKey: "manageKangyurTexts"
     },
     {
       titleKey: "videos",
@@ -20,11 +20,12 @@ const Dashboard = () => {
       path: "/admin/videos",
       descriptionKey: "manageVideoContent"
     },
+   
     {
-      titleKey: "karchag",
-      icon: FileText,
-      path: "/admin/karchag",
-      descriptionKey: "manageKangyurTexts"
+      titleKey: "news",
+      icon: NewspaperIcon,
+      path: "/admin/news",
+      descriptionKey: "manageNewsArticles"
     },
     {
       titleKey: "users",
@@ -37,20 +38,20 @@ const Dashboard = () => {
   return (
     <AdminLayout>
       <div className="space-y-8">
-        <div className="text-center">
-          <h1 className="text-3xl font-bold text-gray-800 mb-2 pt-10 tibetan">{t('contentManagementBoard')}</h1>
+        <div className="text-center py-2">
+          <h1 className="text-3xl font-bold text-gray-800 mb-2 pt-5 tibetan">{t('contentManagementBoard')}</h1>
           <p className="text-gray-600 tibetan">{t('manageContentAcrossCategories')}</p>
         </div>
         
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 tibetan">
+        <div className="grid max-w-6xl mx-auto grid-cols-1 md:grid-cols-2  gap-6 tibetan">
           {managementCards.map((card) => (
             <Link
               key={card.titleKey}
               to={card.path}
               className="group"
             >
-              <div className="bg-white rounded-lg border border-gray-200 p-6 shadow-sm hover:shadow-md transition-all duration-200 group-hover:border-kangyur-orange/30">
-                <div className="text-center space-y-4">
+              <div className=" rounded-lg border   border-gray-200 p-3 shadow-sm hover:shadow-md transition-all duration-200 group-hover:border-kangyur-orange/30">
+                <div className="text-center space-y-4 bg-white py-2">
                   <div className="mx-auto w-16 h-16 bg-kangyur-orange/10 hover:bg-kangyur-orange/20 rounded-full flex items-center justify-center transition-colors">
                     <card.icon className="w-8 h-8 text-kangyur-orange" />
                   </div>
