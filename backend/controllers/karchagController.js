@@ -322,7 +322,7 @@ const createText = async (req, res, next) => {
       is_active = true,
     } = req.body;
 
-    if (!sub_category_id || !derge_id || !tibetan_title || !english_title) {
+    if (!sub_category_id || !derge_id || !tibetan_title ) {
       throw new AppError('VALIDATION_ERROR', 'sub_category_id, derge_id, tibetan_title and english_title are required', 400);
     }
 

@@ -293,11 +293,12 @@ export const TextForm = ({ isOpen, onClose, mode, data, subCategories, mainCateg
 
             <div className="grid grid-cols-2 gap-4">
               <div className="space-y-2">
-                <Label htmlFor="derge_id">{t('dergeId')} </Label>
+                <Label htmlFor="derge_id">{t('dergeId')} <span className="text-red-600">*</span></Label>
                 <Input
                   id="derge_id"
                   value={formData.derge_id}
                   onChange={(e) => setFormData({ ...formData, derge_id: e.target.value })}
+                  required
                 />
               </div>
               <div className="space-y-2">
@@ -312,20 +313,22 @@ export const TextForm = ({ isOpen, onClose, mode, data, subCategories, mainCateg
 
             <div className="grid grid-cols-2 gap-4">
               <div className="space-y-2">
-                <Label htmlFor="english_title">{t('englishTitle')} </Label>
+                <Label htmlFor="english_title">{t('englishTitle')} <span className="text-red-600">*</span></Label>
                 <Input
                   id="english_title"
                   value={formData.english_title}
                   onChange={(e) => setFormData({ ...formData, english_title: e.target.value })}
+                  required
                 />
               </div>
               <div className="space-y-2">
-                <Label htmlFor="tibetan_title">{t('tibetanTitle')} </Label>
+                <Label htmlFor="tibetan_title">{t('tibetanTitle')} <span className="text-red-600">*</span></Label>
                 <Input
                   id="tibetan_title"
                   value={formData.tibetan_title}
                   onChange={(e) => setFormData({ ...formData, tibetan_title: e.target.value })}
                   className="font-tibetan"
+                  required
                 />
               </div>
             </div>
