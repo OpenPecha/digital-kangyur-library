@@ -290,9 +290,10 @@ export const TextEditModal = ({
     try {
       setSummaryLoading(true);
       await api.createOrUpdateKarchagTextSummary(text.id, summaryFormData);
-      toast.success('Summary saved successfully');
       if (onSummarySave) {
         onSummarySave();
+        onClose();
+        toast.success('Summary saved successfully');
       }
     } catch (error: any) {
       console.error('Failed to save summary:', error);
@@ -302,41 +303,7 @@ export const TextEditModal = ({
     }
   };
 
-  const handleSummaryDelete = async () => {
-    if (!confirm('Are you sure you want to delete this summary?')) {
-      return;
-    }
 
-    try {
-      setSummaryLoading(true);
-      await api.deleteKarchagTextSummary(text.id);
-      toast.success('Summary deleted successfully');
-      setSummaryFormData({
-        translation_homage_tibetan: '',
-        translation_homage_english: '',
-        purpose_tibetan: '',
-        purpose_english: '',
-        summary_text_tibetan: '',
-        summary_text_english: '',
-        word_meaning_tibetan: '',
-        word_meaning_english: '',
-        connection_tibetan: '',
-        connection_english: '',
-        question_answers_tibetan: '',
-        question_answers_english: '',
-        colophon_tibetan: '',
-        colophon_english: '',
-      });
-      if (onSummarySave) {
-        onSummarySave();
-      }
-    } catch (error: any) {
-      console.error('Failed to delete summary:', error);
-      toast.error(error?.message || 'Failed to delete summary');
-    } finally {
-      setSummaryLoading(false);
-    }
-  };
 
   const getSectionFields = (sectionId: string) => {
     const sectionMap: Record<string, { english: keyof typeof summaryFormData; tibetan: keyof typeof summaryFormData; rows: number }> = {
@@ -391,10 +358,10 @@ export const TextEditModal = ({
       return;
     }
     const payload = { ...formData, sub_category_id: subId };
-
     if (!text?.id && onCreateText) {
       try {
         setMetadataSaving(true);
+
         const created = await onCreateText(payload);
         onTextCreated?.(created);
         toast.success('Text created successfully');

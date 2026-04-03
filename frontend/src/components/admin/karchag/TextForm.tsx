@@ -497,6 +497,7 @@ export const TextForm = ({ isOpen, onClose, mode, data, subCategories, mainCateg
               {mode === 'create' ? t('createText') : t('saveChanges')}
             </Button>
           </DialogFooter>
+        
         </form>
       </DialogContent>
     </Dialog>

@@ -129,9 +129,10 @@ export const TextSummaryForm = ({ isOpen, onClose, textId, textTitle, onSave }: 
     try {
       setLoading(true);
       await api.createOrUpdateKarchagTextSummary(textId, formData);
-      toast.success('Summary saved successfully');
       if (onSave) {
         onSave();
+        onClose();
+
       }
       onClose();
     } catch (error: any) {
