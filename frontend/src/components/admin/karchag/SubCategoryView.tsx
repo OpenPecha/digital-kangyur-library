@@ -297,7 +297,7 @@ export const SubCategoryView: React.FC = () => {
         )
       ) : (
         // For Discourses: Show texts
-        <div className="space-y-4">
+        <div className="space-y-4 ">
           {filteredTexts.map((text: any) => (
             <TextCard
               key={text.id}
@@ -328,6 +328,7 @@ export const SubCategoryView: React.FC = () => {
       />
 
       {/* Create / edit text: same modal as edit (metadata + translation / summary tabs) */}
+     
       {isTextEditModalOpen && editingText && subId && (
         <TextEditModal
           isOpen={isTextEditModalOpen}

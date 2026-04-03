@@ -468,7 +468,7 @@ export const TextEditModal = ({
 
   const modalInner = (
           <Card className={cn(
-            'border-0 shadow-none rounded-none flex flex-col',
+            'border-0 shadow-none rounded-none flex flex-col ',
             variant === 'embedded' ? 'max-h-[min(70vh,36rem)]' : 'flex-1'
           )}>
             <CardContent className="p-0 flex-1 overflow-hidden flex flex-col">
@@ -858,7 +858,7 @@ export const TextEditModal = ({
 
   return (
     <Dialog open={isOpen} onOpenChange={handleClose}>
-        <DialogContent className="max-w-full px-10 max-h-[90vh] p-0 overflow-scroll flex flex-col">
+        <DialogContent className="container max-w-[80vw] px-10 max-h-[90vh] p-0 overflow-scroll flex flex-col">
           <DialogHeader className="px-6 pt-6 pb-4 border-b">
             <DialogTitle>
               {text.english_title || text.tibetan_title || t('editText')}

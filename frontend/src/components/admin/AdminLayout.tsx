@@ -28,8 +28,10 @@ const AdminLayout = ({ children }: { children: React.ReactNode }) => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-kangyur-cream to-white relative overflow-hidden">
-      <div className="absolute inset-0 z-0 overflow-hidden">
+    <div className="min-h-screen  bg-gradient-to-b from-kangyur-cream to-white relative overflow-hidden ">
+      <div className='container'>
+
+      <div className="absolute inset-0 z-0 overflow-hidden ">
         <div className="absolute top-20 left-10 w-64 h-64 rounded-full bg-kangyur-orange/5 blur-3xl"></div>
         <div className="absolute bottom-20 right-10 w-80 h-80 rounded-full bg-kangyur-green/5 blur-3xl"></div>
         <div className="absolute inset-0 flex items-center justify-center opacity-5">
@@ -86,6 +88,8 @@ const AdminLayout = ({ children }: { children: React.ReactNode }) => {
       <div className="pt-20 p-8 relative z-10">
         {children}
       </div>
+      </div>
+
     </div>
   );
 };
