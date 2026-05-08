@@ -13,11 +13,19 @@ const Hero = () => {
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 z-10 flex justify-center items-center">
         <div className="mt-10 md:mt-0 flex w-full flex-1 h-min">
           <div className="flex flex-col justify-between md:justify-normal gap-6 w-full  text-center">
-            <div className="pointer-events-none  flex items-center justify-center opacity-20 ">
+            <div className="pointer-events-none relative flex items-center justify-center opacity-20 min-h-[600px]">
               <img
-                src="/logo.svg"
+                src="/top.png"
                 alt="main logo"
-                className="w-64 h-64 sm:w-[400px] sm:h-[400px] lg:w-[600px] lg:h-[600px]"
+                className="w-64 h-64 absolute sm:w-[400px] sm:h-[400px] lg:w-[600px] lg:h-[600px]"
+                style={{ animation: 'spin 10s linear infinite' }}
+              />
+        
+
+              <img
+                src="/base.png"
+                alt="main logo"
+                className="w-64 h-64 absolute sm:w-[400px] sm:h-[400px] lg:w-[600px] lg:h-[600px]"
               />
             </div>
 
