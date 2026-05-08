@@ -252,10 +252,9 @@ const deleteSubCategory = async (req, res, next) => {
     if (!category) {
       throw new AppError('RESOURCE_NOT_FOUND', 'Sub category not found', 404);
     }
-
     // Check if category has texts
     if (category.texts && category.texts.length > 0) {
-      throw new AppError('VALIDATION_ERROR', 'Cannot delete category with texts', 400);
+      throw new AppError('VALIDATION_ERROR', 'Delete the inner texts first', 400);
     }
 
     await karchagSubCategoryService.delete(id);

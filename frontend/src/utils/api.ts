@@ -40,14 +40,18 @@ async function fetchApi<T>(endpoint: string, options?: RequestInit): Promise<T> 
         window.location.href = '/admin/login';
       }
     }
-    try{
-      const error = await response.json()
-      if(error?.error?.message) {
-        throw new ApiError(response.status, error?.error?.message);
-      }
-    } catch (error) {
-      throw new ApiError(response.status, `HTTP error! status: ${response.status}`);
+
+    let backendMessage: string | undefined;
+    try {
+      const errBody = await response.json();
+      backendMessage = errBody?.error?.message;
+    } catch {
+      // body wasn't JSON; fall through to default message
     }
+    throw new ApiError(
+      response.status,
+      backendMessage || `HTTP error! status: ${response.status}`,
+    );
   }
   
 try{

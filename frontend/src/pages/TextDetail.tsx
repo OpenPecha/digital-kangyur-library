@@ -36,10 +36,17 @@ const metadataLabelMap: Record<string, string> = {
   'sanskrit-title': 'sanskritTitle',
   'chinese-title': 'chineseTitle',
   'english-title': 'englishTitle',
+  'alternative-title': 'alternativeTitle',
   'derge-id': 'dergeId',
   'yeshe-de-id': 'yesheDeId',
   'yeshe-de-volume': 'yesheDeVolume',
   'yeshe-de-volume-length': 'yesheDeVolumeLength',
+  'pedurma-volume-number': 'pedurmaVolumeNumber',
+  'chapter-number': 'chapter',
+  'bampo-number': 'bampo',
+  'page-count': 'pageCount',
+  'interpretation': 'interpretation',
+  'pitaka-type': 'pitaka',
   'pecing-link': 'pecingLink',
   'narthang-link': 'narthangLink',
   'sermon': 'sermon',
@@ -72,6 +79,37 @@ const valueTranslationMap: Record<string, Record<string, string>> = {
     'New Translation': 'translationPeriodNew',
     'new translation': 'translationPeriodNew',
   },
+  'interpretation': {
+    'Provisional': 'provisional',
+    'provisional': 'provisional',
+    'Definitive': 'definitive',
+    'definitive': 'definitive',
+  },
+  'pitaka-type': {
+    'Vinaya Pitaka': 'vinayaPitaka',
+    'vinaya pitaka': 'vinayaPitaka',
+    'Sutra Pitaka': 'sutraPitaka',
+    'sutra pitaka': 'sutraPitaka',
+    'Abhidharma Pitaka': 'abhidharmaPitaka',
+    'abhidharma pitaka': 'abhidharmaPitaka',
+  },
+};
+
+const bilingualEnumValueMap: Record<string, Record<string, string>> = {
+  'interpretation': {
+    'Provisional': 'Provisional (དྲང་དོན།)',
+    'provisional': 'Provisional (དྲང་དོན།)',
+    'Definitive': 'Definitive (ངེས་དོན།)',
+    'definitive': 'Definitive (ངེས་དོན།)',
+  },
+  'pitaka-type': {
+    'Vinaya Pitaka': 'Vinaya Pitaka (འདུལ་བའི་སྡེ་སྣོད།)',
+    'vinaya pitaka': 'Vinaya Pitaka (འདུལ་བའི་སྡེ་སྣོད།)',
+    'Sutra Pitaka': 'Sutra Pitaka (མདོའི་སྡེ་སྣོད།)',
+    'sutra pitaka': 'Sutra Pitaka (མདོའི་སྡེ་སྣོད།)',
+    'Abhidharma Pitaka': 'Abhidharma Pitaka (མངོན་པའི་སྡེ་སྣོད།)',
+    'abhidharma pitaka': 'Abhidharma Pitaka (མངོན་པའི་སྡེ་སྣོད།)',
+  },
 };
 
 // Function to map backend values to translation keys
@@ -97,15 +135,27 @@ const getValueTranslationKey = (key: string, value: string): string | null => {
   return null;
 };
 
+const getBilingualEnumDisplayValue = (key: string, value: string): string | null => {
+  const keyMap = bilingualEnumValueMap[key];
+  if (!keyMap) return null;
+  const trimmedValue = value.trim();
+  const lowerValue = trimmedValue.toLowerCase();
+  return keyMap[trimmedValue] || keyMap[lowerValue] || null;
+};
+
 // MetadataSection component
-const MetadataSection = ({ title, group, metadata, t }: { title: string; group: string; metadata: any[]; t: (key: string) => string }) => (
+const MetadataSection = ({ title, group, metadata, t }: { title: string; group: string; metadata: any[]; t: (key: string) => string }) =>{
+  const filteredMetadata = metadata.filter((item: any) => item.group === group);
+  const showTitle=filteredMetadata.length > 0;
+  return (
   <div className="w-full space-y-5">
-    <h3 className="text-xl font-semibold text-kangyur-maroon mb-4">{title}</h3>
+    {showTitle && <h3 className="text-xl font-semibold text-kangyur-maroon mb-4">{title}</h3>}
     <table className="w-full border-collapse">
       <tbody>
-        {metadata.filter((item: any) => item.group === group).map((item: any) => {
+        {filteredMetadata.map((item: any) => {
+          const bilingualDisplayValue = getBilingualEnumDisplayValue(item.key, item.value);
           const translationKey = getValueTranslationKey(item.key, item.value);
-          const displayValue = translationKey ? t(translationKey) : item.value;
+          const displayValue = bilingualDisplayValue || (translationKey ? t(translationKey) : item.value);
           return (
             <tr key={item.key} className="border-b border-gray-200">
               <td className="py-3 pr-4 font-medium text-gray-700 align-top w-1/3 capitalize">{t(metadataLabelMap[item.key] || item.key)}:</td>
@@ -122,7 +172,7 @@ const MetadataSection = ({ title, group, metadata, t }: { title: string; group: 
       </tbody>
     </table>
   </div>
-);
+)}
 
 const TextDetail = () => {
   const { id } = useParams<{ id: string }>();
@@ -148,14 +198,21 @@ const TextDetail = () => {
         { key: 'sanskrit-title', value: response.sanskrit_title?.trim() || '', group: 'titles' },
         { key: 'chinese-title', value: response.chinese_title?.trim() || '', group: 'titles' },
         { key: 'english-title', value: response.english_title?.trim() || '', group: 'titles' },
+        { key: 'alternative-title', value: response.alternative_title?.trim() || '', group: 'titles' },
         // Catalog information
         { key: 'derge-id', value: response.derge_id?.trim() || '', group: 'catalog' },
         { key: 'yeshe-de-id', value: response.yeshe_de_id?.trim() || '', group: 'catalog' },
         { key: 'yeshe-de-volume', value: response.yeshe_de_volume_number?.trim() || '', group: 'catalog' },
         { key: 'yeshe-de-volume-length', value: response.yeshe_de_volume_length?.trim() || '', group: 'catalog' },
+        { key: 'pedurma-volume-number', value: response.pedurma_volume_number?.trim() || '', group: 'catalog' },
+        { key: 'chapter-number', value: response.chapter_number?.toString() || '', group: 'catalog' },
+        { key: 'bampo-number', value: response.bampo_number?.toString() || '', group: 'catalog' },
+        { key: 'page-count', value: response.page_count?.toString() || '', group: 'catalog' },
         { key: 'pecing-link', value: response.pecing_link?.trim() || '', group: 'catalog' },
         { key: 'narthang-link', value: response.narthang_link?.trim() || '', group: 'catalog' },
         // Content information
+        { key: 'interpretation', value: response.interpretation?.trim() || '', group: 'content' },
+        { key: 'pitaka-type', value: response.pitaka_type?.trim() || '', group: 'content' },
         { key: 'sermon', value: response.sermon?.trim() || '', group: 'content' },
         { key: 'yana', value: response.yana?.trim() || '', group: 'content' },
         { key: 'translation-period', value: response.translation_period?.trim() || '', group: 'content' },
@@ -320,13 +377,13 @@ const TextDetail = () => {
               <CardContent className="p-0">
                 <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
                   <TabsList className="w-full grid grid-cols-3 border-b ">
-                    <TabsTrigger value="metadata" className="rounded-none text-lg">
+                    <TabsTrigger value="metadata" className="rounded-none text-md">
                       {t('metadata')}
                     </TabsTrigger>
-                    <TabsTrigger value="summary" className="rounded-none text-lg">
+                    <TabsTrigger value="summary" className="rounded-none text-md">
                       {t('text')}
                     </TabsTrigger>
-                    <TabsTrigger value="pdf" className="rounded-none text-lg">
+                    <TabsTrigger value="pdf" className="rounded-none text-md">
                       {t('yesheDeSourceText')}
                     </TabsTrigger>
                   </TabsList>
