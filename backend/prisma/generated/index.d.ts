@@ -3583,7 +3583,7 @@ export namespace Prisma {
     parent_id: string | null
     id_slug: string
     title_tibetan: string | null
-    title_english: string
+    title_english: string | null
     description: string | null
     count: number
     order_index: number
@@ -3696,7 +3696,7 @@ export namespace Prisma {
       parent_id: string | null
       id_slug: string
       title_tibetan: string | null
-      title_english: string
+      title_english: string | null
       description: string | null
       count: number
       order_index: number
@@ -7070,7 +7070,7 @@ export namespace Prisma {
   export type TimelineEventGroupByOutputType = {
     id: string
     period_id: string
-    title_english: string
+    title_english: string | null
     title_tibetan: string | null
     title_sanskrit: string | null
     description_english: string | null
@@ -7224,7 +7224,7 @@ export namespace Prisma {
     scalars: $Extensions.GetPayloadResult<{
       id: string
       period_id: string
-      title_english: string
+      title_english: string | null
       title_tibetan: string | null
       title_sanskrit: string | null
       description_english: string | null
@@ -13768,7 +13768,7 @@ export namespace Prisma {
 
   export type KarchagMainCategoryGroupByOutputType = {
     id: string
-    name_english: string
+    name_english: string | null
     name_tibetan: string | null
     description_english: string | null
     description_tibetan: string | null
@@ -13862,7 +13862,7 @@ export namespace Prisma {
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
-      name_english: string
+      name_english: string | null
       name_tibetan: string | null
       description_english: string | null
       description_tibetan: string | null
@@ -15959,10 +15959,16 @@ export namespace Prisma {
   }
 
   export type TextAvgAggregateOutputType = {
+    chapter_number: number | null
+    bampo_number: number | null
+    page_count: number | null
     order_index: number | null
   }
 
   export type TextSumAggregateOutputType = {
+    chapter_number: number | null
+    bampo_number: number | null
+    page_count: number | null
     order_index: number | null
   }
 
@@ -15973,6 +15979,13 @@ export namespace Prisma {
     chinese_title: string | null
     sanskrit_title: string | null
     english_title: string | null
+    alternative_title: string | null
+    chapter_number: number | null
+    bampo_number: number | null
+    page_count: number | null
+    interpretation: string | null
+    pitaka_type: string | null
+    pedurma_volume_number: string | null
     derge_id: string | null
     yeshe_de_id: string | null
     yeshe_de_volume_number: string | null
@@ -15996,6 +16009,13 @@ export namespace Prisma {
     chinese_title: string | null
     sanskrit_title: string | null
     english_title: string | null
+    alternative_title: string | null
+    chapter_number: number | null
+    bampo_number: number | null
+    page_count: number | null
+    interpretation: string | null
+    pitaka_type: string | null
+    pedurma_volume_number: string | null
     derge_id: string | null
     yeshe_de_id: string | null
     yeshe_de_volume_number: string | null
@@ -16019,6 +16039,13 @@ export namespace Prisma {
     chinese_title: number
     sanskrit_title: number
     english_title: number
+    alternative_title: number
+    chapter_number: number
+    bampo_number: number
+    page_count: number
+    interpretation: number
+    pitaka_type: number
+    pedurma_volume_number: number
     derge_id: number
     yeshe_de_id: number
     yeshe_de_volume_number: number
@@ -16038,10 +16065,16 @@ export namespace Prisma {
 
 
   export type TextAvgAggregateInputType = {
+    chapter_number?: true
+    bampo_number?: true
+    page_count?: true
     order_index?: true
   }
 
   export type TextSumAggregateInputType = {
+    chapter_number?: true
+    bampo_number?: true
+    page_count?: true
     order_index?: true
   }
 
@@ -16052,6 +16085,13 @@ export namespace Prisma {
     chinese_title?: true
     sanskrit_title?: true
     english_title?: true
+    alternative_title?: true
+    chapter_number?: true
+    bampo_number?: true
+    page_count?: true
+    interpretation?: true
+    pitaka_type?: true
+    pedurma_volume_number?: true
     derge_id?: true
     yeshe_de_id?: true
     yeshe_de_volume_number?: true
@@ -16075,6 +16115,13 @@ export namespace Prisma {
     chinese_title?: true
     sanskrit_title?: true
     english_title?: true
+    alternative_title?: true
+    chapter_number?: true
+    bampo_number?: true
+    page_count?: true
+    interpretation?: true
+    pitaka_type?: true
+    pedurma_volume_number?: true
     derge_id?: true
     yeshe_de_id?: true
     yeshe_de_volume_number?: true
@@ -16098,6 +16145,13 @@ export namespace Prisma {
     chinese_title?: true
     sanskrit_title?: true
     english_title?: true
+    alternative_title?: true
+    chapter_number?: true
+    bampo_number?: true
+    page_count?: true
+    interpretation?: true
+    pitaka_type?: true
+    pedurma_volume_number?: true
     derge_id?: true
     yeshe_de_id?: true
     yeshe_de_volume_number?: true
@@ -16208,6 +16262,13 @@ export namespace Prisma {
     chinese_title: string | null
     sanskrit_title: string | null
     english_title: string | null
+    alternative_title: string | null
+    chapter_number: number | null
+    bampo_number: number | null
+    page_count: number | null
+    interpretation: string | null
+    pitaka_type: string | null
+    pedurma_volume_number: string | null
     derge_id: string | null
     yeshe_de_id: string | null
     yeshe_de_volume_number: string | null
@@ -16250,6 +16311,13 @@ export namespace Prisma {
     chinese_title?: boolean
     sanskrit_title?: boolean
     english_title?: boolean
+    alternative_title?: boolean
+    chapter_number?: boolean
+    bampo_number?: boolean
+    page_count?: boolean
+    interpretation?: boolean
+    pitaka_type?: boolean
+    pedurma_volume_number?: boolean
     derge_id?: boolean
     yeshe_de_id?: boolean
     yeshe_de_volume_number?: boolean
@@ -16277,6 +16345,13 @@ export namespace Prisma {
     chinese_title?: boolean
     sanskrit_title?: boolean
     english_title?: boolean
+    alternative_title?: boolean
+    chapter_number?: boolean
+    bampo_number?: boolean
+    page_count?: boolean
+    interpretation?: boolean
+    pitaka_type?: boolean
+    pedurma_volume_number?: boolean
     derge_id?: boolean
     yeshe_de_id?: boolean
     yeshe_de_volume_number?: boolean
@@ -16301,6 +16376,13 @@ export namespace Prisma {
     chinese_title?: boolean
     sanskrit_title?: boolean
     english_title?: boolean
+    alternative_title?: boolean
+    chapter_number?: boolean
+    bampo_number?: boolean
+    page_count?: boolean
+    interpretation?: boolean
+    pitaka_type?: boolean
+    pedurma_volume_number?: boolean
     derge_id?: boolean
     yeshe_de_id?: boolean
     yeshe_de_volume_number?: boolean
@@ -16325,6 +16407,13 @@ export namespace Prisma {
     chinese_title?: boolean
     sanskrit_title?: boolean
     english_title?: boolean
+    alternative_title?: boolean
+    chapter_number?: boolean
+    bampo_number?: boolean
+    page_count?: boolean
+    interpretation?: boolean
+    pitaka_type?: boolean
+    pedurma_volume_number?: boolean
     derge_id?: boolean
     yeshe_de_id?: boolean
     yeshe_de_volume_number?: boolean
@@ -16341,7 +16430,7 @@ export namespace Prisma {
     updated_at?: boolean
   }
 
-  export type TextOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "sub_category_id" | "tibetan_title" | "chinese_title" | "sanskrit_title" | "english_title" | "derge_id" | "yeshe_de_id" | "yeshe_de_volume_number" | "yeshe_de_volume_length" | "sermon" | "yana" | "translation_period" | "pecing_link" | "narthang_link" | "pdf_url" | "order_index" | "is_active" | "created_at" | "updated_at", ExtArgs["result"]["text"]>
+  export type TextOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "sub_category_id" | "tibetan_title" | "chinese_title" | "sanskrit_title" | "english_title" | "alternative_title" | "chapter_number" | "bampo_number" | "page_count" | "interpretation" | "pitaka_type" | "pedurma_volume_number" | "derge_id" | "yeshe_de_id" | "yeshe_de_volume_number" | "yeshe_de_volume_length" | "sermon" | "yana" | "translation_period" | "pecing_link" | "narthang_link" | "pdf_url" | "order_index" | "is_active" | "created_at" | "updated_at", ExtArgs["result"]["text"]>
   export type TextInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     sub_category?: boolean | KarchagSubCategoryDefaultArgs<ExtArgs>
     summary?: boolean | Text$summaryArgs<ExtArgs>
@@ -16369,6 +16458,13 @@ export namespace Prisma {
       chinese_title: string | null
       sanskrit_title: string | null
       english_title: string | null
+      alternative_title: string | null
+      chapter_number: number | null
+      bampo_number: number | null
+      page_count: number | null
+      interpretation: string | null
+      pitaka_type: string | null
+      pedurma_volume_number: string | null
       derge_id: string | null
       yeshe_de_id: string | null
       yeshe_de_volume_number: string | null
@@ -16815,6 +16911,13 @@ export namespace Prisma {
     readonly chinese_title: FieldRef<"Text", 'String'>
     readonly sanskrit_title: FieldRef<"Text", 'String'>
     readonly english_title: FieldRef<"Text", 'String'>
+    readonly alternative_title: FieldRef<"Text", 'String'>
+    readonly chapter_number: FieldRef<"Text", 'Int'>
+    readonly bampo_number: FieldRef<"Text", 'Int'>
+    readonly page_count: FieldRef<"Text", 'Int'>
+    readonly interpretation: FieldRef<"Text", 'String'>
+    readonly pitaka_type: FieldRef<"Text", 'String'>
+    readonly pedurma_volume_number: FieldRef<"Text", 'String'>
     readonly derge_id: FieldRef<"Text", 'String'>
     readonly yeshe_de_id: FieldRef<"Text", 'String'>
     readonly yeshe_de_volume_number: FieldRef<"Text", 'String'>
@@ -19868,6 +19971,13 @@ export namespace Prisma {
     chinese_title: 'chinese_title',
     sanskrit_title: 'sanskrit_title',
     english_title: 'english_title',
+    alternative_title: 'alternative_title',
+    chapter_number: 'chapter_number',
+    bampo_number: 'bampo_number',
+    page_count: 'page_count',
+    interpretation: 'interpretation',
+    pitaka_type: 'pitaka_type',
+    pedurma_volume_number: 'pedurma_volume_number',
     derge_id: 'derge_id',
     yeshe_de_id: 'yeshe_de_id',
     yeshe_de_volume_number: 'yeshe_de_volume_number',
@@ -20096,7 +20206,7 @@ export namespace Prisma {
     parent_id?: StringNullableFilter<"CatalogCategory"> | string | null
     id_slug?: StringFilter<"CatalogCategory"> | string
     title_tibetan?: StringNullableFilter<"CatalogCategory"> | string | null
-    title_english?: StringFilter<"CatalogCategory"> | string
+    title_english?: StringNullableFilter<"CatalogCategory"> | string | null
     description?: StringNullableFilter<"CatalogCategory"> | string | null
     count?: IntFilter<"CatalogCategory"> | number
     order_index?: IntFilter<"CatalogCategory"> | number
@@ -20112,7 +20222,7 @@ export namespace Prisma {
     parent_id?: SortOrderInput | SortOrder
     id_slug?: SortOrder
     title_tibetan?: SortOrderInput | SortOrder
-    title_english?: SortOrder
+    title_english?: SortOrderInput | SortOrder
     description?: SortOrderInput | SortOrder
     count?: SortOrder
     order_index?: SortOrder
@@ -20131,7 +20241,7 @@ export namespace Prisma {
     NOT?: CatalogCategoryWhereInput | CatalogCategoryWhereInput[]
     parent_id?: StringNullableFilter<"CatalogCategory"> | string | null
     title_tibetan?: StringNullableFilter<"CatalogCategory"> | string | null
-    title_english?: StringFilter<"CatalogCategory"> | string
+    title_english?: StringNullableFilter<"CatalogCategory"> | string | null
     description?: StringNullableFilter<"CatalogCategory"> | string | null
     count?: IntFilter<"CatalogCategory"> | number
     order_index?: IntFilter<"CatalogCategory"> | number
@@ -20147,7 +20257,7 @@ export namespace Prisma {
     parent_id?: SortOrderInput | SortOrder
     id_slug?: SortOrder
     title_tibetan?: SortOrderInput | SortOrder
-    title_english?: SortOrder
+    title_english?: SortOrderInput | SortOrder
     description?: SortOrderInput | SortOrder
     count?: SortOrder
     order_index?: SortOrder
@@ -20169,7 +20279,7 @@ export namespace Prisma {
     parent_id?: StringNullableWithAggregatesFilter<"CatalogCategory"> | string | null
     id_slug?: StringWithAggregatesFilter<"CatalogCategory"> | string
     title_tibetan?: StringNullableWithAggregatesFilter<"CatalogCategory"> | string | null
-    title_english?: StringWithAggregatesFilter<"CatalogCategory"> | string
+    title_english?: StringNullableWithAggregatesFilter<"CatalogCategory"> | string | null
     description?: StringNullableWithAggregatesFilter<"CatalogCategory"> | string | null
     count?: IntWithAggregatesFilter<"CatalogCategory"> | number
     order_index?: IntWithAggregatesFilter<"CatalogCategory"> | number
@@ -20338,7 +20448,7 @@ export namespace Prisma {
     NOT?: TimelineEventWhereInput | TimelineEventWhereInput[]
     id?: StringFilter<"TimelineEvent"> | string
     period_id?: StringFilter<"TimelineEvent"> | string
-    title_english?: StringFilter<"TimelineEvent"> | string
+    title_english?: StringNullableFilter<"TimelineEvent"> | string | null
     title_tibetan?: StringNullableFilter<"TimelineEvent"> | string | null
     title_sanskrit?: StringNullableFilter<"TimelineEvent"> | string | null
     description_english?: StringNullableFilter<"TimelineEvent"> | string | null
@@ -20363,7 +20473,7 @@ export namespace Prisma {
   export type TimelineEventOrderByWithRelationInput = {
     id?: SortOrder
     period_id?: SortOrder
-    title_english?: SortOrder
+    title_english?: SortOrderInput | SortOrder
     title_tibetan?: SortOrderInput | SortOrder
     title_sanskrit?: SortOrderInput | SortOrder
     description_english?: SortOrderInput | SortOrder
@@ -20391,7 +20501,7 @@ export namespace Prisma {
     OR?: TimelineEventWhereInput[]
     NOT?: TimelineEventWhereInput | TimelineEventWhereInput[]
     period_id?: StringFilter<"TimelineEvent"> | string
-    title_english?: StringFilter<"TimelineEvent"> | string
+    title_english?: StringNullableFilter<"TimelineEvent"> | string | null
     title_tibetan?: StringNullableFilter<"TimelineEvent"> | string | null
     title_sanskrit?: StringNullableFilter<"TimelineEvent"> | string | null
     description_english?: StringNullableFilter<"TimelineEvent"> | string | null
@@ -20416,7 +20526,7 @@ export namespace Prisma {
   export type TimelineEventOrderByWithAggregationInput = {
     id?: SortOrder
     period_id?: SortOrder
-    title_english?: SortOrder
+    title_english?: SortOrderInput | SortOrder
     title_tibetan?: SortOrderInput | SortOrder
     title_sanskrit?: SortOrderInput | SortOrder
     description_english?: SortOrderInput | SortOrder
@@ -20445,7 +20555,7 @@ export namespace Prisma {
     NOT?: TimelineEventScalarWhereWithAggregatesInput | TimelineEventScalarWhereWithAggregatesInput[]
     id?: StringWithAggregatesFilter<"TimelineEvent"> | string
     period_id?: StringWithAggregatesFilter<"TimelineEvent"> | string
-    title_english?: StringWithAggregatesFilter<"TimelineEvent"> | string
+    title_english?: StringNullableWithAggregatesFilter<"TimelineEvent"> | string | null
     title_tibetan?: StringNullableWithAggregatesFilter<"TimelineEvent"> | string | null
     title_sanskrit?: StringNullableWithAggregatesFilter<"TimelineEvent"> | string | null
     description_english?: StringNullableWithAggregatesFilter<"TimelineEvent"> | string | null
@@ -20819,7 +20929,7 @@ export namespace Prisma {
     OR?: KarchagMainCategoryWhereInput[]
     NOT?: KarchagMainCategoryWhereInput | KarchagMainCategoryWhereInput[]
     id?: StringFilter<"KarchagMainCategory"> | string
-    name_english?: StringFilter<"KarchagMainCategory"> | string
+    name_english?: StringNullableFilter<"KarchagMainCategory"> | string | null
     name_tibetan?: StringNullableFilter<"KarchagMainCategory"> | string | null
     description_english?: StringNullableFilter<"KarchagMainCategory"> | string | null
     description_tibetan?: StringNullableFilter<"KarchagMainCategory"> | string | null
@@ -20832,7 +20942,7 @@ export namespace Prisma {
 
   export type KarchagMainCategoryOrderByWithRelationInput = {
     id?: SortOrder
-    name_english?: SortOrder
+    name_english?: SortOrderInput | SortOrder
     name_tibetan?: SortOrderInput | SortOrder
     description_english?: SortOrderInput | SortOrder
     description_tibetan?: SortOrderInput | SortOrder
@@ -20848,7 +20958,7 @@ export namespace Prisma {
     AND?: KarchagMainCategoryWhereInput | KarchagMainCategoryWhereInput[]
     OR?: KarchagMainCategoryWhereInput[]
     NOT?: KarchagMainCategoryWhereInput | KarchagMainCategoryWhereInput[]
-    name_english?: StringFilter<"KarchagMainCategory"> | string
+    name_english?: StringNullableFilter<"KarchagMainCategory"> | string | null
     name_tibetan?: StringNullableFilter<"KarchagMainCategory"> | string | null
     description_english?: StringNullableFilter<"KarchagMainCategory"> | string | null
     description_tibetan?: StringNullableFilter<"KarchagMainCategory"> | string | null
@@ -20861,7 +20971,7 @@ export namespace Prisma {
 
   export type KarchagMainCategoryOrderByWithAggregationInput = {
     id?: SortOrder
-    name_english?: SortOrder
+    name_english?: SortOrderInput | SortOrder
     name_tibetan?: SortOrderInput | SortOrder
     description_english?: SortOrderInput | SortOrder
     description_tibetan?: SortOrderInput | SortOrder
@@ -20881,7 +20991,7 @@ export namespace Prisma {
     OR?: KarchagMainCategoryScalarWhereWithAggregatesInput[]
     NOT?: KarchagMainCategoryScalarWhereWithAggregatesInput | KarchagMainCategoryScalarWhereWithAggregatesInput[]
     id?: StringWithAggregatesFilter<"KarchagMainCategory"> | string
-    name_english?: StringWithAggregatesFilter<"KarchagMainCategory"> | string
+    name_english?: StringNullableWithAggregatesFilter<"KarchagMainCategory"> | string | null
     name_tibetan?: StringNullableWithAggregatesFilter<"KarchagMainCategory"> | string | null
     description_english?: StringNullableWithAggregatesFilter<"KarchagMainCategory"> | string | null
     description_tibetan?: StringNullableWithAggregatesFilter<"KarchagMainCategory"> | string | null
@@ -20996,6 +21106,13 @@ export namespace Prisma {
     chinese_title?: StringNullableFilter<"Text"> | string | null
     sanskrit_title?: StringNullableFilter<"Text"> | string | null
     english_title?: StringNullableFilter<"Text"> | string | null
+    alternative_title?: StringNullableFilter<"Text"> | string | null
+    chapter_number?: IntNullableFilter<"Text"> | number | null
+    bampo_number?: IntNullableFilter<"Text"> | number | null
+    page_count?: IntNullableFilter<"Text"> | number | null
+    interpretation?: StringNullableFilter<"Text"> | string | null
+    pitaka_type?: StringNullableFilter<"Text"> | string | null
+    pedurma_volume_number?: StringNullableFilter<"Text"> | string | null
     derge_id?: StringNullableFilter<"Text"> | string | null
     yeshe_de_id?: StringNullableFilter<"Text"> | string | null
     yeshe_de_volume_number?: StringNullableFilter<"Text"> | string | null
@@ -21022,6 +21139,13 @@ export namespace Prisma {
     chinese_title?: SortOrderInput | SortOrder
     sanskrit_title?: SortOrderInput | SortOrder
     english_title?: SortOrderInput | SortOrder
+    alternative_title?: SortOrderInput | SortOrder
+    chapter_number?: SortOrderInput | SortOrder
+    bampo_number?: SortOrderInput | SortOrder
+    page_count?: SortOrderInput | SortOrder
+    interpretation?: SortOrderInput | SortOrder
+    pitaka_type?: SortOrderInput | SortOrder
+    pedurma_volume_number?: SortOrderInput | SortOrder
     derge_id?: SortOrderInput | SortOrder
     yeshe_de_id?: SortOrderInput | SortOrder
     yeshe_de_volume_number?: SortOrderInput | SortOrder
@@ -21051,6 +21175,13 @@ export namespace Prisma {
     chinese_title?: StringNullableFilter<"Text"> | string | null
     sanskrit_title?: StringNullableFilter<"Text"> | string | null
     english_title?: StringNullableFilter<"Text"> | string | null
+    alternative_title?: StringNullableFilter<"Text"> | string | null
+    chapter_number?: IntNullableFilter<"Text"> | number | null
+    bampo_number?: IntNullableFilter<"Text"> | number | null
+    page_count?: IntNullableFilter<"Text"> | number | null
+    interpretation?: StringNullableFilter<"Text"> | string | null
+    pitaka_type?: StringNullableFilter<"Text"> | string | null
+    pedurma_volume_number?: StringNullableFilter<"Text"> | string | null
     derge_id?: StringNullableFilter<"Text"> | string | null
     yeshe_de_id?: StringNullableFilter<"Text"> | string | null
     yeshe_de_volume_number?: StringNullableFilter<"Text"> | string | null
@@ -21077,6 +21208,13 @@ export namespace Prisma {
     chinese_title?: SortOrderInput | SortOrder
     sanskrit_title?: SortOrderInput | SortOrder
     english_title?: SortOrderInput | SortOrder
+    alternative_title?: SortOrderInput | SortOrder
+    chapter_number?: SortOrderInput | SortOrder
+    bampo_number?: SortOrderInput | SortOrder
+    page_count?: SortOrderInput | SortOrder
+    interpretation?: SortOrderInput | SortOrder
+    pitaka_type?: SortOrderInput | SortOrder
+    pedurma_volume_number?: SortOrderInput | SortOrder
     derge_id?: SortOrderInput | SortOrder
     yeshe_de_id?: SortOrderInput | SortOrder
     yeshe_de_volume_number?: SortOrderInput | SortOrder
@@ -21108,6 +21246,13 @@ export namespace Prisma {
     chinese_title?: StringNullableWithAggregatesFilter<"Text"> | string | null
     sanskrit_title?: StringNullableWithAggregatesFilter<"Text"> | string | null
     english_title?: StringNullableWithAggregatesFilter<"Text"> | string | null
+    alternative_title?: StringNullableWithAggregatesFilter<"Text"> | string | null
+    chapter_number?: IntNullableWithAggregatesFilter<"Text"> | number | null
+    bampo_number?: IntNullableWithAggregatesFilter<"Text"> | number | null
+    page_count?: IntNullableWithAggregatesFilter<"Text"> | number | null
+    interpretation?: StringNullableWithAggregatesFilter<"Text"> | string | null
+    pitaka_type?: StringNullableWithAggregatesFilter<"Text"> | string | null
+    pedurma_volume_number?: StringNullableWithAggregatesFilter<"Text"> | string | null
     derge_id?: StringNullableWithAggregatesFilter<"Text"> | string | null
     yeshe_de_id?: StringNullableWithAggregatesFilter<"Text"> | string | null
     yeshe_de_volume_number?: StringNullableWithAggregatesFilter<"Text"> | string | null
@@ -21402,7 +21547,7 @@ export namespace Prisma {
     id?: string
     id_slug: string
     title_tibetan?: string | null
-    title_english: string
+    title_english?: string | null
     description?: string | null
     count?: number
     order_index?: number
@@ -21418,7 +21563,7 @@ export namespace Prisma {
     parent_id?: string | null
     id_slug: string
     title_tibetan?: string | null
-    title_english: string
+    title_english?: string | null
     description?: string | null
     count?: number
     order_index?: number
@@ -21432,7 +21577,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     id_slug?: StringFieldUpdateOperationsInput | string
     title_tibetan?: NullableStringFieldUpdateOperationsInput | string | null
-    title_english?: StringFieldUpdateOperationsInput | string
+    title_english?: NullableStringFieldUpdateOperationsInput | string | null
     description?: NullableStringFieldUpdateOperationsInput | string | null
     count?: IntFieldUpdateOperationsInput | number
     order_index?: IntFieldUpdateOperationsInput | number
@@ -21448,7 +21593,7 @@ export namespace Prisma {
     parent_id?: NullableStringFieldUpdateOperationsInput | string | null
     id_slug?: StringFieldUpdateOperationsInput | string
     title_tibetan?: NullableStringFieldUpdateOperationsInput | string | null
-    title_english?: StringFieldUpdateOperationsInput | string
+    title_english?: NullableStringFieldUpdateOperationsInput | string | null
     description?: NullableStringFieldUpdateOperationsInput | string | null
     count?: IntFieldUpdateOperationsInput | number
     order_index?: IntFieldUpdateOperationsInput | number
@@ -21463,7 +21608,7 @@ export namespace Prisma {
     parent_id?: string | null
     id_slug: string
     title_tibetan?: string | null
-    title_english: string
+    title_english?: string | null
     description?: string | null
     count?: number
     order_index?: number
@@ -21476,7 +21621,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     id_slug?: StringFieldUpdateOperationsInput | string
     title_tibetan?: NullableStringFieldUpdateOperationsInput | string | null
-    title_english?: StringFieldUpdateOperationsInput | string
+    title_english?: NullableStringFieldUpdateOperationsInput | string | null
     description?: NullableStringFieldUpdateOperationsInput | string | null
     count?: IntFieldUpdateOperationsInput | number
     order_index?: IntFieldUpdateOperationsInput | number
@@ -21490,7 +21635,7 @@ export namespace Prisma {
     parent_id?: NullableStringFieldUpdateOperationsInput | string | null
     id_slug?: StringFieldUpdateOperationsInput | string
     title_tibetan?: NullableStringFieldUpdateOperationsInput | string | null
-    title_english?: StringFieldUpdateOperationsInput | string
+    title_english?: NullableStringFieldUpdateOperationsInput | string | null
     description?: NullableStringFieldUpdateOperationsInput | string | null
     count?: IntFieldUpdateOperationsInput | number
     order_index?: IntFieldUpdateOperationsInput | number
@@ -21680,7 +21825,7 @@ export namespace Prisma {
 
   export type TimelineEventCreateInput = {
     id?: string
-    title_english: string
+    title_english?: string | null
     title_tibetan?: string | null
     title_sanskrit?: string | null
     description_english?: string | null
@@ -21705,7 +21850,7 @@ export namespace Prisma {
   export type TimelineEventUncheckedCreateInput = {
     id?: string
     period_id: string
-    title_english: string
+    title_english?: string | null
     title_tibetan?: string | null
     title_sanskrit?: string | null
     description_english?: string | null
@@ -21728,7 +21873,7 @@ export namespace Prisma {
 
   export type TimelineEventUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
-    title_english?: StringFieldUpdateOperationsInput | string
+    title_english?: NullableStringFieldUpdateOperationsInput | string | null
     title_tibetan?: NullableStringFieldUpdateOperationsInput | string | null
     title_sanskrit?: NullableStringFieldUpdateOperationsInput | string | null
     description_english?: NullableStringFieldUpdateOperationsInput | string | null
@@ -21753,7 +21898,7 @@ export namespace Prisma {
   export type TimelineEventUncheckedUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     period_id?: StringFieldUpdateOperationsInput | string
-    title_english?: StringFieldUpdateOperationsInput | string
+    title_english?: NullableStringFieldUpdateOperationsInput | string | null
     title_tibetan?: NullableStringFieldUpdateOperationsInput | string | null
     title_sanskrit?: NullableStringFieldUpdateOperationsInput | string | null
     description_english?: NullableStringFieldUpdateOperationsInput | string | null
@@ -21777,7 +21922,7 @@ export namespace Prisma {
   export type TimelineEventCreateManyInput = {
     id?: string
     period_id: string
-    title_english: string
+    title_english?: string | null
     title_tibetan?: string | null
     title_sanskrit?: string | null
     description_english?: string | null
@@ -21797,7 +21942,7 @@ export namespace Prisma {
 
   export type TimelineEventUpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
-    title_english?: StringFieldUpdateOperationsInput | string
+    title_english?: NullableStringFieldUpdateOperationsInput | string | null
     title_tibetan?: NullableStringFieldUpdateOperationsInput | string | null
     title_sanskrit?: NullableStringFieldUpdateOperationsInput | string | null
     description_english?: NullableStringFieldUpdateOperationsInput | string | null
@@ -21818,7 +21963,7 @@ export namespace Prisma {
   export type TimelineEventUncheckedUpdateManyInput = {
     id?: StringFieldUpdateOperationsInput | string
     period_id?: StringFieldUpdateOperationsInput | string
-    title_english?: StringFieldUpdateOperationsInput | string
+    title_english?: NullableStringFieldUpdateOperationsInput | string | null
     title_tibetan?: NullableStringFieldUpdateOperationsInput | string | null
     title_sanskrit?: NullableStringFieldUpdateOperationsInput | string | null
     description_english?: NullableStringFieldUpdateOperationsInput | string | null
@@ -22227,7 +22372,7 @@ export namespace Prisma {
 
   export type KarchagMainCategoryCreateInput = {
     id?: string
-    name_english: string
+    name_english?: string | null
     name_tibetan?: string | null
     description_english?: string | null
     description_tibetan?: string | null
@@ -22240,7 +22385,7 @@ export namespace Prisma {
 
   export type KarchagMainCategoryUncheckedCreateInput = {
     id?: string
-    name_english: string
+    name_english?: string | null
     name_tibetan?: string | null
     description_english?: string | null
     description_tibetan?: string | null
@@ -22253,7 +22398,7 @@ export namespace Prisma {
 
   export type KarchagMainCategoryUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
-    name_english?: StringFieldUpdateOperationsInput | string
+    name_english?: NullableStringFieldUpdateOperationsInput | string | null
     name_tibetan?: NullableStringFieldUpdateOperationsInput | string | null
     description_english?: NullableStringFieldUpdateOperationsInput | string | null
     description_tibetan?: NullableStringFieldUpdateOperationsInput | string | null
@@ -22266,7 +22411,7 @@ export namespace Prisma {
 
   export type KarchagMainCategoryUncheckedUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
-    name_english?: StringFieldUpdateOperationsInput | string
+    name_english?: NullableStringFieldUpdateOperationsInput | string | null
     name_tibetan?: NullableStringFieldUpdateOperationsInput | string | null
     description_english?: NullableStringFieldUpdateOperationsInput | string | null
     description_tibetan?: NullableStringFieldUpdateOperationsInput | string | null
@@ -22279,7 +22424,7 @@ export namespace Prisma {
 
   export type KarchagMainCategoryCreateManyInput = {
     id?: string
-    name_english: string
+    name_english?: string | null
     name_tibetan?: string | null
     description_english?: string | null
     description_tibetan?: string | null
@@ -22291,7 +22436,7 @@ export namespace Prisma {
 
   export type KarchagMainCategoryUpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
-    name_english?: StringFieldUpdateOperationsInput | string
+    name_english?: NullableStringFieldUpdateOperationsInput | string | null
     name_tibetan?: NullableStringFieldUpdateOperationsInput | string | null
     description_english?: NullableStringFieldUpdateOperationsInput | string | null
     description_tibetan?: NullableStringFieldUpdateOperationsInput | string | null
@@ -22303,7 +22448,7 @@ export namespace Prisma {
 
   export type KarchagMainCategoryUncheckedUpdateManyInput = {
     id?: StringFieldUpdateOperationsInput | string
-    name_english?: StringFieldUpdateOperationsInput | string
+    name_english?: NullableStringFieldUpdateOperationsInput | string | null
     name_tibetan?: NullableStringFieldUpdateOperationsInput | string | null
     description_english?: NullableStringFieldUpdateOperationsInput | string | null
     description_tibetan?: NullableStringFieldUpdateOperationsInput | string | null
@@ -22427,6 +22572,13 @@ export namespace Prisma {
     chinese_title?: string | null
     sanskrit_title?: string | null
     english_title?: string | null
+    alternative_title?: string | null
+    chapter_number?: number | null
+    bampo_number?: number | null
+    page_count?: number | null
+    interpretation?: string | null
+    pitaka_type?: string | null
+    pedurma_volume_number?: string | null
     derge_id?: string | null
     yeshe_de_id?: string | null
     yeshe_de_volume_number?: string | null
@@ -22453,6 +22605,13 @@ export namespace Prisma {
     chinese_title?: string | null
     sanskrit_title?: string | null
     english_title?: string | null
+    alternative_title?: string | null
+    chapter_number?: number | null
+    bampo_number?: number | null
+    page_count?: number | null
+    interpretation?: string | null
+    pitaka_type?: string | null
+    pedurma_volume_number?: string | null
     derge_id?: string | null
     yeshe_de_id?: string | null
     yeshe_de_volume_number?: string | null
@@ -22477,6 +22636,13 @@ export namespace Prisma {
     chinese_title?: NullableStringFieldUpdateOperationsInput | string | null
     sanskrit_title?: NullableStringFieldUpdateOperationsInput | string | null
     english_title?: NullableStringFieldUpdateOperationsInput | string | null
+    alternative_title?: NullableStringFieldUpdateOperationsInput | string | null
+    chapter_number?: NullableIntFieldUpdateOperationsInput | number | null
+    bampo_number?: NullableIntFieldUpdateOperationsInput | number | null
+    page_count?: NullableIntFieldUpdateOperationsInput | number | null
+    interpretation?: NullableStringFieldUpdateOperationsInput | string | null
+    pitaka_type?: NullableStringFieldUpdateOperationsInput | string | null
+    pedurma_volume_number?: NullableStringFieldUpdateOperationsInput | string | null
     derge_id?: NullableStringFieldUpdateOperationsInput | string | null
     yeshe_de_id?: NullableStringFieldUpdateOperationsInput | string | null
     yeshe_de_volume_number?: NullableStringFieldUpdateOperationsInput | string | null
@@ -22503,6 +22669,13 @@ export namespace Prisma {
     chinese_title?: NullableStringFieldUpdateOperationsInput | string | null
     sanskrit_title?: NullableStringFieldUpdateOperationsInput | string | null
     english_title?: NullableStringFieldUpdateOperationsInput | string | null
+    alternative_title?: NullableStringFieldUpdateOperationsInput | string | null
+    chapter_number?: NullableIntFieldUpdateOperationsInput | number | null
+    bampo_number?: NullableIntFieldUpdateOperationsInput | number | null
+    page_count?: NullableIntFieldUpdateOperationsInput | number | null
+    interpretation?: NullableStringFieldUpdateOperationsInput | string | null
+    pitaka_type?: NullableStringFieldUpdateOperationsInput | string | null
+    pedurma_volume_number?: NullableStringFieldUpdateOperationsInput | string | null
     derge_id?: NullableStringFieldUpdateOperationsInput | string | null
     yeshe_de_id?: NullableStringFieldUpdateOperationsInput | string | null
     yeshe_de_volume_number?: NullableStringFieldUpdateOperationsInput | string | null
@@ -22528,6 +22701,13 @@ export namespace Prisma {
     chinese_title?: string | null
     sanskrit_title?: string | null
     english_title?: string | null
+    alternative_title?: string | null
+    chapter_number?: number | null
+    bampo_number?: number | null
+    page_count?: number | null
+    interpretation?: string | null
+    pitaka_type?: string | null
+    pedurma_volume_number?: string | null
     derge_id?: string | null
     yeshe_de_id?: string | null
     yeshe_de_volume_number?: string | null
@@ -22550,6 +22730,13 @@ export namespace Prisma {
     chinese_title?: NullableStringFieldUpdateOperationsInput | string | null
     sanskrit_title?: NullableStringFieldUpdateOperationsInput | string | null
     english_title?: NullableStringFieldUpdateOperationsInput | string | null
+    alternative_title?: NullableStringFieldUpdateOperationsInput | string | null
+    chapter_number?: NullableIntFieldUpdateOperationsInput | number | null
+    bampo_number?: NullableIntFieldUpdateOperationsInput | number | null
+    page_count?: NullableIntFieldUpdateOperationsInput | number | null
+    interpretation?: NullableStringFieldUpdateOperationsInput | string | null
+    pitaka_type?: NullableStringFieldUpdateOperationsInput | string | null
+    pedurma_volume_number?: NullableStringFieldUpdateOperationsInput | string | null
     derge_id?: NullableStringFieldUpdateOperationsInput | string | null
     yeshe_de_id?: NullableStringFieldUpdateOperationsInput | string | null
     yeshe_de_volume_number?: NullableStringFieldUpdateOperationsInput | string | null
@@ -22573,6 +22760,13 @@ export namespace Prisma {
     chinese_title?: NullableStringFieldUpdateOperationsInput | string | null
     sanskrit_title?: NullableStringFieldUpdateOperationsInput | string | null
     english_title?: NullableStringFieldUpdateOperationsInput | string | null
+    alternative_title?: NullableStringFieldUpdateOperationsInput | string | null
+    chapter_number?: NullableIntFieldUpdateOperationsInput | number | null
+    bampo_number?: NullableIntFieldUpdateOperationsInput | number | null
+    page_count?: NullableIntFieldUpdateOperationsInput | number | null
+    interpretation?: NullableStringFieldUpdateOperationsInput | string | null
+    pitaka_type?: NullableStringFieldUpdateOperationsInput | string | null
+    pedurma_volume_number?: NullableStringFieldUpdateOperationsInput | string | null
     derge_id?: NullableStringFieldUpdateOperationsInput | string | null
     yeshe_de_id?: NullableStringFieldUpdateOperationsInput | string | null
     yeshe_de_volume_number?: NullableStringFieldUpdateOperationsInput | string | null
@@ -23641,6 +23835,13 @@ export namespace Prisma {
     chinese_title?: SortOrder
     sanskrit_title?: SortOrder
     english_title?: SortOrder
+    alternative_title?: SortOrder
+    chapter_number?: SortOrder
+    bampo_number?: SortOrder
+    page_count?: SortOrder
+    interpretation?: SortOrder
+    pitaka_type?: SortOrder
+    pedurma_volume_number?: SortOrder
     derge_id?: SortOrder
     yeshe_de_id?: SortOrder
     yeshe_de_volume_number?: SortOrder
@@ -23658,6 +23859,9 @@ export namespace Prisma {
   }
 
   export type TextAvgOrderByAggregateInput = {
+    chapter_number?: SortOrder
+    bampo_number?: SortOrder
+    page_count?: SortOrder
     order_index?: SortOrder
   }
 
@@ -23668,6 +23872,13 @@ export namespace Prisma {
     chinese_title?: SortOrder
     sanskrit_title?: SortOrder
     english_title?: SortOrder
+    alternative_title?: SortOrder
+    chapter_number?: SortOrder
+    bampo_number?: SortOrder
+    page_count?: SortOrder
+    interpretation?: SortOrder
+    pitaka_type?: SortOrder
+    pedurma_volume_number?: SortOrder
     derge_id?: SortOrder
     yeshe_de_id?: SortOrder
     yeshe_de_volume_number?: SortOrder
@@ -23691,6 +23902,13 @@ export namespace Prisma {
     chinese_title?: SortOrder
     sanskrit_title?: SortOrder
     english_title?: SortOrder
+    alternative_title?: SortOrder
+    chapter_number?: SortOrder
+    bampo_number?: SortOrder
+    page_count?: SortOrder
+    interpretation?: SortOrder
+    pitaka_type?: SortOrder
+    pedurma_volume_number?: SortOrder
     derge_id?: SortOrder
     yeshe_de_id?: SortOrder
     yeshe_de_volume_number?: SortOrder
@@ -23708,6 +23926,9 @@ export namespace Prisma {
   }
 
   export type TextSumOrderByAggregateInput = {
+    chapter_number?: SortOrder
+    bampo_number?: SortOrder
+    page_count?: SortOrder
     order_index?: SortOrder
   }
 
@@ -24560,7 +24781,7 @@ export namespace Prisma {
     id?: string
     id_slug: string
     title_tibetan?: string | null
-    title_english: string
+    title_english?: string | null
     description?: string | null
     count?: number
     order_index?: number
@@ -24575,7 +24796,7 @@ export namespace Prisma {
     parent_id?: string | null
     id_slug: string
     title_tibetan?: string | null
-    title_english: string
+    title_english?: string | null
     description?: string | null
     count?: number
     order_index?: number
@@ -24593,7 +24814,7 @@ export namespace Prisma {
     id?: string
     id_slug: string
     title_tibetan?: string | null
-    title_english: string
+    title_english?: string | null
     description?: string | null
     count?: number
     order_index?: number
@@ -24607,7 +24828,7 @@ export namespace Prisma {
     id?: string
     id_slug: string
     title_tibetan?: string | null
-    title_english: string
+    title_english?: string | null
     description?: string | null
     count?: number
     order_index?: number
@@ -24642,7 +24863,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     id_slug?: StringFieldUpdateOperationsInput | string
     title_tibetan?: NullableStringFieldUpdateOperationsInput | string | null
-    title_english?: StringFieldUpdateOperationsInput | string
+    title_english?: NullableStringFieldUpdateOperationsInput | string | null
     description?: NullableStringFieldUpdateOperationsInput | string | null
     count?: IntFieldUpdateOperationsInput | number
     order_index?: IntFieldUpdateOperationsInput | number
@@ -24657,7 +24878,7 @@ export namespace Prisma {
     parent_id?: NullableStringFieldUpdateOperationsInput | string | null
     id_slug?: StringFieldUpdateOperationsInput | string
     title_tibetan?: NullableStringFieldUpdateOperationsInput | string | null
-    title_english?: StringFieldUpdateOperationsInput | string
+    title_english?: NullableStringFieldUpdateOperationsInput | string | null
     description?: NullableStringFieldUpdateOperationsInput | string | null
     count?: IntFieldUpdateOperationsInput | number
     order_index?: IntFieldUpdateOperationsInput | number
@@ -24690,7 +24911,7 @@ export namespace Prisma {
     parent_id?: StringNullableFilter<"CatalogCategory"> | string | null
     id_slug?: StringFilter<"CatalogCategory"> | string
     title_tibetan?: StringNullableFilter<"CatalogCategory"> | string | null
-    title_english?: StringFilter<"CatalogCategory"> | string
+    title_english?: StringNullableFilter<"CatalogCategory"> | string | null
     description?: StringNullableFilter<"CatalogCategory"> | string | null
     count?: IntFilter<"CatalogCategory"> | number
     order_index?: IntFilter<"CatalogCategory"> | number
@@ -24701,7 +24922,7 @@ export namespace Prisma {
 
   export type TimelineEventCreateWithoutPeriodInput = {
     id?: string
-    title_english: string
+    title_english?: string | null
     title_tibetan?: string | null
     title_sanskrit?: string | null
     description_english?: string | null
@@ -24724,7 +24945,7 @@ export namespace Prisma {
 
   export type TimelineEventUncheckedCreateWithoutPeriodInput = {
     id?: string
-    title_english: string
+    title_english?: string | null
     title_tibetan?: string | null
     title_sanskrit?: string | null
     description_english?: string | null
@@ -24777,7 +24998,7 @@ export namespace Prisma {
     NOT?: TimelineEventScalarWhereInput | TimelineEventScalarWhereInput[]
     id?: StringFilter<"TimelineEvent"> | string
     period_id?: StringFilter<"TimelineEvent"> | string
-    title_english?: StringFilter<"TimelineEvent"> | string
+    title_english?: StringNullableFilter<"TimelineEvent"> | string | null
     title_tibetan?: StringNullableFilter<"TimelineEvent"> | string | null
     title_sanskrit?: StringNullableFilter<"TimelineEvent"> | string | null
     description_english?: StringNullableFilter<"TimelineEvent"> | string | null
@@ -25029,7 +25250,7 @@ export namespace Prisma {
 
   export type TimelineEventCreateWithoutFiguresInput = {
     id?: string
-    title_english: string
+    title_english?: string | null
     title_tibetan?: string | null
     title_sanskrit?: string | null
     description_english?: string | null
@@ -25053,7 +25274,7 @@ export namespace Prisma {
   export type TimelineEventUncheckedCreateWithoutFiguresInput = {
     id?: string
     period_id: string
-    title_english: string
+    title_english?: string | null
     title_tibetan?: string | null
     title_sanskrit?: string | null
     description_english?: string | null
@@ -25091,7 +25312,7 @@ export namespace Prisma {
 
   export type TimelineEventUpdateWithoutFiguresInput = {
     id?: StringFieldUpdateOperationsInput | string
-    title_english?: StringFieldUpdateOperationsInput | string
+    title_english?: NullableStringFieldUpdateOperationsInput | string | null
     title_tibetan?: NullableStringFieldUpdateOperationsInput | string | null
     title_sanskrit?: NullableStringFieldUpdateOperationsInput | string | null
     description_english?: NullableStringFieldUpdateOperationsInput | string | null
@@ -25115,7 +25336,7 @@ export namespace Prisma {
   export type TimelineEventUncheckedUpdateWithoutFiguresInput = {
     id?: StringFieldUpdateOperationsInput | string
     period_id?: StringFieldUpdateOperationsInput | string
-    title_english?: StringFieldUpdateOperationsInput | string
+    title_english?: NullableStringFieldUpdateOperationsInput | string | null
     title_tibetan?: NullableStringFieldUpdateOperationsInput | string | null
     title_sanskrit?: NullableStringFieldUpdateOperationsInput | string | null
     description_english?: NullableStringFieldUpdateOperationsInput | string | null
@@ -25137,7 +25358,7 @@ export namespace Prisma {
 
   export type TimelineEventCreateWithoutRelationsInput = {
     id?: string
-    title_english: string
+    title_english?: string | null
     title_tibetan?: string | null
     title_sanskrit?: string | null
     description_english?: string | null
@@ -25161,7 +25382,7 @@ export namespace Prisma {
   export type TimelineEventUncheckedCreateWithoutRelationsInput = {
     id?: string
     period_id: string
-    title_english: string
+    title_english?: string | null
     title_tibetan?: string | null
     title_sanskrit?: string | null
     description_english?: string | null
@@ -25199,7 +25420,7 @@ export namespace Prisma {
 
   export type TimelineEventUpdateWithoutRelationsInput = {
     id?: StringFieldUpdateOperationsInput | string
-    title_english?: StringFieldUpdateOperationsInput | string
+    title_english?: NullableStringFieldUpdateOperationsInput | string | null
     title_tibetan?: NullableStringFieldUpdateOperationsInput | string | null
     title_sanskrit?: NullableStringFieldUpdateOperationsInput | string | null
     description_english?: NullableStringFieldUpdateOperationsInput | string | null
@@ -25223,7 +25444,7 @@ export namespace Prisma {
   export type TimelineEventUncheckedUpdateWithoutRelationsInput = {
     id?: StringFieldUpdateOperationsInput | string
     period_id?: StringFieldUpdateOperationsInput | string
-    title_english?: StringFieldUpdateOperationsInput | string
+    title_english?: NullableStringFieldUpdateOperationsInput | string | null
     title_tibetan?: NullableStringFieldUpdateOperationsInput | string | null
     title_sanskrit?: NullableStringFieldUpdateOperationsInput | string | null
     description_english?: NullableStringFieldUpdateOperationsInput | string | null
@@ -25245,7 +25466,7 @@ export namespace Prisma {
 
   export type TimelineEventCreateWithoutSourcesInput = {
     id?: string
-    title_english: string
+    title_english?: string | null
     title_tibetan?: string | null
     title_sanskrit?: string | null
     description_english?: string | null
@@ -25269,7 +25490,7 @@ export namespace Prisma {
   export type TimelineEventUncheckedCreateWithoutSourcesInput = {
     id?: string
     period_id: string
-    title_english: string
+    title_english?: string | null
     title_tibetan?: string | null
     title_sanskrit?: string | null
     description_english?: string | null
@@ -25307,7 +25528,7 @@ export namespace Prisma {
 
   export type TimelineEventUpdateWithoutSourcesInput = {
     id?: StringFieldUpdateOperationsInput | string
-    title_english?: StringFieldUpdateOperationsInput | string
+    title_english?: NullableStringFieldUpdateOperationsInput | string | null
     title_tibetan?: NullableStringFieldUpdateOperationsInput | string | null
     title_sanskrit?: NullableStringFieldUpdateOperationsInput | string | null
     description_english?: NullableStringFieldUpdateOperationsInput | string | null
@@ -25331,7 +25552,7 @@ export namespace Prisma {
   export type TimelineEventUncheckedUpdateWithoutSourcesInput = {
     id?: StringFieldUpdateOperationsInput | string
     period_id?: StringFieldUpdateOperationsInput | string
-    title_english?: StringFieldUpdateOperationsInput | string
+    title_english?: NullableStringFieldUpdateOperationsInput | string | null
     title_tibetan?: NullableStringFieldUpdateOperationsInput | string | null
     title_sanskrit?: NullableStringFieldUpdateOperationsInput | string | null
     description_english?: NullableStringFieldUpdateOperationsInput | string | null
@@ -25427,7 +25648,7 @@ export namespace Prisma {
 
   export type KarchagMainCategoryCreateWithoutSub_categoriesInput = {
     id?: string
-    name_english: string
+    name_english?: string | null
     name_tibetan?: string | null
     description_english?: string | null
     description_tibetan?: string | null
@@ -25439,7 +25660,7 @@ export namespace Prisma {
 
   export type KarchagMainCategoryUncheckedCreateWithoutSub_categoriesInput = {
     id?: string
-    name_english: string
+    name_english?: string | null
     name_tibetan?: string | null
     description_english?: string | null
     description_tibetan?: string | null
@@ -25460,6 +25681,13 @@ export namespace Prisma {
     chinese_title?: string | null
     sanskrit_title?: string | null
     english_title?: string | null
+    alternative_title?: string | null
+    chapter_number?: number | null
+    bampo_number?: number | null
+    page_count?: number | null
+    interpretation?: string | null
+    pitaka_type?: string | null
+    pedurma_volume_number?: string | null
     derge_id?: string | null
     yeshe_de_id?: string | null
     yeshe_de_volume_number?: string | null
@@ -25484,6 +25712,13 @@ export namespace Prisma {
     chinese_title?: string | null
     sanskrit_title?: string | null
     english_title?: string | null
+    alternative_title?: string | null
+    chapter_number?: number | null
+    bampo_number?: number | null
+    page_count?: number | null
+    interpretation?: string | null
+    pitaka_type?: string | null
+    pedurma_volume_number?: string | null
     derge_id?: string | null
     yeshe_de_id?: string | null
     yeshe_de_volume_number?: string | null
@@ -25525,7 +25760,7 @@ export namespace Prisma {
 
   export type KarchagMainCategoryUpdateWithoutSub_categoriesInput = {
     id?: StringFieldUpdateOperationsInput | string
-    name_english?: StringFieldUpdateOperationsInput | string
+    name_english?: NullableStringFieldUpdateOperationsInput | string | null
     name_tibetan?: NullableStringFieldUpdateOperationsInput | string | null
     description_english?: NullableStringFieldUpdateOperationsInput | string | null
     description_tibetan?: NullableStringFieldUpdateOperationsInput | string | null
@@ -25537,7 +25772,7 @@ export namespace Prisma {
 
   export type KarchagMainCategoryUncheckedUpdateWithoutSub_categoriesInput = {
     id?: StringFieldUpdateOperationsInput | string
-    name_english?: StringFieldUpdateOperationsInput | string
+    name_english?: NullableStringFieldUpdateOperationsInput | string | null
     name_tibetan?: NullableStringFieldUpdateOperationsInput | string | null
     description_english?: NullableStringFieldUpdateOperationsInput | string | null
     description_tibetan?: NullableStringFieldUpdateOperationsInput | string | null
@@ -25573,6 +25808,13 @@ export namespace Prisma {
     chinese_title?: StringNullableFilter<"Text"> | string | null
     sanskrit_title?: StringNullableFilter<"Text"> | string | null
     english_title?: StringNullableFilter<"Text"> | string | null
+    alternative_title?: StringNullableFilter<"Text"> | string | null
+    chapter_number?: IntNullableFilter<"Text"> | number | null
+    bampo_number?: IntNullableFilter<"Text"> | number | null
+    page_count?: IntNullableFilter<"Text"> | number | null
+    interpretation?: StringNullableFilter<"Text"> | string | null
+    pitaka_type?: StringNullableFilter<"Text"> | string | null
+    pedurma_volume_number?: StringNullableFilter<"Text"> | string | null
     derge_id?: StringNullableFilter<"Text"> | string | null
     yeshe_de_id?: StringNullableFilter<"Text"> | string | null
     yeshe_de_volume_number?: StringNullableFilter<"Text"> | string | null
@@ -25830,6 +26072,13 @@ export namespace Prisma {
     chinese_title?: string | null
     sanskrit_title?: string | null
     english_title?: string | null
+    alternative_title?: string | null
+    chapter_number?: number | null
+    bampo_number?: number | null
+    page_count?: number | null
+    interpretation?: string | null
+    pitaka_type?: string | null
+    pedurma_volume_number?: string | null
     derge_id?: string | null
     yeshe_de_id?: string | null
     yeshe_de_volume_number?: string | null
@@ -25855,6 +26104,13 @@ export namespace Prisma {
     chinese_title?: string | null
     sanskrit_title?: string | null
     english_title?: string | null
+    alternative_title?: string | null
+    chapter_number?: number | null
+    bampo_number?: number | null
+    page_count?: number | null
+    interpretation?: string | null
+    pitaka_type?: string | null
+    pedurma_volume_number?: string | null
     derge_id?: string | null
     yeshe_de_id?: string | null
     yeshe_de_volume_number?: string | null
@@ -25894,6 +26150,13 @@ export namespace Prisma {
     chinese_title?: NullableStringFieldUpdateOperationsInput | string | null
     sanskrit_title?: NullableStringFieldUpdateOperationsInput | string | null
     english_title?: NullableStringFieldUpdateOperationsInput | string | null
+    alternative_title?: NullableStringFieldUpdateOperationsInput | string | null
+    chapter_number?: NullableIntFieldUpdateOperationsInput | number | null
+    bampo_number?: NullableIntFieldUpdateOperationsInput | number | null
+    page_count?: NullableIntFieldUpdateOperationsInput | number | null
+    interpretation?: NullableStringFieldUpdateOperationsInput | string | null
+    pitaka_type?: NullableStringFieldUpdateOperationsInput | string | null
+    pedurma_volume_number?: NullableStringFieldUpdateOperationsInput | string | null
     derge_id?: NullableStringFieldUpdateOperationsInput | string | null
     yeshe_de_id?: NullableStringFieldUpdateOperationsInput | string | null
     yeshe_de_volume_number?: NullableStringFieldUpdateOperationsInput | string | null
@@ -25919,6 +26182,13 @@ export namespace Prisma {
     chinese_title?: NullableStringFieldUpdateOperationsInput | string | null
     sanskrit_title?: NullableStringFieldUpdateOperationsInput | string | null
     english_title?: NullableStringFieldUpdateOperationsInput | string | null
+    alternative_title?: NullableStringFieldUpdateOperationsInput | string | null
+    chapter_number?: NullableIntFieldUpdateOperationsInput | number | null
+    bampo_number?: NullableIntFieldUpdateOperationsInput | number | null
+    page_count?: NullableIntFieldUpdateOperationsInput | number | null
+    interpretation?: NullableStringFieldUpdateOperationsInput | string | null
+    pitaka_type?: NullableStringFieldUpdateOperationsInput | string | null
+    pedurma_volume_number?: NullableStringFieldUpdateOperationsInput | string | null
     derge_id?: NullableStringFieldUpdateOperationsInput | string | null
     yeshe_de_id?: NullableStringFieldUpdateOperationsInput | string | null
     yeshe_de_volume_number?: NullableStringFieldUpdateOperationsInput | string | null
@@ -25942,6 +26212,13 @@ export namespace Prisma {
     chinese_title?: string | null
     sanskrit_title?: string | null
     english_title?: string | null
+    alternative_title?: string | null
+    chapter_number?: number | null
+    bampo_number?: number | null
+    page_count?: number | null
+    interpretation?: string | null
+    pitaka_type?: string | null
+    pedurma_volume_number?: string | null
     derge_id?: string | null
     yeshe_de_id?: string | null
     yeshe_de_volume_number?: string | null
@@ -25967,6 +26244,13 @@ export namespace Prisma {
     chinese_title?: string | null
     sanskrit_title?: string | null
     english_title?: string | null
+    alternative_title?: string | null
+    chapter_number?: number | null
+    bampo_number?: number | null
+    page_count?: number | null
+    interpretation?: string | null
+    pitaka_type?: string | null
+    pedurma_volume_number?: string | null
     derge_id?: string | null
     yeshe_de_id?: string | null
     yeshe_de_volume_number?: string | null
@@ -26006,6 +26290,13 @@ export namespace Prisma {
     chinese_title?: NullableStringFieldUpdateOperationsInput | string | null
     sanskrit_title?: NullableStringFieldUpdateOperationsInput | string | null
     english_title?: NullableStringFieldUpdateOperationsInput | string | null
+    alternative_title?: NullableStringFieldUpdateOperationsInput | string | null
+    chapter_number?: NullableIntFieldUpdateOperationsInput | number | null
+    bampo_number?: NullableIntFieldUpdateOperationsInput | number | null
+    page_count?: NullableIntFieldUpdateOperationsInput | number | null
+    interpretation?: NullableStringFieldUpdateOperationsInput | string | null
+    pitaka_type?: NullableStringFieldUpdateOperationsInput | string | null
+    pedurma_volume_number?: NullableStringFieldUpdateOperationsInput | string | null
     derge_id?: NullableStringFieldUpdateOperationsInput | string | null
     yeshe_de_id?: NullableStringFieldUpdateOperationsInput | string | null
     yeshe_de_volume_number?: NullableStringFieldUpdateOperationsInput | string | null
@@ -26031,6 +26322,13 @@ export namespace Prisma {
     chinese_title?: NullableStringFieldUpdateOperationsInput | string | null
     sanskrit_title?: NullableStringFieldUpdateOperationsInput | string | null
     english_title?: NullableStringFieldUpdateOperationsInput | string | null
+    alternative_title?: NullableStringFieldUpdateOperationsInput | string | null
+    chapter_number?: NullableIntFieldUpdateOperationsInput | number | null
+    bampo_number?: NullableIntFieldUpdateOperationsInput | number | null
+    page_count?: NullableIntFieldUpdateOperationsInput | number | null
+    interpretation?: NullableStringFieldUpdateOperationsInput | string | null
+    pitaka_type?: NullableStringFieldUpdateOperationsInput | string | null
+    pedurma_volume_number?: NullableStringFieldUpdateOperationsInput | string | null
     derge_id?: NullableStringFieldUpdateOperationsInput | string | null
     yeshe_de_id?: NullableStringFieldUpdateOperationsInput | string | null
     yeshe_de_volume_number?: NullableStringFieldUpdateOperationsInput | string | null
@@ -26052,7 +26350,7 @@ export namespace Prisma {
     id?: string
     id_slug: string
     title_tibetan?: string | null
-    title_english: string
+    title_english?: string | null
     description?: string | null
     count?: number
     order_index?: number
@@ -26065,7 +26363,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     id_slug?: StringFieldUpdateOperationsInput | string
     title_tibetan?: NullableStringFieldUpdateOperationsInput | string | null
-    title_english?: StringFieldUpdateOperationsInput | string
+    title_english?: NullableStringFieldUpdateOperationsInput | string | null
     description?: NullableStringFieldUpdateOperationsInput | string | null
     count?: IntFieldUpdateOperationsInput | number
     order_index?: IntFieldUpdateOperationsInput | number
@@ -26079,7 +26377,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     id_slug?: StringFieldUpdateOperationsInput | string
     title_tibetan?: NullableStringFieldUpdateOperationsInput | string | null
-    title_english?: StringFieldUpdateOperationsInput | string
+    title_english?: NullableStringFieldUpdateOperationsInput | string | null
     description?: NullableStringFieldUpdateOperationsInput | string | null
     count?: IntFieldUpdateOperationsInput | number
     order_index?: IntFieldUpdateOperationsInput | number
@@ -26093,7 +26391,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     id_slug?: StringFieldUpdateOperationsInput | string
     title_tibetan?: NullableStringFieldUpdateOperationsInput | string | null
-    title_english?: StringFieldUpdateOperationsInput | string
+    title_english?: NullableStringFieldUpdateOperationsInput | string | null
     description?: NullableStringFieldUpdateOperationsInput | string | null
     count?: IntFieldUpdateOperationsInput | number
     order_index?: IntFieldUpdateOperationsInput | number
@@ -26104,7 +26402,7 @@ export namespace Prisma {
 
   export type TimelineEventCreateManyPeriodInput = {
     id?: string
-    title_english: string
+    title_english?: string | null
     title_tibetan?: string | null
     title_sanskrit?: string | null
     description_english?: string | null
@@ -26124,7 +26422,7 @@ export namespace Prisma {
 
   export type TimelineEventUpdateWithoutPeriodInput = {
     id?: StringFieldUpdateOperationsInput | string
-    title_english?: StringFieldUpdateOperationsInput | string
+    title_english?: NullableStringFieldUpdateOperationsInput | string | null
     title_tibetan?: NullableStringFieldUpdateOperationsInput | string | null
     title_sanskrit?: NullableStringFieldUpdateOperationsInput | string | null
     description_english?: NullableStringFieldUpdateOperationsInput | string | null
@@ -26147,7 +26445,7 @@ export namespace Prisma {
 
   export type TimelineEventUncheckedUpdateWithoutPeriodInput = {
     id?: StringFieldUpdateOperationsInput | string
-    title_english?: StringFieldUpdateOperationsInput | string
+    title_english?: NullableStringFieldUpdateOperationsInput | string | null
     title_tibetan?: NullableStringFieldUpdateOperationsInput | string | null
     title_sanskrit?: NullableStringFieldUpdateOperationsInput | string | null
     description_english?: NullableStringFieldUpdateOperationsInput | string | null
@@ -26170,7 +26468,7 @@ export namespace Prisma {
 
   export type TimelineEventUncheckedUpdateManyWithoutPeriodInput = {
     id?: StringFieldUpdateOperationsInput | string
-    title_english?: StringFieldUpdateOperationsInput | string
+    title_english?: NullableStringFieldUpdateOperationsInput | string | null
     title_tibetan?: NullableStringFieldUpdateOperationsInput | string | null
     title_sanskrit?: NullableStringFieldUpdateOperationsInput | string | null
     description_english?: NullableStringFieldUpdateOperationsInput | string | null
@@ -26356,6 +26654,13 @@ export namespace Prisma {
     chinese_title?: string | null
     sanskrit_title?: string | null
     english_title?: string | null
+    alternative_title?: string | null
+    chapter_number?: number | null
+    bampo_number?: number | null
+    page_count?: number | null
+    interpretation?: string | null
+    pitaka_type?: string | null
+    pedurma_volume_number?: string | null
     derge_id?: string | null
     yeshe_de_id?: string | null
     yeshe_de_volume_number?: string | null
@@ -26378,6 +26683,13 @@ export namespace Prisma {
     chinese_title?: NullableStringFieldUpdateOperationsInput | string | null
     sanskrit_title?: NullableStringFieldUpdateOperationsInput | string | null
     english_title?: NullableStringFieldUpdateOperationsInput | string | null
+    alternative_title?: NullableStringFieldUpdateOperationsInput | string | null
+    chapter_number?: NullableIntFieldUpdateOperationsInput | number | null
+    bampo_number?: NullableIntFieldUpdateOperationsInput | number | null
+    page_count?: NullableIntFieldUpdateOperationsInput | number | null
+    interpretation?: NullableStringFieldUpdateOperationsInput | string | null
+    pitaka_type?: NullableStringFieldUpdateOperationsInput | string | null
+    pedurma_volume_number?: NullableStringFieldUpdateOperationsInput | string | null
     derge_id?: NullableStringFieldUpdateOperationsInput | string | null
     yeshe_de_id?: NullableStringFieldUpdateOperationsInput | string | null
     yeshe_de_volume_number?: NullableStringFieldUpdateOperationsInput | string | null
@@ -26402,6 +26714,13 @@ export namespace Prisma {
     chinese_title?: NullableStringFieldUpdateOperationsInput | string | null
     sanskrit_title?: NullableStringFieldUpdateOperationsInput | string | null
     english_title?: NullableStringFieldUpdateOperationsInput | string | null
+    alternative_title?: NullableStringFieldUpdateOperationsInput | string | null
+    chapter_number?: NullableIntFieldUpdateOperationsInput | number | null
+    bampo_number?: NullableIntFieldUpdateOperationsInput | number | null
+    page_count?: NullableIntFieldUpdateOperationsInput | number | null
+    interpretation?: NullableStringFieldUpdateOperationsInput | string | null
+    pitaka_type?: NullableStringFieldUpdateOperationsInput | string | null
+    pedurma_volume_number?: NullableStringFieldUpdateOperationsInput | string | null
     derge_id?: NullableStringFieldUpdateOperationsInput | string | null
     yeshe_de_id?: NullableStringFieldUpdateOperationsInput | string | null
     yeshe_de_volume_number?: NullableStringFieldUpdateOperationsInput | string | null
@@ -26426,6 +26745,13 @@ export namespace Prisma {
     chinese_title?: NullableStringFieldUpdateOperationsInput | string | null
     sanskrit_title?: NullableStringFieldUpdateOperationsInput | string | null
     english_title?: NullableStringFieldUpdateOperationsInput | string | null
+    alternative_title?: NullableStringFieldUpdateOperationsInput | string | null
+    chapter_number?: NullableIntFieldUpdateOperationsInput | number | null
+    bampo_number?: NullableIntFieldUpdateOperationsInput | number | null
+    page_count?: NullableIntFieldUpdateOperationsInput | number | null
+    interpretation?: NullableStringFieldUpdateOperationsInput | string | null
+    pitaka_type?: NullableStringFieldUpdateOperationsInput | string | null
+    pedurma_volume_number?: NullableStringFieldUpdateOperationsInput | string | null
     derge_id?: NullableStringFieldUpdateOperationsInput | string | null
     yeshe_de_id?: NullableStringFieldUpdateOperationsInput | string | null
     yeshe_de_volume_number?: NullableStringFieldUpdateOperationsInput | string | null

@@ -473,7 +473,7 @@ const karchagTextService = {
     
     return await prisma.text.findMany({
       where,
-      orderBy: { order_index: 'asc' },
+      orderBy: { created_at: 'asc' },
       include:{
         summary:{
           select:{

@@ -201,6 +201,13 @@ model Text {
   chinese_title       String?  
   sanskrit_title      String?  
   english_title       String?  
+  alternative_title   String?
+  chapter_number      Int?
+  bampo_number        Int?
+  page_count         Int?
+  interpretation     String?
+  pitaka_type        String?
+  pedurma_volume_number String?
   
   derge_id            String?  
   yeshe_de_id         String?  

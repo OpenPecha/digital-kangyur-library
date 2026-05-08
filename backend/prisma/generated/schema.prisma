@@ -23,7 +23,7 @@ model CatalogCategory {
   parent_id     String?
   id_slug       String   @unique
   title_tibetan String?
-  title_english String
+  title_english String?
   description   String?
   count         Int      @default(0)
   order_index   Int      @default(0)
@@ -67,7 +67,7 @@ model TimelinePeriod {
 model TimelineEvent {
   id                  String   @id @default(uuid())
   period_id           String
-  title_english       String
+  title_english       String?
   title_tibetan       String?
   title_sanskrit      String?
   description_english String?
@@ -158,7 +158,7 @@ model Video {
 
 model KarchagMainCategory {
   id                  String   @id @default(uuid())
-  name_english        String
+  name_english        String?
   name_tibetan        String?
   description_english String?
   description_tibetan String?
@@ -193,10 +193,17 @@ model Text {
   id              String @id @default(uuid())
   sub_category_id String
 
-  tibetan_title  String?
-  chinese_title  String?
-  sanskrit_title String?
-  english_title  String?
+  tibetan_title         String?
+  chinese_title         String?
+  sanskrit_title        String?
+  english_title         String?
+  alternative_title     String?
+  chapter_number        Int?
+  bampo_number          Int?
+  page_count            Int?
+  interpretation        String?
+  pitaka_type           String?
+  pedurma_volume_number String?
 
   derge_id               String?
   yeshe_de_id            String?

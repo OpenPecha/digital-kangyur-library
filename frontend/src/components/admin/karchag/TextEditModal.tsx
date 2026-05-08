@@ -102,6 +102,15 @@ export const TextEditModal = ({
     'questions-answers',
     'colophon',
   ] as const;
+  const interpretationOptions = [
+    { value: 'Provisional', label: 'Provisional (དྲང་དོན།)' },
+    { value: 'Definitive', label: 'Definitive (ངེས་དོན།)' },
+  ];
+  const pitakaOptions = [
+    { value: 'Vinaya Pitaka', label: 'Vinaya Pitaka (འདུལ་བའི་སྡེ་སྣོད།)' },
+    { value: 'Sutra Pitaka', label: 'Sutra Pitaka (མདོའི་སྡེ་སྣོད།)' },
+    { value: 'Abhidharma Pitaka', label: 'Abhidharma Pitaka (མངོན་པའི་སྡེ་སྣོད།)' },
+  ];
 
   const [formData, setFormData] = useState(() => {
     if (text) {
@@ -113,6 +122,13 @@ export const TextEditModal = ({
         chinese_title: text.chinese_title || '',
         sanskrit_title: text.sanskrit_title || '',
         english_title: text.english_title || '',
+        alternative_title: text.alternative_title || '',
+        chapter_number: text.chapter_number ?? '',
+        bampo_number: text.bampo_number ?? '',
+        page_count: text.page_count ?? '',
+        interpretation: text.interpretation || '',
+        pitaka_type: text.pitaka_type || '',
+        pedurma_volume_number: text.pedurma_volume_number || '',
         sermon: text.sermon || '',
         yana: text.yana || '',
         translation_period: text.translation_period || '',
@@ -135,6 +151,13 @@ export const TextEditModal = ({
       chinese_title: '',
       sanskrit_title: '',
       english_title: '',
+      alternative_title: '',
+      chapter_number: '',
+      bampo_number: '',
+      page_count: '',
+      interpretation: '',
+      pitaka_type: '',
+      pedurma_volume_number: '',
       sermon: '',
       yana: '',
       translation_period: '',
@@ -167,6 +190,13 @@ export const TextEditModal = ({
       chinese_title: text.chinese_title || '',
       sanskrit_title: text.sanskrit_title || '',
       english_title: text.english_title || '',
+      alternative_title: text.alternative_title || '',
+      chapter_number: text.chapter_number ?? '',
+      bampo_number: text.bampo_number ?? '',
+      page_count: text.page_count ?? '',
+      interpretation: text.interpretation || '',
+      pitaka_type: text.pitaka_type || '',
+      pedurma_volume_number: text.pedurma_volume_number || '',
       sermon: text.sermon || '',
       yana: text.yana || '',
       translation_period: text.translation_period || '',
@@ -357,7 +387,13 @@ export const TextEditModal = ({
       toast.error(t('pleaseSelectCategory'));
       return;
     }
-    const payload = { ...formData, sub_category_id: subId };
+    const payload = {
+      ...formData,
+      sub_category_id: subId,
+      chapter_number: formData.chapter_number === '' ? null : Number(formData.chapter_number),
+      bampo_number: formData.bampo_number === '' ? null : Number(formData.bampo_number),
+      page_count: formData.page_count === '' ? null : Number(formData.page_count),
+    };
     if (!text?.id && onCreateText) {
       try {
         setMetadataSaving(true);
@@ -430,6 +466,13 @@ export const TextEditModal = ({
         chinese_title: text.chinese_title || '',
         sanskrit_title: text.sanskrit_title || '',
         english_title: text.english_title || '',
+        alternative_title: text.alternative_title || '',
+        chapter_number: text.chapter_number ?? '',
+        bampo_number: text.bampo_number ?? '',
+        page_count: text.page_count ?? '',
+        interpretation: text.interpretation || '',
+        pitaka_type: text.pitaka_type || '',
+        pedurma_volume_number: text.pedurma_volume_number || '',
         sermon: text.sermon || '',
         yana: text.yana || '',
         translation_period: text.translation_period || '',
@@ -517,6 +560,97 @@ export const TextEditModal = ({
                             onChange={(e) => setFormData({ ...formData, order_index: Number.parseInt(e.target.value, 10) || 0 })}
                           />
                         </div> */}
+                      </div>
+
+                      <div className="grid grid-cols-2 gap-4">
+                        <div className="space-y-2">
+                          <Label htmlFor="alternative_title">{t('alternativeTitle')}</Label>
+                          <Input
+                            id="alternative_title"
+                            value={formData.alternative_title}
+                            onChange={(e) => setFormData({ ...formData, alternative_title: e.target.value })}
+                          />
+                        </div>
+                        <div className="space-y-2">
+                          <Label htmlFor="pedurma_volume_number">{t('pedurmaVolumeNumber')}</Label>
+                          <Input
+                            id="pedurma_volume_number"
+                            value={formData.pedurma_volume_number}
+                            onChange={(e) => setFormData({ ...formData, pedurma_volume_number: e.target.value })}
+                          />
+                        </div>
+                      </div>
+
+                      <div className="grid grid-cols-3 gap-4">
+                        <div className="space-y-2">
+                          <Label htmlFor="chapter_number">{t('chapter')}</Label>
+                          <Input
+                            id="chapter_number"
+                            type="number"
+                            value={formData.chapter_number}
+                            onChange={(e) => setFormData({ ...formData, chapter_number: e.target.value })}
+                            min={0}
+                          />
+                        </div>
+                        <div className="space-y-2">
+                          <Label htmlFor="bampo_number">{t('bampo')}</Label>
+                          <Input
+                            id="bampo_number"
+                            type="number"
+                            value={formData.bampo_number}
+                            onChange={(e) => setFormData({ ...formData, bampo_number: e.target.value })}
+                            min={0}
+                          />
+                        </div>
+                        <div className="space-y-2">
+                          <Label htmlFor="page_count">{t('pageCount')}</Label>
+                          <Input
+                            id="page_count"
+                            type="number"
+                            value={formData.page_count}
+                            onChange={(e) => setFormData({ ...formData, page_count: e.target.value })}
+                            min={0}
+                          />
+                        </div>
+                      </div>
+
+                      <div className="grid grid-cols-2 gap-4">
+                        <div className="space-y-2">
+                          <Label htmlFor="interpretation">{t('interpretation')}</Label>
+                          <Select
+                            value={formData.interpretation || undefined}
+                            onValueChange={(value) => setFormData({ ...formData, interpretation: value || '' })}
+                          >
+                            <SelectTrigger id="interpretation">
+                              <SelectValue placeholder={t('selectInterpretation')} />
+                            </SelectTrigger>
+                            <SelectContent>
+                              {interpretationOptions.map((option) => (
+                                <SelectItem key={option.value} value={option.value}>
+                                  {option.label}
+                                </SelectItem>
+                              ))}
+                            </SelectContent>
+                          </Select>
+                        </div>
+                        <div className="space-y-2">
+                          <Label htmlFor="pitaka_type">{t('pitaka')}</Label>
+                          <Select
+                            value={formData.pitaka_type || undefined}
+                            onValueChange={(value) => setFormData({ ...formData, pitaka_type: value || '' })}
+                          >
+                            <SelectTrigger id="pitaka_type">
+                              <SelectValue placeholder={t('selectPitaka')} />
+                            </SelectTrigger>
+                            <SelectContent>
+                              {pitakaOptions.map((option) => (
+                                <SelectItem key={option.value} value={option.value}>
+                                  {option.label}
+                                </SelectItem>
+                              ))}
+                            </SelectContent>
+                          </Select>
+                        </div>
                       </div>
 
                       <div className="grid grid-cols-2 gap-4">
