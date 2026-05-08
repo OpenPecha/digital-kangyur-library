@@ -13,7 +13,7 @@ const Hero = () => {
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 z-10 flex justify-center items-center">
         <div className="mt-10 md:mt-0 flex w-full flex-1 h-min">
           <div className="flex flex-col justify-between md:justify-normal gap-6 w-full  text-center">
-            <div className="pointer-events-none relative flex items-center justify-center opacity-20 min-h-[600px]">
+            <div className="pointer-events-none relative flex items-center justify-center opacity-20  min-h-[600px]">
               <img
                 src="/top.png"
                 alt="main logo"
@@ -33,7 +33,7 @@ const Hero = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.4, ease: "easeOut" }}
-              className="flex justify-center w-[90vw] md:w-[50vw] mx-auto"
+              className="flex justify-center w-[90vw] md:w-[50vw] m-2 md:mx-auto   "
             >
               <Link
                 to="/catalog"
