@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import { Button } from '@/components/ui/atoms/button';
 import { Input } from '@/components/ui/atoms/input';
 import { Label } from "@/components/ui/atoms/label";
@@ -57,7 +57,7 @@ export const TextEditModal = ({
   onTextCreated,
   hideSubCategorySelect = false,
 }: TextEditModalProps) => {
-  const { t, isTibetan } = useLanguage();
+  const { t, isTibetan, currentLanguage } = useLanguage();
   const fileInputRef = React.useRef<HTMLInputElement>(null);
   const [uploading, setUploading] = useState(false);
   const [activeTab, setActiveTab] = useState<string>('metadata');
@@ -102,15 +102,21 @@ export const TextEditModal = ({
     'questions-answers',
     'colophon',
   ] as const;
-  const interpretationOptions = [
-    { value: 'Provisional', label: 'Provisional (དྲང་དོན།)' },
-    { value: 'Definitive', label: 'Definitive (ངེས་དོན།)' },
-  ];
-  const pitakaOptions = [
-    { value: 'Vinaya Pitaka', label: 'Vinaya Pitaka (འདུལ་བའི་སྡེ་སྣོད།)' },
-    { value: 'Sutra Pitaka', label: 'Sutra Pitaka (མདོའི་སྡེ་སྣོད།)' },
-    { value: 'Abhidharma Pitaka', label: 'Abhidharma Pitaka (མངོན་པའི་སྡེ་སྣོད།)' },
-  ];
+  const interpretationOptions = useMemo(
+    () => [
+      { value: 'Provisional', label: t('interpretationProvisional') },
+      { value: 'Definitive', label: t('interpretationDefinitive') },
+    ],
+    [t, currentLanguage]
+  );
+  const pitakaOptions = useMemo(
+    () => [
+      { value: 'Vinaya Pitaka', label: t('pitakaVinaya') },
+      { value: 'Sutra Pitaka', label: t('pitakaSutra') },
+      { value: 'Abhidharma Pitaka', label: t('pitakaAbhidharma') },
+    ],
+    [t, currentLanguage]
+  );
 
   const [formData, setFormData] = useState(() => {
     if (text) {
@@ -567,6 +573,7 @@ export const TextEditModal = ({
                           <Label htmlFor="alternative_title">{t('alternativeTitle')}</Label>
                           <Input
                             id="alternative_title"
+                            type="number"
                             value={formData.alternative_title}
                             onChange={(e) => setFormData({ ...formData, alternative_title: e.target.value })}
                           />

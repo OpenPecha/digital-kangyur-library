@@ -80,35 +80,18 @@ const valueTranslationMap: Record<string, Record<string, string>> = {
     'new translation': 'translationPeriodNew',
   },
   'interpretation': {
-    'Provisional': 'provisional',
-    'provisional': 'provisional',
-    'Definitive': 'definitive',
-    'definitive': 'definitive',
+    'Provisional': 'interpretationProvisional',
+    'provisional': 'interpretationProvisional',
+    'Definitive': 'interpretationDefinitive',
+    'definitive': 'interpretationDefinitive',
   },
   'pitaka-type': {
-    'Vinaya Pitaka': 'vinayaPitaka',
-    'vinaya pitaka': 'vinayaPitaka',
-    'Sutra Pitaka': 'sutraPitaka',
-    'sutra pitaka': 'sutraPitaka',
-    'Abhidharma Pitaka': 'abhidharmaPitaka',
-    'abhidharma pitaka': 'abhidharmaPitaka',
-  },
-};
-
-const bilingualEnumValueMap: Record<string, Record<string, string>> = {
-  'interpretation': {
-    'Provisional': 'Provisional (དྲང་དོན།)',
-    'provisional': 'Provisional (དྲང་དོན།)',
-    'Definitive': 'Definitive (ངེས་དོན།)',
-    'definitive': 'Definitive (ངེས་དོན།)',
-  },
-  'pitaka-type': {
-    'Vinaya Pitaka': 'Vinaya Pitaka (འདུལ་བའི་སྡེ་སྣོད།)',
-    'vinaya pitaka': 'Vinaya Pitaka (འདུལ་བའི་སྡེ་སྣོད།)',
-    'Sutra Pitaka': 'Sutra Pitaka (མདོའི་སྡེ་སྣོད།)',
-    'sutra pitaka': 'Sutra Pitaka (མདོའི་སྡེ་སྣོད།)',
-    'Abhidharma Pitaka': 'Abhidharma Pitaka (མངོན་པའི་སྡེ་སྣོད།)',
-    'abhidharma pitaka': 'Abhidharma Pitaka (མངོན་པའི་སྡེ་སྣོད།)',
+    'Vinaya Pitaka': 'pitakaVinaya',
+    'vinaya pitaka': 'pitakaVinaya',
+    'Sutra Pitaka': 'pitakaSutra',
+    'sutra pitaka': 'pitakaSutra',
+    'Abhidharma Pitaka': 'pitakaAbhidharma',
+    'abhidharma pitaka': 'pitakaAbhidharma',
   },
 };
 
@@ -135,14 +118,6 @@ const getValueTranslationKey = (key: string, value: string): string | null => {
   return null;
 };
 
-const getBilingualEnumDisplayValue = (key: string, value: string): string | null => {
-  const keyMap = bilingualEnumValueMap[key];
-  if (!keyMap) return null;
-  const trimmedValue = value.trim();
-  const lowerValue = trimmedValue.toLowerCase();
-  return keyMap[trimmedValue] || keyMap[lowerValue] || null;
-};
-
 // MetadataSection component
 const MetadataSection = ({ title, group, metadata, t }: { title: string; group: string; metadata: any[]; t: (key: string) => string }) =>{
   const filteredMetadata = metadata.filter((item: any) => item.group === group);
@@ -153,9 +128,8 @@ const MetadataSection = ({ title, group, metadata, t }: { title: string; group: 
     <table className="w-full border-collapse">
       <tbody>
         {filteredMetadata.map((item: any) => {
-          const bilingualDisplayValue = getBilingualEnumDisplayValue(item.key, item.value);
           const translationKey = getValueTranslationKey(item.key, item.value);
-          const displayValue = bilingualDisplayValue || (translationKey ? t(translationKey) : item.value);
+          const displayValue = translationKey ? t(translationKey) : item.value;
           return (
             <tr key={item.key} className="border-b border-gray-200">
               <td className="py-3 pr-4 font-medium text-gray-700 align-top w-1/3 capitalize">{t(metadataLabelMap[item.key] || item.key)}:</td>
